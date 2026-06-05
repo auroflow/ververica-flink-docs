@@ -1,0 +1,676 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pyflink.dataframe.dataframe.DataFrame.write_parquet &#8212; PyFlink 1.20+vvr.11.7.dev0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=b5c65be0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/pyflink.dataframe/api/pyflink.dataframe.dataframe.DataFrame.write_parquet';</script>
+    <link rel="icon" href="../../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="pyflink.dataframe.dataframe.DataFrame.write_kafka" href="pyflink.dataframe.dataframe.DataFrame.write_kafka.html" />
+    <link rel="prev" title="pyflink.dataframe.dataframe.DataFrame.iter_batches" href="pyflink.dataframe.dataframe.DataFrame.iter_batches.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.20+vvr.11.7.dev0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="PyFlink 1.20+vvr.11.7.dev0 documentation - Home"/>
+    <img src="../../../_static/navbar-brand-logo.jpg" class="logo__image only-dark pst-js-only" alt="PyFlink 1.20+vvr.11.7.dev0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../pyflink.table/index.html">PyFlink Table</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyflink.datastream/index.html">PyFlink DataStream</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">PyFlink DataFrame</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="reference internal" href="../dataframe.html">DataFrame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../creation.html">DataFrame Creation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../io.html">Input/Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sql.html">SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../datatype.html">DataType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../udf.html">User Defined Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gpu.html">GPU Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai.html">AI / LLM</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyflink.common/index.html">PyFlink Common</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">API Reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">PyFlink DataFrame</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../dataframe.html" class="nav-link">DataFrame</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyflink.dataframe.dataframe.DataFrame.write_parquet</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="pyflink-dataframe-dataframe-dataframe-write-parquet">
+<h1>pyflink.dataframe.dataframe.DataFrame.write_parquet<a class="headerlink" href="#pyflink-dataframe-dataframe-dataframe-write-parquet" title="Link to this heading">#</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyflink.dataframe.dataframe.DataFrame.write_parquet">
+<span class="sig-prename descclassname"><span class="pre">DataFrame.</span></span><span class="sig-name descname"><span class="pre">write_parquet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'overwrite'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'SNAPPY'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">134217728</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1048576</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dictionary_page_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1048576</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enable_dictionary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_padding_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">8388608</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">writer_version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'v1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">utc_timezone</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp_time_unit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'micros'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">write_int64_timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rolling_policy_file_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'128mb'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rolling_policy_rollover_interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'30min'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rolling_policy_inactivity_interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'30min'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rolling_policy_check_interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'1min'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partition_commit_trigger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'process-time'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partition_commit_delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'0s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partition_commit_watermark_time_zone</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'UTC'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partition_commit_policy_kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partition_commit_policy_class</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partition_commit_policy_class_parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partition_commit_success_file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'_SUCCESS'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partition_time_extractor_kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partition_time_extractor_class</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partition_time_extractor_timestamp_formatter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partition_time_extractor_timestamp_pattern</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shuffle_by_partition_enable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_compaction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compaction_file_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compaction_parallelism</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sink_parallelism</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partition_default_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'__DEFAULT_PARTITION__'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/pyflink/dataframe/dataframe.html#DataFrame.write_parquet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyflink.dataframe.dataframe.DataFrame.write_parquet" title="Link to this definition">#</a></dt>
+<dd><p>Write the DataFrame to Parquet file(s) at the given path.</p>
+<p>Uses Flink’s FileSystem Connector with Parquet Format under the hood.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – Output path for the Parquet file(s). Supports local paths
+and any Flink-supported file system (HDFS, OSS, S3, etc.).</p></li>
+<li><p><strong>mode</strong> – [Batch] Write mode. ‘overwrite’ to overwrite existing data
+(default), ‘append’ to append to existing data.
+In streaming mode, this is always forced to ‘append’
+since streaming does not support overwrite.</p></li>
+<li><p><strong>compression</strong> – [Batch/Streaming] Parquet compression codec. One
+of ‘SNAPPY’ (default), ‘GZIP’, ‘LZO’, ‘BROTLI’,
+‘LZ4’, ‘ZSTD’, ‘LZ4_RAW’, ‘UNCOMPRESSED’.</p></li>
+<li><p><strong>block_size</strong> – [Batch/Streaming] Row group size in bytes. Default
+is 134217728 (128MB).</p></li>
+<li><p><strong>page_size</strong> – [Batch/Streaming] Data page size in bytes. Default
+is 1048576 (1MB).</p></li>
+<li><p><strong>dictionary_page_size</strong> – [Batch/Streaming] Dictionary page size in
+bytes. Default is 1048576 (1MB).</p></li>
+<li><p><strong>enable_dictionary</strong> – [Batch/Streaming] Whether to enable dictionary
+encoding. Default is True.</p></li>
+<li><p><strong>max_padding_size</strong> – [Batch/Streaming] The maximum padding size in
+bytes for row group alignment. Default is
+8388608 (8MB).</p></li>
+<li><p><strong>validation</strong> – [Batch/Streaming] Whether to enable schema validation
+on write. Default is False.</p></li>
+<li><p><strong>writer_version</strong> – [Batch/Streaming] Parquet writer version. One of
+‘v1’ (default), ‘v2’.</p></li>
+<li><p><strong>utc_timezone</strong> – [Batch/Streaming] Use UTC timezone or local timezone
+to the conversion between epoch time and
+LocalDateTime. Hive 0.x/1.x/2.x use local timezone.
+But Hive 3.x use UTC timezone. Default is False.</p></li>
+<li><p><strong>timestamp_time_unit</strong> – [Batch/Streaming] Store parquet
+int64/LogicalTypes timestamps in this time
+unit. One of ‘nanos’, ‘micros’ (default),
+‘millis’.</p></li>
+<li><p><strong>write_int64_timestamp</strong> – [Batch/Streaming] Write parquet timestamp
+as int64/LogicalTypes instead of
+int96/OriginalTypes. Note: Timestamp will
+be time zone agnostic (NEVER converted to
+a different time zone). Default is False.</p></li>
+<li><p><strong>rolling_policy_file_size</strong> – [Streaming] The maximum part file size
+before rolling (e.g., ‘128mb’). Default
+is 128MB.</p></li>
+<li><p><strong>rolling_policy_rollover_interval</strong> – [Streaming] The maximum time
+duration a part file can stay
+open before rolling (by default
+long enough to avoid too many
+small files). The frequency at
+which this is checked is
+controlled by
+rolling_policy_check_interval.
+Default is 30 minutes.</p></li>
+<li><p><strong>rolling_policy_inactivity_interval</strong> – [Streaming] The maximum time
+duration a part file can stay
+inactive before rolling (by
+default long enough to avoid
+too many small files). The
+frequency at which this is
+checked is controlled by
+rolling_policy_check_interval.
+Default is 30 minutes.</p></li>
+<li><p><strong>rolling_policy_check_interval</strong> – [Streaming] The interval for
+checking time based rolling
+policies. This controls the
+frequency to check whether a part
+file should rollover based on
+rolling_policy_rollover_interval.
+Default is 1 minute.</p></li>
+<li><p><strong>partition_commit_trigger</strong> – [Streaming] Trigger type for partition
+commit. One of ‘process-time’ (default),
+‘partition-time’.</p></li>
+<li><p><strong>partition_commit_delay</strong> – [Streaming] The partition will not commit
+until the delay time. The value should be
+‘1d’ for day partitions and ‘1h’ for hour
+partitions. Default is 0.</p></li>
+<li><p><strong>partition_commit_watermark_time_zone</strong> – [Streaming] The time zone to
+parse the long watermark
+value to TIMESTAMP value,
+the parsed watermark
+timestamp is used to compare
+with partition time to
+decide the partition should
+commit or not. The default
+value is ‘UTC’, which means
+the watermark is defined on
+TIMESTAMP column or not
+defined. If the watermark is
+defined on TIMESTAMP_LTZ
+column, the time zone of
+watermark is user configured
+time zone. The option value
+is either a full name such
+as ‘America/Los_Angeles’, or
+a custom timezone id such as
+‘GMT-08:00’.</p></li>
+<li><p><strong>partition_commit_policy_kind</strong> – [Streaming] Policy to commit a
+partition is to notify the downstream
+application that the partition has
+finished writing, the partition is
+ready to be read. ‘metastore’: add
+partition to metastore. Only hive
+table supports metastore policy, file
+system manages partitions through
+directory structure. ‘success-file’:
+add ‘_success’ file to directory.
+Both can be configured at the same
+time: ‘metastore,success-file’.
+‘custom’: use policy class to create
+a commit policy.</p></li>
+<li><p><strong>partition_commit_policy_class</strong> – [Streaming] The partition commit
+policy class for implementing
+PartitionCommitPolicy interface.
+Only works with ‘custom’ commit
+policy.</p></li>
+<li><p><strong>partition_commit_policy_class_parameters</strong> – [Streaming] The
+parameters passed to the
+constructor of the custom
+commit policy, with
+multiple parameters
+separated by semicolons,
+such as ‘param1;param2’.</p></li>
+<li><p><strong>partition_commit_success_file_name</strong> – [Streaming] The file name for
+success-file partition commit
+policy. Default is ‘_SUCCESS’.</p></li>
+<li><p><strong>partition_time_extractor_kind</strong> – [Streaming] Time extractor to
+extract time from partition values.
+This can either be ‘default’ or a
+custom extractor class. For
+‘default’, you can configure a
+timestamp pattern. Default is
+‘default’.</p></li>
+<li><p><strong>partition_time_extractor_class</strong> – [Streaming] The extractor class
+for implementing
+PartitionTimeExtractor interface.
+Only used when
+partition_time_extractor_kind is
+not ‘default’.</p></li>
+<li><p><strong>partition_time_extractor_timestamp_formatter</strong> – [Streaming] The
+formatter to format timestamp from string. Used with
+partition_time_extractor_timestamp_pattern.
+Supports multiple partition fields like
+‘$year-$month-$day $hour:00:00’. Compatible
+with Java’s DateTimeFormatter.</p></li>
+<li><p><strong>partition_time_extractor_timestamp_pattern</strong> – [Streaming] Pattern
+to get a timestamp from partitions when
+partition_time_extractor_kind is ‘default’.
+E.g., ‘$dt’ for a single partition field, or
+‘$year-$month-$day $hour:00:00’ for multiple
+fields.</p></li>
+<li><p><strong>shuffle_by_partition_enable</strong> – [Batch/Streaming] Enable shuffle data
+by dynamic partition fields in sink
+phase, this can greatly reduce the
+number of files for filesystem sink
+but may lead to data skew. Default
+is False.</p></li>
+<li><p><strong>auto_compaction</strong> – [Streaming] Whether to enable automatic compaction
+in streaming sink. The data will be written to
+temporary files. After the checkpoint is
+completed, the temporary files generated by a
+checkpoint will be compacted. The temporary files
+are invisible before compaction. Default is False.</p></li>
+<li><p><strong>compaction_file_size</strong> – [Streaming] The compaction target file size.
+Defaults to the rolling file size.</p></li>
+<li><p><strong>compaction_parallelism</strong> – [Batch] Custom parallelism for the
+compaction operator in batch mode. By
+default, the planner will use the
+parallelism of the sink.</p></li>
+<li><p><strong>sink_parallelism</strong> – [Batch/Streaming] Custom parallelism for the
+sink.</p></li>
+<li><p><strong>partition_default_name</strong> – [Batch/Streaming] The default partition
+name in case the dynamic partition column
+value is null/empty string. Default is
+‘__DEFAULT_PARTITION__’.</p></li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>Example::</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pf</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">from_records</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">)],</span> <span class="n">schema</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">write_parquet</span><span class="p">(</span><span class="s2">&quot;/path/to/output&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Append with GZIP compression</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">write_parquet</span><span class="p">(</span><span class="s2">&quot;/path/to/output&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;append&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                 <span class="n">compression</span><span class="o">=</span><span class="s2">&quot;GZIP&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Custom rolling policy and block size</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">write_parquet</span><span class="p">(</span><span class="s2">&quot;/path/to/output&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                 <span class="n">block_size</span><span class="o">=</span><span class="mi">256</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">,</span>
+<span class="gp">... </span>                 <span class="n">rolling_policy_file_size</span><span class="o">=</span><span class="s2">&quot;256mb&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="pyflink.dataframe.dataframe.DataFrame.iter_batches.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">pyflink.dataframe.dataframe.DataFrame.iter_batches</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="pyflink.dataframe.dataframe.DataFrame.write_kafka.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">pyflink.dataframe.dataframe.DataFrame.write_kafka</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflink.dataframe.dataframe.DataFrame.write_parquet"><code class="docutils literal notranslate"><span class="pre">DataFrame.write_parquet()</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/reference/pyflink.dataframe/api/pyflink.dataframe.dataframe.DataFrame.write_parquet.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

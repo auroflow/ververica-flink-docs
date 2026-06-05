@@ -1,0 +1,1238 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyflink.datastream.connectors.pulsar &#8212; PyFlink 1.20+vvr.11.7.dev0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../../_static/documentation_options.js?v=b5c65be0"></script>
+    <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyflink/datastream/connectors/pulsar';</script>
+    <link rel="icon" href="../../../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../../../search.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.20+vvr.11.7.dev0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="PyFlink 1.20+vvr.11.7.dev0 documentation - Home"/>
+    <img src="../../../../_static/navbar-brand-logo.jpg" class="logo__image only-dark pst-js-only" alt="PyFlink 1.20+vvr.11.7.dev0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../reference/index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../reference/index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyflink.datastream.connectors.pulsar</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for pyflink.datastream.connectors.pulsar</h1><div class="highlight"><pre>
+<span></span><span class="c1">################################################################################</span>
+<span class="c1">#  Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="c1">#  or more contributor license agreements.  See the NOTICE file</span>
+<span class="c1">#  distributed with this work for additional information</span>
+<span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
+<span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
+<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  with the License.  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">################################################################################</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeserializationSchema</span><span class="p">,</span> <span class="n">ConfigOptions</span><span class="p">,</span> <span class="n">Duration</span><span class="p">,</span> <span class="n">SerializationSchema</span><span class="p">,</span> \
+    <span class="n">ConfigOption</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream.connectors</span><span class="w"> </span><span class="kn">import</span> <span class="n">Source</span><span class="p">,</span> <span class="n">Sink</span><span class="p">,</span> <span class="n">DeliveryGuarantee</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.java_gateway</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_gateway</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.util.java_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_java_class</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;PulsarSource&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;PulsarSourceBuilder&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;StartCursor&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;StopCursor&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;RangeGenerator&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;PulsarSink&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;PulsarSinkBuilder&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;MessageDelayer&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;TopicRoutingMode&#39;</span>
+<span class="p">]</span>
+
+
+<span class="c1"># ---- PulsarSource ----</span>
+
+<div class="viewcode-block" id="StartCursor">
+<a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.pulsar.StartCursor.html#pyflink.datastream.connectors.pulsar.StartCursor">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">StartCursor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A factory class for users to specify the start position of a pulsar subscription.</span>
+<span class="sd">    Since it would be serialized into split.</span>
+<span class="sd">    The implementation for this interface should be well considered.</span>
+<span class="sd">    I don&#39;t recommend adding extra internal state for this implementation.</span>
+
+<span class="sd">    This class would be used only for SubscriptionType.Exclusive and SubscriptionType.Failover.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_j_start_cursor</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_start_cursor</span> <span class="o">=</span> <span class="n">_j_start_cursor</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">default_start_cursor</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;StartCursor&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">StartCursor</span><span class="o">.</span><span class="n">earliest</span><span class="p">()</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">earliest</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;StartCursor&#39;</span><span class="p">:</span>
+        <span class="n">JStartCursor</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span> \
+            <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">pulsar</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">enumerator</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">StartCursor</span>
+        <span class="k">return</span> <span class="n">StartCursor</span><span class="p">(</span><span class="n">JStartCursor</span><span class="o">.</span><span class="n">earliest</span><span class="p">())</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">latest</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;StartCursor&#39;</span><span class="p">:</span>
+        <span class="n">JStartCursor</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span> \
+            <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">pulsar</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">enumerator</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">StartCursor</span>
+        <span class="k">return</span> <span class="n">StartCursor</span><span class="p">(</span><span class="n">JStartCursor</span><span class="o">.</span><span class="n">latest</span><span class="p">())</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_message_id</span><span class="p">(</span><span class="n">message_id</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">inclusive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StartCursor&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Find the available message id and start consuming from it. User could call pulsar Python</span>
+<span class="sd">        library serialize method to cover messageId bytes.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; from pulsar import MessageId</span>
+<span class="sd">            &gt;&gt;&gt; message_id_bytes = MessageId().serialize()</span>
+<span class="sd">            &gt;&gt;&gt; start_cursor = StartCursor.from_message_id(message_id_bytes)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">JStartCursor</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span> \
+            <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">pulsar</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">enumerator</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">StartCursor</span>
+        <span class="n">j_message_id</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">pulsar</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">MessageId</span> \
+            <span class="o">.</span><span class="n">fromByteArray</span><span class="p">(</span><span class="n">message_id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">StartCursor</span><span class="p">(</span><span class="n">JStartCursor</span><span class="o">.</span><span class="n">fromMessageId</span><span class="p">(</span><span class="n">j_message_id</span><span class="p">,</span> <span class="n">inclusive</span><span class="p">))</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_publish_time</span><span class="p">(</span><span class="n">timestamp</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StartCursor&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Seek the start position by using message publish time.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">JStartCursor</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span> \
+            <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">pulsar</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">enumerator</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">StartCursor</span>
+        <span class="k">return</span> <span class="n">StartCursor</span><span class="p">(</span><span class="n">JStartCursor</span><span class="o">.</span><span class="n">fromPublishTime</span><span class="p">(</span><span class="n">timestamp</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="StopCursor">
+<a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.pulsar.StopCursor.html#pyflink.datastream.connectors.pulsar.StopCursor">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">StopCursor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A factory class for users to specify the stop position of a pulsar subscription. Since it would</span>
+<span class="sd">    be serialized into split. The implementation for this interface should be well considered. I</span>
+<span class="sd">    don&#39;t recommend adding extra internal state for this implementation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_j_stop_cursor</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_stop_cursor</span> <span class="o">=</span> <span class="n">_j_stop_cursor</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">default_stop_cursor</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;StopCursor&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">StopCursor</span><span class="o">.</span><span class="n">never</span><span class="p">()</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">never</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;StopCursor&#39;</span><span class="p">:</span>
+        <span class="n">JStopCursor</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span> \
+            <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">pulsar</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">enumerator</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">StopCursor</span>
+        <span class="k">return</span> <span class="n">StopCursor</span><span class="p">(</span><span class="n">JStopCursor</span><span class="o">.</span><span class="n">never</span><span class="p">())</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">latest</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;StopCursor&#39;</span><span class="p">:</span>
+        <span class="n">JStopCursor</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span> \
+            <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">pulsar</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">enumerator</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">StopCursor</span>
+        <span class="k">return</span> <span class="n">StopCursor</span><span class="p">(</span><span class="n">JStopCursor</span><span class="o">.</span><span class="n">latest</span><span class="p">())</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">at_event_time</span><span class="p">(</span><span class="n">timestamp</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StopCursor&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Stop consuming when message eventTime is greater than or equals the specified timestamp.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">JStopCursor</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span> \
+            <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">pulsar</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">enumerator</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">StopCursor</span>
+        <span class="k">return</span> <span class="n">StopCursor</span><span class="p">(</span><span class="n">JStopCursor</span><span class="o">.</span><span class="n">atEventTime</span><span class="p">(</span><span class="n">timestamp</span><span class="p">))</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">after_event_time</span><span class="p">(</span><span class="n">timestamp</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StopCursor&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Stop consuming when message eventTime is greater than the specified timestamp.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">JStopCursor</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span> \
+            <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">pulsar</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">enumerator</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">StopCursor</span>
+        <span class="k">return</span> <span class="n">StopCursor</span><span class="p">(</span><span class="n">JStopCursor</span><span class="o">.</span><span class="n">afterEventTime</span><span class="p">(</span><span class="n">timestamp</span><span class="p">))</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">at_publish_time</span><span class="p">(</span><span class="n">timestamp</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StopCursor&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Stop consuming when message publishTime is greater than or equals the specified timestamp.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">JStopCursor</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span> \
+            <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">pulsar</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">enumerator</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">StopCursor</span>
+        <span class="k">return</span> <span class="n">StopCursor</span><span class="p">(</span><span class="n">JStopCursor</span><span class="o">.</span><span class="n">atPublishTime</span><span class="p">(</span><span class="n">timestamp</span><span class="p">))</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">after_publish_time</span><span class="p">(</span><span class="n">timestamp</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StopCursor&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Stop consuming when message publishTime is greater than the specified timestamp.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">JStopCursor</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span> \
+            <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">pulsar</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">enumerator</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">StopCursor</span>
+        <span class="k">return</span> <span class="n">StopCursor</span><span class="p">(</span><span class="n">JStopCursor</span><span class="o">.</span><span class="n">afterPublishTime</span><span class="p">(</span><span class="n">timestamp</span><span class="p">))</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">at_message_id</span><span class="p">(</span><span class="n">message_id</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StopCursor&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Stop consuming when the messageId is equal or greater than the specified messageId.</span>
+<span class="sd">        Message that is equal to the specified messageId will not be consumed. User could call</span>
+<span class="sd">        pulsar Python library serialize method to cover messageId bytes.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; from pulsar import MessageId</span>
+<span class="sd">            &gt;&gt;&gt; message_id_bytes = MessageId().serialize()</span>
+<span class="sd">            &gt;&gt;&gt; stop_cursor = StopCursor.at_message_id(message_id_bytes)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">JStopCursor</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span> \
+            <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">pulsar</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">enumerator</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">StopCursor</span>
+        <span class="n">j_message_id</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">pulsar</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">MessageId</span> \
+            <span class="o">.</span><span class="n">fromByteArray</span><span class="p">(</span><span class="n">message_id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">StopCursor</span><span class="p">(</span><span class="n">JStopCursor</span><span class="o">.</span><span class="n">atMessageId</span><span class="p">(</span><span class="n">j_message_id</span><span class="p">))</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">after_message_id</span><span class="p">(</span><span class="n">message_id</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StopCursor&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Stop consuming when the messageId is greater than the specified messageId. Message that is</span>
+<span class="sd">        equal to the specified messageId will be consumed. User could call pulsar Python library</span>
+<span class="sd">        serialize method to cover messageId bytes.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; from pulsar import MessageId</span>
+<span class="sd">            &gt;&gt;&gt; message_id_bytes = MessageId().serialize()</span>
+<span class="sd">            &gt;&gt;&gt; stop_cursor = StopCursor.after_message_id(message_id_bytes)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">JStopCursor</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span> \
+            <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">pulsar</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">enumerator</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">StopCursor</span>
+        <span class="n">j_message_id</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">pulsar</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">MessageId</span> \
+            <span class="o">.</span><span class="n">fromByteArray</span><span class="p">(</span><span class="n">message_id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">StopCursor</span><span class="p">(</span><span class="n">JStopCursor</span><span class="o">.</span><span class="n">afterMessageId</span><span class="p">(</span><span class="n">j_message_id</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="RangeGenerator">
+<a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.pulsar.RangeGenerator.html#pyflink.datastream.connectors.pulsar.RangeGenerator">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">RangeGenerator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A generator for generating the TopicRange for given topic. It was used for pulsar&#39;s</span>
+<span class="sd">    SubscriptionType#Key_Shared mode. TopicRange would be used in KeySharedPolicy for different</span>
+<span class="sd">    pulsar source readers.</span>
+
+<span class="sd">    If you implement this interface, make sure that each TopicRange would be assigned to a</span>
+<span class="sd">    specified source reader. Since flink parallelism is provided, make sure the pulsar message key&#39;s</span>
+<span class="sd">    hashcode is evenly distributed among these topic ranges.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_range_generator</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_range_generator</span> <span class="o">=</span> <span class="n">j_range_generator</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">full</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;RangeGenerator&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Default implementation for SubscriptionType#Shared, SubscriptionType#Failover and</span>
+<span class="sd">        SubscriptionType#Exclusive subscription.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">JFullRangeGenerator</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span> \
+            <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">pulsar</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">enumerator</span><span class="o">.</span><span class="n">topic</span><span class="o">.</span><span class="n">range</span><span class="o">.</span><span class="n">FullRangeGenerator</span>
+        <span class="k">return</span> <span class="n">RangeGenerator</span><span class="p">(</span><span class="n">JFullRangeGenerator</span><span class="p">())</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fixed_key</span><span class="p">(</span><span class="n">support_null_key</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                  <span class="n">keys</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                  <span class="n">key_bytes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                  <span class="n">ordering_key_bytes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;RangeGenerator&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Pulsar didn&#39;t expose the key hash range method. We have to provide an implementation for</span>
+<span class="sd">        end-user. You can add the keys you want to consume, no need to provide any hash ranges.</span>
+
+<span class="sd">        Since the key&#39;s hash isn&#39;t specified to only one key. The consuming results may contain the</span>
+<span class="sd">        messages with different keys comparing the keys you have defined in this range generator.</span>
+<span class="sd">        Remember to use flink&#39;s DataStream.filter() method.</span>
+
+<span class="sd">        :param support_null_key: Some Message in Pulsar may not have Message#getOrderingKey() or</span>
+<span class="sd">                                 Message#getKey(), use this method for supporting consuming such</span>
+<span class="sd">                                 messages.</span>
+<span class="sd">        :param keys: If you set the message key by using PulsarMessageBuilder#key(String) or</span>
+<span class="sd">                     TypedMessageBuilder#key(String), use this method for supporting consuming such</span>
+<span class="sd">                     messages.</span>
+<span class="sd">        :param key_bytes: If you set the message key by using TypedMessageBuilder#keyBytes(byte[]),</span>
+<span class="sd">                          use this method for supporting consuming such messages.</span>
+<span class="sd">        :param ordering_key_bytes: Pulsar&#39;s ordering key is prior to the message key. If you set</span>
+<span class="sd">                                   the ordering key by using</span>
+<span class="sd">                                   PulsarMessageBuilder#orderingKey(byte[]) or</span>
+<span class="sd">                                   TypedMessageBuilder#orderingKey(byte[]), use this method for</span>
+<span class="sd">                                   supporting consuming such messages.</span>
+<span class="sd">         * messages.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">JFixedKeysRangeGenerator</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span> \
+            <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">pulsar</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">enumerator</span><span class="o">.</span><span class="n">topic</span><span class="o">.</span><span class="n">range</span><span class="o">.</span><span class="n">FixedKeysRangeGenerator</span>
+        <span class="n">j_range_generator_builder</span> <span class="o">=</span> <span class="n">JFixedKeysRangeGenerator</span><span class="o">.</span><span class="n">builder</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">support_null_key</span><span class="p">:</span>
+            <span class="n">j_range_generator_builder</span><span class="o">.</span><span class="n">supportNullKey</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">keys</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">j_range_generator_builder</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+                    <span class="n">j_range_generator_builder</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">key_bytes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">j_range_generator_builder</span><span class="o">.</span><span class="n">keyBytes</span><span class="p">(</span><span class="n">key_bytes</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ordering_key_bytes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">j_range_generator_builder</span><span class="o">.</span><span class="n">orderingKey</span><span class="p">(</span><span class="n">ordering_key_bytes</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">RangeGenerator</span><span class="p">(</span><span class="n">j_range_generator_builder</span><span class="o">.</span><span class="n">build</span><span class="p">())</span></div>
+
+
+
+<div class="viewcode-block" id="PulsarSource">
+<a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.pulsar.PulsarSource.html#pyflink.datastream.connectors.pulsar.PulsarSource">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PulsarSource</span><span class="p">(</span><span class="n">Source</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The Source implementation of Pulsar. Please use a PulsarSourceBuilder to construct a</span>
+<span class="sd">    PulsarSource. The following example shows how to create a PulsarSource emitting records of</span>
+<span class="sd">    String type.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        &gt;&gt;&gt; source = PulsarSource() \\</span>
+<span class="sd">        ...     .builder() \\</span>
+<span class="sd">        ...     .set_topics([TOPIC1, TOPIC2]) \\</span>
+<span class="sd">        ...     .set_service_url(get_service_url()) \\</span>
+<span class="sd">        ...     .set_admin_url(get_admin_url()) \\</span>
+<span class="sd">        ...     .set_subscription_name(&quot;test&quot;) \\</span>
+<span class="sd">        ...     .set_deserialization_schema(SimpleStringSchema()) \\</span>
+<span class="sd">        ...     .set_bounded_stop_cursor(StopCursor.default_stop_cursor()) \\</span>
+<span class="sd">        ...     .build()</span>
+
+<span class="sd">    See PulsarSourceBuilder for more details.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_pulsar_source</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PulsarSource</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">j_pulsar_source</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">builder</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;PulsarSourceBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a PulsarSourceBuilder to builder a PulsarSource.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">PulsarSourceBuilder</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="PulsarSourceBuilder">
+<a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.pulsar.PulsarSourceBuilder.html#pyflink.datastream.connectors.pulsar.PulsarSourceBuilder">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PulsarSourceBuilder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The builder class for PulsarSource to make it easier for the users to construct a PulsarSource.</span>
+
+<span class="sd">    The following example shows the minimum setup to create a PulsarSource that reads the String</span>
+<span class="sd">    values from a Pulsar topic.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        &gt;&gt;&gt; source = PulsarSource() \\</span>
+<span class="sd">        ...     .builder() \\</span>
+<span class="sd">        ...     .set_service_url(PULSAR_BROKER_URL) \\</span>
+<span class="sd">        ...     .set_admin_url(PULSAR_BROKER_HTTP_URL) \\</span>
+<span class="sd">        ...     .set_subscription_name(&quot;flink-source-1&quot;) \\</span>
+<span class="sd">        ...     .set_topics([TOPIC1, TOPIC2]) \\</span>
+<span class="sd">        ...     .set_deserialization_schema(SimpleStringSchema()) \\</span>
+<span class="sd">        ...     .build()</span>
+
+<span class="sd">    The service url, admin url, subscription name, topics to consume, and the record deserializer</span>
+<span class="sd">    are required fields that must be set.</span>
+
+<span class="sd">    To specify the starting position of PulsarSource, one can call set_start_cursor(StartCursor).</span>
+
+<span class="sd">    By default the PulsarSource runs in an Boundedness.CONTINUOUS_UNBOUNDED mode and never stop</span>
+<span class="sd">    until the Flink job is canceled or fails. To let the PulsarSource run in</span>
+<span class="sd">    Boundedness.CONTINUOUS_UNBOUNDED but stops at some given offsets, one can call</span>
+<span class="sd">    set_unbounded_stop_cursor(StopCursor).</span>
+
+<span class="sd">    For example the following PulsarSource stops after it consumes up to a event time when the</span>
+<span class="sd">    Flink started.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        &gt;&gt;&gt; source = PulsarSource() \\</span>
+<span class="sd">        ...     .builder() \\</span>
+<span class="sd">        ...     .set_service_url(PULSAR_BROKER_URL) \\</span>
+<span class="sd">        ...     .set_admin_url(PULSAR_BROKER_HTTP_URL) \\</span>
+<span class="sd">        ...     .set_subscription_name(&quot;flink-source-1&quot;) \\</span>
+<span class="sd">        ...     .set_topics([TOPIC1, TOPIC2]) \\</span>
+<span class="sd">        ...     .set_deserialization_schema(SimpleStringSchema()) \\</span>
+<span class="sd">        ...     .set_bounded_stop_cursor(StopCursor.at_publish_time(int(time.time() * 1000)))</span>
+<span class="sd">        ...     .build()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">JPulsarSource</span> <span class="o">=</span> \
+            <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">pulsar</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">PulsarSource</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_source_builder</span> <span class="o">=</span> <span class="n">JPulsarSource</span><span class="o">.</span><span class="n">builder</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_admin_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">admin_url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;PulsarSourceBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the admin endpoint for the PulsarAdmin of the PulsarSource.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_source_builder</span><span class="o">.</span><span class="n">setAdminUrl</span><span class="p">(</span><span class="n">admin_url</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_service_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">service_url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;PulsarSourceBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the server&#39;s link for the PulsarConsumer of the PulsarSource.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_source_builder</span><span class="o">.</span><span class="n">setServiceUrl</span><span class="p">(</span><span class="n">service_url</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_subscription_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subscription_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;PulsarSourceBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the name for this pulsar subscription.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_source_builder</span><span class="o">.</span><span class="n">setSubscriptionName</span><span class="p">(</span><span class="n">subscription_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_topics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topics</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="s1">&#39;PulsarSourceBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set a pulsar topic list for flink source. Some topic may not exist currently, consuming this</span>
+<span class="sd">        non-existed topic wouldn&#39;t throw any exception. But the best solution is just consuming by</span>
+<span class="sd">        using a topic regex. You can set topics once either with setTopics or setTopicPattern in</span>
+<span class="sd">        this builder.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">topics</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">topics</span> <span class="o">=</span> <span class="p">[</span><span class="n">topics</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_source_builder</span><span class="o">.</span><span class="n">setTopics</span><span class="p">(</span><span class="n">topics</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_topic_pattern</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topic_pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;PulsarSourceBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set a topic pattern to consume from the java regex str. You can set topics once either with</span>
+<span class="sd">        set_topics or set_topic_pattern in this builder.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_source_builder</span><span class="o">.</span><span class="n">setTopicPattern</span><span class="p">(</span><span class="n">topic_pattern</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_consumer_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">consumer_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;PulsarSourceBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The consumer name is informative, and it can be used to identify a particular consumer</span>
+<span class="sd">        instance from the topic stats.</span>
+
+<span class="sd">        .. versionadded:: 1.17.2</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_source_builder</span><span class="o">.</span><span class="n">setConsumerName</span><span class="p">(</span><span class="n">consumer_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_range_generator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">range_generator</span><span class="p">:</span> <span class="n">RangeGenerator</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;PulsarSourceBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set a topic range generator for consuming a sub set of keys.</span>
+
+<span class="sd">        :param range_generator: A generator which would generate a set of TopicRange for given</span>
+<span class="sd">                                topic.</span>
+
+<span class="sd">        .. versionadded:: 1.17.2</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_source_builder</span><span class="o">.</span><span class="n">setRangeGenerator</span><span class="p">(</span><span class="n">range_generator</span><span class="o">.</span><span class="n">_j_range_generator</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_start_cursor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_cursor</span><span class="p">:</span> <span class="n">StartCursor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;PulsarSourceBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Specify from which offsets the PulsarSource should start consume from by providing an</span>
+<span class="sd">        StartCursor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_source_builder</span><span class="o">.</span><span class="n">setStartCursor</span><span class="p">(</span><span class="n">start_cursor</span><span class="o">.</span><span class="n">_j_start_cursor</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_unbounded_stop_cursor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stop_cursor</span><span class="p">:</span> <span class="n">StopCursor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;PulsarSourceBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        By default the PulsarSource is set to run in Boundedness.CONTINUOUS_UNBOUNDED manner and</span>
+<span class="sd">        thus never stops until the Flink job fails or is canceled. To let the PulsarSource run as a</span>
+<span class="sd">        streaming source but still stops at some point, one can set an StopCursor to specify the</span>
+<span class="sd">        stopping offsets for each partition. When all the partitions have reached their stopping</span>
+<span class="sd">        offsets, the PulsarSource will then exit.</span>
+
+<span class="sd">        This method is different from set_bounded_stop_cursor(StopCursor) that after setting the</span>
+<span class="sd">        stopping offsets with this method, PulsarSource.getBoundedness() will still return</span>
+<span class="sd">        Boundedness.CONTINUOUS_UNBOUNDED even though it will stop at the stopping offsets specified</span>
+<span class="sd">        by the stopping offsets StopCursor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_source_builder</span><span class="o">.</span><span class="n">setUnboundedStopCursor</span><span class="p">(</span><span class="n">stop_cursor</span><span class="o">.</span><span class="n">_j_stop_cursor</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_bounded_stop_cursor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stop_cursor</span><span class="p">:</span> <span class="n">StopCursor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;PulsarSourceBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        By default the PulsarSource is set to run in Boundedness.CONTINUOUS_UNBOUNDED manner and</span>
+<span class="sd">        thus never stops until the Flink job fails or is canceled. To let the PulsarSource run in</span>
+<span class="sd">        Boundedness.BOUNDED manner and stops at some point, one can set an StopCursor to specify</span>
+<span class="sd">        the stopping offsets for each partition. When all the partitions have reached their stopping</span>
+<span class="sd">        offsets, the PulsarSource will then exit.</span>
+
+<span class="sd">        This method is different from set_unbounded_stop_cursor(StopCursor) that after setting the</span>
+<span class="sd">        stopping offsets with this method, PulsarSource.getBoundedness() will return</span>
+<span class="sd">        Boundedness.BOUNDED instead of Boundedness.CONTINUOUS_UNBOUNDED.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_source_builder</span><span class="o">.</span><span class="n">setBoundedStopCursor</span><span class="p">(</span><span class="n">stop_cursor</span><span class="o">.</span><span class="n">_j_stop_cursor</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_deserialization_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">deserialization_schema</span><span class="p">:</span> <span class="n">DeserializationSchema</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;PulsarSourceBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the :class:`~pyflink.common.serialization.DeserializationSchema` for deserializing the</span>
+<span class="sd">        value of Pulsars message.</span>
+
+<span class="sd">        :param deserialization_schema: the :class:`DeserializationSchema` to use for</span>
+<span class="sd">            deserialization.</span>
+<span class="sd">        :return: this PulsarSourceBuilder.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_source_builder</span><span class="o">.</span><span class="n">setDeserializationSchema</span><span class="p">(</span>
+            <span class="n">deserialization_schema</span><span class="o">.</span><span class="n">_j_deserialization_schema</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_authentication</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                           <span class="n">auth_plugin_class_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                           <span class="n">auth_params_string</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]])</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;PulsarSourceBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Configure the authentication provider to use in the Pulsar client instance.</span>
+
+<span class="sd">        :param auth_plugin_class_name: Name of the Authentication-Plugin you want to use.</span>
+<span class="sd">        :param auth_params_string: String which represents parameters for the Authentication-Plugin,</span>
+<span class="sd">                                   e.g., &quot;key1:val1,key2:val2&quot;.</span>
+
+<span class="sd">        .. versionadded:: 1.17.2</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">auth_params_string</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_source_builder</span><span class="o">.</span><span class="n">setAuthentication</span><span class="p">(</span>
+                <span class="n">auth_plugin_class_name</span><span class="p">,</span> <span class="n">auth_params_string</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">j_auth_params_map</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">HashMap</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">auth_params_string</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">j_auth_params_map</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_source_builder</span><span class="o">.</span><span class="n">setAuthentication</span><span class="p">(</span>
+                <span class="n">auth_plugin_class_name</span><span class="p">,</span> <span class="n">j_auth_params_map</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ConfigOption</span><span class="p">],</span> <span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;PulsarSourceBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set arbitrary properties for the PulsarSource and PulsarConsumer. The valid keys can be</span>
+<span class="sd">        found in PulsarSourceOptions and PulsarOptions.</span>
+
+<span class="sd">        Make sure the option could be set only once or with same value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">ConfigOption</span><span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;set_config(key: ConfigOption, value) is deprecated. &quot;</span>
+                          <span class="s2">&quot;Use set_config(key: str, value) instead.&quot;</span><span class="p">,</span>
+                          <span class="ne">DeprecationWarning</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">j_config_option</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">_j_config_option</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">j_config_option</span> <span class="o">=</span> \
+                <span class="n">ConfigOptions</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="n">string_type</span><span class="p">()</span><span class="o">.</span><span class="n">no_default_value</span><span class="p">()</span><span class="o">.</span><span class="n">_j_config_option</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_source_builder</span><span class="o">.</span><span class="n">setConfig</span><span class="p">(</span><span class="n">j_config_option</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_config_with_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;PulsarSourceBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set arbitrary properties for the PulsarSource and PulsarConsumer. The valid keys can be</span>
+<span class="sd">        found in PulsarSourceOptions and PulsarOptions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;set_config_with_dict is deprecated. Use set_properties instead.&quot;</span><span class="p">,</span>
+                      <span class="ne">DeprecationWarning</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_properties</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;PulsarSourceBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set arbitrary properties for the PulsarSource and PulsarConsumer. The valid keys can be</span>
+<span class="sd">        found in PulsarSourceOptions and PulsarOptions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">JConfiguration</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">Configuration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_source_builder</span><span class="o">.</span><span class="n">setConfig</span><span class="p">(</span><span class="n">JConfiguration</span><span class="o">.</span><span class="n">fromMap</span><span class="p">(</span><span class="n">config</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;PulsarSource&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Build the PulsarSource.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">PulsarSource</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_source_builder</span><span class="o">.</span><span class="n">build</span><span class="p">())</span></div>
+
+
+
+<span class="c1"># ---- PulsarSink ----</span>
+
+<div class="viewcode-block" id="TopicRoutingMode">
+<a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.pulsar.TopicRoutingMode.html#pyflink.datastream.connectors.pulsar.TopicRoutingMode">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">TopicRoutingMode</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The routing policy for choosing the desired topic by the given message.</span>
+
+<span class="sd">    :data: `ROUND_ROBIN`:</span>
+
+<span class="sd">    The producer will publish messages across all partitions in a round-robin fashion to achieve</span>
+<span class="sd">    maximum throughput. Please note that round-robin is not done per individual message but</span>
+<span class="sd">    rather it&#39;s set to the same boundary of batching delay, to ensure batching is effective.</span>
+
+<span class="sd">    :data: `MESSAGE_KEY_HASH`:</span>
+
+<span class="sd">    If no key is provided, The partitioned producer will randomly pick one single topic partition</span>
+<span class="sd">    and publish all the messages into that partition. If a key is provided on the message, the</span>
+<span class="sd">    partitioned producer will hash the key and assign the message to a particular partition.</span>
+
+<span class="sd">    :data: `CUSTOM`:</span>
+
+<span class="sd">    Use custom topic router implementation that will be called to determine the partition for a</span>
+<span class="sd">    particular message.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">ROUND_ROBIN</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">MESSAGE_KEY_HASH</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">CUSTOM</span> <span class="o">=</span> <span class="mi">2</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_to_j_topic_routing_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">JTopicRoutingMode</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span> \
+            <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">pulsar</span><span class="o">.</span><span class="n">sink</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">router</span><span class="o">.</span><span class="n">TopicRoutingMode</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">JTopicRoutingMode</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="MessageDelayer">
+<a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.pulsar.MessageDelayer.html#pyflink.datastream.connectors.pulsar.MessageDelayer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MessageDelayer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A delayer for Pulsar broker passing the sent message to the downstream consumer. This is only</span>
+<span class="sd">    works in :data:`SubscriptionType.Shared` subscription.</span>
+
+<span class="sd">    Read delayed message delivery</span>
+<span class="sd">    https://pulsar.apache.org/docs/en/next/concepts-messaging/#delayed-message-delivery for better</span>
+<span class="sd">    understanding this feature.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_j_message_delayer</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_message_delayer</span> <span class="o">=</span> <span class="n">_j_message_delayer</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">never</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;MessageDelayer&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        All the messages should be consumed immediately.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">JMessageDelayer</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span> \
+            <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">pulsar</span><span class="o">.</span><span class="n">sink</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">delayer</span><span class="o">.</span><span class="n">MessageDelayer</span>
+        <span class="k">return</span> <span class="n">MessageDelayer</span><span class="p">(</span><span class="n">JMessageDelayer</span><span class="o">.</span><span class="n">never</span><span class="p">())</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fixed</span><span class="p">(</span><span class="n">duration</span><span class="p">:</span> <span class="n">Duration</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;MessageDelayer&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        All the messages should be consumed in a fixed duration.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">JMessageDelayer</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span> \
+            <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">pulsar</span><span class="o">.</span><span class="n">sink</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">delayer</span><span class="o">.</span><span class="n">MessageDelayer</span>
+        <span class="k">return</span> <span class="n">MessageDelayer</span><span class="p">(</span><span class="n">JMessageDelayer</span><span class="o">.</span><span class="n">fixed</span><span class="p">(</span><span class="n">duration</span><span class="o">.</span><span class="n">_j_duration</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="PulsarSink">
+<a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.pulsar.PulsarSink.html#pyflink.datastream.connectors.pulsar.PulsarSink">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PulsarSink</span><span class="p">(</span><span class="n">Sink</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The Sink implementation of Pulsar. Please use a PulsarSinkBuilder to construct a</span>
+<span class="sd">    PulsarSink. The following example shows how to create a PulsarSink receiving records of</span>
+<span class="sd">    String type.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        &gt;&gt;&gt; sink = PulsarSink.builder() \\</span>
+<span class="sd">        ...     .set_service_url(PULSAR_BROKER_URL) \\</span>
+<span class="sd">        ...     .set_admin_url(PULSAR_BROKER_HTTP_URL) \\</span>
+<span class="sd">        ...     .set_topics(topic) \\</span>
+<span class="sd">        ...     .set_serialization_schema(SimpleStringSchema()) \\</span>
+<span class="sd">        ...     .build()</span>
+
+<span class="sd">    The sink supports all delivery guarantees described by DeliveryGuarantee.</span>
+
+<span class="sd">    DeliveryGuarantee#NONE does not provide any guarantees: messages may be lost in</span>
+<span class="sd">    case of issues on the Pulsar broker and messages may be duplicated in case of a Flink</span>
+<span class="sd">    failure.</span>
+
+<span class="sd">    DeliveryGuarantee#AT_LEAST_ONCE the sink will wait for all outstanding records in</span>
+<span class="sd">    the Pulsar buffers to be acknowledged by the Pulsar producer on a checkpoint. No messages</span>
+<span class="sd">    will be lost in case of any issue with the Pulsar brokers but messages may be duplicated</span>
+<span class="sd">    when Flink restarts.</span>
+
+<span class="sd">    DeliveryGuarantee#EXACTLY_ONCE: In this mode the PulsarSink will write all messages</span>
+<span class="sd">    in a Pulsar transaction that will be committed to Pulsar on a checkpoint. Thus, no</span>
+<span class="sd">    duplicates will be seen in case of a Flink restart. However, this delays record writing</span>
+<span class="sd">    effectively until a checkpoint is written, so adjust the checkpoint duration accordingly.</span>
+<span class="sd">    Additionally, it is highly recommended to tweak Pulsar transaction timeout (link) &gt;&gt;</span>
+<span class="sd">    maximum checkpoint duration + maximum restart duration or data loss may happen when Pulsar</span>
+<span class="sd">    expires an uncommitted transaction.</span>
+
+<span class="sd">    See PulsarSinkBuilder for more details.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_pulsar_sink</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PulsarSink</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">sink</span><span class="o">=</span><span class="n">j_pulsar_sink</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">builder</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;PulsarSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a PulsarSinkBuilder to builder a PulsarSink.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">PulsarSinkBuilder</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="PulsarSinkBuilder">
+<a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.pulsar.PulsarSinkBuilder.html#pyflink.datastream.connectors.pulsar.PulsarSinkBuilder">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PulsarSinkBuilder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The builder class for PulsarSink to make it easier for the users to construct a PulsarSink.</span>
+
+<span class="sd">    The following example shows the minimum setup to create a PulsarSink that reads the String</span>
+<span class="sd">    values from a Pulsar topic.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        &gt;&gt;&gt; sink = PulsarSink.builder() \\</span>
+<span class="sd">        ...     .set_service_url(PULSAR_BROKER_URL) \\</span>
+<span class="sd">        ...     .set_admin_url(PULSAR_BROKER_HTTP_URL) \\</span>
+<span class="sd">        ...     .set_topics([TOPIC1, TOPIC2]) \\</span>
+<span class="sd">        ...     .set_serialization_schema(SimpleStringSchema()) \\</span>
+<span class="sd">        ...     .build()</span>
+
+<span class="sd">    The service url, admin url, and the record serializer are required fields that must be set. If</span>
+<span class="sd">    you don&#39;t set the topics, make sure you have provided a custom TopicRouter. Otherwise,</span>
+<span class="sd">    you must provide the topics to produce.</span>
+
+<span class="sd">    To specify the delivery guarantees of PulsarSink, one can call</span>
+<span class="sd">    #setDeliveryGuarantee(DeliveryGuarantee). The default value of the delivery guarantee is</span>
+<span class="sd">    DeliveryGuarantee#NONE, and it wouldn&#39;t promise the consistence when write the message into</span>
+<span class="sd">    Pulsar.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        &gt;&gt;&gt; sink = PulsarSink.builder() \\</span>
+<span class="sd">        ...     .set_service_url(PULSAR_BROKER_URL) \\</span>
+<span class="sd">        ...     .set_admin_url(PULSAR_BROKER_HTTP_URL) \\</span>
+<span class="sd">        ...     .set_topics([TOPIC1, TOPIC2]) \\</span>
+<span class="sd">        ...     .set_serialization_schema(SimpleStringSchema()) \\</span>
+<span class="sd">        ...     .set_delivery_guarantee(DeliveryGuarantee.EXACTLY_ONCE)</span>
+<span class="sd">        ...     .build()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">JPulsarSink</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">pulsar</span><span class="o">.</span><span class="n">sink</span><span class="o">.</span><span class="n">PulsarSink</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_sink_builder</span> <span class="o">=</span> <span class="n">JPulsarSink</span><span class="o">.</span><span class="n">builder</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_admin_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">admin_url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;PulsarSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the admin endpoint for the PulsarAdmin of the PulsarSink.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_sink_builder</span><span class="o">.</span><span class="n">setAdminUrl</span><span class="p">(</span><span class="n">admin_url</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_service_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">service_url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;PulsarSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the server&#39;s link for the PulsarProducer of the PulsarSink.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_sink_builder</span><span class="o">.</span><span class="n">setServiceUrl</span><span class="p">(</span><span class="n">service_url</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_producer_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">producer_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;PulsarSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The producer name is informative, and it can be used to identify a particular producer</span>
+<span class="sd">        instance from the topic stats.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_sink_builder</span><span class="o">.</span><span class="n">setProducerName</span><span class="p">(</span><span class="n">producer_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_topics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topics</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="s1">&#39;PulsarSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set a pulsar topic list for flink sink. Some topic may not exist currently, write to this</span>
+<span class="sd">        non-existed topic wouldn&#39;t throw any exception.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">topics</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">topics</span> <span class="o">=</span> <span class="p">[</span><span class="n">topics</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_sink_builder</span><span class="o">.</span><span class="n">setTopics</span><span class="p">(</span><span class="n">topics</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_delivery_guarantee</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delivery_guarantee</span><span class="p">:</span> <span class="n">DeliveryGuarantee</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;PulsarSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the wanted the DeliveryGuarantee. The default delivery guarantee is</span>
+<span class="sd">        DeliveryGuarantee#NONE.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_sink_builder</span><span class="o">.</span><span class="n">setDeliveryGuarantee</span><span class="p">(</span>
+            <span class="n">delivery_guarantee</span><span class="o">.</span><span class="n">_to_j_delivery_guarantee</span><span class="p">())</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_topic_routing_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topic_routing_mode</span><span class="p">:</span> <span class="n">TopicRoutingMode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;PulsarSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set a routing mode for choosing right topic partition to send messages.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_sink_builder</span><span class="o">.</span><span class="n">setTopicRoutingMode</span><span class="p">(</span>
+            <span class="n">topic_routing_mode</span><span class="o">.</span><span class="n">_to_j_topic_routing_mode</span><span class="p">())</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_topic_router</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topic_router_class_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;PulsarSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Use a custom topic router instead predefine topic routing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">j_topic_router</span> <span class="o">=</span> <span class="n">load_java_class</span><span class="p">(</span><span class="n">topic_router_class_name</span><span class="p">)</span><span class="o">.</span><span class="n">newInstance</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_sink_builder</span><span class="o">.</span><span class="n">setTopicRouter</span><span class="p">(</span><span class="n">j_topic_router</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_serialization_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">serialization_schema</span><span class="p">:</span> <span class="n">SerializationSchema</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;PulsarSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the SerializationSchema of the PulsarSinkBuilder.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_sink_builder</span><span class="o">.</span><span class="n">setSerializationSchema</span><span class="p">(</span>
+            <span class="n">serialization_schema</span><span class="o">.</span><span class="n">_j_serialization_schema</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_authentication</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                           <span class="n">auth_plugin_class_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                           <span class="n">auth_params_string</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]])</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;PulsarSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Configure the authentication provider to use in the Pulsar client instance.</span>
+
+<span class="sd">        :param auth_plugin_class_name: Name of the Authentication-Plugin you want to use.</span>
+<span class="sd">        :param auth_params_string: String which represents parameters for the Authentication-Plugin,</span>
+<span class="sd">                                   e.g., &quot;key1:val1,key2:val2&quot;.</span>
+
+<span class="sd">        .. versionadded:: 1.17.2</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">auth_params_string</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_sink_builder</span><span class="o">.</span><span class="n">setAuthentication</span><span class="p">(</span>
+                <span class="n">auth_plugin_class_name</span><span class="p">,</span> <span class="n">auth_params_string</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">j_auth_params_map</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">HashMap</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">auth_params_string</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">j_auth_params_map</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_sink_builder</span><span class="o">.</span><span class="n">setAuthentication</span><span class="p">(</span>
+                <span class="n">auth_plugin_class_name</span><span class="p">,</span> <span class="n">j_auth_params_map</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">delay_sending_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message_delayer</span><span class="p">:</span> <span class="n">MessageDelayer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;PulsarSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set a message delayer for enable Pulsar message delay delivery.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_sink_builder</span><span class="o">.</span><span class="n">delaySendingMessage</span><span class="p">(</span><span class="n">message_delayer</span><span class="o">.</span><span class="n">_j_message_delayer</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;PulsarSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set an arbitrary property for the PulsarSink and Pulsar Producer. The valid keys can be</span>
+<span class="sd">        found in PulsarSinkOptions and PulsarOptions.</span>
+
+<span class="sd">        Make sure the option could be set only once or with same value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">j_config_option</span> <span class="o">=</span> <span class="n">ConfigOptions</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="n">string_type</span><span class="p">()</span><span class="o">.</span><span class="n">no_default_value</span><span class="p">()</span><span class="o">.</span><span class="n">_j_config_option</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_sink_builder</span><span class="o">.</span><span class="n">setConfig</span><span class="p">(</span><span class="n">j_config_option</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;PulsarSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set an arbitrary property for the PulsarSink and Pulsar Producer. The valid keys can be</span>
+<span class="sd">        found in PulsarSinkOptions and PulsarOptions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">JConfiguration</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">Configuration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_sink_builder</span><span class="o">.</span><span class="n">setConfig</span><span class="p">(</span><span class="n">JConfiguration</span><span class="o">.</span><span class="n">fromMap</span><span class="p">(</span><span class="n">config</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;PulsarSink&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Build the PulsarSink.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">PulsarSink</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_pulsar_sink_builder</span><span class="o">.</span><span class="n">build</span><span class="p">())</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

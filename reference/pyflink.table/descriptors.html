@@ -1,0 +1,654 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Descriptors &#8212; PyFlink 1.20+vvr.11.7.dev0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=b5c65be0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/pyflink.table/descriptors';</script>
+    <link rel="icon" href="../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pyflink.table.table_descriptor.TableDescriptor.for_connector" href="api/pyflink.table.table_descriptor.TableDescriptor.for_connector.html" />
+    <link rel="prev" title="pyflink.table.data_view.MapView" href="api/pyflink.table.data_view.MapView.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.20+vvr.11.7.dev0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="PyFlink 1.20+vvr.11.7.dev0 documentation - Home"/>
+    <img src="../../_static/navbar-brand-logo.jpg" class="logo__image only-dark pst-js-only" alt="PyFlink 1.20+vvr.11.7.dev0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">PyFlink Table</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="table_environment.html">TableEnvironment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="table.html">Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_types.html">Data Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="window.html">Window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expressions.html">Expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="udf.html">User Defined Functions</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Descriptors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="statement_set.html">StatementSet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="catalog.html">Catalog</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.datastream/index.html">PyFlink DataStream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.dataframe/index.html">PyFlink DataFrame</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.common/index.html">PyFlink Common</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">API Reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">PyFlink Table</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Descriptors</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="descriptors">
+<h1>Descriptors<a class="headerlink" href="#descriptors" title="Link to this heading">#</a></h1>
+<section id="tabledescriptor">
+<h2>TableDescriptor<a class="headerlink" href="#tabledescriptor" title="Link to this heading">#</a></h2>
+<p>Describes a CatalogTable representing a source or sink.</p>
+<p>TableDescriptor is a template for creating a CatalogTable instance. It closely resembles the
+“CREATE TABLE” SQL DDL statement, containing schema, connector options, and other
+characteristics. Since tables in Flink are typically backed by external systems, the
+descriptor describes how a connector (and possibly its format) are configured.</p>
+<p>This can be used to register a table in the Table API, see <code class="xref py py-func docutils literal notranslate"><span class="pre">create_temporary_table()</span></code> in
+TableEnvironment.</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_descriptor.TableDescriptor.for_connector.html#pyflink.table.table_descriptor.TableDescriptor.for_connector" title="pyflink.table.table_descriptor.TableDescriptor.for_connector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableDescriptor.for_connector</span></code></a>(connector)</p></td>
+<td><p>Creates a new <code class="xref py py-class docutils literal notranslate"><span class="pre">Builder</span></code> for a table using the given connector.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_descriptor.TableDescriptor.get_schema.html#pyflink.table.table_descriptor.TableDescriptor.get_schema" title="pyflink.table.table_descriptor.TableDescriptor.get_schema"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableDescriptor.get_schema</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_descriptor.TableDescriptor.get_options.html#pyflink.table.table_descriptor.TableDescriptor.get_options" title="pyflink.table.table_descriptor.TableDescriptor.get_options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableDescriptor.get_options</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_descriptor.TableDescriptor.get_partition_keys.html#pyflink.table.table_descriptor.TableDescriptor.get_partition_keys" title="pyflink.table.table_descriptor.TableDescriptor.get_partition_keys"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableDescriptor.get_partition_keys</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_descriptor.TableDescriptor.get_comment.html#pyflink.table.table_descriptor.TableDescriptor.get_comment" title="pyflink.table.table_descriptor.TableDescriptor.get_comment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableDescriptor.get_comment</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_descriptor.TableDescriptor.Builder.schema.html#pyflink.table.table_descriptor.TableDescriptor.Builder.schema" title="pyflink.table.table_descriptor.TableDescriptor.Builder.schema"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableDescriptor.Builder.schema</span></code></a>(schema)</p></td>
+<td><p>Define the schema of the TableDescriptor.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_descriptor.TableDescriptor.Builder.option.html#pyflink.table.table_descriptor.TableDescriptor.Builder.option" title="pyflink.table.table_descriptor.TableDescriptor.Builder.option"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableDescriptor.Builder.option</span></code></a>(key, value)</p></td>
+<td><p>Sets the given option on the table.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_descriptor.TableDescriptor.Builder.format.html#pyflink.table.table_descriptor.TableDescriptor.Builder.format" title="pyflink.table.table_descriptor.TableDescriptor.Builder.format"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableDescriptor.Builder.format</span></code></a>(format[, ...])</p></td>
+<td><p>Defines the format to be used for this table.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_descriptor.TableDescriptor.Builder.partitioned_by.html#pyflink.table.table_descriptor.TableDescriptor.Builder.partitioned_by" title="pyflink.table.table_descriptor.TableDescriptor.Builder.partitioned_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableDescriptor.Builder.partitioned_by</span></code></a>(...)</p></td>
+<td><p>Define which columns this table is partitioned by.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_descriptor.TableDescriptor.Builder.comment.html#pyflink.table.table_descriptor.TableDescriptor.Builder.comment" title="pyflink.table.table_descriptor.TableDescriptor.Builder.comment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableDescriptor.Builder.comment</span></code></a>(comment)</p></td>
+<td><p>Define the comment for this table.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_descriptor.TableDescriptor.Builder.build.html#pyflink.table.table_descriptor.TableDescriptor.Builder.build" title="pyflink.table.table_descriptor.TableDescriptor.Builder.build"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableDescriptor.Builder.build</span></code></a>()</p></td>
+<td><p>Returns an immutable instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">TableDescriptor</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="formatdescriptor">
+<h2>FormatDescriptor<a class="headerlink" href="#formatdescriptor" title="Link to this heading">#</a></h2>
+<p>Describes a Format and its options for use with <code class="xref py py-class docutils literal notranslate"><span class="pre">TableDescriptor</span></code>.</p>
+<p>Formats are responsible for encoding and decoding data in table connectors. Note that not
+every connector has a format, while others may have multiple formats (e.g. the Kafka connector
+has separate formats for keys and values). Common formats are “json”, “csv”, “avro”, etc.</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_descriptor.FormatDescriptor.for_format.html#pyflink.table.table_descriptor.FormatDescriptor.for_format" title="pyflink.table.table_descriptor.FormatDescriptor.for_format"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FormatDescriptor.for_format</span></code></a>(format)</p></td>
+<td><p>Creates a new <code class="xref py py-class docutils literal notranslate"><span class="pre">Builder</span></code> describing a format with the given format identifier.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_descriptor.FormatDescriptor.get_format.html#pyflink.table.table_descriptor.FormatDescriptor.get_format" title="pyflink.table.table_descriptor.FormatDescriptor.get_format"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FormatDescriptor.get_format</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_descriptor.FormatDescriptor.get_options.html#pyflink.table.table_descriptor.FormatDescriptor.get_options" title="pyflink.table.table_descriptor.FormatDescriptor.get_options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FormatDescriptor.get_options</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_descriptor.FormatDescriptor.Builder.option.html#pyflink.table.table_descriptor.FormatDescriptor.Builder.option" title="pyflink.table.table_descriptor.FormatDescriptor.Builder.option"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FormatDescriptor.Builder.option</span></code></a>(key, value)</p></td>
+<td><p>Sets the given option on the format.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_descriptor.FormatDescriptor.Builder.build.html#pyflink.table.table_descriptor.FormatDescriptor.Builder.build" title="pyflink.table.table_descriptor.FormatDescriptor.Builder.build"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FormatDescriptor.Builder.build</span></code></a>()</p></td>
+<td><p>Returns an immutable instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">FormatDescriptor</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="schema">
+<h2>Schema<a class="headerlink" href="#schema" title="Link to this heading">#</a></h2>
+<p>Schema of a table or view.</p>
+<p>A schema represents the schema part of a <a class="reference external" href="mailto:{&#37;&#52;&#48;code">{<span>&#64;</span>code</a> CREATE TABLE (schema) WITH (options)} DDL
+statement in SQL. It defines columns of different kind, constraints, time attributes, and
+watermark strategies. It is possible to reference objects (such as functions or types) across
+different catalogs.</p>
+<p>This class is used in the API and catalogs to define an unresolved schema that will be
+translated to ResolvedSchema. Some methods of this class perform basic validation, however, the
+main validation happens during the resolution. Thus, an unresolved schema can be incomplete and
+might be enriched or merged with a different schema at a later stage.</p>
+<p>Since an instance of this class is unresolved, it should not be directly persisted. The str()
+shows only a summary of the contained objects.</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.schema.Schema.Builder.from_schema.html#pyflink.table.schema.Schema.Builder.from_schema" title="pyflink.table.schema.Schema.Builder.from_schema"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Schema.Builder.from_schema</span></code></a>(unresolved_schema)</p></td>
+<td><p>Adopts all members from the given unresolved schema.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.schema.Schema.Builder.from_row_data_type.html#pyflink.table.schema.Schema.Builder.from_row_data_type" title="pyflink.table.schema.Schema.Builder.from_row_data_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Schema.Builder.from_row_data_type</span></code></a>(data_type)</p></td>
+<td><p>Adopts all fields of the given row as physical columns of the schema.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.schema.Schema.Builder.from_fields.html#pyflink.table.schema.Schema.Builder.from_fields" title="pyflink.table.schema.Schema.Builder.from_fields"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Schema.Builder.from_fields</span></code></a>(field_names, ...)</p></td>
+<td><p>Adopts the given field names and field data types as physical columns of the schema.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.schema.Schema.Builder.column.html#pyflink.table.schema.Schema.Builder.column" title="pyflink.table.schema.Schema.Builder.column"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Schema.Builder.column</span></code></a>(column_name, data_type)</p></td>
+<td><p>Declares a physical column that is appended to this schema.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.schema.Schema.Builder.column_by_expression.html#pyflink.table.schema.Schema.Builder.column_by_expression" title="pyflink.table.schema.Schema.Builder.column_by_expression"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Schema.Builder.column_by_expression</span></code></a>(...)</p></td>
+<td><p>Declares a computed column that is appended to this schema.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.schema.Schema.Builder.column_by_metadata.html#pyflink.table.schema.Schema.Builder.column_by_metadata" title="pyflink.table.schema.Schema.Builder.column_by_metadata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Schema.Builder.column_by_metadata</span></code></a>(...[, ...])</p></td>
+<td><p>Declares a metadata column that is appended to this schema.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.schema.Schema.Builder.watermark.html#pyflink.table.schema.Schema.Builder.watermark" title="pyflink.table.schema.Schema.Builder.watermark"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Schema.Builder.watermark</span></code></a>(column_name, ...)</p></td>
+<td><p>Declares that the given column should serve as an event-time (i.e. rowtime) attribute and specifies a corresponding watermark strategy as an expression.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.schema.Schema.Builder.primary_key.html#pyflink.table.schema.Schema.Builder.primary_key" title="pyflink.table.schema.Schema.Builder.primary_key"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Schema.Builder.primary_key</span></code></a>(*column_names)</p></td>
+<td><p>Declares a primary key constraint for a set of given columns.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.schema.Schema.Builder.primary_key_named.html#pyflink.table.schema.Schema.Builder.primary_key_named" title="pyflink.table.schema.Schema.Builder.primary_key_named"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Schema.Builder.primary_key_named</span></code></a>(...)</p></td>
+<td><p>Declares a primary key constraint for a set of given columns.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.schema.Schema.Builder.build.html#pyflink.table.schema.Schema.Builder.build" title="pyflink.table.schema.Schema.Builder.build"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Schema.Builder.build</span></code></a>()</p></td>
+<td><p>Returns an instance of an unresolved Schema.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="tableschema">
+<h2>TableSchema<a class="headerlink" href="#tableschema" title="Link to this heading">#</a></h2>
+<p>A table schema that represents a table’s structure with field names and data types.</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_schema.TableSchema.copy.html#pyflink.table.table_schema.TableSchema.copy" title="pyflink.table.table_schema.TableSchema.copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableSchema.copy</span></code></a>()</p></td>
+<td><p>Returns a deep copy of the table schema.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_schema.TableSchema.get_field_data_types.html#pyflink.table.table_schema.TableSchema.get_field_data_types" title="pyflink.table.table_schema.TableSchema.get_field_data_types"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableSchema.get_field_data_types</span></code></a>()</p></td>
+<td><p>Returns all field data types as a list.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_schema.TableSchema.get_field_data_type.html#pyflink.table.table_schema.TableSchema.get_field_data_type" title="pyflink.table.table_schema.TableSchema.get_field_data_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableSchema.get_field_data_type</span></code></a>(field)</p></td>
+<td><p>Returns the specified data type for the given field index or field name.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_schema.TableSchema.get_field_count.html#pyflink.table.table_schema.TableSchema.get_field_count" title="pyflink.table.table_schema.TableSchema.get_field_count"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableSchema.get_field_count</span></code></a>()</p></td>
+<td><p>Returns the number of fields.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_schema.TableSchema.get_field_names.html#pyflink.table.table_schema.TableSchema.get_field_names" title="pyflink.table.table_schema.TableSchema.get_field_names"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableSchema.get_field_names</span></code></a>()</p></td>
+<td><p>Returns all field names as a list.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_schema.TableSchema.get_field_name.html#pyflink.table.table_schema.TableSchema.get_field_name" title="pyflink.table.table_schema.TableSchema.get_field_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableSchema.get_field_name</span></code></a>(field_index)</p></td>
+<td><p>Returns the specified name for the given field index.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_schema.TableSchema.to_row_data_type.html#pyflink.table.table_schema.TableSchema.to_row_data_type" title="pyflink.table.table_schema.TableSchema.to_row_data_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableSchema.to_row_data_type</span></code></a>()</p></td>
+<td><p>Converts a table schema into a (nested) data type describing a <a class="reference internal" href="api/pyflink.table.types.DataTypes.ROW.html#pyflink.table.types.DataTypes.ROW" title="pyflink.table.types.DataTypes.ROW"><code class="xref py py-func docutils literal notranslate"><span class="pre">pyflink.table.types.DataTypes.ROW()</span></code></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_schema.TableSchema.Builder.field.html#pyflink.table.table_schema.TableSchema.Builder.field" title="pyflink.table.table_schema.TableSchema.Builder.field"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableSchema.Builder.field</span></code></a>(name, data_type)</p></td>
+<td><p>Add a field with name and data type.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_schema.TableSchema.Builder.build.html#pyflink.table.table_schema.TableSchema.Builder.build" title="pyflink.table.table_schema.TableSchema.Builder.build"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableSchema.Builder.build</span></code></a>()</p></td>
+<td><p>Returns a <code class="xref py py-class docutils literal notranslate"><span class="pre">TableSchema</span></code> instance.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="changelogmode">
+<h2>ChangelogMode<a class="headerlink" href="#changelogmode" title="Link to this heading">#</a></h2>
+<p>The set of changes contained in a changelog.</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.changelog_mode.ChangelogMode.insert_only.html#pyflink.table.changelog_mode.ChangelogMode.insert_only" title="pyflink.table.changelog_mode.ChangelogMode.insert_only"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ChangelogMode.insert_only</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.changelog_mode.ChangelogMode.upsert.html#pyflink.table.changelog_mode.ChangelogMode.upsert" title="pyflink.table.changelog_mode.ChangelogMode.upsert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ChangelogMode.upsert</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.changelog_mode.ChangelogMode.all.html#pyflink.table.changelog_mode.ChangelogMode.all" title="pyflink.table.changelog_mode.ChangelogMode.all"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ChangelogMode.all</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="api/pyflink.table.data_view.MapView.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">pyflink.table.data_view.MapView</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="api/pyflink.table.table_descriptor.TableDescriptor.for_connector.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">pyflink.table.table_descriptor.TableDescriptor.for_connector</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabledescriptor">TableDescriptor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formatdescriptor">FormatDescriptor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schema">Schema</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tableschema">TableSchema</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changelogmode">ChangelogMode</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/reference/pyflink.table/descriptors.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

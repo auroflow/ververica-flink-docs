@@ -1,0 +1,799 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>State &#8212; PyFlink 1.20+vvr.11.7.dev0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=b5c65be0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/pyflink.datastream/state';</script>
+    <link rel="icon" href="../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pyflink.datastream.state.OperatorStateStore.get_broadcast_state" href="api/pyflink.datastream.state.OperatorStateStore.get_broadcast_state.html" />
+    <link rel="prev" title="pyflink.datastream.functions.AsyncFunction" href="api/pyflink.datastream.functions.AsyncFunction.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.20+vvr.11.7.dev0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="PyFlink 1.20+vvr.11.7.dev0 documentation - Home"/>
+    <img src="../../_static/navbar-brand-logo.jpg" class="logo__image only-dark pst-js-only" alt="PyFlink 1.20+vvr.11.7.dev0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.table/index.html">PyFlink Table</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">PyFlink DataStream</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="stream_execution_environment.html">StreamExecutionEnvironment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datastream.html">DataStream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html">Functions</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timer.html">Timer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="window.html">Window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.html">Checkpoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sideoutput.html">Side Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asyncio.html">Asynchronous I/O</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connectors.html">Connectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html">Formats</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.dataframe/index.html">PyFlink DataFrame</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.common/index.html">PyFlink Common</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">API Reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">PyFlink DataStream</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">State</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="state">
+<h1>State<a class="headerlink" href="#state" title="Link to this heading">#</a></h1>
+<section id="operatorstatestore">
+<h2>OperatorStateStore<a class="headerlink" href="#operatorstatestore" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.state.OperatorStateStore.get_broadcast_state.html#pyflink.datastream.state.OperatorStateStore.get_broadcast_state" title="pyflink.datastream.state.OperatorStateStore.get_broadcast_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OperatorStateStore.get_broadcast_state</span></code></a>(...)</p></td>
+<td><p>Fetches the <code class="xref py py-class docutils literal notranslate"><span class="pre">BroadcastState</span></code> described by <code class="xref py py-class docutils literal notranslate"><span class="pre">MapStateDescriptor</span></code>, which has read/write access to the broadcast operator state.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id1">
+<h2>State<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.state.ValueState.html#pyflink.datastream.state.ValueState" title="pyflink.datastream.state.ValueState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ValueState</span></code></a>()</p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">State</span></code> interface for partitioned single-value state.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.state.AppendingState.html#pyflink.datastream.state.AppendingState" title="pyflink.datastream.state.AppendingState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AppendingState</span></code></a>()</p></td>
+<td><p>Base interface for partitioned state that supports adding elements and inspecting the current state.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.state.MergingState.html#pyflink.datastream.state.MergingState" title="pyflink.datastream.state.MergingState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MergingState</span></code></a>()</p></td>
+<td><p>Extension of AppendingState that allows merging of state.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.state.ReducingState.html#pyflink.datastream.state.ReducingState" title="pyflink.datastream.state.ReducingState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ReducingState</span></code></a>()</p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">State</span></code> interface for reducing state.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.state.AggregatingState.html#pyflink.datastream.state.AggregatingState" title="pyflink.datastream.state.AggregatingState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AggregatingState</span></code></a>()</p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">State</span></code> interface for aggregating state, based on an <a class="reference internal" href="api/pyflink.datastream.functions.AggregateFunction.html#pyflink.datastream.functions.AggregateFunction" title="pyflink.datastream.functions.AggregateFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">AggregateFunction</span></code></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.state.ListState.html#pyflink.datastream.state.ListState" title="pyflink.datastream.state.ListState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ListState</span></code></a>()</p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">State</span></code> interface for partitioned list state in Operations.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.state.MapState.html#pyflink.datastream.state.MapState" title="pyflink.datastream.state.MapState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MapState</span></code></a>()</p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">State</span></code> interface for partitioned key-value state.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.state.ReadOnlyBroadcastState.html#pyflink.datastream.state.ReadOnlyBroadcastState" title="pyflink.datastream.state.ReadOnlyBroadcastState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ReadOnlyBroadcastState</span></code></a>()</p></td>
+<td><p>A read-only view of the <a class="reference internal" href="api/pyflink.datastream.state.BroadcastState.html#pyflink.datastream.state.BroadcastState" title="pyflink.datastream.state.BroadcastState"><code class="xref py py-class docutils literal notranslate"><span class="pre">BroadcastState</span></code></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.state.BroadcastState.html#pyflink.datastream.state.BroadcastState" title="pyflink.datastream.state.BroadcastState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BroadcastState</span></code></a>()</p></td>
+<td><p>A type of state that can be created to store the state of a <code class="xref py py-class docutils literal notranslate"><span class="pre">BroadcastStream</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="statedescriptor">
+<h2>StateDescriptor<a class="headerlink" href="#statedescriptor" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.state.ValueStateDescriptor.html#pyflink.datastream.state.ValueStateDescriptor" title="pyflink.datastream.state.ValueStateDescriptor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ValueStateDescriptor</span></code></a>(name, value_type_info)</p></td>
+<td><p>StateDescriptor for ValueState.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.state.ListStateDescriptor.html#pyflink.datastream.state.ListStateDescriptor" title="pyflink.datastream.state.ListStateDescriptor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ListStateDescriptor</span></code></a>(name, elem_type_info)</p></td>
+<td><p>StateDescriptor for ListState.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.state.MapStateDescriptor.html#pyflink.datastream.state.MapStateDescriptor" title="pyflink.datastream.state.MapStateDescriptor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MapStateDescriptor</span></code></a>(name, key_type_info, ...)</p></td>
+<td><p>StateDescriptor for MapState.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.state.ReducingStateDescriptor.html#pyflink.datastream.state.ReducingStateDescriptor" title="pyflink.datastream.state.ReducingStateDescriptor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ReducingStateDescriptor</span></code></a>(name, ...)</p></td>
+<td><p>StateDescriptor for ReducingState.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.state.AggregatingStateDescriptor.html#pyflink.datastream.state.AggregatingStateDescriptor" title="pyflink.datastream.state.AggregatingStateDescriptor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AggregatingStateDescriptor</span></code></a>(name, ...)</p></td>
+<td><p>A StateDescriptor for AggregatingState.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="statettlconfig">
+<h2>StateTtlConfig<a class="headerlink" href="#statettlconfig" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyflink.datastream.state.StateTtlConfig.UpdateType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">StateTtlConfig.</span></span><span class="sig-name descname"><span class="pre">UpdateType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pyflink/datastream/state.html#StateTtlConfig.UpdateType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyflink.datastream.state.StateTtlConfig.UpdateType" title="Link to this definition">#</a></dt>
+<dd><p>This option value configures when to update last access timestamp which prolongs state TTL.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyflink.datastream.state.StateTtlConfig.UpdateType.Disabled">
+<span class="sig-name descname"><span class="pre">Disabled</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#pyflink.datastream.state.StateTtlConfig.UpdateType.Disabled" title="Link to this definition">#</a></dt>
+<dd><p>TTL is disabled. State does not expire.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyflink.datastream.state.StateTtlConfig.UpdateType.OnCreateAndWrite">
+<span class="sig-name descname"><span class="pre">OnCreateAndWrite</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#pyflink.datastream.state.StateTtlConfig.UpdateType.OnCreateAndWrite" title="Link to this definition">#</a></dt>
+<dd><p>Last access timestamp is initialised when state is created and updated on every write
+operation.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyflink.datastream.state.StateTtlConfig.UpdateType.OnReadAndWrite">
+<span class="sig-name descname"><span class="pre">OnReadAndWrite</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#pyflink.datastream.state.StateTtlConfig.UpdateType.OnReadAndWrite" title="Link to this definition">#</a></dt>
+<dd><p>The same as OnCreateAndWrite but also updated on read.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyflink.datastream.state.StateTtlConfig.StateVisibility">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">StateTtlConfig.</span></span><span class="sig-name descname"><span class="pre">StateVisibility</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pyflink/datastream/state.html#StateTtlConfig.StateVisibility"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyflink.datastream.state.StateTtlConfig.StateVisibility" title="Link to this definition">#</a></dt>
+<dd><p>This option configures whether expired user value can be returned or not.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyflink.datastream.state.StateTtlConfig.StateVisibility.NeverReturnExpired">
+<span class="sig-name descname"><span class="pre">NeverReturnExpired</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#pyflink.datastream.state.StateTtlConfig.StateVisibility.NeverReturnExpired" title="Link to this definition">#</a></dt>
+<dd><p>Never return expired user value.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyflink.datastream.state.StateTtlConfig.StateVisibility.ReturnExpiredIfNotCleanedUp">
+<span class="sig-name descname"><span class="pre">ReturnExpiredIfNotCleanedUp</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#pyflink.datastream.state.StateTtlConfig.StateVisibility.ReturnExpiredIfNotCleanedUp" title="Link to this definition">#</a></dt>
+<dd><p>Return expired user value if it is not cleaned up yet.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyflink.datastream.state.StateTtlConfig.TtlTimeCharacteristic">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">StateTtlConfig.</span></span><span class="sig-name descname"><span class="pre">TtlTimeCharacteristic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pyflink/datastream/state.html#StateTtlConfig.TtlTimeCharacteristic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyflink.datastream.state.StateTtlConfig.TtlTimeCharacteristic" title="Link to this definition">#</a></dt>
+<dd><p>This option configures time scale to use for ttl.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyflink.datastream.state.StateTtlConfig.TtlTimeCharacteristic.ProcessingTime">
+<span class="sig-name descname"><span class="pre">ProcessingTime</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#pyflink.datastream.state.StateTtlConfig.TtlTimeCharacteristic.ProcessingTime" title="Link to this definition">#</a></dt>
+<dd><p>Processing time</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyflink.datastream.state.StateTtlConfig.CleanupStrategies">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">StateTtlConfig.</span></span><span class="sig-name descname"><span class="pre">CleanupStrategies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strategies</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyflink.datastream.state.StateTtlConfig.CleanupStrategies.Strategies" title="pyflink.datastream.state.StateTtlConfig.CleanupStrategies.Strategies"><span class="pre">Strategies</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#pyflink.datastream.state.StateTtlConfig.CleanupStrategies.CleanupStrategy" title="pyflink.datastream.state.StateTtlConfig.CleanupStrategies.CleanupStrategy"><span class="pre">CleanupStrategy</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_cleanup_in_background</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pyflink/datastream/state.html#StateTtlConfig.CleanupStrategies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyflink.datastream.state.StateTtlConfig.CleanupStrategies" title="Link to this definition">#</a></dt>
+<dd><p>TTL cleanup strategies.</p>
+<p>This class configures when to cleanup expired state with TTL. By default, state is always
+cleaned up on explicit read access if found expired. Currently cleanup of state full
+snapshot can be additionally activated.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyflink.datastream.state.StateTtlConfig.CleanupStrategies.CleanupStrategy">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CleanupStrategy</span></span><a class="reference internal" href="../../_modules/pyflink/datastream/state.html#StateTtlConfig.CleanupStrategies.CleanupStrategy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyflink.datastream.state.StateTtlConfig.CleanupStrategies.CleanupStrategy" title="Link to this definition">#</a></dt>
+<dd><p>Base interface for cleanup strategies configurations.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyflink.datastream.state.StateTtlConfig.CleanupStrategies.EmptyCleanupStrategy">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">EmptyCleanupStrategy</span></span><a class="reference internal" href="../../_modules/pyflink/datastream/state.html#StateTtlConfig.CleanupStrategies.EmptyCleanupStrategy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyflink.datastream.state.StateTtlConfig.CleanupStrategies.EmptyCleanupStrategy" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyflink.datastream.state.StateTtlConfig.CleanupStrategies.IncrementalCleanupStrategy">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">IncrementalCleanupStrategy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cleanup_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_cleanup_for_every_record</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pyflink/datastream/state.html#StateTtlConfig.CleanupStrategies.IncrementalCleanupStrategy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyflink.datastream.state.StateTtlConfig.CleanupStrategies.IncrementalCleanupStrategy" title="Link to this definition">#</a></dt>
+<dd><p>Configuration of cleanup strategy while taking the full snapshot.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyflink.datastream.state.StateTtlConfig.CleanupStrategies.RocksdbCompactFilterCleanupStrategy">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RocksdbCompactFilterCleanupStrategy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query_time_after_num_entries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">periodic_compaction_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pyflink/datastream/state.html#StateTtlConfig.CleanupStrategies.RocksdbCompactFilterCleanupStrategy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyflink.datastream.state.StateTtlConfig.CleanupStrategies.RocksdbCompactFilterCleanupStrategy" title="Link to this definition">#</a></dt>
+<dd><p>Configuration of cleanup strategy using custom compaction filter in RocksDB.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyflink.datastream.state.StateTtlConfig.CleanupStrategies.Strategies">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Strategies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pyflink/datastream/state.html#StateTtlConfig.CleanupStrategies.Strategies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyflink.datastream.state.StateTtlConfig.CleanupStrategies.Strategies" title="Link to this definition">#</a></dt>
+<dd><p>Fixed strategies ordinals in strategies config field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.state.StateTtlConfig.new_builder.html#pyflink.datastream.state.StateTtlConfig.new_builder" title="pyflink.datastream.state.StateTtlConfig.new_builder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StateTtlConfig.new_builder</span></code></a>(ttl)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.state.StateTtlConfig.get_update_type.html#pyflink.datastream.state.StateTtlConfig.get_update_type" title="pyflink.datastream.state.StateTtlConfig.get_update_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StateTtlConfig.get_update_type</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.state.StateTtlConfig.get_state_visibility.html#pyflink.datastream.state.StateTtlConfig.get_state_visibility" title="pyflink.datastream.state.StateTtlConfig.get_state_visibility"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StateTtlConfig.get_state_visibility</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.state.StateTtlConfig.get_ttl.html#pyflink.datastream.state.StateTtlConfig.get_ttl" title="pyflink.datastream.state.StateTtlConfig.get_ttl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StateTtlConfig.get_ttl</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.state.StateTtlConfig.get_ttl_time_characteristic.html#pyflink.datastream.state.StateTtlConfig.get_ttl_time_characteristic" title="pyflink.datastream.state.StateTtlConfig.get_ttl_time_characteristic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StateTtlConfig.get_ttl_time_characteristic</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.state.StateTtlConfig.is_enabled.html#pyflink.datastream.state.StateTtlConfig.is_enabled" title="pyflink.datastream.state.StateTtlConfig.is_enabled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StateTtlConfig.is_enabled</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.state.StateTtlConfig.get_cleanup_strategies.html#pyflink.datastream.state.StateTtlConfig.get_cleanup_strategies" title="pyflink.datastream.state.StateTtlConfig.get_cleanup_strategies"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StateTtlConfig.get_cleanup_strategies</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.state.StateTtlConfig.Builder.set_update_type.html#pyflink.datastream.state.StateTtlConfig.Builder.set_update_type" title="pyflink.datastream.state.StateTtlConfig.Builder.set_update_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StateTtlConfig.Builder.set_update_type</span></code></a>(...)</p></td>
+<td><p>Sets the ttl update type.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.state.StateTtlConfig.Builder.update_ttl_on_create_and_write.html#pyflink.datastream.state.StateTtlConfig.Builder.update_ttl_on_create_and_write" title="pyflink.datastream.state.StateTtlConfig.Builder.update_ttl_on_create_and_write"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StateTtlConfig.Builder.update_ttl_on_create_and_write</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.state.StateTtlConfig.Builder.update_ttl_on_read_and_write.html#pyflink.datastream.state.StateTtlConfig.Builder.update_ttl_on_read_and_write" title="pyflink.datastream.state.StateTtlConfig.Builder.update_ttl_on_read_and_write"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StateTtlConfig.Builder.update_ttl_on_read_and_write</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.state.StateTtlConfig.Builder.set_state_visibility.html#pyflink.datastream.state.StateTtlConfig.Builder.set_state_visibility" title="pyflink.datastream.state.StateTtlConfig.Builder.set_state_visibility"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StateTtlConfig.Builder.set_state_visibility</span></code></a>(...)</p></td>
+<td><p>Sets the state visibility.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.state.StateTtlConfig.Builder.return_expired_if_not_cleaned_up.html#pyflink.datastream.state.StateTtlConfig.Builder.return_expired_if_not_cleaned_up" title="pyflink.datastream.state.StateTtlConfig.Builder.return_expired_if_not_cleaned_up"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StateTtlConfig.Builder.return_expired_if_not_cleaned_up</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.state.StateTtlConfig.Builder.never_return_expired.html#pyflink.datastream.state.StateTtlConfig.Builder.never_return_expired" title="pyflink.datastream.state.StateTtlConfig.Builder.never_return_expired"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StateTtlConfig.Builder.never_return_expired</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.state.StateTtlConfig.Builder.set_ttl_time_characteristic.html#pyflink.datastream.state.StateTtlConfig.Builder.set_ttl_time_characteristic" title="pyflink.datastream.state.StateTtlConfig.Builder.set_ttl_time_characteristic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StateTtlConfig.Builder.set_ttl_time_characteristic</span></code></a>(...)</p></td>
+<td><p>Sets the time characteristic.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.state.StateTtlConfig.Builder.use_processing_time.html#pyflink.datastream.state.StateTtlConfig.Builder.use_processing_time" title="pyflink.datastream.state.StateTtlConfig.Builder.use_processing_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StateTtlConfig.Builder.use_processing_time</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.state.StateTtlConfig.Builder.cleanup_full_snapshot.html#pyflink.datastream.state.StateTtlConfig.Builder.cleanup_full_snapshot" title="pyflink.datastream.state.StateTtlConfig.Builder.cleanup_full_snapshot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StateTtlConfig.Builder.cleanup_full_snapshot</span></code></a>()</p></td>
+<td><p>Cleanup expired state in full snapshot on checkpoint.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.state.StateTtlConfig.Builder.cleanup_incrementally.html#pyflink.datastream.state.StateTtlConfig.Builder.cleanup_incrementally" title="pyflink.datastream.state.StateTtlConfig.Builder.cleanup_incrementally"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StateTtlConfig.Builder.cleanup_incrementally</span></code></a>(...)</p></td>
+<td><p>Cleanup expired state incrementally cleanup local state.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.state.StateTtlConfig.Builder.cleanup_in_rocksdb_compact_filter.html#pyflink.datastream.state.StateTtlConfig.Builder.cleanup_in_rocksdb_compact_filter" title="pyflink.datastream.state.StateTtlConfig.Builder.cleanup_in_rocksdb_compact_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StateTtlConfig.Builder.cleanup_in_rocksdb_compact_filter</span></code></a>(...)</p></td>
+<td><p>Cleanup expired state while Rocksdb compaction is running.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.state.StateTtlConfig.Builder.disable_cleanup_in_background.html#pyflink.datastream.state.StateTtlConfig.Builder.disable_cleanup_in_background" title="pyflink.datastream.state.StateTtlConfig.Builder.disable_cleanup_in_background"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StateTtlConfig.Builder.disable_cleanup_in_background</span></code></a>()</p></td>
+<td><p>Disable default cleanup of expired state in background (enabled by default).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.state.StateTtlConfig.Builder.set_ttl.html#pyflink.datastream.state.StateTtlConfig.Builder.set_ttl" title="pyflink.datastream.state.StateTtlConfig.Builder.set_ttl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StateTtlConfig.Builder.set_ttl</span></code></a>(ttl)</p></td>
+<td><p>Sets the ttl time.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.state.StateTtlConfig.Builder.build.html#pyflink.datastream.state.StateTtlConfig.Builder.build" title="pyflink.datastream.state.StateTtlConfig.Builder.build"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StateTtlConfig.Builder.build</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="statebackend">
+<h2>StateBackend<a class="headerlink" href="#statebackend" title="Link to this heading">#</a></h2>
+<p>A <strong>State Backend</strong> defines how the state of a streaming application is stored locally within
+the cluster. Different state backends store their state in different fashions, and use different
+data structures to hold the state of running applications.</p>
+<p>For example, the <code class="xref py py-class docutils literal notranslate"><span class="pre">HashMapStateBackend</span></code> keeps working state in the memory of the
+TaskManager. The backend is lightweight and without additional dependencies.</p>
+<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">EmbeddedRocksDBStateBackend</span></code> keeps working state in the memory of the TaskManager
+and stores state checkpoints in a filesystem(typically a replicated highly-available filesystem,
+like <a class="reference external" href="https://hadoop.apache.org/">HDFS</a>, <a class="reference external" href="https://ceph.com/">Ceph</a>,
+<a class="reference external" href="https://aws.amazon.com/documentation/s3/">S3</a>, <a class="reference external" href="https://cloud.google.com/storage/">GCS</a>,
+etc).</p>
+<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">EmbeddedRocksDBStateBackend</span></code> stores working state in an embedded
+<a class="reference external" href="http://rocksdb.org/">RocksDB</a>, instance and is able to scale working state to many
+terrabytes in size, only limited by available disk space across all task managers.</p>
+<p><strong>Raw Bytes Storage and Backends</strong></p>
+<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">StateBackend</span></code> creates services for <em>raw bytes storage</em> and for <em>keyed state</em>
+and <em>operator state</em>.</p>
+<p>The <cite>org.apache.flink.runtime.state.AbstractKeyedStateBackend and
+`org.apache.flink.runtime.state.OperatorStateBackend</cite> created by this state backend define how
+to hold the working state for keys and operators. They also define how to checkpoint that
+state, frequently using the raw bytes storage (via the
+<cite>org.apache.flink.runtime.state.CheckpointStreamFactory</cite>). However, it is also possible that
+for example a keyed state backend simply implements the bridge to a key/value store, and that
+it does not need to store anything in the raw byte storage upon a checkpoint.</p>
+<p><strong>Serializability</strong></p>
+<p>State Backends need to be serializable(<cite>java.io.Serializable</cite>), because they distributed
+across parallel processes (for distributed execution) together with the streaming application
+code.</p>
+<p>Because of that, <code class="xref py py-class docutils literal notranslate"><span class="pre">StateBackend</span></code> implementations are meant to be like <em>factories</em> that
+create the proper states stores that provide access to the persistent storage and hold the
+keyed- and operator state data structures. That way, the State Backend can be very lightweight
+(contain only configurations) which makes it easier to be serializable.</p>
+<p><strong>Thread Safety</strong></p>
+<p>State backend implementations have to be thread-safe. Multiple threads may be creating
+streams and keyed-/operator state backends concurrently.</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.state_backend.HashMapStateBackend.html#pyflink.datastream.state_backend.HashMapStateBackend" title="pyflink.datastream.state_backend.HashMapStateBackend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HashMapStateBackend</span></code></a>([j_hashmap_state_backend])</p></td>
+<td><p>This state backend holds the working state in the memory (JVM heap) of the TaskManagers and checkpoints based on the configured CheckpointStorage.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.state_backend.EmbeddedRocksDBStateBackend.html#pyflink.datastream.state_backend.EmbeddedRocksDBStateBackend" title="pyflink.datastream.state_backend.EmbeddedRocksDBStateBackend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EmbeddedRocksDBStateBackend</span></code></a>([...])</p></td>
+<td><p>A State Backend that stores its state in an embedded <code class="docutils literal notranslate"><span class="pre">RocksDB</span></code> instance.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.state_backend.MemoryStateBackend.html#pyflink.datastream.state_backend.MemoryStateBackend" title="pyflink.datastream.state_backend.MemoryStateBackend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MemoryStateBackend</span></code></a>([checkpoint_path, ...])</p></td>
+<td><p><strong>IMPORTANT</strong> <cite>MemoryStateBackend</cite> is deprecated in favor of <cite>HashMapStateBackend</cite> and <cite>JobManagerCheckpointStorage</cite>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.state_backend.FsStateBackend.html#pyflink.datastream.state_backend.FsStateBackend" title="pyflink.datastream.state_backend.FsStateBackend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FsStateBackend</span></code></a>([checkpoint_directory_uri, ...])</p></td>
+<td><p><strong>IMPORTANT</strong> <cite>FsStateBackend is deprecated in favor of `HashMapStateBackend</cite> and <cite>FileSystemCheckpointStorage</cite>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.state_backend.RocksDBStateBackend.html#pyflink.datastream.state_backend.RocksDBStateBackend" title="pyflink.datastream.state_backend.RocksDBStateBackend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RocksDBStateBackend</span></code></a>([checkpoint_data_uri, ...])</p></td>
+<td><p><strong>IMPORTANT</strong> <cite>RocksDBStateBackend</cite> is deprecated in favor of <cite>EmbeddedRocksDBStateBackend</cite> and <cite>FileSystemCheckpointStorage</cite>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.state_backend.CustomStateBackend.html#pyflink.datastream.state_backend.CustomStateBackend" title="pyflink.datastream.state_backend.CustomStateBackend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CustomStateBackend</span></code></a>(j_custom_state_backend)</p></td>
+<td><p>A wrapper of customized java state backend.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.state_backend.PredefinedOptions.html#pyflink.datastream.state_backend.PredefinedOptions" title="pyflink.datastream.state_backend.PredefinedOptions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PredefinedOptions</span></code></a>(value)</p></td>
+<td><p>The <a class="reference internal" href="api/pyflink.datastream.state_backend.PredefinedOptions.html#pyflink.datastream.state_backend.PredefinedOptions" title="pyflink.datastream.state_backend.PredefinedOptions"><code class="xref py py-class docutils literal notranslate"><span class="pre">PredefinedOptions</span></code></a> are configuration settings for the <a class="reference internal" href="api/pyflink.datastream.state_backend.RocksDBStateBackend.html#pyflink.datastream.state_backend.RocksDBStateBackend" title="pyflink.datastream.state_backend.RocksDBStateBackend"><code class="xref py py-class docutils literal notranslate"><span class="pre">RocksDBStateBackend</span></code></a>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="api/pyflink.datastream.functions.AsyncFunction.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">pyflink.datastream.functions.AsyncFunction</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="api/pyflink.datastream.state.OperatorStateStore.get_broadcast_state.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">pyflink.datastream.state.OperatorStateStore.get_broadcast_state</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operatorstatestore">OperatorStateStore</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">State</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statedescriptor">StateDescriptor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statettlconfig">StateTtlConfig</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflink.datastream.state.StateTtlConfig.UpdateType"><code class="docutils literal notranslate"><span class="pre">StateTtlConfig.UpdateType</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflink.datastream.state.StateTtlConfig.UpdateType.Disabled"><code class="docutils literal notranslate"><span class="pre">StateTtlConfig.UpdateType.Disabled</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflink.datastream.state.StateTtlConfig.UpdateType.OnCreateAndWrite"><code class="docutils literal notranslate"><span class="pre">StateTtlConfig.UpdateType.OnCreateAndWrite</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflink.datastream.state.StateTtlConfig.UpdateType.OnReadAndWrite"><code class="docutils literal notranslate"><span class="pre">StateTtlConfig.UpdateType.OnReadAndWrite</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflink.datastream.state.StateTtlConfig.StateVisibility"><code class="docutils literal notranslate"><span class="pre">StateTtlConfig.StateVisibility</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflink.datastream.state.StateTtlConfig.StateVisibility.NeverReturnExpired"><code class="docutils literal notranslate"><span class="pre">StateTtlConfig.StateVisibility.NeverReturnExpired</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflink.datastream.state.StateTtlConfig.StateVisibility.ReturnExpiredIfNotCleanedUp"><code class="docutils literal notranslate"><span class="pre">StateTtlConfig.StateVisibility.ReturnExpiredIfNotCleanedUp</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflink.datastream.state.StateTtlConfig.TtlTimeCharacteristic"><code class="docutils literal notranslate"><span class="pre">StateTtlConfig.TtlTimeCharacteristic</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflink.datastream.state.StateTtlConfig.TtlTimeCharacteristic.ProcessingTime"><code class="docutils literal notranslate"><span class="pre">StateTtlConfig.TtlTimeCharacteristic.ProcessingTime</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflink.datastream.state.StateTtlConfig.CleanupStrategies"><code class="docutils literal notranslate"><span class="pre">StateTtlConfig.CleanupStrategies</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflink.datastream.state.StateTtlConfig.CleanupStrategies.CleanupStrategy"><code class="docutils literal notranslate"><span class="pre">StateTtlConfig.CleanupStrategies.CleanupStrategy</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflink.datastream.state.StateTtlConfig.CleanupStrategies.EmptyCleanupStrategy"><code class="docutils literal notranslate"><span class="pre">StateTtlConfig.CleanupStrategies.EmptyCleanupStrategy</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflink.datastream.state.StateTtlConfig.CleanupStrategies.IncrementalCleanupStrategy"><code class="docutils literal notranslate"><span class="pre">StateTtlConfig.CleanupStrategies.IncrementalCleanupStrategy</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflink.datastream.state.StateTtlConfig.CleanupStrategies.RocksdbCompactFilterCleanupStrategy"><code class="docutils literal notranslate"><span class="pre">StateTtlConfig.CleanupStrategies.RocksdbCompactFilterCleanupStrategy</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflink.datastream.state.StateTtlConfig.CleanupStrategies.Strategies"><code class="docutils literal notranslate"><span class="pre">StateTtlConfig.CleanupStrategies.Strategies</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statebackend">StateBackend</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/reference/pyflink.datastream/state.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

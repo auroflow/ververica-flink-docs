@@ -1,0 +1,806 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Connectors &#8212; PyFlink 1.20+vvr.11.7.dev0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=b5c65be0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/pyflink.datastream/connectors';</script>
+    <link rel="icon" href="../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pyflink.datastream.connectors.file_system.FileEnumeratorProvider" href="api/pyflink.datastream.connectors.file_system.FileEnumeratorProvider.html" />
+    <link rel="prev" title="pyflink.datastream.async_retry_predicates.exception_type_predicate" href="api/pyflink.datastream.async_retry_predicates.exception_type_predicate.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.20+vvr.11.7.dev0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="PyFlink 1.20+vvr.11.7.dev0 documentation - Home"/>
+    <img src="../../_static/navbar-brand-logo.jpg" class="logo__image only-dark pst-js-only" alt="PyFlink 1.20+vvr.11.7.dev0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.table/index.html">PyFlink Table</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">PyFlink DataStream</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="stream_execution_environment.html">StreamExecutionEnvironment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datastream.html">DataStream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="state.html">State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timer.html">Timer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="window.html">Window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.html">Checkpoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sideoutput.html">Side Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asyncio.html">Asynchronous I/O</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Connectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html">Formats</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.dataframe/index.html">PyFlink DataFrame</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.common/index.html">PyFlink Common</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">API Reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">PyFlink DataStream</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Connectors</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="connectors">
+<h1>Connectors<a class="headerlink" href="#connectors" title="Link to this heading">#</a></h1>
+<section id="file-system">
+<h2>File System<a class="headerlink" href="#file-system" title="Link to this heading">#</a></h2>
+<section id="file-source">
+<h3>File Source<a class="headerlink" href="#file-source" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.file_system.FileEnumeratorProvider.html#pyflink.datastream.connectors.file_system.FileEnumeratorProvider" title="pyflink.datastream.connectors.file_system.FileEnumeratorProvider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FileEnumeratorProvider</span></code></a>(...)</p></td>
+<td><p>Factory for FileEnumerator which task is to discover all files to be read and to split them into a set of file source splits.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.file_system.FileSplitAssignerProvider.html#pyflink.datastream.connectors.file_system.FileSplitAssignerProvider" title="pyflink.datastream.connectors.file_system.FileSplitAssignerProvider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FileSplitAssignerProvider</span></code></a>(j_file_split_assigner)</p></td>
+<td><p>Factory for FileSplitAssigner which is responsible for deciding what split should be processed next by which node.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.file_system.StreamFormat.html#pyflink.datastream.connectors.file_system.StreamFormat" title="pyflink.datastream.connectors.file_system.StreamFormat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamFormat</span></code></a>(j_stream_format)</p></td>
+<td><p>A reader format that reads individual records from a stream.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.file_system.BulkFormat.html#pyflink.datastream.connectors.file_system.BulkFormat" title="pyflink.datastream.connectors.file_system.BulkFormat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BulkFormat</span></code></a>(j_bulk_format)</p></td>
+<td><p>The BulkFormat reads and decodes batches of records at a time.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.file_system.FileSourceBuilder.html#pyflink.datastream.connectors.file_system.FileSourceBuilder" title="pyflink.datastream.connectors.file_system.FileSourceBuilder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FileSourceBuilder</span></code></a>(j_file_source_builder)</p></td>
+<td><p>The builder for the <a class="reference internal" href="api/pyflink.datastream.connectors.file_system.FileSource.html#pyflink.datastream.connectors.file_system.FileSource" title="pyflink.datastream.connectors.file_system.FileSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileSource</span></code></a>, to configure the various behaviors.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.file_system.FileSource.html#pyflink.datastream.connectors.file_system.FileSource" title="pyflink.datastream.connectors.file_system.FileSource"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FileSource</span></code></a>(j_file_source)</p></td>
+<td><p>A unified data source that reads files - both in batch and in streaming mode.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="file-sink">
+<h3>File Sink<a class="headerlink" href="#file-sink" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.file_system.BucketAssigner.html#pyflink.datastream.connectors.file_system.BucketAssigner" title="pyflink.datastream.connectors.file_system.BucketAssigner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BucketAssigner</span></code></a>(j_bucket_assigner)</p></td>
+<td><p>A BucketAssigner is used with a file sink to determine the bucket each incoming element should be put into.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.file_system.RollingPolicy.html#pyflink.datastream.connectors.file_system.RollingPolicy" title="pyflink.datastream.connectors.file_system.RollingPolicy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RollingPolicy</span></code></a>(j_rolling_policy)</p></td>
+<td><p>The policy based on which a Bucket in the FileSink rolls its currently open part file and opens a new one.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.file_system.DefaultRollingPolicy.html#pyflink.datastream.connectors.file_system.DefaultRollingPolicy" title="pyflink.datastream.connectors.file_system.DefaultRollingPolicy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DefaultRollingPolicy</span></code></a>(j_rolling_policy)</p></td>
+<td><p>The default implementation of the RollingPolicy.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.file_system.OnCheckpointRollingPolicy.html#pyflink.datastream.connectors.file_system.OnCheckpointRollingPolicy" title="pyflink.datastream.connectors.file_system.OnCheckpointRollingPolicy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OnCheckpointRollingPolicy</span></code></a>(j_rolling_policy)</p></td>
+<td><p>A RollingPolicy which rolls (ONLY) on every checkpoint.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.file_system.OutputFileConfig.html#pyflink.datastream.connectors.file_system.OutputFileConfig" title="pyflink.datastream.connectors.file_system.OutputFileConfig"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OutputFileConfig</span></code></a>(part_prefix, part_suffix)</p></td>
+<td><p>Part file name configuration.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.file_system.FileCompactStrategy.html#pyflink.datastream.connectors.file_system.FileCompactStrategy" title="pyflink.datastream.connectors.file_system.FileCompactStrategy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FileCompactStrategy</span></code></a>(j_file_compact_strategy)</p></td>
+<td><p>Strategy for compacting the files written in <a class="reference external" href="mailto:{&#37;&#52;&#48;link">{<span>&#64;</span>link</a> FileSink} before committing.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.file_system.FileCompactor.html#pyflink.datastream.connectors.file_system.FileCompactor" title="pyflink.datastream.connectors.file_system.FileCompactor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FileCompactor</span></code></a>(j_file_compactor)</p></td>
+<td><p>The FileCompactor is responsible for compacting files into one file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.file_system.FileSink.html#pyflink.datastream.connectors.file_system.FileSink" title="pyflink.datastream.connectors.file_system.FileSink"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FileSink</span></code></a>(j_file_sink[, transformer])</p></td>
+<td><p>A unified sink that emits its input elements to FileSystem files within buckets.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.file_system.StreamingFileSink.html#pyflink.datastream.connectors.file_system.StreamingFileSink" title="pyflink.datastream.connectors.file_system.StreamingFileSink"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamingFileSink</span></code></a>(j_obj)</p></td>
+<td><p>Sink that emits its input elements to <cite>FileSystem</cite> files within buckets.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="number-sequence">
+<h2>Number Sequence<a class="headerlink" href="#number-sequence" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.number_seq.NumberSequenceSource.html#pyflink.datastream.connectors.number_seq.NumberSequenceSource" title="pyflink.datastream.connectors.number_seq.NumberSequenceSource"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NumberSequenceSource</span></code></a>(start, end)</p></td>
+<td><p>A data source that produces a sequence of numbers (longs).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="kafka">
+<h2>Kafka<a class="headerlink" href="#kafka" title="Link to this heading">#</a></h2>
+<section id="kakfa-producer-and-consumer">
+<h3>Kakfa Producer and Consumer<a class="headerlink" href="#kakfa-producer-and-consumer" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.kafka.FlinkKafkaConsumer.html#pyflink.datastream.connectors.kafka.FlinkKafkaConsumer" title="pyflink.datastream.connectors.kafka.FlinkKafkaConsumer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FlinkKafkaConsumer</span></code></a>(topics, ...)</p></td>
+<td><p>The Flink Kafka Consumer is a streaming data source that pulls a parallel data stream from Apache Kafka.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.kafka.FlinkKafkaProducer.html#pyflink.datastream.connectors.kafka.FlinkKafkaProducer" title="pyflink.datastream.connectors.kafka.FlinkKafkaProducer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FlinkKafkaProducer</span></code></a>(topic, ...[, ...])</p></td>
+<td><p>Flink Sink to produce data into a Kafka topic.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.kafka.Semantic.html#pyflink.datastream.connectors.kafka.Semantic" title="pyflink.datastream.connectors.kafka.Semantic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Semantic</span></code></a>(value)</p></td>
+<td><p>Semantics that can be chosen.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="kafka-source-and-sink">
+<h3>Kafka Source and Sink<a class="headerlink" href="#kafka-source-and-sink" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.kafka.KafkaSource.html#pyflink.datastream.connectors.kafka.KafkaSource" title="pyflink.datastream.connectors.kafka.KafkaSource"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KafkaSource</span></code></a>(j_kafka_source)</p></td>
+<td><p>The Source implementation of Kafka.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.kafka.KafkaSourceBuilder.html#pyflink.datastream.connectors.kafka.KafkaSourceBuilder" title="pyflink.datastream.connectors.kafka.KafkaSourceBuilder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KafkaSourceBuilder</span></code></a>()</p></td>
+<td><p>The builder class for <a class="reference internal" href="api/pyflink.datastream.connectors.kafka.KafkaSource.html#pyflink.datastream.connectors.kafka.KafkaSource" title="pyflink.datastream.connectors.kafka.KafkaSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">KafkaSource</span></code></a> to make it easier for the users to construct a <a class="reference internal" href="api/pyflink.datastream.connectors.kafka.KafkaSource.html#pyflink.datastream.connectors.kafka.KafkaSource" title="pyflink.datastream.connectors.kafka.KafkaSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">KafkaSource</span></code></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.kafka.KafkaTopicPartition.html#pyflink.datastream.connectors.kafka.KafkaTopicPartition" title="pyflink.datastream.connectors.kafka.KafkaTopicPartition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KafkaTopicPartition</span></code></a>(topic, partition)</p></td>
+<td><p>Corresponding to Java <code class="docutils literal notranslate"><span class="pre">org.apache.kafka.common.TopicPartition</span></code> class.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.kafka.KafkaOffsetResetStrategy.html#pyflink.datastream.connectors.kafka.KafkaOffsetResetStrategy" title="pyflink.datastream.connectors.kafka.KafkaOffsetResetStrategy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KafkaOffsetResetStrategy</span></code></a>(value)</p></td>
+<td><p>Corresponding to Java <code class="docutils literal notranslate"><span class="pre">org.apache.kafka.client.consumer.OffsetResetStrategy</span></code> class.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.kafka.KafkaOffsetsInitializer.html#pyflink.datastream.connectors.kafka.KafkaOffsetsInitializer" title="pyflink.datastream.connectors.kafka.KafkaOffsetsInitializer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KafkaOffsetsInitializer</span></code></a>(j_initializer)</p></td>
+<td><p>An interface for users to specify the starting / stopping offset of a KafkaPartitionSplit.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.kafka.KafkaSink.html#pyflink.datastream.connectors.kafka.KafkaSink" title="pyflink.datastream.connectors.kafka.KafkaSink"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KafkaSink</span></code></a>(j_kafka_sink[, transformer])</p></td>
+<td><p>Flink Sink to produce data into a Kafka topic.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.kafka.KafkaSinkBuilder.html#pyflink.datastream.connectors.kafka.KafkaSinkBuilder" title="pyflink.datastream.connectors.kafka.KafkaSinkBuilder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KafkaSinkBuilder</span></code></a>()</p></td>
+<td><p>Builder to construct <a class="reference internal" href="api/pyflink.datastream.connectors.kafka.KafkaSink.html#pyflink.datastream.connectors.kafka.KafkaSink" title="pyflink.datastream.connectors.kafka.KafkaSink"><code class="xref py py-class docutils literal notranslate"><span class="pre">KafkaSink</span></code></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.kafka.KafkaRecordSerializationSchema.html#pyflink.datastream.connectors.kafka.KafkaRecordSerializationSchema" title="pyflink.datastream.connectors.kafka.KafkaRecordSerializationSchema"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KafkaRecordSerializationSchema</span></code></a>(...[, ...])</p></td>
+<td><p>A serialization schema which defines how to convert the stream record to kafka producer record.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.kafka.KafkaRecordSerializationSchemaBuilder.html#pyflink.datastream.connectors.kafka.KafkaRecordSerializationSchemaBuilder" title="pyflink.datastream.connectors.kafka.KafkaRecordSerializationSchemaBuilder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KafkaRecordSerializationSchemaBuilder</span></code></a>()</p></td>
+<td><p>Builder to construct <a class="reference internal" href="api/pyflink.datastream.connectors.kafka.KafkaRecordSerializationSchema.html#pyflink.datastream.connectors.kafka.KafkaRecordSerializationSchema" title="pyflink.datastream.connectors.kafka.KafkaRecordSerializationSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">KafkaRecordSerializationSchema</span></code></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.kafka.KafkaTopicSelector.html#pyflink.datastream.connectors.kafka.KafkaTopicSelector" title="pyflink.datastream.connectors.kafka.KafkaTopicSelector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KafkaTopicSelector</span></code></a>()</p></td>
+<td><p>Select topic for an incoming record</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="kinesis">
+<h2>kinesis<a class="headerlink" href="#kinesis" title="Link to this heading">#</a></h2>
+<section id="kinesis-source">
+<h3>Kinesis Source<a class="headerlink" href="#kinesis-source" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.kinesis.KinesisShardAssigner.html#pyflink.datastream.connectors.kinesis.KinesisShardAssigner" title="pyflink.datastream.connectors.kinesis.KinesisShardAssigner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KinesisShardAssigner</span></code></a>(j_kinesis_shard_assigner)</p></td>
+<td><p>Utility to map Kinesis shards to Flink subtask indices.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.kinesis.KinesisDeserializationSchema.html#pyflink.datastream.connectors.kinesis.KinesisDeserializationSchema" title="pyflink.datastream.connectors.kinesis.KinesisDeserializationSchema"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KinesisDeserializationSchema</span></code></a>(...)</p></td>
+<td><p>This is a deserialization schema specific for the Flink Kinesis Consumer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.kinesis.WatermarkTracker.html#pyflink.datastream.connectors.kinesis.WatermarkTracker" title="pyflink.datastream.connectors.kinesis.WatermarkTracker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WatermarkTracker</span></code></a>(j_watermark_tracker)</p></td>
+<td><p>The watermark tracker is responsible for aggregating watermarks across distributed operators.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.kinesis.FlinkKinesisConsumer.html#pyflink.datastream.connectors.kinesis.FlinkKinesisConsumer" title="pyflink.datastream.connectors.kinesis.FlinkKinesisConsumer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FlinkKinesisConsumer</span></code></a>(streams, deserializer, ...)</p></td>
+<td><p>The Flink Kinesis Consumer is an exactly-once parallel streaming data source that subscribes to multiple AWS Kinesis streams within the same AWS service region, and can handle resharding of streams.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="kinesis-sink">
+<h3>Kinesis Sink<a class="headerlink" href="#kinesis-sink" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.kinesis.PartitionKeyGenerator.html#pyflink.datastream.connectors.kinesis.PartitionKeyGenerator" title="pyflink.datastream.connectors.kinesis.PartitionKeyGenerator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PartitionKeyGenerator</span></code></a>(j_partition_key_generator)</p></td>
+<td><p>This is a generator convert from an input element to the partition key, a string.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.kinesis.KinesisStreamsSink.html#pyflink.datastream.connectors.kinesis.KinesisStreamsSink" title="pyflink.datastream.connectors.kinesis.KinesisStreamsSink"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KinesisStreamsSink</span></code></a>(j_kinesis_streams_sink)</p></td>
+<td><p>A Kinesis Data Streams (KDS) Sink that performs async requests against a destination stream using the buffering protocol.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.kinesis.KinesisStreamsSinkBuilder.html#pyflink.datastream.connectors.kinesis.KinesisStreamsSinkBuilder" title="pyflink.datastream.connectors.kinesis.KinesisStreamsSinkBuilder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KinesisStreamsSinkBuilder</span></code></a>()</p></td>
+<td><p>Builder to construct KinesisStreamsSink.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.kinesis.KinesisFirehoseSink.html#pyflink.datastream.connectors.kinesis.KinesisFirehoseSink" title="pyflink.datastream.connectors.kinesis.KinesisFirehoseSink"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KinesisFirehoseSink</span></code></a>(j_kinesis_firehose_sink)</p></td>
+<td><p>A Kinesis Data Firehose (KDF) Sink that performs async requests against a destination delivery stream using the buffering protocol.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.kinesis.KinesisFirehoseSinkBuilder.html#pyflink.datastream.connectors.kinesis.KinesisFirehoseSinkBuilder" title="pyflink.datastream.connectors.kinesis.KinesisFirehoseSinkBuilder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KinesisFirehoseSinkBuilder</span></code></a>()</p></td>
+<td><p>Builder to construct KinesisFirehoseSink.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="pulsar">
+<h2>Pulsar<a class="headerlink" href="#pulsar" title="Link to this heading">#</a></h2>
+<section id="pulsar-source">
+<h3>Pulsar Source<a class="headerlink" href="#pulsar-source" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.pulsar.StartCursor.html#pyflink.datastream.connectors.pulsar.StartCursor" title="pyflink.datastream.connectors.pulsar.StartCursor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StartCursor</span></code></a>(_j_start_cursor)</p></td>
+<td><p>A factory class for users to specify the start position of a pulsar subscription.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.pulsar.StopCursor.html#pyflink.datastream.connectors.pulsar.StopCursor" title="pyflink.datastream.connectors.pulsar.StopCursor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StopCursor</span></code></a>(_j_stop_cursor)</p></td>
+<td><p>A factory class for users to specify the stop position of a pulsar subscription.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.pulsar.RangeGenerator.html#pyflink.datastream.connectors.pulsar.RangeGenerator" title="pyflink.datastream.connectors.pulsar.RangeGenerator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RangeGenerator</span></code></a>(j_range_generator)</p></td>
+<td><p>A generator for generating the TopicRange for given topic.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.pulsar.PulsarSource.html#pyflink.datastream.connectors.pulsar.PulsarSource" title="pyflink.datastream.connectors.pulsar.PulsarSource"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PulsarSource</span></code></a>(j_pulsar_source)</p></td>
+<td><p>The Source implementation of Pulsar.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.pulsar.PulsarSourceBuilder.html#pyflink.datastream.connectors.pulsar.PulsarSourceBuilder" title="pyflink.datastream.connectors.pulsar.PulsarSourceBuilder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PulsarSourceBuilder</span></code></a>()</p></td>
+<td><p>The builder class for PulsarSource to make it easier for the users to construct a PulsarSource.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="pulsar-sink">
+<h3>Pulsar Sink<a class="headerlink" href="#pulsar-sink" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.pulsar.TopicRoutingMode.html#pyflink.datastream.connectors.pulsar.TopicRoutingMode" title="pyflink.datastream.connectors.pulsar.TopicRoutingMode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TopicRoutingMode</span></code></a>(value)</p></td>
+<td><p>The routing policy for choosing the desired topic by the given message.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.pulsar.MessageDelayer.html#pyflink.datastream.connectors.pulsar.MessageDelayer" title="pyflink.datastream.connectors.pulsar.MessageDelayer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MessageDelayer</span></code></a>(_j_message_delayer)</p></td>
+<td><p>A delayer for Pulsar broker passing the sent message to the downstream consumer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.pulsar.PulsarSink.html#pyflink.datastream.connectors.pulsar.PulsarSink" title="pyflink.datastream.connectors.pulsar.PulsarSink"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PulsarSink</span></code></a>(j_pulsar_sink)</p></td>
+<td><p>The Sink implementation of Pulsar.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.pulsar.PulsarSinkBuilder.html#pyflink.datastream.connectors.pulsar.PulsarSinkBuilder" title="pyflink.datastream.connectors.pulsar.PulsarSinkBuilder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PulsarSinkBuilder</span></code></a>()</p></td>
+<td><p>The builder class for PulsarSink to make it easier for the users to construct a PulsarSink.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="jdbc">
+<h2>Jdbc<a class="headerlink" href="#jdbc" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.jdbc.JdbcSink.html#pyflink.datastream.connectors.jdbc.JdbcSink" title="pyflink.datastream.connectors.jdbc.JdbcSink"><code class="xref py py-obj docutils literal notranslate"><span class="pre">JdbcSink</span></code></a>(j_jdbc_sink)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.jdbc.JdbcConnectionOptions.html#pyflink.datastream.connectors.jdbc.JdbcConnectionOptions" title="pyflink.datastream.connectors.jdbc.JdbcConnectionOptions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">JdbcConnectionOptions</span></code></a>(j_jdbc_connection_options)</p></td>
+<td><p>JDBC connection options.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.jdbc.JdbcExecutionOptions.html#pyflink.datastream.connectors.jdbc.JdbcExecutionOptions" title="pyflink.datastream.connectors.jdbc.JdbcExecutionOptions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">JdbcExecutionOptions</span></code></a>(j_jdbc_execution_options)</p></td>
+<td><p>JDBC sink batch options.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="rmq">
+<h2>RMQ<a class="headerlink" href="#rmq" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.rabbitmq.RMQConnectionConfig.html#pyflink.datastream.connectors.rabbitmq.RMQConnectionConfig" title="pyflink.datastream.connectors.rabbitmq.RMQConnectionConfig"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RMQConnectionConfig</span></code></a>(j_rmq_connection_config)</p></td>
+<td><p>Connection Configuration for RMQ.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.rabbitmq.RMQSource.html#pyflink.datastream.connectors.rabbitmq.RMQSource" title="pyflink.datastream.connectors.rabbitmq.RMQSource"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RMQSource</span></code></a>(connection_config, queue_name, ...)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.rabbitmq.RMQSink.html#pyflink.datastream.connectors.rabbitmq.RMQSink" title="pyflink.datastream.connectors.rabbitmq.RMQSink"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RMQSink</span></code></a>(connection_config, queue_name, ...)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="elasticsearch">
+<h2>Elasticsearch<a class="headerlink" href="#elasticsearch" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.elasticsearch.FlushBackoffType.html#pyflink.datastream.connectors.elasticsearch.FlushBackoffType" title="pyflink.datastream.connectors.elasticsearch.FlushBackoffType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FlushBackoffType</span></code></a>(value)</p></td>
+<td><p>Used to control whether the sink should retry failed requests at all or with which kind back off strategy.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.elasticsearch.ElasticsearchEmitter.html#pyflink.datastream.connectors.elasticsearch.ElasticsearchEmitter" title="pyflink.datastream.connectors.elasticsearch.ElasticsearchEmitter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ElasticsearchEmitter</span></code></a>(j_emitter)</p></td>
+<td><p>Emitter which is used by sinks to prepare elements for sending them to Elasticsearch.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.elasticsearch.Elasticsearch6SinkBuilder.html#pyflink.datastream.connectors.elasticsearch.Elasticsearch6SinkBuilder" title="pyflink.datastream.connectors.elasticsearch.Elasticsearch6SinkBuilder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Elasticsearch6SinkBuilder</span></code></a>()</p></td>
+<td><p>Builder to construct an Elasticsearch 6 compatible ElasticsearchSink.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.elasticsearch.Elasticsearch7SinkBuilder.html#pyflink.datastream.connectors.elasticsearch.Elasticsearch7SinkBuilder" title="pyflink.datastream.connectors.elasticsearch.Elasticsearch7SinkBuilder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Elasticsearch7SinkBuilder</span></code></a>()</p></td>
+<td><p>Builder to construct an Elasticsearch 7 compatible ElasticsearchSink.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.elasticsearch.ElasticsearchSink.html#pyflink.datastream.connectors.elasticsearch.ElasticsearchSink" title="pyflink.datastream.connectors.elasticsearch.ElasticsearchSink"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ElasticsearchSink</span></code></a>(j_elasticsearch_sink)</p></td>
+<td><p>Flink Sink to insert or update data in an Elasticsearch index.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="cassandra">
+<h2>Cassandra<a class="headerlink" href="#cassandra" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.cassandra.CassandraSink.html#pyflink.datastream.connectors.cassandra.CassandraSink" title="pyflink.datastream.connectors.cassandra.CassandraSink"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CassandraSink</span></code></a>(j_cassandra_sink)</p></td>
+<td><p>Sets the ClusterBuilder for this sink.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.cassandra.ConsistencyLevel.html#pyflink.datastream.connectors.cassandra.ConsistencyLevel" title="pyflink.datastream.connectors.cassandra.ConsistencyLevel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ConsistencyLevel</span></code></a>(value)</p></td>
+<td><p>The consistency level</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.cassandra.MapperOptions.html#pyflink.datastream.connectors.cassandra.MapperOptions" title="pyflink.datastream.connectors.cassandra.MapperOptions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MapperOptions</span></code></a>()</p></td>
+<td><p>This class is used to configure a Mapper after deployment.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.cassandra.ClusterBuilder.html#pyflink.datastream.connectors.cassandra.ClusterBuilder" title="pyflink.datastream.connectors.cassandra.ClusterBuilder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ClusterBuilder</span></code></a>(j_cluster_builder)</p></td>
+<td><p>This class is used to configure a Cluster after deployment.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.cassandra.CassandraCommitter.html#pyflink.datastream.connectors.cassandra.CassandraCommitter" title="pyflink.datastream.connectors.cassandra.CassandraCommitter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CassandraCommitter</span></code></a>(j_checkpoint_committer)</p></td>
+<td><p>CheckpointCommitter that saves information about completed checkpoints within a separate table in a cassandra database.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.connectors.cassandra.CassandraFailureHandler.html#pyflink.datastream.connectors.cassandra.CassandraFailureHandler" title="pyflink.datastream.connectors.cassandra.CassandraFailureHandler"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CassandraFailureHandler</span></code></a>(...)</p></td>
+<td><p>Handle a failed Throwable.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="api/pyflink.datastream.async_retry_predicates.exception_type_predicate.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">pyflink.datastream.async_retry_predicates.exception_type_predicate</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="api/pyflink.datastream.connectors.file_system.FileEnumeratorProvider.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">pyflink.datastream.connectors.file_system.FileEnumeratorProvider</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-system">File System</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#file-source">File Source</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#file-sink">File Sink</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#number-sequence">Number Sequence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kafka">Kafka</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kakfa-producer-and-consumer">Kakfa Producer and Consumer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kafka-source-and-sink">Kafka Source and Sink</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kinesis">kinesis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kinesis-source">Kinesis Source</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kinesis-sink">Kinesis Sink</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pulsar">Pulsar</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pulsar-source">Pulsar Source</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pulsar-sink">Pulsar Sink</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jdbc">Jdbc</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rmq">RMQ</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#elasticsearch">Elasticsearch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cassandra">Cassandra</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/reference/pyflink.datastream/connectors.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

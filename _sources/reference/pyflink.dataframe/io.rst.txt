@@ -1,0 +1,45 @@
+.. ################################################################################
+     Licensed to the Apache Software Foundation (ASF) under one
+     or more contributor license agreements.  See the NOTICE file
+     distributed with this work for additional information
+     regarding copyright ownership.  The ASF licenses this file
+     to you under the Apache License, Version 2.0 (the
+     "License"); you may not use this file except in compliance
+     with the License.  You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+    limitations under the License.
+   ################################################################################
+
+============
+Input/Output
+============
+
+Functions to read data from external sources into a :class:`~pyflink.dataframe.DataFrame`.
+For writing data, see the ``write_parquet``, ``write_kafka``, ``write_odps``, ``write_paimon``,
+``write_sls``, ``write_hologres``, and ``write_custom`` methods on
+:class:`~pyflink.dataframe.DataFrame`.
+
+Example::
+
+    >>> import pyflink.dataframe as pf
+    >>> df = pf.read_parquet("/path/to/data", schema={"id": pf.DataType.int64(), "name": pf.DataType.string()})
+    >>> df = pf.read_kafka("localhost:9092", schema={"key": pf.DataType.string()}, topic="my_topic")
+
+.. currentmodule:: pyflink.dataframe.io
+
+.. autosummary::
+    :toctree: api/
+
+    read_parquet
+    read_kafka
+    read_odps
+    read_paimon
+    read_sls
+    read_hologres
+    read_custom

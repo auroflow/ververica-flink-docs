@@ -1,0 +1,2000 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyflink.table.table &#8212; PyFlink 1.20+vvr.11.7.dev0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=b5c65be0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyflink/table/table';</script>
+    <link rel="icon" href="../../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../../search.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.20+vvr.11.7.dev0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="PyFlink 1.20+vvr.11.7.dev0 documentation - Home"/>
+    <img src="../../../_static/navbar-brand-logo.jpg" class="logo__image only-dark pst-js-only" alt="PyFlink 1.20+vvr.11.7.dev0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../reference/index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../reference/index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyflink.table.table</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for pyflink.table.table</h1><div class="highlight"><pre>
+<span></span><span class="c1">################################################################################</span>
+<span class="c1">#  Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="c1">#  or more contributor license agreements.  See the NOTICE file</span>
+<span class="c1">#  distributed with this work for additional information</span>
+<span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
+<span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
+<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  with the License.  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">################################################################################</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">py4j.java_gateway</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_method</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Union</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.java_gateway</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_gateway</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table</span><span class="w"> </span><span class="kn">import</span> <span class="n">ExplainDetail</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.expression</span><span class="w"> </span><span class="kn">import</span> <span class="n">Expression</span><span class="p">,</span> <span class="n">_get_java_expression</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.expressions</span><span class="w"> </span><span class="kn">import</span> <span class="n">col</span><span class="p">,</span> <span class="n">with_columns</span><span class="p">,</span> <span class="n">without_columns</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.serializers</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArrowSerializer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.table_descriptor</span><span class="w"> </span><span class="kn">import</span> <span class="n">TableDescriptor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.table_result</span><span class="w"> </span><span class="kn">import</span> <span class="n">TableResult</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.table_schema</span><span class="w"> </span><span class="kn">import</span> <span class="n">TableSchema</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.catalog</span><span class="w"> </span><span class="kn">import</span> <span class="n">ResolvedSchema</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_arrow_schema</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.udf</span><span class="w"> </span><span class="kn">import</span> <span class="n">UserDefinedScalarFunctionWrapper</span><span class="p">,</span> \
+    <span class="n">UserDefinedAggregateFunctionWrapper</span><span class="p">,</span> <span class="n">UserDefinedTableFunctionWrapper</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">tz_convert_from_internal</span><span class="p">,</span> <span class="n">to_expression_jarray</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.window</span><span class="w"> </span><span class="kn">import</span> <span class="n">OverWindow</span><span class="p">,</span> <span class="n">GroupWindow</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.util.java_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">to_jarray</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.util.java_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">to_j_explain_detail_arr</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Table&#39;</span><span class="p">,</span> <span class="s1">&#39;GroupedTable&#39;</span><span class="p">,</span> <span class="s1">&#39;GroupWindowedTable&#39;</span><span class="p">,</span> <span class="s1">&#39;OverWindowedTable&#39;</span><span class="p">,</span> <span class="s1">&#39;WindowGroupedTable&#39;</span><span class="p">]</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Table</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A :class:`~pyflink.table.Table` object is the core abstraction of the Table API.</span>
+<span class="sd">    Similar to how the DataStream API has DataStream,</span>
+<span class="sd">    the Table API is built around :class:`~pyflink.table.Table`.</span>
+
+<span class="sd">    A :class:`~pyflink.table.Table` object describes a pipeline of data transformations. It does not</span>
+<span class="sd">    contain the data itself in any way. Instead, it describes how to read data from a table source,</span>
+<span class="sd">    and how to eventually write data to a table sink. The declared pipeline can be</span>
+<span class="sd">    printed, optimized, and eventually executed in a cluster. The pipeline can work with bounded or</span>
+<span class="sd">    unbounded streams which enables both streaming and batch scenarios.</span>
+
+<span class="sd">    By the definition above, a :class:`~pyflink.table.Table` object can actually be considered as</span>
+<span class="sd">    a view in SQL terms.</span>
+
+<span class="sd">    The initial :class:`~pyflink.table.Table` object is constructed by a</span>
+<span class="sd">    :class:`~pyflink.table.TableEnvironment`. For example,</span>
+<span class="sd">    :func:`~pyflink.table.TableEnvironment.from_path` obtains a table from a catalog.</span>
+<span class="sd">    Every :class:`~pyflink.table.Table` object has a schema that is available through</span>
+<span class="sd">    :func:`~pyflink.table.Table.get_schema`. A :class:`~pyflink.table.Table` object is</span>
+<span class="sd">    always associated with its original table environment during programming.</span>
+
+<span class="sd">    Every transformation (i.e. :func:`~pyflink.table.Table.select`} or</span>
+<span class="sd">    :func:`~pyflink.table.Table.filter` on a :class:`~pyflink.table.Table` object leads to a new</span>
+<span class="sd">    :class:`~pyflink.table.Table` object.</span>
+
+<span class="sd">    Use :func:`~pyflink.table.Table.execute` to execute the pipeline and retrieve the transformed</span>
+<span class="sd">    data locally during development. Otherwise, use :func:`~pyflink.table.Table.execute_insert` to</span>
+<span class="sd">    write the data into a table sink.</span>
+
+<span class="sd">    Many methods of this class take one or more :class:`~pyflink.table.Expression` as parameters.</span>
+<span class="sd">    For fluent definition of expressions and easier readability, we recommend to add a star import:</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        &gt;&gt;&gt; from pyflink.table.expressions import *</span>
+
+<span class="sd">    Check the documentation for more programming language specific APIs.</span>
+
+<span class="sd">    The following example shows how to work with a :class:`~pyflink.table.Table` object.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        &gt;&gt;&gt; from pyflink.table import EnvironmentSettings, TableEnvironment</span>
+<span class="sd">        &gt;&gt;&gt; from pyflink.table.expressions import *</span>
+<span class="sd">        &gt;&gt;&gt; env_settings = EnvironmentSettings.in_streaming_mode()</span>
+<span class="sd">        &gt;&gt;&gt; t_env = TableEnvironment.create(env_settings)</span>
+<span class="sd">        &gt;&gt;&gt; table = t_env.from_path(&quot;my_table&quot;).select(col(&quot;colA&quot;).trim(), col(&quot;colB&quot;) + 12)</span>
+<span class="sd">        &gt;&gt;&gt; table.execute().print()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_table</span><span class="p">,</span> <span class="n">t_env</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span> <span class="o">=</span> <span class="n">j_table</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span> <span class="o">=</span> <span class="n">t_env</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">toString</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the :class:`Expression` of the column `name`.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; tab.select(tab.a)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_schema</span><span class="p">()</span><span class="o">.</span><span class="n">get_field_names</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
+                <span class="s2">&quot;The current table has no column named &#39;</span><span class="si">%s</span><span class="s2">&#39;, available columns: [</span><span class="si">%s</span><span class="s2">]&quot;</span>
+                <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_schema</span><span class="p">()</span><span class="o">.</span><span class="n">get_field_names</span><span class="p">())))</span>
+        <span class="k">return</span> <span class="n">col</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Table.select">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.select.html#pyflink.table.Table.select">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">fields</span><span class="p">:</span> <span class="n">Expression</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Table&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Performs a selection operation. Similar to a SQL SELECT statement. The field expressions</span>
+<span class="sd">        can contain complex expressions.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; from pyflink.table.expressions import col, concat</span>
+<span class="sd">            &gt;&gt;&gt; tab.select(tab.key, concat(tab.value, &#39;hello&#39;))</span>
+<span class="sd">            &gt;&gt;&gt; tab.select(col(&#39;key&#39;), concat(col(&#39;value&#39;), &#39;hello&#39;))</span>
+
+<span class="sd">        :return: The result table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">to_expression_jarray</span><span class="p">(</span><span class="n">fields</span><span class="p">)),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.alias">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.alias.html#pyflink.table.Table.alias">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">alias</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">fields</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Table&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renames the fields of the expression result. Use this to disambiguate fields before</span>
+<span class="sd">        joining two tables.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; tab.alias(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;)</span>
+
+<span class="sd">        :param field: Field alias.</span>
+<span class="sd">        :param fields: Additional field aliases.</span>
+<span class="sd">        :return: The result table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
+        <span class="n">extra_fields</span> <span class="o">=</span> <span class="n">to_jarray</span><span class="p">(</span><span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">String</span><span class="p">,</span> <span class="n">fields</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="n">get_method</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="p">,</span> <span class="s2">&quot;as&quot;</span><span class="p">)(</span><span class="n">field</span><span class="p">,</span> <span class="n">extra_fields</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.filter">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.filter.html#pyflink.table.Table.filter">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predicate</span><span class="p">:</span> <span class="n">Expression</span><span class="p">[</span><span class="nb">bool</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s1">&#39;Table&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Filters out elements that don&#39;t pass the filter predicate. Similar to a SQL WHERE</span>
+<span class="sd">        clause.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; tab.filter(col(&#39;name&#39;) == &#39;Fred&#39;)</span>
+
+<span class="sd">        :param predicate: Predicate expression string.</span>
+<span class="sd">        :return: The result table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">_get_java_expression</span><span class="p">(</span><span class="n">predicate</span><span class="p">)),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.where">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.where.html#pyflink.table.Table.where">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">where</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predicate</span><span class="p">:</span> <span class="n">Expression</span><span class="p">[</span><span class="nb">bool</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s1">&#39;Table&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Filters out elements that don&#39;t pass the filter predicate. Similar to a SQL WHERE</span>
+<span class="sd">        clause.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; tab.where(col(&#39;name&#39;) == &#39;Fred&#39;)</span>
+
+<span class="sd">        :param predicate: Predicate expression string.</span>
+<span class="sd">        :return: The result table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">_get_java_expression</span><span class="p">(</span><span class="n">predicate</span><span class="p">)),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.group_by">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.group_by.html#pyflink.table.Table.group_by">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">group_by</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">fields</span><span class="p">:</span> <span class="n">Expression</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;GroupedTable&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Groups the elements on some grouping keys. Use this before a selection with aggregations</span>
+<span class="sd">        to perform the aggregation on a per-group basis. Similar to a SQL GROUP BY statement.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; tab.group_by(col(&#39;key&#39;)).select(col(&#39;key&#39;), col(&#39;value&#39;).avg)</span>
+
+<span class="sd">        :param fields: Group keys.</span>
+<span class="sd">        :return: The grouped table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">GroupedTable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="n">to_expression_jarray</span><span class="p">(</span><span class="n">fields</span><span class="p">)),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.distinct">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.distinct.html#pyflink.table.Table.distinct">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">distinct</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Table&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Removes duplicate values and returns only distinct (different) values.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; tab.select(col(&#39;key&#39;), col(&#39;value&#39;)).distinct()</span>
+
+<span class="sd">        :return: The result table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">distinct</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.join">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.join.html#pyflink.table.Table.join">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">join</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="s1">&#39;Table&#39;</span><span class="p">,</span> <span class="n">join_predicate</span><span class="p">:</span> <span class="n">Expression</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Joins two :class:`~pyflink.table.Table`. Similar to a SQL join. The fields of the two joined</span>
+<span class="sd">        operations must not overlap, use :func:`~pyflink.table.Table.alias` to rename fields if</span>
+<span class="sd">        necessary. You can use where and select clauses after a join to further specify the</span>
+<span class="sd">        behaviour of the join.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            Both tables must be bound to the same :class:`~pyflink.table.TableEnvironment` .</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; left.join(right).where((col(&#39;a&#39;) == col(&#39;b&#39;)) &amp;&amp; (col(&#39;c&#39;) &gt; 3))</span>
+<span class="sd">            &gt;&gt;&gt; left.join(right, col(&#39;a&#39;) == col(&#39;b&#39;))</span>
+
+<span class="sd">        :param right: Right table.</span>
+<span class="sd">        :param join_predicate: Optional, the join predicate expression string.</span>
+<span class="sd">        :return: The result table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">join_predicate</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="n">right</span><span class="o">.</span><span class="n">_j_table</span><span class="p">,</span> <span class="n">_get_java_expression</span><span class="p">(</span><span class="n">join_predicate</span><span class="p">)),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">right</span><span class="o">.</span><span class="n">_j_table</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.left_outer_join">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.left_outer_join.html#pyflink.table.Table.left_outer_join">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">left_outer_join</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                        <span class="n">right</span><span class="p">:</span> <span class="s1">&#39;Table&#39;</span><span class="p">,</span>
+                        <span class="n">join_predicate</span><span class="p">:</span> <span class="n">Expression</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Table&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Joins two :class:`~pyflink.table.Table`. Similar to a SQL left outer join. The fields of</span>
+<span class="sd">        the two joined operations must not overlap, use :func:`~pyflink.table.Table.alias` to</span>
+<span class="sd">        rename fields if necessary.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            Both tables must be bound to the same :class:`~pyflink.table.TableEnvironment` and its</span>
+<span class="sd">            :class:`~pyflink.table.TableConfig` must have null check enabled (default).</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; left.left_outer_join(right)</span>
+<span class="sd">            &gt;&gt;&gt; left.left_outer_join(right, col(&#39;a&#39;) == col(&#39;b&#39;))</span>
+
+<span class="sd">        :param right: Right table.</span>
+<span class="sd">        :param join_predicate: Optional, the join predicate expression string.</span>
+<span class="sd">        :return: The result table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">join_predicate</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">leftOuterJoin</span><span class="p">(</span><span class="n">right</span><span class="o">.</span><span class="n">_j_table</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">leftOuterJoin</span><span class="p">(</span>
+                <span class="n">right</span><span class="o">.</span><span class="n">_j_table</span><span class="p">,</span> <span class="n">_get_java_expression</span><span class="p">(</span><span class="n">join_predicate</span><span class="p">)),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.right_outer_join">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.right_outer_join.html#pyflink.table.Table.right_outer_join">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">right_outer_join</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                         <span class="n">right</span><span class="p">:</span> <span class="s1">&#39;Table&#39;</span><span class="p">,</span>
+                         <span class="n">join_predicate</span><span class="p">:</span> <span class="n">Expression</span><span class="p">[</span><span class="nb">bool</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s1">&#39;Table&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Joins two :class:`~pyflink.table.Table`. Similar to a SQL right outer join. The fields of</span>
+<span class="sd">        the two joined operations must not overlap, use :func:`~pyflink.table.Table.alias` to</span>
+<span class="sd">        rename fields if necessary.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            Both tables must be bound to the same :class:`~pyflink.table.TableEnvironment` and its</span>
+<span class="sd">            :class:`~pyflink.table.TableConfig` must have null check enabled (default).</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; left.right_outer_join(right, col(&#39;a&#39;) == col(&#39;b&#39;))</span>
+
+<span class="sd">        :param right: Right table.</span>
+<span class="sd">        :param join_predicate: The join predicate expression string.</span>
+<span class="sd">        :return: The result table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">rightOuterJoin</span><span class="p">(</span>
+            <span class="n">right</span><span class="o">.</span><span class="n">_j_table</span><span class="p">,</span> <span class="n">_get_java_expression</span><span class="p">(</span><span class="n">join_predicate</span><span class="p">)),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.full_outer_join">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.full_outer_join.html#pyflink.table.Table.full_outer_join">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">full_outer_join</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                        <span class="n">right</span><span class="p">:</span> <span class="s1">&#39;Table&#39;</span><span class="p">,</span>
+                        <span class="n">join_predicate</span><span class="p">:</span> <span class="n">Expression</span><span class="p">[</span><span class="nb">bool</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s1">&#39;Table&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Joins two :class:`~pyflink.table.Table`. Similar to a SQL full outer join. The fields of</span>
+<span class="sd">        the two joined operations must not overlap, use :func:`~pyflink.table.Table.alias` to</span>
+<span class="sd">        rename fields if necessary.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            Both tables must be bound to the same :class:`~pyflink.table.TableEnvironment` and its</span>
+<span class="sd">            :class:`~pyflink.table.TableConfig` must have null check enabled (default).</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; left.full_outer_join(right, col(&#39;a&#39;) == col(&#39;b&#39;))</span>
+
+<span class="sd">        :param right: Right table.</span>
+<span class="sd">        :param join_predicate: The join predicate expression string.</span>
+<span class="sd">        :return: The result table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">fullOuterJoin</span><span class="p">(</span>
+            <span class="n">right</span><span class="o">.</span><span class="n">_j_table</span><span class="p">,</span> <span class="n">_get_java_expression</span><span class="p">(</span><span class="n">join_predicate</span><span class="p">)),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.join_lateral">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.join_lateral.html#pyflink.table.Table.join_lateral">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">join_lateral</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                     <span class="n">table_function_call</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Expression</span><span class="p">,</span> <span class="n">UserDefinedTableFunctionWrapper</span><span class="p">],</span>
+                     <span class="n">join_predicate</span><span class="p">:</span> <span class="n">Expression</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Table&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Joins this Table with an user-defined TableFunction. This join is similar to a SQL inner</span>
+<span class="sd">        join but works with a table function. Each row of the table is joined with the rows</span>
+<span class="sd">        produced by the table function.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; from pyflink.table.expressions import *</span>
+<span class="sd">            &gt;&gt;&gt; t_env.create_java_temporary_system_function(&quot;split&quot;,</span>
+<span class="sd">            ...     &quot;java.table.function.class.name&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; tab.join_lateral(call(&#39;split&#39;, &#39; &#39;).alias(&#39;b&#39;), col(&#39;a&#39;) == col(&#39;b&#39;))</span>
+<span class="sd">            &gt;&gt;&gt; # take all the columns as inputs</span>
+<span class="sd">            &gt;&gt;&gt; @udtf(result_types=[DataTypes.INT(), DataTypes.STRING()])</span>
+<span class="sd">            ... def split_row(row: Row):</span>
+<span class="sd">            ...     for s in row[1].split(&quot;,&quot;):</span>
+<span class="sd">            ...         yield row[0], s</span>
+<span class="sd">            &gt;&gt;&gt; tab.join_lateral(split_row.alias(&quot;a&quot;, &quot;b&quot;))</span>
+
+<span class="sd">        :param table_function_call: An expression representing a table function call.</span>
+<span class="sd">        :param join_predicate: Optional, The join predicate expression string, join ON TRUE if not</span>
+<span class="sd">                               exist.</span>
+<span class="sd">        :return: The result Table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">table_function_call</span><span class="p">,</span> <span class="n">UserDefinedTableFunctionWrapper</span><span class="p">):</span>
+            <span class="n">table_function_call</span><span class="o">.</span><span class="n">_set_takes_row_as_input</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">table_function_call</span><span class="p">,</span> <span class="s2">&quot;_alias_names&quot;</span><span class="p">):</span>
+                <span class="n">alias_names</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">table_function_call</span><span class="p">,</span> <span class="s2">&quot;_alias_names&quot;</span><span class="p">)</span>
+                <span class="n">table_function_call</span> <span class="o">=</span> <span class="n">table_function_call</span><span class="p">(</span><span class="n">with_columns</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)))</span> \
+                    <span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="o">*</span><span class="n">alias_names</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s1">&#39;table_function_call must be followed by a alias function&#39;</span>
+                                     <span class="s1">&#39;e.g. table_function.alias(&quot;a&quot;, &quot;b&quot;)&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">join_predicate</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">joinLateral</span><span class="p">(</span>
+                <span class="n">_get_java_expression</span><span class="p">(</span><span class="n">table_function_call</span><span class="p">)),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">joinLateral</span><span class="p">(</span>
+                <span class="n">_get_java_expression</span><span class="p">(</span><span class="n">table_function_call</span><span class="p">),</span>
+                <span class="n">_get_java_expression</span><span class="p">(</span><span class="n">join_predicate</span><span class="p">)),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.left_outer_join_lateral">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.left_outer_join_lateral.html#pyflink.table.Table.left_outer_join_lateral">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">left_outer_join_lateral</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                <span class="n">table_function_call</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Expression</span><span class="p">,</span>
+                                                           <span class="n">UserDefinedTableFunctionWrapper</span><span class="p">],</span>
+                                <span class="n">join_predicate</span><span class="p">:</span> <span class="n">Expression</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Table&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Joins this Table with an user-defined TableFunction. This join is similar to</span>
+<span class="sd">        a SQL left outer join but works with a table function. Each row of the table is joined</span>
+<span class="sd">        with all rows produced by the table function. If the join does not produce any row, the</span>
+<span class="sd">        outer row is padded with nulls.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; t_env.create_java_temporary_system_function(&quot;split&quot;,</span>
+<span class="sd">            ...     &quot;java.table.function.class.name&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; from pyflink.table.expressions import *</span>
+<span class="sd">            &gt;&gt;&gt; tab.left_outer_join_lateral(call(&#39;split&#39;, &#39; &#39;).alias(&#39;b&#39;))</span>
+
+<span class="sd">            &gt;&gt;&gt; # take all the columns as inputs</span>
+<span class="sd">            &gt;&gt;&gt; @udtf(result_types=[DataTypes.INT(), DataTypes.STRING()])</span>
+<span class="sd">            ... def split_row(row: Row):</span>
+<span class="sd">            ...     for s in row[1].split(&quot;,&quot;):</span>
+<span class="sd">            ...         yield row[0], s</span>
+<span class="sd">            &gt;&gt;&gt; tab.left_outer_join_lateral(split_row.alias(&quot;a&quot;, &quot;b&quot;))</span>
+
+<span class="sd">        :param table_function_call: An expression representing a table function call.</span>
+<span class="sd">        :param join_predicate: Optional, The join predicate expression string, join ON TRUE if not</span>
+<span class="sd">                               exist.</span>
+<span class="sd">        :return: The result Table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">table_function_call</span><span class="p">,</span> <span class="n">UserDefinedTableFunctionWrapper</span><span class="p">):</span>
+            <span class="n">table_function_call</span><span class="o">.</span><span class="n">_set_takes_row_as_input</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">table_function_call</span><span class="p">,</span> <span class="s2">&quot;_alias_names&quot;</span><span class="p">):</span>
+                <span class="n">alias_names</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">table_function_call</span><span class="p">,</span> <span class="s2">&quot;_alias_names&quot;</span><span class="p">)</span>
+                <span class="n">table_function_call</span> <span class="o">=</span> <span class="n">table_function_call</span><span class="p">(</span><span class="n">with_columns</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)))</span> \
+                    <span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="o">*</span><span class="n">alias_names</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s1">&#39;table_function_call must be followed by a alias function&#39;</span>
+                                     <span class="s1">&#39;e.g. table_function.alias(&quot;a&quot;, &quot;b&quot;)&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">join_predicate</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">leftOuterJoinLateral</span><span class="p">(</span>
+                <span class="n">_get_java_expression</span><span class="p">(</span><span class="n">table_function_call</span><span class="p">)),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">leftOuterJoinLateral</span><span class="p">(</span>
+                <span class="n">_get_java_expression</span><span class="p">(</span><span class="n">table_function_call</span><span class="p">),</span>
+                <span class="n">_get_java_expression</span><span class="p">(</span><span class="n">join_predicate</span><span class="p">)),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.minus">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.minus.html#pyflink.table.Table.minus">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">minus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="s1">&#39;Table&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Table&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Minus of two :class:`~pyflink.table.Table` with duplicate records removed.</span>
+<span class="sd">        Similar to a SQL EXCEPT clause. Minus returns records from the left table that do not</span>
+<span class="sd">        exist in the right table. Duplicate records in the left table are returned</span>
+<span class="sd">        exactly once, i.e., duplicates are removed. Both tables must have identical field types.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            Both tables must be bound to the same :class:`~pyflink.table.TableEnvironment`.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; left.minus(right)</span>
+
+<span class="sd">        :param right: Right table.</span>
+<span class="sd">        :return: The result table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">minus</span><span class="p">(</span><span class="n">right</span><span class="o">.</span><span class="n">_j_table</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.minus_all">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.minus_all.html#pyflink.table.Table.minus_all">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">minus_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="s1">&#39;Table&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Table&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Minus of two :class:`~pyflink.table.Table`. Similar to a SQL EXCEPT ALL.</span>
+<span class="sd">        Similar to a SQL EXCEPT ALL clause. MinusAll returns the records that do not exist in</span>
+<span class="sd">        the right table. A record that is present n times in the left table and m times</span>
+<span class="sd">        in the right table is returned (n - m) times, i.e., as many duplicates as are present</span>
+<span class="sd">        in the right table are removed. Both tables must have identical field types.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            Both tables must be bound to the same :class:`~pyflink.table.TableEnvironment`.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; left.minus_all(right)</span>
+
+<span class="sd">        :param right: Right table.</span>
+<span class="sd">        :return: The result table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">minusAll</span><span class="p">(</span><span class="n">right</span><span class="o">.</span><span class="n">_j_table</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.union">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.union.html#pyflink.table.Table.union">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">union</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="s1">&#39;Table&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Table&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Unions two :class:`~pyflink.table.Table` with duplicate records removed.</span>
+<span class="sd">        Similar to a SQL UNION. The fields of the two union operations must fully overlap.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            Both tables must be bound to the same :class:`~pyflink.table.TableEnvironment`.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; left.union(right)</span>
+
+<span class="sd">        :param right: Right table.</span>
+<span class="sd">        :return: The result table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">right</span><span class="o">.</span><span class="n">_j_table</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.union_all">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.union_all.html#pyflink.table.Table.union_all">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">union_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="s1">&#39;Table&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Table&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Unions two :class:`~pyflink.table.Table`. Similar to a SQL UNION ALL. The fields of the</span>
+<span class="sd">        two union operations must fully overlap.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            Both tables must be bound to the same :class:`~pyflink.table.TableEnvironment`.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; left.union_all(right)</span>
+
+<span class="sd">        :param right: Right table.</span>
+<span class="sd">        :return: The result table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">unionAll</span><span class="p">(</span><span class="n">right</span><span class="o">.</span><span class="n">_j_table</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.intersect">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.intersect.html#pyflink.table.Table.intersect">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">intersect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="s1">&#39;Table&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Table&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Intersects two :class:`~pyflink.table.Table` with duplicate records removed. Intersect</span>
+<span class="sd">        returns records that exist in both tables. If a record is present in one or both tables</span>
+<span class="sd">        more than once, it is returned just once, i.e., the resulting table has no duplicate</span>
+<span class="sd">        records. Similar to a SQL INTERSECT. The fields of the two intersect operations must fully</span>
+<span class="sd">        overlap.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            Both tables must be bound to the same :class:`~pyflink.table.TableEnvironment`.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; left.intersect(right)</span>
+
+<span class="sd">        :param right: Right table.</span>
+<span class="sd">        :return: The result table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">intersect</span><span class="p">(</span><span class="n">right</span><span class="o">.</span><span class="n">_j_table</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.intersect_all">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.intersect_all.html#pyflink.table.Table.intersect_all">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">intersect_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="s1">&#39;Table&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Table&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Intersects two :class:`~pyflink.table.Table`. IntersectAll returns records that exist in</span>
+<span class="sd">        both tables. If a record is present in both tables more than once, it is returned as many</span>
+<span class="sd">        times as it is present in both tables, i.e., the resulting table might have duplicate</span>
+<span class="sd">        records. Similar to an SQL INTERSECT ALL. The fields of the two intersect operations must</span>
+<span class="sd">        fully overlap.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            Both tables must be bound to the same :class:`~pyflink.table.TableEnvironment`.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; left.intersect_all(right)</span>
+
+<span class="sd">        :param right: Right table.</span>
+<span class="sd">        :return: The result table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">intersectAll</span><span class="p">(</span><span class="n">right</span><span class="o">.</span><span class="n">_j_table</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.order_by">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.order_by.html#pyflink.table.Table.order_by">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">order_by</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">fields</span><span class="p">:</span> <span class="n">Expression</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Table&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sorts the given :class:`~pyflink.table.Table`. Similar to SQL ORDER BY.</span>
+<span class="sd">        The resulting Table is sorted globally sorted across all parallel partitions.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; tab.order_by(col(&#39;name&#39;).desc)</span>
+
+<span class="sd">        For unbounded tables, this operation requires a sorting on a time attribute or a subsequent</span>
+<span class="sd">        fetch operation.</span>
+
+<span class="sd">        :param fields: Order fields expression string.</span>
+<span class="sd">        :return: The result table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">to_expression_jarray</span><span class="p">(</span><span class="n">fields</span><span class="p">)),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.offset">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.offset.html#pyflink.table.Table.offset">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">offset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Table&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Limits a (possibly sorted) result from an offset position.</span>
+
+<span class="sd">        This method can be combined with a preceding :func:`~pyflink.table.Table.order_by` call for</span>
+<span class="sd">        a deterministic order and a subsequent :func:`~pyflink.table.Table.fetch` call to return n</span>
+<span class="sd">        rows after skipping the first o rows.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            # skips the first 3 rows and returns all following rows.</span>
+<span class="sd">            &gt;&gt;&gt; tab.order_by(col(&#39;name&#39;).desc).offset(3)</span>
+<span class="sd">            # skips the first 10 rows and returns the next 5 rows.</span>
+<span class="sd">            &gt;&gt;&gt; tab.order_by(col(&#39;name&#39;).desc).offset(10).fetch(5)</span>
+
+<span class="sd">        For unbounded tables, this operation requires a subsequent fetch operation.</span>
+
+<span class="sd">        :param offset: Number of records to skip.</span>
+<span class="sd">        :return: The result table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="n">offset</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.fetch">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.fetch.html#pyflink.table.Table.fetch">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fetch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fetch</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Table&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Limits a (possibly sorted) result to the first n rows.</span>
+
+<span class="sd">        This method can be combined with a preceding :func:`~pyflink.table.Table.order_by` call for</span>
+<span class="sd">        a deterministic order and :func:`~pyflink.table.Table.offset` call to return n rows after</span>
+<span class="sd">        skipping the first o rows.</span>
+
+<span class="sd">        Example:</span>
+
+<span class="sd">        Returns the first 3 records.</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; tab.order_by(col(&#39;name&#39;).desc).fetch(3)</span>
+
+<span class="sd">        Skips the first 10 rows and returns the next 5 rows.</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; tab.order_by(col(&#39;name&#39;).desc).offset(10).fetch(5)</span>
+
+<span class="sd">        :param fetch: The number of records to return. Fetch must be &gt;= 0.</span>
+<span class="sd">        :return: The result table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">fetch</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.limit">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.limit.html#pyflink.table.Table.limit">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">limit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fetch</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Table&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Limits a (possibly sorted) result to the first n rows.</span>
+
+<span class="sd">        This method is a synonym for :func:`~pyflink.table.Table.offset` followed by</span>
+<span class="sd">        :func:`~pyflink.table.Table.fetch`.</span>
+
+<span class="sd">        Example:</span>
+
+<span class="sd">        Returns the first 3 records.</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; tab.limit(3)</span>
+
+<span class="sd">        Skips the first 10 rows and returns the next 5 rows.</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; tab.limit(5, 10)</span>
+
+<span class="sd">        :param fetch: the first number of rows to fetch.</span>
+<span class="sd">        :param offset: the number of records to skip, default 0.</span>
+<span class="sd">        :return: The result table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">offset</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">fetch</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.window">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.window.html#pyflink.table.Table.window">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">window</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">:</span> <span class="n">GroupWindow</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;GroupWindowedTable&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Defines group window on the records of a table.</span>
+
+<span class="sd">        A group window groups the records of a table by assigning them to windows defined by a time</span>
+<span class="sd">        or row interval.</span>
+
+<span class="sd">        For streaming tables of infinite size, grouping into windows is required to define finite</span>
+<span class="sd">        groups on which group-based aggregates can be computed.</span>
+
+<span class="sd">        For batch tables of finite size, windowing essentially provides shortcuts for time-based</span>
+<span class="sd">        groupBy.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            Computing windowed aggregates on a streaming table is only a parallel operation</span>
+<span class="sd">            if additional grouping attributes are added to the</span>
+<span class="sd">            :func:`~pyflink.table.GroupWindowedTable.group_by` clause.</span>
+<span class="sd">            If the :func:`~pyflink.table.GroupWindowedTable.group_by` only references a GroupWindow</span>
+<span class="sd">            alias, the streamed table will be processed by a single task, i.e., with parallelism 1.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; from pyflink.table.expressions import col, lit</span>
+<span class="sd">            &gt;&gt;&gt; tab.window(Tumble.over(lit(10).minutes).on(col(&#39;rowtime&#39;)).alias(&#39;w&#39;)) \\</span>
+<span class="sd">            ...     .group_by(col(&#39;w&#39;)) \\</span>
+<span class="sd">            ...     .select(col(&#39;a&#39;).sum.alias(&#39;a&#39;),</span>
+<span class="sd">            ...             col(&#39;w&#39;).start.alias(&#39;b&#39;),</span>
+<span class="sd">            ...             col(&#39;w&#39;).end.alias(&#39;c&#39;),</span>
+<span class="sd">            ...             col(&#39;w&#39;).rowtime.alias(&#39;d&#39;))</span>
+
+<span class="sd">        :param window: A :class:`~pyflink.table.window.GroupWindow` created from</span>
+<span class="sd">                       :class:`~pyflink.table.window.Tumble`, :class:`~pyflink.table.window.Session`</span>
+<span class="sd">                       or :class:`~pyflink.table.window.Slide`.</span>
+<span class="sd">        :return: A group windowed table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">GroupWindowedTable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">window</span><span class="p">(</span><span class="n">window</span><span class="o">.</span><span class="n">_java_window</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.over_window">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.over_window.html#pyflink.table.Table.over_window">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">over_window</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">over_windows</span><span class="p">:</span> <span class="n">OverWindow</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;OverWindowedTable&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Defines over-windows on the records of a table.</span>
+
+<span class="sd">        An over-window defines for each record an interval of records over which aggregation</span>
+<span class="sd">        functions can be computed.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; from pyflink.table.expressions import col, lit</span>
+<span class="sd">            &gt;&gt;&gt; tab.over_window(Over.partition_by(col(&#39;c&#39;)).order_by(col(&#39;rowtime&#39;)) \\</span>
+<span class="sd">            ...     .preceding(lit(10).seconds).alias(&quot;ow&quot;)) \\</span>
+<span class="sd">            ...     .select(col(&#39;c&#39;), col(&#39;b&#39;).count.over(col(&#39;ow&#39;), col(&#39;e&#39;).sum.over(col(&#39;ow&#39;))))</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            Computing over window aggregates on a streaming table is only a parallel</span>
+<span class="sd">            operation if the window is partitioned. Otherwise, the whole stream will be processed</span>
+<span class="sd">            by a single task, i.e., with parallelism 1.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            Over-windows for batch tables are currently not supported.</span>
+
+<span class="sd">        :param over_windows: over windows created from :class:`~pyflink.table.window.Over`.</span>
+<span class="sd">        :return: A over windowed table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
+        <span class="n">window_array</span> <span class="o">=</span> <span class="n">to_jarray</span><span class="p">(</span><span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">OverWindow</span><span class="p">,</span>
+                                 <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">_java_over_window</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">over_windows</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">OverWindowedTable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">window</span><span class="p">(</span><span class="n">window_array</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.add_columns">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.add_columns.html#pyflink.table.Table.add_columns">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_columns</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">fields</span><span class="p">:</span> <span class="n">Expression</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Table&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds additional columns. Similar to a SQL SELECT statement. The field expressions</span>
+<span class="sd">        can contain complex expressions, but can not contain aggregations. It will throw an</span>
+<span class="sd">        exception if the added fields already exist.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; from pyflink.table.expressions import col, concat</span>
+<span class="sd">            &gt;&gt;&gt; tab.add_columns((col(&#39;a&#39;) + 1).alias(&#39;a1&#39;), concat(col(&#39;b&#39;), &#39;sunny&#39;).alias(&#39;b1&#39;))</span>
+
+<span class="sd">        :param fields: Column list string.</span>
+<span class="sd">        :return: The result table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">addColumns</span><span class="p">(</span><span class="n">to_expression_jarray</span><span class="p">(</span><span class="n">fields</span><span class="p">)),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.add_or_replace_columns">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.add_or_replace_columns.html#pyflink.table.Table.add_or_replace_columns">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_or_replace_columns</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">fields</span><span class="p">:</span> <span class="n">Expression</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Table&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds additional columns. Similar to a SQL SELECT statement. The field expressions</span>
+<span class="sd">        can contain complex expressions, but can not contain aggregations. Existing fields will be</span>
+<span class="sd">        replaced if add columns name is the same as the existing column name. Moreover, if the added</span>
+<span class="sd">        fields have duplicate field name, then the last one is used.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; from pyflink.table.expressions import col, concat</span>
+<span class="sd">            &gt;&gt;&gt; tab.add_or_replace_columns((col(&#39;a&#39;) + 1).alias(&#39;a1&#39;),</span>
+<span class="sd">            ...                            concat(col(&#39;b&#39;), &#39;sunny&#39;).alias(&#39;b1&#39;))</span>
+
+<span class="sd">        :param fields: Column list string.</span>
+<span class="sd">        :return: The result table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">addOrReplaceColumns</span><span class="p">(</span><span class="n">to_expression_jarray</span><span class="p">(</span><span class="n">fields</span><span class="p">)),</span>
+                     <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.rename_columns">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.rename_columns.html#pyflink.table.Table.rename_columns">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">rename_columns</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">fields</span><span class="p">:</span> <span class="n">Expression</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Table&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renames existing columns. Similar to a field alias statement. The field expressions</span>
+<span class="sd">        should be alias expressions, and only the existing fields can be renamed.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; tab.rename_columns(col(&#39;a&#39;).alias(&#39;a1&#39;), col(&#39;b&#39;).alias(&#39;b1&#39;))</span>
+
+<span class="sd">        :param fields: Column list string.</span>
+<span class="sd">        :return: The result table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">renameColumns</span><span class="p">(</span><span class="n">to_expression_jarray</span><span class="p">(</span><span class="n">fields</span><span class="p">)),</span>
+                     <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.drop_columns">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.drop_columns.html#pyflink.table.Table.drop_columns">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">drop_columns</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">fields</span><span class="p">:</span> <span class="n">Expression</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Table&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Drops existing columns. The field expressions should be field reference expressions.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; tab.drop_columns(col(&#39;a&#39;), col(&#39;b&#39;))</span>
+
+<span class="sd">        :param fields: Column list string.</span>
+<span class="sd">        :return: The result table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">dropColumns</span><span class="p">(</span><span class="n">to_expression_jarray</span><span class="p">(</span><span class="n">fields</span><span class="p">)),</span>
+                     <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.map">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.map.html#pyflink.table.Table.map">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Expression</span><span class="p">,</span> <span class="n">UserDefinedScalarFunctionWrapper</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s1">&#39;Table&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Performs a map operation with a user-defined scalar function.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; add = udf(lambda x: Row(x + 1, x * x), result_type=DataTypes.Row(</span>
+<span class="sd">            ... [DataTypes.FIELD(&quot;a&quot;, DataTypes.INT()), DataTypes.FIELD(&quot;b&quot;, DataTypes.INT())]))</span>
+<span class="sd">            &gt;&gt;&gt; tab.map(add(col(&#39;a&#39;))).alias(&quot;a&quot;, &quot;b&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; # take all the columns as inputs</span>
+<span class="sd">            &gt;&gt;&gt; identity = udf(lambda row: row, result_type=DataTypes.Row(</span>
+<span class="sd">            ... [DataTypes.FIELD(&quot;a&quot;, DataTypes.INT()), DataTypes.FIELD(&quot;b&quot;, DataTypes.INT())]))</span>
+<span class="sd">            &gt;&gt;&gt; tab.map(identity)</span>
+
+<span class="sd">        :param func: user-defined scalar function.</span>
+<span class="sd">        :return: The result table.</span>
+
+<span class="sd">        .. versionadded:: 1.13.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">Expression</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">_j_expr</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">func</span><span class="o">.</span><span class="n">_set_takes_row_as_input</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">with_columns</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)))</span><span class="o">.</span><span class="n">_j_expr</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.flat_map">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.flat_map.html#pyflink.table.Table.flat_map">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">flat_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Expression</span><span class="p">,</span> <span class="n">UserDefinedTableFunctionWrapper</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s1">&#39;Table&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Performs a flatMap operation with a user-defined table function.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; @udtf(result_types=[DataTypes.INT(), DataTypes.STRING()])</span>
+<span class="sd">            ... def split(x, string):</span>
+<span class="sd">            ...     for s in string.split(&quot;,&quot;):</span>
+<span class="sd">            ...         yield x, s</span>
+<span class="sd">            &gt;&gt;&gt; tab.flat_map(split(col(&#39;a&#39;), col(&#39;b&#39;)))</span>
+<span class="sd">            &gt;&gt;&gt; # take all the columns as inputs</span>
+<span class="sd">            &gt;&gt;&gt; @udtf(result_types=[DataTypes.INT(), DataTypes.STRING()])</span>
+<span class="sd">            ... def split_row(row: Row):</span>
+<span class="sd">            ...     for s in row[1].split(&quot;,&quot;):</span>
+<span class="sd">            ...         yield row[0], s</span>
+<span class="sd">            &gt;&gt;&gt; tab.flat_map(split_row)</span>
+
+<span class="sd">        :param func: user-defined table function.</span>
+<span class="sd">        :return: The result table.</span>
+
+<span class="sd">        .. versionadded:: 1.13.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">Expression</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">flatMap</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">_j_expr</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">func</span><span class="o">.</span><span class="n">_set_takes_row_as_input</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">flatMap</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">with_columns</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)))</span><span class="o">.</span><span class="n">_j_expr</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.aggregate">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.aggregate.html#pyflink.table.Table.aggregate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Expression</span><span class="p">,</span> <span class="n">UserDefinedAggregateFunctionWrapper</span><span class="p">])</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;AggregatedTable&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Performs a global aggregate operation with an aggregate function. You have to close the</span>
+<span class="sd">        aggregate with a select statement.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; agg = udaf(lambda a: (a.mean(), a.max()),</span>
+<span class="sd">            ...               result_type=DataTypes.ROW(</span>
+<span class="sd">            ...                   [DataTypes.FIELD(&quot;a&quot;, DataTypes.FLOAT()),</span>
+<span class="sd">            ...                    DataTypes.FIELD(&quot;b&quot;, DataTypes.INT())]),</span>
+<span class="sd">            ...               func_type=&quot;pandas&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; tab.aggregate(agg(col(&#39;a&#39;)).alias(&quot;a&quot;, &quot;b&quot;)).select(col(&#39;a&#39;), col(&#39;b&#39;))</span>
+<span class="sd">            &gt;&gt;&gt; # take all the columns as inputs</span>
+<span class="sd">            &gt;&gt;&gt; # pd is a Pandas.DataFrame</span>
+<span class="sd">            &gt;&gt;&gt; agg_row = udaf(lambda pd: (pd.a.mean(), pd.a.max()),</span>
+<span class="sd">            ...               result_type=DataTypes.ROW(</span>
+<span class="sd">            ...                   [DataTypes.FIELD(&quot;a&quot;, DataTypes.FLOAT()),</span>
+<span class="sd">            ...                    DataTypes.FIELD(&quot;b&quot;, DataTypes.INT())]),</span>
+<span class="sd">            ...               func_type=&quot;pandas&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; tab.aggregate(agg.alias(&quot;a&quot;, &quot;b&quot;)).select(col(&quot;a&quot;), col(&quot;b&quot;))</span>
+
+<span class="sd">        :param func: user-defined aggregate function.</span>
+<span class="sd">        :return: The result table.</span>
+
+<span class="sd">        .. versionadded:: 1.13.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">Expression</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">AggregatedTable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">_j_expr</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">func</span><span class="o">.</span><span class="n">_set_takes_row_as_input</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s2">&quot;_alias_names&quot;</span><span class="p">):</span>
+                <span class="n">alias_names</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s2">&quot;_alias_names&quot;</span><span class="p">)</span>
+                <span class="n">func</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">with_columns</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="o">*</span><span class="n">alias_names</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">func</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">with_columns</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)))</span>
+            <span class="k">return</span> <span class="n">AggregatedTable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">_j_expr</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.flat_aggregate">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.flat_aggregate.html#pyflink.table.Table.flat_aggregate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">flat_aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Expression</span><span class="p">,</span> <span class="n">UserDefinedAggregateFunctionWrapper</span><span class="p">])</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;FlatAggregateTable&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Perform a global flat_aggregate without group_by. flat_aggregate takes a</span>
+<span class="sd">        :class:`~pyflink.table.TableAggregateFunction` which returns multiple rows. Use a selection</span>
+<span class="sd">        after the flat_aggregate.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; table_agg = udtaf(MyTableAggregateFunction())</span>
+<span class="sd">            &gt;&gt;&gt; tab.flat_aggregate(table_agg(col(&#39;a&#39;)).alias(&quot;a&quot;, &quot;b&quot;)).select(col(&#39;a&#39;), col(&#39;b&#39;))</span>
+<span class="sd">            &gt;&gt;&gt; # take all the columns as inputs</span>
+<span class="sd">            &gt;&gt;&gt; class Top2(TableAggregateFunction):</span>
+<span class="sd">            ...     def emit_value(self, accumulator):</span>
+<span class="sd">            ...         yield Row(accumulator[0])</span>
+<span class="sd">            ...         yield Row(accumulator[1])</span>
+<span class="sd">            ...</span>
+<span class="sd">            ...     def create_accumulator(self):</span>
+<span class="sd">            ...         return [None, None]</span>
+<span class="sd">            ...</span>
+<span class="sd">            ...     def accumulate(self, accumulator, *args):</span>
+<span class="sd">            ...         args[0] # type: Row</span>
+<span class="sd">            ...         if args[0][0] is not None:</span>
+<span class="sd">            ...             if accumulator[0] is None or args[0][0] &gt; accumulator[0]:</span>
+<span class="sd">            ...                 accumulator[1] = accumulator[0]</span>
+<span class="sd">            ...                 accumulator[0] = args[0][0]</span>
+<span class="sd">            ...             elif accumulator[1] is None or args[0][0] &gt; accumulator[1]:</span>
+<span class="sd">            ...                 accumulator[1] = args[0][0]</span>
+<span class="sd">            ...</span>
+<span class="sd">            ...     def get_accumulator_type(self):</span>
+<span class="sd">            ...         return DataTypes.ARRAY(DataTypes.BIGINT())</span>
+<span class="sd">            ...</span>
+<span class="sd">            ...     def get_result_type(self):</span>
+<span class="sd">            ...         return DataTypes.ROW(</span>
+<span class="sd">            ...             [DataTypes.FIELD(&quot;a&quot;, DataTypes.BIGINT())])</span>
+<span class="sd">            &gt;&gt;&gt; top2 = udtaf(Top2())</span>
+<span class="sd">            &gt;&gt;&gt; tab.flat_aggregate(top2.alias(&quot;a&quot;, &quot;b&quot;)).select(col(&quot;a&quot;), col(&quot;b&quot;))</span>
+
+<span class="sd">        :param func: user-defined table aggregate function.</span>
+<span class="sd">        :return: The result table.</span>
+
+<span class="sd">        .. versionadded:: 1.13.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">Expression</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">FlatAggregateTable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">flatAggregate</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">_j_expr</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">func</span><span class="o">.</span><span class="n">_set_takes_row_as_input</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s2">&quot;_alias_names&quot;</span><span class="p">):</span>
+                <span class="n">alias_names</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s2">&quot;_alias_names&quot;</span><span class="p">)</span>
+                <span class="n">func</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">with_columns</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="o">*</span><span class="n">alias_names</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">func</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">with_columns</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)))</span>
+            <span class="k">return</span> <span class="n">FlatAggregateTable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">flatAggregate</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">_j_expr</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Table.to_pandas">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.to_pandas.html#pyflink.table.Table.to_pandas">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_pandas</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts the table to a pandas DataFrame. It will collect the content of the table to</span>
+<span class="sd">        the client side and so please make sure that the content of the table could fit in memory</span>
+<span class="sd">        before calling this method.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; pdf = pd.DataFrame(np.random.rand(1000, 2))</span>
+<span class="sd">            &gt;&gt;&gt; table = table_env.from_pandas(pdf, [&quot;a&quot;, &quot;b&quot;])</span>
+<span class="sd">            &gt;&gt;&gt; table.filter(col(&#39;a&#39;) &gt; 0.5).to_pandas()</span>
+
+<span class="sd">        :return: the result pandas DataFrame.</span>
+
+<span class="sd">        .. versionadded:: 1.11.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="o">.</span><span class="n">_before_execute</span><span class="p">()</span>
+        <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
+        <span class="n">max_arrow_batch_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">getTableEnvironment</span><span class="p">()</span><span class="o">.</span><span class="n">getConfig</span><span class="p">()</span>\
+            <span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">PythonOptions</span><span class="o">.</span><span class="n">MAX_ARROW_BATCH_SIZE</span><span class="p">)</span>
+        <span class="n">batches_iterator</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">arrow</span><span class="o">.</span><span class="n">ArrowUtils</span>\
+            <span class="o">.</span><span class="n">collectAsPandasDataFrame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="p">,</span> <span class="n">max_arrow_batch_size</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">batches_iterator</span><span class="o">.</span><span class="n">hasNext</span><span class="p">():</span>
+            <span class="kn">import</span><span class="w"> </span><span class="nn">pytz</span>
+            <span class="n">timezone</span> <span class="o">=</span> <span class="n">pytz</span><span class="o">.</span><span class="n">timezone</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">getTableEnvironment</span><span class="p">()</span><span class="o">.</span><span class="n">getConfig</span><span class="p">()</span><span class="o">.</span><span class="n">getLocalTimeZone</span><span class="p">()</span><span class="o">.</span><span class="n">getId</span><span class="p">())</span>
+            <span class="n">serializer</span> <span class="o">=</span> <span class="n">ArrowSerializer</span><span class="p">(</span>
+                <span class="n">create_arrow_schema</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_schema</span><span class="p">()</span><span class="o">.</span><span class="n">get_field_names</span><span class="p">(),</span>
+                                    <span class="bp">self</span><span class="o">.</span><span class="n">get_schema</span><span class="p">()</span><span class="o">.</span><span class="n">get_field_data_types</span><span class="p">()),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">get_schema</span><span class="p">()</span><span class="o">.</span><span class="n">to_row_data_type</span><span class="p">(),</span>
+                <span class="n">timezone</span><span class="p">)</span>
+            <span class="kn">import</span><span class="w"> </span><span class="nn">pyarrow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pa</span>
+            <span class="kn">import</span><span class="w"> </span><span class="nn">pyarrow_hotfix</span> <span class="c1"># noqa # pylint: disable=unused-import</span>
+            <span class="n">table</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Table</span><span class="o">.</span><span class="n">from_batches</span><span class="p">(</span><span class="n">serializer</span><span class="o">.</span><span class="n">load_from_iterator</span><span class="p">(</span><span class="n">batches_iterator</span><span class="p">))</span>
+            <span class="n">pdf</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+
+            <span class="n">schema</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_schema</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="n">schema</span><span class="o">.</span><span class="n">get_field_names</span><span class="p">():</span>
+                <span class="n">pdf</span><span class="p">[</span><span class="n">field_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">tz_convert_from_internal</span><span class="p">(</span>
+                    <span class="n">pdf</span><span class="p">[</span><span class="n">field_name</span><span class="p">],</span> <span class="n">schema</span><span class="o">.</span><span class="n">get_field_data_type</span><span class="p">(</span><span class="n">field_name</span><span class="p">),</span> <span class="n">timezone</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">pdf</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+            <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_records</span><span class="p">([],</span> <span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_schema</span><span class="p">()</span><span class="o">.</span><span class="n">get_field_names</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="Table.get_schema">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.get_schema.html#pyflink.table.Table.get_schema">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TableSchema</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the :class:`~pyflink.table.TableSchema` of this table.</span>
+
+<span class="sd">        :return: The schema of this table.</span>
+
+<span class="sd">        .. deprecated:: 2.1.0</span>
+<span class="sd">           Use :func:`Table.get_resolved_schema` instead.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">TableSchema</span><span class="p">(</span><span class="n">j_table_schema</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">getSchema</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="Table.get_resolved_schema">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.get_resolved_schema.html#pyflink.table.Table.get_resolved_schema">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_resolved_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ResolvedSchema</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the :class:`~pyflink.table.catalog.ResolvedSchema` of this table.</span>
+
+<span class="sd">        :return: the resolved schema of this table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">ResolvedSchema</span><span class="p">(</span><span class="n">j_resolved_schema</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">getResolvedSchema</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="Table.print_schema">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.print_schema.html#pyflink.table.Table.print_schema">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">print_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Prints the schema of this table to the console in a tree format.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Table.execute_insert">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.execute_insert.html#pyflink.table.Table.execute_insert">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">execute_insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                       <span class="n">table_path_or_descriptor</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">TableDescriptor</span><span class="p">],</span>
+                       <span class="n">overwrite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TableResult</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        1. When target_path_or_descriptor is a tale path:</span>
+
+<span class="sd">            Writes the :class:`~pyflink.table.Table` to a :class:`~pyflink.table.TableSink` that was</span>
+<span class="sd">            registered under the specified name, and then execute the insert operation. For the path</span>
+<span class="sd">            resolution algorithm see :func:`~TableEnvironment.use_database`.</span>
+
+<span class="sd">            Example:</span>
+<span class="sd">            ::</span>
+
+<span class="sd">                &gt;&gt;&gt; tab.execute_insert(&quot;sink&quot;)</span>
+
+<span class="sd">        2. When target_path_or_descriptor is a table descriptor:</span>
+
+<span class="sd">            Declares that the pipeline defined by the given Table object should be written to a</span>
+<span class="sd">            table (backed by a DynamicTableSink) expressed via the given TableDescriptor. It</span>
+<span class="sd">            executes the insert operation.</span>
+
+<span class="sd">            TableDescriptor is registered as an inline (i.e. anonymous) temporary catalog table</span>
+<span class="sd">            (see :func:`~TableEnvironment.create_temporary_table`) using a unique identifier.</span>
+<span class="sd">            Note that calling this method multiple times, even with the same descriptor, results</span>
+<span class="sd">            in multiple sink tables being registered.</span>
+
+<span class="sd">            This method allows to declare a :class:`~pyflink.table.Schema` for the sink descriptor.</span>
+<span class="sd">            The declaration is similar to a {@code CREATE TABLE} DDL in SQL and allows to:</span>
+
+<span class="sd">                1. overwrite automatically derived columns with a custom DataType</span>
+<span class="sd">                2. add metadata columns next to the physical columns</span>
+<span class="sd">                3. declare a primary key</span>
+
+<span class="sd">            It is possible to declare a schema without physical/regular columns. In this case, those</span>
+<span class="sd">            columns will be automatically derived and implicitly put at the beginning of the schema</span>
+<span class="sd">            declaration.</span>
+
+<span class="sd">            Examples:</span>
+<span class="sd">            ::</span>
+
+<span class="sd">                &gt;&gt;&gt; schema = Schema.new_builder()</span>
+<span class="sd">                ...      .column(&quot;f0&quot;, DataTypes.STRING())</span>
+<span class="sd">                ...      .build()</span>
+<span class="sd">                &gt;&gt;&gt; table = table_env.from_descriptor(TableDescriptor.for_connector(&quot;datagen&quot;)</span>
+<span class="sd">                ...      .schema(schema)</span>
+<span class="sd">                ...      .build())</span>
+<span class="sd">                &gt;&gt;&gt; table.execute_insert(TableDescriptor.for_connector(&quot;blackhole&quot;)</span>
+<span class="sd">                ...      .schema(schema)</span>
+<span class="sd">                ...      .build())</span>
+
+<span class="sd">            If multiple pipelines should insert data into one or more sink tables as part of a</span>
+<span class="sd">            single execution, use a :class:`~pyflink.table.StatementSet`</span>
+<span class="sd">            (see :func:`~TableEnvironment.create_statement_set`).</span>
+
+<span class="sd">            By default, all insertion operations are executed asynchronously. Use</span>
+<span class="sd">            :func:`~TableResult.await` or :func:`~TableResult.get_job_client` to monitor the</span>
+<span class="sd">            execution.</span>
+
+<span class="sd">            .. note:: execute_insert for a table descriptor (case 2.) was added from</span>
+<span class="sd">                flink 1.14.0.</span>
+
+<span class="sd">        :param table_path_or_descriptor: The path of the registered</span>
+<span class="sd">            :class:`~pyflink.table.TableSink` or the descriptor describing the sink table into which</span>
+<span class="sd">            data should be inserted to which the :class:`~pyflink.table.Table` is written.</span>
+<span class="sd">        :param overwrite: Indicates whether the insert should overwrite existing data or not.</span>
+<span class="sd">        :return: The table result.</span>
+
+<span class="sd">        .. versionadded:: 1.11.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="o">.</span><span class="n">_before_execute</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">table_path_or_descriptor</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">TableResult</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">executeInsert</span><span class="p">(</span><span class="n">table_path_or_descriptor</span><span class="p">,</span> <span class="n">overwrite</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">TableResult</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">executeInsert</span><span class="p">(</span>
+                <span class="n">table_path_or_descriptor</span><span class="o">.</span><span class="n">_j_table_descriptor</span><span class="p">,</span> <span class="n">overwrite</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="Table.execute">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.execute.html#pyflink.table.Table.execute">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TableResult</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Collects the contents of the current table local client.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; tab.execute()</span>
+
+<span class="sd">        :return: The content of the table.</span>
+
+<span class="sd">        .. versionadded:: 1.11.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="o">.</span><span class="n">_before_execute</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">TableResult</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">execute</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="Table.explain">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.Table.explain.html#pyflink.table.Table.explain">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">explain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">extra_details</span><span class="p">:</span> <span class="n">ExplainDetail</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the AST of this table and the execution plan.</span>
+
+<span class="sd">        :param extra_details: The extra explain details which the explain result should include,</span>
+<span class="sd">                              e.g. estimated cost, changelog mode for streaming</span>
+<span class="sd">        :return: The statement for which the AST and execution plan will be returned.</span>
+
+<span class="sd">        .. versionadded:: 1.11.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="o">.</span><span class="n">_before_execute</span><span class="p">()</span>
+        <span class="n">TEXT</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">ExplainFormat</span><span class="o">.</span><span class="n">TEXT</span>
+        <span class="n">j_extra_details</span> <span class="o">=</span> <span class="n">to_j_explain_detail_arr</span><span class="p">(</span><span class="n">extra_details</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="n">TEXT</span><span class="p">,</span> <span class="n">j_extra_details</span><span class="p">)</span></div>
+
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">GroupedTable</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A table that has been grouped on a set of grouping keys.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">java_table</span><span class="p">,</span> <span class="n">t_env</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span> <span class="o">=</span> <span class="n">java_table</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span> <span class="o">=</span> <span class="n">t_env</span>
+
+<div class="viewcode-block" id="GroupedTable.select">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.GroupedTable.select.html#pyflink.table.GroupedTable.select">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">fields</span><span class="p">:</span> <span class="n">Expression</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Table&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Performs a selection operation on a grouped table. Similar to an SQL SELECT statement.</span>
+<span class="sd">        The field expressions can contain complex expressions and aggregations.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; tab.group_by(col(&#39;key&#39;)).select(col(&#39;key&#39;), col(&#39;value&#39;).avg.alias(&#39;average&#39;))</span>
+
+<span class="sd">        :param fields: Expression string that contains group keys and aggregate function calls.</span>
+<span class="sd">        :return: The result table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">to_expression_jarray</span><span class="p">(</span><span class="n">fields</span><span class="p">)),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="GroupedTable.aggregate">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.GroupedTable.aggregate.html#pyflink.table.GroupedTable.aggregate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Expression</span><span class="p">,</span> <span class="n">UserDefinedAggregateFunctionWrapper</span><span class="p">])</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;AggregatedTable&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Performs a aggregate operation with an aggregate function. You have to close the</span>
+<span class="sd">        aggregate with a select statement.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; agg = udaf(lambda a: (a.mean(), a.max()),</span>
+<span class="sd">            ...               result_type=DataTypes.ROW(</span>
+<span class="sd">            ...                   [DataTypes.FIELD(&quot;a&quot;, DataTypes.FLOAT()),</span>
+<span class="sd">            ...                    DataTypes.FIELD(&quot;b&quot;, DataTypes.INT())]),</span>
+<span class="sd">            ...               func_type=&quot;pandas&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; tab.group_by(col(&#39;a&#39;)).aggregate(agg(col(&#39;b&#39;)).alias(&quot;c&quot;, &quot;d&quot;)).select(</span>
+<span class="sd">            ...     col(&#39;a&#39;), col(&#39;c&#39;), col(&#39;d&#39;))</span>
+<span class="sd">            &gt;&gt;&gt; # take all the columns as inputs</span>
+<span class="sd">            &gt;&gt;&gt; # pd is a Pandas.DataFrame</span>
+<span class="sd">            &gt;&gt;&gt; agg_row = udaf(lambda pd: (pd.a.mean(), pd.b.max()),</span>
+<span class="sd">            ...               result_type=DataTypes.ROW(</span>
+<span class="sd">            ...                   [DataTypes.FIELD(&quot;a&quot;, DataTypes.FLOAT()),</span>
+<span class="sd">            ...                    DataTypes.FIELD(&quot;b&quot;, DataTypes.INT())]),</span>
+<span class="sd">            ...               func_type=&quot;pandas&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; tab.group_by(col(&#39;a&#39;)).aggregate(agg.alias(&quot;a&quot;, &quot;b&quot;)).select(col(&#39;a&#39;), col(&#39;b&#39;))</span>
+
+<span class="sd">        :param func: user-defined aggregate function.</span>
+<span class="sd">        :return: The result table.</span>
+
+<span class="sd">        .. versionadded:: 1.13.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">Expression</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">AggregatedTable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">_j_expr</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">func</span><span class="o">.</span><span class="n">_set_takes_row_as_input</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s2">&quot;_alias_names&quot;</span><span class="p">):</span>
+                <span class="n">alias_names</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s2">&quot;_alias_names&quot;</span><span class="p">)</span>
+                <span class="n">func</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">with_columns</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="o">*</span><span class="n">alias_names</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">func</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">with_columns</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)))</span>
+            <span class="k">return</span> <span class="n">AggregatedTable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">_j_expr</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="GroupedTable.flat_aggregate">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.GroupedTable.flat_aggregate.html#pyflink.table.GroupedTable.flat_aggregate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">flat_aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Expression</span><span class="p">,</span> <span class="n">UserDefinedAggregateFunctionWrapper</span><span class="p">])</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;FlatAggregateTable&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Performs a flat_aggregate operation on a grouped table. flat_aggregate takes a</span>
+<span class="sd">        :class:`~pyflink.table.TableAggregateFunction` which returns multiple rows. Use a selection</span>
+<span class="sd">        after flatAggregate.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; table_agg = udtaf(MyTableAggregateFunction())</span>
+<span class="sd">            &gt;&gt;&gt; tab.group_by(col(&#39;c&#39;)).flat_aggregate(table_agg(col(&#39;a&#39;)).alias(&quot;a&quot;)).select(</span>
+<span class="sd">            ...     col(&#39;c&#39;), col(&#39;a&#39;))</span>
+<span class="sd">            &gt;&gt;&gt; # take all the columns as inputs</span>
+<span class="sd">            &gt;&gt;&gt; class Top2(TableAggregateFunction):</span>
+<span class="sd">            ...     def emit_value(self, accumulator):</span>
+<span class="sd">            ...         yield Row(accumulator[0])</span>
+<span class="sd">            ...         yield Row(accumulator[1])</span>
+<span class="sd">            ...</span>
+<span class="sd">            ...     def create_accumulator(self):</span>
+<span class="sd">            ...         return [None, None]</span>
+<span class="sd">            ...</span>
+<span class="sd">            ...     def accumulate(self, accumulator, *args):</span>
+<span class="sd">            ...         args[0] # type: Row</span>
+<span class="sd">            ...         if args[0][0] is not None:</span>
+<span class="sd">            ...             if accumulator[0] is None or args[0][0] &gt; accumulator[0]:</span>
+<span class="sd">            ...                 accumulator[1] = accumulator[0]</span>
+<span class="sd">            ...                 accumulator[0] = args[0][0]</span>
+<span class="sd">            ...             elif accumulator[1] is None or args[0][0] &gt; accumulator[1]:</span>
+<span class="sd">            ...                 accumulator[1] = args[0][0]</span>
+<span class="sd">            ...</span>
+<span class="sd">            ...     def get_accumulator_type(self):</span>
+<span class="sd">            ...         return DataTypes.ARRAY(DataTypes.BIGINT())</span>
+<span class="sd">            ...</span>
+<span class="sd">            ...     def get_result_type(self):</span>
+<span class="sd">            ...         return DataTypes.ROW(</span>
+<span class="sd">            ...             [DataTypes.FIELD(&quot;a&quot;, DataTypes.BIGINT())])</span>
+<span class="sd">            &gt;&gt;&gt; top2 = udtaf(Top2())</span>
+<span class="sd">            &gt;&gt;&gt; tab.group_by(col(&#39;c&#39;)) \\</span>
+<span class="sd">            ...    .flat_aggregate(top2.alias(&quot;a&quot;, &quot;b&quot;)) \\</span>
+<span class="sd">            ...    .select(col(&#39;a&#39;), col(&#39;b&#39;))</span>
+
+<span class="sd">        :param func: user-defined table aggregate function.</span>
+<span class="sd">        :return: The result table.</span>
+
+<span class="sd">        .. versionadded:: 1.13.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">Expression</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">FlatAggregateTable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">flatAggregate</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">_j_expr</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">func</span><span class="o">.</span><span class="n">_set_takes_row_as_input</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s2">&quot;_alias_names&quot;</span><span class="p">):</span>
+                <span class="n">alias_names</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s2">&quot;_alias_names&quot;</span><span class="p">)</span>
+                <span class="n">func</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">with_columns</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="o">*</span><span class="n">alias_names</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">func</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">with_columns</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)))</span>
+            <span class="k">return</span> <span class="n">FlatAggregateTable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">flatAggregate</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">_j_expr</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">GroupWindowedTable</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A table that has been windowed for :class:`~pyflink.table.GroupWindow`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">java_group_windowed_table</span><span class="p">,</span> <span class="n">t_env</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span> <span class="o">=</span> <span class="n">java_group_windowed_table</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span> <span class="o">=</span> <span class="n">t_env</span>
+
+<div class="viewcode-block" id="GroupWindowedTable.group_by">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.GroupWindowedTable.group_by.html#pyflink.table.GroupWindowedTable.group_by">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">group_by</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">fields</span><span class="p">:</span> <span class="n">Expression</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;WindowGroupedTable&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Groups the elements by a mandatory window and one or more optional grouping attributes.</span>
+<span class="sd">        The window is specified by referring to its alias.</span>
+
+<span class="sd">        If no additional grouping attribute is specified and if the input is a streaming table,</span>
+<span class="sd">        the aggregation will be performed by a single task, i.e., with parallelism 1.</span>
+
+<span class="sd">        Aggregations are performed per group and defined by a subsequent</span>
+<span class="sd">        :func:`~pyflink.table.WindowGroupedTable.select` clause similar to SQL SELECT-GROUP-BY</span>
+<span class="sd">        query.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; from pyflink.table.expressions import col, lit</span>
+<span class="sd">            &gt;&gt;&gt; tab.window(Tumble.over(lit(10).minutes).on(col(&#39;rowtime&#39;)).alias(&#39;w&#39;)) \\</span>
+<span class="sd">            ...     .group_by(col(&#39;w&#39;)) \\</span>
+<span class="sd">            ...     .select(col(&#39;a&#39;).sum.alias(&#39;a&#39;),</span>
+<span class="sd">            ...             col(&#39;w&#39;).start.alias(&#39;b&#39;),</span>
+<span class="sd">            ...             col(&#39;w&#39;).end.alias(&#39;c&#39;),</span>
+<span class="sd">            ...             col(&#39;w&#39;).rowtime.alias(&#39;d&#39;))</span>
+
+<span class="sd">        :param fields: Group keys.</span>
+<span class="sd">        :return: A window grouped table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">WindowGroupedTable</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="n">to_expression_jarray</span><span class="p">(</span><span class="n">fields</span><span class="p">)),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">WindowGroupedTable</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A table that has been windowed and grouped for :class:`~pyflink.table.window.GroupWindow`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">java_window_grouped_table</span><span class="p">,</span> <span class="n">t_env</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span> <span class="o">=</span> <span class="n">java_window_grouped_table</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span> <span class="o">=</span> <span class="n">t_env</span>
+
+<div class="viewcode-block" id="WindowGroupedTable.select">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.WindowGroupedTable.select.html#pyflink.table.WindowGroupedTable.select">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">fields</span><span class="p">:</span> <span class="n">Expression</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Table&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Performs a selection operation on a window grouped table. Similar to an SQL SELECT</span>
+<span class="sd">        statement.</span>
+<span class="sd">        The field expressions can contain complex expressions and aggregations.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; window_grouped_table.select(col(&#39;key&#39;),</span>
+<span class="sd">            ...                             col(&#39;window&#39;).start,</span>
+<span class="sd">            ...                             col(&#39;value&#39;).avg.alias(&#39;valavg&#39;))</span>
+
+<span class="sd">        :param fields: Expression string.</span>
+<span class="sd">        :return: The result table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">Expression</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">to_expression_jarray</span><span class="p">(</span><span class="n">fields</span><span class="p">)),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fields</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">fields</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="WindowGroupedTable.aggregate">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.WindowGroupedTable.aggregate.html#pyflink.table.WindowGroupedTable.aggregate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Expression</span><span class="p">,</span> <span class="n">UserDefinedAggregateFunctionWrapper</span><span class="p">])</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;AggregatedTable&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Performs an aggregate operation on a window grouped table. You have to close the</span>
+<span class="sd">        aggregate with a select statement.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; agg = udaf(lambda a: (a.mean(), a.max()),</span>
+<span class="sd">            ...               result_type=DataTypes.ROW(</span>
+<span class="sd">            ...                   [DataTypes.FIELD(&quot;a&quot;, DataTypes.FLOAT()),</span>
+<span class="sd">            ...                    DataTypes.FIELD(&quot;b&quot;, DataTypes.INT())]),</span>
+<span class="sd">            ...               func_type=&quot;pandas&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; window_grouped_table.group_by(col(&quot;w&quot;)) \\</span>
+<span class="sd">            ...     .aggregate(agg(col(&#39;b&#39;))) \\</span>
+<span class="sd">            ...     .alias(&quot;c&quot;, &quot;d&quot;) \\</span>
+<span class="sd">            ...     .select(col(&#39;c&#39;), col(&#39;d&#39;))</span>
+<span class="sd">            &gt;&gt;&gt; # take all the columns as inputs</span>
+<span class="sd">            &gt;&gt;&gt; # pd is a Pandas.DataFrame</span>
+<span class="sd">            &gt;&gt;&gt; agg_row = udaf(lambda pd: (pd.a.mean(), pd.b.max()),</span>
+<span class="sd">            ...               result_type=DataTypes.ROW(</span>
+<span class="sd">            ...                   [DataTypes.FIELD(&quot;a&quot;, DataTypes.FLOAT()),</span>
+<span class="sd">            ...                    DataTypes.FIELD(&quot;b&quot;, DataTypes.INT())]),</span>
+<span class="sd">            ...               func_type=&quot;pandas&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; window_grouped_table.group_by(col(&quot;w&quot;), col(&quot;a&quot;)).aggregate(agg_row)</span>
+
+<span class="sd">        :param func: user-defined aggregate function.</span>
+<span class="sd">        :return: The result table.</span>
+
+<span class="sd">        .. versionadded:: 1.13.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">Expression</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">AggregatedTable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">_j_expr</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">func</span><span class="o">.</span><span class="n">_set_takes_row_as_input</span><span class="p">()</span>
+            <span class="n">func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_expr</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">AggregatedTable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">_j_expr</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_to_expr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">UserDefinedAggregateFunctionWrapper</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
+        <span class="n">group_window_field</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">getClass</span><span class="p">()</span><span class="o">.</span><span class="n">getDeclaredField</span><span class="p">(</span><span class="s2">&quot;window&quot;</span><span class="p">)</span>
+        <span class="n">group_window_field</span><span class="o">.</span><span class="n">setAccessible</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">j_group_window</span> <span class="o">=</span> <span class="n">group_window_field</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="p">)</span>
+        <span class="n">j_time_field</span> <span class="o">=</span> <span class="n">j_group_window</span><span class="o">.</span><span class="n">getTimeField</span><span class="p">()</span>
+        <span class="n">fields_without_window</span> <span class="o">=</span> <span class="n">without_columns</span><span class="p">(</span><span class="n">j_time_field</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s2">&quot;_alias_names&quot;</span><span class="p">):</span>
+            <span class="n">alias_names</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s2">&quot;_alias_names&quot;</span><span class="p">)</span>
+            <span class="n">func_expression</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">fields_without_window</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="o">*</span><span class="n">alias_names</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">func_expression</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">fields_without_window</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">func_expression</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">OverWindowedTable</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A table that has been windowed for :class:`~pyflink.table.window.OverWindow`.</span>
+
+<span class="sd">    Unlike group windows, which are specified in the GROUP BY clause, over windows do not collapse</span>
+<span class="sd">    rows. Instead over window aggregates compute an aggregate for each input row over a range of</span>
+<span class="sd">    its neighboring rows.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">java_over_windowed_table</span><span class="p">,</span> <span class="n">t_env</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span> <span class="o">=</span> <span class="n">java_over_windowed_table</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span> <span class="o">=</span> <span class="n">t_env</span>
+
+<div class="viewcode-block" id="OverWindowedTable.select">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.OverWindowedTable.select.html#pyflink.table.OverWindowedTable.select">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">fields</span><span class="p">:</span> <span class="n">Expression</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Table&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Performs a selection operation on a over windowed table. Similar to an SQL SELECT</span>
+<span class="sd">        statement.</span>
+<span class="sd">        The field expressions can contain complex expressions and aggregations.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; over_windowed_table.select(col(&#39;c&#39;),</span>
+<span class="sd">            ...                            col(&#39;b&#39;).count.over(col(&#39;ow&#39;)),</span>
+<span class="sd">            ...                            col(&#39;e&#39;).sum.over(col(&#39;ow&#39;)))</span>
+
+<span class="sd">        :param fields: Expression string.</span>
+<span class="sd">        :return: The result table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">to_expression_jarray</span><span class="p">(</span><span class="n">fields</span><span class="p">)),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">AggregatedTable</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A table that has been performed on the aggregate function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">java_table</span><span class="p">,</span> <span class="n">t_env</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span> <span class="o">=</span> <span class="n">java_table</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span> <span class="o">=</span> <span class="n">t_env</span>
+
+<div class="viewcode-block" id="AggregatedTable.select">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.table.AggregatedTable.select.html#pyflink.table.AggregatedTable.select">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">fields</span><span class="p">:</span> <span class="n">Expression</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Table&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Performs a selection operation after an aggregate operation. The field expressions</span>
+<span class="sd">        cannot contain table functions and aggregations.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        &quot;&quot;</span>
+
+<span class="sd">            &gt;&gt;&gt; agg = udaf(lambda a: (a.mean(), a.max()),</span>
+<span class="sd">            ...               result_type=DataTypes.ROW(</span>
+<span class="sd">            ...                   [DataTypes.FIELD(&quot;a&quot;, DataTypes.FLOAT()),</span>
+<span class="sd">            ...                    DataTypes.FIELD(&quot;b&quot;, DataTypes.INT())]),</span>
+<span class="sd">            ...               func_type=&quot;pandas&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; tab.aggregate(agg(col(&#39;a&#39;)).alias(&quot;a&quot;, &quot;b&quot;)).select(col(&#39;a&#39;), col(&#39;b&#39;))</span>
+<span class="sd">            &gt;&gt;&gt; # take all the columns as inputs</span>
+<span class="sd">            &gt;&gt;&gt; # pd is a Pandas.DataFrame</span>
+<span class="sd">            &gt;&gt;&gt; agg_row = udaf(lambda pd: (pd.a.mean(), pd.b.max()),</span>
+<span class="sd">            ...               result_type=DataTypes.ROW(</span>
+<span class="sd">            ...                   [DataTypes.FIELD(&quot;a&quot;, DataTypes.FLOAT()),</span>
+<span class="sd">            ...                    DataTypes.FIELD(&quot;b&quot;, DataTypes.INT())]),</span>
+<span class="sd">            ...               func_type=&quot;pandas&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; tab.group_by(col(&#39;a&#39;)).aggregate(agg.alias(&quot;a&quot;, &quot;b&quot;)).select(col(&#39;a&#39;), col(&#39;b&#39;))</span>
+
+<span class="sd">        :param fields: Expression string.</span>
+<span class="sd">        :return: The result table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">to_expression_jarray</span><span class="p">(</span><span class="n">fields</span><span class="p">)),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">FlatAggregateTable</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A table that performs flatAggregate on a :class:`~pyflink.table.Table`, a</span>
+<span class="sd">    :class:`~pyflink.table.GroupedTable` or a :class:`~pyflink.table.WindowGroupedTable`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">java_table</span><span class="p">,</span> <span class="n">t_env</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span> <span class="o">=</span> <span class="n">java_table</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span> <span class="o">=</span> <span class="n">t_env</span>
+
+<div class="viewcode-block" id="FlatAggregateTable.select">
+<a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.table.FlatAggregateTable.select.html#pyflink.table.FlatAggregateTable.select">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">fields</span><span class="p">:</span> <span class="n">Expression</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Table&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Performs a selection operation on a FlatAggregateTable. Similar to a SQL SELECT statement.</span>
+<span class="sd">        The field expressions can contain complex expressions.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; table_agg = udtaf(MyTableAggregateFunction())</span>
+<span class="sd">            &gt;&gt;&gt; tab.flat_aggregate(table_agg(col(&#39;a&#39;)).alias(&quot;a&quot;, &quot;b&quot;)).select(col(&#39;a&#39;), col(&#39;b&#39;))</span>
+<span class="sd">            &gt;&gt;&gt; # take all the columns as inputs</span>
+<span class="sd">            &gt;&gt;&gt; class Top2(TableAggregateFunction):</span>
+<span class="sd">            ...     def emit_value(self, accumulator):</span>
+<span class="sd">            ...         yield Row(accumulator[0])</span>
+<span class="sd">            ...         yield Row(accumulator[1])</span>
+<span class="sd">            ...</span>
+<span class="sd">            ...     def create_accumulator(self):</span>
+<span class="sd">            ...         return [None, None]</span>
+<span class="sd">            ...</span>
+<span class="sd">            ...     def accumulate(self, accumulator, *args):</span>
+<span class="sd">            ...         args[0] # type: Row</span>
+<span class="sd">            ...         if args[0][0] is not None:</span>
+<span class="sd">            ...             if accumulator[0] is None or args[0][0] &gt; accumulator[0]:</span>
+<span class="sd">            ...                 accumulator[1] = accumulator[0]</span>
+<span class="sd">            ...                 accumulator[0] = args[0][0]</span>
+<span class="sd">            ...             elif accumulator[1] is None or args[0][0] &gt; accumulator[1]:</span>
+<span class="sd">            ...                 accumulator[1] = args[0][0]</span>
+<span class="sd">            ...</span>
+<span class="sd">            ...     def get_accumulator_type(self):</span>
+<span class="sd">            ...         return DataTypes.ARRAY(DataTypes.BIGINT())</span>
+<span class="sd">            ...</span>
+<span class="sd">            ...     def get_result_type(self):</span>
+<span class="sd">            ...         return DataTypes.ROW(</span>
+<span class="sd">            ...             [DataTypes.FIELD(&quot;a&quot;, DataTypes.BIGINT())])</span>
+<span class="sd">            &gt;&gt;&gt; top2 = udtaf(Top2())</span>
+<span class="sd">            &gt;&gt;&gt; tab.group_by(col(&#39;c&#39;)) \\</span>
+<span class="sd">            ...    .flat_aggregate(top2.alias(&quot;a&quot;, &quot;b&quot;)) \\</span>
+<span class="sd">            ...    .select(col(&#39;a&#39;), col(&#39;b&#39;))</span>
+
+<span class="sd">        :param fields: Expression string.</span>
+<span class="sd">        :return: The result table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">to_expression_jarray</span><span class="p">(</span><span class="n">fields</span><span class="p">)),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_t_env</span><span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

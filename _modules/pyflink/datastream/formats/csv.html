@@ -1,0 +1,885 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyflink.datastream.formats.csv &#8212; PyFlink 1.20+vvr.11.7.dev0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../../_static/documentation_options.js?v=b5c65be0"></script>
+    <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyflink/datastream/formats/csv';</script>
+    <link rel="icon" href="../../../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../../../search.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.20+vvr.11.7.dev0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="PyFlink 1.20+vvr.11.7.dev0 documentation - Home"/>
+    <img src="../../../../_static/navbar-brand-logo.jpg" class="logo__image only-dark pst-js-only" alt="PyFlink 1.20+vvr.11.7.dev0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../reference/index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../reference/index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyflink.datastream.formats.csv</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for pyflink.datastream.formats.csv</h1><div class="highlight"><pre>
+<span></span><span class="c1">################################################################################</span>
+<span class="c1">#  Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="c1">#  or more contributor license agreements.  See the NOTICE file</span>
+<span class="c1">#  distributed with this work for additional information</span>
+<span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
+<span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
+<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  with the License.  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">################################################################################</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">TYPE_CHECKING</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common.serialization</span><span class="w"> </span><span class="kn">import</span> <span class="n">BulkWriterFactory</span><span class="p">,</span> <span class="n">RowDataBulkWriterFactory</span><span class="p">,</span> \
+    <span class="n">SerializationSchema</span><span class="p">,</span> <span class="n">DeserializationSchema</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common.typeinfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypeInformation</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream.connectors.file_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">StreamFormat</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.java_gateway</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_gateway</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataType</span><span class="p">,</span> <span class="n">RowType</span><span class="p">,</span> <span class="n">NumericType</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;CsvSchema&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CsvSchemaBuilder&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CsvReaderFormat&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CsvBulkWriters&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CsvRowDeserializationSchema&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CsvRowSerializationSchema&#39;</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="CsvSchema">
+<a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.formats.csv.CsvSchema.html#pyflink.datastream.formats.csv.CsvSchema">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CsvSchema</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    CsvSchema holds schema information of a csv file, corresponding to Java</span>
+<span class="sd">    ``com.fasterxml.jackson.dataformat.csv.CsvSchema`` class.</span>
+
+<span class="sd">    .. versionadded:: 1.16.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_schema</span><span class="p">,</span> <span class="n">row_type</span><span class="p">:</span> <span class="s1">&#39;RowType&#39;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_schema</span> <span class="o">=</span> <span class="n">j_schema</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_row_type</span> <span class="o">=</span> <span class="n">row_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_type_info</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">builder</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;CsvSchemaBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a :class:`CsvSchemaBuilder`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">CsvSchemaBuilder</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_schema</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_schema</span><span class="o">.</span><span class="n">toString</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="CsvSchemaBuilder">
+<a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.formats.csv.CsvSchemaBuilder.html#pyflink.datastream.formats.csv.CsvSchemaBuilder">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CsvSchemaBuilder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    CsvSchemaBuilder is for building a :class:`~CsvSchema`, corresponding to Java</span>
+<span class="sd">    ``com.fasterxml.jackson.dataformat.csv.CsvSchema.Builder`` class.</span>
+
+<span class="sd">    .. versionadded:: 1.16.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">jvm</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_schema_builder</span> <span class="o">=</span> <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">shaded</span><span class="o">.</span><span class="n">jackson2</span><span class="o">.</span><span class="n">com</span><span class="o">.</span><span class="n">fasterxml</span><span class="o">.</span><span class="n">jackson</span> \
+            <span class="o">.</span><span class="n">dataformat</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">CsvSchema</span><span class="o">.</span><span class="n">builder</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fields</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;CsvSchema&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Build the :class:`~CsvSchema`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataTypes</span>
+        <span class="k">return</span> <span class="n">CsvSchema</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_schema_builder</span><span class="o">.</span><span class="n">build</span><span class="p">(),</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">ROW</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fields</span><span class="p">))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_array_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                         <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                         <span class="n">separator</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;;&#39;</span><span class="p">,</span>
+                         <span class="n">element_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;DataType&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;CsvSchemaBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add an array column to schema, the type of elements could be specified via ``element_type``,</span>
+<span class="sd">        which should be primitive types.</span>
+
+<span class="sd">        :param name: Name of the column.</span>
+<span class="sd">        :param separator: Text separator of array elements, default to ``;``.</span>
+<span class="sd">        :param element_type: DataType of array elements, default to ``DataTypes.STRING()``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataTypes</span>
+        <span class="k">if</span> <span class="n">element_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">element_type</span> <span class="o">=</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_schema_builder</span><span class="o">.</span><span class="n">addArrayColumn</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">separator</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">DataTypes</span><span class="o">.</span><span class="n">FIELD</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">ARRAY</span><span class="p">(</span><span class="n">element_type</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_boolean_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;CsvSchemaBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a boolean column to schema, with type as ``DataTypes.BOOLEAN()``.</span>
+
+<span class="sd">        :param name: Name of the column.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataTypes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_schema_builder</span><span class="o">.</span><span class="n">addBooleanColumn</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">DataTypes</span><span class="o">.</span><span class="n">FIELD</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">BOOLEAN</span><span class="p">()))</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_number_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                          <span class="n">number_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;NumericType&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;CsvSchemaBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a number column to schema, the type of number could be specified via ``number_type``.</span>
+
+<span class="sd">        :param name: Name of the column.</span>
+<span class="sd">        :param number_type: DataType of the number, default to ``DataTypes.BIGINT()``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataTypes</span>
+        <span class="k">if</span> <span class="n">number_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">number_type</span> <span class="o">=</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">BIGINT</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_schema_builder</span><span class="o">.</span><span class="n">addNumberColumn</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">DataTypes</span><span class="o">.</span><span class="n">FIELD</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">number_type</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_string_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;CsvSchemaBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a string column to schema, with type as ``DataTypes.STRING()``.</span>
+
+<span class="sd">        :param name: Name of the column.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataTypes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_schema_builder</span><span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">DataTypes</span><span class="o">.</span><span class="n">FIELD</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">()))</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_columns_from</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">schema</span><span class="p">:</span> <span class="s1">&#39;CsvSchema&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;CsvSchemaBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add all columns in ``schema`` to current schema.</span>
+
+<span class="sd">        :param schema: Another :class:`CsvSchema`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_schema_builder</span><span class="o">.</span><span class="n">addColumnsFrom</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">_j_schema</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">schema</span><span class="o">.</span><span class="n">_row_type</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">clear_columns</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Delete all columns in the schema.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_schema_builder</span><span class="o">.</span><span class="n">clearColumns</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fields</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_allow_comments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">allow</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Allow using ``#`` prefixed comments in csv file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_schema_builder</span><span class="o">.</span><span class="n">setAllowComments</span><span class="p">(</span><span class="n">allow</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_any_property_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_schema_builder</span><span class="o">.</span><span class="n">setAnyPropertyName</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">disable_array_element_separator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set array element separator to ``&quot;&quot;``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_schema_builder</span><span class="o">.</span><span class="n">disableArrayElementSeparator</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">remove_array_element_separator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set array element separator of a column specified by ``index`` to ``&quot;&quot;``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_schema_builder</span><span class="o">.</span><span class="n">removeArrayElementSeparator</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_array_element_separator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">separator</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set global array element separator, default to ``;``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_schema_builder</span><span class="o">.</span><span class="n">setArrayElementSeparator</span><span class="p">(</span><span class="n">separator</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_column_separator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">char</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set column separator, ``char`` should be a single char, default to ``,``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">char</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Column separator must be a single char, got </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">char</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_schema_builder</span><span class="o">.</span><span class="n">setColumnSeparator</span><span class="p">(</span><span class="n">char</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">disable_escape_char</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Disable escaping in csv file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_schema_builder</span><span class="o">.</span><span class="n">disableEscapeChar</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_escape_char</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">char</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set escape char, ``char`` should be a single char, default to no-escaping.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">char</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Escape char must be a single char, got </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">char</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_schema_builder</span><span class="o">.</span><span class="n">setEscapeChar</span><span class="p">(</span><span class="n">char</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_line_separator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">separator</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set line separator, default to ``\\n``. This is only configurable for writing, for reading,</span>
+<span class="sd">        ``\\n``, ``\\r``, ``\\r\\n`` are recognized.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_schema_builder</span><span class="o">.</span><span class="n">setLineSeparator</span><span class="p">(</span><span class="n">separator</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_null_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">null_value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set literal for null value, default to empty sequence.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_schema_builder</span><span class="o">.</span><span class="n">setNullValue</span><span class="p">(</span><span class="n">null_value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">disable_quote_char</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Disable quote char.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_schema_builder</span><span class="o">.</span><span class="n">disableQuoteChar</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_quote_char</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">char</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set quote char, default to ``&quot;``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">char</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Quote char must be a single char, got </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">char</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_schema_builder</span><span class="o">.</span><span class="n">setQuoteChar</span><span class="p">(</span><span class="n">char</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_skip_first_data_row</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">skip</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set whether to skip the first row of csv file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_schema_builder</span><span class="o">.</span><span class="n">setSkipFirstDataRow</span><span class="p">(</span><span class="n">skip</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_strict_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set whether to use strict headers, which check column names in the header are consistent</span>
+<span class="sd">        with the schema.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_schema_builder</span><span class="o">.</span><span class="n">setStrictHeaders</span><span class="p">(</span><span class="n">strict</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_use_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set whether to read header.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_schema_builder</span><span class="o">.</span><span class="n">setUseHeader</span><span class="p">(</span><span class="n">use</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fields</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="CsvReaderFormat">
+<a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.formats.csv.CsvReaderFormat.html#pyflink.datastream.formats.csv.CsvReaderFormat">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CsvReaderFormat</span><span class="p">(</span><span class="n">StreamFormat</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The :class:`~StreamFormat` for reading csv files.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        &gt;&gt;&gt; schema = CsvSchema.builder() \\</span>
+<span class="sd">        ...     .add_number_column(&#39;id&#39;, number_type=DataTypes.INT()) \\</span>
+<span class="sd">        ...     .add_string_column(&#39;name&#39;) \\</span>
+<span class="sd">        ...     .add_array_column(&#39;list&#39;, &#39;,&#39;, element_type=DataTypes.STRING()) \\</span>
+<span class="sd">        ...     .set_column_separator(&#39;|&#39;) \\</span>
+<span class="sd">        ...     .set_escape_char(&#39;\\\\&#39;) \\</span>
+<span class="sd">        ...     .set_use_header() \\</span>
+<span class="sd">        ...     .set_strict_headers() \\</span>
+<span class="sd">        ...     .build()</span>
+<span class="sd">        &gt;&gt;&gt; source = FileSource.for_record_stream_format(</span>
+<span class="sd">        ...     CsvReaderFormat.for_schema(schema), CSV_FILE_PATH).build()</span>
+<span class="sd">        &gt;&gt;&gt; ds = env.from_source(source, WatermarkStrategy.no_watermarks(), &#39;csv-source&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; # the type of records is Types.ROW_NAMED([&#39;id&#39;, &#39;name&#39;, &#39;list&#39;],</span>
+<span class="sd">        &gt;&gt;&gt; #   [Types.INT(), Types.STRING(), Types.LIST(Types.STRING())])</span>
+
+<span class="sd">    .. versionadded:: 1.16.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_csv_format</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">j_csv_format</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">for_schema</span><span class="p">(</span><span class="n">schema</span><span class="p">:</span> <span class="s1">&#39;CsvSchema&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;CsvReaderFormat&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Builds a :class:`CsvReaderFormat` using `CsvSchema`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">_to_java_data_type</span>
+        <span class="n">jvm</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>
+        <span class="n">j_csv_format</span> <span class="o">=</span> <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">PythonCsvUtils</span> \
+            <span class="o">.</span><span class="n">createCsvReaderFormat</span><span class="p">(</span>
+                <span class="n">schema</span><span class="o">.</span><span class="n">_j_schema</span><span class="p">,</span>
+                <span class="n">_to_java_data_type</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">_row_type</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">CsvReaderFormat</span><span class="p">(</span><span class="n">j_csv_format</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="CsvBulkWriters">
+<a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.formats.csv.CsvBulkWriters.html#pyflink.datastream.formats.csv.CsvBulkWriters">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CsvBulkWriters</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    CsvBulkWriter is for building :class:`~pyflink.common.serialization.BulkWriterFactory` to write</span>
+<span class="sd">    Rows with a predefined CSV schema to partitioned files in a bulk fashion.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        &gt;&gt;&gt; schema = CsvSchema.builder() \\</span>
+<span class="sd">        ...     .add_number_column(&#39;id&#39;, number_type=DataTypes.INT()) \\</span>
+<span class="sd">        ...     .add_string_column(&#39;name&#39;) \\</span>
+<span class="sd">        ...     .add_array_column(&#39;list&#39;, &#39;,&#39;, element_type=DataTypes.STRING()) \\</span>
+<span class="sd">        ...     .set_column_separator(&#39;|&#39;) \\</span>
+<span class="sd">        ...     .build()</span>
+<span class="sd">        &gt;&gt;&gt; sink = FileSink.for_bulk_format(</span>
+<span class="sd">        ...     OUTPUT_DIR, CsvBulkWriters.for_schema(schema)).build()</span>
+<span class="sd">        &gt;&gt;&gt; ds.sink_to(sink)</span>
+
+<span class="sd">    .. versionadded:: 1.16.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">for_schema</span><span class="p">(</span><span class="n">schema</span><span class="p">:</span> <span class="s1">&#39;CsvSchema&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;BulkWriterFactory&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a :class:`~pyflink.common.serialization.BulkWriterFactory` for writing records to</span>
+<span class="sd">        files in CSV format.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">_to_java_data_type</span>
+
+        <span class="n">jvm</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>
+        <span class="n">csv</span> <span class="o">=</span> <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">csv</span>
+
+        <span class="n">j_factory</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">PythonCsvUtils</span><span class="o">.</span><span class="n">createCsvBulkWriterFactory</span><span class="p">(</span>
+            <span class="n">schema</span><span class="o">.</span><span class="n">_j_schema</span><span class="p">,</span>
+            <span class="n">_to_java_data_type</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">_row_type</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">RowDataBulkWriterFactory</span><span class="p">(</span><span class="n">j_factory</span><span class="p">,</span> <span class="n">schema</span><span class="o">.</span><span class="n">_row_type</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="CsvRowDeserializationSchema">
+<a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.formats.csv.CsvRowDeserializationSchema.html#pyflink.datastream.formats.csv.CsvRowDeserializationSchema">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CsvRowDeserializationSchema</span><span class="p">(</span><span class="n">DeserializationSchema</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Deserialization schema from CSV to Flink types. Deserializes a byte[] message as a JsonNode and</span>
+<span class="sd">    converts it to Row.</span>
+
+<span class="sd">    Failure during deserialization are forwarded as wrapped IOException.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_deserialization_schema</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">CsvRowDeserializationSchema</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">j_deserialization_schema</span><span class="o">=</span><span class="n">j_deserialization_schema</span><span class="p">)</span>
+
+    <span class="k">class</span><span class="w"> </span><span class="nc">Builder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A builder for creating a CsvRowDeserializationSchema.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">type_info</span><span class="p">:</span> <span class="n">TypeInformation</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">type_info</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Type information must not be None&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>\
+                <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">CsvRowDeserializationSchema</span><span class="o">.</span><span class="n">Builder</span><span class="p">(</span>
+                <span class="n">type_info</span><span class="o">.</span><span class="n">get_java_type_info</span><span class="p">())</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">set_field_delimiter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delimiter</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setFieldDelimiter</span><span class="p">(</span><span class="n">delimiter</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">set_allow_comments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">allow_comments</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setAllowComments</span><span class="p">(</span><span class="n">allow_comments</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">set_array_element_delimiter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delimiter</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setArrayElementDelimiter</span><span class="p">(</span><span class="n">delimiter</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">set_quote_character</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setQuoteCharacter</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">set_escape_character</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setEscapeCharacter</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">set_null_literal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">null_literal</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setNullLiteral</span><span class="p">(</span><span class="n">null_literal</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">set_ignore_parse_errors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ignore_parse_errors</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setIgnoreParseErrors</span><span class="p">(</span><span class="n">ignore_parse_errors</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="n">j_csv_row_deserialization_schema</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">CsvRowDeserializationSchema</span><span class="p">(</span>
+                <span class="n">j_deserialization_schema</span><span class="o">=</span><span class="n">j_csv_row_deserialization_schema</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="CsvRowSerializationSchema">
+<a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.formats.csv.CsvRowSerializationSchema.html#pyflink.datastream.formats.csv.CsvRowSerializationSchema">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CsvRowSerializationSchema</span><span class="p">(</span><span class="n">SerializationSchema</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Serialization schema that serializes an object of Flink types into a CSV bytes. Serializes the</span>
+<span class="sd">    input row into an ObjectNode and converts it into byte[].</span>
+
+<span class="sd">    Result byte[] messages can be deserialized using CsvRowDeserializationSchema.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_csv_row_serialization_schema</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">CsvRowSerializationSchema</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">j_csv_row_serialization_schema</span><span class="p">)</span>
+
+    <span class="k">class</span><span class="w"> </span><span class="nc">Builder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A builder for creating a CsvRowSerializationSchema.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">type_info</span><span class="p">:</span> <span class="n">TypeInformation</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">type_info</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Type information must not be None&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>\
+                <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">CsvRowSerializationSchema</span><span class="o">.</span><span class="n">Builder</span><span class="p">(</span>
+                <span class="n">type_info</span><span class="o">.</span><span class="n">get_java_type_info</span><span class="p">())</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">set_field_delimiter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setFieldDelimiter</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">set_line_delimiter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delimiter</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setLineDelimiter</span><span class="p">(</span><span class="n">delimiter</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">set_array_element_delimiter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delimiter</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setArrayElementDelimiter</span><span class="p">(</span><span class="n">delimiter</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">disable_quote_character</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">disableQuoteCharacter</span><span class="p">()</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">set_quote_character</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setQuoteCharacter</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">set_escape_character</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setEscapeCharacter</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">set_null_literal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setNullLiteral</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="n">j_serialization_schema</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">CsvRowSerializationSchema</span><span class="p">(</span><span class="n">j_csv_row_serialization_schema</span><span class="o">=</span><span class="n">j_serialization_schema</span><span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

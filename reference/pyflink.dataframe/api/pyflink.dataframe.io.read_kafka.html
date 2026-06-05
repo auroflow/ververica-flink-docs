@@ -1,0 +1,796 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pyflink.dataframe.io.read_kafka &#8212; PyFlink 1.20+vvr.11.7.dev0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=b5c65be0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/pyflink.dataframe/api/pyflink.dataframe.io.read_kafka';</script>
+    <link rel="icon" href="../../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="pyflink.dataframe.io.read_odps" href="pyflink.dataframe.io.read_odps.html" />
+    <link rel="prev" title="pyflink.dataframe.io.read_parquet" href="pyflink.dataframe.io.read_parquet.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.20+vvr.11.7.dev0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="PyFlink 1.20+vvr.11.7.dev0 documentation - Home"/>
+    <img src="../../../_static/navbar-brand-logo.jpg" class="logo__image only-dark pst-js-only" alt="PyFlink 1.20+vvr.11.7.dev0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../pyflink.table/index.html">PyFlink Table</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyflink.datastream/index.html">PyFlink DataStream</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">PyFlink DataFrame</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../dataframe.html">DataFrame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../creation.html">DataFrame Creation</a></li>
+<li class="toctree-l2 current active"><a class="reference internal" href="../io.html">Input/Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sql.html">SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../datatype.html">DataType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../udf.html">User Defined Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gpu.html">GPU Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai.html">AI / LLM</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyflink.common/index.html">PyFlink Common</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">API Reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">PyFlink DataFrame</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../io.html" class="nav-link">Input/Output</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyflink.dataframe.io.read_kafka</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="pyflink-dataframe-io-read-kafka">
+<h1>pyflink.dataframe.io.read_kafka<a class="headerlink" href="#pyflink-dataframe-io-read-kafka" title="Link to this heading">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyflink.dataframe.io.read_kafka">
+<span class="sig-name descname"><span class="pre">read_kafka</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bootstrap_servers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="pyflink.dataframe.datatype.DataType.html#pyflink.dataframe.datatype.DataType" title="pyflink.dataframe.datatype.DataType"><span class="pre">DataType</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">properties</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'json'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format_options</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key_format_options</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key_fields</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key_fields_prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_format_options</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_fields_include</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'ALL'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'EXCEPT_KEY'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'ALL'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic_pattern</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startup_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'earliest-offset'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'latest-offset'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'group-offsets'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'timestamp'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'specific-offsets'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'group-offsets'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startup_specific_offsets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startup_timestamp_millis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic_partition_discovery_interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'5</span> <span class="pre">min'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header_filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_duplicated_group_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounded_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'unbounded'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'group-offsets'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'latest-offset'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'timestamp'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'specific-offsets'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'unbounded'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounded_timestamp_millis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounded_specific_offsets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../../../_modules/pyflink/dataframe/io.html#read_kafka"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyflink.dataframe.io.read_kafka" title="Link to this definition">#</a></dt>
+<dd><p>Read data from one or more Kafka topics into a DataFrame.</p>
+<p>Uses Flink’s Kafka SQL Connector under the hood. This creates a streaming
+source that continuously reads from Kafka. For bounded (batch) reads, use
+the <code class="docutils literal notranslate"><span class="pre">bounded_mode</span></code> parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bootstrap_servers</strong> – Comma-separated list of Kafka broker addresses
+(e.g., <code class="docutils literal notranslate"><span class="pre">&quot;localhost:9092&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;broker1:9092,broker2:9092&quot;</span></code>).</p></li>
+<li><p><strong>schema</strong> – Dict of <code class="docutils literal notranslate"><span class="pre">{column_name:</span> <span class="pre">DataType}</span></code> specifying the schema of
+the data in Kafka messages.</p></li>
+<li><p><strong>columns</strong> – Optional list of column names to read (projection pushdown).
+If None, all columns from the schema are read.</p></li>
+<li><p><strong>properties</strong> – <p>Extra Kafka consumer properties. Each key in this dict is
+directly passed to Kafka.</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">{&quot;allow.auto.create.topics&quot;:</span> <span class="pre">&quot;false&quot;}</span></code></p>
+<p>Note:</p>
+<ul>
+<li><p>Property names should be valid Kafka consumer config keys.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">key.deserializer</span></code> and <code class="docutils literal notranslate"><span class="pre">value.deserializer</span></code> cannot be
+set, because Kafka connector overrides them.</p></li>
+</ul>
+</p></li>
+<li><p><strong>format</strong> – The format used to deserialize the value part of
+Kafka messages (equivalent to <code class="docutils literal notranslate"><span class="pre">value_format</span></code>). Supported options:
+<code class="docutils literal notranslate"><span class="pre">&quot;csv&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;json&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;avro&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;debezium-json&quot;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&quot;canal-json&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;maxwell-json&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;avro-confluent&quot;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&quot;raw&quot;</span></code>.</p></li>
+<li><p><strong>format_options</strong> – Additional options for the value format used by
+<code class="docutils literal notranslate"><span class="pre">format</span></code> as a dict.
+Keys are format-specific options without the format prefix
+(e.g., <code class="docutils literal notranslate"><span class="pre">{&quot;map-null-key.mode&quot;:</span> <span class="pre">&quot;FAIL&quot;}</span></code> for JSON format).</p></li>
+<li><p><strong>key_format</strong> – <p>The format used to deserialize the key part
+of Kafka messages.</p>
+<p>If a key format is defined, the <code class="docutils literal notranslate"><span class="pre">key_fields</span></code> option is required
+as well. Otherwise the Kafka records will have an empty key.</p>
+</p></li>
+<li><p><strong>key_format_options</strong> – Additional options for the key format, as a dict.
+Same structure as <code class="docutils literal notranslate"><span class="pre">format_options</span></code>.</p></li>
+<li><p><strong>key_fields</strong> – List of column names that form the message key (e.g.
+<code class="docutils literal notranslate"><span class="pre">[&quot;field1&quot;,</span> <span class="pre">&quot;field2&quot;]</span></code>).</p></li>
+<li><p><strong>key_fields_prefix</strong> – <p>Prefix for key field column names to avoid name
+clashes with value fields. For example, with prefix <code class="docutils literal notranslate"><span class="pre">&quot;k_&quot;</span></code>,
+a key field <code class="docutils literal notranslate"><span class="pre">user_id</span></code> becomes <code class="docutils literal notranslate"><span class="pre">k_user_id</span></code> in the schema.</p>
+<p>This prefix is only for table-column disambiguation; it is removed
+when parsing/serializing Kafka key fields.</p>
+<p>When this option is set, <code class="docutils literal notranslate"><span class="pre">value_fields_include</span></code> must be set to
+<code class="docutils literal notranslate"><span class="pre">&quot;EXCEPT_KEY&quot;</span></code>.</p>
+</p></li>
+<li><p><strong>value_format</strong> – <p>The format used to deserialize the value part of Kafka
+messages.</p>
+<p>Only one of <code class="docutils literal notranslate"><span class="pre">format</span></code> or <code class="docutils literal notranslate"><span class="pre">value_format</span></code> are required.
+If both are configured, <code class="docutils literal notranslate"><span class="pre">value_format</span></code> should take precedence.</p>
+</p></li>
+<li><p><strong>value_format_options</strong> – Extra options for <code class="docutils literal notranslate"><span class="pre">value_format</span></code>.</p></li>
+<li><p><strong>value_fields_include</strong> – <p>Whether key fields are included in value fields
+during value parsing.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;ALL&quot;</span></code> (default): all columns are treated as value fields.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;EXCEPT_KEY&quot;</span></code>: fields in <code class="docutils literal notranslate"><span class="pre">key_fields</span></code> are excluded from
+value fields.</p></li>
+</ul>
+</p></li>
+<li><p><strong>topic</strong> – <p>Topic name(s) to read. It can be a single topic, a list of
+topics, or a semicolon-separated topic string
+(for example, <code class="docutils literal notranslate"><span class="pre">&quot;topic-1;topic-2&quot;</span></code>).</p>
+<p>Exactly one of <code class="docutils literal notranslate"><span class="pre">topic</span></code> and <code class="docutils literal notranslate"><span class="pre">topic_pattern</span></code> can be set.</p>
+</p></li>
+<li><p><strong>topic_pattern</strong> – <p>Regular expression for matching topic names.
+All topics matching this pattern are consumed at runtime.</p>
+<p>Exactly one of <code class="docutils literal notranslate"><span class="pre">topic</span></code> and <code class="docutils literal notranslate"><span class="pre">topic_pattern</span></code> can be set.</p>
+</p></li>
+<li><p><strong>group_id</strong> – <p>Consumer group id.</p>
+<p>If a new group id is used for the first time, configure
+<code class="docutils literal notranslate"><span class="pre">auto.offset.reset</span></code> to <code class="docutils literal notranslate"><span class="pre">earliest</span></code> or <code class="docutils literal notranslate"><span class="pre">latest</span></code> in
+<code class="docutils literal notranslate"><span class="pre">properties</span></code> to control initial startup position.</p>
+</p></li>
+<li><p><strong>startup_mode</strong> – <p>Startup position mode for Kafka consumer. Values:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;group-offsets&quot;</span></code> (default): Start from committed offsets in
+the consumer group.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;earliest-offset&quot;</span></code>: Start from the earliest available offset.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;latest-offset&quot;</span></code>: Start from the latest offset.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;timestamp&quot;</span></code>: Start from a user-specified timestamp
+(requires <code class="docutils literal notranslate"><span class="pre">startup_timestamp_millis</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;specific-offsets&quot;</span></code>: Start from specified offsets per
+partition (requires <code class="docutils literal notranslate"><span class="pre">startup_specific_offsets</span></code>).</p></li>
+</ul>
+<p>Note: This option is effective for stateless startup. When
+restarting from checkpoint/savepoint, restored state progress has
+higher priority.</p>
+</p></li>
+<li><p><strong>startup_specific_offsets</strong> – Per-partition offsets to start reading from.
+Used when <code class="docutils literal notranslate"><span class="pre">startup_mode=&quot;specific-offsets&quot;</span></code>. Can be a string
+like <code class="docutils literal notranslate"><span class="pre">&quot;partition:0,offset:42;partition:1,offset:300&quot;</span></code> or a dict
+mapping partition IDs to offsets like <code class="docutils literal notranslate"><span class="pre">{0:</span> <span class="pre">42,</span> <span class="pre">1:</span> <span class="pre">300}</span></code>.</p></li>
+<li><p><strong>startup_timestamp_millis</strong> – Epoch timestamp in milliseconds to start
+reading from. Used when <code class="docutils literal notranslate"><span class="pre">startup_mode=&quot;timestamp&quot;</span></code>.</p></li>
+<li><p><strong>topic_partition_discovery_interval</strong> – <p>Interval for discovering new
+partitions and topics dynamically (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;30</span> <span class="pre">s&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;5</span> <span class="pre">min&quot;</span></code>).
+Default is 5 minutes.</p>
+<p>Note:</p>
+<ul>
+<li><p>Set this to a non-positive interval to disable discovery.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">topic_pattern</span></code> mode, this discovers both:
+new partitions in existing matched topics and
+newly created topics that match the pattern.</p></li>
+</ul>
+</p></li>
+<li><p><strong>header_filter</strong> – <p>Logical expression for filtering Kafka records by
+headers.</p>
+<p>Syntax:</p>
+<ul>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">key:value</span></code> for one header condition.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> and <code class="docutils literal notranslate"><span class="pre">|</span></code> to combine conditions.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">!</span></code> for negation.</p></li>
+</ul>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">&quot;depart:toy|depart:book&amp;!env:test&quot;</span></code> keeps records
+with <code class="docutils literal notranslate"><span class="pre">depart=toy</span></code> or <code class="docutils literal notranslate"><span class="pre">depart=book</span></code>, and without <code class="docutils literal notranslate"><span class="pre">env=test</span></code>.</p>
+<p>Notes:</p>
+<ul>
+<li><p>Parentheses are not supported.</p></li>
+<li><p>Operators are evaluated from left to right.</p></li>
+<li><p>Header values are converted to UTF-8 strings before comparison.</p></li>
+</ul>
+</p></li>
+<li><p><strong>check_duplicated_group_id</strong> – <p>Whether to check if the consumer group ID
+already exists on broker. Default is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code>: check duplicate group id before job starts. If found,
+fail fast to avoid consumer-group conflicts.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code>: start directly without conflict check.</p></li>
+</ul>
+</p></li>
+<li><p><strong>bounded_mode</strong> – <p>Bounded mode for Kafka consumer
+(connector <code class="docutils literal notranslate"><span class="pre">scan.bounded.mode</span></code>). One of:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;unbounded&quot;</span></code> (default): Do not stop consuming.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;latest-offset&quot;</span></code>: bounded by latest offsets. This is evaluated
+at the start of consumption from a given partition.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;group-offsets&quot;</span></code>: bounded by committed offsets in ZooKeeper /
+Kafka brokers of a specific consumer group. This is evaluated at
+the start of consumption from a given partition.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;timestamp&quot;</span></code>: bounded by a user-supplied timestamp
+(requires <code class="docutils literal notranslate"><span class="pre">bounded_timestamp_millis</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;specific-offsets&quot;</span></code>: bounded by user-supplied specific offsets
+for each partition (requires <code class="docutils literal notranslate"><span class="pre">bounded_specific_offsets</span></code>).</p></li>
+</ul>
+</p></li>
+<li><p><strong>bounded_timestamp_millis</strong> – Epoch timestamp in milliseconds for the
+bounded end position. Used when <code class="docutils literal notranslate"><span class="pre">bounded_mode=&quot;timestamp&quot;</span></code>.</p></li>
+<li><p><strong>bounded_specific_offsets</strong> – Per-partition offsets for the bounded end
+position. Used when <code class="docutils literal notranslate"><span class="pre">bounded_mode=&quot;specific-offsets&quot;</span></code>.
+Same format as <code class="docutils literal notranslate"><span class="pre">startup_specific_offsets</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new DataFrame representing the Kafka source.</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pf</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Simple JSON consumption from a single topic</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_kafka</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;localhost:9092&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;user_events&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
+<span class="gp">... </span>        <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">&quot;event&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">&quot;ts&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">timestamp</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="p">},</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Read from earliest offset with explicit consumer group</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_kafka</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;broker1:9092,broker2:9092&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;orders&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
+<span class="gp">... </span>        <span class="s2">&quot;order_id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="p">},</span>
+<span class="gp">... </span>    <span class="n">group_id</span><span class="o">=</span><span class="s2">&quot;my-consumer-group&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">startup_mode</span><span class="o">=</span><span class="s2">&quot;earliest-offset&quot;</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Read multiple topics</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_kafka</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;localhost:9092&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;topic_a&quot;</span><span class="p">,</span> <span class="s2">&quot;topic_b&quot;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
+<span class="gp">... </span>        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="p">},</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Subscribe to topics by pattern</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_kafka</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;localhost:9092&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topic_pattern</span><span class="o">=</span><span class="s2">&quot;events-.*&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
+<span class="gp">... </span>        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">&quot;payload&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="p">},</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Bounded read (batch mode) — read up to the latest offset</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_kafka</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;localhost:9092&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;orders&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
+<span class="gp">... </span>        <span class="s2">&quot;order_id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="p">},</span>
+<span class="gp">... </span>    <span class="n">startup_mode</span><span class="o">=</span><span class="s2">&quot;earliest-offset&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">bounded_mode</span><span class="o">=</span><span class="s2">&quot;latest-offset&quot;</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Read with key+value formats and Avro</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_kafka</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;localhost:9092&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;keyed_events&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
+<span class="gp">... </span>        <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">&quot;event&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="p">},</span>
+<span class="gp">... </span>    <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;avro&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">key_format</span><span class="o">=</span><span class="s2">&quot;json&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">key_fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;user_id&quot;</span><span class="p">],</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Start from a specific timestamp</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_kafka</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;localhost:9092&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;events&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
+<span class="gp">... </span>        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="p">},</span>
+<span class="gp">... </span>    <span class="n">startup_mode</span><span class="o">=</span><span class="s2">&quot;timestamp&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">startup_timestamp_millis</span><span class="o">=</span><span class="mi">1700000000000</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Start from specific offsets per partition</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_kafka</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;localhost:9092&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;events&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
+<span class="gp">... </span>        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="p">},</span>
+<span class="gp">... </span>    <span class="n">startup_mode</span><span class="o">=</span><span class="s2">&quot;specific-offsets&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">startup_specific_offsets</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">300</span><span class="p">},</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># JSON format with custom parse options</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_kafka</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;localhost:9092&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;events&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
+<span class="gp">... </span>        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="p">},</span>
+<span class="gp">... </span>    <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;json&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">format_options</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;ignore-parse-errors&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">},</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># With Kafka security (SASL/SSL)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># When using Aliyun Kafka, download the truststore file from the Kafka</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># console and upload it as an additional dependency file.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_kafka</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;localhost:9092&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;secure_events&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
+<span class="gp">... </span>        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="p">},</span>
+<span class="gp">... </span>    <span class="n">properties</span><span class="o">=</span><span class="p">{</span>
+<span class="gp">... </span>        <span class="s2">&quot;ssl.truststore.location&quot;</span><span class="p">:</span> <span class="s2">&quot;/flink/usrlib/only.4096.client.truststore.jks&quot;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">&quot;ssl.truststore.password&quot;</span><span class="p">:</span> <span class="s2">&quot;KafkaOnsClient&quot;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">&quot;ssl.endpoint.identification.algorithm&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">&quot;sasl.jaas.config&quot;</span><span class="p">:</span> <span class="p">(</span>
+<span class="gp">... </span>            <span class="s2">&quot;org.apache.flink.kafka.shaded.org.apache.kafka.common.security&quot;</span>
+<span class="gp">... </span>            <span class="s2">&quot;.plain.PlainLoginModule required &quot;</span>
+<span class="gp">... </span>            <span class="sa">f</span><span class="s1">&#39;username=&quot;&lt;username&gt;&quot; &#39;</span>
+<span class="gp">... </span>            <span class="sa">f</span><span class="s1">&#39;password=&quot;&lt;password&gt;&quot;;&#39;</span>
+<span class="gp">... </span>        <span class="p">),</span>
+<span class="gp">... </span>        <span class="s2">&quot;sasl.mechanism&quot;</span><span class="p">:</span> <span class="s2">&quot;PLAIN&quot;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">&quot;security.protocol&quot;</span><span class="p">:</span> <span class="s2">&quot;SASL_SSL&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">},</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Read with column projection</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_kafka</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;localhost:9092&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;events&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
+<span class="gp">... </span>        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="p">},</span>
+<span class="gp">... </span>    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">],</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># CDC with Debezium format</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_kafka</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;localhost:9092&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;cdc_events&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
+<span class="gp">... </span>        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="p">},</span>
+<span class="gp">... </span>    <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;debezium-json&quot;</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="pyflink.dataframe.io.read_parquet.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">pyflink.dataframe.io.read_parquet</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="pyflink.dataframe.io.read_odps.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">pyflink.dataframe.io.read_odps</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflink.dataframe.io.read_kafka"><code class="docutils literal notranslate"><span class="pre">read_kafka()</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/reference/pyflink.dataframe/api/pyflink.dataframe.io.read_kafka.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

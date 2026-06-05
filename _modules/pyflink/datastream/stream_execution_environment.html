@@ -1,0 +1,1671 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyflink.datastream.stream_execution_environment &#8212; PyFlink 1.20+vvr.11.7.dev0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=b5c65be0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyflink/datastream/stream_execution_environment';</script>
+    <link rel="icon" href="../../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../../search.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.20+vvr.11.7.dev0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="PyFlink 1.20+vvr.11.7.dev0 documentation - Home"/>
+    <img src="../../../_static/navbar-brand-logo.jpg" class="logo__image only-dark pst-js-only" alt="PyFlink 1.20+vvr.11.7.dev0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../reference/index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../reference/index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyflink.datastream.stream_execution_environment</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for pyflink.datastream.stream_execution_environment</h1><div class="highlight"><pre>
+<span></span><span class="c1">################################################################################</span>
+<span class="c1">#  Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="c1">#  or more contributor license agreements.  See the NOTICE file</span>
+<span class="c1">#  distributed with this work for additional information</span>
+<span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
+<span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
+<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  with the License.  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">################################################################################</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">cast</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">py4j.java_gateway</span><span class="w"> </span><span class="kn">import</span> <span class="n">JavaObject</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">Configuration</span><span class="p">,</span> <span class="n">WatermarkStrategy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common.execution_config</span><span class="w"> </span><span class="kn">import</span> <span class="n">ExecutionConfig</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">InputFormat</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common.job_client</span><span class="w"> </span><span class="kn">import</span> <span class="n">JobClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common.job_execution_result</span><span class="w"> </span><span class="kn">import</span> <span class="n">JobExecutionResult</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common.restart_strategy</span><span class="w"> </span><span class="kn">import</span> <span class="n">RestartStrategies</span><span class="p">,</span> <span class="n">RestartStrategyConfiguration</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common.typeinfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypeInformation</span><span class="p">,</span> <span class="n">Types</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream</span><span class="w"> </span><span class="kn">import</span> <span class="n">SlotSharingGroup</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream.checkpoint_config</span><span class="w"> </span><span class="kn">import</span> <span class="n">CheckpointConfig</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream.checkpointing_mode</span><span class="w"> </span><span class="kn">import</span> <span class="n">CheckpointingMode</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream.connectors</span><span class="w"> </span><span class="kn">import</span> <span class="n">Source</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream.data_stream</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataStream</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream.execution_mode</span><span class="w"> </span><span class="kn">import</span> <span class="n">RuntimeExecutionMode</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">SourceFunction</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream.state_backend</span><span class="w"> </span><span class="kn">import</span> <span class="n">_from_j_state_backend</span><span class="p">,</span> <span class="n">StateBackend</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream.time_characteristic</span><span class="w"> </span><span class="kn">import</span> <span class="n">TimeCharacteristic</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">ResultTypeQueryable</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.java_gateway</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_gateway</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.serializers</span><span class="w"> </span><span class="kn">import</span> <span class="n">PickleSerializer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.util.java_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_java_class</span><span class="p">,</span> <span class="n">add_jars_to_context_class_loader</span><span class="p">,</span> \
+    <span class="n">invoke_method</span><span class="p">,</span> <span class="n">get_field_value</span><span class="p">,</span> <span class="n">is_local_deployment</span><span class="p">,</span> <span class="n">get_j_env_configuration</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;StreamExecutionEnvironment&#39;</span><span class="p">]</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">StreamExecutionEnvironment</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The StreamExecutionEnvironment is the context in which a streaming program is executed. A</span>
+<span class="sd">    *LocalStreamEnvironment* will cause execution in the attached JVM, a</span>
+<span class="sd">    *RemoteStreamEnvironment* will cause execution on a remote setup.</span>
+
+<span class="sd">    The environment provides methods to control the job execution (such as setting the parallelism</span>
+<span class="sd">    or the fault tolerance/checkpointing parameters) and to interact with the outside world (data</span>
+<span class="sd">    access).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_stream_execution_environment</span><span class="p">,</span> <span class="n">serializer</span><span class="o">=</span><span class="n">PickleSerializer</span><span class="p">()):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span> <span class="o">=</span> <span class="n">j_stream_execution_environment</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">serializer</span> <span class="o">=</span> <span class="n">serializer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_open</span><span class="p">()</span>
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.get_config">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.get_config.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.get_config">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_config</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ExecutionConfig</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the config object.</span>
+
+<span class="sd">        :return: The :class:`~pyflink.common.ExecutionConfig` object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">ExecutionConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">getConfig</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.set_parallelism">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.set_parallelism.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.set_parallelism">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_parallelism</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parallelism</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StreamExecutionEnvironment&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the parallelism for operations executed through this environment.</span>
+<span class="sd">        Setting a parallelism of x here will cause all operators (such as map,</span>
+<span class="sd">        batchReduce) to run with x parallel instances. This method overrides the</span>
+<span class="sd">        default parallelism for this environment. The</span>
+<span class="sd">        *LocalStreamEnvironment* uses by default a value equal to the</span>
+<span class="sd">        number of hardware contexts (CPU cores / threads). When executing the</span>
+<span class="sd">        program via the command line client from a JAR file, the default degree</span>
+<span class="sd">        of parallelism is the one configured for that setup.</span>
+
+<span class="sd">        :param parallelism: The parallelism.</span>
+<span class="sd">        :return: This object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">setParallelism</span><span class="p">(</span><span class="n">parallelism</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.set_max_parallelism">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.set_max_parallelism.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.set_max_parallelism">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_max_parallelism</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_parallelism</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StreamExecutionEnvironment&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the maximum degree of parallelism defined for the program. The upper limit (inclusive)</span>
+<span class="sd">        is 32768.</span>
+
+<span class="sd">        The maximum degree of parallelism specifies the upper limit for dynamic scaling. It also</span>
+<span class="sd">        defines the number of key groups used for partitioned state.</span>
+
+<span class="sd">        :param max_parallelism: Maximum degree of parallelism to be used for the program,</span>
+<span class="sd">                                with 0 &lt; maxParallelism &lt;= 2^15.</span>
+<span class="sd">        :return: This object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">setMaxParallelism</span><span class="p">(</span><span class="n">max_parallelism</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.register_slot_sharing_group">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.register_slot_sharing_group.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.register_slot_sharing_group">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">register_slot_sharing_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slot_sharing_group</span><span class="p">:</span> <span class="n">SlotSharingGroup</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;StreamExecutionEnvironment&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Register a slot sharing group with its resource spec.</span>
+
+<span class="sd">        Note that a slot sharing group hints the scheduler that the grouped operators CAN be</span>
+<span class="sd">        deployed into a shared slot. There&#39;s no guarantee that the scheduler always deploy the</span>
+<span class="sd">        grouped operators together. In cases grouped operators are deployed into separate slots, the</span>
+<span class="sd">        slot resources will be derived from the specified group requirements.</span>
+
+<span class="sd">        :param slot_sharing_group: Which contains name and its resource spec.</span>
+<span class="sd">        :return: This object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">registerSlotSharingGroup</span><span class="p">(</span>
+                <span class="n">slot_sharing_group</span><span class="o">.</span><span class="n">get_java_slot_sharing_group</span><span class="p">())</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.get_parallelism">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.get_parallelism.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.get_parallelism">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_parallelism</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the parallelism with which operation are executed by default.</span>
+<span class="sd">        Operations can individually override this value to use a specific</span>
+<span class="sd">        parallelism.</span>
+
+<span class="sd">        :return: The parallelism used by operations, unless they override that value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">getParallelism</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.get_max_parallelism">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.get_max_parallelism.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.get_max_parallelism">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_max_parallelism</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the maximum degree of parallelism defined for the program.</span>
+
+<span class="sd">        The maximum degree of parallelism specifies the upper limit for dynamic scaling. It also</span>
+<span class="sd">        defines the number of key groups used for partitioned state.</span>
+
+<span class="sd">        :return: Maximum degree of parallelism.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">getMaxParallelism</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.set_runtime_mode">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.set_runtime_mode.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.set_runtime_mode">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_runtime_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">execution_mode</span><span class="p">:</span> <span class="n">RuntimeExecutionMode</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the runtime execution mode for the application</span>
+<span class="sd">        :class:`~pyflink.datastream.execution_mode.RuntimeExecutionMode`. This</span>
+<span class="sd">        is equivalent to setting the `execution.runtime-mode` in your application&#39;s</span>
+<span class="sd">        configuration file.</span>
+
+<span class="sd">        We recommend users to NOT use this method but set the `execution.runtime-mode` using</span>
+<span class="sd">        the command-line when submitting the application. Keeping the application code</span>
+<span class="sd">        configuration-free allows for more flexibility as the same application will be able to be</span>
+<span class="sd">        executed in any execution mode.</span>
+
+<span class="sd">        :param execution_mode: The desired execution mode.</span>
+<span class="sd">        :return: The execution environment of your application.</span>
+
+<span class="sd">        .. versionadded:: 1.13.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">setRuntimeMode</span><span class="p">(</span>
+            <span class="n">execution_mode</span><span class="o">.</span><span class="n">_to_j_execution_mode</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.set_buffer_timeout">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.set_buffer_timeout.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.set_buffer_timeout">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_buffer_timeout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout_millis</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StreamExecutionEnvironment&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the maximum time frequency (milliseconds) for the flushing of the</span>
+<span class="sd">        output buffers. By default the output buffers flush frequently to provide</span>
+<span class="sd">        low latency and to aid smooth developer experience. Setting the parameter</span>
+<span class="sd">        can result in three logical modes:</span>
+
+<span class="sd">        - A positive integer triggers flushing periodically by that integer</span>
+<span class="sd">        - 0 triggers flushing after every record thus minimizing latency</span>
+<span class="sd">        - -1 triggers flushing only when the output buffer is full thus maximizing throughput</span>
+
+<span class="sd">        :param timeout_millis: The maximum time between two output flushes.</span>
+<span class="sd">        :return: This object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">setBufferTimeout</span><span class="p">(</span><span class="n">timeout_millis</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.get_buffer_timeout">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.get_buffer_timeout.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.get_buffer_timeout">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_buffer_timeout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the maximum time frequency (milliseconds) for the flushing of the</span>
+<span class="sd">        output buffers. For clarification on the extremal values see</span>
+<span class="sd">        :func:`set_buffer_timeout`.</span>
+
+<span class="sd">        :return: The timeout of the buffer.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">getBufferTimeout</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.disable_operator_chaining">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.disable_operator_chaining.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.disable_operator_chaining">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">disable_operator_chaining</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StreamExecutionEnvironment&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Disables operator chaining for streaming operators. Operator chaining</span>
+<span class="sd">        allows non-shuffle operations to be co-located in the same thread fully</span>
+<span class="sd">        avoiding serialization and de-serialization.</span>
+
+<span class="sd">        :return: This object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">disableOperatorChaining</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.is_chaining_enabled">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.is_chaining_enabled.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.is_chaining_enabled">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_chaining_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns whether operator chaining is enabled.</span>
+
+<span class="sd">        :return: True if chaining is enabled, false otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">isChainingEnabled</span><span class="p">()</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_chaining_of_operators_with_different_max_parallelism_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns whether operators that have a different max parallelism can be chained.</span>
+
+<span class="sd">        :return: True if chaining is enabled, false otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span>\
+            <span class="o">.</span><span class="n">isChainingOfOperatorsWithDifferentMaxParallelismEnabled</span><span class="p">()</span>
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.get_checkpoint_config">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.get_checkpoint_config.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.get_checkpoint_config">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_checkpoint_config</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CheckpointConfig</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the checkpoint config, which defines values like checkpoint interval, delay between</span>
+<span class="sd">        checkpoints, etc.</span>
+
+<span class="sd">        :return: The :class:`~pyflink.datastream.CheckpointConfig`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">j_checkpoint_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">getCheckpointConfig</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">CheckpointConfig</span><span class="p">(</span><span class="n">j_checkpoint_config</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.enable_checkpointing">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.enable_checkpointing.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.enable_checkpointing">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">enable_checkpointing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interval</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">CheckpointingMode</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;StreamExecutionEnvironment&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Enables checkpointing for the streaming job. The distributed state of the streaming</span>
+<span class="sd">        dataflow will be periodically snapshotted. In case of a failure, the streaming</span>
+<span class="sd">        dataflow will be restarted from the latest completed checkpoint.</span>
+
+<span class="sd">        The job draws checkpoints periodically, in the given interval. The system uses the</span>
+<span class="sd">        given :class:`~pyflink.datastream.CheckpointingMode` for the checkpointing (&quot;exactly once&quot;</span>
+<span class="sd">        vs &quot;at least once&quot;). The state will be stored in the configured state backend.</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            Checkpointing iterative streaming dataflows in not properly supported at</span>
+<span class="sd">            the moment. For that reason, iterative jobs will not be started if used</span>
+<span class="sd">            with enabled checkpointing.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; env.enable_checkpointing(300000, CheckpointingMode.AT_LEAST_ONCE)</span>
+
+<span class="sd">        :param interval: Time interval between state checkpoints in milliseconds.</span>
+<span class="sd">        :param mode: The checkpointing mode, selecting between &quot;exactly once&quot; and &quot;at least once&quot;</span>
+<span class="sd">                     guaranteed.</span>
+<span class="sd">        :return: This object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span> <span class="o">=</span> \
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">enableCheckpointing</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">j_checkpointing_mode</span> <span class="o">=</span> <span class="n">CheckpointingMode</span><span class="o">.</span><span class="n">_to_j_checkpointing_mode</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">enableCheckpointing</span><span class="p">(</span>
+                <span class="n">interval</span><span class="p">,</span>
+                <span class="n">j_checkpointing_mode</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.get_checkpoint_interval">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.get_checkpoint_interval.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.get_checkpoint_interval">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_checkpoint_interval</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the checkpointing interval or -1 if checkpointing is disabled.</span>
+
+<span class="sd">        Shorthand for get_checkpoint_config().get_checkpoint_interval().</span>
+
+<span class="sd">        :return: The checkpointing interval or -1.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">getCheckpointInterval</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.get_checkpointing_mode">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.get_checkpointing_mode.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.get_checkpointing_mode">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_checkpointing_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CheckpointingMode</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the checkpointing mode (exactly-once vs. at-least-once).</span>
+
+<span class="sd">        Shorthand for get_checkpoint_config().get_checkpointing_mode().</span>
+
+<span class="sd">        :return: The :class:`~pyflink.datastream.CheckpointingMode`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_checkpointing_consistency_mode</span><span class="p">()</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_checkpointing_consistency_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CheckpointingMode</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the checkpointing mode (exactly-once vs. at-least-once).</span>
+
+<span class="sd">        Shorthand for get_checkpoint_config().get_checkpointing_mode().</span>
+
+<span class="sd">        :return: The :class:`~pyflink.datastream.CheckpointingMode`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">j_checkpointing_mode</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">getCheckpointingConsistencyMode</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">CheckpointingMode</span><span class="o">.</span><span class="n">_from_j_checkpointing_mode</span><span class="p">(</span><span class="n">j_checkpointing_mode</span><span class="p">)</span>
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.get_state_backend">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.get_state_backend.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.get_state_backend">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_state_backend</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StateBackend</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the state backend that defines how to store and checkpoint state.</span>
+
+<span class="sd">        .. seealso:: :func:`set_state_backend`</span>
+
+<span class="sd">        :return: The :class:`StateBackend`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">j_state_backend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">getStateBackend</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">_from_j_state_backend</span><span class="p">(</span><span class="n">j_state_backend</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.set_state_backend">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.set_state_backend.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.set_state_backend">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_state_backend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state_backend</span><span class="p">:</span> <span class="n">StateBackend</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StreamExecutionEnvironment&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the state backend that describes how to store and checkpoint operator state. It</span>
+<span class="sd">        defines both which data structures hold state during execution (for example hash tables,</span>
+<span class="sd">        RockDB, or other data stores) as well as where checkpointed data will be persisted.</span>
+
+<span class="sd">        The :class:`~pyflink.datastream.MemoryStateBackend` for example maintains the state in heap</span>
+<span class="sd">        memory, as objects. It is lightweight without extra dependencies, but can checkpoint only</span>
+<span class="sd">        small states(some counters).</span>
+
+<span class="sd">        In contrast, the :class:`~pyflink.datastream.FsStateBackend` stores checkpoints of the state</span>
+<span class="sd">        (also maintained as heap objects) in files. When using a replicated file system (like HDFS,</span>
+<span class="sd">        S3, Alluxio, etc) this will guarantee that state is not lost upon failures of</span>
+<span class="sd">        individual nodes and that streaming program can be executed highly available and strongly</span>
+<span class="sd">        consistent(assuming that Flink is run in high-availability mode).</span>
+
+<span class="sd">        The build-in state backend includes:</span>
+<span class="sd">            :class:`~pyflink.datastream.MemoryStateBackend`,</span>
+<span class="sd">            :class:`~pyflink.datastream.FsStateBackend`</span>
+<span class="sd">            and :class:`~pyflink.datastream.RocksDBStateBackend`.</span>
+
+<span class="sd">        .. seealso:: :func:`get_state_backend`</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; env.set_state_backend(EmbeddedRocksDBStateBackend())</span>
+
+<span class="sd">        :param state_backend: The :class:`StateBackend`.</span>
+<span class="sd">        :return: This object.</span>
+
+<span class="sd">        .. note:: Deprecated since version 1.19: This method is deprecated and will be removed in</span>
+<span class="sd">                  future FLINK major version. Use `stream_execution_environment.configure` method</span>
+<span class="sd">                  instead to set the state backend.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Deprecated since version 1.19: This method is deprecated and will be removed&quot;</span>
+                      <span class="s2">&quot; in future FLINK major version. Use `stream_execution_environment.configure`&quot;</span>
+                      <span class="s2">&quot; method instead to set the state backend.&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">setStateBackend</span><span class="p">(</span><span class="n">state_backend</span><span class="o">.</span><span class="n">_j_state_backend</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.enable_changelog_state_backend">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.enable_changelog_state_backend.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.enable_changelog_state_backend">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">enable_changelog_state_backend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enabled</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StreamExecutionEnvironment&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Enable the change log for current state backend. This change log allows operators to persist</span>
+<span class="sd">        state changes in a very fine-grained manner. Currently, the change log only applies to keyed</span>
+<span class="sd">        state, so non-keyed operator state and channel state are persisted as usual. The &#39;state&#39;</span>
+<span class="sd">        here refers to &#39;keyed state&#39;. Details are as follows:</span>
+
+<span class="sd">        * Stateful operators write the state changes to that log (logging the state), in addition \</span>
+<span class="sd">        to applying them to the state tables in RocksDB or the in-mem Hashtable.</span>
+<span class="sd">        * An operator can acknowledge a checkpoint as soon as the changes in the log have reached \</span>
+<span class="sd">        the durable checkpoint storage.</span>
+<span class="sd">        * The state tables are persisted periodically, independent of the checkpoints. We call \</span>
+<span class="sd">        this the materialization of the state on the checkpoint storage.</span>
+<span class="sd">        * Once the state is materialized on checkpoint storage, the state changelog can be \</span>
+<span class="sd">        truncated to the corresponding point.</span>
+
+<span class="sd">        It establish a way to drastically reduce the checkpoint interval for streaming</span>
+<span class="sd">        applications across state backends. For more details please check the FLIP-158.</span>
+
+<span class="sd">        If this method is not called explicitly, it means no preference for enabling the change</span>
+<span class="sd">        log. Configs for change log enabling will override in different config levels</span>
+<span class="sd">        (job/local/cluster).</span>
+
+<span class="sd">        .. seealso:: :func:`is_changelog_state_backend_enabled`</span>
+
+
+<span class="sd">        :param enabled: True if enable the change log for state backend explicitly, otherwise</span>
+<span class="sd">                        disable the change log.</span>
+<span class="sd">        :return: This object.</span>
+
+<span class="sd">        .. versionadded:: 1.14.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">enableChangelogStateBackend</span><span class="p">(</span><span class="n">enabled</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.is_changelog_state_backend_enabled">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.is_changelog_state_backend_enabled.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.is_changelog_state_backend_enabled">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_changelog_state_backend_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the enable status of change log for state backend.</span>
+
+<span class="sd">        .. seealso:: :func:`enable_changelog_state_backend`</span>
+
+<span class="sd">        :return: An :class:`Optional[bool]` for the enable status of change log for state backend.</span>
+<span class="sd">                 Could be None if user never specify this by calling</span>
+<span class="sd">                 :func:`enable_changelog_state_backend`.</span>
+
+<span class="sd">        .. versionadded:: 1.14.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">j_ternary_boolean</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">isChangelogStateBackendEnabled</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">j_ternary_boolean</span><span class="o">.</span><span class="n">getAsBoolean</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.set_default_savepoint_directory">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.set_default_savepoint_directory.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.set_default_savepoint_directory">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_default_savepoint_directory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StreamExecutionEnvironment&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the default savepoint directory, where savepoints will be written to if none</span>
+<span class="sd">        is explicitly provided when triggered.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; env.set_default_savepoint_directory(&quot;hdfs://savepoints&quot;)</span>
+
+<span class="sd">        :param directory The savepoint directory</span>
+<span class="sd">        :return: This object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">setDefaultSavepointDirectory</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.get_default_savepoint_directory">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.get_default_savepoint_directory.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.get_default_savepoint_directory">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_default_savepoint_directory</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the default savepoint directory for this Job.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">j_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">getDefaultSavepointDirectory</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">j_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">j_path</span><span class="o">.</span><span class="n">toString</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.set_restart_strategy">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.set_restart_strategy.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.set_restart_strategy">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_restart_strategy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">restart_strategy_configuration</span><span class="p">:</span> <span class="n">RestartStrategyConfiguration</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the restart strategy configuration. The configuration specifies which restart strategy</span>
+<span class="sd">        will be used for the execution graph in case of a restart.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; env.set_restart_strategy(RestartStrategies.no_restart())</span>
+
+<span class="sd">        :param restart_strategy_configuration: Restart strategy configuration to be set.</span>
+<span class="sd">        :return:</span>
+
+<span class="sd">        .. note:: Deprecated since version 1.19: This method is deprecated and will be removed in</span>
+<span class="sd">                  future FLINK major version. Use `stream_execution_environment.configure` method</span>
+<span class="sd">                  instead to set the restart strategy.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Deprecated since version 1.19: This method is deprecated and will be removed&quot;</span>
+                      <span class="s2">&quot; in future FLINK major version. Use `stream_execution_environment.configure`&quot;</span>
+                      <span class="s2">&quot; method instead to set the restart strategy.&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">setRestartStrategy</span><span class="p">(</span>
+            <span class="n">restart_strategy_configuration</span><span class="o">.</span><span class="n">_j_restart_strategy_configuration</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.get_restart_strategy">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.get_restart_strategy.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.get_restart_strategy">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_restart_strategy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RestartStrategyConfiguration</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the specified restart strategy configuration.</span>
+
+<span class="sd">        :return: The restart strategy configuration to be used.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">RestartStrategies</span><span class="o">.</span><span class="n">_from_j_restart_strategy</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">getRestartStrategy</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.add_default_kryo_serializer">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.add_default_kryo_serializer.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.add_default_kryo_serializer">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_default_kryo_serializer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">type_class_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">serializer_class_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds a new Kryo default serializer to the Runtime.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; env.add_default_kryo_serializer(&quot;com.aaa.bbb.TypeClass&quot;, &quot;com.aaa.bbb.Serializer&quot;)</span>
+
+<span class="sd">        :param type_class_name: The full-qualified java class name of the types serialized with the</span>
+<span class="sd">                                given serializer.</span>
+<span class="sd">        :param serializer_class_name: The full-qualified java class name of the serializer to use.</span>
+
+<span class="sd">        .. note:: Deprecated since version 1.19: Register data types and serializers through hard</span>
+<span class="sd">                  codes is deprecated, because you need to modify the codes when upgrading job</span>
+<span class="sd">                  version. You should configure this by option `pipeline.serialization-config`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Deprecated since version 1.19: Register data types and serializers through&quot;</span>
+                      <span class="s2">&quot; hard codes is deprecated, because you need to modify the codes when&quot;</span>
+                      <span class="s2">&quot; upgrading job version. You should configure this by config option &quot;</span>
+                      <span class="s2">&quot; &#39;pipeline.serialization-config&#39;.&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+
+        <span class="n">type_clz</span> <span class="o">=</span> <span class="n">load_java_class</span><span class="p">(</span><span class="n">type_class_name</span><span class="p">)</span>
+        <span class="n">j_serializer_clz</span> <span class="o">=</span> <span class="n">load_java_class</span><span class="p">(</span><span class="n">serializer_class_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">addDefaultKryoSerializer</span><span class="p">(</span><span class="n">type_clz</span><span class="p">,</span> <span class="n">j_serializer_clz</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.register_type_with_kryo_serializer">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.register_type_with_kryo_serializer.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.register_type_with_kryo_serializer">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">register_type_with_kryo_serializer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">type_class_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">serializer_class_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Registers the given Serializer via its class as a serializer for the given type at the</span>
+<span class="sd">        KryoSerializer.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; env.register_type_with_kryo_serializer(&quot;com.aaa.bbb.TypeClass&quot;,</span>
+<span class="sd">            ...                                        &quot;com.aaa.bbb.Serializer&quot;)</span>
+
+<span class="sd">        :param type_class_name: The full-qualified java class name of the types serialized with</span>
+<span class="sd">                                the given serializer.</span>
+<span class="sd">        :param serializer_class_name: The full-qualified java class name of the serializer to use.</span>
+
+<span class="sd">        .. note:: Deprecated since version 1.19: Register data types and serializers through hard</span>
+<span class="sd">                  codes is deprecated, because you need to modify the codes when upgrading job</span>
+<span class="sd">                  version. You should configure this by option `pipeline.serialization-config`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Deprecated since version 1.19: Register data types and serializers through&quot;</span>
+                      <span class="s2">&quot; hard codes is deprecated, because you need to modify the codes when&quot;</span>
+                      <span class="s2">&quot; upgrading job version. You should configure this by config option &quot;</span>
+                      <span class="s2">&quot; &#39;pipeline.serialization-config&#39;.&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+        <span class="n">type_clz</span> <span class="o">=</span> <span class="n">load_java_class</span><span class="p">(</span><span class="n">type_class_name</span><span class="p">)</span>
+        <span class="n">j_serializer_clz</span> <span class="o">=</span> <span class="n">load_java_class</span><span class="p">(</span><span class="n">serializer_class_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">registerTypeWithKryoSerializer</span><span class="p">(</span>
+            <span class="n">type_clz</span><span class="p">,</span> <span class="n">j_serializer_clz</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.register_type">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.register_type.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.register_type">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">register_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">type_class_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Registers the given type with the serialization stack. If the type is eventually</span>
+<span class="sd">        serialized as a POJO, then the type is registered with the POJO serializer. If the</span>
+<span class="sd">        type ends up being serialized with Kryo, then it will be registered at Kryo to make</span>
+<span class="sd">        sure that only tags are written.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; env.register_type(&quot;com.aaa.bbb.TypeClass&quot;)</span>
+
+<span class="sd">        :param type_class_name: The full-qualified java class name of the type to register.</span>
+
+<span class="sd">        .. note:: Deprecated since version 1.19: Register data types and serializers through hard</span>
+<span class="sd">                  codes is deprecated, because you need to modify the codes when upgrading job</span>
+<span class="sd">                  version. You should configure this by option `pipeline.serialization-config`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Deprecated since version 1.19: Register data types and serializers through&quot;</span>
+                      <span class="s2">&quot; hard codes is deprecated, because you need to modify the codes when&quot;</span>
+                      <span class="s2">&quot; upgrading job version. You should configure this by config option &quot;</span>
+                      <span class="s2">&quot; &#39;pipeline.serialization-config&#39;.&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+        <span class="n">type_clz</span> <span class="o">=</span> <span class="n">load_java_class</span><span class="p">(</span><span class="n">type_class_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">registerType</span><span class="p">(</span><span class="n">type_clz</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.set_stream_time_characteristic">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.set_stream_time_characteristic.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.set_stream_time_characteristic">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_stream_time_characteristic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">characteristic</span><span class="p">:</span> <span class="n">TimeCharacteristic</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the time characteristic for all streams create from this environment, e.g., processing</span>
+<span class="sd">        time, event time, or ingestion time.</span>
+
+<span class="sd">        If you set the characteristic to IngestionTime of EventTime this will set a default</span>
+<span class="sd">        watermark update interval of 200 ms. If this is not applicable for your application</span>
+<span class="sd">        you should change it using</span>
+<span class="sd">        :func:`pyflink.common.ExecutionConfig.set_auto_watermark_interval`.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; env.set_stream_time_characteristic(TimeCharacteristic.EventTime)</span>
+
+<span class="sd">        :param characteristic: The time characteristic, which could be</span>
+<span class="sd">                               :data:`TimeCharacteristic.ProcessingTime`,</span>
+<span class="sd">                               :data:`TimeCharacteristic.IngestionTime`,</span>
+<span class="sd">                               :data:`TimeCharacteristic.EventTime`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">j_characteristic</span> <span class="o">=</span> <span class="n">TimeCharacteristic</span><span class="o">.</span><span class="n">_to_j_time_characteristic</span><span class="p">(</span><span class="n">characteristic</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">setStreamTimeCharacteristic</span><span class="p">(</span><span class="n">j_characteristic</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.get_stream_time_characteristic">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.get_stream_time_characteristic.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.get_stream_time_characteristic">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_stream_time_characteristic</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;TimeCharacteristic&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the time characteristic.</span>
+
+<span class="sd">        .. seealso:: :func:`set_stream_time_characteristic`</span>
+
+<span class="sd">        :return: The :class:`TimeCharacteristic`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">j_characteristic</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">getStreamTimeCharacteristic</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">TimeCharacteristic</span><span class="o">.</span><span class="n">_from_j_time_characteristic</span><span class="p">(</span><span class="n">j_characteristic</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.configure">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.configure.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.configure">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">configure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configuration</span><span class="p">:</span> <span class="n">Configuration</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets all relevant options contained in the :class:`~pyflink.common.Configuration`. such as</span>
+<span class="sd">        e.g. `pipeline.time-characteristic`. It will reconfigure</span>
+<span class="sd">        :class:`~pyflink.datastream.StreamExecutionEnvironment`,</span>
+<span class="sd">        :class:`~pyflink.common.ExecutionConfig` and :class:`~pyflink.datastream.CheckpointConfig`.</span>
+
+<span class="sd">        It will change the value of a setting only if a corresponding option was set in the</span>
+<span class="sd">        `configuration`. If a key is not present, the current value of a field will remain</span>
+<span class="sd">        untouched.</span>
+
+<span class="sd">        :param configuration: a configuration to read the values from.</span>
+
+<span class="sd">        .. versionadded:: 1.15.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">configuration</span><span class="o">.</span><span class="n">_j_configuration</span><span class="p">,</span>
+                                                       <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">Thread</span><span class="o">.</span><span class="n">currentThread</span><span class="p">()</span>
+                                                       <span class="o">.</span><span class="n">getContextClassLoader</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.add_python_file">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.add_python_file.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.add_python_file">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_python_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds a python dependency which could be python files, python packages or</span>
+<span class="sd">        local directories. They will be added to the PYTHONPATH of the python UDF worker.</span>
+<span class="sd">        Please make sure that these dependencies can be imported.</span>
+
+<span class="sd">        :param file_path: The path of the python dependency.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">jvm</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>
+        <span class="n">env_config</span> <span class="o">=</span> <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">PythonConfigUtil</span>\
+            <span class="o">.</span><span class="n">getEnvironmentConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="p">)</span>
+        <span class="n">python_files</span> <span class="o">=</span> <span class="n">env_config</span><span class="o">.</span><span class="n">getString</span><span class="p">(</span><span class="n">jvm</span><span class="o">.</span><span class="n">PythonOptions</span><span class="o">.</span><span class="n">PYTHON_FILES</span><span class="o">.</span><span class="n">key</span><span class="p">(),</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">python_files</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">python_files</span> <span class="o">=</span> <span class="n">jvm</span><span class="o">.</span><span class="n">PythonDependencyUtils</span><span class="o">.</span><span class="n">FILE_DELIMITER</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">file_path</span><span class="p">,</span> <span class="n">python_files</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">python_files</span> <span class="o">=</span> <span class="n">file_path</span>
+        <span class="n">env_config</span><span class="o">.</span><span class="n">setString</span><span class="p">(</span><span class="n">jvm</span><span class="o">.</span><span class="n">PythonOptions</span><span class="o">.</span><span class="n">PYTHON_FILES</span><span class="o">.</span><span class="n">key</span><span class="p">(),</span> <span class="n">python_files</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.set_python_requirements">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.set_python_requirements.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.set_python_requirements">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_python_requirements</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">requirements_file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                                <span class="n">requirements_cache_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Specifies a requirements.txt file which defines the third-party dependencies.</span>
+<span class="sd">        These dependencies will be installed to a temporary directory and added to the</span>
+<span class="sd">        PYTHONPATH of the python UDF worker.</span>
+
+<span class="sd">        For the dependencies which could not be accessed in the cluster, a directory which contains</span>
+<span class="sd">        the installation packages of these dependencies could be specified using the parameter</span>
+<span class="sd">        &quot;requirements_cached_dir&quot;. It will be uploaded to the cluster to support offline</span>
+<span class="sd">        installation.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            # commands executed in shell</span>
+<span class="sd">            $ echo numpy==1.16.5 &gt; requirements.txt</span>
+<span class="sd">            $ pip download -d cached_dir -r requirements.txt --no-binary :all:</span>
+
+<span class="sd">            # python code</span>
+<span class="sd">            &gt;&gt;&gt; stream_env.set_python_requirements(&quot;requirements.txt&quot;, &quot;cached_dir&quot;)</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            Please make sure the installation packages matches the platform of the cluster</span>
+<span class="sd">            and the python version used. These packages will be installed using pip,</span>
+<span class="sd">            so also make sure the version of Pip (version &gt;= 20.3) and the version of</span>
+<span class="sd">            SetupTools (version &gt;= 37.0.0).</span>
+
+<span class="sd">        :param requirements_file_path: The path of &quot;requirements.txt&quot; file.</span>
+<span class="sd">        :param requirements_cache_dir: The path of the local directory which contains the</span>
+<span class="sd">                                       installation packages.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">jvm</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>
+        <span class="n">python_requirements</span> <span class="o">=</span> <span class="n">requirements_file_path</span>
+        <span class="k">if</span> <span class="n">requirements_cache_dir</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">python_requirements</span> <span class="o">=</span> <span class="n">jvm</span><span class="o">.</span><span class="n">PythonDependencyUtils</span><span class="o">.</span><span class="n">PARAM_DELIMITER</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">python_requirements</span><span class="p">,</span> <span class="n">requirements_cache_dir</span><span class="p">])</span>
+        <span class="n">env_config</span> <span class="o">=</span> <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">PythonConfigUtil</span> \
+            <span class="o">.</span><span class="n">getEnvironmentConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="p">)</span>
+        <span class="n">env_config</span><span class="o">.</span><span class="n">setString</span><span class="p">(</span><span class="n">jvm</span><span class="o">.</span><span class="n">PythonOptions</span><span class="o">.</span><span class="n">PYTHON_REQUIREMENTS</span><span class="o">.</span><span class="n">key</span><span class="p">(),</span> <span class="n">python_requirements</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.add_python_archive">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.add_python_archive.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.add_python_archive">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_python_archive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">archive_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">target_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds a python archive file. The file will be extracted to the working directory of</span>
+<span class="sd">        python UDF worker.</span>
+
+<span class="sd">        If the parameter &quot;target_dir&quot; is specified, the archive file will be extracted to a</span>
+<span class="sd">        directory named ${target_dir}. Otherwise, the archive file will be extracted to a</span>
+<span class="sd">        directory with the same name of the archive file.</span>
+
+<span class="sd">        If python UDF depends on a specific python version which does not exist in the cluster,</span>
+<span class="sd">        this method can be used to upload the virtual environment.</span>
+<span class="sd">        Note that the path of the python interpreter contained in the uploaded environment</span>
+<span class="sd">        should be specified via the method :func:`pyflink.table.TableConfig.set_python_executable`.</span>
+
+<span class="sd">        The files uploaded via this method are also accessible in UDFs via relative path.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            # command executed in shell</span>
+<span class="sd">            # assert the relative path of python interpreter is py_env/bin/python</span>
+<span class="sd">            $ zip -r py_env.zip py_env</span>
+
+<span class="sd">            # python code</span>
+<span class="sd">            &gt;&gt;&gt; stream_env.add_python_archive(&quot;py_env.zip&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; stream_env.set_python_executable(&quot;py_env.zip/py_env/bin/python&quot;)</span>
+
+<span class="sd">            # or</span>
+<span class="sd">            &gt;&gt;&gt; stream_env.add_python_archive(&quot;py_env.zip&quot;, &quot;myenv&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; stream_env.set_python_executable(&quot;myenv/py_env/bin/python&quot;)</span>
+
+<span class="sd">            # the files contained in the archive file can be accessed in UDF</span>
+<span class="sd">            &gt;&gt;&gt; def my_udf():</span>
+<span class="sd">            ...     with open(&quot;myenv/py_env/data/data.txt&quot;) as f:</span>
+<span class="sd">            ...         ...</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            Please make sure the uploaded python environment matches the platform that the cluster</span>
+<span class="sd">            is running on and that the python version must be 3.6 or higher.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            Currently only zip-format is supported. i.e. zip, jar, whl, egg, etc.</span>
+<span class="sd">            The other archive formats such as tar, tar.gz, 7z, rar, etc are not supported.</span>
+
+<span class="sd">        :param archive_path: The archive file path.</span>
+<span class="sd">        :param target_dir: Optional, the target dir name that the archive file extracted to.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">jvm</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>
+        <span class="k">if</span> <span class="n">target_dir</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">archive_path</span> <span class="o">=</span> <span class="n">jvm</span><span class="o">.</span><span class="n">PythonDependencyUtils</span><span class="o">.</span><span class="n">PARAM_DELIMITER</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">archive_path</span><span class="p">,</span> <span class="n">target_dir</span><span class="p">])</span>
+        <span class="n">env_config</span> <span class="o">=</span> <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">PythonConfigUtil</span> \
+            <span class="o">.</span><span class="n">getEnvironmentConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="p">)</span>
+        <span class="n">python_archives</span> <span class="o">=</span> <span class="n">env_config</span><span class="o">.</span><span class="n">getString</span><span class="p">(</span><span class="n">jvm</span><span class="o">.</span><span class="n">PythonOptions</span><span class="o">.</span><span class="n">PYTHON_ARCHIVES</span><span class="o">.</span><span class="n">key</span><span class="p">(),</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">python_archives</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">python_files</span> <span class="o">=</span> <span class="n">jvm</span><span class="o">.</span><span class="n">PythonDependencyUtils</span><span class="o">.</span><span class="n">FILE_DELIMITER</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">python_archives</span><span class="p">,</span> <span class="n">archive_path</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">python_files</span> <span class="o">=</span> <span class="n">archive_path</span>
+        <span class="n">env_config</span><span class="o">.</span><span class="n">setString</span><span class="p">(</span><span class="n">jvm</span><span class="o">.</span><span class="n">PythonOptions</span><span class="o">.</span><span class="n">PYTHON_ARCHIVES</span><span class="o">.</span><span class="n">key</span><span class="p">(),</span> <span class="n">python_files</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.set_python_executable">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.set_python_executable.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.set_python_executable">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_python_executable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">python_exec</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the path of the python interpreter which is used to execute the python udf workers.</span>
+
+<span class="sd">        e.g. &quot;/usr/local/bin/python3&quot;.</span>
+
+<span class="sd">        If python UDF depends on a specific python version which does not exist in the cluster,</span>
+<span class="sd">        the method :func:`pyflink.datastream.StreamExecutionEnvironment.add_python_archive` can be</span>
+<span class="sd">        used to upload a virtual environment. The path of the python interpreter contained in the</span>
+<span class="sd">        uploaded environment can be specified via this method.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            # command executed in shell</span>
+<span class="sd">            # assume that the relative path of python interpreter is py_env/bin/python</span>
+<span class="sd">            $ zip -r py_env.zip py_env</span>
+
+<span class="sd">            # python code</span>
+<span class="sd">            &gt;&gt;&gt; stream_env.add_python_archive(&quot;py_env.zip&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; stream_env.set_python_executable(&quot;py_env.zip/py_env/bin/python&quot;)</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            Please make sure the uploaded python environment matches the platform that the cluster</span>
+<span class="sd">            is running on and that the python version must be 3.7 or higher.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            The python udf worker depends on Apache Beam (version == 2.43.0).</span>
+<span class="sd">            Please ensure that the specified environment meets the above requirements.</span>
+
+<span class="sd">        :param python_exec: The path of python interpreter.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">jvm</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>
+        <span class="n">env_config</span> <span class="o">=</span> <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">PythonConfigUtil</span> \
+            <span class="o">.</span><span class="n">getEnvironmentConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="p">)</span>
+        <span class="n">env_config</span><span class="o">.</span><span class="n">setString</span><span class="p">(</span><span class="n">jvm</span><span class="o">.</span><span class="n">PythonOptions</span><span class="o">.</span><span class="n">PYTHON_EXECUTABLE</span><span class="o">.</span><span class="n">key</span><span class="p">(),</span> <span class="n">python_exec</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.add_jars">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.add_jars.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.add_jars">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_jars</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">jars_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds a list of jar files that will be uploaded to the cluster and referenced by the job.</span>
+
+<span class="sd">        :param jars_path: Path of jars.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">add_jars_to_context_class_loader</span><span class="p">(</span><span class="n">jars_path</span><span class="p">)</span>
+        <span class="n">jvm</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>
+        <span class="n">jars_key</span> <span class="o">=</span> <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">PipelineOptions</span><span class="o">.</span><span class="n">JARS</span><span class="o">.</span><span class="n">key</span><span class="p">()</span>
+        <span class="n">env_config</span> <span class="o">=</span> <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">PythonConfigUtil</span> \
+            <span class="o">.</span><span class="n">getEnvironmentConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="p">)</span>
+        <span class="n">old_jars_path</span> <span class="o">=</span> <span class="n">env_config</span><span class="o">.</span><span class="n">getString</span><span class="p">(</span><span class="n">jars_key</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">standard_yaml</span> <span class="o">=</span> <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">GlobalConfiguration</span><span class="o">.</span><span class="n">isStandardYaml</span><span class="p">()</span>
+        <span class="n">old_jars_list</span> <span class="o">=</span> <span class="n">Configuration</span><span class="o">.</span><span class="n">parse_list_value</span><span class="p">(</span><span class="n">old_jars_path</span><span class="p">,</span> <span class="n">standard_yaml</span><span class="p">)</span>
+        <span class="n">joined_jars_list</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">old_jars_list</span><span class="p">,</span> <span class="o">*</span><span class="n">jars_path</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">standard_yaml</span><span class="p">:</span>
+            <span class="n">env_config</span><span class="o">.</span><span class="n">setString</span><span class="p">(</span><span class="n">jars_key</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">joined_jars_list</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">env_config</span><span class="o">.</span><span class="n">setString</span><span class="p">(</span><span class="n">jars_key</span><span class="p">,</span> <span class="s1">&#39;;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">joined_jars_list</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.add_classpaths">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.add_classpaths.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.add_classpaths">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_classpaths</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">classpaths</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds a list of URLs that are added to the classpath of each user code classloader of the</span>
+<span class="sd">        program. Paths must specify a protocol (e.g. file://) and be accessible on all nodes</span>
+
+<span class="sd">        :param classpaths: Classpaths that will be added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">add_jars_to_context_class_loader</span><span class="p">(</span><span class="n">classpaths</span><span class="p">)</span>
+        <span class="n">jvm</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>
+        <span class="n">classpaths_key</span> <span class="o">=</span> <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">PipelineOptions</span><span class="o">.</span><span class="n">CLASSPATHS</span><span class="o">.</span><span class="n">key</span><span class="p">()</span>
+        <span class="n">env_config</span> <span class="o">=</span> <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">PythonConfigUtil</span> \
+            <span class="o">.</span><span class="n">getEnvironmentConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="p">)</span>
+        <span class="n">old_classpaths</span> <span class="o">=</span> <span class="n">env_config</span><span class="o">.</span><span class="n">getString</span><span class="p">(</span><span class="n">classpaths_key</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">standard_yaml</span> <span class="o">=</span> <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">GlobalConfiguration</span><span class="o">.</span><span class="n">isStandardYaml</span><span class="p">()</span>
+        <span class="n">old_classpaths_list</span> <span class="o">=</span> <span class="n">Configuration</span><span class="o">.</span><span class="n">parse_list_value</span><span class="p">(</span><span class="n">old_classpaths</span><span class="p">,</span> <span class="n">standard_yaml</span><span class="p">)</span>
+        <span class="n">joined_classpaths_list</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">old_classpaths_list</span><span class="p">,</span> <span class="o">*</span><span class="n">classpaths</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">standard_yaml</span><span class="p">:</span>
+            <span class="n">env_config</span><span class="o">.</span><span class="n">setString</span><span class="p">(</span><span class="n">classpaths_key</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">joined_classpaths_list</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">env_config</span><span class="o">.</span><span class="n">setString</span><span class="p">(</span><span class="n">classpaths_key</span><span class="p">,</span> <span class="s1">&#39;;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">joined_classpaths_list</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.get_default_local_parallelism">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.get_default_local_parallelism.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.get_default_local_parallelism">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_default_local_parallelism</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the default parallelism that will be used for the local execution environment.</span>
+
+<span class="sd">        :return: The default local parallelism.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">getDefaultLocalParallelism</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.set_default_local_parallelism">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.set_default_local_parallelism.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.set_default_local_parallelism">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_default_local_parallelism</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parallelism</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the default parallelism that will be used for the local execution environment.</span>
+
+<span class="sd">        :param parallelism: The parallelism to use as the default local parallelism.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">setDefaultLocalParallelism</span><span class="p">(</span><span class="n">parallelism</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.execute">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.execute.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.execute">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JobExecutionResult</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Triggers the program execution. The environment will execute all parts of</span>
+<span class="sd">        the program that have resulted in a &quot;sink&quot; operation. Sink operations are</span>
+<span class="sd">        for example printing results or forwarding them to a message queue.</span>
+
+<span class="sd">        The program execution will be logged and displayed with the provided name</span>
+
+<span class="sd">        :param job_name: Desired name of the job, optional.</span>
+<span class="sd">        :return: The result of the job execution, containing elapsed time and accumulators.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">j_stream_graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_stream_graph</span><span class="p">(</span><span class="n">clear_transformations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">job_name</span><span class="o">=</span><span class="n">job_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">JobExecutionResult</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">j_stream_graph</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.execute_async">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.execute_async.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.execute_async">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">execute_async</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Flink Streaming Job&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JobClient</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Triggers the program asynchronously. The environment will execute all parts of the program</span>
+<span class="sd">        that have resulted in a &quot;sink&quot; operation. Sink operations are for example printing results</span>
+<span class="sd">        or forwarding them to a message queue.</span>
+<span class="sd">        The program execution will be logged and displayed with a generated default name.</span>
+
+<span class="sd">        :param job_name: Desired name of the job.</span>
+<span class="sd">        :return: A JobClient that can be used to communicate with the submitted job, completed on</span>
+<span class="sd">                 submission succeeded.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">j_stream_graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_stream_graph</span><span class="p">(</span><span class="n">clear_transformations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">job_name</span><span class="o">=</span><span class="n">job_name</span><span class="p">)</span>
+        <span class="n">j_job_client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">executeAsync</span><span class="p">(</span><span class="n">j_stream_graph</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">JobClient</span><span class="p">(</span><span class="n">j_job_client</span><span class="o">=</span><span class="n">j_job_client</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.get_execution_plan">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.get_execution_plan.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.get_execution_plan">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_execution_plan</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates the plan with which the system will execute the program, and returns it as</span>
+<span class="sd">        a String using a JSON representation of the execution data flow graph.</span>
+<span class="sd">        Note that this needs to be called, before the plan is executed.</span>
+
+<span class="sd">        If the compiler could not be instantiated, or the master could not</span>
+<span class="sd">        be contacted to retrieve information relevant to the execution planning,</span>
+<span class="sd">        an exception will be thrown.</span>
+
+<span class="sd">        :return: The execution plan of the program, as a JSON String.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">j_stream_graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_stream_graph</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">j_stream_graph</span><span class="o">.</span><span class="n">getStreamingPlanAsJSON</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.register_cached_file">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.register_cached_file.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.register_cached_file">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">register_cached_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">executable</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Registers a file at the distributed cache under the given name. The file will be accessible</span>
+<span class="sd">        from any user-defined function in the (distributed) runtime under a local path. Files may be</span>
+<span class="sd">        local files (which will be distributed via BlobServer), or files in a distributed file</span>
+<span class="sd">        system. The runtime will copy the files temporarily to a local cache, if needed.</span>
+
+<span class="sd">        :param file_path: The path of the file, as a URI (e.g. &quot;file:///some/path&quot; or</span>
+<span class="sd">                         hdfs://host:port/and/path&quot;).</span>
+<span class="sd">        :param name: The name under which the file is registered.</span>
+<span class="sd">        :param executable: Flag indicating whether the file should be executable.</span>
+
+<span class="sd">        .. versionadded:: 1.16.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">registerCachedFile</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">executable</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.get_execution_environment">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.get_execution_environment.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.get_execution_environment">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_execution_environment</span><span class="p">(</span><span class="n">configuration</span><span class="p">:</span> <span class="n">Configuration</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;StreamExecutionEnvironment&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates an execution environment that represents the context in which the</span>
+<span class="sd">        program is currently executed. If the program is invoked standalone, this</span>
+<span class="sd">        method returns a local execution environment.</span>
+
+<span class="sd">        When executed from the command line the given configuration is stacked on top of the</span>
+<span class="sd">        global configuration which comes from the config.yaml, potentially overriding</span>
+<span class="sd">        duplicated options.</span>
+
+<span class="sd">        :param configuration: The configuration to instantiate the environment with.</span>
+<span class="sd">        :return: The execution environment of the context in which the program is executed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
+        <span class="n">JStreamExecutionEnvironment</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">streaming</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">environment</span> \
+            <span class="o">.</span><span class="n">StreamExecutionEnvironment</span>
+
+        <span class="k">if</span> <span class="n">configuration</span><span class="p">:</span>
+            <span class="n">j_stream_exection_environment</span> <span class="o">=</span> <span class="n">JStreamExecutionEnvironment</span><span class="o">.</span><span class="n">getExecutionEnvironment</span><span class="p">(</span>
+                <span class="n">configuration</span><span class="o">.</span><span class="n">_j_configuration</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">j_stream_exection_environment</span> <span class="o">=</span> <span class="n">JStreamExecutionEnvironment</span><span class="o">.</span><span class="n">getExecutionEnvironment</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">StreamExecutionEnvironment</span><span class="p">(</span><span class="n">j_stream_exection_environment</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.create_input">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.create_input.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.create_input">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_format</span><span class="p">:</span> <span class="n">InputFormat</span><span class="p">,</span>
+                     <span class="n">type_info</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TypeInformation</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create an input data stream with InputFormat.</span>
+
+<span class="sd">        If the input_format needs a well-defined type information (e.g. Avro&#39;s generic record), you</span>
+<span class="sd">        can either explicitly use type_info argument or use InputFormats implementing</span>
+<span class="sd">        ResultTypeQueryable.</span>
+
+<span class="sd">        :param input_format: The input format to read from.</span>
+<span class="sd">        :param type_info: Optional type information to explicitly declare output type.</span>
+
+<span class="sd">        .. versionadded:: 1.16.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">input_type_info</span> <span class="o">=</span> <span class="n">type_info</span>
+
+        <span class="k">if</span> <span class="n">input_type_info</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">input_format</span><span class="p">,</span> <span class="n">ResultTypeQueryable</span><span class="p">):</span>
+            <span class="n">input_type_info</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">ResultTypeQueryable</span><span class="p">,</span> <span class="n">input_format</span><span class="p">)</span><span class="o">.</span><span class="n">get_produced_type</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">input_type_info</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">j_data_stream</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">createInput</span><span class="p">(</span>
+                <span class="n">input_format</span><span class="o">.</span><span class="n">get_java_object</span><span class="p">()</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">j_data_stream</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">createInput</span><span class="p">(</span>
+                <span class="n">input_format</span><span class="o">.</span><span class="n">get_java_object</span><span class="p">(),</span> <span class="n">input_type_info</span><span class="o">.</span><span class="n">get_java_type_info</span><span class="p">()</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">DataStream</span><span class="p">(</span><span class="n">j_data_stream</span><span class="o">=</span><span class="n">j_data_stream</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.add_source">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.add_source.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.add_source">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_source</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_func</span><span class="p">:</span> <span class="n">SourceFunction</span><span class="p">,</span> <span class="n">source_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Custom Source&#39;</span><span class="p">,</span>
+                   <span class="n">type_info</span><span class="p">:</span> <span class="n">TypeInformation</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;DataStream&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds a data source to the streaming topology.</span>
+
+<span class="sd">        :param source_func: the user defined function.</span>
+<span class="sd">        :param source_name: name of the data source. Optional.</span>
+<span class="sd">        :param type_info: type of the returned stream. Optional.</span>
+<span class="sd">        :return: the data stream constructed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">type_info</span><span class="p">:</span>
+            <span class="n">j_type_info</span> <span class="o">=</span> <span class="n">type_info</span><span class="o">.</span><span class="n">get_java_type_info</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">j_type_info</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">j_data_stream</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">addSource</span><span class="p">(</span><span class="n">source_func</span>
+                                                                       <span class="o">.</span><span class="n">get_java_function</span><span class="p">(),</span>
+                                                                       <span class="n">source_name</span><span class="p">,</span>
+                                                                       <span class="n">j_type_info</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">DataStream</span><span class="p">(</span><span class="n">j_data_stream</span><span class="o">=</span><span class="n">j_data_stream</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.from_source">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.from_source.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.from_source">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_source</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                    <span class="n">source</span><span class="p">:</span> <span class="n">Source</span><span class="p">,</span>
+                    <span class="n">watermark_strategy</span><span class="p">:</span> <span class="n">WatermarkStrategy</span><span class="p">,</span>
+                    <span class="n">source_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                    <span class="n">type_info</span><span class="p">:</span> <span class="n">TypeInformation</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;DataStream&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds a data :class:`~pyflink.datastream.connectors.Source` to the environment to get a</span>
+<span class="sd">        :class:`~pyflink.datastream.DataStream`.</span>
+
+<span class="sd">        The result will be either a bounded data stream (that can be processed in a batch way) or</span>
+<span class="sd">        an unbounded data stream (that must be processed in a streaming way), based on the</span>
+<span class="sd">        boundedness property of the source.</span>
+
+<span class="sd">        This method takes an explicit type information for the produced data stream, so that</span>
+<span class="sd">        callers can define directly what type/serializer will be used for the produced stream. For</span>
+<span class="sd">        sources that describe their produced type, the parameter type_info should not be specified</span>
+<span class="sd">        to avoid specifying the produced type redundantly.</span>
+
+<span class="sd">        .. versionadded:: 1.13.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">type_info</span><span class="p">:</span>
+            <span class="n">j_type_info</span> <span class="o">=</span> <span class="n">type_info</span><span class="o">.</span><span class="n">get_java_type_info</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">j_type_info</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">j_data_stream</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">fromSource</span><span class="p">(</span>
+            <span class="n">source</span><span class="o">.</span><span class="n">get_java_function</span><span class="p">(),</span>
+            <span class="n">watermark_strategy</span><span class="o">.</span><span class="n">_j_watermark_strategy</span><span class="p">,</span>
+            <span class="n">source_name</span><span class="p">,</span>
+            <span class="n">j_type_info</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">DataStream</span><span class="p">(</span><span class="n">j_data_stream</span><span class="o">=</span><span class="n">j_data_stream</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.read_text_file">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.read_text_file.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.read_text_file">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_text_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">charset_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;UTF-8&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataStream</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reads the given file line-by-line and creates a DataStream that contains a string with the</span>
+<span class="sd">        contents of each such line. The charset with the given name will be used to read the files.</span>
+
+<span class="sd">        Note that this interface is not fault tolerant that is supposed to be used for test purpose.</span>
+
+<span class="sd">        :param file_path: The path of the file, as a URI (e.g., &quot;file:///some/local/file&quot; or</span>
+<span class="sd">                          &quot;hdfs://host:port/file/path&quot;)</span>
+<span class="sd">        :param charset_name: The name of the character set used to read the file.</span>
+<span class="sd">        :return: The DataStream that represents the data read from the given file as text lines.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">DataStream</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span>
+                          <span class="o">.</span><span class="n">readTextFile</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">charset_name</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.from_collection">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.from_collection.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.from_collection">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_collection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">collection</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
+                        <span class="n">type_info</span><span class="p">:</span> <span class="n">TypeInformation</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataStream</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a data stream from the given non-empty collection. The type of the data stream is</span>
+<span class="sd">        that of the elements in the collection.</span>
+
+<span class="sd">        Note that this operation will result in a non-parallel data stream source, i.e. a data</span>
+<span class="sd">        stream source with parallelism one.</span>
+
+<span class="sd">        :param collection: The collection of elements to create the data stream from.</span>
+<span class="sd">        :param type_info: The TypeInformation for the produced data stream</span>
+<span class="sd">        :return: the data stream representing the given collection.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">type_info</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">collection</span> <span class="o">=</span> <span class="p">[</span><span class="n">type_info</span><span class="o">.</span><span class="n">to_internal_type</span><span class="p">(</span><span class="n">element</span><span class="p">)</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">collection</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_from_collection</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">type_info</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_from_collection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">elements</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
+                         <span class="n">type_info</span><span class="p">:</span> <span class="n">TypeInformation</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataStream</span><span class="p">:</span>
+        <span class="n">temp_file</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">())</span>
+        <span class="n">serializer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">serializer</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">temp_file</span><span class="p">:</span>
+                <span class="c1"># dumps elements to a temporary file by pickle serializer.</span>
+                <span class="n">serializer</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="n">elements</span><span class="p">,</span> <span class="n">temp_file</span><span class="p">)</span>
+            <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
+            <span class="c1"># if user does not defined the element data types, read the pickled data as a byte array</span>
+            <span class="c1"># list.</span>
+            <span class="k">if</span> <span class="n">type_info</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">j_objs</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">PythonBridgeUtils</span><span class="o">.</span><span class="n">readPickledBytes</span><span class="p">(</span><span class="n">temp_file</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                <span class="n">out_put_type_info</span> <span class="o">=</span> <span class="n">Types</span><span class="o">.</span><span class="n">PICKLED_BYTE_ARRAY</span><span class="p">()</span>  <span class="c1"># type: TypeInformation</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">j_objs</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">PythonBridgeUtils</span><span class="o">.</span><span class="n">readPythonObjects</span><span class="p">(</span><span class="n">temp_file</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                <span class="n">out_put_type_info</span> <span class="o">=</span> <span class="n">type_info</span>
+
+            <span class="n">PythonTypeUtils</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span>\
+                <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">streaming</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">PythonTypeUtils</span>
+            <span class="n">execution_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">getConfig</span><span class="p">()</span>
+            <span class="n">j_input_format</span> <span class="o">=</span> <span class="n">PythonTypeUtils</span><span class="o">.</span><span class="n">getCollectionInputFormat</span><span class="p">(</span>
+                <span class="n">j_objs</span><span class="p">,</span>
+                <span class="n">out_put_type_info</span><span class="o">.</span><span class="n">get_java_type_info</span><span class="p">(),</span>
+                <span class="n">execution_config</span>
+            <span class="p">)</span>
+
+            <span class="n">JInputFormatSourceFunction</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">streaming</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span>\
+                <span class="n">source</span><span class="o">.</span><span class="n">InputFormatSourceFunction</span>
+            <span class="n">JBoundedness</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">Boundedness</span>
+
+            <span class="n">j_data_stream_source</span> <span class="o">=</span> <span class="n">invoke_method</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="p">,</span>
+                <span class="s2">&quot;org.apache.flink.streaming.api.environment.StreamExecutionEnvironment&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;addSource&quot;</span><span class="p">,</span>
+                <span class="p">[</span><span class="n">JInputFormatSourceFunction</span><span class="p">(</span><span class="n">j_input_format</span><span class="p">,</span> <span class="n">out_put_type_info</span><span class="o">.</span><span class="n">get_java_type_info</span><span class="p">()),</span>
+                 <span class="s2">&quot;Collection Source&quot;</span><span class="p">,</span>
+                 <span class="n">out_put_type_info</span><span class="o">.</span><span class="n">get_java_type_info</span><span class="p">(),</span>
+                 <span class="n">JBoundedness</span><span class="o">.</span><span class="n">BOUNDED</span><span class="p">],</span>
+                <span class="p">[</span><span class="s2">&quot;org.apache.flink.streaming.api.functions.source.SourceFunction&quot;</span><span class="p">,</span>
+                 <span class="s2">&quot;java.lang.String&quot;</span><span class="p">,</span>
+                 <span class="s2">&quot;org.apache.flink.api.common.typeinfo.TypeInformation&quot;</span><span class="p">,</span>
+                 <span class="s2">&quot;org.apache.flink.api.connector.source.Boundedness&quot;</span><span class="p">])</span>
+            <span class="n">j_data_stream_source</span><span class="o">.</span><span class="n">forceNonParallel</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">DataStream</span><span class="p">(</span><span class="n">j_data_stream</span><span class="o">=</span><span class="n">j_data_stream_source</span><span class="p">)</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">temp_file</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_generate_stream_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clear_transformations</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">job_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="n">JavaObject</span><span class="p">:</span>
+        <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
+        <span class="n">JPythonConfigUtil</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">PythonConfigUtil</span>
+
+        <span class="n">JPythonConfigUtil</span><span class="o">.</span><span class="n">configPythonOperator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="p">)</span>
+
+        <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">chain</span><span class="o">.</span><span class="n">PythonOperatorChainingOptimizer</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="p">)</span>
+
+        <span class="n">JPythonConfigUtil</span><span class="o">.</span><span class="n">setPartitionCustomOperatorNumPartitions</span><span class="p">(</span>
+            <span class="n">get_field_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="p">,</span> <span class="s2">&quot;transformations&quot;</span><span class="p">))</span>
+
+        <span class="n">j_stream_graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">getStreamGraph</span><span class="p">(</span><span class="n">clear_transformations</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">job_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">j_stream_graph</span><span class="o">.</span><span class="n">setJobName</span><span class="p">(</span><span class="n">job_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">j_stream_graph</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_open</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># start BeamFnLoopbackWorkerPoolServicer when executed in MiniCluster</span>
+        <span class="n">j_configuration</span> <span class="o">=</span> <span class="n">get_j_env_configuration</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">startup_loopback_server</span><span class="p">():</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">Configuration</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.fn_execution.beam.beam_worker_pool_service</span><span class="w"> </span><span class="kn">import</span> \
+                <span class="n">BeamFnLoopbackWorkerPoolServicer</span>
+            <span class="n">config</span> <span class="o">=</span> <span class="n">Configuration</span><span class="p">(</span><span class="n">j_configuration</span><span class="o">=</span><span class="n">j_configuration</span><span class="p">)</span>
+            <span class="n">config</span><span class="o">.</span><span class="n">set_string</span><span class="p">(</span>
+                <span class="s2">&quot;python.loopback-server.address&quot;</span><span class="p">,</span> <span class="n">BeamFnLoopbackWorkerPoolServicer</span><span class="p">()</span><span class="o">.</span><span class="n">start</span><span class="p">())</span>
+
+        <span class="n">python_worker_execution_mode</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;_python_worker_execution_mode&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">python_worker_execution_mode</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">is_local_deployment</span><span class="p">(</span><span class="n">j_configuration</span><span class="p">):</span>
+                <span class="n">startup_loopback_server</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">python_worker_execution_mode</span> <span class="o">==</span> <span class="s1">&#39;loopback&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">is_local_deployment</span><span class="p">(</span><span class="n">j_configuration</span><span class="p">):</span>
+                <span class="n">startup_loopback_server</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Loopback mode is enabled, however the job wasn&#39;t configured to &quot;</span>
+                                 <span class="s2">&quot;run in local deployment mode&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">python_worker_execution_mode</span> <span class="o">!=</span> <span class="s1">&#39;process&#39;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;It only supports to execute the Python worker in &#39;loopback&#39; mode and &#39;process&#39; &quot;</span>
+                <span class="s2">&quot;mode, unknown mode &#39;</span><span class="si">%s</span><span class="s2">&#39; is configured&quot;</span> <span class="o">%</span> <span class="n">python_worker_execution_mode</span><span class="p">)</span>
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.is_unaligned_checkpoints_enabled">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.is_unaligned_checkpoints_enabled.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.is_unaligned_checkpoints_enabled">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_unaligned_checkpoints_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns whether Unaligned Checkpoints are enabled.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">isUnalignedCheckpointsEnabled</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.is_force_unaligned_checkpoints">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.is_force_unaligned_checkpoints.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.is_force_unaligned_checkpoints">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_force_unaligned_checkpoints</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns whether Unaligned Checkpoints are force-enabled.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">isForceUnalignedCheckpoints</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="StreamExecutionEnvironment.close">
+<a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.close.html#pyflink.datastream.stream_execution_environment.StreamExecutionEnvironment.close">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Close and clean up the execution environment. All the cached intermediate results will be</span>
+<span class="sd">        released physically.</span>
+
+<span class="sd">        .. versionadded:: 1.16.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_execution_environment</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

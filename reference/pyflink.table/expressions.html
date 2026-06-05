@@ -1,0 +1,1278 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Expressions &#8212; PyFlink 1.20+vvr.11.7.dev0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=b5c65be0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/pyflink.table/expressions';</script>
+    <link rel="icon" href="../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pyflink.table.expressions.col" href="api/pyflink.table.expressions.col.html" />
+    <link rel="prev" title="pyflink.table.window.OverWindowPartitioned.order_by" href="api/pyflink.table.window.OverWindowPartitioned.order_by.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.20+vvr.11.7.dev0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="PyFlink 1.20+vvr.11.7.dev0 documentation - Home"/>
+    <img src="../../_static/navbar-brand-logo.jpg" class="logo__image only-dark pst-js-only" alt="PyFlink 1.20+vvr.11.7.dev0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">PyFlink Table</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="table_environment.html">TableEnvironment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="table.html">Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_types.html">Data Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="window.html">Window</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="udf.html">User Defined Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="descriptors.html">Descriptors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="statement_set.html">StatementSet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="catalog.html">Catalog</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.datastream/index.html">PyFlink DataStream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.dataframe/index.html">PyFlink DataFrame</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.common/index.html">PyFlink Common</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">API Reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">PyFlink Table</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Expressions</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="expressions">
+<h1>Expressions<a class="headerlink" href="#expressions" title="Link to this heading">#</a></h1>
+<section id="id1">
+<h2>Expressions<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expressions.col.html#pyflink.table.expressions.col" title="pyflink.table.expressions.col"><code class="xref py py-obj docutils literal notranslate"><span class="pre">col</span></code></a>(name)</p></td>
+<td><p>Creates an expression which refers to a table's column.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expressions.lit.html#pyflink.table.expressions.lit" title="pyflink.table.expressions.lit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lit</span></code></a>(v[, data_type])</p></td>
+<td><p>Creates a SQL literal.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expressions.range_.html#pyflink.table.expressions.range_" title="pyflink.table.expressions.range_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">range_</span></code></a>(start, end)</p></td>
+<td><p>Indicates a range from 'start' to 'end', which can be used in columns selection.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expressions.and_.html#pyflink.table.expressions.and_" title="pyflink.table.expressions.and_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">and_</span></code></a>(predicate0, predicate1, *predicates)</p></td>
+<td><p>Boolean AND in three-valued logic.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expressions.or_.html#pyflink.table.expressions.or_" title="pyflink.table.expressions.or_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">or_</span></code></a>(predicate0, predicate1, *predicates)</p></td>
+<td><p>Boolean OR in three-valued logic.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expressions.not_.html#pyflink.table.expressions.not_" title="pyflink.table.expressions.not_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">not_</span></code></a>(expression)</p></td>
+<td><p>Inverts a given boolean expression.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expressions.current_database.html#pyflink.table.expressions.current_database" title="pyflink.table.expressions.current_database"><code class="xref py py-obj docutils literal notranslate"><span class="pre">current_database</span></code></a>()</p></td>
+<td><p>Returns the current database</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expressions.current_date.html#pyflink.table.expressions.current_date" title="pyflink.table.expressions.current_date"><code class="xref py py-obj docutils literal notranslate"><span class="pre">current_date</span></code></a>()</p></td>
+<td><p>Returns the current SQL date in local time zone.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expressions.current_time.html#pyflink.table.expressions.current_time" title="pyflink.table.expressions.current_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">current_time</span></code></a>()</p></td>
+<td><p>Returns the current SQL time in local time zone.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expressions.current_timestamp.html#pyflink.table.expressions.current_timestamp" title="pyflink.table.expressions.current_timestamp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">current_timestamp</span></code></a>()</p></td>
+<td><p>Returns the current SQL timestamp in local time zone, the return type of this expression is TIMESTAMP_LTZ.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expressions.current_watermark.html#pyflink.table.expressions.current_watermark" title="pyflink.table.expressions.current_watermark"><code class="xref py py-obj docutils literal notranslate"><span class="pre">current_watermark</span></code></a>(rowtimeAttribute)</p></td>
+<td><p>Returns the current watermark for the given rowtime attribute, or NULL if no common watermark of all upstream operations is available at the current operation in the pipeline.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expressions.local_time.html#pyflink.table.expressions.local_time" title="pyflink.table.expressions.local_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">local_time</span></code></a>()</p></td>
+<td><p>Returns the current SQL time in local time zone.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expressions.local_timestamp.html#pyflink.table.expressions.local_timestamp" title="pyflink.table.expressions.local_timestamp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">local_timestamp</span></code></a>()</p></td>
+<td><p>Returns the current SQL timestamp in local time zone, the return type of this expression s TIMESTAMP.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expressions.to_date.html#pyflink.table.expressions.to_date" title="pyflink.table.expressions.to_date"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_date</span></code></a>(date_str[, format])</p></td>
+<td><p>Converts the date string with the given format (by default 'yyyy-MM-dd') to a date.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expressions.to_timestamp.html#pyflink.table.expressions.to_timestamp" title="pyflink.table.expressions.to_timestamp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_timestamp</span></code></a>(timestamp_str[, format])</p></td>
+<td><p>Converts the date time string with the given format (by default: 'yyyy-MM-dd HH:mm:ss') under the 'UTC+0' time zone to a timestamp.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expressions.to_timestamp_ltz.html#pyflink.table.expressions.to_timestamp_ltz" title="pyflink.table.expressions.to_timestamp_ltz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_timestamp_ltz</span></code></a>(numeric_epoch_time, precision)</p></td>
+<td><p>Converts a numeric type epoch time to TIMESTAMP_LTZ.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expressions.temporal_overlaps.html#pyflink.table.expressions.temporal_overlaps" title="pyflink.table.expressions.temporal_overlaps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">temporal_overlaps</span></code></a>(left_time_point, ...)</p></td>
+<td><p>Determines whether two anchored time intervals overlap.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expressions.date_format.html#pyflink.table.expressions.date_format" title="pyflink.table.expressions.date_format"><code class="xref py py-obj docutils literal notranslate"><span class="pre">date_format</span></code></a>(timestamp, format)</p></td>
+<td><p>Formats a timestamp as a string using a specified format.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expressions.timestamp_diff.html#pyflink.table.expressions.timestamp_diff" title="pyflink.table.expressions.timestamp_diff"><code class="xref py py-obj docutils literal notranslate"><span class="pre">timestamp_diff</span></code></a>(time_point_unit, time_point1, ...)</p></td>
+<td><p>Returns the (signed) number of <code class="xref py py-class docutils literal notranslate"><span class="pre">TimePointUnit</span></code> between time_point1 and time_point2.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expressions.convert_tz.html#pyflink.table.expressions.convert_tz" title="pyflink.table.expressions.convert_tz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convert_tz</span></code></a>(date_str, tz_from, tz_to)</p></td>
+<td><p>Converts a datetime string date_str (with default ISO timestamp format 'yyyy-MM-dd HH:mm:ss') from time zone tz_from to time zone tz_to.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expressions.from_unixtime.html#pyflink.table.expressions.from_unixtime" title="pyflink.table.expressions.from_unixtime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_unixtime</span></code></a>(unixtime[, format])</p></td>
+<td><p>Converts unix timestamp (seconds since '1970-01-01 00:00:00' UTC) to datetime string the given format.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expressions.unix_timestamp.html#pyflink.table.expressions.unix_timestamp" title="pyflink.table.expressions.unix_timestamp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unix_timestamp</span></code></a>([date_str, format])</p></td>
+<td><p>Gets the current unix timestamp in seconds if no arguments are not specified.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expressions.array.html#pyflink.table.expressions.array" title="pyflink.table.expressions.array"><code class="xref py py-obj docutils literal notranslate"><span class="pre">array</span></code></a>(head, *tail)</p></td>
+<td><p>Creates an array of literals.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expressions.row.html#pyflink.table.expressions.row" title="pyflink.table.expressions.row"><code class="xref py py-obj docutils literal notranslate"><span class="pre">row</span></code></a>(head, *tail)</p></td>
+<td><p>Creates a row of expressions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expressions.map_.html#pyflink.table.expressions.map_" title="pyflink.table.expressions.map_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">map_</span></code></a>(key, value, *tail)</p></td>
+<td><p>Creates a map of expressions.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expressions.map_from_arrays.html#pyflink.table.expressions.map_from_arrays" title="pyflink.table.expressions.map_from_arrays"><code class="xref py py-obj docutils literal notranslate"><span class="pre">map_from_arrays</span></code></a>(key, value)</p></td>
+<td><p>Creates a map from an array of keys and an array of values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expressions.row_interval.html#pyflink.table.expressions.row_interval" title="pyflink.table.expressions.row_interval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">row_interval</span></code></a>(rows)</p></td>
+<td><p>Creates an interval of rows.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expressions.pi.html#pyflink.table.expressions.pi" title="pyflink.table.expressions.pi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pi</span></code></a>()</p></td>
+<td><p>Returns a value that is closer than any other value to <cite>pi</cite>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expressions.e.html#pyflink.table.expressions.e" title="pyflink.table.expressions.e"><code class="xref py py-obj docutils literal notranslate"><span class="pre">e</span></code></a>()</p></td>
+<td><p>Returns a value that is closer than any other value to <cite>e</cite>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expressions.rand.html#pyflink.table.expressions.rand" title="pyflink.table.expressions.rand"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rand</span></code></a>([seed])</p></td>
+<td><p>Returns a pseudorandom double value between 0.0 (inclusive) and 1.0 (exclusive) with a initial seed if specified.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expressions.rand_integer.html#pyflink.table.expressions.rand_integer" title="pyflink.table.expressions.rand_integer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rand_integer</span></code></a>(bound[, seed])</p></td>
+<td><p>Returns a pseudorandom integer value between 0 (inclusive) and the specified value (exclusive) with a initial seed if specified.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expressions.atan2.html#pyflink.table.expressions.atan2" title="pyflink.table.expressions.atan2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">atan2</span></code></a>(y, x)</p></td>
+<td><p>Calculates the arc tangent of a given coordinate.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expressions.negative.html#pyflink.table.expressions.negative" title="pyflink.table.expressions.negative"><code class="xref py py-obj docutils literal notranslate"><span class="pre">negative</span></code></a>(v)</p></td>
+<td><p>Returns negative numeric.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expressions.concat.html#pyflink.table.expressions.concat" title="pyflink.table.expressions.concat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">concat</span></code></a>(first, *others)</p></td>
+<td><p>Returns the string that results from concatenating the arguments.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expressions.concat_ws.html#pyflink.table.expressions.concat_ws" title="pyflink.table.expressions.concat_ws"><code class="xref py py-obj docutils literal notranslate"><span class="pre">concat_ws</span></code></a>(separator, first, *others)</p></td>
+<td><p>Returns the string that results from concatenating the arguments and separator.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expressions.uuid.html#pyflink.table.expressions.uuid" title="pyflink.table.expressions.uuid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">uuid</span></code></a>()</p></td>
+<td><p>Returns an UUID (Universally Unique Identifier) string (e.g., &quot;3d3c68f7-f608-473f-b60c-b0c44ad4cc4e&quot;) according to RFC 4122 type 4 (pseudo randomly generated) UUID.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expressions.null_of.html#pyflink.table.expressions.null_of" title="pyflink.table.expressions.null_of"><code class="xref py py-obj docutils literal notranslate"><span class="pre">null_of</span></code></a>(data_type)</p></td>
+<td><p>Returns a null literal value of a given data type.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expressions.log.html#pyflink.table.expressions.log" title="pyflink.table.expressions.log"><code class="xref py py-obj docutils literal notranslate"><span class="pre">log</span></code></a>(v[, base])</p></td>
+<td><p>If base is specified, calculates the logarithm of the given value to the given base.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expressions.source_watermark.html#pyflink.table.expressions.source_watermark" title="pyflink.table.expressions.source_watermark"><code class="xref py py-obj docutils literal notranslate"><span class="pre">source_watermark</span></code></a>()</p></td>
+<td><p>Source watermark declaration for schema.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expressions.if_then_else.html#pyflink.table.expressions.if_then_else" title="pyflink.table.expressions.if_then_else"><code class="xref py py-obj docutils literal notranslate"><span class="pre">if_then_else</span></code></a>(condition, if_true, if_false)</p></td>
+<td><p>Ternary conditional operator that decides which of two other expressions should be evaluated based on a evaluated boolean condition.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expressions.coalesce.html#pyflink.table.expressions.coalesce" title="pyflink.table.expressions.coalesce"><code class="xref py py-obj docutils literal notranslate"><span class="pre">coalesce</span></code></a>(*args)</p></td>
+<td><p>Returns the first argument that is not NULL.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expressions.with_columns.html#pyflink.table.expressions.with_columns" title="pyflink.table.expressions.with_columns"><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_columns</span></code></a>(head, *tails)</p></td>
+<td><p>Creates an expression that selects a range of columns.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expressions.without_columns.html#pyflink.table.expressions.without_columns" title="pyflink.table.expressions.without_columns"><code class="xref py py-obj docutils literal notranslate"><span class="pre">without_columns</span></code></a>(head, *tails)</p></td>
+<td><p>Creates an expression that selects all columns except for the given range of columns.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expressions.json_string.html#pyflink.table.expressions.json_string" title="pyflink.table.expressions.json_string"><code class="xref py py-obj docutils literal notranslate"><span class="pre">json_string</span></code></a>(value)</p></td>
+<td><p>Serializes a value into JSON.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expressions.json_object.html#pyflink.table.expressions.json_object" title="pyflink.table.expressions.json_object"><code class="xref py py-obj docutils literal notranslate"><span class="pre">json_object</span></code></a>([on_null])</p></td>
+<td><p>Builds a JSON object string from a list of key-value pairs.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expressions.json_object_agg.html#pyflink.table.expressions.json_object_agg" title="pyflink.table.expressions.json_object_agg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">json_object_agg</span></code></a>(on_null, key_expr, value_expr)</p></td>
+<td><p>Builds a JSON object string by aggregating key-value expressions into a single JSON object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expressions.json_array.html#pyflink.table.expressions.json_array" title="pyflink.table.expressions.json_array"><code class="xref py py-obj docutils literal notranslate"><span class="pre">json_array</span></code></a>([on_null])</p></td>
+<td><p>Builds a JSON array string from a list of values.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expressions.json_array_agg.html#pyflink.table.expressions.json_array_agg" title="pyflink.table.expressions.json_array_agg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">json_array_agg</span></code></a>(on_null, item_expr)</p></td>
+<td><p>Builds a JSON object string by aggregating items into an array.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expressions.call.html#pyflink.table.expressions.call" title="pyflink.table.expressions.call"><code class="xref py py-obj docutils literal notranslate"><span class="pre">call</span></code></a>(f, *args)</p></td>
+<td><p>The first parameter <cite>f</cite> could be a str or a Python user-defined function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expressions.call_sql.html#pyflink.table.expressions.call_sql" title="pyflink.table.expressions.call_sql"><code class="xref py py-obj docutils literal notranslate"><span class="pre">call_sql</span></code></a>(sql_expression)</p></td>
+<td><p>A call to a SQL expression.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="expression">
+<h2>Expression<a class="headerlink" href="#expression" title="Link to this heading">#</a></h2>
+<section id="arithmetic-functions">
+<h3>arithmetic functions<a class="headerlink" href="#arithmetic-functions" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.exp.html#pyflink.table.expression.Expression.exp" title="pyflink.table.expression.Expression.exp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.exp</span></code></a></p></td>
+<td><p>Calculates the Euler's number raised to the given power.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.log10.html#pyflink.table.expression.Expression.log10" title="pyflink.table.expression.Expression.log10"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.log10</span></code></a></p></td>
+<td><p>Calculates the base 10 logarithm of the given value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.log2.html#pyflink.table.expression.Expression.log2" title="pyflink.table.expression.Expression.log2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.log2</span></code></a></p></td>
+<td><p>Calculates the base 2 logarithm of the given value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.ln.html#pyflink.table.expression.Expression.ln" title="pyflink.table.expression.Expression.ln"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.ln</span></code></a></p></td>
+<td><p>Calculates the natural logarithm of the given value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.log.html#pyflink.table.expression.Expression.log" title="pyflink.table.expression.Expression.log"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.log</span></code></a>([base])</p></td>
+<td><p>Calculates the natural logarithm of the given value if base is not specified.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.cosh.html#pyflink.table.expression.Expression.cosh" title="pyflink.table.expression.Expression.cosh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.cosh</span></code></a></p></td>
+<td><p>Calculates the hyperbolic cosine of a given number.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.sinh.html#pyflink.table.expression.Expression.sinh" title="pyflink.table.expression.Expression.sinh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.sinh</span></code></a></p></td>
+<td><p>Calculates the hyperbolic sine of a given number.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.sin.html#pyflink.table.expression.Expression.sin" title="pyflink.table.expression.Expression.sin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.sin</span></code></a></p></td>
+<td><p>Calculates the sine of a given number.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.cos.html#pyflink.table.expression.Expression.cos" title="pyflink.table.expression.Expression.cos"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.cos</span></code></a></p></td>
+<td><p>Calculates the cosine of a given number.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.tan.html#pyflink.table.expression.Expression.tan" title="pyflink.table.expression.Expression.tan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.tan</span></code></a></p></td>
+<td><p>Calculates the tangent of a given number.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.cot.html#pyflink.table.expression.Expression.cot" title="pyflink.table.expression.Expression.cot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.cot</span></code></a></p></td>
+<td><p>Calculates the cotangent of a given number.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.asin.html#pyflink.table.expression.Expression.asin" title="pyflink.table.expression.Expression.asin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.asin</span></code></a></p></td>
+<td><p>Calculates the arc sine of a given number.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.acos.html#pyflink.table.expression.Expression.acos" title="pyflink.table.expression.Expression.acos"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.acos</span></code></a></p></td>
+<td><p>Calculates the arc cosine of a given number.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.atan.html#pyflink.table.expression.Expression.atan" title="pyflink.table.expression.Expression.atan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.atan</span></code></a></p></td>
+<td><p>Calculates the arc tangent of a given number.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.tanh.html#pyflink.table.expression.Expression.tanh" title="pyflink.table.expression.Expression.tanh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.tanh</span></code></a></p></td>
+<td><p>Calculates the hyperbolic tangent of a given number.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.degrees.html#pyflink.table.expression.Expression.degrees" title="pyflink.table.expression.Expression.degrees"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.degrees</span></code></a></p></td>
+<td><p>Converts numeric from radians to degrees.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.radians.html#pyflink.table.expression.Expression.radians" title="pyflink.table.expression.Expression.radians"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.radians</span></code></a></p></td>
+<td><p>Converts numeric from degrees to radians.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.sqrt.html#pyflink.table.expression.Expression.sqrt" title="pyflink.table.expression.Expression.sqrt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.sqrt</span></code></a></p></td>
+<td><p>Calculates the square root of a given value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.abs.html#pyflink.table.expression.Expression.abs" title="pyflink.table.expression.Expression.abs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.abs</span></code></a></p></td>
+<td><p>Calculates the absolute value of given value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.sign.html#pyflink.table.expression.Expression.sign" title="pyflink.table.expression.Expression.sign"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.sign</span></code></a></p></td>
+<td><p>Calculates the signum of a given number.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.round.html#pyflink.table.expression.Expression.round" title="pyflink.table.expression.Expression.round"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.round</span></code></a>(places)</p></td>
+<td><p>Rounds the given number to integer places right to the decimal point.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.between.html#pyflink.table.expression.Expression.between" title="pyflink.table.expression.Expression.between"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.between</span></code></a>(lower_bound, upper_bound)</p></td>
+<td><p>Returns true if the given expression is between lower_bound and upper_bound (both inclusive).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.not_between.html#pyflink.table.expression.Expression.not_between" title="pyflink.table.expression.Expression.not_between"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.not_between</span></code></a>(lower_bound, upper_bound)</p></td>
+<td><p>Returns true if the given expression is not between lower_bound and upper_bound (both inclusive).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.then.html#pyflink.table.expression.Expression.then" title="pyflink.table.expression.Expression.then"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.then</span></code></a>(if_true, if_false)</p></td>
+<td><p>Ternary conditional operator that decides which of two other expressions should be evaluated based on a evaluated boolean condition.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.if_null.html#pyflink.table.expression.Expression.if_null" title="pyflink.table.expression.Expression.if_null"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.if_null</span></code></a>(null_replacement)</p></td>
+<td><p>Returns null_replacement if the given expression is null; otherwise the expression is returned.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.is_null.html#pyflink.table.expression.Expression.is_null" title="pyflink.table.expression.Expression.is_null"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.is_null</span></code></a></p></td>
+<td><p>Returns true if the given expression is null.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.is_not_null.html#pyflink.table.expression.Expression.is_not_null" title="pyflink.table.expression.Expression.is_not_null"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.is_not_null</span></code></a></p></td>
+<td><p>Returns true if the given expression is not null.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.is_true.html#pyflink.table.expression.Expression.is_true" title="pyflink.table.expression.Expression.is_true"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.is_true</span></code></a></p></td>
+<td><p>Returns true if given boolean expression is true.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.is_false.html#pyflink.table.expression.Expression.is_false" title="pyflink.table.expression.Expression.is_false"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.is_false</span></code></a></p></td>
+<td><p>Returns true if given boolean expression is false.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.is_not_true.html#pyflink.table.expression.Expression.is_not_true" title="pyflink.table.expression.Expression.is_not_true"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.is_not_true</span></code></a></p></td>
+<td><p>Returns true if given boolean expression is not true (for null and false).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.is_not_false.html#pyflink.table.expression.Expression.is_not_false" title="pyflink.table.expression.Expression.is_not_false"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.is_not_false</span></code></a></p></td>
+<td><p>Returns true if given boolean expression is not false (for null and true).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.distinct.html#pyflink.table.expression.Expression.distinct" title="pyflink.table.expression.Expression.distinct"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.distinct</span></code></a></p></td>
+<td><p>Similar to a SQL distinct aggregation clause such as COUNT(DISTINCT a), declares that an aggregation function is only applied on distinct input values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.sum.html#pyflink.table.expression.Expression.sum" title="pyflink.table.expression.Expression.sum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.sum</span></code></a></p></td>
+<td><p>Returns the sum of the numeric field across all input values.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.sum0.html#pyflink.table.expression.Expression.sum0" title="pyflink.table.expression.Expression.sum0"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.sum0</span></code></a></p></td>
+<td><p>Returns the sum of the numeric field across all input values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.min.html#pyflink.table.expression.Expression.min" title="pyflink.table.expression.Expression.min"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.min</span></code></a></p></td>
+<td><p>Returns the minimum value of field across all input values.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.max.html#pyflink.table.expression.Expression.max" title="pyflink.table.expression.Expression.max"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.max</span></code></a></p></td>
+<td><p>Returns the maximum value of field across all input values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.count.html#pyflink.table.expression.Expression.count" title="pyflink.table.expression.Expression.count"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.count</span></code></a></p></td>
+<td><p>Returns the number of input rows for which the field is not null.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.avg.html#pyflink.table.expression.Expression.avg" title="pyflink.table.expression.Expression.avg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.avg</span></code></a></p></td>
+<td><p>Returns the average (arithmetic mean) of the numeric field across all input values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.first_value.html#pyflink.table.expression.Expression.first_value" title="pyflink.table.expression.Expression.first_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.first_value</span></code></a></p></td>
+<td><p>Returns the first value of field across all input values.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.last_value.html#pyflink.table.expression.Expression.last_value" title="pyflink.table.expression.Expression.last_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.last_value</span></code></a></p></td>
+<td><p>Returns the last value of field across all input values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.list_agg.html#pyflink.table.expression.Expression.list_agg" title="pyflink.table.expression.Expression.list_agg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.list_agg</span></code></a>([separator])</p></td>
+<td><p>Concatenates the values of string expressions and places separator values between them.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.stddev_pop.html#pyflink.table.expression.Expression.stddev_pop" title="pyflink.table.expression.Expression.stddev_pop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.stddev_pop</span></code></a></p></td>
+<td><p>Returns the population standard deviation of an expression(the square root of var_pop).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.stddev_samp.html#pyflink.table.expression.Expression.stddev_samp" title="pyflink.table.expression.Expression.stddev_samp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.stddev_samp</span></code></a></p></td>
+<td><p>Returns the sample standard deviation of an expression(the square root of var_samp).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.var_pop.html#pyflink.table.expression.Expression.var_pop" title="pyflink.table.expression.Expression.var_pop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.var_pop</span></code></a></p></td>
+<td><p>Returns the population standard variance of an expression.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.var_samp.html#pyflink.table.expression.Expression.var_samp" title="pyflink.table.expression.Expression.var_samp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.var_samp</span></code></a></p></td>
+<td><p>Returns the sample variance of a given expression.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.collect.html#pyflink.table.expression.Expression.collect" title="pyflink.table.expression.Expression.collect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.collect</span></code></a></p></td>
+<td><p>Returns multiset aggregate of a given expression.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.array_agg.html#pyflink.table.expression.Expression.array_agg" title="pyflink.table.expression.Expression.array_agg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.array_agg</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.alias.html#pyflink.table.expression.Expression.alias" title="pyflink.table.expression.Expression.alias"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.alias</span></code></a>(name, *extra_names)</p></td>
+<td><p>Specifies a name for an expression i.e. a field.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.cast.html#pyflink.table.expression.Expression.cast" title="pyflink.table.expression.Expression.cast"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.cast</span></code></a>(data_type)</p></td>
+<td><p>Returns a new value being cast to type type.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.try_cast.html#pyflink.table.expression.Expression.try_cast" title="pyflink.table.expression.Expression.try_cast"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.try_cast</span></code></a>(data_type)</p></td>
+<td><p>Like cast, but in case of error, returns NULL rather than failing the job.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.asc.html#pyflink.table.expression.Expression.asc" title="pyflink.table.expression.Expression.asc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.asc</span></code></a></p></td>
+<td><p>Specifies ascending order of an expression i.e. a field for order_by.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.desc.html#pyflink.table.expression.Expression.desc" title="pyflink.table.expression.Expression.desc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.desc</span></code></a></p></td>
+<td><p>Specifies descending order of an expression i.e. a field for order_by.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.in_.html#pyflink.table.expression.Expression.in_" title="pyflink.table.expression.Expression.in_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.in_</span></code></a>(first_element_or_table, ...)</p></td>
+<td><p>If first_element_or_table is a Table, Returns true if an expression exists in a given table sub-query.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.start.html#pyflink.table.expression.Expression.start" title="pyflink.table.expression.Expression.start"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.start</span></code></a></p></td>
+<td><p>Returns the start time (inclusive) of a window when applied on a window reference.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.end.html#pyflink.table.expression.Expression.end" title="pyflink.table.expression.Expression.end"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.end</span></code></a></p></td>
+<td><p>Returns the end time (exclusive) of a window when applied on a window reference.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.bin.html#pyflink.table.expression.Expression.bin" title="pyflink.table.expression.Expression.bin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.bin</span></code></a></p></td>
+<td><p>Returns a string representation of an integer numeric value in binary format.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.hex.html#pyflink.table.expression.Expression.hex" title="pyflink.table.expression.Expression.hex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.hex</span></code></a></p></td>
+<td><p>Returns a string representation of an integer numeric value or a string in hex format.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.unhex.html#pyflink.table.expression.Expression.unhex" title="pyflink.table.expression.Expression.unhex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.unhex</span></code></a></p></td>
+<td><p>Converts hexadecimal string expr to BINARY.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.truncate.html#pyflink.table.expression.Expression.truncate" title="pyflink.table.expression.Expression.truncate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.truncate</span></code></a>([n])</p></td>
+<td><p>Returns a number of truncated to n decimal places.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.percentile.html#pyflink.table.expression.Expression.percentile" title="pyflink.table.expression.Expression.percentile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.percentile</span></code></a>(percentage[, frequency])</p></td>
+<td><p>Returns the exact percentile value of expr at the specified percentage in a group.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="string-functions">
+<h3>string functions<a class="headerlink" href="#string-functions" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.starts_with.html#pyflink.table.expression.Expression.starts_with" title="pyflink.table.expression.Expression.starts_with"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.starts_with</span></code></a>(start_expr)</p></td>
+<td><p>Returns whether expr starts with start_expr.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.ends_with.html#pyflink.table.expression.Expression.ends_with" title="pyflink.table.expression.Expression.ends_with"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.ends_with</span></code></a>(end_expr)</p></td>
+<td><p>Returns whether expr ends with end_expr.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.substring.html#pyflink.table.expression.Expression.substring" title="pyflink.table.expression.Expression.substring"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.substring</span></code></a>(begin_index[, length])</p></td>
+<td><p>Creates a substring of the given string at given index for a given length.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.substr.html#pyflink.table.expression.Expression.substr" title="pyflink.table.expression.Expression.substr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.substr</span></code></a>(begin_index[, length])</p></td>
+<td><p>Creates a substring of the given string at given index for a given length.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.trim_leading.html#pyflink.table.expression.Expression.trim_leading" title="pyflink.table.expression.Expression.trim_leading"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.trim_leading</span></code></a>([character])</p></td>
+<td><p>Removes leading space characters from the given string if character is None.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.trim_trailing.html#pyflink.table.expression.Expression.trim_trailing" title="pyflink.table.expression.Expression.trim_trailing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.trim_trailing</span></code></a>([character])</p></td>
+<td><p>Removes trailing space characters from the given string if character is None.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.trim.html#pyflink.table.expression.Expression.trim" title="pyflink.table.expression.Expression.trim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.trim</span></code></a>([character])</p></td>
+<td><p>Removes leading and trailing space characters from the given string if character is None.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.replace.html#pyflink.table.expression.Expression.replace" title="pyflink.table.expression.Expression.replace"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.replace</span></code></a>([search, replacement])</p></td>
+<td><p>Returns a new string which replaces all the occurrences of the search target with the replacement string (non-overlapping).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.translate.html#pyflink.table.expression.Expression.translate" title="pyflink.table.expression.Expression.translate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.translate</span></code></a>(from_str, to_str)</p></td>
+<td><p>Translate an expr where all characters in from_str have been replaced with those in to_str.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.char_length.html#pyflink.table.expression.Expression.char_length" title="pyflink.table.expression.Expression.char_length"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.char_length</span></code></a></p></td>
+<td><p>Returns the length of a string.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.upper_case.html#pyflink.table.expression.Expression.upper_case" title="pyflink.table.expression.Expression.upper_case"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.upper_case</span></code></a></p></td>
+<td><p>Returns all of the characters in a string in upper case using the rules of the default locale.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.lower_case.html#pyflink.table.expression.Expression.lower_case" title="pyflink.table.expression.Expression.lower_case"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.lower_case</span></code></a></p></td>
+<td><p>Returns all of the characters in a string in lower case using the rules of the default locale.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.init_cap.html#pyflink.table.expression.Expression.init_cap" title="pyflink.table.expression.Expression.init_cap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.init_cap</span></code></a></p></td>
+<td><p>Converts the initial letter of each word in a string to uppercase.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.like.html#pyflink.table.expression.Expression.like" title="pyflink.table.expression.Expression.like"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.like</span></code></a>([pattern])</p></td>
+<td><p>Returns true, if a string matches the specified LIKE pattern.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.similar.html#pyflink.table.expression.Expression.similar" title="pyflink.table.expression.Expression.similar"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.similar</span></code></a>([pattern])</p></td>
+<td><p>Returns true, if a string matches the specified SQL regex pattern.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.position.html#pyflink.table.expression.Expression.position" title="pyflink.table.expression.Expression.position"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.position</span></code></a>([haystack])</p></td>
+<td><p>Returns the position of string in an other string starting at 1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.lpad.html#pyflink.table.expression.Expression.lpad" title="pyflink.table.expression.Expression.lpad"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.lpad</span></code></a>(length, pad)</p></td>
+<td><p>Returns a string left-padded with the given pad string to a length of len characters.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.rpad.html#pyflink.table.expression.Expression.rpad" title="pyflink.table.expression.Expression.rpad"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.rpad</span></code></a>(length, pad)</p></td>
+<td><p>Returns a string right-padded with the given pad string to a length of len characters.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.overlay.html#pyflink.table.expression.Expression.overlay" title="pyflink.table.expression.Expression.overlay"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.overlay</span></code></a>(new_string, starting[, ...])</p></td>
+<td><p>Replaces a substring of string with a string starting at a position (starting at 1).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.regexp.html#pyflink.table.expression.Expression.regexp" title="pyflink.table.expression.Expression.regexp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.regexp</span></code></a>(regex)</p></td>
+<td><p>Returns True if any (possibly empty) substring matches the regular expression, otherwise False.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.regexp_count.html#pyflink.table.expression.Expression.regexp_count" title="pyflink.table.expression.Expression.regexp_count"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.regexp_count</span></code></a>(regex)</p></td>
+<td><p>Returns the number of times str matches the regex pattern.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.regexp_replace.html#pyflink.table.expression.Expression.regexp_replace" title="pyflink.table.expression.Expression.regexp_replace"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.regexp_replace</span></code></a>(regex, replacement)</p></td>
+<td><p>Returns a string with all substrings that match the regular expression consecutively being replaced.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.regexp_extract.html#pyflink.table.expression.Expression.regexp_extract" title="pyflink.table.expression.Expression.regexp_extract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.regexp_extract</span></code></a>(regex[, extract_index])</p></td>
+<td><p>Returns a string extracted with a specified regular expression and a regex match group index.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.regexp_extract_all.html#pyflink.table.expression.Expression.regexp_extract_all" title="pyflink.table.expression.Expression.regexp_extract_all"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.regexp_extract_all</span></code></a>(regex[, ...])</p></td>
+<td><p>Extracts all the substrings in str that match the regex expression and correspond to the regex group extract_index.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.regexp_instr.html#pyflink.table.expression.Expression.regexp_instr" title="pyflink.table.expression.Expression.regexp_instr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.regexp_instr</span></code></a>(regex)</p></td>
+<td><p>Returns the position of the first substring in str that matches regex.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.regexp_substr.html#pyflink.table.expression.Expression.regexp_substr" title="pyflink.table.expression.Expression.regexp_substr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.regexp_substr</span></code></a>(regex)</p></td>
+<td><p>Returns the first substring in str that matches regex.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.from_base64.html#pyflink.table.expression.Expression.from_base64" title="pyflink.table.expression.Expression.from_base64"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.from_base64</span></code></a></p></td>
+<td><p>Returns the base string decoded with base64.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.to_base64.html#pyflink.table.expression.Expression.to_base64" title="pyflink.table.expression.Expression.to_base64"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.to_base64</span></code></a></p></td>
+<td><p>Returns the base64-encoded result of the input string.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.ascii.html#pyflink.table.expression.Expression.ascii" title="pyflink.table.expression.Expression.ascii"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.ascii</span></code></a></p></td>
+<td><p>Returns the numeric value of the first character of the input string.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.chr.html#pyflink.table.expression.Expression.chr" title="pyflink.table.expression.Expression.chr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.chr</span></code></a></p></td>
+<td><p>Returns the ASCII character result of the input integer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.decode.html#pyflink.table.expression.Expression.decode" title="pyflink.table.expression.Expression.decode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.decode</span></code></a>(charset)</p></td>
+<td><p>Decodes the first argument into a String using the provided character set.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.encode.html#pyflink.table.expression.Expression.encode" title="pyflink.table.expression.Expression.encode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.encode</span></code></a>(charset)</p></td>
+<td><p>Encodes the string into a BINARY using the provided character set.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.left.html#pyflink.table.expression.Expression.left" title="pyflink.table.expression.Expression.left"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.left</span></code></a>(length)</p></td>
+<td><p>Returns the leftmost integer characters from the input string.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.right.html#pyflink.table.expression.Expression.right" title="pyflink.table.expression.Expression.right"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.right</span></code></a>(length)</p></td>
+<td><p>Returns the rightmost integer characters from the input string.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.instr.html#pyflink.table.expression.Expression.instr" title="pyflink.table.expression.Expression.instr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.instr</span></code></a>(s)</p></td>
+<td><p>Returns the position of the first occurrence in the input string.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.locate.html#pyflink.table.expression.Expression.locate" title="pyflink.table.expression.Expression.locate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.locate</span></code></a>(s[, pos])</p></td>
+<td><p>Returns the position of the first occurrence in the input string after position integer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.parse_url.html#pyflink.table.expression.Expression.parse_url" title="pyflink.table.expression.Expression.parse_url"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.parse_url</span></code></a>(part_to_extract[, key])</p></td>
+<td><p>Parse url and return various parameter of the URL.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.printf.html#pyflink.table.expression.Expression.printf" title="pyflink.table.expression.Expression.printf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.printf</span></code></a>(*obj)</p></td>
+<td><p>Returns a formatted string from printf-style format strings.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.ltrim.html#pyflink.table.expression.Expression.ltrim" title="pyflink.table.expression.Expression.ltrim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.ltrim</span></code></a>([trim_str])</p></td>
+<td><p>Removes any leading characters within trim_str from str.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.rtrim.html#pyflink.table.expression.Expression.rtrim" title="pyflink.table.expression.Expression.rtrim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.rtrim</span></code></a>([trim_str])</p></td>
+<td><p>Removes any trailing characters within trim_str from str.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.btrim.html#pyflink.table.expression.Expression.btrim" title="pyflink.table.expression.Expression.btrim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.btrim</span></code></a>([trim_str])</p></td>
+<td><p>Removes any leading and trailing characters within trim_str from str.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.repeat.html#pyflink.table.expression.Expression.repeat" title="pyflink.table.expression.Expression.repeat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.repeat</span></code></a>(n)</p></td>
+<td><p>Returns a string that repeats the base string n times.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.over.html#pyflink.table.expression.Expression.over" title="pyflink.table.expression.Expression.over"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.over</span></code></a>(alias)</p></td>
+<td><p>Defines an aggregation to be used for a previously specified over window.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.reverse.html#pyflink.table.expression.Expression.reverse" title="pyflink.table.expression.Expression.reverse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.reverse</span></code></a></p></td>
+<td><p>Reverse each character in current string.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.split_index.html#pyflink.table.expression.Expression.split_index" title="pyflink.table.expression.Expression.split_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.split_index</span></code></a>(separator, index)</p></td>
+<td><p>Split target string with custom separator and pick the index-th(start with 0) result.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.str_to_map.html#pyflink.table.expression.Expression.str_to_map" title="pyflink.table.expression.Expression.str_to_map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.str_to_map</span></code></a>([list_delimiter, ...])</p></td>
+<td><p>Creates a map by parsing text.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.elt.html#pyflink.table.expression.Expression.elt" title="pyflink.table.expression.Expression.elt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.elt</span></code></a>(expr, *exprs)</p></td>
+<td><p>Returns the index-th expression.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.mime_type.html#pyflink.table.expression.Expression.mime_type" title="pyflink.table.expression.Expression.mime_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.mime_type</span></code></a>()</p></td>
+<td><p>Returns the MIME type based on the file extension in the given URI or object key.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.fetch_content.html#pyflink.table.expression.Expression.fetch_content" title="pyflink.table.expression.Expression.fetch_content"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.fetch_content</span></code></a>([concurrency])</p></td>
+<td><p>Asynchronously fetches content from the given URI (HTTP, OSS, HDFS, S3, etc.) and returns as VARBINARY.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="temporal-functions">
+<h3>temporal functions<a class="headerlink" href="#temporal-functions" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.to_date.html#pyflink.table.expression.Expression.to_date" title="pyflink.table.expression.Expression.to_date"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.to_date</span></code></a></p></td>
+<td><p>Parses a date string in the form &quot;yyyy-MM-dd&quot; to a SQL Date.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.to_time.html#pyflink.table.expression.Expression.to_time" title="pyflink.table.expression.Expression.to_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.to_time</span></code></a></p></td>
+<td><p>ss&quot; to a SQL Time.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.to_timestamp.html#pyflink.table.expression.Expression.to_timestamp" title="pyflink.table.expression.Expression.to_timestamp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.to_timestamp</span></code></a></p></td>
+<td><p>ss[.SSS]&quot; to a SQL Timestamp.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.extract.html#pyflink.table.expression.Expression.extract" title="pyflink.table.expression.Expression.extract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.extract</span></code></a>(time_interval_unit)</p></td>
+<td><p>Extracts parts of a time point or time interval.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.floor.html#pyflink.table.expression.Expression.floor" title="pyflink.table.expression.Expression.floor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.floor</span></code></a>([time_interval_unit])</p></td>
+<td><p>If time_interval_unit is specified, it rounds down a time point to the given unit, e.g. <cite>lit(&quot;12:44:31&quot;).to_date.floor(TimeIntervalUnit.MINUTE)</cite> leads to <cite>12:44:00</cite>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.ceil.html#pyflink.table.expression.Expression.ceil" title="pyflink.table.expression.Expression.ceil"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.ceil</span></code></a>([time_interval_unit])</p></td>
+<td><p>If time_interval_unit is specified, it rounds up a time point to the given unit, e.g. <cite>lit(&quot;12:44:31&quot;).to_date.floor(TimeIntervalUnit.MINUTE)</cite> leads to 12:45:00.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="advanced-type-helper-functions">
+<h3>advanced type helper functions<a class="headerlink" href="#advanced-type-helper-functions" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.get.html#pyflink.table.expression.Expression.get" title="pyflink.table.expression.Expression.get"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.get</span></code></a>(name_or_index)</p></td>
+<td><p>Accesses the field of a Flink composite type (such as Tuple, POJO, etc.) by name or index and returns it's value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.flatten.html#pyflink.table.expression.Expression.flatten" title="pyflink.table.expression.Expression.flatten"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.flatten</span></code></a></p></td>
+<td><p>Converts a Flink composite type (such as Tuple, POJO, etc.) and all of its direct subtypes into a flat representation where every subtype is a separate field.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.at.html#pyflink.table.expression.Expression.at" title="pyflink.table.expression.Expression.at"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.at</span></code></a>(index)</p></td>
+<td><p>Accesses the element of an array or map based on a key or an index (starting at 1).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.cardinality.html#pyflink.table.expression.Expression.cardinality" title="pyflink.table.expression.Expression.cardinality"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.cardinality</span></code></a></p></td>
+<td><p>Returns the number of elements of an array or number of entries of a map.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.element.html#pyflink.table.expression.Expression.element" title="pyflink.table.expression.Expression.element"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.element</span></code></a></p></td>
+<td><p>Returns the sole element of an array with a single element.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.array_concat.html#pyflink.table.expression.Expression.array_concat" title="pyflink.table.expression.Expression.array_concat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.array_concat</span></code></a>(*arrays)</p></td>
+<td><p>Returns an array that is the result of concatenating at least one array.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.array_contains.html#pyflink.table.expression.Expression.array_contains" title="pyflink.table.expression.Expression.array_contains"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.array_contains</span></code></a>(needle)</p></td>
+<td><p>Returns whether the given element exists in an array.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.array_distinct.html#pyflink.table.expression.Expression.array_distinct" title="pyflink.table.expression.Expression.array_distinct"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.array_distinct</span></code></a>()</p></td>
+<td><p>Returns an array with unique elements.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.array_join.html#pyflink.table.expression.Expression.array_join" title="pyflink.table.expression.Expression.array_join"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.array_join</span></code></a>(delimiter[, ...])</p></td>
+<td><p>Returns a string that represents the concatenation of the elements in the given array and the elements' data type in the given array is string.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.array_position.html#pyflink.table.expression.Expression.array_position" title="pyflink.table.expression.Expression.array_position"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.array_position</span></code></a>(needle)</p></td>
+<td><p>Returns the position of the first occurrence of element in the given array as int.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.array_remove.html#pyflink.table.expression.Expression.array_remove" title="pyflink.table.expression.Expression.array_remove"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.array_remove</span></code></a>(needle)</p></td>
+<td><p>Removes all elements that equal to element from array.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.array_reverse.html#pyflink.table.expression.Expression.array_reverse" title="pyflink.table.expression.Expression.array_reverse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.array_reverse</span></code></a>()</p></td>
+<td><p>Returns an array in reverse order.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.array_max.html#pyflink.table.expression.Expression.array_max" title="pyflink.table.expression.Expression.array_max"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.array_max</span></code></a>()</p></td>
+<td><p>Returns the maximum value from the array.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.array_slice.html#pyflink.table.expression.Expression.array_slice" title="pyflink.table.expression.Expression.array_slice"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.array_slice</span></code></a>(start_offset[, ...])</p></td>
+<td><p>Returns a subarray of the input array between 'start_offset' and 'end_offset' inclusive.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.array_min.html#pyflink.table.expression.Expression.array_min" title="pyflink.table.expression.Expression.array_min"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.array_min</span></code></a>()</p></td>
+<td><p>Returns the minimum value from the array.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.array_sort.html#pyflink.table.expression.Expression.array_sort" title="pyflink.table.expression.Expression.array_sort"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.array_sort</span></code></a>([ascending_order, ...])</p></td>
+<td><p>Returns the array in sorted order.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.array_union.html#pyflink.table.expression.Expression.array_union" title="pyflink.table.expression.Expression.array_union"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.array_union</span></code></a>(array)</p></td>
+<td><p>Returns an array of the elements in the union of array1 and array2, without duplicates.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.map_entries.html#pyflink.table.expression.Expression.map_entries" title="pyflink.table.expression.Expression.map_entries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.map_entries</span></code></a></p></td>
+<td><p>Returns an array of all entries in the given map.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.map_keys.html#pyflink.table.expression.Expression.map_keys" title="pyflink.table.expression.Expression.map_keys"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.map_keys</span></code></a></p></td>
+<td><p>Returns the keys of the map as an array.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.map_union.html#pyflink.table.expression.Expression.map_union" title="pyflink.table.expression.Expression.map_union"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.map_union</span></code></a>(*maps)</p></td>
+<td><p>Returns a map created by merging at least one map.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.map_values.html#pyflink.table.expression.Expression.map_values" title="pyflink.table.expression.Expression.map_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.map_values</span></code></a></p></td>
+<td><p>Returns the values of the map as an array.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.array_except.html#pyflink.table.expression.Expression.array_except" title="pyflink.table.expression.Expression.array_except"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.array_except</span></code></a>(array)</p></td>
+<td><p>Returns an ARRAY that contains the elements from array1 that are not in array2.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.array_intersect.html#pyflink.table.expression.Expression.array_intersect" title="pyflink.table.expression.Expression.array_intersect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.array_intersect</span></code></a>(array)</p></td>
+<td><p>Returns an ARRAY that contains the elements from array1 that are also in array2, without duplicates.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.split.html#pyflink.table.expression.Expression.split" title="pyflink.table.expression.Expression.split"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.split</span></code></a>(delimiter)</p></td>
+<td><p>Returns an array of substrings by splitting the input string based on the given delimiter.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="time-definition-functions">
+<h3>time definition functions<a class="headerlink" href="#time-definition-functions" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.rowtime.html#pyflink.table.expression.Expression.rowtime" title="pyflink.table.expression.Expression.rowtime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.rowtime</span></code></a></p></td>
+<td><p>Declares a field as the rowtime attribute for indicating, accessing, and working in Flink's event time.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.proctime.html#pyflink.table.expression.Expression.proctime" title="pyflink.table.expression.Expression.proctime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.proctime</span></code></a></p></td>
+<td><p>Declares a field as the proctime attribute for indicating, accessing, and working in Flink's processing time.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.year.html#pyflink.table.expression.Expression.year" title="pyflink.table.expression.Expression.year"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.year</span></code></a></p></td>
+<td><p>Creates an interval of the given number of years.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.years.html#pyflink.table.expression.Expression.years" title="pyflink.table.expression.Expression.years"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.years</span></code></a></p></td>
+<td><p>Creates an interval of the given number of years.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.quarter.html#pyflink.table.expression.Expression.quarter" title="pyflink.table.expression.Expression.quarter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.quarter</span></code></a></p></td>
+<td><p>Creates an interval of the given number of quarters.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.quarters.html#pyflink.table.expression.Expression.quarters" title="pyflink.table.expression.Expression.quarters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.quarters</span></code></a></p></td>
+<td><p>Creates an interval of the given number of quarters.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.month.html#pyflink.table.expression.Expression.month" title="pyflink.table.expression.Expression.month"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.month</span></code></a></p></td>
+<td><p>Creates an interval of the given number of months.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.months.html#pyflink.table.expression.Expression.months" title="pyflink.table.expression.Expression.months"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.months</span></code></a></p></td>
+<td><p>Creates an interval of the given number of months.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.week.html#pyflink.table.expression.Expression.week" title="pyflink.table.expression.Expression.week"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.week</span></code></a></p></td>
+<td><p>Creates an interval of the given number of weeks.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.weeks.html#pyflink.table.expression.Expression.weeks" title="pyflink.table.expression.Expression.weeks"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.weeks</span></code></a></p></td>
+<td><p>Creates an interval of the given number of weeks.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.day.html#pyflink.table.expression.Expression.day" title="pyflink.table.expression.Expression.day"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.day</span></code></a></p></td>
+<td><p>Creates an interval of the given number of days.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.days.html#pyflink.table.expression.Expression.days" title="pyflink.table.expression.Expression.days"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.days</span></code></a></p></td>
+<td><p>Creates an interval of the given number of days.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.hour.html#pyflink.table.expression.Expression.hour" title="pyflink.table.expression.Expression.hour"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.hour</span></code></a></p></td>
+<td><p>Creates an interval of the given number of hours.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.hours.html#pyflink.table.expression.Expression.hours" title="pyflink.table.expression.Expression.hours"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.hours</span></code></a></p></td>
+<td><p>Creates an interval of the given number of hours.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.minute.html#pyflink.table.expression.Expression.minute" title="pyflink.table.expression.Expression.minute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.minute</span></code></a></p></td>
+<td><p>Creates an interval of the given number of minutes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.minutes.html#pyflink.table.expression.Expression.minutes" title="pyflink.table.expression.Expression.minutes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.minutes</span></code></a></p></td>
+<td><p>Creates an interval of the given number of minutes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.second.html#pyflink.table.expression.Expression.second" title="pyflink.table.expression.Expression.second"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.second</span></code></a></p></td>
+<td><p>Creates an interval of the given number of seconds.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.seconds.html#pyflink.table.expression.Expression.seconds" title="pyflink.table.expression.Expression.seconds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.seconds</span></code></a></p></td>
+<td><p>Creates an interval of the given number of seconds.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.milli.html#pyflink.table.expression.Expression.milli" title="pyflink.table.expression.Expression.milli"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.milli</span></code></a></p></td>
+<td><p>Creates an interval of the given number of millis.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.millis.html#pyflink.table.expression.Expression.millis" title="pyflink.table.expression.Expression.millis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.millis</span></code></a></p></td>
+<td><p>Creates an interval of the given number of millis.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="hash-functions">
+<h3>hash functions<a class="headerlink" href="#hash-functions" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.md5.html#pyflink.table.expression.Expression.md5" title="pyflink.table.expression.Expression.md5"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.md5</span></code></a></p></td>
+<td><p>Returns the MD5 hash of the string argument; null if string is null.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.sha1.html#pyflink.table.expression.Expression.sha1" title="pyflink.table.expression.Expression.sha1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.sha1</span></code></a></p></td>
+<td><p>Returns the SHA-1 hash of the string argument; null if string is null.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.sha224.html#pyflink.table.expression.Expression.sha224" title="pyflink.table.expression.Expression.sha224"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.sha224</span></code></a></p></td>
+<td><p>Returns the SHA-224 hash of the string argument; null if string is null.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.sha256.html#pyflink.table.expression.Expression.sha256" title="pyflink.table.expression.Expression.sha256"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.sha256</span></code></a></p></td>
+<td><p>Returns the SHA-256 hash of the string argument; null if string is null.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.sha384.html#pyflink.table.expression.Expression.sha384" title="pyflink.table.expression.Expression.sha384"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.sha384</span></code></a></p></td>
+<td><p>Returns the SHA-384 hash of the string argument; null if string is null.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.sha512.html#pyflink.table.expression.Expression.sha512" title="pyflink.table.expression.Expression.sha512"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.sha512</span></code></a></p></td>
+<td><p>Returns the SHA-512 hash of the string argument; null if string is null.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.sha2.html#pyflink.table.expression.Expression.sha2" title="pyflink.table.expression.Expression.sha2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.sha2</span></code></a>(hash_length)</p></td>
+<td><p>Returns the hash for the given string expression using the SHA-2 family of hash functions (SHA-224, SHA-256, SHA-384, or SHA-512).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="json-functions">
+<h3>JSON functions<a class="headerlink" href="#json-functions" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.is_json.html#pyflink.table.expression.Expression.is_json" title="pyflink.table.expression.Expression.is_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.is_json</span></code></a>([json_type])</p></td>
+<td><p>Determine whether a given string is valid JSON.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.json_exists.html#pyflink.table.expression.Expression.json_exists" title="pyflink.table.expression.Expression.json_exists"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.json_exists</span></code></a>(path[, on_error])</p></td>
+<td><p>Determines whether a JSON string satisfies a given search criterion.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.json_value.html#pyflink.table.expression.Expression.json_value" title="pyflink.table.expression.Expression.json_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.json_value</span></code></a>(path[, ...])</p></td>
+<td><p>Extracts a scalar from a JSON string.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.json_query.html#pyflink.table.expression.Expression.json_query" title="pyflink.table.expression.Expression.json_query"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.json_query</span></code></a>(path[, ...])</p></td>
+<td><p>Extracts JSON values from a JSON string.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.json_quote.html#pyflink.table.expression.Expression.json_quote" title="pyflink.table.expression.Expression.json_quote"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.json_quote</span></code></a>()</p></td>
+<td><p>Quotes a string as a JSON value by wrapping it with double quote characters, escaping interior quote and special characters ('&quot;', '', '/', 'b', 'f', 'n', 'r', 't'), and returning the result as a string.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.json_unquote.html#pyflink.table.expression.Expression.json_unquote" title="pyflink.table.expression.Expression.json_unquote"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.json_unquote</span></code></a>()</p></td>
+<td><p>Unquotes JSON value, unescapes escaped special characters ('&quot;', '', '/', 'b', 'f', 'n', 'r', 't', 'u' hex hex hex hex) and returns the result as a string.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="bitmap-functions">
+<h3>Bitmap functions<a class="headerlink" href="#bitmap-functions" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.bitmap_and.html#pyflink.table.expression.Expression.bitmap_and" title="pyflink.table.expression.Expression.bitmap_and"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.bitmap_and</span></code></a>(bitmap2)</p></td>
+<td><p>Computes the AND (intersection) of two bitmaps.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.bitmap_andnot.html#pyflink.table.expression.Expression.bitmap_andnot" title="pyflink.table.expression.Expression.bitmap_andnot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.bitmap_andnot</span></code></a>(bitmap2)</p></td>
+<td><p>Computes the AND NOT (difference) of two bitmaps.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.bitmap_and_agg.html#pyflink.table.expression.Expression.bitmap_and_agg" title="pyflink.table.expression.Expression.bitmap_and_agg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.bitmap_and_agg</span></code></a>()</p></td>
+<td><p>Aggregates the AND (intersection) of multiple bitmaps.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.bitmap_and_cardinality_agg.html#pyflink.table.expression.Expression.bitmap_and_cardinality_agg" title="pyflink.table.expression.Expression.bitmap_and_cardinality_agg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.bitmap_and_cardinality_agg</span></code></a>()</p></td>
+<td><p>Aggregates the AND (intersection) of multiple bitmaps and returns its 64-bit cardinality.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.bitmap_build.html#pyflink.table.expression.Expression.bitmap_build" title="pyflink.table.expression.Expression.bitmap_build"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.bitmap_build</span></code></a>()</p></td>
+<td><p>Creates a bitmap from an array of 32-bit integers.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.bitmap_build_agg.html#pyflink.table.expression.Expression.bitmap_build_agg" title="pyflink.table.expression.Expression.bitmap_build_agg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.bitmap_build_agg</span></code></a>()</p></td>
+<td><p>Aggregates 32-bit integers into a bitmap.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.bitmap_build_cardinality_agg.html#pyflink.table.expression.Expression.bitmap_build_cardinality_agg" title="pyflink.table.expression.Expression.bitmap_build_cardinality_agg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.bitmap_build_cardinality_agg</span></code></a>()</p></td>
+<td><p>Aggregates 32-bit integers into a bitmap and returns its 64-bit cardinality.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.bitmap_cardinality.html#pyflink.table.expression.Expression.bitmap_cardinality" title="pyflink.table.expression.Expression.bitmap_cardinality"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.bitmap_cardinality</span></code></a>()</p></td>
+<td><p>Returns the 64-bit cardinality of a bitmap.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.bitmap_from_bytes.html#pyflink.table.expression.Expression.bitmap_from_bytes" title="pyflink.table.expression.Expression.bitmap_from_bytes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.bitmap_from_bytes</span></code></a>()</p></td>
+<td><p>Converts an array of bytes to a bitmap.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.bitmap_or.html#pyflink.table.expression.Expression.bitmap_or" title="pyflink.table.expression.Expression.bitmap_or"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.bitmap_or</span></code></a>(bitmap2)</p></td>
+<td><p>Computes the OR (union) of two bitmaps.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.bitmap_or_agg.html#pyflink.table.expression.Expression.bitmap_or_agg" title="pyflink.table.expression.Expression.bitmap_or_agg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.bitmap_or_agg</span></code></a>()</p></td>
+<td><p>Aggregates the OR (union) of multiple bitmaps.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.bitmap_or_cardinality_agg.html#pyflink.table.expression.Expression.bitmap_or_cardinality_agg" title="pyflink.table.expression.Expression.bitmap_or_cardinality_agg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.bitmap_or_cardinality_agg</span></code></a>()</p></td>
+<td><p>Aggregates the OR (union) of multiple bitmaps and returns its 64-bit cardinality.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.bitmap_to_array.html#pyflink.table.expression.Expression.bitmap_to_array" title="pyflink.table.expression.Expression.bitmap_to_array"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.bitmap_to_array</span></code></a>()</p></td>
+<td><p>Converts a bitmap to an array of 32-bit integers, the values are sorted by         <code class="xref py py-meth docutils literal notranslate"><span class="pre">Integer.compareUnsigned()</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.bitmap_to_bytes.html#pyflink.table.expression.Expression.bitmap_to_bytes" title="pyflink.table.expression.Expression.bitmap_to_bytes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.bitmap_to_bytes</span></code></a>()</p></td>
+<td><p>Converts a bitmap to an array of bytes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.bitmap_to_string.html#pyflink.table.expression.Expression.bitmap_to_string" title="pyflink.table.expression.Expression.bitmap_to_string"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.bitmap_to_string</span></code></a>()</p></td>
+<td><p>Converts a bitmap to a string, the values are sorted by <cite>Integer.compareUnsigned</cite> in Java.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.bitmap_xor.html#pyflink.table.expression.Expression.bitmap_xor" title="pyflink.table.expression.Expression.bitmap_xor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.bitmap_xor</span></code></a>(bitmap2)</p></td>
+<td><p>Computes the XOR (symmetric difference) of two bitmaps.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.bitmap_xor_agg.html#pyflink.table.expression.Expression.bitmap_xor_agg" title="pyflink.table.expression.Expression.bitmap_xor_agg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.bitmap_xor_agg</span></code></a>()</p></td>
+<td><p>Aggregates the XOR (symmetric difference) of multiple bitmaps.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.expression.Expression.bitmap_xor_cardinality_agg.html#pyflink.table.expression.Expression.bitmap_xor_cardinality_agg" title="pyflink.table.expression.Expression.bitmap_xor_cardinality_agg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Expression.bitmap_xor_cardinality_agg</span></code></a>()</p></td>
+<td><p>Aggregates the XOR (symmetric difference) of multiple bitmaps and returns its 64-bit cardinality.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="api/pyflink.table.window.OverWindowPartitioned.order_by.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">pyflink.table.window.OverWindowPartitioned.order_by</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="api/pyflink.table.expressions.col.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">pyflink.table.expressions.col</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Expressions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expression">Expression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arithmetic-functions">arithmetic functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#string-functions">string functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-functions">temporal functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-type-helper-functions">advanced type helper functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-definition-functions">time definition functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hash-functions">hash functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#json-functions">JSON functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bitmap-functions">Bitmap functions</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/reference/pyflink.table/expressions.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

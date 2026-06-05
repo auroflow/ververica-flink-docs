@@ -1,0 +1,980 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>TableEnvironment &#8212; PyFlink 1.20+vvr.11.7.dev0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=b5c65be0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/pyflink.table/table_environment';</script>
+    <link rel="icon" href="../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pyflink.table.environment_settings.EnvironmentSettings.new_instance" href="api/pyflink.table.environment_settings.EnvironmentSettings.new_instance.html" />
+    <link rel="prev" title="PyFlink Table" href="index.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.20+vvr.11.7.dev0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="PyFlink 1.20+vvr.11.7.dev0 documentation - Home"/>
+    <img src="../../_static/navbar-brand-logo.jpg" class="logo__image only-dark pst-js-only" alt="PyFlink 1.20+vvr.11.7.dev0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">PyFlink Table</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">TableEnvironment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="table.html">Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_types.html">Data Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="window.html">Window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expressions.html">Expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="udf.html">User Defined Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="descriptors.html">Descriptors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="statement_set.html">StatementSet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="catalog.html">Catalog</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.datastream/index.html">PyFlink DataStream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.dataframe/index.html">PyFlink DataFrame</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.common/index.html">PyFlink Common</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">API Reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">PyFlink Table</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">TableEnvironment</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="tableenvironment">
+<h1>TableEnvironment<a class="headerlink" href="#tableenvironment" title="Link to this heading">#</a></h1>
+<p>A table environment is the base class, entry point, and central context for creating Table
+and SQL API programs.</p>
+<section id="environmentsettings">
+<h2>EnvironmentSettings<a class="headerlink" href="#environmentsettings" title="Link to this heading">#</a></h2>
+<p>Defines all parameters that initialize a table environment. Those parameters are used only
+during instantiation of a <code class="xref py py-class docutils literal notranslate"><span class="pre">TableEnvironment</span></code> and cannot be changed
+afterwards.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">EnvironmentSettings</span><span class="o">.</span><span class="n">new_instance</span><span class="p">()</span> \
+<span class="gp">... </span>    <span class="o">.</span><span class="n">in_streaming_mode</span><span class="p">()</span> \
+<span class="gp">... </span>    <span class="o">.</span><span class="n">with_built_in_catalog_name</span><span class="p">(</span><span class="s2">&quot;my_catalog&quot;</span><span class="p">)</span> \
+<span class="gp">... </span>    <span class="o">.</span><span class="n">with_built_in_database_name</span><span class="p">(</span><span class="s2">&quot;my_database&quot;</span><span class="p">)</span> \
+<span class="gp">... </span>    <span class="o">.</span><span class="n">build</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">in_streaming_mode()</span></code> or <code class="xref py py-func docutils literal notranslate"><span class="pre">in_batch_mode()</span></code>
+might be convenient as shortcuts.</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.environment_settings.EnvironmentSettings.new_instance.html#pyflink.table.environment_settings.EnvironmentSettings.new_instance" title="pyflink.table.environment_settings.EnvironmentSettings.new_instance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EnvironmentSettings.new_instance</span></code></a>()</p></td>
+<td><p>Creates a builder for creating an instance of EnvironmentSettings.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.environment_settings.EnvironmentSettings.from_configuration.html#pyflink.table.environment_settings.EnvironmentSettings.from_configuration" title="pyflink.table.environment_settings.EnvironmentSettings.from_configuration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EnvironmentSettings.from_configuration</span></code></a>(config)</p></td>
+<td><p>Creates the EnvironmentSetting with specified Configuration.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.environment_settings.EnvironmentSettings.in_streaming_mode.html#pyflink.table.environment_settings.EnvironmentSettings.in_streaming_mode" title="pyflink.table.environment_settings.EnvironmentSettings.in_streaming_mode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EnvironmentSettings.in_streaming_mode</span></code></a>()</p></td>
+<td><p>Creates a default instance of EnvironmentSettings in streaming execution mode.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.environment_settings.EnvironmentSettings.in_batch_mode.html#pyflink.table.environment_settings.EnvironmentSettings.in_batch_mode" title="pyflink.table.environment_settings.EnvironmentSettings.in_batch_mode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EnvironmentSettings.in_batch_mode</span></code></a>()</p></td>
+<td><p>Creates a default instance of EnvironmentSettings in batch execution mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.environment_settings.EnvironmentSettings.get_built_in_catalog_name.html#pyflink.table.environment_settings.EnvironmentSettings.get_built_in_catalog_name" title="pyflink.table.environment_settings.EnvironmentSettings.get_built_in_catalog_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EnvironmentSettings.get_built_in_catalog_name</span></code></a>()</p></td>
+<td><p>Gets the specified name of the initial catalog to be created when instantiating a <code class="xref py py-class docutils literal notranslate"><span class="pre">TableEnvironment</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.environment_settings.EnvironmentSettings.get_built_in_database_name.html#pyflink.table.environment_settings.EnvironmentSettings.get_built_in_database_name" title="pyflink.table.environment_settings.EnvironmentSettings.get_built_in_database_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EnvironmentSettings.get_built_in_database_name</span></code></a>()</p></td>
+<td><p>Gets the specified name of the default database in the initial catalog to be created when instantiating a <code class="xref py py-class docutils literal notranslate"><span class="pre">TableEnvironment</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.environment_settings.EnvironmentSettings.is_streaming_mode.html#pyflink.table.environment_settings.EnvironmentSettings.is_streaming_mode" title="pyflink.table.environment_settings.EnvironmentSettings.is_streaming_mode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EnvironmentSettings.is_streaming_mode</span></code></a>()</p></td>
+<td><p>Tells if the <code class="xref py py-class docutils literal notranslate"><span class="pre">TableEnvironment</span></code> should work in a batch or streaming mode.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.environment_settings.EnvironmentSettings.to_configuration.html#pyflink.table.environment_settings.EnvironmentSettings.to_configuration" title="pyflink.table.environment_settings.EnvironmentSettings.to_configuration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EnvironmentSettings.to_configuration</span></code></a>()</p></td>
+<td><p>Convert to <cite>pyflink.common.Configuration</cite>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.environment_settings.EnvironmentSettings.get_configuration.html#pyflink.table.environment_settings.EnvironmentSettings.get_configuration" title="pyflink.table.environment_settings.EnvironmentSettings.get_configuration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EnvironmentSettings.get_configuration</span></code></a>()</p></td>
+<td><p>Get the underlying <cite>pyflink.common.Configuration</cite>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.environment_settings.EnvironmentSettings.Builder.with_configuration.html#pyflink.table.environment_settings.EnvironmentSettings.Builder.with_configuration" title="pyflink.table.environment_settings.EnvironmentSettings.Builder.with_configuration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EnvironmentSettings.Builder.with_configuration</span></code></a>(config)</p></td>
+<td><p>Creates the EnvironmentSetting with specified Configuration.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.environment_settings.EnvironmentSettings.Builder.in_batch_mode.html#pyflink.table.environment_settings.EnvironmentSettings.Builder.in_batch_mode" title="pyflink.table.environment_settings.EnvironmentSettings.Builder.in_batch_mode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EnvironmentSettings.Builder.in_batch_mode</span></code></a>()</p></td>
+<td><p>Sets that the components should work in a batch mode.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.environment_settings.EnvironmentSettings.Builder.in_streaming_mode.html#pyflink.table.environment_settings.EnvironmentSettings.Builder.in_streaming_mode" title="pyflink.table.environment_settings.EnvironmentSettings.Builder.in_streaming_mode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EnvironmentSettings.Builder.in_streaming_mode</span></code></a>()</p></td>
+<td><p>Sets that the components should work in a streaming mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.environment_settings.EnvironmentSettings.Builder.with_built_in_catalog_name.html#pyflink.table.environment_settings.EnvironmentSettings.Builder.with_built_in_catalog_name" title="pyflink.table.environment_settings.EnvironmentSettings.Builder.with_built_in_catalog_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EnvironmentSettings.Builder.with_built_in_catalog_name</span></code></a>(...)</p></td>
+<td><p>Specifies the name of the initial catalog to be created when instantiating a <code class="xref py py-class docutils literal notranslate"><span class="pre">TableEnvironment</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.environment_settings.EnvironmentSettings.Builder.with_built_in_database_name.html#pyflink.table.environment_settings.EnvironmentSettings.Builder.with_built_in_database_name" title="pyflink.table.environment_settings.EnvironmentSettings.Builder.with_built_in_database_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EnvironmentSettings.Builder.with_built_in_database_name</span></code></a>(...)</p></td>
+<td><p>Specifies the name of the default database in the initial catalog to be created when instantiating a <code class="xref py py-class docutils literal notranslate"><span class="pre">TableEnvironment</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.environment_settings.EnvironmentSettings.Builder.build.html#pyflink.table.environment_settings.EnvironmentSettings.Builder.build" title="pyflink.table.environment_settings.EnvironmentSettings.Builder.build"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EnvironmentSettings.Builder.build</span></code></a>()</p></td>
+<td><p>Returns an immutable instance of EnvironmentSettings.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="tableconfig">
+<h2>TableConfig<a class="headerlink" href="#tableconfig" title="Link to this heading">#</a></h2>
+<p>Configuration for the current <code class="xref py py-class docutils literal notranslate"><span class="pre">TableEnvironment</span></code> session to adjust Table &amp; SQL API
+programs.</p>
+<p>This class is a pure API class that abstracts configuration from various sources. Currently,
+configuration can be set in any of the following layers (in the given order):</p>
+<ul class="simple">
+<li><p>flink-conf.yaml</p></li>
+<li><p>CLI parameters</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamExecutionEnvironment</span></code> when bridging to DataStream API</p></li>
+<li><p><a class="reference internal" href="api/pyflink.table.environment_settings.EnvironmentSettings.Builder.with_configuration.html#pyflink.table.environment_settings.EnvironmentSettings.Builder.with_configuration" title="pyflink.table.environment_settings.EnvironmentSettings.Builder.with_configuration"><code class="xref py py-func docutils literal notranslate"><span class="pre">with_configuration()</span></code></a></p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">set()</span></code></p></li>
+</ul>
+<p>The latter two represent the application-specific part of the configuration. They initialize
+and directly modify <code class="xref py py-func docutils literal notranslate"><span class="pre">get_configuration()</span></code>. Other layers represent the
+configuration of the execution context and are immutable.</p>
+<p>The getter <code class="xref py py-func docutils literal notranslate"><span class="pre">get()</span></code> gives read-only access to the full configuration. However,
+application-specific configuration has precedence. Configuration of outer layers is used for
+defaults and fallbacks. The setter <code class="xref py py-func docutils literal notranslate"><span class="pre">set()</span></code> will only affect
+application-specific configuration.</p>
+<p>For common or important configuration options, this class provides getters and setters methods
+with detailed inline documentation.</p>
+<p>For more advanced configuration, users can directly access the underlying key-value map via
+<code class="xref py py-func docutils literal notranslate"><span class="pre">get_configuration()</span></code>.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table_config</span> <span class="o">=</span> <span class="n">t_env</span><span class="o">.</span><span class="n">get_config</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">config</span> <span class="o">=</span> <span class="n">Configuration</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">config</span><span class="o">.</span><span class="n">set_string</span><span class="p">(</span><span class="s2">&quot;parallelism.default&quot;</span><span class="p">,</span> <span class="s2">&quot;128&quot;</span><span class="p">)</span> \
+<span class="gp">... </span>      <span class="o">.</span><span class="n">set_string</span><span class="p">(</span><span class="s2">&quot;pipeline.auto-watermark-interval&quot;</span><span class="p">,</span> <span class="s2">&quot;800ms&quot;</span><span class="p">)</span> \
+<span class="gp">... </span>      <span class="o">.</span><span class="n">set_string</span><span class="p">(</span><span class="s2">&quot;execution.checkpointing.interval&quot;</span><span class="p">,</span> <span class="s2">&quot;30s&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">table_config</span><span class="o">.</span><span class="n">add_configuration</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Because options are read at different point in time when performing operations, it is
+recommended to set configuration options early after instantiating a table environment.</p>
+</div>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_config.TableConfig.html#pyflink.table.table_config.TableConfig" title="pyflink.table.table_config.TableConfig"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableConfig</span></code></a>([j_table_config])</p></td>
+<td><p>Configuration for the current <code class="xref py py-class docutils literal notranslate"><span class="pre">TableEnvironment</span></code> session to adjust Table &amp; SQL API programs.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id1">
+<h2>TableEnvironment<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>A table environment is the base class, entry point, and central context for creating Table
+and SQL API programs.</p>
+<p>It is unified for bounded and unbounded data processing.</p>
+<p>A table environment is responsible for:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Connecting to external systems.</p></li>
+<li><p>Registering and retrieving <code class="xref py py-class docutils literal notranslate"><span class="pre">Table</span></code> and other meta objects from a
+catalog.</p></li>
+<li><p>Executing SQL statements.</p></li>
+<li><p>Offering further configuration options.</p></li>
+</ul>
+</div></blockquote>
+<p>The path in methods such as <code class="xref py py-func docutils literal notranslate"><span class="pre">create_temporary_view()</span></code>
+should be a proper SQL identifier. The syntax is following
+[[catalog-name.]database-name.]object-name, where the catalog name and database are optional.
+For path resolution see <code class="xref py py-func docutils literal notranslate"><span class="pre">use_catalog()</span></code> and <code class="xref py py-func docutils literal notranslate"><span class="pre">use_database()</span></code>. All keywords or other
+special characters need to be escaped.</p>
+<p>Example: <cite>cat.1</cite>.`db`.`Table` resolves to an object named ‘Table’ (table is a reserved
+keyword, thus must be escaped) in a catalog named ‘cat.1’ and database named ‘db’.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This environment is meant for pure table programs. If you would like to convert from or to
+other Flink APIs, it might be necessary to use one of the available language-specific table
+environments in the corresponding bridging modules.</p>
+</div>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.add_python_archive.html#pyflink.table.table_environment.TableEnvironment.add_python_archive" title="pyflink.table.table_environment.TableEnvironment.add_python_archive"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.add_python_archive</span></code></a>(archive_path)</p></td>
+<td><p>Adds a python archive file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.add_python_file.html#pyflink.table.table_environment.TableEnvironment.add_python_file" title="pyflink.table.table_environment.TableEnvironment.add_python_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.add_python_file</span></code></a>(file_path)</p></td>
+<td><p>Adds a python dependency which could be python files, python packages or local directories.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.create.html#pyflink.table.table_environment.TableEnvironment.create" title="pyflink.table.table_environment.TableEnvironment.create"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.create</span></code></a>(environment_settings)</p></td>
+<td><p>Creates a table environment that is the entry point and central context for creating Table and SQL API programs.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.create_java_function.html#pyflink.table.table_environment.TableEnvironment.create_java_function" title="pyflink.table.table_environment.TableEnvironment.create_java_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.create_java_function</span></code></a>(path, ...)</p></td>
+<td><p>Registers a java user defined function class as a catalog function in the given path.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.create_java_temporary_function.html#pyflink.table.table_environment.TableEnvironment.create_java_temporary_function" title="pyflink.table.table_environment.TableEnvironment.create_java_temporary_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.create_java_temporary_function</span></code></a>(...)</p></td>
+<td><p>Registers a java user defined function class as a temporary catalog function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.create_java_temporary_system_function.html#pyflink.table.table_environment.TableEnvironment.create_java_temporary_system_function" title="pyflink.table.table_environment.TableEnvironment.create_java_temporary_system_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.create_java_temporary_system_function</span></code></a>(...)</p></td>
+<td><p>Registers a java user defined function class as a temporary system function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.create_statement_set.html#pyflink.table.table_environment.TableEnvironment.create_statement_set" title="pyflink.table.table_environment.TableEnvironment.create_statement_set"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.create_statement_set</span></code></a>()</p></td>
+<td><p>Create a StatementSet instance which accepts DML statements or Tables, the planner can optimize all added statements and Tables together and then submit as one job.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.create_table.html#pyflink.table.table_environment.TableEnvironment.create_table" title="pyflink.table.table_environment.TableEnvironment.create_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.create_table</span></code></a>(path, descriptor)</p></td>
+<td><p>Registers the given <code class="xref py py-class docutils literal notranslate"><span class="pre">TableDescriptor</span></code> as a catalog table.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.create_temporary_function.html#pyflink.table.table_environment.TableEnvironment.create_temporary_function" title="pyflink.table.table_environment.TableEnvironment.create_temporary_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.create_temporary_function</span></code></a>(...)</p></td>
+<td><p>Registers a python user defined function class as a temporary catalog function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.create_temporary_system_function.html#pyflink.table.table_environment.TableEnvironment.create_temporary_system_function" title="pyflink.table.table_environment.TableEnvironment.create_temporary_system_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.create_temporary_system_function</span></code></a>(...)</p></td>
+<td><p>Registers a python user defined function class as a temporary system function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.create_temporary_table.html#pyflink.table.table_environment.TableEnvironment.create_temporary_table" title="pyflink.table.table_environment.TableEnvironment.create_temporary_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.create_temporary_table</span></code></a>(...)</p></td>
+<td><p>Registers the given <code class="xref py py-class docutils literal notranslate"><span class="pre">TableDescriptor</span></code> as a temporary catalog table.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.create_temporary_view.html#pyflink.table.table_environment.TableEnvironment.create_temporary_view" title="pyflink.table.table_environment.TableEnvironment.create_temporary_view"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.create_temporary_view</span></code></a>(...)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.create_model.html#pyflink.table.table_environment.TableEnvironment.create_model" title="pyflink.table.table_environment.TableEnvironment.create_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.create_model</span></code></a>(model_path, ...)</p></td>
+<td><p>Registers the given <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelDescriptor</span></code> as a catalog model similar to SQL models.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.create_temporary_model.html#pyflink.table.table_environment.TableEnvironment.create_temporary_model" title="pyflink.table.table_environment.TableEnvironment.create_temporary_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.create_temporary_model</span></code></a>(...)</p></td>
+<td><p>Registers the given <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelDescriptor</span></code> as a temporary catalog model similar to SQL temporary models.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.drop_function.html#pyflink.table.table_environment.TableEnvironment.drop_function" title="pyflink.table.table_environment.TableEnvironment.drop_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.drop_function</span></code></a>(path)</p></td>
+<td><p>Drops a catalog function registered in the given path.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.drop_temporary_function.html#pyflink.table.table_environment.TableEnvironment.drop_temporary_function" title="pyflink.table.table_environment.TableEnvironment.drop_temporary_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.drop_temporary_function</span></code></a>(path)</p></td>
+<td><p>Drops a temporary system function registered under the given name.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.drop_temporary_system_function.html#pyflink.table.table_environment.TableEnvironment.drop_temporary_system_function" title="pyflink.table.table_environment.TableEnvironment.drop_temporary_system_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.drop_temporary_system_function</span></code></a>(name)</p></td>
+<td><p>Drops a temporary system function registered under the given name.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.drop_temporary_table.html#pyflink.table.table_environment.TableEnvironment.drop_temporary_table" title="pyflink.table.table_environment.TableEnvironment.drop_temporary_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.drop_temporary_table</span></code></a>(table_path)</p></td>
+<td><p>Drops a temporary table registered in the given path.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.drop_temporary_view.html#pyflink.table.table_environment.TableEnvironment.drop_temporary_view" title="pyflink.table.table_environment.TableEnvironment.drop_temporary_view"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.drop_temporary_view</span></code></a>(view_path)</p></td>
+<td><p>Drops a temporary view registered in the given path.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.drop_model.html#pyflink.table.table_environment.TableEnvironment.drop_model" title="pyflink.table.table_environment.TableEnvironment.drop_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.drop_model</span></code></a>(model_path[, ...])</p></td>
+<td><p>Drops a model registered in the given path.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.drop_temporary_model.html#pyflink.table.table_environment.TableEnvironment.drop_temporary_model" title="pyflink.table.table_environment.TableEnvironment.drop_temporary_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.drop_temporary_model</span></code></a>(model_path)</p></td>
+<td><p>Drops a temporary model registered in the given path.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.execute_sql.html#pyflink.table.table_environment.TableEnvironment.execute_sql" title="pyflink.table.table_environment.TableEnvironment.execute_sql"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.execute_sql</span></code></a>(stmt)</p></td>
+<td><p>Execute the given single statement, and return the execution result.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.explain_sql.html#pyflink.table.table_environment.TableEnvironment.explain_sql" title="pyflink.table.table_environment.TableEnvironment.explain_sql"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.explain_sql</span></code></a>(stmt, ...)</p></td>
+<td><p>Returns the AST of the specified statement and the execution plan.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.from_descriptor.html#pyflink.table.table_environment.TableEnvironment.from_descriptor" title="pyflink.table.table_environment.TableEnvironment.from_descriptor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.from_descriptor</span></code></a>(descriptor)</p></td>
+<td><p>Returns a Table backed by the given TableDescriptor.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.from_elements.html#pyflink.table.table_environment.TableEnvironment.from_elements" title="pyflink.table.table_environment.TableEnvironment.from_elements"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.from_elements</span></code></a>(elements[, ...])</p></td>
+<td><p>Creates a table from a collection of elements.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.from_pandas.html#pyflink.table.table_environment.TableEnvironment.from_pandas" title="pyflink.table.table_environment.TableEnvironment.from_pandas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.from_pandas</span></code></a>(pdf[, schema, ...])</p></td>
+<td><p>Creates a table from a pandas DataFrame.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.from_path.html#pyflink.table.table_environment.TableEnvironment.from_path" title="pyflink.table.table_environment.TableEnvironment.from_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.from_path</span></code></a>(path)</p></td>
+<td><p>Reads a registered table and returns the resulting <code class="xref py py-class docutils literal notranslate"><span class="pre">Table</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.from_table_source.html#pyflink.table.table_environment.TableEnvironment.from_table_source" title="pyflink.table.table_environment.TableEnvironment.from_table_source"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.from_table_source</span></code></a>(table_source)</p></td>
+<td><p>Creates a table from a table source.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.get_catalog.html#pyflink.table.table_environment.TableEnvironment.get_catalog" title="pyflink.table.table_environment.TableEnvironment.get_catalog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.get_catalog</span></code></a>(catalog_name)</p></td>
+<td><p>Gets a registered <code class="xref py py-class docutils literal notranslate"><span class="pre">Catalog</span></code> by name.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.get_config.html#pyflink.table.table_environment.TableEnvironment.get_config" title="pyflink.table.table_environment.TableEnvironment.get_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.get_config</span></code></a>()</p></td>
+<td><p>Returns the table config to define the runtime behavior of the Table API.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.get_current_catalog.html#pyflink.table.table_environment.TableEnvironment.get_current_catalog" title="pyflink.table.table_environment.TableEnvironment.get_current_catalog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.get_current_catalog</span></code></a>()</p></td>
+<td><p>Gets the current default catalog name of the current session.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.get_current_database.html#pyflink.table.table_environment.TableEnvironment.get_current_database" title="pyflink.table.table_environment.TableEnvironment.get_current_database"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.get_current_database</span></code></a>()</p></td>
+<td><p>Gets the current default database name of the running session.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.list_catalogs.html#pyflink.table.table_environment.TableEnvironment.list_catalogs" title="pyflink.table.table_environment.TableEnvironment.list_catalogs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.list_catalogs</span></code></a>()</p></td>
+<td><p>Gets the names of all catalogs registered in this environment.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.list_databases.html#pyflink.table.table_environment.TableEnvironment.list_databases" title="pyflink.table.table_environment.TableEnvironment.list_databases"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.list_databases</span></code></a>()</p></td>
+<td><p>Gets the names of all databases in the current catalog.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.list_full_modules.html#pyflink.table.table_environment.TableEnvironment.list_full_modules" title="pyflink.table.table_environment.TableEnvironment.list_full_modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.list_full_modules</span></code></a>()</p></td>
+<td><p>Gets the names and statuses of all modules loaded in this environment.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.list_functions.html#pyflink.table.table_environment.TableEnvironment.list_functions" title="pyflink.table.table_environment.TableEnvironment.list_functions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.list_functions</span></code></a>()</p></td>
+<td><p>Gets the names of all functions in this environment.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.list_modules.html#pyflink.table.table_environment.TableEnvironment.list_modules" title="pyflink.table.table_environment.TableEnvironment.list_modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.list_modules</span></code></a>()</p></td>
+<td><p>Gets the names of all modules used in this environment.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.list_tables.html#pyflink.table.table_environment.TableEnvironment.list_tables" title="pyflink.table.table_environment.TableEnvironment.list_tables"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.list_tables</span></code></a>()</p></td>
+<td><p>Gets the names of all tables and views in the current database of the current catalog.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.list_temporary_tables.html#pyflink.table.table_environment.TableEnvironment.list_temporary_tables" title="pyflink.table.table_environment.TableEnvironment.list_temporary_tables"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.list_temporary_tables</span></code></a>()</p></td>
+<td><p>Gets the names of all temporary tables and views available in the current namespace (the current database of the current catalog).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.list_temporary_views.html#pyflink.table.table_environment.TableEnvironment.list_temporary_views" title="pyflink.table.table_environment.TableEnvironment.list_temporary_views"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.list_temporary_views</span></code></a>()</p></td>
+<td><p>Gets the names of all temporary views available in the current namespace (the current database of the current catalog).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.list_user_defined_functions.html#pyflink.table.table_environment.TableEnvironment.list_user_defined_functions" title="pyflink.table.table_environment.TableEnvironment.list_user_defined_functions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.list_user_defined_functions</span></code></a>()</p></td>
+<td><p>Gets the names of all user defined functions registered in this environment.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.list_views.html#pyflink.table.table_environment.TableEnvironment.list_views" title="pyflink.table.table_environment.TableEnvironment.list_views"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.list_views</span></code></a>()</p></td>
+<td><p>Gets the names of all views in the current database of the current catalog.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.list_models.html#pyflink.table.table_environment.TableEnvironment.list_models" title="pyflink.table.table_environment.TableEnvironment.list_models"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.list_models</span></code></a>()</p></td>
+<td><p>Gets the names of all model available in the current namespace (the current database of the current catalog).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.list_temporary_models.html#pyflink.table.table_environment.TableEnvironment.list_temporary_models" title="pyflink.table.table_environment.TableEnvironment.list_temporary_models"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.list_temporary_models</span></code></a>()</p></td>
+<td><p>Gets the names of all temporary models available in the current namespace (the current database of the current catalog).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.load_module.html#pyflink.table.table_environment.TableEnvironment.load_module" title="pyflink.table.table_environment.TableEnvironment.load_module"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.load_module</span></code></a>(module_name, module)</p></td>
+<td><p>Loads a <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> under a unique name.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.register_catalog.html#pyflink.table.table_environment.TableEnvironment.register_catalog" title="pyflink.table.table_environment.TableEnvironment.register_catalog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.register_catalog</span></code></a>(...)</p></td>
+<td><p>Registers a <code class="xref py py-class docutils literal notranslate"><span class="pre">Catalog</span></code> under a unique name.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.register_function.html#pyflink.table.table_environment.TableEnvironment.register_function" title="pyflink.table.table_environment.TableEnvironment.register_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.register_function</span></code></a>(name, ...)</p></td>
+<td><p>Registers a python user-defined function under a unique name.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.register_java_function.html#pyflink.table.table_environment.TableEnvironment.register_java_function" title="pyflink.table.table_environment.TableEnvironment.register_java_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.register_java_function</span></code></a>(...)</p></td>
+<td><p>Registers a java user defined function under a unique name.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.register_table.html#pyflink.table.table_environment.TableEnvironment.register_table" title="pyflink.table.table_environment.TableEnvironment.register_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.register_table</span></code></a>(name, table)</p></td>
+<td><p>Registers a <code class="xref py py-class docutils literal notranslate"><span class="pre">Table</span></code> under a unique name in the TableEnvironment's catalog.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.register_table_sink.html#pyflink.table.table_environment.TableEnvironment.register_table_sink" title="pyflink.table.table_environment.TableEnvironment.register_table_sink"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.register_table_sink</span></code></a>(name, ...)</p></td>
+<td><p>Registers an external <code class="xref py py-class docutils literal notranslate"><span class="pre">TableSink</span></code> with given field names and types in this <code class="xref py py-class docutils literal notranslate"><span class="pre">TableEnvironment</span></code>'s catalog.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.register_table_source.html#pyflink.table.table_environment.TableEnvironment.register_table_source" title="pyflink.table.table_environment.TableEnvironment.register_table_source"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.register_table_source</span></code></a>(name, ...)</p></td>
+<td><p>Registers an external <code class="xref py py-class docutils literal notranslate"><span class="pre">TableSource</span></code> in this <code class="xref py py-class docutils literal notranslate"><span class="pre">TableEnvironment</span></code>'s catalog.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.scan.html#pyflink.table.table_environment.TableEnvironment.scan" title="pyflink.table.table_environment.TableEnvironment.scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.scan</span></code></a>(*table_path)</p></td>
+<td><p>Scans a registered table and returns the resulting <code class="xref py py-class docutils literal notranslate"><span class="pre">Table</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.set_python_requirements.html#pyflink.table.table_environment.TableEnvironment.set_python_requirements" title="pyflink.table.table_environment.TableEnvironment.set_python_requirements"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.set_python_requirements</span></code></a>(...)</p></td>
+<td><p>Specifies a requirements.txt file which defines the third-party dependencies.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.sql_query.html#pyflink.table.table_environment.TableEnvironment.sql_query" title="pyflink.table.table_environment.TableEnvironment.sql_query"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.sql_query</span></code></a>(query)</p></td>
+<td><p>Evaluates a SQL query on registered tables and retrieves the result as a <code class="xref py py-class docutils literal notranslate"><span class="pre">Table</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.unload_module.html#pyflink.table.table_environment.TableEnvironment.unload_module" title="pyflink.table.table_environment.TableEnvironment.unload_module"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.unload_module</span></code></a>(module_name)</p></td>
+<td><p>Unloads a <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> with given name.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.use_catalog.html#pyflink.table.table_environment.TableEnvironment.use_catalog" title="pyflink.table.table_environment.TableEnvironment.use_catalog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.use_catalog</span></code></a>(catalog_name)</p></td>
+<td><p>Sets the current catalog to the given value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.use_database.html#pyflink.table.table_environment.TableEnvironment.use_database" title="pyflink.table.table_environment.TableEnvironment.use_database"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.use_database</span></code></a>(database_name)</p></td>
+<td><p>Sets the current default database.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.TableEnvironment.use_modules.html#pyflink.table.table_environment.TableEnvironment.use_modules" title="pyflink.table.table_environment.TableEnvironment.use_modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TableEnvironment.use_modules</span></code></a>(*module_names)</p></td>
+<td><p>Use an array of <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> with given names.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="streamtableenvironment">
+<h2>StreamTableEnvironment<a class="headerlink" href="#streamtableenvironment" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.add_python_archive.html#pyflink.table.table_environment.StreamTableEnvironment.add_python_archive" title="pyflink.table.table_environment.StreamTableEnvironment.add_python_archive"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.add_python_archive</span></code></a>(...)</p></td>
+<td><p>Adds a python archive file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.add_python_file.html#pyflink.table.table_environment.StreamTableEnvironment.add_python_file" title="pyflink.table.table_environment.StreamTableEnvironment.add_python_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.add_python_file</span></code></a>(file_path)</p></td>
+<td><p>Adds a python dependency which could be python files, python packages or local directories.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.create.html#pyflink.table.table_environment.StreamTableEnvironment.create" title="pyflink.table.table_environment.StreamTableEnvironment.create"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.create</span></code></a>([...])</p></td>
+<td><p>Creates a <code class="xref py py-class docutils literal notranslate"><span class="pre">StreamTableEnvironment</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.create_java_function.html#pyflink.table.table_environment.StreamTableEnvironment.create_java_function" title="pyflink.table.table_environment.StreamTableEnvironment.create_java_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.create_java_function</span></code></a>(...)</p></td>
+<td><p>Registers a java user defined function class as a catalog function in the given path.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.create_java_temporary_function.html#pyflink.table.table_environment.StreamTableEnvironment.create_java_temporary_function" title="pyflink.table.table_environment.StreamTableEnvironment.create_java_temporary_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.create_java_temporary_function</span></code></a>(...)</p></td>
+<td><p>Registers a java user defined function class as a temporary catalog function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.create_java_temporary_system_function.html#pyflink.table.table_environment.StreamTableEnvironment.create_java_temporary_system_function" title="pyflink.table.table_environment.StreamTableEnvironment.create_java_temporary_system_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.create_java_temporary_system_function</span></code></a>(...)</p></td>
+<td><p>Registers a java user defined function class as a temporary system function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.create_statement_set.html#pyflink.table.table_environment.StreamTableEnvironment.create_statement_set" title="pyflink.table.table_environment.StreamTableEnvironment.create_statement_set"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.create_statement_set</span></code></a>()</p></td>
+<td><p>Create a StatementSet instance which accepts DML statements or Tables, the planner can optimize all added statements and Tables together and then submit as one job.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.create_table.html#pyflink.table.table_environment.StreamTableEnvironment.create_table" title="pyflink.table.table_environment.StreamTableEnvironment.create_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.create_table</span></code></a>(path, ...)</p></td>
+<td><p>Registers the given <code class="xref py py-class docutils literal notranslate"><span class="pre">TableDescriptor</span></code> as a catalog table.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.create_temporary_function.html#pyflink.table.table_environment.StreamTableEnvironment.create_temporary_function" title="pyflink.table.table_environment.StreamTableEnvironment.create_temporary_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.create_temporary_function</span></code></a>(...)</p></td>
+<td><p>Registers a python user defined function class as a temporary catalog function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.create_temporary_system_function.html#pyflink.table.table_environment.StreamTableEnvironment.create_temporary_system_function" title="pyflink.table.table_environment.StreamTableEnvironment.create_temporary_system_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.create_temporary_system_function</span></code></a>(...)</p></td>
+<td><p>Registers a python user defined function class as a temporary system function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.create_temporary_table.html#pyflink.table.table_environment.StreamTableEnvironment.create_temporary_table" title="pyflink.table.table_environment.StreamTableEnvironment.create_temporary_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.create_temporary_table</span></code></a>(...)</p></td>
+<td><p>Registers the given <code class="xref py py-class docutils literal notranslate"><span class="pre">TableDescriptor</span></code> as a temporary catalog table.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.create_temporary_view.html#pyflink.table.table_environment.StreamTableEnvironment.create_temporary_view" title="pyflink.table.table_environment.StreamTableEnvironment.create_temporary_view"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.create_temporary_view</span></code></a>(...)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.drop_function.html#pyflink.table.table_environment.StreamTableEnvironment.drop_function" title="pyflink.table.table_environment.StreamTableEnvironment.drop_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.drop_function</span></code></a>(path)</p></td>
+<td><p>Drops a catalog function registered in the given path.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.drop_temporary_function.html#pyflink.table.table_environment.StreamTableEnvironment.drop_temporary_function" title="pyflink.table.table_environment.StreamTableEnvironment.drop_temporary_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.drop_temporary_function</span></code></a>(path)</p></td>
+<td><p>Drops a temporary system function registered under the given name.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.drop_temporary_system_function.html#pyflink.table.table_environment.StreamTableEnvironment.drop_temporary_system_function" title="pyflink.table.table_environment.StreamTableEnvironment.drop_temporary_system_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.drop_temporary_system_function</span></code></a>(name)</p></td>
+<td><p>Drops a temporary system function registered under the given name.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.drop_temporary_table.html#pyflink.table.table_environment.StreamTableEnvironment.drop_temporary_table" title="pyflink.table.table_environment.StreamTableEnvironment.drop_temporary_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.drop_temporary_table</span></code></a>(...)</p></td>
+<td><p>Drops a temporary table registered in the given path.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.drop_temporary_view.html#pyflink.table.table_environment.StreamTableEnvironment.drop_temporary_view" title="pyflink.table.table_environment.StreamTableEnvironment.drop_temporary_view"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.drop_temporary_view</span></code></a>(...)</p></td>
+<td><p>Drops a temporary view registered in the given path.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.execute_sql.html#pyflink.table.table_environment.StreamTableEnvironment.execute_sql" title="pyflink.table.table_environment.StreamTableEnvironment.execute_sql"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.execute_sql</span></code></a>(stmt)</p></td>
+<td><p>Execute the given single statement, and return the execution result.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.explain_sql.html#pyflink.table.table_environment.StreamTableEnvironment.explain_sql" title="pyflink.table.table_environment.StreamTableEnvironment.explain_sql"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.explain_sql</span></code></a>(stmt, ...)</p></td>
+<td><p>Returns the AST of the specified statement and the execution plan.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.from_descriptor.html#pyflink.table.table_environment.StreamTableEnvironment.from_descriptor" title="pyflink.table.table_environment.StreamTableEnvironment.from_descriptor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.from_descriptor</span></code></a>(...)</p></td>
+<td><p>Returns a Table backed by the given TableDescriptor.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.from_elements.html#pyflink.table.table_environment.StreamTableEnvironment.from_elements" title="pyflink.table.table_environment.StreamTableEnvironment.from_elements"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.from_elements</span></code></a>(elements)</p></td>
+<td><p>Creates a table from a collection of elements.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.from_pandas.html#pyflink.table.table_environment.StreamTableEnvironment.from_pandas" title="pyflink.table.table_environment.StreamTableEnvironment.from_pandas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.from_pandas</span></code></a>(pdf[, ...])</p></td>
+<td><p>Creates a table from a pandas DataFrame.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.from_path.html#pyflink.table.table_environment.StreamTableEnvironment.from_path" title="pyflink.table.table_environment.StreamTableEnvironment.from_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.from_path</span></code></a>(path)</p></td>
+<td><p>Reads a registered table and returns the resulting <code class="xref py py-class docutils literal notranslate"><span class="pre">Table</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.from_table_source.html#pyflink.table.table_environment.StreamTableEnvironment.from_table_source" title="pyflink.table.table_environment.StreamTableEnvironment.from_table_source"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.from_table_source</span></code></a>(...)</p></td>
+<td><p>Creates a table from a table source.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.from_data_stream.html#pyflink.table.table_environment.StreamTableEnvironment.from_data_stream" title="pyflink.table.table_environment.StreamTableEnvironment.from_data_stream"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.from_data_stream</span></code></a>(...)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.from_changelog_stream.html#pyflink.table.table_environment.StreamTableEnvironment.from_changelog_stream" title="pyflink.table.table_environment.StreamTableEnvironment.from_changelog_stream"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.from_changelog_stream</span></code></a>(...)</p></td>
+<td><p>Converts the given DataStream of changelog entries into a Table.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.get_catalog.html#pyflink.table.table_environment.StreamTableEnvironment.get_catalog" title="pyflink.table.table_environment.StreamTableEnvironment.get_catalog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.get_catalog</span></code></a>(catalog_name)</p></td>
+<td><p>Gets a registered <code class="xref py py-class docutils literal notranslate"><span class="pre">Catalog</span></code> by name.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.get_config.html#pyflink.table.table_environment.StreamTableEnvironment.get_config" title="pyflink.table.table_environment.StreamTableEnvironment.get_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.get_config</span></code></a>()</p></td>
+<td><p>Returns the table config to define the runtime behavior of the Table API.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.get_current_catalog.html#pyflink.table.table_environment.StreamTableEnvironment.get_current_catalog" title="pyflink.table.table_environment.StreamTableEnvironment.get_current_catalog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.get_current_catalog</span></code></a>()</p></td>
+<td><p>Gets the current default catalog name of the current session.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.get_current_database.html#pyflink.table.table_environment.StreamTableEnvironment.get_current_database" title="pyflink.table.table_environment.StreamTableEnvironment.get_current_database"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.get_current_database</span></code></a>()</p></td>
+<td><p>Gets the current default database name of the running session.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.list_catalogs.html#pyflink.table.table_environment.StreamTableEnvironment.list_catalogs" title="pyflink.table.table_environment.StreamTableEnvironment.list_catalogs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.list_catalogs</span></code></a>()</p></td>
+<td><p>Gets the names of all catalogs registered in this environment.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.list_databases.html#pyflink.table.table_environment.StreamTableEnvironment.list_databases" title="pyflink.table.table_environment.StreamTableEnvironment.list_databases"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.list_databases</span></code></a>()</p></td>
+<td><p>Gets the names of all databases in the current catalog.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.list_full_modules.html#pyflink.table.table_environment.StreamTableEnvironment.list_full_modules" title="pyflink.table.table_environment.StreamTableEnvironment.list_full_modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.list_full_modules</span></code></a>()</p></td>
+<td><p>Gets the names and statuses of all modules loaded in this environment.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.list_functions.html#pyflink.table.table_environment.StreamTableEnvironment.list_functions" title="pyflink.table.table_environment.StreamTableEnvironment.list_functions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.list_functions</span></code></a>()</p></td>
+<td><p>Gets the names of all functions in this environment.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.list_modules.html#pyflink.table.table_environment.StreamTableEnvironment.list_modules" title="pyflink.table.table_environment.StreamTableEnvironment.list_modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.list_modules</span></code></a>()</p></td>
+<td><p>Gets the names of all modules used in this environment.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.list_tables.html#pyflink.table.table_environment.StreamTableEnvironment.list_tables" title="pyflink.table.table_environment.StreamTableEnvironment.list_tables"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.list_tables</span></code></a>()</p></td>
+<td><p>Gets the names of all tables and views in the current database of the current catalog.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.list_temporary_tables.html#pyflink.table.table_environment.StreamTableEnvironment.list_temporary_tables" title="pyflink.table.table_environment.StreamTableEnvironment.list_temporary_tables"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.list_temporary_tables</span></code></a>()</p></td>
+<td><p>Gets the names of all temporary tables and views available in the current namespace (the current database of the current catalog).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.list_temporary_views.html#pyflink.table.table_environment.StreamTableEnvironment.list_temporary_views" title="pyflink.table.table_environment.StreamTableEnvironment.list_temporary_views"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.list_temporary_views</span></code></a>()</p></td>
+<td><p>Gets the names of all temporary views available in the current namespace (the current database of the current catalog).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.list_user_defined_functions.html#pyflink.table.table_environment.StreamTableEnvironment.list_user_defined_functions" title="pyflink.table.table_environment.StreamTableEnvironment.list_user_defined_functions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.list_user_defined_functions</span></code></a>()</p></td>
+<td><p>Gets the names of all user defined functions registered in this environment.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.list_views.html#pyflink.table.table_environment.StreamTableEnvironment.list_views" title="pyflink.table.table_environment.StreamTableEnvironment.list_views"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.list_views</span></code></a>()</p></td>
+<td><p>Gets the names of all views in the current database of the current catalog.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.load_module.html#pyflink.table.table_environment.StreamTableEnvironment.load_module" title="pyflink.table.table_environment.StreamTableEnvironment.load_module"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.load_module</span></code></a>(...)</p></td>
+<td><p>Loads a <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> under a unique name.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.register_catalog.html#pyflink.table.table_environment.StreamTableEnvironment.register_catalog" title="pyflink.table.table_environment.StreamTableEnvironment.register_catalog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.register_catalog</span></code></a>(...)</p></td>
+<td><p>Registers a <code class="xref py py-class docutils literal notranslate"><span class="pre">Catalog</span></code> under a unique name.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.register_function.html#pyflink.table.table_environment.StreamTableEnvironment.register_function" title="pyflink.table.table_environment.StreamTableEnvironment.register_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.register_function</span></code></a>(...)</p></td>
+<td><p>Registers a python user-defined function under a unique name.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.register_java_function.html#pyflink.table.table_environment.StreamTableEnvironment.register_java_function" title="pyflink.table.table_environment.StreamTableEnvironment.register_java_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.register_java_function</span></code></a>(...)</p></td>
+<td><p>Registers a java user defined function under a unique name.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.register_table.html#pyflink.table.table_environment.StreamTableEnvironment.register_table" title="pyflink.table.table_environment.StreamTableEnvironment.register_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.register_table</span></code></a>(name, ...)</p></td>
+<td><p>Registers a <code class="xref py py-class docutils literal notranslate"><span class="pre">Table</span></code> under a unique name in the TableEnvironment's catalog.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.register_table_sink.html#pyflink.table.table_environment.StreamTableEnvironment.register_table_sink" title="pyflink.table.table_environment.StreamTableEnvironment.register_table_sink"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.register_table_sink</span></code></a>(...)</p></td>
+<td><p>Registers an external <code class="xref py py-class docutils literal notranslate"><span class="pre">TableSink</span></code> with given field names and types in this <code class="xref py py-class docutils literal notranslate"><span class="pre">TableEnvironment</span></code>'s catalog.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.register_table_source.html#pyflink.table.table_environment.StreamTableEnvironment.register_table_source" title="pyflink.table.table_environment.StreamTableEnvironment.register_table_source"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.register_table_source</span></code></a>(...)</p></td>
+<td><p>Registers an external <code class="xref py py-class docutils literal notranslate"><span class="pre">TableSource</span></code> in this <code class="xref py py-class docutils literal notranslate"><span class="pre">TableEnvironment</span></code>'s catalog.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.scan.html#pyflink.table.table_environment.StreamTableEnvironment.scan" title="pyflink.table.table_environment.StreamTableEnvironment.scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.scan</span></code></a>(*table_path)</p></td>
+<td><p>Scans a registered table and returns the resulting <code class="xref py py-class docutils literal notranslate"><span class="pre">Table</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.set_python_requirements.html#pyflink.table.table_environment.StreamTableEnvironment.set_python_requirements" title="pyflink.table.table_environment.StreamTableEnvironment.set_python_requirements"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.set_python_requirements</span></code></a>(...)</p></td>
+<td><p>Specifies a requirements.txt file which defines the third-party dependencies.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.sql_query.html#pyflink.table.table_environment.StreamTableEnvironment.sql_query" title="pyflink.table.table_environment.StreamTableEnvironment.sql_query"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.sql_query</span></code></a>(query)</p></td>
+<td><p>Evaluates a SQL query on registered tables and retrieves the result as a <code class="xref py py-class docutils literal notranslate"><span class="pre">Table</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.to_data_stream.html#pyflink.table.table_environment.StreamTableEnvironment.to_data_stream" title="pyflink.table.table_environment.StreamTableEnvironment.to_data_stream"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.to_data_stream</span></code></a>(table)</p></td>
+<td><p>Converts the given Table into a DataStream.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.to_changelog_stream.html#pyflink.table.table_environment.StreamTableEnvironment.to_changelog_stream" title="pyflink.table.table_environment.StreamTableEnvironment.to_changelog_stream"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.to_changelog_stream</span></code></a>(table)</p></td>
+<td><p>Converts the given Table into a DataStream of changelog entries.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.to_append_stream.html#pyflink.table.table_environment.StreamTableEnvironment.to_append_stream" title="pyflink.table.table_environment.StreamTableEnvironment.to_append_stream"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.to_append_stream</span></code></a>(...)</p></td>
+<td><p>Converts the given Table into a DataStream of a specified type.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.to_retract_stream.html#pyflink.table.table_environment.StreamTableEnvironment.to_retract_stream" title="pyflink.table.table_environment.StreamTableEnvironment.to_retract_stream"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.to_retract_stream</span></code></a>(...)</p></td>
+<td><p>Converts the given Table into a DataStream of add and retract messages.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.unload_module.html#pyflink.table.table_environment.StreamTableEnvironment.unload_module" title="pyflink.table.table_environment.StreamTableEnvironment.unload_module"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.unload_module</span></code></a>(module_name)</p></td>
+<td><p>Unloads a <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> with given name.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.use_catalog.html#pyflink.table.table_environment.StreamTableEnvironment.use_catalog" title="pyflink.table.table_environment.StreamTableEnvironment.use_catalog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.use_catalog</span></code></a>(catalog_name)</p></td>
+<td><p>Sets the current catalog to the given value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.use_database.html#pyflink.table.table_environment.StreamTableEnvironment.use_database" title="pyflink.table.table_environment.StreamTableEnvironment.use_database"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.use_database</span></code></a>(...)</p></td>
+<td><p>Sets the current default database.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.table.table_environment.StreamTableEnvironment.use_modules.html#pyflink.table.table_environment.StreamTableEnvironment.use_modules" title="pyflink.table.table_environment.StreamTableEnvironment.use_modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StreamTableEnvironment.use_modules</span></code></a>(*module_names)</p></td>
+<td><p>Use an array of <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> with given names.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">PyFlink Table</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="api/pyflink.table.environment_settings.EnvironmentSettings.new_instance.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">pyflink.table.environment_settings.EnvironmentSettings.new_instance</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environmentsettings">EnvironmentSettings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tableconfig">TableConfig</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">TableEnvironment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#streamtableenvironment">StreamTableEnvironment</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/reference/pyflink.table/table_environment.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
