@@ -1,0 +1,927 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyflink.multimodal.operators.image_face &#8212; PyFlink 1.20+vvr.11.7.dev0 documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyflink/multimodal/operators/image_face';</script>
+    <link rel="shortcut icon" href="../../../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../../../search.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="Logo image">
+    <img src="../../../../_static/navbar-brand-logo.jpg" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <h1>Source code for pyflink.multimodal.operators.image_face</h1><div class="highlight"><pre>
+<span></span><span class="c1">################################################################################</span>
+<span class="c1">#  Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="c1">#  or more contributor license agreements.  See the NOTICE file</span>
+<span class="c1">#  distributed with this work for additional information</span>
+<span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
+<span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
+<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  with the License.  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">################################################################################</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Face processing operators.</span>
+
+<span class="sd">Operators in this module detect, count, or blur faces in image inputs with</span>
+<span class="sd">OpenCV Haar cascade classifiers.</span>
+
+<span class="sd">Requires: ``pip install opencv-python``. ``image_face_blur`` also requires</span>
+<span class="sd">``pip install Pillow``.</span>
+
+<span class="sd">Runtime args:</span>
+<span class="sd">    ``concurrency`` is forwarded to the DataFrame UDF runtime.</span>
+
+<span class="sd">Usage::</span>
+
+<span class="sd">    &gt;&gt;&gt; from pyflink.multimodal.operators.image_face import (</span>
+<span class="sd">    ...     image_face_detect, image_face_count, image_face_blur,</span>
+<span class="sd">    ... )</span>
+<span class="sd">    &gt;&gt;&gt; from pyflink.dataframe import col</span>
+<span class="sd">    &gt;&gt;&gt; detect = image_face_detect(min_neighbors=3)</span>
+<span class="sd">    &gt;&gt;&gt; df = df.with_column(&quot;faces&quot;, detect(col(&quot;img&quot;)))</span>
+<span class="sd">    &gt;&gt;&gt; count = image_face_count(min_neighbors=3)</span>
+<span class="sd">    &gt;&gt;&gt; df = df.with_column(&quot;face_count&quot;, count(col(&quot;img&quot;)))</span>
+<span class="sd">    &gt;&gt;&gt; blur = image_face_blur(radius=15, min_neighbors=3)</span>
+<span class="sd">    &gt;&gt;&gt; df = df.with_column(&quot;blurred&quot;, blur(col(&quot;img&quot;)))</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="kn">import</span> <span class="n">udf</span><span class="p">,</span> <span class="n">DataType</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.udf</span><span class="w"> </span><span class="kn">import</span> <span class="n">ScalarFunction</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.multimodal.codec</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">convert_image_array_to_mode</span><span class="p">,</span>
+    <span class="n">decode_image_input</span><span class="p">,</span>
+    <span class="n">image_array_to_pil_compatible</span><span class="p">,</span>
+    <span class="n">pil_to_image</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.multimodal.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">_build_or_apply_udf</span><span class="p">,</span> <span class="n">_udf_runtime_kwargs</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;image_face_detect&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;image_face_count&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;image_face_blur&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="c1"># &quot;mean&quot; intentionally excluded: it mapped to BoxBlur (identical to &quot;box&quot;)</span>
+<span class="c1"># but Data-Juicer maps &quot;mean&quot; to ImageFilter.BLUR which differs.</span>
+<span class="n">_VALID_BLUR_TYPES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;gaussian&quot;</span><span class="p">,</span> <span class="s2">&quot;box&quot;</span><span class="p">}</span>
+<span class="n">_IMAGE_FILTER_MODES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;L&quot;</span><span class="p">,</span> <span class="s2">&quot;LA&quot;</span><span class="p">,</span> <span class="s2">&quot;RGB&quot;</span><span class="p">,</span> <span class="s2">&quot;RGBA&quot;</span><span class="p">}</span>
+<span class="c1"># Some PIL modes are representable but not accepted by ImageFilter. For face</span>
+<span class="c1"># blur, prefer a filter-compatible 8-bit mode over preserving high precision.</span>
+<span class="n">_IMAGE_FILTER_MODE_BY_CHANNELS</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;L&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;LA&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s2">&quot;RGB&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="s2">&quot;RGBA&quot;</span><span class="p">}</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_validate_cv_classifier_name</span><span class="p">(</span><span class="n">cv_classifier</span><span class="p">):</span>
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cv_classifier</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+        <span class="ow">or</span> <span class="ow">not</span> <span class="n">cv_classifier</span>
+        <span class="ow">or</span> <span class="s2">&quot;/&quot;</span> <span class="ow">in</span> <span class="n">cv_classifier</span>
+        <span class="ow">or</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span> <span class="ow">in</span> <span class="n">cv_classifier</span>
+        <span class="ow">or</span> <span class="n">cv_classifier</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="s2">&quot;..&quot;</span><span class="p">)</span>
+    <span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;cv_classifier must be an OpenCV Haar cascade XML filename, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;got </span><span class="si">{</span><span class="n">cv_classifier</span><span class="si">!r}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">cv_classifier</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_validate_face_size</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">size</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">))</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">size</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be a (width, height) pair, got </span><span class="si">{</span><span class="n">size</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">size</span>
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+        <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span>
+        <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+        <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span>
+        <span class="ow">or</span> <span class="n">width</span> <span class="o">&lt;=</span> <span class="mi">0</span>
+        <span class="ow">or</span> <span class="n">height</span> <span class="o">&lt;=</span> <span class="mi">0</span>
+    <span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must contain positive integer pixels, got </span><span class="si">{</span><span class="n">size</span><span class="si">!r}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_validate_face_detection_params</span><span class="p">(</span><span class="n">min_neighbors</span><span class="p">,</span> <span class="n">scale_factor</span><span class="p">,</span> <span class="n">min_size</span><span class="p">,</span> <span class="n">max_size</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">min_neighbors</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">min_neighbors</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;min_neighbors must be a non-negative integer, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;got </span><span class="si">{</span><span class="n">min_neighbors</span><span class="si">!r}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">min_neighbors</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;min_neighbors must be a non-negative integer, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;got </span><span class="si">{</span><span class="n">min_neighbors</span><span class="si">!r}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">scale_factor</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span>
+        <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">scale_factor</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span>
+        <span class="ow">or</span> <span class="ow">not</span> <span class="n">math</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">scale_factor</span><span class="p">)</span>
+        <span class="ow">or</span> <span class="n">scale_factor</span> <span class="o">&lt;=</span> <span class="mf">1.0</span>
+    <span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;scale_factor must be &gt; 1.0, got </span><span class="si">{</span><span class="n">scale_factor</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">min_size</span> <span class="o">=</span> <span class="n">_validate_face_size</span><span class="p">(</span><span class="s2">&quot;min_size&quot;</span><span class="p">,</span> <span class="n">min_size</span><span class="p">)</span>
+    <span class="n">max_size</span> <span class="o">=</span> <span class="n">_validate_face_size</span><span class="p">(</span><span class="s2">&quot;max_size&quot;</span><span class="p">,</span> <span class="n">max_size</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="n">min_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="ow">and</span> <span class="n">max_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="ow">and</span> <span class="p">(</span><span class="n">max_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">min_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">or</span> <span class="n">max_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">min_size</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;max_size must be greater than or equal to min_size, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;got min_size=</span><span class="si">{</span><span class="n">min_size</span><span class="si">!r}</span><span class="s2">, max_size=</span><span class="si">{</span><span class="n">max_size</span><span class="si">!r}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">min_size</span><span class="p">,</span> <span class="n">max_size</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_image_array_to_filterable_pil</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert pixels to a PIL image that supports Pillow ImageFilter.&quot;&quot;&quot;</span>
+    <span class="n">pil_image</span> <span class="o">=</span> <span class="n">image_array_to_pil_compatible</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">pil_image</span><span class="o">.</span><span class="n">mode</span> <span class="ow">in</span> <span class="n">_IMAGE_FILTER_MODES</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pil_image</span>
+    <span class="n">channels</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">pixel_array</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">pixel_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">target_mode</span> <span class="o">=</span> <span class="n">_IMAGE_FILTER_MODE_BY_CHANNELS</span><span class="p">[</span><span class="n">channels</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">image_array_to_pil_compatible</span><span class="p">(</span>
+        <span class="n">convert_image_array_to_mode</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">,</span> <span class="n">target_mode</span><span class="p">)</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_detect_faces_cv</span><span class="p">(</span>
+    <span class="n">cv2</span><span class="p">,</span> <span class="n">np</span><span class="p">,</span> <span class="n">cascade</span><span class="p">,</span> <span class="n">rgb_array</span><span class="p">,</span> <span class="n">scale_factor</span><span class="p">,</span> <span class="n">min_neighbors</span><span class="p">,</span>
+    <span class="n">min_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run face detection on a decoded image ndarray.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        cv2: OpenCV module reference.</span>
+<span class="sd">        np: NumPy module reference.</span>
+<span class="sd">        cascade: Loaded Haar cascade classifier.</span>
+<span class="sd">        rgb_array: Decoded image as ``(H, W)``, ``(H, W, 1)``,</span>
+<span class="sd">            ``(H, W, 3)``, or ``(H, W, 4)`` ndarray.</span>
+<span class="sd">        scale_factor: Image pyramid scale factor.</span>
+<span class="sd">        min_neighbors: minNeighbors parameter for detectMultiScale.</span>
+<span class="sd">        min_size: Minimum face size ``(width, height)`` or ``None``.</span>
+<span class="sd">        max_size: Maximum face size ``(width, height)`` or ``None``.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        faces: ndarray of shape ``(N, 4)`` with detected face rectangles.</span>
+<span class="sd">            Always an ndarray -- empty ``(0, 4)`` when no faces are found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">rgb_array</span><span class="o">.</span><span class="n">ndim</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Face detection expects a 2D or 3D image array, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;got shape </span><span class="si">{</span><span class="nb">getattr</span><span class="p">(</span><span class="n">rgb_array</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;shape&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">None</span><span class="p">)</span><span class="si">!r}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">rgb_array</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">gray</span> <span class="o">=</span> <span class="n">rgb_array</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">channels</span> <span class="o">=</span> <span class="n">rgb_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">channels</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">gray</span> <span class="o">=</span> <span class="n">rgb_array</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">channels</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">gray</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">rgb_array</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_RGB2GRAY</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">channels</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="n">gray</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">rgb_array</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_RGBA2GRAY</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Face detection expects 1, 3, or 4 channels for 3D arrays, &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;got shape </span><span class="si">{</span><span class="n">rgb_array</span><span class="o">.</span><span class="n">shape</span><span class="si">!r}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+    <span class="n">kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">scaleFactor</span><span class="o">=</span><span class="n">scale_factor</span><span class="p">,</span> <span class="n">minNeighbors</span><span class="o">=</span><span class="n">min_neighbors</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">min_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># OpenCV expects (width, height) tuple for minSize.</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;minSize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">min_size</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">max_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># OpenCV expects (width, height) tuple for maxSize.</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;maxSize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">max_size</span><span class="p">)</span>
+    <span class="n">faces</span> <span class="o">=</span> <span class="n">cascade</span><span class="o">.</span><span class="n">detectMultiScale</span><span class="p">(</span><span class="n">gray</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="c1"># detectMultiScale returns () when no faces found; normalize to ndarray</span>
+    <span class="c1"># so callers can always use len() / iterate without type-checking.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">faces</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="n">faces</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">faces</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">_ImageFaceBase</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Shared OpenCV Haar cascade setup for scalar face operators.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">cv_classifier</span><span class="o">=</span><span class="s2">&quot;haarcascade_frontalface_alt.xml&quot;</span><span class="p">,</span>
+        <span class="n">min_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">scale_factor</span><span class="o">=</span><span class="mf">1.1</span><span class="p">,</span>
+        <span class="n">min_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cv_classifier</span> <span class="o">=</span> <span class="n">_validate_cv_classifier_name</span><span class="p">(</span><span class="n">cv_classifier</span><span class="p">)</span>
+        <span class="n">min_size</span><span class="p">,</span> <span class="n">max_size</span> <span class="o">=</span> <span class="n">_validate_face_detection_params</span><span class="p">(</span>
+            <span class="n">min_neighbors</span><span class="p">,</span> <span class="n">scale_factor</span><span class="p">,</span> <span class="n">min_size</span><span class="p">,</span> <span class="n">max_size</span>
+        <span class="p">)</span>
+        <span class="c1"># OpenCV minNeighbors: higher values reduce false positives but may</span>
+        <span class="c1"># miss weak faces. Default 3 matches OpenCV&#39;s common Haar examples.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_neighbors</span> <span class="o">=</span> <span class="n">min_neighbors</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scale_factor</span> <span class="o">=</span> <span class="n">scale_factor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_size</span> <span class="o">=</span> <span class="n">min_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_size</span> <span class="o">=</span> <span class="n">max_size</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_dependency_packages</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;cv2&quot;</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_context</span><span class="p">):</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.model.cache_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_dependencies</span>
+
+        <span class="n">check_dependencies</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_dependency_packages</span><span class="p">())</span>
+
+        <span class="kn">import</span><span class="w"> </span><span class="nn">cv2</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cv2</span> <span class="o">=</span> <span class="n">cv2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_np</span> <span class="o">=</span> <span class="n">np</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">haarcascades</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv_classifier</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cascade</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">CascadeClassifier</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cascade</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Failed to load Haar cascade classifier &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cv_classifier</span><span class="si">}</span><span class="s2">&#39; from &#39;</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cv2</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_np</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cascade</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_detect_faces</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pixel_array</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">_detect_faces_cv</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cv2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_np</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cascade</span><span class="p">,</span> <span class="n">pixel_array</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scale_factor</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_neighbors</span><span class="p">,</span>
+            <span class="n">min_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">min_size</span><span class="p">,</span> <span class="n">max_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_size</span><span class="p">,</span>
+        <span class="p">)</span>
+
+
+<span class="c1"># ImageFaceDetect - detect faces and return bounding boxes</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_ImageFaceDetect</span><span class="p">(</span><span class="n">_ImageFaceBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Detect faces in an image and return bounding boxes.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_input</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">image_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="c1"># Haar Cascade detection needs an OpenCV-compatible image. Normalize</span>
+        <span class="c1"># native IMAGE modes such as LA/RGBA to RGB before detection so</span>
+        <span class="c1"># two-channel alpha images do not reach cv2.cvtColor directly.</span>
+        <span class="n">pixel_array</span> <span class="o">=</span> <span class="n">decode_image_input</span><span class="p">(</span><span class="n">image_input</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;RGB&quot;</span><span class="p">)</span>
+        <span class="n">faces</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_detect_faces</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span> <span class="ow">in</span> <span class="n">faces</span><span class="p">:</span>
+            <span class="c1"># Haar Cascade does not expose per-detection probability. Preserve</span>
+            <span class="c1"># the output schema but mark confidence unknown instead of</span>
+            <span class="c1"># reporting a synthetic perfect score.</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">w</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">h</span><span class="p">),</span> <span class="kc">None</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+
+<div class="viewcode-block" id="image_face_detect"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_face.image_face_detect.html#pyflink.multimodal.operators.image_face.image_face_detect">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_face_detect</span><span class="p">(</span>
+    <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
+    <span class="n">cv_classifier</span><span class="o">=</span><span class="s2">&quot;haarcascade_frontalface_alt.xml&quot;</span><span class="p">,</span>
+    <span class="n">min_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">scale_factor</span><span class="o">=</span><span class="mf">1.1</span><span class="p">,</span>
+    <span class="n">min_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">max_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a face detection UDF (OpenCV Haar Cascade-based).</span>
+
+<span class="sd">    Requires ``pip install opencv-python``. This is a scalar UDF.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        *columns: Optional image column(s). When provided, the UDF is</span>
+<span class="sd">            applied directly instead of returning a factory.</span>
+<span class="sd">        cv_classifier: OpenCV Haar cascade XML filename. Must be a bare</span>
+<span class="sd">            filename without path separators. Default</span>
+<span class="sd">            ``&quot;haarcascade_frontalface_alt.xml&quot;``.</span>
+<span class="sd">        min_neighbors: OpenCV ``detectMultiScale`` ``minNeighbors`` value.</span>
+<span class="sd">            Higher values reduce false positives but may miss faces.</span>
+<span class="sd">            Default ``3``.</span>
+<span class="sd">        scale_factor: Image pyramid scale factor for multi-scale detection. Default ``1.1``.</span>
+<span class="sd">        min_size: Minimum face size as ``(width, height)`` tuple in pixels.</span>
+<span class="sd">            Detections smaller than this are ignored. ``None`` (default) uses</span>
+<span class="sd">            OpenCV&#39;s built-in minimum.</span>
+<span class="sd">        max_size: Maximum face size as ``(width, height)`` tuple in pixels.</span>
+<span class="sd">            Detections larger than this are ignored. ``None`` (default)</span>
+<span class="sd">            imposes no upper limit.</span>
+<span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A UDF that returns a list of face bounding boxes as</span>
+<span class="sd">        ``(x, y, w, h, confidence)`` structs, or ``None`` for null input.</span>
+<span class="sd">        The ``confidence`` field is always ``None`` for Haar Cascade</span>
+<span class="sd">        detection because OpenCV does not expose per-detection probability.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If detection parameters are invalid.</span>
+
+<span class="sd">    Usage::</span>
+
+<span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
+<span class="sd">        &gt;&gt;&gt; detect = image_face_detect(min_neighbors=3)</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;faces&quot;, detect(col(&quot;img&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Inline</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;faces&quot;, image_face_detect(col(&quot;img&quot;)))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
+        <span class="n">_ImageFaceDetect</span><span class="p">(</span>
+            <span class="n">cv_classifier</span><span class="o">=</span><span class="n">cv_classifier</span><span class="p">,</span>
+            <span class="n">min_neighbors</span><span class="o">=</span><span class="n">min_neighbors</span><span class="p">,</span>
+            <span class="n">scale_factor</span><span class="o">=</span><span class="n">scale_factor</span><span class="p">,</span>
+            <span class="n">min_size</span><span class="o">=</span><span class="n">min_size</span><span class="p">,</span>
+            <span class="n">max_size</span><span class="o">=</span><span class="n">max_size</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">list</span><span class="p">(</span>
+            <span class="n">DataType</span><span class="o">.</span><span class="n">struct</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">DataType</span><span class="o">.</span><span class="n">int32</span><span class="p">(),</span>
+                    <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="n">DataType</span><span class="o">.</span><span class="n">int32</span><span class="p">(),</span>
+                    <span class="s2">&quot;w&quot;</span><span class="p">:</span> <span class="n">DataType</span><span class="o">.</span><span class="n">int32</span><span class="p">(),</span>
+                    <span class="s2">&quot;h&quot;</span><span class="p">:</span> <span class="n">DataType</span><span class="o">.</span><span class="n">int32</span><span class="p">(),</span>
+                    <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">(),</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
+        <span class="p">),</span>
+        <span class="o">**</span><span class="n">_udf_runtime_kwargs</span><span class="p">(</span><span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_build_or_apply_udf</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">)</span></div>
+
+
+<span class="c1"># ImageFaceCount - count number of faces</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_ImageFaceCount</span><span class="p">(</span><span class="n">_ImageFaceBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Count the number of faces in an image.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_input</span><span class="p">):</span>
+        <span class="c1"># None input -&gt; None output (unknown), distinct from 0 (no faces found).</span>
+        <span class="k">if</span> <span class="n">image_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="c1"># Haar Cascade detection needs an OpenCV-compatible image. Normalize</span>
+        <span class="c1"># native IMAGE modes such as LA/RGBA to RGB before detection so</span>
+        <span class="c1"># two-channel alpha images do not reach cv2.cvtColor directly.</span>
+        <span class="n">pixel_array</span> <span class="o">=</span> <span class="n">decode_image_input</span><span class="p">(</span><span class="n">image_input</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;RGB&quot;</span><span class="p">)</span>
+        <span class="n">faces</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_detect_faces</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">)</span>
+        <span class="c1"># _detect_faces_cv always returns ndarray; len() gives count directly.</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">faces</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="image_face_count"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_face.image_face_count.html#pyflink.multimodal.operators.image_face.image_face_count">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_face_count</span><span class="p">(</span>
+    <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
+    <span class="n">cv_classifier</span><span class="o">=</span><span class="s2">&quot;haarcascade_frontalface_alt.xml&quot;</span><span class="p">,</span>
+    <span class="n">min_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">scale_factor</span><span class="o">=</span><span class="mf">1.1</span><span class="p">,</span>
+    <span class="n">min_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">max_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a face count UDF (OpenCV Haar Cascade-based).</span>
+
+<span class="sd">    Requires ``pip install opencv-python``. This is a scalar UDF that returns</span>
+<span class="sd">    the number of detected faces as an integer.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        *columns: Optional image column(s). When provided, the UDF is</span>
+<span class="sd">            applied directly instead of returning a factory.</span>
+<span class="sd">        cv_classifier: OpenCV Haar cascade XML filename. Must be a bare</span>
+<span class="sd">            filename without path separators. Default</span>
+<span class="sd">            ``&quot;haarcascade_frontalface_alt.xml&quot;``.</span>
+<span class="sd">        min_neighbors: OpenCV ``detectMultiScale`` ``minNeighbors`` value.</span>
+<span class="sd">            Higher values reduce false positives but may miss faces.</span>
+<span class="sd">            Default ``3``.</span>
+<span class="sd">        scale_factor: Image pyramid scale factor for multi-scale detection. Default ``1.1``.</span>
+<span class="sd">        min_size: Minimum face size as ``(width, height)`` tuple in pixels.</span>
+<span class="sd">            Detections smaller than this are ignored. ``None`` (default) uses</span>
+<span class="sd">            OpenCV&#39;s built-in minimum.</span>
+<span class="sd">        max_size: Maximum face size as ``(width, height)`` tuple in pixels.</span>
+<span class="sd">            Detections larger than this are ignored. ``None`` (default)</span>
+<span class="sd">            imposes no upper limit.</span>
+<span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A UDF that returns the number of detected faces as an integer,</span>
+<span class="sd">        or ``None`` for null input.</span>
+<span class="sd">        ``None`` means the input itself is null; ``0`` means a valid image was</span>
+<span class="sd">        processed and no faces were detected.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If detection parameters are invalid.</span>
+
+<span class="sd">    Usage::</span>
+
+<span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
+<span class="sd">        &gt;&gt;&gt; count = image_face_count(min_neighbors=3)</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;face_count&quot;, count(col(&quot;img&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Inline</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;face_count&quot;, image_face_count(col(&quot;img&quot;)))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
+        <span class="n">_ImageFaceCount</span><span class="p">(</span>
+            <span class="n">cv_classifier</span><span class="o">=</span><span class="n">cv_classifier</span><span class="p">,</span>
+            <span class="n">min_neighbors</span><span class="o">=</span><span class="n">min_neighbors</span><span class="p">,</span>
+            <span class="n">scale_factor</span><span class="o">=</span><span class="n">scale_factor</span><span class="p">,</span>
+            <span class="n">min_size</span><span class="o">=</span><span class="n">min_size</span><span class="p">,</span>
+            <span class="n">max_size</span><span class="o">=</span><span class="n">max_size</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">int32</span><span class="p">(),</span>
+        <span class="o">**</span><span class="n">_udf_runtime_kwargs</span><span class="p">(</span><span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_build_or_apply_udf</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">)</span></div>
+
+
+<span class="c1"># ImageFaceBlur - detect and blur faces</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_ImageFaceBlur</span><span class="p">(</span><span class="n">_ImageFaceBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Detect and blur faces in an image.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">cv_classifier</span><span class="o">=</span><span class="s2">&quot;haarcascade_frontalface_alt.xml&quot;</span><span class="p">,</span>
+        <span class="n">blur_type</span><span class="o">=</span><span class="s2">&quot;gaussian&quot;</span><span class="p">,</span>
+        <span class="n">radius</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">min_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">scale_factor</span><span class="o">=</span><span class="mf">1.1</span><span class="p">,</span>
+        <span class="n">min_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">cv_classifier</span><span class="o">=</span><span class="n">cv_classifier</span><span class="p">,</span>
+            <span class="n">min_neighbors</span><span class="o">=</span><span class="n">min_neighbors</span><span class="p">,</span>
+            <span class="n">scale_factor</span><span class="o">=</span><span class="n">scale_factor</span><span class="p">,</span>
+            <span class="n">min_size</span><span class="o">=</span><span class="n">min_size</span><span class="p">,</span>
+            <span class="n">max_size</span><span class="o">=</span><span class="n">max_size</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span>
+            <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span>
+            <span class="ow">or</span> <span class="ow">not</span> <span class="n">math</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span>
+            <span class="ow">or</span> <span class="n">radius</span> <span class="o">&lt;</span> <span class="mi">0</span>
+        <span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;radius must be a finite number &gt;= 0, got </span><span class="si">{</span><span class="n">radius</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">blur_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_VALID_BLUR_TYPES</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;blur_type must be one of </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">_VALID_BLUR_TYPES</span><span class="p">)</span><span class="si">}</span><span class="s2">, &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;got </span><span class="si">{</span><span class="n">blur_type</span><span class="si">!r}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">blur_type</span> <span class="o">=</span> <span class="n">blur_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">radius</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_blur_filter</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_dependency_packages</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;cv2&quot;</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">,</span> <span class="s2">&quot;PIL&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_make_blur_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">blur_type</span> <span class="o">==</span> <span class="s2">&quot;box&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ImageFilter</span><span class="o">.</span><span class="n">BoxBlur</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ImageFilter</span><span class="o">.</span><span class="n">GaussianBlur</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_context</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">function_context</span><span class="p">)</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">ImageFilter</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ImageFilter</span> <span class="o">=</span> <span class="n">ImageFilter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_blur_filter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_blur_filter</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_input</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">image_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">pixel_array</span> <span class="o">=</span> <span class="n">decode_image_input</span><span class="p">(</span><span class="n">image_input</span><span class="p">)</span>
+        <span class="c1"># Use a normalized RGB view/copy for detection only. The blur operation</span>
+        <span class="c1"># below still edits the original decoded image, preserving LA/RGBA</span>
+        <span class="c1"># output modes and alpha channels instead of forcing RGB output.</span>
+        <span class="n">detection_array</span> <span class="o">=</span> <span class="n">convert_image_array_to_mode</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">,</span> <span class="s2">&quot;RGB&quot;</span><span class="p">)</span>
+        <span class="n">faces</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_detect_faces</span><span class="p">(</span><span class="n">detection_array</span><span class="p">)</span>
+        <span class="n">pil_image</span> <span class="o">=</span> <span class="n">_image_array_to_filterable_pil</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">)</span>
+        <span class="c1"># _detect_faces_cv always returns ndarray; check length directly.</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">faces</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">blur_filter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_blur_filter</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span> <span class="ow">in</span> <span class="n">faces</span><span class="p">:</span>
+                <span class="n">region</span> <span class="o">=</span> <span class="n">pil_image</span><span class="o">.</span><span class="n">crop</span><span class="p">((</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">w</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="n">h</span><span class="p">)))</span>
+                <span class="n">region</span> <span class="o">=</span> <span class="n">region</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">blur_filter</span><span class="p">)</span>
+                <span class="n">pil_image</span><span class="o">.</span><span class="n">paste</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="n">pil_to_image</span><span class="p">(</span><span class="n">pil_image</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ImageFilter</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_blur_filter</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="image_face_blur"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_face.image_face_blur.html#pyflink.multimodal.operators.image_face.image_face_blur">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_face_blur</span><span class="p">(</span>
+    <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
+    <span class="n">cv_classifier</span><span class="o">=</span><span class="s2">&quot;haarcascade_frontalface_alt.xml&quot;</span><span class="p">,</span>
+    <span class="n">blur_type</span><span class="o">=</span><span class="s2">&quot;gaussian&quot;</span><span class="p">,</span>
+    <span class="n">radius</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">min_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">scale_factor</span><span class="o">=</span><span class="mf">1.1</span><span class="p">,</span>
+    <span class="n">min_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">max_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a face blurring UDF (OpenCV Haar Cascade + PIL-based).</span>
+
+<span class="sd">    Requires ``pip install opencv-python Pillow``. This is a scalar UDF that</span>
+<span class="sd">    returns native ``IMAGE``.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        *columns: Optional image column(s). When provided, the UDF is</span>
+<span class="sd">            applied directly instead of returning a factory.</span>
+<span class="sd">        cv_classifier: OpenCV Haar cascade XML filename. Must be a bare</span>
+<span class="sd">            filename without path separators. Default</span>
+<span class="sd">            ``&quot;haarcascade_frontalface_alt.xml&quot;``.</span>
+<span class="sd">        blur_type: Blur filter type. One of ``&quot;gaussian&quot;``, ``&quot;box&quot;``. Default ``&quot;gaussian&quot;``.</span>
+<span class="sd">        radius: Blur kernel radius in pixels. Default ``2`` is a light visual</span>
+<span class="sd">            blur; use a larger value for privacy/anonymization.</span>
+<span class="sd">        min_neighbors: OpenCV ``detectMultiScale`` ``minNeighbors`` value.</span>
+<span class="sd">            Higher values reduce false positives but may miss faces.</span>
+<span class="sd">            Default ``3``.</span>
+<span class="sd">        scale_factor: Image pyramid scale factor for multi-scale detection. Default ``1.1``.</span>
+<span class="sd">        min_size: Minimum face size as ``(width, height)`` tuple in pixels.</span>
+<span class="sd">            Detections smaller than this are ignored. ``None`` (default) uses</span>
+<span class="sd">            OpenCV&#39;s built-in minimum.</span>
+<span class="sd">        max_size: Maximum face size as ``(width, height)`` tuple in pixels.</span>
+<span class="sd">            Detections larger than this are ignored. ``None`` (default)</span>
+<span class="sd">            imposes no upper limit.</span>
+<span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A UDF that returns a native ``IMAGE`` with faces blurred,</span>
+<span class="sd">            or ``None`` for null input. Unsupported native-IMAGE outputs</span>
+<span class="sd">            fail fast at the codec boundary.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If blur or detection parameters are invalid.</span>
+
+<span class="sd">    Usage::</span>
+
+<span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
+<span class="sd">        &gt;&gt;&gt; blur = image_face_blur(blur_type=&quot;gaussian&quot;, radius=3)</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;blurred&quot;, blur(col(&quot;img&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Inline</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;blurred&quot;, image_face_blur(col(&quot;img&quot;)))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
+        <span class="n">_ImageFaceBlur</span><span class="p">(</span>
+            <span class="n">cv_classifier</span><span class="o">=</span><span class="n">cv_classifier</span><span class="p">,</span>
+            <span class="n">blur_type</span><span class="o">=</span><span class="n">blur_type</span><span class="p">,</span>
+            <span class="n">radius</span><span class="o">=</span><span class="n">radius</span><span class="p">,</span>
+            <span class="n">min_neighbors</span><span class="o">=</span><span class="n">min_neighbors</span><span class="p">,</span>
+            <span class="n">scale_factor</span><span class="o">=</span><span class="n">scale_factor</span><span class="p">,</span>
+            <span class="n">min_size</span><span class="o">=</span><span class="n">min_size</span><span class="p">,</span>
+            <span class="n">max_size</span><span class="o">=</span><span class="n">max_size</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">image</span><span class="p">(),</span>
+        <span class="o">**</span><span class="n">_udf_runtime_kwargs</span><span class="p">(</span><span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_build_or_apply_udf</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">)</span></div>
+</pre></div>
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

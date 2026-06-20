@@ -22,15 +22,23 @@ User Defined Functions
 
 The :func:`~pyflink.dataframe.udf.udf` decorator creates user-defined scalar functions
 for use with the DataFrame API. It supports plain functions, async functions,
-``ScalarFunction`` subclasses, and callable classes.
+``ScalarFunction`` subclasses, and callable classes. The
+:func:`~pyflink.dataframe.udf.udtf` decorator creates user-defined table functions
+that emit zero or more rows per input, for use with
+:meth:`~pyflink.dataframe.DataFrame.flat_map` and
+:meth:`~pyflink.dataframe.DataFrame.join_lateral`.
 
-Example:
-::
+Example::
 
-    >>> from pyflink.dataframe import udf, DataType
+    >>> from pyflink.dataframe import udf, udtf, DataType
     >>> @udf(return_dtype=DataType.string())
     ... def to_upper(s: str) -> str:
     ...     return s.upper()
+    >>>
+    >>> @udtf(return_dtype=DataType.string())
+    ... def split_words(text: str):
+    ...     for word in text.split():
+    ...         yield word
 
 .. currentmodule:: pyflink.dataframe.udf
 
@@ -38,3 +46,4 @@ Example:
     :toctree: api/
 
     udf
+    udtf
