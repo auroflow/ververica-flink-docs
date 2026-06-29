@@ -24,7 +24,7 @@ under the License.
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Configuration &#8212; PyFlink 1.20+vvr.11.7.dev0 documentation</title>
+    <title>Configuration &#8212; PyFlink 11.8.0.preview.2 documentation</title>
   <script>
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
@@ -59,7 +59,7 @@ under the License.
 
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="pyflink.dataframe.context.DataFrameConfig" href="api/pyflink.dataframe.context.DataFrameConfig.html" />
-    <link rel="prev" title="pyflink.dataframe.udf.udtf" href="api/pyflink.dataframe.udf.udtf.html" />
+    <link rel="prev" title="pyflink.dataframe.udtf" href="api/pyflink.dataframe.udtf.html" />
 <script src="_static/pyflink.js" ></script>
 <link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
 
@@ -261,20 +261,21 @@ under the License.
   <div class="bd-toc-item navbar-nav">
     <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../pyflink.table/index.html">PyFlink Table</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pyflink.datastream/index.html">PyFlink DataStream</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">PyFlink DataFrame</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="dataframe.html">DataFrame</a></li>
 <li class="toctree-l2"><a class="reference internal" href="creation.html">DataFrame Creation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="io.html">Input/Output</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sql.html">SQL</a></li>
-<li class="toctree-l2"><a class="reference internal" href="datatype.html">DataType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datatype.html">Data Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="udf.html">User Defined Functions</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="catalog.html">Catalog</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gpu.html">GPU Support</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ai.html">AI / LLM</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../pyflink.multimodal/index.html">PyFlink Multimodal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.datastream/index.html">PyFlink DataStream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyflink.common/index.html">PyFlink Common</a></li>
 </ul>
 
@@ -307,12 +308,13 @@ under the License.
   <section id="configuration">
 <h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">#</a></h1>
 <p>Functions and classes for configuring the DataFrame execution environment,
-including setting the underlying <code class="docutils literal notranslate"><span class="pre">TableEnvironment</span></code> and managing configuration options.</p>
+including setting the underlying TableEnvironment and managing configuration
+options.</p>
 <section id="dataframeconfig">
 <h2>DataFrameConfig<a class="headerlink" href="#dataframeconfig" title="Permalink to this headline">#</a></h2>
-<p>The module-level <code class="docutils literal notranslate"><span class="pre">pyflink.dataframe.config</span></code> is a singleton
-<a class="reference internal" href="api/pyflink.dataframe.context.DataFrameConfig.html#pyflink.dataframe.context.DataFrameConfig" title="pyflink.dataframe.context.DataFrameConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrameConfig</span></code></a> instance. Use it to set
-configuration options that will be applied to the underlying <code class="docutils literal notranslate"><span class="pre">TableEnvironment</span></code>.</p>
+<p>The module-level <code class="docutils literal notranslate"><span class="pre">pyflink.dataframe.config</span></code> is a singleton DataFrameConfig
+instance. Use it to set configuration options that will be applied to the
+underlying TableEnvironment.</p>
 <table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
@@ -339,48 +341,14 @@ configuration options that will be applied to the underlying <code class="docuti
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.context.set_table_environment.html#pyflink.dataframe.context.set_table_environment" title="pyflink.dataframe.context.set_table_environment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_table_environment</span></code></a>(t_env)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.set_table_environment.html#pyflink.dataframe.set_table_environment" title="pyflink.dataframe.set_table_environment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_table_environment</span></code></a>(t_env)</p></td>
 <td><p>Set the global TableEnvironment for DataFrame operations.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.context.get_table_environment.html#pyflink.dataframe.context.get_table_environment" title="pyflink.dataframe.context.get_table_environment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_table_environment</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.get_table_environment.html#pyflink.dataframe.get_table_environment" title="pyflink.dataframe.get_table_environment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_table_environment</span></code></a>()</p></td>
 <td><p>Get the currently set global TableEnvironment.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.context.get_or_create_table_environment.html#pyflink.dataframe.context.get_or_create_table_environment" title="pyflink.dataframe.context.get_or_create_table_environment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_or_create_table_environment</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.get_or_create_table_environment.html#pyflink.dataframe.get_or_create_table_environment" title="pyflink.dataframe.get_or_create_table_environment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_or_create_table_environment</span></code></a>()</p></td>
 <td><p>Return the global TableEnvironment, creating and storing one if needed.</p></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="catalogs-and-databases">
-<h2>Catalogs and Databases<a class="headerlink" href="#catalogs-and-databases" title="Permalink to this headline">#</a></h2>
-<p>Functions to register and navigate catalogs and databases used by the
-DataFrame API.</p>
-<table class="autosummary longtable table autosummary">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.context.create_catalog.html#pyflink.dataframe.context.create_catalog" title="pyflink.dataframe.context.create_catalog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_catalog</span></code></a>(name, options)</p></td>
-<td><p>Create a catalog in the DataFrame default TableEnvironment.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.context.use_catalog.html#pyflink.dataframe.context.use_catalog" title="pyflink.dataframe.context.use_catalog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">use_catalog</span></code></a>(name)</p></td>
-<td><p>Set the current catalog for DataFrame operations.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.context.get_current_catalog.html#pyflink.dataframe.context.get_current_catalog" title="pyflink.dataframe.context.get_current_catalog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_current_catalog</span></code></a>()</p></td>
-<td><p>Get the current catalog used by DataFrame operations.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.context.list_catalogs.html#pyflink.dataframe.context.list_catalogs" title="pyflink.dataframe.context.list_catalogs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list_catalogs</span></code></a>()</p></td>
-<td><p>List catalogs in the DataFrame default TableEnvironment.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.context.use_database.html#pyflink.dataframe.context.use_database" title="pyflink.dataframe.context.use_database"><code class="xref py py-obj docutils literal notranslate"><span class="pre">use_database</span></code></a>(name)</p></td>
-<td><p>Set the current database for DataFrame operations.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.context.get_current_database.html#pyflink.dataframe.context.get_current_database" title="pyflink.dataframe.context.get_current_database"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_current_database</span></code></a>()</p></td>
-<td><p>Get the current database used by DataFrame operations.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.context.list_databases.html#pyflink.dataframe.context.list_databases" title="pyflink.dataframe.context.list_databases"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list_databases</span></code></a>()</p></td>
-<td><p>List databases in the current catalog.</p></td>
 </tr>
 </tbody>
 </table>
@@ -395,11 +363,11 @@ DataFrame API.</p>
             <footer class="bd-footer-article">
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-  <a class='left-prev' id="prev-link" href="api/pyflink.dataframe.udf.udtf.html" title="previous page">
+  <a class='left-prev' id="prev-link" href="api/pyflink.dataframe.udtf.html" title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
           <p class="prev-next-subtitle">previous</p>
-          <p class="prev-next-title">pyflink.dataframe.udf.udtf</p>
+          <p class="prev-next-title">pyflink.dataframe.udtf</p>
       </div>
   </a>
   <a class='right-next' id="next-link" href="api/pyflink.dataframe.context.DataFrameConfig.html" title="next page">
@@ -433,11 +401,6 @@ DataFrame API.</p>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#environment">
    Environment
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#catalogs-and-databases">
-   Catalogs and Databases
   </a>
  </li>
 </ul>

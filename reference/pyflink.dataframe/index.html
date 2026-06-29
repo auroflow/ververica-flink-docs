@@ -24,7 +24,7 @@ under the License.
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>PyFlink DataFrame &#8212; PyFlink 1.20+vvr.11.7.dev0 documentation</title>
+    <title>PyFlink DataFrame &#8212; PyFlink 11.8.0.preview.2 documentation</title>
   <script>
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
@@ -59,7 +59,7 @@ under the License.
 
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="DataFrame" href="dataframe.html" />
-    <link rel="prev" title="pyflink.datastream.formats.parquet.ParquetBulkWriters" href="../pyflink.datastream/api/pyflink.datastream.formats.parquet.ParquetBulkWriters.html" />
+    <link rel="prev" title="pyflink.table.catalog.ResolvedSchema.to_sink_row_data_type" href="../pyflink.table/api/pyflink.table.catalog.ResolvedSchema.to_sink_row_data_type.html" />
 <script src="_static/pyflink.js" ></script>
 <link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
 
@@ -261,20 +261,21 @@ under the License.
   <div class="bd-toc-item navbar-nav">
     <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../pyflink.table/index.html">PyFlink Table</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pyflink.datastream/index.html">PyFlink DataStream</a></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">PyFlink DataFrame</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="dataframe.html">DataFrame</a></li>
 <li class="toctree-l2"><a class="reference internal" href="creation.html">DataFrame Creation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="io.html">Input/Output</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sql.html">SQL</a></li>
-<li class="toctree-l2"><a class="reference internal" href="datatype.html">DataType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datatype.html">Data Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="udf.html">User Defined Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="config.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="catalog.html">Catalog</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gpu.html">GPU Support</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ai.html">AI / LLM</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../pyflink.multimodal/index.html">PyFlink Multimodal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.datastream/index.html">PyFlink DataStream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyflink.common/index.html">PyFlink Common</a></li>
 </ul>
 
@@ -309,85 +310,16 @@ under the License.
 <p>This page gives an overview of all public PyFlink DataFrame API.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="dataframe.html">DataFrame</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="dataframe.html#id1">DataFrame</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dataframe.html#groupeddataframe">GroupedDataFrame</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dataframe.html#expressions">Expressions</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="creation.html">DataFrame Creation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.convert.from_table.html">pyflink.dataframe.convert.from_table</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.convert.from_pandas.html">pyflink.dataframe.convert.from_pandas</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.convert.from_dict.html">pyflink.dataframe.convert.from_dict</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.convert.from_records.html">pyflink.dataframe.convert.from_records</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="io.html">Input/Output</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.io.read_catalog_table.html">pyflink.dataframe.io.read_catalog_table</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.io.read_parquet.html">pyflink.dataframe.io.read_parquet</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.io.read_kafka.html">pyflink.dataframe.io.read_kafka</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.io.read_odps.html">pyflink.dataframe.io.read_odps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.io.read_paimon.html">pyflink.dataframe.io.read_paimon</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.io.read_sls.html">pyflink.dataframe.io.read_sls</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.io.read_hologres.html">pyflink.dataframe.io.read_hologres</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.io.read_milvus.html">pyflink.dataframe.io.read_milvus</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.io.read_custom.html">pyflink.dataframe.io.read_custom</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="sql.html">SQL</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.sql.sql.html">pyflink.dataframe.sql.sql</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="datatype.html">DataType</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.html">pyflink.dataframe.datatype.DataType</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.not_null.html">pyflink.dataframe.datatype.DataType.not_null</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.nullable.html">pyflink.dataframe.datatype.DataType.nullable</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.int8.html">pyflink.dataframe.datatype.DataType.int8</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.int16.html">pyflink.dataframe.datatype.DataType.int16</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.int32.html">pyflink.dataframe.datatype.DataType.int32</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.int64.html">pyflink.dataframe.datatype.DataType.int64</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.float32.html">pyflink.dataframe.datatype.DataType.float32</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.float64.html">pyflink.dataframe.datatype.DataType.float64</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.decimal.html">pyflink.dataframe.datatype.DataType.decimal</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.string.html">pyflink.dataframe.datatype.DataType.string</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.fixed_size_string.html">pyflink.dataframe.datatype.DataType.fixed_size_string</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.variant.html">pyflink.dataframe.datatype.DataType.variant</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.binary.html">pyflink.dataframe.datatype.DataType.binary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.fixed_size_binary.html">pyflink.dataframe.datatype.DataType.fixed_size_binary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.null.html">pyflink.dataframe.datatype.DataType.null</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.bool.html">pyflink.dataframe.datatype.DataType.bool</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.date.html">pyflink.dataframe.datatype.DataType.date</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.time.html">pyflink.dataframe.datatype.DataType.time</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.timestamp.html">pyflink.dataframe.datatype.DataType.timestamp</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.timestamp_ltz.html">pyflink.dataframe.datatype.DataType.timestamp_ltz</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.list.html">pyflink.dataframe.datatype.DataType.list</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.map.html">pyflink.dataframe.datatype.DataType.map</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.struct.html">pyflink.dataframe.datatype.DataType.struct</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.tensor.html">pyflink.dataframe.datatype.DataType.tensor</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="udf.html">User Defined Functions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.udf.udf.html">pyflink.dataframe.udf.udf</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.udf.udtf.html">pyflink.dataframe.udf.udtf</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="config.html">Configuration</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="config.html#dataframeconfig">DataFrameConfig</a></li>
-<li class="toctree-l2"><a class="reference internal" href="config.html#environment">Environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="config.html#catalogs-and-databases">Catalogs and Databases</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.gpu.GPUInfo.html">pyflink.dataframe.gpu.GPUInfo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.dataframe.gpu.get_gpu_infos.html">pyflink.dataframe.gpu.get_gpu_infos</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="ai.html">AI / LLM</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ai.html#providers">Providers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ai.html#provider">Provider</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ai.html#llmaccessor">LLMAccessor</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="dataframe.html">DataFrame</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creation.html">DataFrame Creation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">Input/Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sql.html">SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datatype.html">Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="udf.html">User Defined Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="catalog.html">Catalog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ai.html">AI / LLM</a></li>
 </ul>
 </div>
 </section>
@@ -400,11 +332,11 @@ under the License.
             <footer class="bd-footer-article">
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-  <a class='left-prev' id="prev-link" href="../pyflink.datastream/api/pyflink.datastream.formats.parquet.ParquetBulkWriters.html" title="previous page">
+  <a class='left-prev' id="prev-link" href="../pyflink.table/api/pyflink.table.catalog.ResolvedSchema.to_sink_row_data_type.html" title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
           <p class="prev-next-subtitle">previous</p>
-          <p class="prev-next-title">pyflink.datastream.formats.parquet.ParquetBulkWriters</p>
+          <p class="prev-next-title">pyflink.table.catalog.ResolvedSchema.to_sink_row_data_type</p>
       </div>
   </a>
   <a class='right-next' id="next-link" href="dataframe.html" title="next page">

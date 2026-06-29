@@ -23,7 +23,7 @@ under the License.
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pyflink.multimodal.operators.image_transform &#8212; PyFlink 1.20+vvr.11.7.dev0 documentation</title>
+    <title>pyflink.multimodal.operators.image_transform &#8212; PyFlink 11.8.0.preview.2 documentation</title>
   <script>
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
@@ -293,8 +293,8 @@ under the License.
 <span class="sd">Image transformation operators.</span>
 
 <span class="sd">Transform operators accept either raw image bytes (``DataType.binary()``)</span>
-<span class="sd">or a native ``IMAGE`` value (from ``image_decode()``). Pixel transforms</span>
-<span class="sd">return native ``IMAGE`` values so chained operators can avoid repeated</span>
+<span class="sd">or a built-in ``IMAGE`` value (from ``image_decode()``). Pixel transforms</span>
+<span class="sd">return built-in ``IMAGE`` values so chained operators can avoid repeated</span>
 <span class="sd">JPEG/PNG encode-decode cycles. Boundary operators such as</span>
 <span class="sd">``image_encode()``, ``image_compress()``, and ``image_convert_format()``</span>
 <span class="sd">return encoded image bytes.</span>
@@ -315,6 +315,7 @@ under the License.
 <span class="sd">    df = df.with_columns(&quot;img&quot;, blur(col(&quot;img&quot;)))</span>
 <span class="sd">    df = df.with_columns(&quot;jpg&quot;, encode(col(&quot;img&quot;)))</span>
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">base64</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
@@ -333,6 +334,7 @@ under the License.
     <span class="n">_normalize_image_mode</span><span class="p">,</span>
     <span class="n">decode_image</span> <span class="k">as</span> <span class="n">decode_image_value</span><span class="p">,</span>
     <span class="n">decode_image_input</span><span class="p">,</span>
+    <span class="n">detect_image_format</span><span class="p">,</span>
     <span class="n">encode_image_input</span><span class="p">,</span>
     <span class="n">image_array_to_pil</span><span class="p">,</span>
     <span class="n">image_array_to_pil_compatible</span><span class="p">,</span>
@@ -379,6 +381,15 @@ under the License.
 
 
 <span class="n">_VALID_DECODE_ON_ERROR</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;raise&quot;</span><span class="p">,</span> <span class="s2">&quot;null&quot;</span><span class="p">}</span>
+<span class="n">_VALID_IMAGE_ENCODE_OUTPUTS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;bytes&quot;</span><span class="p">,</span> <span class="s2">&quot;data_url&quot;</span><span class="p">}</span>
+<span class="n">_IMAGE_DATA_URL_MIME_TYPES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;JPEG&quot;</span><span class="p">:</span> <span class="s2">&quot;image/jpeg&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PNG&quot;</span><span class="p">:</span> <span class="s2">&quot;image/png&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;WEBP&quot;</span><span class="p">:</span> <span class="s2">&quot;image/webp&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BMP&quot;</span><span class="p">:</span> <span class="s2">&quot;image/bmp&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GIF&quot;</span><span class="p">:</span> <span class="s2">&quot;image/gif&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TIFF&quot;</span><span class="p">:</span> <span class="s2">&quot;image/tiff&quot;</span><span class="p">,</span>
+<span class="p">}</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_normalize_decode_on_error</span><span class="p">(</span><span class="n">on_error</span><span class="p">):</span>
@@ -388,6 +399,22 @@ under the License.
             <span class="sa">f</span><span class="s2">&quot;got </span><span class="si">{</span><span class="n">on_error</span><span class="si">!r}</span><span class="s2">&quot;</span>
         <span class="p">)</span>
     <span class="k">return</span> <span class="n">on_error</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_normalize_image_encode_output</span><span class="p">(</span><span class="n">output</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">output</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_VALID_IMAGE_ENCODE_OUTPUTS</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;output must be one of </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">_VALID_IMAGE_ENCODE_OUTPUTS</span><span class="p">)</span><span class="si">}</span><span class="s2">, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;got </span><span class="si">{</span><span class="n">output</span><span class="si">!r}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">output</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_image_data_url</span><span class="p">(</span><span class="n">encoded</span><span class="p">,</span> <span class="n">output_format</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">image_format</span> <span class="o">=</span> <span class="n">detect_image_format</span><span class="p">(</span><span class="n">encoded</span><span class="p">)</span> <span class="ow">or</span> <span class="n">output_format</span> <span class="ow">or</span> <span class="s2">&quot;JPEG&quot;</span>
+    <span class="n">mime_type</span> <span class="o">=</span> <span class="n">_IMAGE_DATA_URL_MIME_TYPES</span><span class="p">[</span><span class="n">image_format</span><span class="p">]</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">encoded</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;data:</span><span class="si">{</span><span class="n">mime_type</span><span class="si">}</span><span class="s2">;base64,</span><span class="si">{</span><span class="n">payload</span><span class="si">}</span><span class="s2">&quot;</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_scale_size</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">ratio</span><span class="p">):</span>
@@ -526,7 +553,7 @@ under the License.
 <span class="c1"># DecodeImage - binary bytes -&gt; native ``IMAGE`` (pipeline entry point)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">_DecodeImage</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Decode encoded image bytes (JPEG/PNG/...) into an ``native ``IMAGE````.</span>
+<span class="sd">    Decode encoded image bytes (JPEG/PNG/...) into a decoded image value.</span>
 
 <span class="sd">    This is the entry point for zero-copy image pipelines.  Place it</span>
 <span class="sd">    once at the beginning; downstream transform operators will pass</span>
@@ -577,7 +604,7 @@ under the License.
                 <span class="k">return</span> <span class="kc">None</span>
 
 
-<div class="viewcode-block" id="image_decode"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_transform.image_decode.html#pyflink.multimodal.operators.image_transform.image_decode">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_decode</span><span class="p">(</span>
+<div class="viewcode-block" id="image_decode"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_decode.html#pyflink.multimodal.operators.image_decode">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_decode</span><span class="p">(</span>
     <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
     <span class="n">on_error</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">,</span>
     <span class="n">mode</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -585,7 +612,7 @@ under the License.
     <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Decode a BYTES column into native ``IMAGE``.</span>
+<span class="sd">    Decode encoded image bytes into a decoded image.</span>
 
 <span class="sd">    This is the pipeline entry point for image data quality handling.</span>
 
@@ -595,7 +622,7 @@ under the License.
 <span class="sd">        on_error: Handling strategy for corrupt or undecodable images:</span>
 <span class="sd">            - ``&quot;raise&quot;`` (default): raise an exception and stop processing.</span>
 <span class="sd">            - ``&quot;null&quot;``: output null so downstream operators skip the row.</span>
-<span class="sd">        mode: Optional native IMAGE mode to convert to, e.g. &quot;RGB&quot; or &quot;L16&quot;.</span>
+<span class="sd">        mode: Optional target mode to convert to, e.g. &quot;RGB&quot; or &quot;L16&quot;.</span>
 <span class="sd">            ``None`` preserves the decoded mode when it can be represented.</span>
 <span class="sd">            Set ``mode=&quot;RGB&quot;`` explicitly before model operators that require</span>
 <span class="sd">            normalized RGB input.</span>
@@ -610,10 +637,9 @@ under the License.
 <span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        A UDF producing native ``IMAGE`` values.</span>
+<span class="sd">        A UDF producing decoded image values.</span>
 
 <span class="sd">    Example::</span>
-
 <span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
 <span class="sd">        &gt;&gt;&gt; decode = image_decode(on_error=&quot;null&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_columns(&quot;img&quot;, decode(col(&quot;raw_bytes&quot;)))</span>
@@ -632,15 +658,15 @@ under the License.
 <span class="c1"># EncodeImage - native ``IMAGE`` to image binary bytes</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">_EncodeImage</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Encode an ``native ``IMAGE```` back to compressed image bytes.</span>
+<span class="sd">    Encode a decoded image into compressed image bytes.</span>
 
 <span class="sd">    This is the exit point for zero-copy image pipelines.  Place it</span>
 <span class="sd">    at the end when you need JPEG/PNG bytes for storage or output.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        output_format: Target format, e.g. &quot;JPEG&quot;, &quot;PNG&quot;. If omitted, encoded</span>
-<span class="sd">            byte inputs keep their source format; decoded native IMAGE inputs</span>
-<span class="sd">            use JPEG because decoded structs do not retain source container</span>
+<span class="sd">            byte inputs keep their source format; decoded image values default</span>
+<span class="sd">            to JPEG because decoded images do not retain source container</span>
 <span class="sd">            metadata.</span>
 <span class="sd">        quality: Compression quality (1-100, JPEG/WebP only). Default 85.</span>
 
@@ -650,47 +676,56 @@ under the License.
 <span class="sd">        when Pillow can encode it directly; unsupported combinations raise.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">quality</span><span class="o">=</span><span class="n">DEFAULT_IMAGE_ENCODE_QUALITY</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">quality</span><span class="o">=</span><span class="n">DEFAULT_IMAGE_ENCODE_QUALITY</span><span class="p">,</span>
+                 <span class="n">output</span><span class="o">=</span><span class="s2">&quot;bytes&quot;</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">output_format</span> <span class="o">=</span> <span class="n">normalize_image_format</span><span class="p">(</span>
             <span class="n">output_format</span><span class="p">,</span> <span class="n">param_name</span><span class="o">=</span><span class="s2">&quot;output_format&quot;</span><span class="p">,</span> <span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">quality</span> <span class="o">=</span> <span class="n">validate_image_quality</span><span class="p">(</span><span class="n">quality</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="n">_normalize_image_encode_output</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_context</span><span class="p">):</span>
         <span class="n">check_dependencies</span><span class="p">(</span><span class="s2">&quot;PIL&quot;</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_input</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">encode_image_input</span><span class="p">(</span>
+        <span class="n">encoded</span> <span class="o">=</span> <span class="n">encode_image_input</span><span class="p">(</span>
             <span class="n">image_input</span><span class="p">,</span> <span class="n">output_format</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">output_format</span><span class="p">,</span> <span class="n">quality</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">quality</span>
         <span class="p">)</span>
+        <span class="k">if</span> <span class="n">encoded</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span> <span class="o">==</span> <span class="s2">&quot;bytes&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">encoded</span>
+        <span class="k">return</span> <span class="n">_image_data_url</span><span class="p">(</span><span class="n">encoded</span><span class="p">,</span> <span class="n">output_format</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">output_format</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="image_encode"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_transform.image_encode.html#pyflink.multimodal.operators.image_transform.image_encode">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_encode</span><span class="p">(</span>
+<div class="viewcode-block" id="image_encode"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_encode.html#pyflink.multimodal.operators.image_encode">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_encode</span><span class="p">(</span>
     <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
     <span class="nb">format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">quality</span><span class="o">=</span><span class="n">DEFAULT_IMAGE_ENCODE_QUALITY</span><span class="p">,</span>
+    <span class="n">output</span><span class="o">=</span><span class="s2">&quot;bytes&quot;</span><span class="p">,</span>
     <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Encode an image into compressed bytes.</span>
+<span class="sd">    Encode an image into compressed bytes or a base64 data URL.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        *columns: Optional image columns. When provided, the UDF is applied</span>
 <span class="sd">            directly instead of returning a factory.</span>
 <span class="sd">        format: Target image format, e.g. ``&quot;JPEG&quot;``, ``&quot;PNG&quot;``, ``&quot;WEBP&quot;``,</span>
 <span class="sd">            ``&quot;BMP&quot;``. ``None`` (default) keeps the source format for encoded</span>
-<span class="sd">            byte inputs; decoded native IMAGE inputs default to ``&quot;JPEG&quot;``</span>
-<span class="sd">            because the struct does not retain original container metadata.</span>
+<span class="sd">            byte inputs; decoded image values default to ``&quot;JPEG&quot;`` because</span>
+<span class="sd">            decoded images do not retain original container metadata.</span>
 <span class="sd">        quality: Compression quality (1-100). Only affects lossy formats</span>
 <span class="sd">            such as JPEG and WebP. Default 85.</span>
+<span class="sd">        output: Output representation. ``&quot;bytes&quot;`` (default) preserves the</span>
+<span class="sd">            existing binary contract. ``&quot;data_url&quot;`` returns a string such as</span>
+<span class="sd">            ``data:image/jpeg;base64,...`` for AI functions that accept image</span>
+<span class="sd">            URLs or inline data URLs.</span>
 <span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        A UDF producing encoded image bytes.</span>
+<span class="sd">        A UDF producing encoded image bytes or a data URL string.</span>
 
 <span class="sd">    Example::</span>
-
 <span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
 <span class="sd">        &gt;&gt;&gt; encode = image_encode(format=&quot;JPEG&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_columns(&quot;jpg_bytes&quot;, encode(col(&quot;img&quot;)))</span>
@@ -698,18 +733,19 @@ under the License.
 <span class="sd">        &gt;&gt;&gt; # Inline</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_columns(&quot;jpg_bytes&quot;, image_encode(col(&quot;img&quot;), format=&quot;JPEG&quot;))</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">_normalize_image_encode_output</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
     <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
-        <span class="n">_EncodeImage</span><span class="p">(</span><span class="n">output_format</span><span class="o">=</span><span class="nb">format</span><span class="p">,</span> <span class="n">quality</span><span class="o">=</span><span class="n">quality</span><span class="p">),</span>
-        <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">binary</span><span class="p">(),</span>
+        <span class="n">_EncodeImage</span><span class="p">(</span><span class="n">output_format</span><span class="o">=</span><span class="nb">format</span><span class="p">,</span> <span class="n">quality</span><span class="o">=</span><span class="n">quality</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">output</span><span class="p">),</span>
+        <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">()</span> <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s2">&quot;data_url&quot;</span> <span class="k">else</span> <span class="n">DataType</span><span class="o">.</span><span class="n">binary</span><span class="p">(),</span>
         <span class="o">**</span><span class="n">_udf_runtime_kwargs</span><span class="p">(</span><span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">),</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">_build_or_apply_udf</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">)</span></div>
 
 
-<span class="c1"># ImageConvertMode - convert to a target native IMAGE mode</span>
+<span class="c1"># ImageConvertMode - convert to a target image mode</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">_ImageConvertMode</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Convert an image to a target native IMAGE mode.</span>
+<span class="sd">    Convert an image to a target mode.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: Target mode, e.g. &quot;RGB&quot;, &quot;RGBA&quot;, &quot;L&quot;, or &quot;L16&quot;.</span>
@@ -736,7 +772,7 @@ under the License.
             <span class="k">return</span> <span class="kc">None</span>
 
 
-<div class="viewcode-block" id="image_convert_mode"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_transform.image_convert_mode.html#pyflink.multimodal.operators.image_transform.image_convert_mode">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_convert_mode</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="image_convert_mode"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_convert_mode.html#pyflink.multimodal.operators.image_convert_mode">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_convert_mode</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert an image to a target mode.</span>
 
@@ -748,10 +784,9 @@ under the License.
 <span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        A UDF producing native ``IMAGE`` values.</span>
+<span class="sd">        A UDF producing decoded image values.</span>
 
 <span class="sd">    Example::</span>
-
 <span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
 <span class="sd">        &gt;&gt;&gt; convert_mode = image_convert_mode(mode=&quot;L&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_columns(&quot;gray&quot;, convert_mode(col(&quot;img&quot;)))</span>
@@ -816,7 +851,7 @@ under the License.
             <span class="k">return</span> <span class="kc">None</span>
 
 
-<div class="viewcode-block" id="image_to_tensor"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_transform.image_to_tensor.html#pyflink.multimodal.operators.image_transform.image_to_tensor">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_to_tensor</span><span class="p">(</span>
+<div class="viewcode-block" id="image_to_tensor"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_to_tensor.html#pyflink.multimodal.operators.image_to_tensor">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_to_tensor</span><span class="p">(</span>
     <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
     <span class="n">width</span><span class="p">,</span>
     <span class="n">height</span><span class="p">,</span>
@@ -852,7 +887,6 @@ under the License.
 <span class="sd">        A UDF producing a fixed-shape ``float32`` tensor.</span>
 
 <span class="sd">    Example::</span>
-
 <span class="sd">        &gt;&gt;&gt; df = df.with_columns(&quot;img&quot;, image_decode(col(&quot;raw_bytes&quot;)))</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_columns(&quot;img&quot;, image_convert_mode(col(&quot;img&quot;), mode=&quot;RGB&quot;))</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_columns(&quot;img&quot;, image_resize(col(&quot;img&quot;), width=224, height=224))</span>
@@ -924,7 +958,7 @@ under the License.
             <span class="k">return</span> <span class="kc">None</span>
 
 
-<div class="viewcode-block" id="image_resize"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_transform.image_resize.html#pyflink.multimodal.operators.image_transform.image_resize">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_resize</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;lanczos&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="image_resize"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_resize.html#pyflink.multimodal.operators.image_resize">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_resize</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;lanczos&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Resize an image to fixed output dimensions.</span>
 
@@ -939,10 +973,9 @@ under the License.
 <span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        A UDF producing native ``IMAGE`` values.</span>
+<span class="sd">        A UDF producing decoded image values.</span>
 
 <span class="sd">    Example::</span>
-
 <span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
 <span class="sd">        &gt;&gt;&gt; resize = image_resize(width=512, height=512)</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_columns(&quot;resized&quot;, resize(col(&quot;img&quot;)))</span>
@@ -1009,7 +1042,7 @@ under the License.
             <span class="k">return</span> <span class="kc">None</span>
 
 
-<div class="viewcode-block" id="image_blur"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_transform.image_blur.html#pyflink.multimodal.operators.image_transform.image_blur">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_blur</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">blur_type</span><span class="o">=</span><span class="s2">&quot;gaussian&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="image_blur"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_blur.html#pyflink.multimodal.operators.image_blur">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_blur</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">blur_type</span><span class="o">=</span><span class="s2">&quot;gaussian&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Apply blur to an image.</span>
 
@@ -1024,10 +1057,9 @@ under the License.
 <span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        A UDF producing native ``IMAGE`` values.</span>
+<span class="sd">        A UDF producing decoded image values.</span>
 
 <span class="sd">    Example::</span>
-
 <span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
 <span class="sd">        &gt;&gt;&gt; blur = image_blur(radius=3)</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_columns(&quot;blurred&quot;, blur(col(&quot;img&quot;)))</span>
@@ -1133,7 +1165,7 @@ under the License.
             <span class="k">return</span> <span class="kc">None</span>
 
 
-<div class="viewcode-block" id="image_crop"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_transform.image_crop.html#pyflink.multimodal.operators.image_transform.image_crop">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_crop</span><span class="p">(</span>
+<div class="viewcode-block" id="image_crop"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_crop.html#pyflink.multimodal.operators.image_crop">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_crop</span><span class="p">(</span>
     <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
     <span class="n">crop_coords</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">crop_type</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
@@ -1164,10 +1196,9 @@ under the License.
 <span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        A UDF producing native ``IMAGE`` values.</span>
+<span class="sd">        A UDF producing decoded image values.</span>
 
 <span class="sd">    Example::</span>
-
 <span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
 <span class="sd">        &gt;&gt;&gt; crop = image_crop(crop_coords=(100, 100, 500, 500))</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_columns(&quot;cropped&quot;, crop(col(&quot;img&quot;)))</span>
@@ -1201,8 +1232,9 @@ under the License.
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Encode an image to compressed bytes with the specified format and quality.</span>
 
-<span class="sd">    native IMAGE stores decoded pixels only. Compression is an output-boundary</span>
-<span class="sd">    operation and therefore returns encoded bytes instead of native IMAGE. This</span>
+<span class="sd">    Built-in IMAGE values store decoded pixels only. Compression is an</span>
+<span class="sd">    output-boundary operation and therefore returns encoded bytes instead of a</span>
+<span class="sd">    decoded image value. This</span>
 <span class="sd">    is a convenience wrapper around image encoding with a JPEG-oriented</span>
 <span class="sd">    default.</span>
 
@@ -1210,7 +1242,7 @@ under the License.
 <span class="sd">        quality: Compression quality (1-100). Default 85.</span>
 <span class="sd">        output_format: Output format. Default &quot;JPEG&quot;.</span>
 
-<span class="sd">    Corrupt encoded bytes return ``None``. Malformed native IMAGE input is</span>
+<span class="sd">    Corrupt encoded bytes return ``None``. Malformed decoded image input is</span>
 <span class="sd">    treated as invalid operator input and may fail fast.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -1230,7 +1262,7 @@ under the License.
         <span class="p">)</span>
 
 
-<div class="viewcode-block" id="image_compress"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_transform.image_compress.html#pyflink.multimodal.operators.image_transform.image_compress">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_compress</span><span class="p">(</span>
+<div class="viewcode-block" id="image_compress"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_compress.html#pyflink.multimodal.operators.image_compress">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_compress</span><span class="p">(</span>
     <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
     <span class="n">quality</span><span class="o">=</span><span class="n">DEFAULT_IMAGE_ENCODE_QUALITY</span><span class="p">,</span>
     <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;JPEG&quot;</span><span class="p">,</span>
@@ -1239,9 +1271,9 @@ under the License.
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compress an image to encoded bytes with the specified format and quality.</span>
 
-<span class="sd">    The input may be raw encoded image bytes or native IMAGE. The output is</span>
-<span class="sd">    always newly encoded image bytes. Corrupt encoded bytes return ``None``;</span>
-<span class="sd">    malformed native IMAGE input may fail fast.</span>
+<span class="sd">    The input may be raw encoded image bytes or a decoded image value. The</span>
+<span class="sd">    output is always newly encoded image bytes. Corrupt encoded bytes return</span>
+<span class="sd">    ``None``; malformed decoded image input may fail fast.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        *columns: Optional image columns. When provided, the UDF is applied</span>
@@ -1255,7 +1287,6 @@ under the License.
 <span class="sd">        A UDF producing encoded image bytes.</span>
 
 <span class="sd">    Example::</span>
-
 <span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
 <span class="sd">        &gt;&gt;&gt; compress = image_compress(quality=60)</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_columns(&quot;compressed&quot;, compress(col(&quot;img&quot;)))</span>
@@ -1276,13 +1307,13 @@ under the License.
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert an image to encoded bytes in a different format.</span>
 
-<span class="sd">    native IMAGE stores decoded pixels only. Format conversion is an</span>
+<span class="sd">    Built-in IMAGE values store decoded pixels only. Format conversion is an</span>
 <span class="sd">    output-boundary operation and therefore returns encoded bytes.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        output_format: Target format, e.g. &quot;PNG&quot;, &quot;JPEG&quot;, &quot;WEBP&quot;, &quot;BMP&quot;.</span>
 
-<span class="sd">    Corrupt encoded bytes return ``None``. Malformed native IMAGE input is</span>
+<span class="sd">    Corrupt encoded bytes return ``None``. Malformed decoded image input is</span>
 <span class="sd">    treated as invalid operator input and may fail fast.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -1299,11 +1330,11 @@ under the License.
         <span class="k">return</span> <span class="n">encode_image_input</span><span class="p">(</span><span class="n">image_input</span><span class="p">,</span> <span class="n">output_format</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">output_format</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="image_convert_format"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_transform.image_convert_format.html#pyflink.multimodal.operators.image_transform.image_convert_format">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_convert_format</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="image_convert_format"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_convert_format.html#pyflink.multimodal.operators.image_convert_format">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_convert_format</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert an image to a different encoded format.</span>
 
-<span class="sd">    Corrupt encoded bytes return ``None``; malformed native IMAGE input may</span>
+<span class="sd">    Corrupt encoded bytes return ``None``; malformed decoded image input may</span>
 <span class="sd">    fail fast.</span>
 
 <span class="sd">    Args:</span>
@@ -1317,7 +1348,6 @@ under the License.
 <span class="sd">        A UDF producing encoded image bytes.</span>
 
 <span class="sd">    Example::</span>
-
 <span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
 <span class="sd">        &gt;&gt;&gt; convert_fmt = image_convert_format(format=&quot;PNG&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_columns(&quot;png_img&quot;, convert_fmt(col(&quot;img&quot;)))</span>
@@ -1386,7 +1416,7 @@ under the License.
             <span class="k">return</span> <span class="kc">None</span>
 
 
-<div class="viewcode-block" id="image_adjust_color"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_transform.image_adjust_color.html#pyflink.multimodal.operators.image_transform.image_adjust_color">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_adjust_color</span><span class="p">(</span>
+<div class="viewcode-block" id="image_adjust_color"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_adjust_color.html#pyflink.multimodal.operators.image_adjust_color">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_adjust_color</span><span class="p">(</span>
     <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
     <span class="n">brightness</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
     <span class="n">contrast</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
@@ -1409,10 +1439,9 @@ under the License.
 <span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        A UDF producing native ``IMAGE`` values.</span>
+<span class="sd">        A UDF producing decoded image values.</span>
 
 <span class="sd">    Example::</span>
-
 <span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
 <span class="sd">        &gt;&gt;&gt; adjust = image_adjust_color(brightness=1.5)</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_columns(&quot;bright&quot;, adjust(col(&quot;img&quot;)))</span>
@@ -1467,7 +1496,7 @@ under the License.
             <span class="k">return</span> <span class="kc">None</span>
 
 
-<div class="viewcode-block" id="image_flip"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_transform.image_flip.html#pyflink.multimodal.operators.image_transform.image_flip">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_flip</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="image_flip"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_flip.html#pyflink.multimodal.operators.image_flip">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_flip</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Flip an image horizontally, vertically, or rotate 180 degrees.</span>
 
@@ -1479,10 +1508,9 @@ under the License.
 <span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        A UDF producing native ``IMAGE`` values.</span>
+<span class="sd">        A UDF producing decoded image values.</span>
 
 <span class="sd">    Example::</span>
-
 <span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
 <span class="sd">        &gt;&gt;&gt; flip = image_flip(mode=&quot;horizontal&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_columns(&quot;flipped&quot;, flip(col(&quot;img&quot;)))</span>
@@ -1504,7 +1532,7 @@ under the License.
 <span class="sd">    Detect and crop black borders from an image.</span>
 
 <span class="sd">    Supports threshold, histogram, edge, and auto detection modes. If no</span>
-<span class="sd">    meaningful border is detected, the original native IMAGE is returned.</span>
+<span class="sd">    meaningful border is detected, the original decoded image value is returned.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        detect_algorithm: &quot;threshold&quot;, &quot;histogram&quot;, &quot;edge&quot;, or &quot;auto&quot;.</span>
@@ -1635,7 +1663,7 @@ under the License.
             <span class="k">return</span> <span class="kc">None</span>
 
 
-<div class="viewcode-block" id="image_crop_black_border"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_transform.image_crop_black_border.html#pyflink.multimodal.operators.image_transform.image_crop_black_border">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_crop_black_border</span><span class="p">(</span>
+<div class="viewcode-block" id="image_crop_black_border"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_crop_black_border.html#pyflink.multimodal.operators.image_crop_black_border">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_crop_black_border</span><span class="p">(</span>
     <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
     <span class="n">threshold</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">detect_algorithm</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
@@ -1648,7 +1676,7 @@ under the License.
 <span class="sd">    Detect and remove black borders from an image.</span>
 
 <span class="sd">    If every pixel is treated as border (e.g. an all-black image), the</span>
-<span class="sd">    original native IMAGE is returned unchanged.</span>
+<span class="sd">    original decoded image value is returned unchanged.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        *columns: Optional image columns. When provided, the UDF is applied</span>
@@ -1671,10 +1699,9 @@ under the License.
 <span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        A UDF producing native ``IMAGE`` values.</span>
+<span class="sd">        A UDF producing decoded image values.</span>
 
 <span class="sd">    Example::</span>
-
 <span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
 <span class="sd">        &gt;&gt;&gt; crop_border = image_crop_black_border(black_threshold=15)</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_columns(&quot;clean&quot;, crop_border(col(&quot;img&quot;)))</span>
@@ -1744,7 +1771,7 @@ under the License.
             <span class="k">return</span> <span class="kc">None</span>
 
 
-<div class="viewcode-block" id="image_rescale"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_transform.image_rescale.html#pyflink.multimodal.operators.image_transform.image_rescale">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_rescale</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;lanczos&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="image_rescale"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_rescale.html#pyflink.multimodal.operators.image_rescale">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_rescale</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;lanczos&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Rescale an image by a multiplicative factor, preserving aspect ratio.</span>
 
@@ -1762,10 +1789,9 @@ under the License.
 <span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        A UDF producing native ``IMAGE`` values.</span>
+<span class="sd">        A UDF producing decoded image values.</span>
 
 <span class="sd">    Example::</span>
-
 <span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
 <span class="sd">        &gt;&gt;&gt; rescale = image_rescale(scale=0.5)</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_columns(&quot;small&quot;, rescale(col(&quot;img&quot;)))</span>
@@ -1842,6 +1868,8 @@ under the License.
         <span class="n">alpha_matting_erode_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
         <span class="n">bgcolor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">alpha_matting</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
@@ -1884,6 +1912,8 @@ under the License.
         <span class="bp">self</span><span class="o">.</span><span class="n">alpha_matting_erode_size</span> <span class="o">=</span> <span class="n">alpha_matting_erode_size</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bgcolor</span> <span class="o">=</span> <span class="n">bgcolor</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model_sharing</span> <span class="o">=</span> <span class="n">model_sharing</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span> <span class="o">=</span> <span class="n">num_gpus</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_gpu_type</span> <span class="o">=</span> <span class="n">gpu_type</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_rembg_options</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;alpha_matting&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha_matting</span><span class="p">,</span>
             <span class="s2">&quot;alpha_matting_foreground_threshold&quot;</span><span class="p">:</span> <span class="p">(</span>
@@ -1915,6 +1945,8 @@ under the License.
             <span class="n">model_sharing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model_sharing</span><span class="p">,</span>
             <span class="n">dependencies</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;rembg&quot;</span><span class="p">,),</span>
             <span class="n">model_id</span><span class="o">=</span><span class="s2">&quot;rembg&quot;</span><span class="p">,</span>
+            <span class="n">requested_num_gpus</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span><span class="p">,</span>
+            <span class="n">requested_gpu_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_gpu_type</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span><span class="o">.</span><span class="n">register_operation</span><span class="p">(</span>
             <span class="s2">&quot;image_remove_background&quot;</span><span class="p">,</span> <span class="n">_ImageRemoveBackground</span><span class="o">.</span><span class="n">_predict_batch</span>
@@ -1927,7 +1959,7 @@ under the License.
         <span class="k">return</span> <span class="n">image_array_to_pil</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;RGB&quot;</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_result_to_image_struct</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_result_to_image_value</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="p">(</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bytearray</span><span class="p">)):</span>
@@ -1947,7 +1979,7 @@ under the License.
         <span class="k">for</span> <span class="n">pil_image</span> <span class="ow">in</span> <span class="n">pil_images</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">result</span> <span class="o">=</span> <span class="n">remove</span><span class="p">(</span><span class="n">pil_image</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
-                <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_ImageRemoveBackground</span><span class="o">.</span><span class="n">_result_to_image_struct</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+                <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_ImageRemoveBackground</span><span class="o">.</span><span class="n">_result_to_image_value</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
             <span class="k">except</span> <span class="n">_IMAGE_DATA_ERRORS</span><span class="p">:</span>
                 <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">results</span>
@@ -1993,7 +2025,7 @@ under the License.
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scatter_results_as_series</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">valid_idx</span><span class="p">,</span> <span class="n">total_len</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="image_remove_background"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_transform.image_remove_background.html#pyflink.multimodal.operators.image_transform.image_remove_background">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_remove_background</span><span class="p">(</span>
+<div class="viewcode-block" id="image_remove_background"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_remove_background.html#pyflink.multimodal.operators.image_remove_background">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_remove_background</span><span class="p">(</span>
     <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
     <span class="n">alpha_matting</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">alpha_matting_foreground_threshold</span><span class="o">=</span><span class="mi">240</span><span class="p">,</span>
@@ -2037,10 +2069,9 @@ under the License.
 <span class="sd">            available GPU.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        A UDF producing native ``IMAGE`` values.</span>
+<span class="sd">        A UDF producing decoded image values.</span>
 
 <span class="sd">    Example::</span>
-
 <span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
 <span class="sd">        &gt;&gt;&gt; remove_bg = image_remove_background(alpha_matting=True)</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_columns(&quot;nobg&quot;, remove_bg(col(&quot;img&quot;)))</span>
@@ -2056,6 +2087,8 @@ under the License.
             <span class="n">alpha_matting_erode_size</span><span class="o">=</span><span class="n">alpha_matting_erode_size</span><span class="p">,</span>
             <span class="n">bgcolor</span><span class="o">=</span><span class="n">bgcolor</span><span class="p">,</span>
             <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">,</span>
+            <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+            <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">image</span><span class="p">(),</span>
         <span class="n">func_type</span><span class="o">=</span><span class="s2">&quot;pandas&quot;</span><span class="p">,</span>
@@ -2070,7 +2103,7 @@ under the License.
 
 
 <span class="c1"># ═══════════════════════════════════════════════════════════════════════════</span>
-<span class="c1"># GenerateImage — seed → native ``IMAGE`` (synthetic source for demo / tests)</span>
+<span class="c1"># GenerateImage — seed → built-in ``IMAGE`` (synthetic source for demo / tests)</span>
 <span class="c1"># ═══════════════════════════════════════════════════════════════════════════</span>
 
 
@@ -2081,14 +2114,10 @@ under the License.
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generate a synthetic solid-color image deterministically from ``seed``.</span>
 
-<span class="sd">    Produces an ``native ``IMAGE```` row, i.e. the 5-field struct</span>
-<span class="sd">    ``(data, height, width, channels, mode)``. The ``data`` field holds raw</span>
-<span class="sd">    decoded pixel bytes (``len(data) == height * width * channels`` for 8-bit</span>
-<span class="sd">    modes), per the native IMAGE contract — never encoded container bytes. The</span>
-<span class="sd">    struct carries no ``format``/``quality`` metadata; those belong on a</span>
-<span class="sd">    downstream ``encode_image`` step. The fill color is derived from ``seed``</span>
-<span class="sd">    so that identical seeds produce identical output — useful for reproducible</span>
-<span class="sd">    demos and tests.</span>
+<span class="sd">    Produces a decoded image value. The value stores decoded pixels only and</span>
+<span class="sd">    does not retain encoded format or quality metadata. The fill color is</span>
+<span class="sd">    derived from ``seed`` so that identical seeds produce identical output —</span>
+<span class="sd">    useful for reproducible demos and tests.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        width: Image width in pixels. Default 512.</span>
@@ -2096,7 +2125,7 @@ under the License.
 <span class="sd">        format: Intended downstream encoding hint, one of ``&quot;PNG&quot;``,</span>
 <span class="sd">            ``&quot;JPEG&quot;``, ``&quot;BMP&quot;`` (case-insensitive). Default ``&quot;PNG&quot;``.</span>
 <span class="sd">            Validated for forward compatibility but NOT stored on the</span>
-<span class="sd">            produced raw-pixel native IMAGE.</span>
+<span class="sd">            produced decoded image value.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;PNG&quot;</span><span class="p">):</span>
@@ -2145,7 +2174,7 @@ under the License.
 
 <span class="k">def</span><span class="w"> </span><span class="nf">generate_image</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;PNG&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Create an image generation UDF (seed → native ``IMAGE``).</span>
+<span class="sd">    Create an image generation UDF (seed → built-in ``IMAGE`` value).</span>
 
 <span class="sd">    Produces a deterministic solid-color image whose color is derived from</span>
 <span class="sd">    the input ``seed``.  Intended for demos, end-to-end tests, and synthetic</span>

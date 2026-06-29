@@ -1,0 +1,572 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>pyflink.dataframe.DataFrame.write_odps &#8212; PyFlink 11.8.0.preview.2 documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/pyflink.dataframe/api/pyflink.dataframe.DataFrame.write_odps';</script>
+    <link rel="shortcut icon" href="../../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="pyflink.dataframe.DataFrame.write_paimon" href="pyflink.dataframe.DataFrame.write_paimon.html" />
+    <link rel="prev" title="pyflink.dataframe.DataFrame.write_kafka" href="pyflink.dataframe.DataFrame.write_kafka.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="Logo image">
+    <img src="../../../_static/navbar-brand-logo.jpg" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../../index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../../index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Section navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">
+    Section Navigation
+  </p>
+  <div class="bd-toc-item navbar-nav">
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../pyflink.table/index.html">PyFlink Table</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">PyFlink DataFrame</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../dataframe.html">DataFrame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../creation.html">DataFrame Creation</a></li>
+<li class="toctree-l2 current active"><a class="reference internal" href="../io.html">Input/Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sql.html">SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../datatype.html">Data Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../udf.html">User Defined Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../catalog.html">Catalog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gpu.html">GPU Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai.html">AI / LLM</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyflink.multimodal/index.html">PyFlink Multimodal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyflink.datastream/index.html">PyFlink DataStream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyflink.common/index.html">PyFlink Common</a></li>
+</ul>
+
+  </div>
+</nav>
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <section id="pyflink-dataframe-dataframe-write-odps">
+<h1>pyflink.dataframe.DataFrame.write_odps<a class="headerlink" href="#pyflink-dataframe-dataframe-write-odps" title="Permalink to this headline">#</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyflink.dataframe.DataFrame.write_odps">
+<span class="sig-prename descclassname"><span class="pre">DataFrame.</span></span><span class="sig-name descname"><span class="pre">write_odps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">endpoint</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tunnel_endpoint</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">access_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">access_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compress_algorithm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'RAW'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'ZLIB'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'SNAPPY'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'SNAPPY'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quota_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_stream_tunnel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flush_interval_ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">67108864</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_flush_threads</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slot_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamic_partition_limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep_millis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enable_upsert</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upsert_async_commit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upsert_commit_timeout_ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">120000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'insert'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'upsert'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'insert'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallelism</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_cached_enable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_cached_writer_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bucket_check_interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">60000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_cached_rolling_max_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'16mb'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_cached_memory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'64mb'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_cached_memory_segment_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'128kb'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_cached_flush_always</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_cached_write_max_retries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upsert_writer_max_retries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upsert_writer_buffer_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'64mb'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upsert_writer_bucket_buffer_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'1mb'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upsert_write_bucket_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upsert_write_slot_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upsert_commit_max_retries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upsert_commit_thread_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upsert_commit_timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">600</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upsert_flush_concurrent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">insert_commit_thread_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">insert_arrow_writer_enable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">insert_arrow_writer_batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">512</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">insert_arrow_writer_flush_interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">insert_writer_buffer_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'64mb'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upsert_partial_column_enable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../_modules/pyflink/dataframe/dataframe.html#DataFrame.write_odps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyflink.dataframe.DataFrame.write_odps" title="Permalink to this definition">#</a></dt>
+<dd><p>Write the DataFrame to a MaxCompute (ODPS) table.</p>
+<p>Uses the ODPS SQL connector under the hood. The DataFrame schema is
+derived from the current DataFrame, and connector options are exposed
+with Pythonic snake_case names in the same order as the ODPS
+documentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>endpoint</strong> – MaxCompute endpoint.</p></li>
+<li><p><strong>tunnel_endpoint</strong> – MaxCompute Tunnel endpoint. If unset,
+MaxCompute allocates tunnel connections through Server Load
+Balancer (SLB).</p></li>
+<li><p><strong>project</strong> – MaxCompute project name.</p></li>
+<li><p><strong>schema_name</strong> – Required only when the MaxCompute schema feature is
+enabled. Set this to the table’s schema name.</p></li>
+<li><p><strong>table_name</strong> – MaxCompute table name.</p></li>
+<li><p><strong>access_id</strong> – AccessKey ID used to access MaxCompute.</p></li>
+<li><p><strong>access_key</strong> – AccessKey secret used to access MaxCompute.</p></li>
+<li><p><strong>partition</strong> – <p>Partition name in the MaxCompute table.</p>
+<p>Examples:</p>
+<ul>
+<li><dl class="simple">
+<dt>To write to fixed partition column <code class="docutils literal notranslate"><span class="pre">dt</span></code> with value</dt><dd><p><code class="docutils literal notranslate"><span class="pre">20220901</span></code>, pass <code class="docutils literal notranslate"><span class="pre">(&quot;dt&quot;,</span> <span class="pre">&quot;20220901&quot;)</span></code>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>For a three-level partition table <code class="docutils literal notranslate"><span class="pre">dt</span></code>/<code class="docutils literal notranslate"><span class="pre">hh</span></code>/<code class="docutils literal notranslate"><span class="pre">mm</span></code>,</dt><dd><p>to write to <code class="docutils literal notranslate"><span class="pre">dt=20220901,hh=08,mm=10</span></code>, pass
+<code class="docutils literal notranslate"><span class="pre">[(&quot;dt&quot;,</span> <span class="pre">&quot;20220901&quot;),</span> <span class="pre">(&quot;hh&quot;,</span> <span class="pre">&quot;08&quot;),</span> <span class="pre">(&quot;mm&quot;,</span> <span class="pre">&quot;10&quot;)]</span></code>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>To write dynamic partitions from a single partition column</dt><dd><p><code class="docutils literal notranslate"><span class="pre">partition_name</span></code>, pass <code class="docutils literal notranslate"><span class="pre">&quot;partition_name&quot;</span></code>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>For multi-level dynamic partition columns <code class="docutils literal notranslate"><span class="pre">dt</span></code>/<code class="docutils literal notranslate"><span class="pre">hh</span></code>/<code class="docutils literal notranslate"><span class="pre">mm</span></code>, pass</dt><dd><p><code class="docutils literal notranslate"><span class="pre">[&quot;dt&quot;,</span> <span class="pre">&quot;hh&quot;,</span> <span class="pre">&quot;mm&quot;]</span></code>.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</p></li>
+<li><p><strong>compress_algorithm</strong> – Compression algorithm for MaxCompute Tunnel.
+Valid values are <code class="docutils literal notranslate"><span class="pre">&quot;RAW&quot;</span></code> (no compression), <code class="docutils literal notranslate"><span class="pre">&quot;ZLIB&quot;</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">&quot;SNAPPY&quot;</span></code>. <code class="docutils literal notranslate"><span class="pre">&quot;RAW&quot;</span></code> cannot be used when
+<code class="docutils literal notranslate"><span class="pre">enable_upsert</span></code> is true.</p></li>
+<li><p><strong>quota_name</strong> – Quota name for exclusive MaxCompute Tunnel resource
+groups. If specified, remove <code class="docutils literal notranslate"><span class="pre">tunnel_endpoint</span></code>; otherwise
+the tunnel specified by <code class="docutils literal notranslate"><span class="pre">tunnel_endpoint</span></code> takes precedence.</p></li>
+<li><p><strong>use_stream_tunnel</strong> – Use MaxCompute Streaming Tunnel instead of
+Batch Tunnel. <code class="docutils literal notranslate"><span class="pre">True</span></code> selects Streaming Tunnel and <code class="docutils literal notranslate"><span class="pre">False</span></code>
+selects Batch Tunnel.</p></li>
+<li><p><strong>flush_interval_ms</strong> – Flush interval for the tunnel writer buffer,
+in milliseconds. For Streaming Tunnel, flushed data is
+immediately available. For Batch Tunnel, data becomes
+available only after checkpointing; set to <code class="docutils literal notranslate"><span class="pre">0</span></code> to disable
+scheduled flushing. Triggered when either
+<code class="docutils literal notranslate"><span class="pre">flush_interval_ms</span></code> or <code class="docutils literal notranslate"><span class="pre">batch_size</span></code> is reached.</p></li>
+<li><p><strong>batch_size</strong> – Buffer size in bytes. Data is flushed when the buffer
+reaches this size. Triggered when either <code class="docutils literal notranslate"><span class="pre">batch_size</span></code> or
+<code class="docutils literal notranslate"><span class="pre">flush_interval_ms</span></code> is reached.</p></li>
+<li><p><strong>num_flush_threads</strong> – Number of threads used to flush the tunnel
+writer buffer. Values greater than 1 allow concurrent
+flushing across partitions.</p></li>
+<li><p><strong>slot_num</strong> – Number of Tunnel slots for receiving data from Flink.</p></li>
+<li><p><strong>dynamic_partition_limit</strong> – Maximum number of dynamic partitions
+written between two checkpoints. Writing to many partitions
+increases load on MaxCompute and slows checkpointing.
+Increase this only when your workload requires it.</p></li>
+<li><p><strong>retry_times</strong> – Maximum retries for MaxCompute server requests,
+including session creation, submission, and flush failures.</p></li>
+<li><p><strong>sleep_millis</strong> – Retry interval in milliseconds.</p></li>
+<li><p><strong>enable_upsert</strong> – Use MaxCompute Upsert Tunnel. <code class="docutils literal notranslate"><span class="pre">True</span></code> processes
+INSERT, UPDATE_AFTER, and DELETE records. <code class="docutils literal notranslate"><span class="pre">False</span></code> uses the
+tunnel specified by <code class="docutils literal notranslate"><span class="pre">use_stream_tunnel</span></code>. If session commits
+in upsert mode encounter errors or long-running faults, set
+sink operator parallelism to 10 or fewer.</p></li>
+<li><p><strong>upsert_async_commit</strong> – Use asynchronous mode when committing upsert
+sessions. Async mode reduces commit time, but committed data
+is not immediately queryable.</p></li>
+<li><p><strong>upsert_commit_timeout_ms</strong> – Timeout for upsert session commits, in
+milliseconds.</p></li>
+<li><p><strong>operation</strong> – Write mode for a Delta table. <code class="docutils literal notranslate"><span class="pre">&quot;insert&quot;</span></code> is append
+mode; <code class="docutils literal notranslate"><span class="pre">&quot;upsert&quot;</span></code> is update mode and requires
+<code class="docutils literal notranslate"><span class="pre">upsert_write_bucket_num</span></code>.</p></li>
+<li><p><strong>parallelism</strong> – Write parallelism for a Delta table. Defaults to
+upstream parallelism. <code class="docutils literal notranslate"><span class="pre">write.bucket.num</span></code> must be an integral
+multiple of this value for optimal write performance and
+memory efficiency.</p></li>
+<li><p><strong>file_cached_enable</strong> – Enable file cache mode when writing to dynamic
+partitions of a Delta table. This reduces small files written
+to the server but increases write latency. Enable when the
+sink has high parallelism.</p></li>
+<li><p><strong>file_cached_writer_num</strong> – Concurrent upload threads per task in
+file cache mode. Avoid setting this too high because writing
+to many partitions simultaneously can cause OOM errors.
+Effective only when <code class="docutils literal notranslate"><span class="pre">file_cached_enable</span></code> is true.</p></li>
+<li><p><strong>bucket_check_interval</strong> – File size check interval in file cache
+mode, in milliseconds. Effective only when
+<code class="docutils literal notranslate"><span class="pre">file_cached_enable</span></code> is true.</p></li>
+<li><p><strong>file_cached_rolling_max_size</strong> – Maximum size of a single cached
+file. When exceeded, data is uploaded to the server. Effective
+only when <code class="docutils literal notranslate"><span class="pre">file_cached_enable</span></code> is true.</p></li>
+<li><p><strong>file_cached_memory</strong> – Maximum off-heap memory for file writes in
+file cache mode. Effective only when <code class="docutils literal notranslate"><span class="pre">file_cached_enable</span></code> is
+true.</p></li>
+<li><p><strong>file_cached_memory_segment_size</strong> – Buffer segment size for file
+writes in file cache mode. Effective only when
+<code class="docutils literal notranslate"><span class="pre">file_cached_enable</span></code> is true.</p></li>
+<li><p><strong>file_cached_flush_always</strong> – Whether to use the cache when writing
+files in file cache mode. Effective only when
+<code class="docutils literal notranslate"><span class="pre">file_cached_enable</span></code> is true.</p></li>
+<li><p><strong>file_cached_write_max_retries</strong> – Retry count for data uploads in
+file cache mode. Effective only when <code class="docutils literal notranslate"><span class="pre">file_cached_enable</span></code> is
+true.</p></li>
+<li><p><strong>upsert_writer_max_retries</strong> – Maximum retries for writing to a bucket
+in an Upsert Writer session.</p></li>
+<li><p><strong>upsert_writer_buffer_size</strong> – Total buffer size across all buckets in
+an Upsert Writer session. Data is flushed when the total
+reaches this threshold. Increase for better write efficiency;
+decrease if writing to many partitions causes OOM errors.</p></li>
+<li><p><strong>upsert_writer_bucket_buffer_size</strong> – Per-bucket buffer size in an
+Upsert Writer session. Decrease if Flink server memory is
+insufficient.</p></li>
+<li><p><strong>upsert_write_bucket_num</strong> – Number of buckets for the target Delta
+table. Must match <code class="docutils literal notranslate"><span class="pre">write.bucket.num</span></code> configured on the Delta
+table.</p></li>
+<li><p><strong>upsert_write_slot_num</strong> – Tunnel slots per upsert session.</p></li>
+<li><p><strong>upsert_commit_max_retries</strong> – Maximum retries for upsert session
+commits.</p></li>
+<li><p><strong>upsert_commit_thread_num</strong> – Parallelism for upsert session commits.
+Avoid large values because excessive concurrent commits
+increase resource consumption and can cause performance
+issues.</p></li>
+<li><p><strong>upsert_commit_timeout</strong> – Upsert session commit timeout in seconds.</p></li>
+<li><p><strong>upsert_flush_concurrent</strong> – Maximum concurrent bucket flushes per
+partition. Each bucket flush occupies a Tunnel slot.</p></li>
+<li><p><strong>insert_commit_thread_num</strong> – Parallelism for insert session commits.</p></li>
+<li><p><strong>insert_arrow_writer_enable</strong> – Use the Arrow format for inserts.</p></li>
+<li><p><strong>insert_arrow_writer_batch_size</strong> – Maximum rows per Arrow-format
+batch.</p></li>
+<li><p><strong>insert_arrow_writer_flush_interval</strong> – Writer flush interval in
+milliseconds.</p></li>
+<li><p><strong>insert_writer_buffer_size</strong> – Cache size for the buffered writer.</p></li>
+<li><p><strong>upsert_partial_column_enable</strong> – Update only specified columns
+(partial column update). Applies only to Delta table sinks.
+When true, if a record with the same primary key exists,
+specified non-null fields are overwritten. If no matching
+record exists, a new record is inserted with new values for
+specified columns and null for all unspecified columns.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pf</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">from_records</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">)],</span>
+<span class="gp">... </span>                     <span class="n">schema</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">write_odps</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;http://service.cn-hangzhou.maxcompute.aliyun.com/api&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">project</span><span class="o">=</span><span class="s2">&quot;my_project&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">table_name</span><span class="o">=</span><span class="s2">&quot;events&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">access_id</span><span class="o">=</span><span class="s2">&quot;$</span><span class="si">{secret_values.ak_id}</span><span class="s2">&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">access_key</span><span class="o">=</span><span class="s2">&quot;$</span><span class="si">{secret_values.ak_secret}</span><span class="s2">&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">partition</span><span class="o">=</span><span class="s2">&quot;ds=20260428&quot;</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="pyflink.dataframe.DataFrame.write_kafka.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">pyflink.dataframe.DataFrame.write_kafka</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="pyflink.dataframe.DataFrame.write_paimon.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">pyflink.dataframe.DataFrame.write_paimon</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+<div class="tocsection sourcelink">
+    <a href="../../../_sources/reference/pyflink.dataframe/api/pyflink.dataframe.DataFrame.write_odps.rst.txt">
+        <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+</div>
+
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

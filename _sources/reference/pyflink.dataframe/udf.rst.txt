@@ -20,13 +20,11 @@
 User Defined Functions
 ======================
 
-The :func:`~pyflink.dataframe.udf.udf` decorator creates user-defined scalar functions
-for use with the DataFrame API. It supports plain functions, async functions,
-``ScalarFunction`` subclasses, and callable classes. The
-:func:`~pyflink.dataframe.udf.udtf` decorator creates user-defined table functions
-that emit zero or more rows per input, for use with
-:meth:`~pyflink.dataframe.DataFrame.flat_map` and
-:meth:`~pyflink.dataframe.DataFrame.join_lateral`.
+The ``udf()`` decorator creates user-defined scalar functions for use with the
+DataFrame API. It supports plain functions, async functions, ScalarFunction
+subclasses, and callable classes. The ``udtf()`` decorator creates
+user-defined table functions that emit zero or more rows per input, for use
+with ``flat_map()`` and ``join_lateral()``.
 
 Example::
 
@@ -34,13 +32,16 @@ Example::
     >>> @udf(return_dtype=DataType.string())
     ... def to_upper(s: str) -> str:
     ...     return s.upper()
-    >>>
+    ...
     >>> @udtf(return_dtype=DataType.string())
     ... def split_words(text: str):
     ...     for word in text.split():
     ...         yield word
 
-.. currentmodule:: pyflink.dataframe.udf
+Functions
+---------
+
+.. currentmodule:: pyflink.dataframe
 
 .. autosummary::
     :toctree: api/

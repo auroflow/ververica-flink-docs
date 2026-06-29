@@ -23,7 +23,7 @@ under the License.
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pyflink.dataframe.ai.providers &#8212; PyFlink 1.20+vvr.11.7.dev0 documentation</title>
+    <title>pyflink.dataframe.ai.providers &#8212; PyFlink 11.8.0.preview.2 documentation</title>
   <script>
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
@@ -329,13 +329,21 @@ under the License.
 <span class="n">_ContentType</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span>
     <span class="s2">&quot;TEXT&quot;</span><span class="p">,</span>
     <span class="s2">&quot;IMAGE_URL&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;MULTI_IMAGES_URL&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MULTI_IMAGE_URLS&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 <span class="n">_ContentTypeInput</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">_ContentType</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">_ContentType</span><span class="p">],</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">_ContentType</span><span class="p">,</span> <span class="o">...</span><span class="p">]]</span>
 <span class="n">_CONTENT_TYPES</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">((</span>
     <span class="s2">&quot;TEXT&quot;</span><span class="p">,</span>
     <span class="s2">&quot;IMAGE_URL&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;MULTI_IMAGES_URL&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MULTI_IMAGE_URLS&quot;</span><span class="p">,</span>
+<span class="p">))</span>
+<span class="n">_SINGLE_CONTENT_TYPE_OPTION_TYPES</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">((</span>
+    <span class="s2">&quot;TEXT&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;IMAGE_URL&quot;</span><span class="p">,</span>
+<span class="p">))</span>
+<span class="n">_SINGLE_INPUT_CONTENT_TYPE_TASKS</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">((</span>
+    <span class="s2">&quot;embeddings&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;multimodal-embedding&quot;</span><span class="p">,</span>
 <span class="p">))</span>
 <span class="n">_TEXT_CONTENT_TYPES</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">((</span><span class="s2">&quot;TEXT&quot;</span><span class="p">,))</span>
 <span class="n">_DASHSCOPE_MULTIMODAL_EMBEDDING_CONTENT_TYPES</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">((</span>
@@ -359,28 +367,55 @@ under the License.
 <span class="p">}</span>
 
 
-<div class="viewcode-block" id="Provider"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.ai.providers.Provider.html#pyflink.dataframe.ai.providers.Provider">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">Provider</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<div class="viewcode-block" id="Provider"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.Provider.html#pyflink.dataframe.Provider">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">Provider</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for model providers.</span>
 
-<span class="sd">    Subclasses represent specific provider configurations and handle</span>
-<span class="sd">    the translation from Python-style parameter names to the Java-side</span>
-<span class="sd">    option keys expected by Flink&#39;s ModelDescriptor.</span>
+<span class="sd">    A provider owns the Python-side configuration for a Java model provider</span>
+<span class="sd">    factory. Subclasses translate Python-style constructor parameters to the</span>
+<span class="sd">    Java-side option keys expected by Flink&#39;s ``ModelDescriptor``.</span>
+
+<span class="sd">    ``to_options()`` is called in two modes:</span>
+
+<span class="sd">    - Without ``input_columns``, it serializes the provider&#39;s static</span>
+<span class="sd">      configuration.</span>
+<span class="sd">    - With ``input_columns``, it may additionally validate or adapt options</span>
+<span class="sd">      against the model input schema before the descriptor is created.</span>
+
+<span class="sd">    Custom provider subclasses should accept the optional ``input_columns``</span>
+<span class="sd">    argument even if they do not need schema-aware option handling.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="nd">@abstractmethod</span>
+<div class="viewcode-block" id="Provider.provider_name"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.Provider.provider_name.html#pyflink.dataframe.Provider.provider_name">[docs]</a>    <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">provider_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the provider identifier recognized by Flink&#39;s Java runtime.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the provider identifier recognized by Flink&#39;s Java runtime.&quot;&quot;&quot;</span></div>
 
-    <span class="nd">@abstractmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">to_options</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return all configured options as a dict with Java-side key names.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Provider.to_options"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.Provider.to_options.html#pyflink.dataframe.Provider.to_options">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_options</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">input_columns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return Java-side options for ``ModelDescriptor``.</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">model_option_key</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the Java-side option key used for a per-call model name.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="s2">&quot;model&quot;</span></div>
+<span class="sd">        Args:</span>
+<span class="sd">            input_columns: Optional list of ``(name, data_type)`` pairs for the</span>
+<span class="sd">                model input schema. DataFrame AI calls pass this when creating</span>
+<span class="sd">                a model descriptor. ``None`` means only static provider</span>
+<span class="sd">                configuration should be serialized.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A dictionary whose keys and values are Java-side option strings.</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="Provider.model_option_key"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.Provider.model_option_key.html#pyflink.dataframe.Provider.model_option_key">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">model_option_key</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the Java-side option key used for a per-call model name.</span>
+
+<span class="sd">        Most providers use ``model``. Providers whose Java option differs, such</span>
+<span class="sd">        as Triton, override this method.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;model&quot;</span></div></div>
 
 
-<div class="viewcode-block" id="OpenAICompatProvider"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.ai.providers.OpenAICompatProvider.html#pyflink.dataframe.ai.providers.OpenAICompatProvider">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">OpenAICompatProvider</span><span class="p">(</span><span class="n">Provider</span><span class="p">):</span>
+<div class="viewcode-block" id="OpenAICompatProvider"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.OpenAICompatProvider.html#pyflink.dataframe.OpenAICompatProvider">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">OpenAICompatProvider</span><span class="p">(</span><span class="n">Provider</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Provider for all OpenAI-compatible endpoints (openai-compat).</span>
 
 <span class="sd">    Covers OpenAI, DeepSeek, Bailian, and any other service that</span>
@@ -419,7 +454,7 @@ under the License.
 <span class="sd">            multiple input columns. Multiple content types are positional:</span>
 <span class="sd">            their count and order must match the input columns.</span>
 <span class="sd">            Supported values are ``&quot;TEXT&quot;`` (default), ``&quot;IMAGE_URL&quot;``,</span>
-<span class="sd">            and ``&quot;MULTI_IMAGES_URL&quot;``. Task-specific limitations are</span>
+<span class="sd">            and ``&quot;MULTI_IMAGE_URLS&quot;``. Task-specific limitations are</span>
 <span class="sd">            enforced by the model provider.</span>
 <span class="sd">        response_format: The format of the response (``&quot;text&quot;`` or</span>
 <span class="sd">            ``&quot;json_object&quot;``).</span>
@@ -479,6 +514,7 @@ under the License.
         <span class="s2">&quot;n&quot;</span><span class="p">:</span> <span class="s2">&quot;n&quot;</span><span class="p">,</span>
         <span class="s2">&quot;seed&quot;</span><span class="p">:</span> <span class="s2">&quot;seed&quot;</span><span class="p">,</span>
         <span class="s2">&quot;content_type&quot;</span><span class="p">:</span> <span class="s2">&quot;content-type&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;content_types&quot;</span><span class="p">:</span> <span class="s2">&quot;content-types&quot;</span><span class="p">,</span>
         <span class="s2">&quot;response_format&quot;</span><span class="p">:</span> <span class="s2">&quot;response-format&quot;</span><span class="p">,</span>
         <span class="s2">&quot;dimension&quot;</span><span class="p">:</span> <span class="s2">&quot;dimension&quot;</span><span class="p">,</span>
         <span class="s2">&quot;max_context_size&quot;</span><span class="p">:</span> <span class="s2">&quot;max-context-size&quot;</span><span class="p">,</span>
@@ -525,9 +561,16 @@ under the License.
     <span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_validate_service_options</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">api_key</span><span class="p">,</span> <span class="n">task</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_validate_context_overflow_action</span><span class="p">(</span><span class="n">context_overflow_action</span><span class="p">)</span>
-        <span class="n">content_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_normalize_content_type</span><span class="p">(</span><span class="n">content_type</span><span class="p">)</span>
+        <span class="n">content_types</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_normalize_content_type</span><span class="p">(</span><span class="n">content_type</span><span class="p">)</span>
         <span class="n">resolved_task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_task</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">task</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_content_type</span><span class="p">(</span><span class="n">content_type</span><span class="p">,</span> <span class="n">resolved_task</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_content_type</span><span class="p">(</span><span class="n">content_types</span><span class="p">,</span> <span class="n">resolved_task</span><span class="p">)</span>
+        <span class="n">content_type_param</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_content_type_param_name</span><span class="p">(</span><span class="n">content_types</span><span class="p">)</span>
+        <span class="n">content_type_value</span> <span class="o">=</span> <span class="s2">&quot;;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">content_types</span><span class="p">)</span>
+        <span class="n">skip_default_content_type</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">content_type_param</span> <span class="o">==</span> <span class="s2">&quot;content_type&quot;</span>
+            <span class="ow">and</span> <span class="n">content_type_value</span> <span class="o">==</span> <span class="s2">&quot;TEXT&quot;</span>
+            <span class="ow">and</span> <span class="s2">&quot;content-types&quot;</span> <span class="ow">in</span> <span class="n">extra_options</span>
+        <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="c1"># Collect all explicitly named parameters that are not None.</span>
         <span class="n">local_vars</span> <span class="o">=</span> <span class="p">{</span>
@@ -544,7 +587,6 @@ under the License.
             <span class="s2">&quot;presence_penalty&quot;</span><span class="p">:</span> <span class="n">presence_penalty</span><span class="p">,</span>
             <span class="s2">&quot;n&quot;</span><span class="p">:</span> <span class="n">n</span><span class="p">,</span>
             <span class="s2">&quot;seed&quot;</span><span class="p">:</span> <span class="n">seed</span><span class="p">,</span>
-            <span class="s2">&quot;content_type&quot;</span><span class="p">:</span> <span class="n">content_type</span><span class="p">,</span>
             <span class="s2">&quot;response_format&quot;</span><span class="p">:</span> <span class="n">response_format</span><span class="p">,</span>
             <span class="s2">&quot;dimension&quot;</span><span class="p">:</span> <span class="n">dimension</span><span class="p">,</span>
             <span class="s2">&quot;max_context_size&quot;</span><span class="p">:</span> <span class="n">max_context_size</span><span class="p">,</span>
@@ -557,13 +599,15 @@ under the License.
             <span class="s2">&quot;extra_header&quot;</span><span class="p">:</span> <span class="n">extra_header</span><span class="p">,</span>
             <span class="s2">&quot;extra_body&quot;</span><span class="p">:</span> <span class="n">extra_body</span><span class="p">,</span>
         <span class="p">}</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">skip_default_content_type</span><span class="p">:</span>
+            <span class="n">local_vars</span><span class="p">[</span><span class="n">content_type_param</span><span class="p">]</span> <span class="o">=</span> <span class="n">content_type_value</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">local_vars</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_params</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_extra_options</span> <span class="o">=</span> <span class="n">extra_options</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">provider_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;openai-compat&quot;</span>
+<div class="viewcode-block" id="OpenAICompatProvider.provider_name"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.OpenAICompatProvider.provider_name.html#pyflink.dataframe.OpenAICompatProvider.provider_name">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">provider_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;openai-compat&quot;</span></div>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_validate_service_options</span><span class="p">(</span>
@@ -605,7 +649,7 @@ under the License.
         <span class="k">return</span> <span class="kc">None</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_normalize_content_type</span><span class="p">(</span><span class="n">content_type</span><span class="p">:</span> <span class="n">_ContentTypeInput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_normalize_content_type</span><span class="p">(</span><span class="n">content_type</span><span class="p">:</span> <span class="n">_ContentTypeInput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">content_type</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">content_type</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;content_type must not be empty.&quot;</span><span class="p">)</span>
@@ -626,23 +670,29 @@ under the License.
                     <span class="sa">f</span><span class="s2">&quot;Unsupported content_type </span><span class="si">{</span><span class="n">content_type_value</span><span class="si">!r}</span><span class="s2">. &quot;</span>
                     <span class="sa">f</span><span class="s2">&quot;Supported values: </span><span class="si">{</span><span class="n">supported</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
             <span class="n">normalized_content_types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">normalized_content_type</span><span class="p">)</span>
-        <span class="k">return</span> <span class="s2">&quot;;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">normalized_content_types</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">normalized_content_types</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_content_type_param_name</span><span class="p">(</span><span class="n">content_types</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">content_types</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+                <span class="ow">and</span> <span class="n">content_types</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_SINGLE_CONTENT_TYPE_OPTION_TYPES</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s2">&quot;content_type&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;content_types&quot;</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_validate_content_type</span><span class="p">(</span>
-            <span class="bp">cls</span><span class="p">,</span> <span class="n">content_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">task</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="p">,</span> <span class="n">content_types</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">task</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">task</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span>
 
         <span class="n">supported_content_types</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_SUPPORTED_TASK_CONTENT_TYPES</span><span class="p">[</span><span class="n">task</span><span class="p">]</span>
-        <span class="n">content_type_values</span> <span class="o">=</span> <span class="n">content_type</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">content_type_values</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">content_types</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span>
                 <span class="ow">and</span> <span class="n">task</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_MULTI_COLUMN_CONTENT_TYPE_TASKS</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;task </span><span class="si">{</span><span class="n">task</span><span class="si">!r}</span><span class="s2"> supports exactly one content_type, &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;but got </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">content_type_values</span><span class="p">)</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">content_type</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+                <span class="sa">f</span><span class="s2">&quot;but got </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">content_types</span><span class="p">)</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="s1">&#39;;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">content_types</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
 
-        <span class="k">for</span> <span class="n">content_type_value</span> <span class="ow">in</span> <span class="n">content_type_values</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">content_type_value</span> <span class="ow">in</span> <span class="n">content_types</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">content_type_value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">supported_content_types</span><span class="p">:</span>
                 <span class="n">supported</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">supported_content_types</span><span class="p">))</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
@@ -657,7 +707,10 @@ under the License.
                 <span class="sa">f</span><span class="s2">&quot;Unsupported context_overflow_action </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">. &quot;</span>
                 <span class="sa">f</span><span class="s2">&quot;Supported values: </span><span class="si">{</span><span class="n">supported</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">to_options</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<div class="viewcode-block" id="OpenAICompatProvider.to_options"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.OpenAICompatProvider.to_options.html#pyflink.dataframe.OpenAICompatProvider.to_options">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_options</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">input_columns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
         <span class="n">options</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">py_key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_params</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">java_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_OPTION_MAP</span><span class="p">[</span><span class="n">py_key</span><span class="p">]</span>
@@ -665,10 +718,78 @@ under the License.
         <span class="c1"># Extra options are passed through as-is.</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extra_options</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">options</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">options</span></div>
+        <span class="k">if</span> <span class="n">input_columns</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">options</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_align_content_type_input_count</span><span class="p">(</span>
+            <span class="n">options</span><span class="p">,</span> <span class="n">input_columns</span><span class="p">)</span></div>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_align_content_type_input_count</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">provider_options</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
+            <span class="n">input_columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Align content type options with the model input schema.&quot;&quot;&quot;</span>
+        <span class="n">aligned_options</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">provider_options</span><span class="p">)</span>
+        <span class="n">input_column_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">input_columns</span><span class="p">]</span>
+        <span class="c1"># Embedding-style tasks consume exactly one model input, so reject</span>
+        <span class="c1"># multi-column calls before default TEXT handling expands the option.</span>
+        <span class="n">task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_task</span><span class="p">(</span>
+            <span class="n">provider_options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;endpoint&quot;</span><span class="p">),</span> <span class="n">provider_options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;task&quot;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">task</span> <span class="ow">in</span> <span class="n">_SINGLE_INPUT_CONTENT_TYPE_TASKS</span>
+                <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_column_names</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;task </span><span class="si">{</span><span class="n">task</span><span class="si">!r}</span><span class="s2"> supports exactly one input column, but got &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">input_column_names</span><span class="p">)</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">input_column_names</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+        <span class="n">scalar_option_value</span> <span class="o">=</span> <span class="n">provider_options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content-type&quot;</span><span class="p">)</span>
+        <span class="n">plural_option_value</span> <span class="o">=</span> <span class="n">provider_options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content-types&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">scalar_option_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">plural_option_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;content-type and content-types are mutually exclusive for &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;provider </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">provider_name</span><span class="p">()</span><span class="si">!r}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># The Java provider uses scalar content-type for single TEXT/IMAGE_URL</span>
+        <span class="c1"># inputs, and content-types for positional multi-input or array content.</span>
+        <span class="k">if</span> <span class="n">plural_option_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">resolved_content_types</span> <span class="o">=</span> <span class="n">plural_option_value</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
+            <span class="n">reported_option_value</span> <span class="o">=</span> <span class="n">plural_option_value</span>
+        <span class="k">elif</span> <span class="n">scalar_option_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">resolved_content_types</span> <span class="o">=</span> <span class="n">scalar_option_value</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
+            <span class="n">reported_option_value</span> <span class="o">=</span> <span class="n">scalar_option_value</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">resolved_content_types</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">aligned_options</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;content-type&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                <span class="n">aligned_options</span><span class="p">[</span><span class="s2">&quot;content-types&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scalar_option_value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">resolved_content_types</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;TEXT&quot;</span><span class="p">]</span>
+            <span class="n">reported_option_value</span> <span class="o">=</span> <span class="s2">&quot;TEXT&quot;</span>
+            <span class="n">aligned_options</span><span class="p">[</span><span class="s2">&quot;content-type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;TEXT&quot;</span>
+
+        <span class="c1"># An omitted content_type means every input column is TEXT, not that the</span>
+        <span class="c1"># model has only one input column.</span>
+        <span class="k">if</span> <span class="n">resolved_content_types</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;TEXT&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_column_names</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">resolved_content_types</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;TEXT&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_column_names</span><span class="p">)</span>
+            <span class="n">reported_option_value</span> <span class="o">=</span> <span class="s2">&quot;;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">resolved_content_types</span><span class="p">)</span>
+            <span class="n">aligned_options</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;content-type&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">aligned_options</span><span class="p">[</span><span class="s2">&quot;content-types&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">reported_option_value</span>
+
+        <span class="c1"># Explicit content types are positional and must match predict(*cols).</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">resolved_content_types</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_column_names</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Number of content types (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">resolved_content_types</span><span class="p">)</span><span class="si">}</span><span class="s2">) must &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;match number of input columns (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">input_column_names</span><span class="p">)</span><span class="si">}</span><span class="s2">) &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;for provider </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">provider_name</span><span class="p">()</span><span class="si">!r}</span><span class="s2">. Content type: &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">reported_option_value</span><span class="si">}</span><span class="s2">, input columns: </span><span class="si">{</span><span class="n">input_column_names</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">resolved_content_types</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+                <span class="ow">and</span> <span class="n">resolved_content_types</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">_SINGLE_CONTENT_TYPE_OPTION_TYPES</span><span class="p">):</span>
+            <span class="n">aligned_options</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;content-types&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">aligned_options</span><span class="p">[</span><span class="s2">&quot;content-type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">reported_option_value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">aligned_options</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;content-type&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">aligned_options</span><span class="p">[</span><span class="s2">&quot;content-types&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">reported_option_value</span>
+        <span class="k">return</span> <span class="n">aligned_options</span></div>
 
 
-<div class="viewcode-block" id="DashScopeProvider"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.ai.providers.DashScopeProvider.html#pyflink.dataframe.ai.providers.DashScopeProvider">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">DashScopeProvider</span><span class="p">(</span><span class="n">OpenAICompatProvider</span><span class="p">):</span>
+<div class="viewcode-block" id="DashScopeProvider"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.DashScopeProvider.html#pyflink.dataframe.DashScopeProvider">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">DashScopeProvider</span><span class="p">(</span><span class="n">OpenAICompatProvider</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Provider for Alibaba Cloud DashScope (dashscope).</span>
 
 <span class="sd">    DashScope reuses the OpenAI-compatible Java provider for normal chat and</span>
@@ -707,7 +828,7 @@ under the License.
 <span class="sd">            multiple input columns. Multiple content types are positional:</span>
 <span class="sd">            their count and order must match the input columns.</span>
 <span class="sd">            Supported values are ``&quot;TEXT&quot;`` (default), ``&quot;IMAGE_URL&quot;``,</span>
-<span class="sd">            and ``&quot;MULTI_IMAGES_URL&quot;``. Task-specific limitations are</span>
+<span class="sd">            and ``&quot;MULTI_IMAGE_URLS&quot;``. Task-specific limitations are</span>
 <span class="sd">            enforced by the model provider.</span>
 <span class="sd">        response_format: The format of the response (``&quot;text&quot;`` or</span>
 <span class="sd">            ``&quot;json_object&quot;``).</span>
@@ -744,15 +865,13 @@ under the License.
 <span class="sd">        **options: Additional options passed through as-is (keys are not</span>
 <span class="sd">            translated).</span>
 
-<span class="sd">    Examples::</span>
-
+<span class="sd">    Examples:</span>
 <span class="sd">        &gt;&gt;&gt; provider = DashScopeProvider(</span>
 <span class="sd">        ...     endpoint=&quot;https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions&quot;,</span>
 <span class="sd">        ...     api_key=&quot;sk-...&quot;,</span>
 <span class="sd">        ...     model=&quot;qwen-plus&quot;,</span>
 <span class="sd">        ...     temperature=0.7,</span>
 <span class="sd">        ... )</span>
-
 <span class="sd">        &gt;&gt;&gt; provider = DashScopeProvider(</span>
 <span class="sd">        ...     endpoint=&quot;https://dashscope.aliyuncs.com/api/v1/services/&quot;</span>
 <span class="sd">        ...              &quot;embeddings/multimodal-embedding/multimodal-embedding&quot;,</span>
@@ -769,11 +888,11 @@ under the License.
 
     <span class="n">_SUPPORTED_TASK_CONTENT_TYPES</span> <span class="o">=</span> <span class="n">_DASHSCOPE_TASK_CONTENT_TYPES</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">provider_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;dashscope&quot;</span></div>
+<div class="viewcode-block" id="DashScopeProvider.provider_name"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.DashScopeProvider.provider_name.html#pyflink.dataframe.DashScopeProvider.provider_name">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">provider_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;dashscope&quot;</span></div></div>
 
 
-<div class="viewcode-block" id="TritonProvider"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.ai.providers.TritonProvider.html#pyflink.dataframe.ai.providers.TritonProvider">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">TritonProvider</span><span class="p">(</span><span class="n">Provider</span><span class="p">):</span>
+<div class="viewcode-block" id="TritonProvider"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.TritonProvider.html#pyflink.dataframe.TritonProvider">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">TritonProvider</span><span class="p">(</span><span class="n">Provider</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Provider for NVIDIA Triton Inference Server (triton).</span>
 
 <span class="sd">    Args:</span>
@@ -840,7 +959,6 @@ under the License.
 <span class="sd">        **extra_options: Additional options passed through as-is.</span>
 
 <span class="sd">    Examples::</span>
-
 <span class="sd">        &gt;&gt;&gt; import pyflink.dataframe as pf</span>
 <span class="sd">        &gt;&gt;&gt;</span>
 <span class="sd">        &gt;&gt;&gt; # Classifier with ARRAY&lt;FLOAT&gt; features and BIGINT class output.</span>
@@ -1008,20 +1126,23 @@ under the License.
                 <span class="bp">self</span><span class="o">.</span><span class="n">_params</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_extra_options</span> <span class="o">=</span> <span class="n">extra_options</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">provider_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;triton&quot;</span>
+<div class="viewcode-block" id="TritonProvider.provider_name"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.TritonProvider.provider_name.html#pyflink.dataframe.TritonProvider.provider_name">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">provider_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;triton&quot;</span></div>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">model_option_key</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;model-name&quot;</span>
+<div class="viewcode-block" id="TritonProvider.model_option_key"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.TritonProvider.model_option_key.html#pyflink.dataframe.TritonProvider.model_option_key">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">model_option_key</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;model-name&quot;</span></div>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">to_options</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<div class="viewcode-block" id="TritonProvider.to_options"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.TritonProvider.to_options.html#pyflink.dataframe.TritonProvider.to_options">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_options</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">input_columns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
         <span class="n">options</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">py_key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_params</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">java_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_OPTION_MAP</span><span class="p">[</span><span class="n">py_key</span><span class="p">]</span>
             <span class="n">options</span><span class="p">[</span><span class="n">java_key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stringify</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extra_options</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">options</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stringify</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">options</span>
+        <span class="k">return</span> <span class="n">options</span></div>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_format_default_value</span><span class="p">(</span>
@@ -1052,7 +1173,7 @@ under the License.
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="GenericProvider"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.ai.providers.GenericProvider.html#pyflink.dataframe.ai.providers.GenericProvider">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">GenericProvider</span><span class="p">(</span><span class="n">Provider</span><span class="p">):</span>
+<div class="viewcode-block" id="GenericProvider"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.GenericProvider.html#pyflink.dataframe.GenericProvider">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">GenericProvider</span><span class="p">(</span><span class="n">Provider</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generic provider for unknown or custom model providers.</span>
 
 <span class="sd">    Options are passed through to the Java side as-is without any</span>
@@ -1071,11 +1192,28 @@ under the License.
         <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_options</span> <span class="o">=</span> <span class="n">options</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">provider_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
+<div class="viewcode-block" id="GenericProvider.provider_name"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.GenericProvider.provider_name.html#pyflink.dataframe.GenericProvider.provider_name">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">provider_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span></div>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">to_options</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-        <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_options</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span></div>
+<div class="viewcode-block" id="GenericProvider.to_options"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.GenericProvider.to_options.html#pyflink.dataframe.GenericProvider.to_options">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_options</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">input_columns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_options</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span></div></div>
+
+
+<span class="n">_KNOWN_PROVIDER_CLASSES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;dashscope&quot;</span><span class="p">:</span> <span class="n">DashScopeProvider</span><span class="p">,</span>
+    <span class="s2">&quot;openai-compat&quot;</span><span class="p">:</span> <span class="n">OpenAICompatProvider</span><span class="p">,</span>
+    <span class="s2">&quot;triton&quot;</span><span class="p">:</span> <span class="n">TritonProvider</span><span class="p">,</span>
+<span class="p">}</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_provider</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Provider</span><span class="p">:</span>
+    <span class="n">provider_cls</span> <span class="o">=</span> <span class="n">_KNOWN_PROVIDER_CLASSES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">provider_cls</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">GenericProvider</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">provider_cls</span><span class="p">(</span><span class="o">**</span><span class="n">options</span><span class="p">)</span>
 </pre></div>
 
             </article>

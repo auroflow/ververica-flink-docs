@@ -23,7 +23,7 @@ under the License.
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pyflink.multimodal.operators.image_quality &#8212; PyFlink 1.20+vvr.11.7.dev0 documentation</title>
+    <title>pyflink.multimodal.operators.image_quality &#8212; PyFlink 11.8.0.preview.2 documentation</title>
   <script>
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
@@ -297,7 +297,6 @@ under the License.
 
 <span class="sd">Example::</span>
 
-
 <span class="sd">    &gt;&gt;&gt; from pyflink.multimodal.operators.image_quality import image_quality_score</span>
 <span class="sd">    &gt;&gt;&gt; quality = image_quality_score()</span>
 <span class="sd">    &gt;&gt;&gt; df = df.with_column(&quot;quality&quot;, quality(col(&quot;img&quot;)))</span>
@@ -380,10 +379,12 @@ under the License.
     <span class="n">_missing_label_hint</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="n">_missing_label_article</span> <span class="o">=</span> <span class="s2">&quot;a&quot;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_id</span><span class="p">,</span> <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_id</span><span class="p">,</span> <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_model_id</span> <span class="o">=</span> <span class="n">model_id</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model_sharing</span> <span class="o">=</span> <span class="n">model_sharing</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span> <span class="o">=</span> <span class="n">num_gpus</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_gpu_type</span> <span class="o">=</span> <span class="n">gpu_type</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_is_negative_label</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
@@ -490,6 +491,8 @@ under the License.
             <span class="n">model_sharing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model_sharing</span><span class="p">,</span>
             <span class="n">dependencies</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;transformers&quot;</span><span class="p">,</span> <span class="s2">&quot;torch&quot;</span><span class="p">),</span>
             <span class="n">model_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_model_id</span><span class="p">,</span>
+            <span class="n">requested_num_gpus</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span><span class="p">,</span>
+            <span class="n">requested_gpu_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_gpu_type</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span><span class="o">.</span><span class="n">register_operation</span><span class="p">(</span>
             <span class="n">_SCORE_IMAGES_OP</span><span class="p">,</span> <span class="n">_HfImageClassifierScorer</span><span class="o">.</span><span class="n">_predict_batch</span>
@@ -527,12 +530,17 @@ under the License.
     <span class="n">_missing_label_article</span> <span class="o">=</span> <span class="s2">&quot;an&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hf_nsfw_model</span><span class="o">=</span><span class="n">_DEFAULT_NSFW_MODEL</span><span class="p">,</span>
-                 <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+                 <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hf_nsfw_model</span> <span class="o">=</span> <span class="n">hf_nsfw_model</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">hf_nsfw_model</span><span class="p">,</span> <span class="n">model_sharing</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">hf_nsfw_model</span><span class="p">,</span>
+            <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">,</span>
+            <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+            <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
+        <span class="p">)</span>
 
 
-<div class="viewcode-block" id="image_nsfw_score"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_quality.image_nsfw_score.html#pyflink.multimodal.operators.image_quality.image_nsfw_score">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_nsfw_score</span><span class="p">(</span>
+<div class="viewcode-block" id="image_nsfw_score"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_nsfw_score.html#pyflink.multimodal.operators.image_nsfw_score">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_nsfw_score</span><span class="p">(</span>
     <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
     <span class="n">hf_nsfw_model</span><span class="o">=</span><span class="n">_DEFAULT_NSFW_MODEL</span><span class="p">,</span>
     <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -569,7 +577,6 @@ under the License.
 <span class="sd">        boolean decision.</span>
 
 <span class="sd">    Example::</span>
-
 <span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
 <span class="sd">        &gt;&gt;&gt; nsfw = image_nsfw_score()</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;nsfw&quot;, nsfw(col(&quot;img&quot;)))</span>
@@ -581,7 +588,12 @@ under the License.
 <span class="sd">        &gt;&gt;&gt; df = df.filter(image_nsfw_score(col(&quot;img&quot;)) &gt; 0.5)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
-        <span class="n">_ImageNsfwScore</span><span class="p">(</span><span class="n">hf_nsfw_model</span><span class="o">=</span><span class="n">hf_nsfw_model</span><span class="p">,</span> <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">),</span>
+        <span class="n">_ImageNsfwScore</span><span class="p">(</span>
+            <span class="n">hf_nsfw_model</span><span class="o">=</span><span class="n">hf_nsfw_model</span><span class="p">,</span>
+            <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">,</span>
+            <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+            <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
+        <span class="p">),</span>
         <span class="n">func_type</span><span class="o">=</span><span class="s2">&quot;pandas&quot;</span><span class="p">,</span>
         <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">(),</span>
         <span class="o">**</span><span class="n">_udf_runtime_kwargs</span><span class="p">(</span>
@@ -602,10 +614,14 @@ under the License.
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">hf_scorer_model</span><span class="o">=</span><span class="n">DEFAULT_AESTHETIC_SCORER_MODEL</span><span class="p">,</span>
         <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hf_scorer_model</span> <span class="o">=</span> <span class="n">hf_scorer_model</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model_sharing</span> <span class="o">=</span> <span class="n">model_sharing</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span> <span class="o">=</span> <span class="n">num_gpus</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_gpu_type</span> <span class="o">=</span> <span class="n">gpu_type</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_predict_batch</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">pixel_arrays</span><span class="p">):</span>
@@ -619,6 +635,8 @@ under the License.
             <span class="n">model_sharing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model_sharing</span><span class="p">,</span>
             <span class="n">dependencies</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;transformers&quot;</span><span class="p">,</span> <span class="s2">&quot;torch&quot;</span><span class="p">),</span>
             <span class="n">model_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hf_scorer_model</span><span class="p">,</span>
+            <span class="n">requested_num_gpus</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span><span class="p">,</span>
+            <span class="n">requested_gpu_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_gpu_type</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span><span class="o">.</span><span class="n">register_operation</span><span class="p">(</span>
             <span class="n">_SCORE_IMAGES_OP</span><span class="p">,</span> <span class="n">_ImageAestheticScore</span><span class="o">.</span><span class="n">_predict_batch</span>
@@ -638,7 +656,7 @@ under the License.
         <span class="p">)</span>
 
 
-<div class="viewcode-block" id="image_aesthetic_score"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_quality.image_aesthetic_score.html#pyflink.multimodal.operators.image_quality.image_aesthetic_score">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_aesthetic_score</span><span class="p">(</span>
+<div class="viewcode-block" id="image_aesthetic_score"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_aesthetic_score.html#pyflink.multimodal.operators.image_aesthetic_score">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_aesthetic_score</span><span class="p">(</span>
     <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
     <span class="n">hf_scorer_model</span><span class="o">=</span><span class="n">DEFAULT_AESTHETIC_SCORER_MODEL</span><span class="p">,</span>
     <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -683,7 +701,6 @@ under the License.
 <span class="sd">        ``[0, 1]`` or ``None`` for null inputs.</span>
 
 <span class="sd">    Example::</span>
-
 <span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
 <span class="sd">        &gt;&gt;&gt; aesthetic = image_aesthetic_score()</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;aesthetic&quot;, aesthetic(col(&quot;img&quot;)))</span>
@@ -695,7 +712,9 @@ under the License.
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
         <span class="n">_ImageAestheticScore</span><span class="p">(</span><span class="n">hf_scorer_model</span><span class="o">=</span><span class="n">hf_scorer_model</span><span class="p">,</span>
-                             <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">),</span>
+                             <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">,</span>
+                             <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+                             <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">),</span>
         <span class="n">func_type</span><span class="o">=</span><span class="s2">&quot;pandas&quot;</span><span class="p">,</span>
         <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">(),</span>
         <span class="o">**</span><span class="n">_udf_runtime_kwargs</span><span class="p">(</span>
@@ -748,7 +767,7 @@ under the License.
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan_to_num</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">nan</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">posinf</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">neginf</span><span class="o">=</span><span class="mf">0.0</span><span class="p">))</span>
 
 
-<div class="viewcode-block" id="image_quality_score"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_quality.image_quality_score.html#pyflink.multimodal.operators.image_quality.image_quality_score">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_quality_score</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="image_quality_score"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_quality_score.html#pyflink.multimodal.operators.image_quality_score">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_quality_score</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create an image quality scoring UDF (Laplacian + contrast + colorfulness-based).</span>
 
@@ -765,7 +784,6 @@ under the License.
 <span class="sd">        sharpness, contrast, and colorfulness, or ``None`` for null inputs.</span>
 
 <span class="sd">    Example::</span>
-
 <span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
 <span class="sd">        &gt;&gt;&gt; quality = image_quality_score()</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;quality&quot;, quality(col(&quot;img&quot;)))</span>
@@ -789,12 +807,17 @@ under the License.
     <span class="n">_missing_label_hint</span> <span class="o">=</span> <span class="s2">&quot;watermark detection&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hf_watermark_model</span><span class="o">=</span><span class="n">_DEFAULT_WATERMARK_MODEL</span><span class="p">,</span>
-                 <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+                 <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hf_watermark_model</span> <span class="o">=</span> <span class="n">hf_watermark_model</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">hf_watermark_model</span><span class="p">,</span> <span class="n">model_sharing</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">hf_watermark_model</span><span class="p">,</span>
+            <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">,</span>
+            <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+            <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
+        <span class="p">)</span>
 
 
-<div class="viewcode-block" id="image_watermark_score"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_quality.image_watermark_score.html#pyflink.multimodal.operators.image_quality.image_watermark_score">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_watermark_score</span><span class="p">(</span>
+<div class="viewcode-block" id="image_watermark_score"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_watermark_score.html#pyflink.multimodal.operators.image_watermark_score">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_watermark_score</span><span class="p">(</span>
     <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
     <span class="n">hf_watermark_model</span><span class="o">=</span><span class="n">_DEFAULT_WATERMARK_MODEL</span><span class="p">,</span>
     <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -831,7 +854,6 @@ under the License.
 <span class="sd">        boolean decision.</span>
 
 <span class="sd">    Example::</span>
-
 <span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
 <span class="sd">        &gt;&gt;&gt; watermark = image_watermark_score()</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;wm&quot;, watermark(col(&quot;img&quot;)))</span>
@@ -846,6 +868,8 @@ under the License.
         <span class="n">_ImageWatermarkScore</span><span class="p">(</span>
             <span class="n">hf_watermark_model</span><span class="o">=</span><span class="n">hf_watermark_model</span><span class="p">,</span>
             <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">,</span>
+            <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+            <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="n">func_type</span><span class="o">=</span><span class="s2">&quot;pandas&quot;</span><span class="p">,</span>
         <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">(),</span>

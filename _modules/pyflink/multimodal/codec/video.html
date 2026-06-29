@@ -1,0 +1,709 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyflink.multimodal.codec.video &#8212; PyFlink 11.8.0.preview.2 documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyflink/multimodal/codec/video';</script>
+    <link rel="shortcut icon" href="../../../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../../../search.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="Logo image">
+    <img src="../../../../_static/navbar-brand-logo.jpg" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <h1>Source code for pyflink.multimodal.codec.video</h1><div class="highlight"><pre>
+<span></span><span class="c1">################################################################################</span>
+<span class="c1">#  Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="c1">#  or more contributor license agreements.  See the NOTICE file</span>
+<span class="c1">#  distributed with this work for additional information</span>
+<span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
+<span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
+<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  with the License.  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">################################################################################</span>
+<span class="sd">&quot;&quot;&quot;Video codec helpers backed by Java-side Flink FileSystem reads.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">Row</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common.image</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageMode</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.fn_execution.file_system_bridge</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">FlinkFileSystemBridgeClient</span><span class="p">,</span>
+    <span class="n">JavaBackedSeekableFile</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.multimodal.types.video</span><span class="w"> </span><span class="kn">import</span> <span class="n">VideoRef</span>
+
+
+<span class="n">_VALID_FRAME_SELECTORS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;keyframe&quot;</span><span class="p">,</span> <span class="s2">&quot;sample&quot;</span><span class="p">,</span> <span class="s2">&quot;all_frames&quot;</span><span class="p">}</span>
+<span class="n">_DEFAULT_SAMPLE_INTERVAL_MS</span> <span class="o">=</span> <span class="mi">1000</span>
+
+
+<div class="viewcode-block" id="open_video_container"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.codec.open_video_container.html#pyflink.multimodal.codec.open_video_container">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">open_video_container</span><span class="p">(</span><span class="n">uri</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                         <span class="n">bridge_client</span><span class="p">:</span> <span class="n">FlinkFileSystemBridgeClient</span><span class="p">,</span>
+                         <span class="o">*</span><span class="p">,</span>
+                         <span class="n">container_options</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                         <span class="n">read_chunk_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                         <span class="n">max_cached_blocks</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                         <span class="n">read_ahead_blocks</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Opens a video container with PyAV using a Java-backed seekable file.</span>
+
+<span class="sd">    The returned object delegates to the PyAV container. The caller owns</span>
+<span class="sd">    closing it; close releases both the PyAV container and the Java-side file</span>
+<span class="sd">    handle.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">av</span>
+    <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+            <span class="s2">&quot;PyAV is required for video decoding. Install it with `pip install av`.&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+    <span class="n">file_obj</span> <span class="o">=</span> <span class="n">JavaBackedSeekableFile</span><span class="p">(</span>
+        <span class="n">bridge_client</span><span class="p">,</span>
+        <span class="n">uri</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">_file_read_options</span><span class="p">(</span><span class="n">read_chunk_size</span><span class="p">,</span> <span class="n">max_cached_blocks</span><span class="p">,</span> <span class="n">read_ahead_blocks</span><span class="p">))</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Keep PyAV hardware acceleration out of part1. This pipeline</span>
+        <span class="c1"># materializes decoded frames as CPU ndarrays/IMAGE values, so</span>
+        <span class="c1"># hwaccel would still copy frames back to host memory and needs a</span>
+        <span class="c1"># separate benchmark plus Flink GPU resource scheduling design.</span>
+        <span class="k">return</span> <span class="n">_JavaBackedVideoContainer</span><span class="p">(</span>
+            <span class="n">av</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file_obj</span><span class="p">,</span> <span class="o">**</span><span class="p">(</span><span class="n">container_options</span> <span class="ow">or</span> <span class="p">{})),</span> <span class="n">file_obj</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="n">_close_resource</span><span class="p">(</span><span class="n">file_obj</span><span class="p">)</span>
+        <span class="k">raise</span></div>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">_JavaBackedVideoContainer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;PyAV container wrapper that owns its Java-backed file object.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">container</span><span class="p">,</span> <span class="n">file_obj</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_container</span> <span class="o">=</span> <span class="n">container</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_file_obj</span> <span class="o">=</span> <span class="n">file_obj</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_container</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">_close_resource</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_container</span><span class="p">)</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">_close_resource</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_file_obj</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="probe_video_metadata"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.codec.video.probe_video_metadata.html#pyflink.multimodal.codec.probe_video_metadata">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">probe_video_metadata</span><span class="p">(</span><span class="n">uri</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                         <span class="n">bridge_client</span><span class="p">:</span> <span class="n">FlinkFileSystemBridgeClient</span><span class="p">,</span>
+                         <span class="o">*</span><span class="p">,</span>
+                         <span class="n">container_options</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                         <span class="n">read_chunk_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                         <span class="n">max_cached_blocks</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                         <span class="n">read_ahead_blocks</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Read lightweight video metadata from container headers.&quot;&quot;&quot;</span>
+    <span class="n">container</span> <span class="o">=</span> <span class="n">open_video_container</span><span class="p">(</span>
+        <span class="n">uri</span><span class="p">,</span>
+        <span class="n">bridge_client</span><span class="p">,</span>
+        <span class="n">container_options</span><span class="o">=</span><span class="n">container_options</span><span class="p">,</span>
+        <span class="n">read_chunk_size</span><span class="o">=</span><span class="n">read_chunk_size</span><span class="p">,</span>
+        <span class="n">max_cached_blocks</span><span class="o">=</span><span class="n">max_cached_blocks</span><span class="p">,</span>
+        <span class="n">read_ahead_blocks</span><span class="o">=</span><span class="n">read_ahead_blocks</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">stream</span> <span class="o">=</span> <span class="n">_first_video_stream</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Row</span><span class="p">(</span>
+            <span class="n">width</span><span class="o">=</span><span class="n">_optional_int</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="s2">&quot;width&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+            <span class="n">height</span><span class="o">=</span><span class="n">_optional_int</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="s2">&quot;height&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+            <span class="n">fps</span><span class="o">=</span><span class="n">_stream_fps</span><span class="p">(</span><span class="n">stream</span><span class="p">),</span>
+            <span class="n">duration_ms</span><span class="o">=</span><span class="n">_video_duration_ms</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">stream</span><span class="p">),</span>
+            <span class="n">frame_count</span><span class="o">=</span><span class="n">_optional_int</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="s2">&quot;frames&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+            <span class="n">time_base</span><span class="o">=</span><span class="n">_optional_float</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="s2">&quot;time_base&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+            <span class="n">codec_name</span><span class="o">=</span><span class="n">_stream_codec_name</span><span class="p">(</span><span class="n">stream</span><span class="p">),</span>
+            <span class="n">video_stream_index</span><span class="o">=</span><span class="n">_optional_int</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="s2">&quot;index&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">_close_resource</span><span class="p">(</span><span class="n">container</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="extract_video_frames"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.codec.extract_video_frames.html#pyflink.multimodal.codec.extract_video_frames">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">extract_video_frames</span><span class="p">(</span><span class="n">video_input</span><span class="p">,</span>
+                         <span class="n">bridge_client</span><span class="p">:</span> <span class="n">FlinkFileSystemBridgeClient</span><span class="p">,</span>
+                         <span class="o">*</span><span class="p">,</span>
+                         <span class="n">frame_selector</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;keyframe&quot;</span><span class="p">,</span>
+                         <span class="n">sample_interval_ms</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                         <span class="n">max_frames</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                         <span class="n">container_options</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                         <span class="n">read_chunk_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                         <span class="n">max_cached_blocks</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                         <span class="n">read_ahead_blocks</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Decode selected frames from a full video or metadata-only video segment.</span>
+
+<span class="sd">    ``video_input`` accepts a URI string, ``VideoRef``, or a Row/tuple matching</span>
+<span class="sd">    ``VIDEO_STRUCT_TABLE_TYPE``. Segment handling is metadata-only: the same URI</span>
+<span class="sd">    is opened and frames outside ``start_time_ms`` / ``end_time_ms`` are skipped.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">video_ref</span> <span class="o">=</span> <span class="n">_normalize_video_ref</span><span class="p">(</span><span class="n">video_input</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">video_ref</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span>
+
+    <span class="n">frame_selector</span> <span class="o">=</span> <span class="n">_normalize_frame_selector</span><span class="p">(</span><span class="n">frame_selector</span><span class="p">)</span>
+    <span class="n">max_frames</span> <span class="o">=</span> <span class="n">_validate_optional_positive_int</span><span class="p">(</span><span class="s2">&quot;max_frames&quot;</span><span class="p">,</span> <span class="n">max_frames</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">frame_selector</span> <span class="o">==</span> <span class="s2">&quot;sample&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">sample_interval_ms</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">sample_interval_ms</span> <span class="o">=</span> <span class="n">_DEFAULT_SAMPLE_INTERVAL_MS</span>
+        <span class="n">sample_interval_ms</span> <span class="o">=</span> <span class="n">_validate_positive_int</span><span class="p">(</span>
+            <span class="s2">&quot;sample_interval_ms&quot;</span><span class="p">,</span> <span class="n">sample_interval_ms</span><span class="p">)</span>
+
+    <span class="n">container</span> <span class="o">=</span> <span class="n">open_video_container</span><span class="p">(</span>
+        <span class="n">video_ref</span><span class="o">.</span><span class="n">uri</span><span class="p">,</span>
+        <span class="n">bridge_client</span><span class="p">,</span>
+        <span class="n">container_options</span><span class="o">=</span><span class="n">container_options</span><span class="p">,</span>
+        <span class="n">read_chunk_size</span><span class="o">=</span><span class="n">read_chunk_size</span><span class="p">,</span>
+        <span class="n">max_cached_blocks</span><span class="o">=</span><span class="n">max_cached_blocks</span><span class="p">,</span>
+        <span class="n">read_ahead_blocks</span><span class="o">=</span><span class="n">read_ahead_blocks</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">stream</span> <span class="o">=</span> <span class="n">_first_video_stream</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+        <span class="n">_seek_to_segment_start</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">stream</span><span class="p">,</span> <span class="n">video_ref</span><span class="o">.</span><span class="n">start_time_ms</span><span class="p">)</span>
+        <span class="n">emitted</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">next_sample_time_ms</span> <span class="o">=</span> <span class="n">video_ref</span><span class="o">.</span><span class="n">start_time_ms</span>
+        <span class="k">for</span> <span class="n">frame</span> <span class="ow">in</span> <span class="n">container</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">stream</span><span class="p">):</span>
+            <span class="n">time_ms</span> <span class="o">=</span> <span class="n">_frame_time_ms</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">stream</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">_before_segment</span><span class="p">(</span><span class="n">time_ms</span><span class="p">,</span> <span class="n">video_ref</span><span class="o">.</span><span class="n">start_time_ms</span><span class="p">):</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">_after_segment</span><span class="p">(</span><span class="n">time_ms</span><span class="p">,</span> <span class="n">video_ref</span><span class="o">.</span><span class="n">end_time_ms</span><span class="p">):</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="n">frame_selector</span> <span class="o">==</span> <span class="s2">&quot;keyframe&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">bool</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="s2">&quot;key_frame&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)):</span>
+                    <span class="k">continue</span>
+            <span class="k">elif</span> <span class="n">frame_selector</span> <span class="o">==</span> <span class="s2">&quot;sample&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">time_ms</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">emitted</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="k">continue</span>
+                <span class="k">elif</span> <span class="n">next_sample_time_ms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">time_ms</span> <span class="o">&lt;</span> <span class="n">next_sample_time_ms</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="k">if</span> <span class="n">time_ms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">next_sample_time_ms</span> <span class="o">=</span> <span class="n">time_ms</span> <span class="o">+</span> <span class="n">sample_interval_ms</span>
+
+            <span class="k">yield</span> <span class="n">_frame_to_output</span><span class="p">(</span><span class="n">video_ref</span><span class="p">,</span> <span class="n">frame</span><span class="p">,</span> <span class="n">stream</span><span class="p">,</span> <span class="n">emitted</span><span class="p">,</span> <span class="n">time_ms</span><span class="p">)</span>
+            <span class="n">emitted</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">max_frames</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">emitted</span> <span class="o">&gt;=</span> <span class="n">max_frames</span><span class="p">:</span>
+                <span class="k">break</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">_close_resource</span><span class="p">(</span><span class="n">container</span><span class="p">)</span></div>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_normalize_video_ref</span><span class="p">(</span><span class="n">video_input</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">video_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">video_input</span><span class="p">,</span> <span class="n">VideoRef</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">video_input</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">video_input</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">VideoRef</span><span class="p">(</span><span class="n">video_input</span><span class="p">)</span>
+
+    <span class="n">uri</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">video_input</span><span class="p">,</span> <span class="s2">&quot;uri&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">uri</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">VideoRef</span><span class="p">(</span>
+            <span class="n">uri</span><span class="o">=</span><span class="n">uri</span><span class="p">,</span>
+            <span class="n">start_time_ms</span><span class="o">=</span><span class="n">_optional_time_ms</span><span class="p">(</span>
+                <span class="s2">&quot;start_time_ms&quot;</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">video_input</span><span class="p">,</span> <span class="s2">&quot;start_time_ms&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+            <span class="n">end_time_ms</span><span class="o">=</span><span class="n">_optional_time_ms</span><span class="p">(</span>
+                <span class="s2">&quot;end_time_ms&quot;</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">video_input</span><span class="p">,</span> <span class="s2">&quot;end_time_ms&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">uri</span><span class="p">,</span> <span class="n">start_time_ms</span><span class="p">,</span> <span class="n">end_time_ms</span> <span class="o">=</span> <span class="n">video_input</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">video_input</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">video_input</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">IndexError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;video_input must be a URI string, VideoRef, or VIDEO_STRUCT row&quot;</span>
+        <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+    <span class="k">return</span> <span class="n">VideoRef</span><span class="p">(</span>
+        <span class="n">uri</span><span class="o">=</span><span class="n">uri</span><span class="p">,</span>
+        <span class="n">start_time_ms</span><span class="o">=</span><span class="n">_optional_time_ms</span><span class="p">(</span><span class="s2">&quot;start_time_ms&quot;</span><span class="p">,</span> <span class="n">start_time_ms</span><span class="p">),</span>
+        <span class="n">end_time_ms</span><span class="o">=</span><span class="n">_optional_time_ms</span><span class="p">(</span><span class="s2">&quot;end_time_ms&quot;</span><span class="p">,</span> <span class="n">end_time_ms</span><span class="p">),</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_optional_int</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">return</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_optional_time_ms</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be a non-negative integer, got </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">value</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_optional_float</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">return</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_optional_str</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">return</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_normalize_frame_selector</span><span class="p">(</span><span class="n">frame_selector</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">frame_selector</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_VALID_FRAME_SELECTORS</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;frame_selector must be one of </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">_VALID_FRAME_SELECTORS</span><span class="p">)</span><span class="si">}</span><span class="s2">, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;got </span><span class="si">{</span><span class="n">frame_selector</span><span class="si">!r}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">frame_selector</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_validate_positive_int</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be a positive integer, got </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">value</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_validate_optional_positive_int</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">_validate_positive_int</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_file_read_options</span><span class="p">(</span><span class="n">read_chunk_size</span><span class="p">,</span> <span class="n">max_cached_blocks</span><span class="p">,</span> <span class="n">read_ahead_blocks</span><span class="p">):</span>
+    <span class="n">options</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="n">read_chunk_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">options</span><span class="p">[</span><span class="s2">&quot;read_chunk_size&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">read_chunk_size</span>
+    <span class="k">if</span> <span class="n">max_cached_blocks</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">options</span><span class="p">[</span><span class="s2">&quot;max_cached_blocks&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">max_cached_blocks</span>
+    <span class="k">if</span> <span class="n">read_ahead_blocks</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">options</span><span class="p">[</span><span class="s2">&quot;read_ahead_blocks&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">read_ahead_blocks</span>
+    <span class="k">return</span> <span class="n">options</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_close_resource</span><span class="p">(</span><span class="n">resource</span><span class="p">):</span>
+    <span class="n">close</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">resource</span><span class="p">,</span> <span class="s2">&quot;close&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">close</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">close</span><span class="p">()</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_first_video_stream</span><span class="p">(</span><span class="n">container</span><span class="p">):</span>
+    <span class="n">streams</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="s2">&quot;streams&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">video_streams</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">streams</span><span class="p">,</span> <span class="s2">&quot;video&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="k">if</span> <span class="n">streams</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">video_streams</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Video container has no video stream.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">video_streams</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_video_duration_ms</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">stream</span><span class="p">):</span>
+    <span class="n">stream_duration_ms</span> <span class="o">=</span> <span class="n">_duration_from_stream</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">stream_duration_ms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">stream_duration_ms</span>
+
+    <span class="n">container_duration</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="s2">&quot;duration&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">container_duration</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">container_duration</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1000.0</span><span class="p">))</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_duration_from_stream</span><span class="p">(</span><span class="n">stream</span><span class="p">):</span>
+    <span class="n">duration</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="s2">&quot;duration&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">time_base</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="s2">&quot;time_base&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">duration</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">time_base</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">time_base</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">))</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_stream_fps</span><span class="p">(</span><span class="n">stream</span><span class="p">):</span>
+    <span class="n">average_rate</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="s2">&quot;average_rate&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">average_rate</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_optional_float</span><span class="p">(</span><span class="n">average_rate</span><span class="p">)</span>
+    <span class="n">base_rate</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="s2">&quot;base_rate&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_optional_float</span><span class="p">(</span><span class="n">base_rate</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_stream_codec_name</span><span class="p">(</span><span class="n">stream</span><span class="p">):</span>
+    <span class="n">codec_context</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="s2">&quot;codec_context&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">codec_name</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">codec_context</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">codec_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_optional_str</span><span class="p">(</span><span class="n">codec_name</span><span class="p">)</span>
+    <span class="n">codec</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="s2">&quot;codec&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_optional_str</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">codec</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_seek_to_segment_start</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">stream</span><span class="p">,</span> <span class="n">start_time_ms</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">start_time_ms</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">start_time_ms</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="n">_stream_offset_from_ms</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">start_time_ms</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">container</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">offset</span><span class="p">,</span> <span class="n">any_frame</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">backward</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="n">stream</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">OSError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+        <span class="n">container</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">start_time_ms</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">any_frame</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">backward</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_stream_offset_from_ms</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">time_ms</span><span class="p">):</span>
+    <span class="n">time_base</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="s2">&quot;time_base&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">time_base</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">((</span><span class="n">time_ms</span> <span class="o">/</span> <span class="mf">1000.0</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">time_base</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">time_ms</span> <span class="o">*</span> <span class="mi">1000</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_frame_time_ms</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">stream</span><span class="p">):</span>
+    <span class="n">frame_time</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">frame_time</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">frame_time</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">))</span>
+    <span class="n">pts</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="s2">&quot;pts&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">time_base</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="s2">&quot;time_base&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">pts</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">time_base</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">pts</span><span class="p">)</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">time_base</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">))</span>
+    <span class="k">return</span> <span class="kc">None</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_before_segment</span><span class="p">(</span><span class="n">time_ms</span><span class="p">,</span> <span class="n">start_time_ms</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">time_ms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">start_time_ms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">time_ms</span> <span class="o">&lt;</span> <span class="n">start_time_ms</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_after_segment</span><span class="p">(</span><span class="n">time_ms</span><span class="p">,</span> <span class="n">end_time_ms</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">time_ms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">end_time_ms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">time_ms</span> <span class="o">&gt;</span> <span class="n">end_time_ms</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_frame_to_output</span><span class="p">(</span><span class="n">video_ref</span><span class="p">,</span> <span class="n">frame</span><span class="p">,</span> <span class="n">stream</span><span class="p">,</span> <span class="n">frame_index</span><span class="p">,</span> <span class="n">time_ms</span><span class="p">):</span>
+    <span class="n">pixel_array</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">to_ndarray</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;rgb24&quot;</span><span class="p">)</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">pixel_array</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">ImageMode</span><span class="o">.</span><span class="n">RGB</span><span class="p">)</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="n">Row</span><span class="p">(</span>
+        <span class="n">uri</span><span class="o">=</span><span class="n">video_ref</span><span class="o">.</span><span class="n">uri</span><span class="p">,</span>
+        <span class="n">video_stream_index</span><span class="o">=</span><span class="n">_optional_int</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="s2">&quot;index&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">frame_index</span><span class="o">=</span><span class="n">frame_index</span><span class="p">,</span>
+        <span class="n">pts</span><span class="o">=</span><span class="n">_optional_int</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="s2">&quot;pts&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">time_ms</span><span class="o">=</span><span class="n">time_ms</span><span class="p">,</span>
+        <span class="n">key_frame</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="s2">&quot;key_frame&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)),</span>
+        <span class="n">start_time_ms</span><span class="o">=</span><span class="n">video_ref</span><span class="o">.</span><span class="n">start_time_ms</span><span class="p">,</span>
+        <span class="n">end_time_ms</span><span class="o">=</span><span class="n">video_ref</span><span class="o">.</span><span class="n">end_time_ms</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">image</span><span class="p">,</span> <span class="n">metadata</span>
+</pre></div>
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

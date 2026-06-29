@@ -24,7 +24,7 @@ under the License.
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>DataType &#8212; PyFlink 1.20+vvr.11.7.dev0 documentation</title>
+    <title>Data Types &#8212; PyFlink 11.8.0.preview.2 documentation</title>
   <script>
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
@@ -58,8 +58,8 @@ under the License.
     <link rel="shortcut icon" href="../../_static/navbar-brand-logo.jpg"/>
 
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="pyflink.dataframe.datatype.DataType" href="api/pyflink.dataframe.datatype.DataType.html" />
-    <link rel="prev" title="pyflink.dataframe.sql.sql" href="api/pyflink.dataframe.sql.sql.html" />
+    <link rel="next" title="pyflink.dataframe.DataType" href="api/pyflink.dataframe.DataType.html" />
+    <link rel="prev" title="pyflink.dataframe.sql" href="api/pyflink.dataframe.sql.html" />
 <script src="_static/pyflink.js" ></script>
 <link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
 
@@ -261,20 +261,21 @@ under the License.
   <div class="bd-toc-item navbar-nav">
     <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../pyflink.table/index.html">PyFlink Table</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pyflink.datastream/index.html">PyFlink DataStream</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">PyFlink DataFrame</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="dataframe.html">DataFrame</a></li>
 <li class="toctree-l2"><a class="reference internal" href="creation.html">DataFrame Creation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="io.html">Input/Output</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sql.html">SQL</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">DataType</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Data Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="udf.html">User Defined Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="config.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="catalog.html">Catalog</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gpu.html">GPU Support</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ai.html">AI / LLM</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../pyflink.multimodal/index.html">PyFlink Multimodal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.datastream/index.html">PyFlink DataStream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyflink.common/index.html">PyFlink Common</a></li>
 </ul>
 
@@ -304,98 +305,137 @@ under the License.
             
             <article class="bd-article" role="main">
               
-  <section id="datatype">
-<h1>DataType<a class="headerlink" href="#datatype" title="Permalink to this headline">#</a></h1>
-<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">DataType</span></code> class provides factory methods for creating data types
-used in schema definitions, UDF return types, and other type specifications in the DataFrame API.</p>
+  <section id="data-types">
+<h1>Data Types<a class="headerlink" href="#data-types" title="Permalink to this headline">#</a></h1>
+<p>The DataType class provides factory methods for creating data types used in
+schema definitions, UDF return types, and other type specifications in the
+DataFrame API.</p>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataType</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">schema</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span> <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">()}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">schema</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">(),</span>
+<span class="gp">... </span><span class="p">}</span>
 </pre></div>
 </div>
+<section id="datatype">
+<h2>DataType<a class="headerlink" href="#datatype" title="Permalink to this headline">#</a></h2>
 <table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.html#pyflink.dataframe.datatype.DataType" title="pyflink.dataframe.datatype.DataType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType</span></code></a>(_table_type)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataType.html#pyflink.dataframe.DataType" title="pyflink.dataframe.DataType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType</span></code></a>(_table_type)</p></td>
 <td><p>DataType for DataFrame API.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.not_null.html#pyflink.dataframe.datatype.DataType.not_null" title="pyflink.dataframe.datatype.DataType.not_null"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.not_null</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataType.not_null.html#pyflink.dataframe.DataType.not_null" title="pyflink.dataframe.DataType.not_null"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.not_null</span></code></a>()</p></td>
 <td><p>Return a non-nullable version of this type.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.nullable.html#pyflink.dataframe.datatype.DataType.nullable" title="pyflink.dataframe.datatype.DataType.nullable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.nullable</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataType.nullable.html#pyflink.dataframe.DataType.nullable" title="pyflink.dataframe.DataType.nullable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.nullable</span></code></a>()</p></td>
 <td><p>Return a nullable version of this type.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.int8.html#pyflink.dataframe.datatype.DataType.int8" title="pyflink.dataframe.datatype.DataType.int8"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.int8</span></code></a>()</p></td>
-<td><p>8-bit signed integer type (TINYINT).</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.int16.html#pyflink.dataframe.datatype.DataType.int16" title="pyflink.dataframe.datatype.DataType.int16"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.int16</span></code></a>()</p></td>
-<td><p>16-bit signed integer type (SMALLINT).</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.int32.html#pyflink.dataframe.datatype.DataType.int32" title="pyflink.dataframe.datatype.DataType.int32"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.int32</span></code></a>()</p></td>
-<td><p>32-bit signed integer type (INT).</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.int64.html#pyflink.dataframe.datatype.DataType.int64" title="pyflink.dataframe.datatype.DataType.int64"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.int64</span></code></a>()</p></td>
-<td><p>64-bit signed integer type (BIGINT).</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.float32.html#pyflink.dataframe.datatype.DataType.float32" title="pyflink.dataframe.datatype.DataType.float32"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.float32</span></code></a>()</p></td>
-<td><p>32-bit floating point type (FLOAT).</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.float64.html#pyflink.dataframe.datatype.DataType.float64" title="pyflink.dataframe.datatype.DataType.float64"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.float64</span></code></a>()</p></td>
-<td><p>64-bit floating point type (DOUBLE).</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.decimal.html#pyflink.dataframe.datatype.DataType.decimal" title="pyflink.dataframe.datatype.DataType.decimal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.decimal</span></code></a>(precision, scale)</p></td>
-<td><p>Decimal type with specified precision and scale.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.string.html#pyflink.dataframe.datatype.DataType.string" title="pyflink.dataframe.datatype.DataType.string"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.string</span></code></a>()</p></td>
-<td><p>Variable-length string type (VARCHAR).</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.fixed_size_string.html#pyflink.dataframe.datatype.DataType.fixed_size_string" title="pyflink.dataframe.datatype.DataType.fixed_size_string"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.fixed_size_string</span></code></a>(length)</p></td>
-<td><p>Fixed-length character type (CHAR(n)).</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.variant.html#pyflink.dataframe.datatype.DataType.variant" title="pyflink.dataframe.datatype.DataType.variant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.variant</span></code></a>()</p></td>
-<td><p>Variant type that can store a value of any type.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.binary.html#pyflink.dataframe.datatype.DataType.binary" title="pyflink.dataframe.datatype.DataType.binary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.binary</span></code></a>()</p></td>
-<td><p>Binary type (BYTES).</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.fixed_size_binary.html#pyflink.dataframe.datatype.DataType.fixed_size_binary" title="pyflink.dataframe.datatype.DataType.fixed_size_binary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.fixed_size_binary</span></code></a>(length)</p></td>
-<td><p>Fixed-length binary type (BINARY(n)).</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.null.html#pyflink.dataframe.datatype.DataType.null" title="pyflink.dataframe.datatype.DataType.null"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.null</span></code></a>()</p></td>
-<td><p>Null type (NULL).</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.bool.html#pyflink.dataframe.datatype.DataType.bool" title="pyflink.dataframe.datatype.DataType.bool"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.bool</span></code></a>()</p></td>
-<td><p>Boolean type.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.date.html#pyflink.dataframe.datatype.DataType.date" title="pyflink.dataframe.datatype.DataType.date"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.date</span></code></a>()</p></td>
-<td><p>Date type (year, month, day).</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.time.html#pyflink.dataframe.datatype.DataType.time" title="pyflink.dataframe.datatype.DataType.time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.time</span></code></a>([precision])</p></td>
-<td><p>Time type (hour, minute, second, fractional seconds).</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.timestamp.html#pyflink.dataframe.datatype.DataType.timestamp" title="pyflink.dataframe.datatype.DataType.timestamp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.timestamp</span></code></a>([precision])</p></td>
-<td><p>Timestamp type without time zone.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.timestamp_ltz.html#pyflink.dataframe.datatype.DataType.timestamp_ltz" title="pyflink.dataframe.datatype.DataType.timestamp_ltz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.timestamp_ltz</span></code></a>([precision])</p></td>
-<td><p>Timestamp type with local time zone.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.list.html#pyflink.dataframe.datatype.DataType.list" title="pyflink.dataframe.datatype.DataType.list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.list</span></code></a>(dtype)</p></td>
-<td><p>List type with element type.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.map.html#pyflink.dataframe.datatype.DataType.map" title="pyflink.dataframe.datatype.DataType.map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.map</span></code></a>(key_type, value_type)</p></td>
-<td><p>Map type with key and value types.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.struct.html#pyflink.dataframe.datatype.DataType.struct" title="pyflink.dataframe.datatype.DataType.struct"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.struct</span></code></a>(fields)</p></td>
-<td><p>Struct/Row type with named fields.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.datatype.DataType.tensor.html#pyflink.dataframe.datatype.DataType.tensor" title="pyflink.dataframe.datatype.DataType.tensor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.tensor</span></code></a>(dtype, shape)</p></td>
-<td><p>Fixed-shape tensor type.</p></td>
 </tr>
 </tbody>
 </table>
+</section>
+<section id="primitive-types">
+<h2>Primitive Types<a class="headerlink" href="#primitive-types" title="Permalink to this headline">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataType.int8.html#pyflink.dataframe.DataType.int8" title="pyflink.dataframe.DataType.int8"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.int8</span></code></a>()</p></td>
+<td><p>8-bit signed integer type (TINYINT).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataType.int16.html#pyflink.dataframe.DataType.int16" title="pyflink.dataframe.DataType.int16"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.int16</span></code></a>()</p></td>
+<td><p>16-bit signed integer type (SMALLINT).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataType.int32.html#pyflink.dataframe.DataType.int32" title="pyflink.dataframe.DataType.int32"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.int32</span></code></a>()</p></td>
+<td><p>32-bit signed integer type (INT).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataType.int64.html#pyflink.dataframe.DataType.int64" title="pyflink.dataframe.DataType.int64"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.int64</span></code></a>()</p></td>
+<td><p>64-bit signed integer type (BIGINT).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataType.float32.html#pyflink.dataframe.DataType.float32" title="pyflink.dataframe.DataType.float32"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.float32</span></code></a>()</p></td>
+<td><p>32-bit floating point type (FLOAT).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataType.float64.html#pyflink.dataframe.DataType.float64" title="pyflink.dataframe.DataType.float64"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.float64</span></code></a>()</p></td>
+<td><p>64-bit floating point type (DOUBLE).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataType.decimal.html#pyflink.dataframe.DataType.decimal" title="pyflink.dataframe.DataType.decimal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.decimal</span></code></a>(precision, scale)</p></td>
+<td><p>Decimal type with specified precision and scale.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataType.string.html#pyflink.dataframe.DataType.string" title="pyflink.dataframe.DataType.string"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.string</span></code></a>()</p></td>
+<td><p>Variable-length string type (VARCHAR).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataType.fixed_size_string.html#pyflink.dataframe.DataType.fixed_size_string" title="pyflink.dataframe.DataType.fixed_size_string"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.fixed_size_string</span></code></a>(length)</p></td>
+<td><p>Fixed-length character type (CHAR(n)).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataType.variant.html#pyflink.dataframe.DataType.variant" title="pyflink.dataframe.DataType.variant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.variant</span></code></a>()</p></td>
+<td><p>Variant type that can store a value of any type.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataType.binary.html#pyflink.dataframe.DataType.binary" title="pyflink.dataframe.DataType.binary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.binary</span></code></a>()</p></td>
+<td><p>Binary type (BYTES).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataType.fixed_size_binary.html#pyflink.dataframe.DataType.fixed_size_binary" title="pyflink.dataframe.DataType.fixed_size_binary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.fixed_size_binary</span></code></a>(length)</p></td>
+<td><p>Fixed-length binary type (BINARY(n)).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataType.null.html#pyflink.dataframe.DataType.null" title="pyflink.dataframe.DataType.null"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.null</span></code></a>()</p></td>
+<td><p>Null type (NULL).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataType.bool.html#pyflink.dataframe.DataType.bool" title="pyflink.dataframe.DataType.bool"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.bool</span></code></a>()</p></td>
+<td><p>Boolean type.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataType.boolean.html#pyflink.dataframe.DataType.boolean" title="pyflink.dataframe.DataType.boolean"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.boolean</span></code></a>()</p></td>
+<td><p>Boolean type.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataType.date.html#pyflink.dataframe.DataType.date" title="pyflink.dataframe.DataType.date"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.date</span></code></a>()</p></td>
+<td><p>Date type (year, month, day).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataType.time.html#pyflink.dataframe.DataType.time" title="pyflink.dataframe.DataType.time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.time</span></code></a>([precision])</p></td>
+<td><p>Time type (hour, minute, second, fractional seconds).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataType.timestamp.html#pyflink.dataframe.DataType.timestamp" title="pyflink.dataframe.DataType.timestamp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.timestamp</span></code></a>([precision])</p></td>
+<td><p>Timestamp type without time zone.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataType.timestamp_ltz.html#pyflink.dataframe.DataType.timestamp_ltz" title="pyflink.dataframe.DataType.timestamp_ltz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.timestamp_ltz</span></code></a>([precision])</p></td>
+<td><p>Timestamp type with local time zone.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="composite-and-multimodal-types">
+<h2>Composite and Multimodal Types<a class="headerlink" href="#composite-and-multimodal-types" title="Permalink to this headline">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataType.list.html#pyflink.dataframe.DataType.list" title="pyflink.dataframe.DataType.list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.list</span></code></a>(dtype)</p></td>
+<td><p>List type with element type.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataType.map.html#pyflink.dataframe.DataType.map" title="pyflink.dataframe.DataType.map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.map</span></code></a>(key_type, value_type)</p></td>
+<td><p>Map type with key and value types.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataType.struct.html#pyflink.dataframe.DataType.struct" title="pyflink.dataframe.DataType.struct"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.struct</span></code></a>(fields)</p></td>
+<td><p>Struct/Row type with named fields.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataType.row.html#pyflink.dataframe.DataType.row" title="pyflink.dataframe.DataType.row"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.row</span></code></a>(fields)</p></td>
+<td><p>Struct/Row type with named fields.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataType.tensor.html#pyflink.dataframe.DataType.tensor" title="pyflink.dataframe.DataType.tensor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.tensor</span></code></a>(dtype, shape)</p></td>
+<td><p>Fixed-shape tensor type.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataType.image.html#pyflink.dataframe.DataType.image" title="pyflink.dataframe.DataType.image"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataType.image</span></code></a>([mode, height, width])</p></td>
+<td><p>Decoded image type.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
 </section>
 
 
@@ -406,17 +446,17 @@ used in schema definitions, UDF return types, and other type specifications in t
             <footer class="bd-footer-article">
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-  <a class='left-prev' id="prev-link" href="api/pyflink.dataframe.sql.sql.html" title="previous page">
+  <a class='left-prev' id="prev-link" href="api/pyflink.dataframe.sql.html" title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
           <p class="prev-next-subtitle">previous</p>
-          <p class="prev-next-title">pyflink.dataframe.sql.sql</p>
+          <p class="prev-next-title">pyflink.dataframe.sql</p>
       </div>
   </a>
-  <a class='right-next' id="next-link" href="api/pyflink.dataframe.datatype.DataType.html" title="next page">
+  <a class='right-next' id="next-link" href="api/pyflink.dataframe.DataType.html" title="next page">
   <div class="prev-next-info">
       <p class="prev-next-subtitle">next</p>
-      <p class="prev-next-title">pyflink.dataframe.datatype.DataType</p>
+      <p class="prev-next-title">pyflink.dataframe.DataType</p>
   </div>
   <i class="fa-solid fa-angle-right"></i>
   </a>
@@ -429,6 +469,33 @@ used in schema definitions, UDF return types, and other type specifications in t
           
             <div class="bd-sidebar-secondary bd-toc">
               
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#datatype">
+   DataType
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#primitive-types">
+   Primitive Types
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#composite-and-multimodal-types">
+   Composite and Multimodal Types
+  </a>
+ </li>
+</ul>
+
+</nav>
+</div>
+
 <div class="toc-item">
   
 <div id="searchbox"></div>

@@ -23,7 +23,7 @@ under the License.
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pyflink.dataframe.ai.llm &#8212; PyFlink 1.20+vvr.11.7.dev0 documentation</title>
+    <title>pyflink.dataframe.ai.llm &#8212; PyFlink 11.8.0.preview.2 documentation</title>
   <script>
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
@@ -294,7 +294,6 @@ under the License.
 <span class="sd">LLM / AI functions for the DataFrame API.</span>
 
 <span class="sd">Example::</span>
-
 <span class="sd">    import pyflink.dataframe as pf</span>
 
 <span class="sd">    # Option 1: Use a provider</span>
@@ -314,7 +313,7 @@ under the License.
 <span class="kn">import</span><span class="w"> </span><span class="nn">uuid</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">TYPE_CHECKING</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.dataframe.ai.providers</span><span class="w"> </span><span class="kn">import</span> <span class="n">Provider</span><span class="p">,</span> <span class="n">GenericProvider</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.dataframe.ai.providers</span><span class="w"> </span><span class="kn">import</span> <span class="n">Provider</span><span class="p">,</span> <span class="n">create_provider</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.dataframe.dataframe</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataFrame</span>
@@ -327,10 +326,9 @@ under the License.
 
 <span class="n">_provider_registry</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Provider</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">_default_provider</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="n">_CONTENT_TYPE_DEFAULT_PROVIDERS</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">((</span><span class="s2">&quot;dashscope&quot;</span><span class="p">,</span> <span class="s2">&quot;openai-compat&quot;</span><span class="p">))</span>
 
 
-<div class="viewcode-block" id="set_provider"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.ai.llm.set_provider.html#pyflink.dataframe.ai.llm.set_provider">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">set_provider</span><span class="p">(</span><span class="n">name_or_provider</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Provider</span><span class="p">],</span>
+<div class="viewcode-block" id="set_provider"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.set_provider.html#pyflink.dataframe.ai.llm.set_provider">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">set_provider</span><span class="p">(</span><span class="n">name_or_provider</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Provider</span><span class="p">],</span>
                  <span class="n">provider</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Provider</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="o">**</span><span class="n">options</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -343,7 +341,8 @@ under the License.
 <span class="sd">    2. ``set_provider(&quot;name&quot;, Provider_instance)`` — register under a custom</span>
 <span class="sd">       name. This allows registering multiple instances of the same provider</span>
 <span class="sd">       type (e.g. one for chat, one for embeddings).</span>
-<span class="sd">    3. ``set_provider(&quot;name&quot;, **options)`` — create a</span>
+<span class="sd">    3. ``set_provider(&quot;name&quot;, **options)`` — create a built-in provider</span>
+<span class="sd">       when ``name`` matches a built-in provider name, otherwise create a</span>
 <span class="sd">       :class:`GenericProvider` with the given options.</span>
 
 <span class="sd">    Args:</span>
@@ -351,11 +350,11 @@ under the License.
 <span class="sd">            custom name string (forms 2 and 3).</span>
 <span class="sd">        provider: A :class:`Provider` instance to register under the custom</span>
 <span class="sd">            name (form 2 only).</span>
-<span class="sd">        **options: Provider options (form 3 only, wraps in</span>
+<span class="sd">        **options: Provider options (form 3 only, dispatches when ``name``</span>
+<span class="sd">            matches a built-in provider name, otherwise wraps in</span>
 <span class="sd">            :class:`GenericProvider`).</span>
 
 <span class="sd">    Example::</span>
-
 <span class="sd">        &gt;&gt;&gt; import pyflink.dataframe as pf</span>
 <span class="sd">        &gt;&gt;&gt; # Form 1: Provider instance (registered as &quot;openai-compat&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; pf.set_provider(pf.OpenAICompatProvider(</span>
@@ -397,7 +396,7 @@ under the License.
                     <span class="s2">&quot;Cannot pass both a Provider instance and **options.&quot;</span><span class="p">)</span>
             <span class="n">_provider_registry</span><span class="p">[</span><span class="n">name_or_provider</span><span class="p">]</span> <span class="o">=</span> <span class="n">provider</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">_provider_registry</span><span class="p">[</span><span class="n">name_or_provider</span><span class="p">]</span> <span class="o">=</span> <span class="n">GenericProvider</span><span class="p">(</span>
+            <span class="n">_provider_registry</span><span class="p">[</span><span class="n">name_or_provider</span><span class="p">]</span> <span class="o">=</span> <span class="n">create_provider</span><span class="p">(</span>
                 <span class="n">name_or_provider</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
@@ -405,7 +404,7 @@ under the License.
             <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">name_or_provider</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="set_default_provider"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.ai.llm.set_default_provider.html#pyflink.dataframe.ai.llm.set_default_provider">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">set_default_provider</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="set_default_provider"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.set_default_provider.html#pyflink.dataframe.ai.llm.set_default_provider">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">set_default_provider</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Set the default provider for AI functions.</span>
 
@@ -416,7 +415,6 @@ under the License.
 <span class="sd">        name: Provider name (must already be registered via set_provider).</span>
 
 <span class="sd">    Example::</span>
-
 <span class="sd">        &gt;&gt;&gt; pf.set_provider(&quot;openai&quot;, api_key=&quot;sk-...&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; pf.set_provider(&quot;deepseek&quot;, api_key=&quot;dk-...&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; pf.set_default_provider(&quot;openai&quot;)</span>
@@ -429,7 +427,7 @@ under the License.
     <span class="n">_default_provider</span> <span class="o">=</span> <span class="n">name</span></div>
 
 
-<div class="viewcode-block" id="list_providers"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.ai.llm.list_providers.html#pyflink.dataframe.ai.llm.list_providers">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">list_providers</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<div class="viewcode-block" id="list_providers"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.list_providers.html#pyflink.dataframe.ai.llm.list_providers">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">list_providers</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    List all registered provider names.</span>
 
@@ -437,7 +435,6 @@ under the License.
 <span class="sd">        A list of registered provider names.</span>
 
 <span class="sd">    Example::</span>
-
 <span class="sd">        &gt;&gt;&gt; pf.set_provider(&quot;openai&quot;, api_key=&quot;sk-...&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; pf.set_provider(&quot;deepseek&quot;, api_key=&quot;dk-...&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; pf.list_providers()</span>
@@ -501,34 +498,6 @@ under the License.
     <span class="k">return</span> <span class="n">builder</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_align_content_type_input_count</span><span class="p">(</span><span class="n">provider_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-                                    <span class="n">provider_options</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
-                                    <span class="n">input_columns</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Align and validate content-type count with the model input schema.&quot;&quot;&quot;</span>
-    <span class="n">aligned_options</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">provider_options</span><span class="p">)</span>
-    <span class="n">input_column_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">input_columns</span><span class="p">]</span>
-    <span class="n">content_type</span> <span class="o">=</span> <span class="n">provider_options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content-type&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">content_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">provider_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_CONTENT_TYPE_DEFAULT_PROVIDERS</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">aligned_options</span>
-        <span class="n">content_type</span> <span class="o">=</span> <span class="s2">&quot;TEXT&quot;</span>
-
-    <span class="n">content_types</span> <span class="o">=</span> <span class="n">content_type</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">provider_name</span> <span class="ow">in</span> <span class="n">_CONTENT_TYPE_DEFAULT_PROVIDERS</span>
-            <span class="ow">and</span> <span class="n">content_types</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;TEXT&quot;</span><span class="p">]</span>
-            <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_column_names</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="n">content_types</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;TEXT&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_column_names</span><span class="p">)</span>
-        <span class="n">aligned_options</span><span class="p">[</span><span class="s2">&quot;content-type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">content_types</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">content_types</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_column_names</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Number of content types (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">content_types</span><span class="p">)</span><span class="si">}</span><span class="s2">) must match &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;number of input columns (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">input_column_names</span><span class="p">)</span><span class="si">}</span><span class="s2">) for &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;provider </span><span class="si">{</span><span class="n">provider_name</span><span class="si">!r}</span><span class="s2">. content-type: </span><span class="si">{</span><span class="n">content_type</span><span class="si">}</span><span class="s2">, &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;input columns: </span><span class="si">{</span><span class="n">input_column_names</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">aligned_options</span>
-
-
 <span class="k">def</span><span class="w"> </span><span class="nf">_create_model_descriptor</span><span class="p">(</span><span class="n">t_env</span><span class="p">,</span> <span class="n">provider_name</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">input_columns</span><span class="p">,</span>
                              <span class="n">output_columns</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a ModelDescriptor from a provider registry entry.</span>
@@ -546,11 +515,9 @@ under the License.
     <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModelDescriptor</span>
 
     <span class="n">provider</span> <span class="o">=</span> <span class="n">_provider_registry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">provider_name</span><span class="p">)</span>
-    <span class="n">provider_options</span> <span class="o">=</span> <span class="n">provider</span><span class="o">.</span><span class="n">to_options</span><span class="p">()</span> <span class="k">if</span> <span class="n">provider</span> <span class="k">else</span> <span class="p">{}</span>
+    <span class="n">provider_options</span> <span class="o">=</span> <span class="n">provider</span><span class="o">.</span><span class="n">to_options</span><span class="p">(</span><span class="n">input_columns</span><span class="p">)</span> <span class="k">if</span> <span class="n">provider</span> <span class="k">else</span> <span class="p">{}</span>
 
     <span class="n">java_provider_name</span> <span class="o">=</span> <span class="n">provider</span><span class="o">.</span><span class="n">provider_name</span><span class="p">()</span> <span class="k">if</span> <span class="n">provider</span> <span class="k">else</span> <span class="n">provider_name</span>
-    <span class="n">provider_options</span> <span class="o">=</span> <span class="n">_align_content_type_input_count</span><span class="p">(</span>
-        <span class="n">java_provider_name</span><span class="p">,</span> <span class="n">provider_options</span><span class="p">,</span> <span class="n">input_columns</span><span class="p">)</span>
     <span class="n">add_built_in_model</span><span class="p">(</span><span class="n">t_env</span><span class="p">,</span> <span class="n">java_provider_name</span><span class="p">)</span>
     <span class="n">builder</span> <span class="o">=</span> <span class="n">ModelDescriptor</span><span class="o">.</span><span class="n">for_provider</span><span class="p">(</span><span class="n">java_provider_name</span><span class="p">)</span>
 
@@ -623,7 +590,6 @@ under the License.
 <span class="sd">    Accessed via ``df.llm``. Groups all AI-related operations together.</span>
 
 <span class="sd">    Example::</span>
-
 <span class="sd">        &gt;&gt;&gt; import pyflink.dataframe as pf</span>
 <span class="sd">        &gt;&gt;&gt; pf.set_provider(pf.OpenAICompatProvider(</span>
 <span class="sd">        ...     endpoint=&quot;https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions&quot;,</span>
@@ -655,7 +621,7 @@ under the License.
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;Column </span><span class="si">{</span><span class="n">col_name</span><span class="si">!r}</span><span class="s2"> not found. Available columns: </span><span class="si">{</span><span class="n">available</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">vector_search</span><span class="p">(</span>
+<div class="viewcode-block" id="LLMAccessor.vector_search"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.ai.llm.LLMAccessor.vector_search.html#pyflink.dataframe.ai.llm.LLMAccessor.vector_search">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">vector_search</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">search_source</span><span class="p">:</span> <span class="s2">&quot;DataFrame&quot;</span><span class="p">,</span>
         <span class="n">column_to_search</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -702,8 +668,7 @@ under the License.
 <span class="sd">            must contain exactly one name and is used as the name of the</span>
 <span class="sd">            appended array column.</span>
 
-<span class="sd">        Example:</span>
-<span class="sd">        ::</span>
+<span class="sd">        Example::</span>
 
 <span class="sd">            &gt;&gt;&gt; import pyflink.dataframe as pf</span>
 <span class="sd">            &gt;&gt;&gt; from pyflink.table import DataTypes</span>
@@ -850,7 +815,7 @@ under the License.
 
         <span class="k">return</span> <span class="n">DF</span><span class="p">(</span>
             <span class="n">joined</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
-                <span class="o">*</span><span class="p">[</span><span class="n">table_col</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">+</span> <span class="n">resolved_outputs</span><span class="p">]))</span>
+                <span class="o">*</span><span class="p">[</span><span class="n">table_col</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">+</span> <span class="n">resolved_outputs</span><span class="p">]))</span></div>
 
 <div class="viewcode-block" id="LLMAccessor.predict"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.ai.llm.LLMAccessor.predict.html#pyflink.dataframe.ai.llm.LLMAccessor.predict">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">input_cols</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">provider</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                 <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -885,7 +850,6 @@ under the License.
 <span class="sd">            A new DataFrame with the model output columns appended.</span>
 
 <span class="sd">        Example::</span>
-
 <span class="sd">            &gt;&gt;&gt; # Single output column (default)</span>
 <span class="sd">            &gt;&gt;&gt; df.llm.predict(&quot;question&quot;, model=&quot;qwen-plus&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; # JSON structured output</span>
@@ -956,7 +920,6 @@ under the License.
 <span class="sd">            - ``confidence`` (DOUBLE): confidence score.</span>
 
 <span class="sd">        Example::</span>
-
 <span class="sd">            &gt;&gt;&gt; df.llm.ai_classify(&quot;text&quot;, [&quot;positive&quot;, &quot;negative&quot;],</span>
 <span class="sd">            ...                    model=&quot;qwen-plus&quot;)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -984,7 +947,6 @@ under the License.
 <span class="sd">            - ``confidence`` (DOUBLE): confidence score.</span>
 
 <span class="sd">        Example::</span>
-
 <span class="sd">            &gt;&gt;&gt; df.llm.ai_sentiment(&quot;review&quot;, model=&quot;qwen-plus&quot;)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.ai_functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ai_sentiment</span> <span class="k">as</span> <span class="n">_ai_sentiment</span>
@@ -1011,7 +973,6 @@ under the License.
 <span class="sd">            - ``extracted_json`` (STRING): extracted fields as a JSON string.</span>
 
 <span class="sd">        Example::</span>
-
 <span class="sd">            &gt;&gt;&gt; df.llm.ai_extract(&quot;text&quot;,</span>
 <span class="sd">            ...     &#39;{&quot;name&quot;:&quot;STRING&quot;, &quot;phone&quot;:&quot;STRING&quot;}&#39;, model=&quot;qwen-plus&quot;)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1044,7 +1005,6 @@ under the License.
 <span class="sd">            - ``detected_language`` (STRING): detected source language code.</span>
 
 <span class="sd">        Example::</span>
-
 <span class="sd">            &gt;&gt;&gt; df.llm.ai_translate(&quot;text&quot;, &quot;zh&quot;, &quot;en&quot;, model=&quot;qwen-plus&quot;)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.ai_functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ai_translate</span> <span class="k">as</span> <span class="n">_ai_translate</span>
@@ -1072,7 +1032,6 @@ under the License.
 <span class="sd">            - ``summary`` (STRING): the summarized text.</span>
 
 <span class="sd">        Example::</span>
-
 <span class="sd">            &gt;&gt;&gt; df.llm.ai_summarize(&quot;article&quot;, 200, model=&quot;qwen-plus&quot;)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.ai_functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ai_summarize</span> <span class="k">as</span> <span class="n">_ai_summarize</span>
@@ -1101,7 +1060,6 @@ under the License.
 <span class="sd">              types.</span>
 
 <span class="sd">        Example::</span>
-
 <span class="sd">            &gt;&gt;&gt; df.llm.ai_mask(&quot;text&quot;, [&quot;name&quot;, &quot;phone&quot;], model=&quot;qwen-plus&quot;)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.ai_functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ai_mask</span> <span class="k">as</span> <span class="n">_ai_mask</span>
@@ -1133,7 +1091,6 @@ under the License.
 <span class="sd">            - ``embedding`` (ARRAY&lt;FLOAT&gt;): the embedding vector.</span>
 
 <span class="sd">        Example::</span>
-
 <span class="sd">            &gt;&gt;&gt; df.llm.ai_embed(&quot;text&quot;, 512, model=&quot;qwen-plus&quot;)</span>
 <span class="sd">            &gt;&gt;&gt; df.llm.ai_embed(</span>
 <span class="sd">            ...     &quot;text&quot;, 512, model=&quot;qwen-plus&quot;,</span>

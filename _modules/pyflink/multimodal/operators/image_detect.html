@@ -23,7 +23,7 @@ under the License.
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pyflink.multimodal.operators.image_detect &#8212; PyFlink 1.20+vvr.11.7.dev0 documentation</title>
+    <title>pyflink.multimodal.operators.image_detect &#8212; PyFlink 11.8.0.preview.2 documentation</title>
   <script>
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
@@ -303,7 +303,6 @@ under the License.
 
 <span class="sd">Example::</span>
 
-
 <span class="sd">    &gt;&gt;&gt; from pyflink.multimodal.operators.image_detect import (</span>
 <span class="sd">    ...     image_detect_objects, image_ocr, image_segment, image_detect_subplot,</span>
 <span class="sd">    ... )</span>
@@ -329,9 +328,14 @@ under the License.
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.multimodal.codec</span><span class="w"> </span><span class="kn">import</span> <span class="n">decode_image_input</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.model.backends.easyocr</span><span class="w"> </span><span class="kn">import</span> <span class="n">EasyOcrModelAdapter</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.model.backends.ultralytics</span><span class="w"> </span><span class="kn">import</span> <span class="n">UltralyticsModelAdapter</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.model.cache_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_dependencies</span><span class="p">,</span> <span class="n">prepare_and_load_model_handle</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.model.cache_manager</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">_is_gpu_requested</span><span class="p">,</span>
+    <span class="n">check_dependencies</span><span class="p">,</span>
+    <span class="n">prepare_and_load_model_handle</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.multimodal.utils</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">_build_or_apply_udf</span><span class="p">,</span>
+    <span class="n">_setup_cv2_threads</span><span class="p">,</span>
     <span class="n">_udf_runtime_kwargs</span><span class="p">,</span>
     <span class="n">run_image_batch_inference</span><span class="p">,</span>
 <span class="p">)</span>
@@ -365,7 +369,7 @@ under the License.
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Detect objects in a batch of images using YOLO.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;yolov8n&quot;</span><span class="p">,</span> <span class="n">confidence</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">imgsz</span><span class="o">=</span><span class="mi">640</span><span class="p">,</span> <span class="n">iou</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-                 <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+                 <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">confidence</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;confidence must be in [0, 1], got </span><span class="si">{</span><span class="n">confidence</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -386,6 +390,8 @@ under the License.
         <span class="c1"># Default 0.5 aligned with Data-Juicer (ultralytics default is 0.7).</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">iou</span> <span class="o">=</span> <span class="n">iou</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model_sharing</span> <span class="o">=</span> <span class="n">model_sharing</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span> <span class="o">=</span> <span class="n">num_gpus</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_gpu_type</span> <span class="o">=</span> <span class="n">gpu_type</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_parse_result</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
@@ -420,6 +426,8 @@ under the License.
             <span class="n">model_sharing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model_sharing</span><span class="p">,</span>
             <span class="n">dependencies</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;ultralytics&quot;</span><span class="p">,),</span>
             <span class="n">model_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="p">,</span>
+            <span class="n">requested_num_gpus</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span><span class="p">,</span>
+            <span class="n">requested_gpu_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_gpu_type</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span><span class="o">.</span><span class="n">register_operation</span><span class="p">(</span>
             <span class="s2">&quot;detect_objects&quot;</span><span class="p">,</span> <span class="n">_ImageDetection</span><span class="o">.</span><span class="n">_predict_batch</span>
@@ -432,7 +440,7 @@ under the License.
 
     <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_series</span><span class="p">:</span> <span class="s2">&quot;pd.Series&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;pd.Series&quot;</span><span class="p">:</span>
         <span class="c1"># YOLO model inputs are normalized to RGB at the operator boundary;</span>
-        <span class="c1"># native IMAGE itself may carry L/LA/RGBA modes for non-model operators.</span>
+        <span class="c1"># decoded images may carry L/LA/RGBA modes for non-model operators.</span>
         <span class="k">return</span> <span class="n">run_image_batch_inference</span><span class="p">(</span>
             <span class="n">image_series</span><span class="p">,</span>
             <span class="k">lambda</span> <span class="n">image_arrays</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
@@ -442,7 +450,7 @@ under the License.
         <span class="p">)</span>
 
 
-<div class="viewcode-block" id="image_detect_objects"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_detect.image_detect_objects.html#pyflink.multimodal.operators.image_detect.image_detect_objects">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_detect_objects</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;yolov8n&quot;</span><span class="p">,</span> <span class="n">confidence</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+<div class="viewcode-block" id="image_detect_objects"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_detect_objects.html#pyflink.multimodal.operators.image_detect_objects">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_detect_objects</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;yolov8n&quot;</span><span class="p">,</span> <span class="n">confidence</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
                          <span class="n">imgsz</span><span class="o">=</span><span class="mi">640</span><span class="p">,</span> <span class="n">iou</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                          <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                          <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -479,7 +487,6 @@ under the License.
 
 <span class="sd">    Example::</span>
 
-
 <span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
 <span class="sd">        &gt;&gt;&gt; detect = image_detect_objects(model=&quot;yolov8n&quot;, confidence=0.05)</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;objects&quot;, detect(col(&quot;img&quot;)))</span>
@@ -488,8 +495,15 @@ under the License.
 <span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;objects&quot;, image_detect_objects(col(&quot;img&quot;)))</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
-        <span class="n">_ImageDetection</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">confidence</span><span class="o">=</span><span class="n">confidence</span><span class="p">,</span> <span class="n">imgsz</span><span class="o">=</span><span class="n">imgsz</span><span class="p">,</span> <span class="n">iou</span><span class="o">=</span><span class="n">iou</span><span class="p">,</span>
-                        <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">),</span>
+        <span class="n">_ImageDetection</span><span class="p">(</span>
+            <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+            <span class="n">confidence</span><span class="o">=</span><span class="n">confidence</span><span class="p">,</span>
+            <span class="n">imgsz</span><span class="o">=</span><span class="n">imgsz</span><span class="p">,</span>
+            <span class="n">iou</span><span class="o">=</span><span class="n">iou</span><span class="p">,</span>
+            <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">,</span>
+            <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+            <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
+        <span class="p">),</span>
         <span class="n">func_type</span><span class="o">=</span><span class="s2">&quot;pandas&quot;</span><span class="p">,</span>
         <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">list</span><span class="p">(</span>
             <span class="n">DataType</span><span class="o">.</span><span class="n">struct</span><span class="p">(</span>
@@ -517,8 +531,8 @@ under the License.
 <span class="k">class</span><span class="w"> </span><span class="nc">_ImageSegment</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Segment images into indexed masks using FastSAM.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;FastSAM-s.pt&quot;</span><span class="p">,</span> <span class="n">confidence</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">imgsz</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">iou</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-                 <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;FastSAM-x.pt&quot;</span><span class="p">,</span> <span class="n">confidence</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">imgsz</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">iou</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                 <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">confidence</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;confidence must be in [0, 1], got </span><span class="si">{</span><span class="n">confidence</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -533,6 +547,8 @@ under the License.
         <span class="bp">self</span><span class="o">.</span><span class="n">confidence</span> <span class="o">=</span> <span class="n">confidence</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">iou</span> <span class="o">=</span> <span class="n">iou</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model_sharing</span> <span class="o">=</span> <span class="n">model_sharing</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span> <span class="o">=</span> <span class="n">num_gpus</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_gpu_type</span> <span class="o">=</span> <span class="n">gpu_type</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_encode_mask</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
@@ -560,8 +576,8 @@ under the License.
                     <span class="n">mask_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mask_pil</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">127</span>
                 <span class="n">combined</span><span class="p">[</span><span class="n">mask_np</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
         <span class="c1"># Keep the label mask lossless and portable. Returning encoded PNG bytes</span>
-        <span class="c1"># avoids exposing a native IMAGE value that users would still need to encode</span>
-        <span class="c1"># before storing, visualizing, or passing to non-image-struct operators.</span>
+        <span class="c1"># avoids exposing a decoded image value that users would still need to</span>
+        <span class="c1"># encode before storing, visualizing, or passing to non-mask consumers.</span>
         <span class="n">mask_image</span> <span class="o">=</span> <span class="n">pil_image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">combined</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;L&quot;</span><span class="p">)</span>
         <span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">()</span> <span class="k">as</span> <span class="n">buf</span><span class="p">:</span>
             <span class="n">mask_image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;PNG&quot;</span><span class="p">)</span>
@@ -589,6 +605,8 @@ under the License.
             <span class="n">model_sharing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model_sharing</span><span class="p">,</span>
             <span class="n">dependencies</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;ultralytics&quot;</span><span class="p">,),</span>
             <span class="n">model_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="p">,</span>
+            <span class="n">requested_num_gpus</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span><span class="p">,</span>
+            <span class="n">requested_gpu_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_gpu_type</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span><span class="o">.</span><span class="n">register_operation</span><span class="p">(</span>
             <span class="s2">&quot;segment_masks&quot;</span><span class="p">,</span> <span class="n">_ImageSegment</span><span class="o">.</span><span class="n">_predict_batch</span>
@@ -609,7 +627,7 @@ under the License.
         <span class="p">)</span>
 
 
-<div class="viewcode-block" id="image_segment"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_detect.image_segment.html#pyflink.multimodal.operators.image_detect.image_segment">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_segment</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;FastSAM-s.pt&quot;</span><span class="p">,</span> <span class="n">confidence</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">imgsz</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">iou</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+<div class="viewcode-block" id="image_segment"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_segment.html#pyflink.multimodal.operators.image_segment">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_segment</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;FastSAM-x.pt&quot;</span><span class="p">,</span> <span class="n">confidence</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">imgsz</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">iou</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
                   <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                   <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -621,7 +639,7 @@ under the License.
 <span class="sd">    Args:</span>
 <span class="sd">        *columns: Optional image column(s). When provided, the UDF is</span>
 <span class="sd">            applied directly instead of returning a factory.</span>
-<span class="sd">        model: FastSAM model name. Default ``&quot;FastSAM-s.pt&quot;``.</span>
+<span class="sd">        model: FastSAM model name. Default ``&quot;FastSAM-x.pt&quot;``.</span>
 <span class="sd">        confidence: Minimum confidence threshold. Default ``0.05``.</span>
 <span class="sd">        imgsz: Input image size for inference. Default ``1024``.</span>
 <span class="sd">        iou: IoU threshold for NMS. Default ``0.5``.</span>
@@ -642,9 +660,8 @@ under the License.
 
 <span class="sd">    Example::</span>
 
-
 <span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
-<span class="sd">        &gt;&gt;&gt; segment = image_segment(model=&quot;FastSAM-s.pt&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; segment = image_segment(model=&quot;FastSAM-x.pt&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;mask&quot;, segment(col(&quot;img&quot;)))</span>
 <span class="sd">        &gt;&gt;&gt;</span>
 <span class="sd">        &gt;&gt;&gt; # Inline</span>
@@ -654,6 +671,8 @@ under the License.
         <span class="n">_ImageSegment</span><span class="p">(</span>
             <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">confidence</span><span class="o">=</span><span class="n">confidence</span><span class="p">,</span> <span class="n">imgsz</span><span class="o">=</span><span class="n">imgsz</span><span class="p">,</span> <span class="n">iou</span><span class="o">=</span><span class="n">iou</span><span class="p">,</span>
             <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">,</span>
+            <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+            <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="n">func_type</span><span class="o">=</span><span class="s2">&quot;pandas&quot;</span><span class="p">,</span>
         <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">binary</span><span class="p">(),</span>
@@ -671,7 +690,7 @@ under the License.
 <span class="k">class</span><span class="w"> </span><span class="nc">_ImageOCR</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Extract text from a batch of images using EasyOCR.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lang</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lang</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">lang</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">lang</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;en&quot;</span><span class="p">]</span>
@@ -686,6 +705,7 @@ under the License.
             <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lang</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">lang</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span> <span class="o">=</span> <span class="n">num_gpus</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_gpu_type</span> <span class="o">=</span> <span class="n">gpu_type</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model_sharing</span> <span class="o">=</span> <span class="n">model_sharing</span>
 
     <span class="nd">@staticmethod</span>
@@ -711,15 +731,19 @@ under the License.
         <span class="p">]</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_context</span><span class="p">):</span>
-        <span class="c1"># EasyOCR accepts a boolean GPU switch. ``num_gpus`` is still forwarded</span>
-        <span class="c1"># to the UDF runtime as the Flink resource request.</span>
+        <span class="c1"># EasyOCR accepts a boolean GPU switch rather than an explicit device.</span>
+        <span class="c1"># ``num_gpus`` is still forwarded as the Flink resource request, and</span>
+        <span class="c1"># ``gpu_type`` is validated by cache_manager before the model loads.</span>
+        <span class="n">use_gpu</span> <span class="o">=</span> <span class="n">_is_gpu_requested</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span> <span class="o">=</span> <span class="n">prepare_and_load_model_handle</span><span class="p">(</span>
             <span class="n">adapter_cls</span><span class="o">=</span><span class="n">EasyOcrModelAdapter</span><span class="p">,</span>
-            <span class="n">config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;lang&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lang</span><span class="p">),</span> <span class="s2">&quot;gpu&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">},</span>
+            <span class="n">config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;lang&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lang</span><span class="p">),</span> <span class="s2">&quot;gpu&quot;</span><span class="p">:</span> <span class="n">use_gpu</span><span class="p">},</span>
             <span class="n">function_context</span><span class="o">=</span><span class="n">function_context</span><span class="p">,</span>
             <span class="n">model_sharing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model_sharing</span><span class="p">,</span>
             <span class="n">dependencies</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;easyocr&quot;</span><span class="p">,),</span>
             <span class="n">model_id</span><span class="o">=</span><span class="s2">&quot;easyocr&quot;</span><span class="p">,</span>
+            <span class="n">requested_num_gpus</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span><span class="p">,</span>
+            <span class="n">requested_gpu_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_gpu_type</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span><span class="o">.</span><span class="n">register_operation</span><span class="p">(</span>
             <span class="s2">&quot;read_text&quot;</span><span class="p">,</span> <span class="n">_ImageOCR</span><span class="o">.</span><span class="n">_predict_batch</span>
@@ -731,23 +755,26 @@ under the License.
             <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_series</span><span class="p">:</span> <span class="s2">&quot;pd.Series&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;pd.Series&quot;</span><span class="p">:</span>
-        <span class="c1"># EasyOCR expects image-like RGB arrays; normalize supported</span>
-        <span class="c1"># native IMAGE modes before crossing the model boundary.</span>
+        <span class="c1"># EasyOCR expects image-like RGB arrays; normalize supported decoded</span>
+        <span class="c1"># image modes before crossing the model boundary.</span>
         <span class="k">return</span> <span class="n">run_image_batch_inference</span><span class="p">(</span>
             <span class="n">image_series</span><span class="p">,</span>
             <span class="k">lambda</span> <span class="n">image_arrays</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;read_text&quot;</span><span class="p">,</span> <span class="n">image_arrays</span><span class="p">),</span>
         <span class="p">)</span>
 
 
-<div class="viewcode-block" id="image_ocr"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_detect.image_ocr.html#pyflink.multimodal.operators.image_detect.image_ocr">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_ocr</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">lang</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="image_ocr"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_ocr.html#pyflink.multimodal.operators.image_ocr">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_ocr</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">lang</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
               <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create an OCR text extraction UDF (EasyOCR-based).</span>
 
-<span class="sd">    Requires ``pip install easyocr``. This is a pandas batch UDF that</span>
-<span class="sd">    supports GPU acceleration via ``num_gpus`` / ``gpu_type``. EasyOCR</span>
-<span class="sd">    inference currently runs per image so mixed-size batches do not need</span>
-<span class="sd">    padding; ``batch_size`` mainly controls Python/Arrow batching overhead.</span>
+<span class="sd">    Requires ``pip install easyocr``. This is a pandas batch UDF. EasyOCR</span>
+<span class="sd">    accepts only a CPU/GPU boolean switch here: ``num_gpus &gt; 0`` requests a</span>
+<span class="sd">    Flink GPU resource and enables EasyOCR GPU mode, while ``gpu_type`` is</span>
+<span class="sd">    used to validate the assigned Flink GPU label before loading. EasyOCR does</span>
+<span class="sd">    not expose explicit CUDA device placement through this operator. Inference</span>
+<span class="sd">    currently runs per image so mixed-size batches do not need padding;</span>
+<span class="sd">    ``batch_size`` mainly controls Python/Arrow batching overhead.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        *columns: Optional image column(s). When provided, the UDF is</span>
@@ -758,10 +785,12 @@ under the License.
 <span class="sd">            ``None`` uses per-process caching.</span>
 <span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
 <span class="sd">        batch_size: Pandas batch size. ``None`` uses the framework default.</span>
-<span class="sd">        num_gpus: Fractional GPU count per subtask, e.g. ``0.5``. ``None``</span>
-<span class="sd">            runs on CPU.</span>
-<span class="sd">        gpu_type: Required GPU type, e.g. ``&quot;A10&quot;``. ``None`` accepts any</span>
-<span class="sd">            available GPU.</span>
+<span class="sd">        num_gpus: Fractional GPU count per subtask, e.g. ``0.5``. Values</span>
+<span class="sd">            greater than ``0`` enable EasyOCR GPU mode; ``None`` and ``0``</span>
+<span class="sd">            run on CPU.</span>
+<span class="sd">        gpu_type: Required Flink GPU resource label, e.g. ``&quot;A10&quot;``. ``None``</span>
+<span class="sd">            accepts any assigned GPU label. EasyOCR itself receives only the</span>
+<span class="sd">            boolean GPU switch.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        A UDF that returns a list of dicts with ``text``, ``confidence``,</span>
@@ -771,7 +800,6 @@ under the License.
 
 <span class="sd">    Example::</span>
 
-
 <span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
 <span class="sd">        &gt;&gt;&gt; ocr = image_ocr(lang=[&quot;en&quot;, &quot;ch_sim&quot;])</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;text&quot;, ocr(col(&quot;img&quot;)))</span>
@@ -780,7 +808,12 @@ under the License.
 <span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;text&quot;, image_ocr(col(&quot;img&quot;)))</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
-        <span class="n">_ImageOCR</span><span class="p">(</span><span class="n">lang</span><span class="o">=</span><span class="n">lang</span><span class="p">,</span> <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span> <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">),</span>
+        <span class="n">_ImageOCR</span><span class="p">(</span>
+            <span class="n">lang</span><span class="o">=</span><span class="n">lang</span><span class="p">,</span>
+            <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+            <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
+            <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">,</span>
+        <span class="p">),</span>
         <span class="n">func_type</span><span class="o">=</span><span class="s2">&quot;pandas&quot;</span><span class="p">,</span>
         <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">list</span><span class="p">(</span>
             <span class="n">DataType</span><span class="o">.</span><span class="n">struct</span><span class="p">(</span>
@@ -833,6 +866,7 @@ under the License.
         <span class="kn">import</span><span class="w"> </span><span class="nn">cv2</span>
         <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
+        <span class="n">_setup_cv2_threads</span><span class="p">(</span><span class="n">cv2</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cv2</span> <span class="o">=</span> <span class="n">cv2</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_np</span> <span class="o">=</span> <span class="n">np</span>
 
@@ -887,11 +921,11 @@ under the License.
         <span class="k">return</span> <span class="p">(</span><span class="n">is_subplot</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="image_detect_subplot"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_detect.image_detect_subplot.html#pyflink.multimodal.operators.image_detect.image_detect_subplot">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_detect_subplot</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="image_detect_subplot"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_detect_subplot.html#pyflink.multimodal.operators.image_detect_subplot">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_detect_subplot</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create a subplot / mosaic detection UDF (OpenCV Hough-based).</span>
 
-<span class="sd">    Requires ``pip install opencv-python``. This is a scalar UDF.</span>
+<span class="sd">    Requires ``pip install opencv-python-headless``. This is a scalar UDF.</span>
 
 <span class="sd">    Detects whether an image is a composite (mosaic / subplot / screenshot</span>
 <span class="sd">    collage) by looking for strong horizontal/vertical grid lines. Images</span>
@@ -908,11 +942,10 @@ under the License.
 <span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        A UDF that returns a struct with ``is_subplot`` (bool) and</span>
+<span class="sd">        A UDF that returns an object with ``is_subplot`` (bool) and</span>
 <span class="sd">        ``count`` (int).</span>
 
 <span class="sd">    Example::</span>
-
 
 <span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
 <span class="sd">        &gt;&gt;&gt; subplot = image_detect_subplot(threshold=0.5)</span>

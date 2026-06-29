@@ -23,7 +23,7 @@ under the License.
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pyflink.multimodal.operators.image_info &#8212; PyFlink 1.20+vvr.11.7.dev0 documentation</title>
+    <title>pyflink.multimodal.operators.image_info &#8212; PyFlink 11.8.0.preview.2 documentation</title>
   <script>
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
@@ -292,9 +292,9 @@ under the License.
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Image information extraction operators.</span>
 
-<span class="sd">Operators in this module take raw encoded image bytes or decoded native</span>
-<span class="sd">``Image`` values as input and return numeric values, strings, or booleans -</span>
-<span class="sd">they do **not** modify the image.</span>
+<span class="sd">Operators in this module take raw encoded image bytes or decoded ``Image``</span>
+<span class="sd">values as input and return numeric values, strings, or booleans - they do</span>
+<span class="sd">**not** modify the image.</span>
 
 <span class="sd">Without business params (factory function, no args)::</span>
 
@@ -328,6 +328,7 @@ under the License.
 <span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.multimodal.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">_build_or_apply_udf</span><span class="p">,</span> <span class="n">_udf_runtime_kwargs</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.model.cache_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_dependencies</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.model.dependencies</span><span class="w"> </span><span class="kn">import</span> <span class="n">dependency_install_requirement</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
     <span class="c1"># Metadata extraction</span>
@@ -367,7 +368,7 @@ under the License.
     <span class="k">if</span> <span class="n">_pil_open</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
             <span class="s2">&quot;Pillow is required for image operations. &quot;</span>
-            <span class="s2">&quot;Install it with: pip install Pillow&gt;=9.0&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Install it with: pip install </span><span class="si">{</span><span class="n">dependency_install_requirement</span><span class="p">(</span><span class="s1">&#39;PIL&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="p">)</span>
     <span class="c1"># Use the original Pillow opener captured by codec to avoid global</span>
     <span class="c1"># Image.open monkey patches from optional model libraries.</span>
@@ -463,7 +464,7 @@ under the License.
         <span class="k">return</span> <span class="n">pixel_array</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
 
 
-<div class="viewcode-block" id="is_valid_image"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_info.is_valid_image.html#pyflink.multimodal.operators.image_info.is_valid_image">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">is_valid_image</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pixel_limit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="is_valid_image"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.is_valid_image.html#pyflink.multimodal.operators.is_valid_image">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">is_valid_image</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pixel_limit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Check if an image can be decoded by the multimodal image codec.</span>
 
@@ -482,7 +483,6 @@ under the License.
 <span class="sd">        A UDF producing ``boolean``.</span>
 
 <span class="sd">    Example::</span>
-
 <span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
 <span class="sd">        &gt;&gt;&gt; valid = is_valid_image(pixel_limit=4096 * 4096)</span>
 <span class="sd">        &gt;&gt;&gt; df = df.filter(valid(col(&quot;content&quot;)))</span>
@@ -506,11 +506,11 @@ under the License.
 
 <span class="sd">    Raw encoded bytes are inspected through Pillow headers without converting</span>
 <span class="sd">    the full image into an ndarray; ``mode`` is reported as Pillow&#39;s mode</span>
-<span class="sd">    string (e.g. ``&quot;L&quot;``, ``&quot;RGB&quot;``, ``&quot;P&quot;``, ``&quot;I;16&quot;``). For native ``Image``</span>
-<span class="sd">    input, width/height/channels/mode are read from the decoded value -</span>
-<span class="sd">    ``mode`` is the canonical native mode (``&quot;L&quot;``, ``&quot;LA&quot;``, ``&quot;RGB&quot;``,</span>
+<span class="sd">    string (e.g. ``&quot;L&quot;``, ``&quot;RGB&quot;``, ``&quot;P&quot;``, ``&quot;I;16&quot;``). For decoded</span>
+<span class="sd">    ``Image`` input, width/height/channels/mode are read from the value -</span>
+<span class="sd">    ``mode`` is the canonical mode (``&quot;L&quot;``, ``&quot;LA&quot;``, ``&quot;RGB&quot;``,</span>
 <span class="sd">    ``&quot;RGBA&quot;``, ``&quot;L16&quot;``) - and ``format`` is returned as ``&quot;UNKNOWN&quot;`` because</span>
-<span class="sd">    native IMAGE stores decoded pixels, not the original container format.</span>
+<span class="sd">    decoded images store pixels only, not the original container format.</span>
 
 <span class="sd">    Usage::</span>
 
@@ -528,17 +528,17 @@ under the License.
         <span class="k">return</span> <span class="kc">None</span>
 
 
-<div class="viewcode-block" id="image_metadata"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_info.image_metadata.html#pyflink.multimodal.operators.image_info.image_metadata">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_metadata</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="image_metadata"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_metadata.html#pyflink.multimodal.operators.image_metadata">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_metadata</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Extract metadata (width, height, channels, mode, encoded format) from an</span>
 <span class="sd">    image.</span>
 
 <span class="sd">    ``mode`` reports the image&#39;s channel/precision mode: Pillow&#39;s mode string</span>
-<span class="sd">    for raw encoded bytes, or the canonical native mode (``&quot;L&quot;``, ``&quot;LA&quot;``,</span>
-<span class="sd">    ``&quot;RGB&quot;``, ``&quot;RGBA&quot;``, ``&quot;L16&quot;``) for decoded native ``Image`` input.</span>
+<span class="sd">    for raw encoded bytes, or the canonical mode (``&quot;L&quot;``, ``&quot;LA&quot;``,</span>
+<span class="sd">    ``&quot;RGB&quot;``, ``&quot;RGBA&quot;``, ``&quot;L16&quot;``) for decoded ``Image`` input.</span>
 <span class="sd">    ``format`` describes the encoded container for raw bytes. For decoded</span>
-<span class="sd">    native ``Image`` input it is ``&quot;UNKNOWN&quot;`` because the internal pixel</span>
-<span class="sd">    value intentionally does not retain original encoding metadata. Apply</span>
+<span class="sd">    ``Image`` input it is ``&quot;UNKNOWN&quot;`` because the internal pixel value</span>
+<span class="sd">    intentionally does not retain original encoding metadata. Apply</span>
 <span class="sd">    format filters to raw encoded bytes before ``image_decode`` when the</span>
 <span class="sd">    original container format matters.</span>
 
@@ -548,11 +548,10 @@ under the License.
 <span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        A UDF producing a struct with ``width``, ``height``, ``channels``,</span>
+<span class="sd">        A UDF producing an object with ``width``, ``height``, ``channels``,</span>
 <span class="sd">        ``mode``, and ``format`` fields.</span>
 
 <span class="sd">    Example::</span>
-
 <span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
 <span class="sd">        &gt;&gt;&gt; metadata = image_metadata()</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_columns(&quot;meta&quot;, metadata(col(&quot;img&quot;)))</span>
@@ -599,7 +598,7 @@ under the License.
         <span class="p">)</span>
 
 
-<div class="viewcode-block" id="image_aspect_ratio"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_info.image_aspect_ratio.html#pyflink.multimodal.operators.image_info.image_aspect_ratio">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_aspect_ratio</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="image_aspect_ratio"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_aspect_ratio.html#pyflink.multimodal.operators.image_aspect_ratio">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_aspect_ratio</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute the aspect ratio (width / height) of an image.</span>
 
@@ -612,7 +611,6 @@ under the License.
 <span class="sd">        A UDF producing ``float64``.</span>
 
 <span class="sd">    Example::</span>
-
 <span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
 <span class="sd">        &gt;&gt;&gt; aspect_ratio = image_aspect_ratio()</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_columns(&quot;ratio&quot;, aspect_ratio(col(&quot;img&quot;)))</span>
@@ -685,7 +683,7 @@ under the License.
         <span class="k">return</span> <span class="n">_laplacian_variance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_np</span><span class="p">,</span> <span class="n">pixel_array</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="image_sharpness"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_info.image_sharpness.html#pyflink.multimodal.operators.image_info.image_sharpness">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_sharpness</span><span class="p">(</span>
+<div class="viewcode-block" id="image_sharpness"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_sharpness.html#pyflink.multimodal.operators.image_sharpness">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_sharpness</span><span class="p">(</span>
     <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
     <span class="n">max_edge</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">allow_upscale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -711,7 +709,6 @@ under the License.
 <span class="sd">        A UDF producing ``float64``.</span>
 
 <span class="sd">    Example::</span>
-
 <span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
 <span class="sd">        &gt;&gt;&gt; sharpness = image_sharpness(max_edge=512)</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_columns(&quot;sharpness&quot;, sharpness(col(&quot;img&quot;)))</span>
@@ -768,7 +765,7 @@ under the License.
             <span class="n">pil_image</span> <span class="o">=</span> <span class="n">image_array_to_pil</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
             <span class="c1"># Perceptual hash libraries operate on 8-bit PIL images; high</span>
-            <span class="c1"># precision native IMAGE input must be normalized here.</span>
+            <span class="c1"># precision decoded image input must be normalized here.</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">pil_image</span> <span class="o">=</span> <span class="n">image_array_to_pil</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;RGB&quot;</span><span class="p">)</span>
             <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
@@ -776,7 +773,7 @@ under the License.
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_hash_funcs</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">method</span><span class="p">](</span><span class="n">pil_image</span><span class="p">))</span>
 
 
-<div class="viewcode-block" id="image_hash"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_info.image_hash.html#pyflink.multimodal.operators.image_info.image_hash">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_hash</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;phash&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="image_hash"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_hash.html#pyflink.multimodal.operators.image_hash">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_hash</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;phash&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute a perceptual hash of an image.</span>
 
@@ -791,7 +788,6 @@ under the License.
 <span class="sd">        A UDF producing ``string``.</span>
 
 <span class="sd">    Example::</span>
-
 <span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
 <span class="sd">        &gt;&gt;&gt; hasher = image_hash(method=&quot;phash&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_columns(&quot;hash&quot;, hasher(col(&quot;img&quot;)))</span>
@@ -852,12 +848,12 @@ under the License.
         <span class="p">)</span>
 
 
-<div class="viewcode-block" id="image_size_filter"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_info.image_size_filter.html#pyflink.multimodal.operators.image_info.image_size_filter">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_size_filter</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">min_w</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">min_h</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_w</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_h</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="image_size_filter"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_size_filter.html#pyflink.multimodal.operators.image_size_filter">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_size_filter</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">min_w</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">min_h</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_w</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_h</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                       <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Filter images by pixel dimensions.</span>
 
-<span class="sd">    Accepts both raw encoded image bytes and decoded native ``Image`` values.</span>
+<span class="sd">    Accepts both raw encoded image bytes and decoded ``Image`` values.</span>
 <span class="sd">    For raw bytes, dimensions are read from image headers when possible, so</span>
 <span class="sd">    normal JPEG/PNG inputs do not need a full decode. At least one dimension</span>
 <span class="sd">    bound must be configured.</span>
@@ -875,7 +871,6 @@ under the License.
 <span class="sd">        A UDF producing ``boolean``.</span>
 
 <span class="sd">    Example::</span>
-
 <span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
 <span class="sd">        &gt;&gt;&gt; size_filter = image_size_filter(min_w=100, max_w=4096)</span>
 <span class="sd">        &gt;&gt;&gt; df = df.filter(size_filter(col(&quot;img&quot;)))</span>
@@ -935,7 +930,7 @@ under the License.
         <span class="k">return</span> <span class="n">_within_optional_bounds</span><span class="p">(</span><span class="n">ratio</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_ratio</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_ratio</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="image_shape_filter"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_info.image_shape_filter.html#pyflink.multimodal.operators.image_info.image_shape_filter">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_shape_filter</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">min_ratio</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_ratio</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="image_shape_filter"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_shape_filter.html#pyflink.multimodal.operators.image_shape_filter">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_shape_filter</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">min_ratio</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_ratio</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Filter images by aspect ratio (width / height).</span>
 
@@ -952,7 +947,6 @@ under the License.
 <span class="sd">        A UDF producing ``boolean``.</span>
 
 <span class="sd">    Example::</span>
-
 <span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
 <span class="sd">        &gt;&gt;&gt; shape_filter = image_shape_filter(min_ratio=0.5, max_ratio=2.0)</span>
 <span class="sd">        &gt;&gt;&gt; df = df.filter(shape_filter(col(&quot;img&quot;)))</span>
@@ -1007,7 +1001,7 @@ under the License.
         <span class="k">return</span> <span class="n">_within_optional_bounds</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_bytes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_bytes</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="image_file_size_filter"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_info.image_file_size_filter.html#pyflink.multimodal.operators.image_info.image_file_size_filter">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_file_size_filter</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">min_bytes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_bytes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="image_file_size_filter"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_file_size_filter.html#pyflink.multimodal.operators.image_file_size_filter">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_file_size_filter</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">min_bytes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_bytes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                            <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Filter images by encoded file size in bytes.</span>
@@ -1027,7 +1021,6 @@ under the License.
 <span class="sd">        A UDF producing ``boolean``.</span>
 
 <span class="sd">    Example::</span>
-
 <span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
 <span class="sd">        &gt;&gt;&gt; file_size_filter = image_file_size_filter(min_bytes=1024, max_bytes=5*1024*1024)</span>
 <span class="sd">        &gt;&gt;&gt; df = df.filter(file_size_filter(col(&quot;img&quot;)))</span>

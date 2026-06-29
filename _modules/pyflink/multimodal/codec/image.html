@@ -1,0 +1,1025 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyflink.multimodal.codec.image &#8212; PyFlink 11.8.0.preview.2 documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyflink/multimodal/codec/image';</script>
+    <link rel="shortcut icon" href="../../../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../../../search.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="Logo image">
+    <img src="../../../../_static/navbar-brand-logo.jpg" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <h1>Source code for pyflink.multimodal.codec.image</h1><div class="highlight"><pre>
+<span></span><span class="c1">################################################################################</span>
+<span class="c1">#  Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="c1">#  or more contributor license agreements.  See the NOTICE file</span>
+<span class="c1">#  distributed with this work for additional information</span>
+<span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
+<span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
+<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  with the License.  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">################################################################################</span>
+<span class="sd">&quot;&quot;&quot;Native IMAGE encode/decode conversion helpers for multimodal operators.&quot;&quot;&quot;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">io</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common.image</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageMode</span><span class="p">,</span> <span class="n">validate_image</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.model.dependencies</span><span class="w"> </span><span class="kn">import</span> <span class="n">dependency_install_requirement</span>
+
+<span class="c1"># Save the original PIL.Image.open before any third-party monkey-patches</span>
+<span class="c1"># (e.g. ultralytics patches Image.open to add HEIF support, which raises</span>
+<span class="c1"># ModuleNotFoundError on corrupt input).</span>
+<span class="c1"># Graceful fallback: module remains importable without Pillow; functions</span>
+<span class="c1"># that need PIL will fail at call time with a clear error.</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span> <span class="k">as</span> <span class="n">_PILImage</span>
+    <span class="n">_pil_open</span> <span class="o">=</span> <span class="n">_PILImage</span><span class="o">.</span><span class="n">open</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">_PILImage</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">_pil_open</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># Pillow warns or rejects very large images to protect users from decompression</span>
+<span class="c1"># bombs. Keep an explicit upper bound for decode safety while allowing common</span>
+<span class="c1"># high-resolution images; this is about 1.6 GB for RGB uint8 payloads.</span>
+<span class="n">_MAX_IMAGE_PIXELS</span> <span class="o">=</span> <span class="mi">178_956_970</span>
+
+<span class="k">if</span> <span class="n">_PILImage</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">_PILImage</span><span class="o">.</span><span class="n">MAX_IMAGE_PIXELS</span> <span class="o">=</span> <span class="n">_MAX_IMAGE_PIXELS</span>
+
+<span class="n">_logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_ImageModeSpec</span><span class="p">:</span>
+    <span class="n">dtype</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span>
+    <span class="n">channels</span><span class="p">:</span> <span class="nb">int</span>
+
+
+<span class="n">_IMAGE_MODE_SPECS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;L&quot;</span><span class="p">:</span> <span class="n">_ImageModeSpec</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">),</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s2">&quot;LA&quot;</span><span class="p">:</span> <span class="n">_ImageModeSpec</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="s2">&quot;RGB&quot;</span><span class="p">:</span> <span class="n">_ImageModeSpec</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">),</span> <span class="mi">3</span><span class="p">),</span>
+    <span class="s2">&quot;RGBA&quot;</span><span class="p">:</span> <span class="n">_ImageModeSpec</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">),</span> <span class="mi">4</span><span class="p">),</span>
+    <span class="s2">&quot;L16&quot;</span><span class="p">:</span> <span class="n">_ImageModeSpec</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint16</span><span class="p">),</span> <span class="mi">1</span><span class="p">),</span>
+<span class="p">}</span>
+<span class="n">_IMAGE_MODE_CHANNELS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="n">spec</span><span class="o">.</span><span class="n">channels</span> <span class="k">for</span> <span class="n">mode</span><span class="p">,</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">_IMAGE_MODE_SPECS</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="n">_IMAGE_MODE_DTYPES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="n">spec</span><span class="o">.</span><span class="n">dtype</span> <span class="k">for</span> <span class="n">mode</span><span class="p">,</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">_IMAGE_MODE_SPECS</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="n">_NATIVE_IMAGE_MODES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;L&quot;</span><span class="p">:</span> <span class="n">ImageMode</span><span class="o">.</span><span class="n">L</span><span class="p">,</span>
+    <span class="s2">&quot;LA&quot;</span><span class="p">:</span> <span class="n">ImageMode</span><span class="o">.</span><span class="n">LA</span><span class="p">,</span>
+    <span class="s2">&quot;RGB&quot;</span><span class="p">:</span> <span class="n">ImageMode</span><span class="o">.</span><span class="n">RGB</span><span class="p">,</span>
+    <span class="s2">&quot;RGBA&quot;</span><span class="p">:</span> <span class="n">ImageMode</span><span class="o">.</span><span class="n">RGBA</span><span class="p">,</span>
+    <span class="s2">&quot;L16&quot;</span><span class="p">:</span> <span class="n">ImageMode</span><span class="o">.</span><span class="n">L16</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">_PIL_NATIVE_MODES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;L&quot;</span><span class="p">,</span> <span class="s2">&quot;LA&quot;</span><span class="p">,</span> <span class="s2">&quot;RGB&quot;</span><span class="p">,</span> <span class="s2">&quot;RGBA&quot;</span><span class="p">}</span>
+<span class="n">_PIL_16BIT_MODES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;I;16&quot;</span><span class="p">,</span> <span class="s2">&quot;I;16L&quot;</span><span class="p">,</span> <span class="s2">&quot;I;16B&quot;</span><span class="p">}</span>
+<span class="n">_UINT8_MODES_BY_CHANNELS</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;L&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;LA&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s2">&quot;RGB&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="s2">&quot;RGBA&quot;</span><span class="p">}</span>
+<span class="n">_UINT16_MODES_BY_CHANNELS</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;L16&quot;</span><span class="p">}</span>
+
+<span class="n">DEFAULT_IMAGE_ENCODE_QUALITY</span> <span class="o">=</span> <span class="mi">85</span>
+<span class="n">SUPPORTED_IMAGE_FORMATS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;JPEG&quot;</span><span class="p">,</span> <span class="s2">&quot;PNG&quot;</span><span class="p">,</span> <span class="s2">&quot;TIFF&quot;</span><span class="p">,</span> <span class="s2">&quot;WEBP&quot;</span><span class="p">,</span> <span class="s2">&quot;BMP&quot;</span><span class="p">,</span> <span class="s2">&quot;GIF&quot;</span><span class="p">}</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_normalize_image_mode</span><span class="p">(</span><span class="n">mode</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;mode must be a string, got </span><span class="si">{</span><span class="n">mode</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">normalized</span> <span class="o">=</span> <span class="n">mode</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">normalized</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_IMAGE_MODE_SPECS</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Unsupported decoded image mode </span><span class="si">{</span><span class="n">mode</span><span class="si">!r}</span><span class="s2">; expected one of &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">_IMAGE_MODE_SPECS</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">normalized</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">image_mode_dtype</span><span class="p">(</span><span class="n">mode</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the numpy dtype used by a native IMAGE mode.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_IMAGE_MODE_DTYPES</span><span class="p">[</span><span class="n">_normalize_image_mode</span><span class="p">(</span><span class="n">mode</span><span class="p">)]</span>
+
+
+<div class="viewcode-block" id="image_mode_channels"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.codec.image_mode_channels.html#pyflink.multimodal.codec.image_mode_channels">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_mode_channels</span><span class="p">(</span><span class="n">mode</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the channel count used by a native IMAGE mode.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_IMAGE_MODE_CHANNELS</span><span class="p">[</span><span class="n">_normalize_image_mode</span><span class="p">(</span><span class="n">mode</span><span class="p">)]</span></div>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_image_mode_spec</span><span class="p">(</span><span class="n">mode</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">_IMAGE_MODE_SPECS</span><span class="p">[</span><span class="n">_normalize_image_mode</span><span class="p">(</span><span class="n">mode</span><span class="p">)]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_infer_image_mode</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">):</span>
+    <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">pixel_array</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">pixel_array</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">channels</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">pixel_array</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">channels</span> <span class="o">=</span> <span class="n">pixel_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Expected a 2-D or 3-D image array, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;got </span><span class="si">{</span><span class="n">pixel_array</span><span class="o">.</span><span class="n">ndim</span><span class="si">}</span><span class="s2">-D&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">):</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="n">_UINT8_MODES_BY_CHANNELS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">channels</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint16</span><span class="p">):</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="n">_UINT16_MODES_BY_CHANNELS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">channels</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Unsupported native IMAGE dtype/channel combination: &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;dtype=</span><span class="si">{</span><span class="n">pixel_array</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s2">, channels=</span><span class="si">{</span><span class="n">channels</span><span class="si">}</span><span class="s2">. &quot;</span>
+            <span class="s2">&quot;Supported native modes are L, LA, RGB, RGBA, and L16.&quot;</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">mode</span><span class="p">,</span> <span class="n">channels</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_ensure_channel_axis</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">pixel_array</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pixel_array</span><span class="p">[:,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">pixel_array</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_normalize_native_image_mode</span><span class="p">(</span><span class="n">mode</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">ImageMode</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">mode</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">normalized</span> <span class="o">=</span> <span class="n">_normalize_image_mode</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">_NATIVE_IMAGE_MODES</span><span class="p">[</span><span class="n">normalized</span><span class="p">]</span>
+    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+        <span class="s2">&quot;Image mode must be an ImageMode or canonical mode string, got </span><span class="si">%s</span><span class="s2">&quot;</span>
+        <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_native_mode_name</span><span class="p">(</span><span class="n">mode</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">ImageMode</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">mode</span><span class="o">.</span><span class="n">canonical_name</span>
+    <span class="k">return</span> <span class="n">_normalize_image_mode</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_ensure_native_image_array</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">):</span>
+    <span class="n">pixel_array</span> <span class="o">=</span> <span class="n">_ensure_channel_axis</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">pixel_array</span><span class="o">.</span><span class="n">flags</span><span class="p">[</span><span class="s2">&quot;C_CONTIGUOUS&quot;</span><span class="p">]:</span>
+        <span class="n">pixel_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pixel_array</span>
+
+
+<div class="viewcode-block" id="image_to_ndarray"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.codec.image_to_ndarray.html#pyflink.multimodal.codec.image_to_ndarray">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_to_ndarray</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a native :class:`Image` to an ndarray for operator internals.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">image</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">validate_image</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="n">pixel_array</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">data</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">target_mode</span> <span class="o">=</span> <span class="n">_native_mode_name</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">canonical_name</span> <span class="o">!=</span> <span class="n">target_mode</span><span class="p">:</span>
+            <span class="n">pixel_array</span> <span class="o">=</span> <span class="n">convert_image_array_to_mode</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">,</span> <span class="n">target_mode</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">pixel_array</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">pixel_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pixel_array</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">pixel_array</span></div>
+
+
+<div class="viewcode-block" id="ndarray_to_image"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.codec.ndarray_to_image.html#pyflink.multimodal.codec.ndarray_to_image">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">ndarray_to_image</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert an ndarray to a native :class:`Image`.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">pixel_array</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">target_mode</span> <span class="o">=</span> <span class="n">_native_mode_name</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span>
+        <span class="n">pixel_array</span> <span class="o">=</span> <span class="n">convert_image_array_to_mode</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">,</span> <span class="n">target_mode</span><span class="p">)</span>
+        <span class="n">native_mode</span> <span class="o">=</span> <span class="n">_normalize_native_image_mode</span><span class="p">(</span><span class="n">target_mode</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">inferred_mode</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">_infer_image_mode</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">)</span>
+        <span class="n">native_mode</span> <span class="o">=</span> <span class="n">_normalize_native_image_mode</span><span class="p">(</span><span class="n">inferred_mode</span><span class="p">)</span>
+    <span class="n">normalized</span> <span class="o">=</span> <span class="n">_ensure_native_image_array</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Image</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">normalized</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">native_mode</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="pil_to_image"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.codec.pil_to_image.html#pyflink.multimodal.codec.pil_to_image">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">pil_to_image</span><span class="p">(</span><span class="n">pil_image</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a PIL image to a native :class:`Image`.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">_PILImage</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+            <span class="s2">&quot;Pillow is required for image operations. &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Install it with: pip install </span><span class="si">{</span><span class="n">dependency_install_requirement</span><span class="p">(</span><span class="s1">&#39;PIL&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+    <span class="n">normalized_mode</span> <span class="o">=</span> <span class="n">_native_mode_name</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span> <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="n">pixel_array</span> <span class="o">=</span> <span class="n">_canonicalize_decoded_pil_image</span><span class="p">(</span><span class="n">pil_image</span><span class="p">,</span> <span class="n">normalized_mode</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ndarray_to_image</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">)</span></div>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_convert_dtype</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">,</span> <span class="n">target_dtype</span><span class="p">):</span>
+    <span class="n">target_dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">target_dtype</span><span class="p">)</span>
+    <span class="n">source_dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">pixel_array</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">source_dtype</span> <span class="o">==</span> <span class="n">target_dtype</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pixel_array</span>
+    <span class="k">if</span> <span class="n">target_dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">source_dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint16</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">pixel_array</span> <span class="o">/</span> <span class="mi">257</span><span class="p">)</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">source_dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">integer</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">pixel_array</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">source_dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">):</span>
+            <span class="n">max_value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">)</span> <span class="k">if</span> <span class="n">pixel_array</span><span class="o">.</span><span class="n">size</span> <span class="k">else</span> <span class="mf">1.0</span>
+            <span class="n">scale</span> <span class="o">=</span> <span class="mf">255.0</span> <span class="k">if</span> <span class="n">max_value</span> <span class="o">&lt;=</span> <span class="mf">1.0</span> <span class="k">else</span> <span class="mf">1.0</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">pixel_array</span> <span class="o">*</span> <span class="n">scale</span><span class="p">)</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">target_dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint16</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">source_dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">pixel_array</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint16</span><span class="p">)</span> <span class="o">*</span> <span class="mi">257</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">source_dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">integer</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">pixel_array</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">65535</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint16</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">source_dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">):</span>
+            <span class="n">max_value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">)</span> <span class="k">if</span> <span class="n">pixel_array</span><span class="o">.</span><span class="n">size</span> <span class="k">else</span> <span class="mf">1.0</span>
+            <span class="n">scale</span> <span class="o">=</span> <span class="mf">65535.0</span> <span class="k">if</span> <span class="n">max_value</span> <span class="o">&lt;=</span> <span class="mf">1.0</span> <span class="k">else</span> <span class="mf">1.0</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">pixel_array</span> <span class="o">*</span> <span class="n">scale</span><span class="p">)</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">65535</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint16</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">target_dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">source_dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">pixel_array</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="o">/</span> <span class="mf">255.0</span>
+        <span class="k">if</span> <span class="n">source_dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint16</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">pixel_array</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="o">/</span> <span class="mf">65535.0</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">source_dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">integer</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">pixel_array</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported dtype conversion: </span><span class="si">{</span><span class="n">source_dtype</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">target_dtype</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_convert_channels</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">,</span> <span class="n">target_channels</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">target_channels</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported target channel count: </span><span class="si">{</span><span class="n">target_channels</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">pixel_array</span><span class="o">.</span><span class="n">ndim</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Expected a 2-D or 3-D image array, got </span><span class="si">{</span><span class="n">pixel_array</span><span class="o">.</span><span class="n">ndim</span><span class="si">}</span><span class="s2">-D&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">src</span> <span class="o">=</span> <span class="n">_ensure_channel_axis</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">)</span>
+    <span class="n">source_channels</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">source_channels</span> <span class="o">==</span> <span class="n">target_channels</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pixel_array</span> <span class="k">if</span> <span class="n">target_channels</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">src</span>
+
+    <span class="n">max_alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">src</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span> \
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">integer</span><span class="p">)</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">src</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">source_channels</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">luminance</span> <span class="o">=</span> <span class="n">src</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">luminance</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">max_alpha</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">src</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">source_channels</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">luminance</span> <span class="o">=</span> <span class="n">src</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="n">src</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">source_channels</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+        <span class="n">rgb</span> <span class="o">=</span> <span class="n">src</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="n">luminance</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="mf">0.299</span> <span class="o">*</span> <span class="n">rgb</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+            <span class="o">+</span> <span class="mf">0.587</span> <span class="o">*</span> <span class="n">rgb</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="o">+</span> <span class="mf">0.114</span> <span class="o">*</span> <span class="n">rgb</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="n">src</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">3</span><span class="p">]</span> <span class="k">if</span> <span class="n">source_channels</span> <span class="o">==</span> <span class="mi">4</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span>
+            <span class="n">luminance</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">max_alpha</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">src</span><span class="o">.</span><span class="n">dtype</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported source channel count: </span><span class="si">{</span><span class="n">source_channels</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">target_channels</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">luminance</span>
+    <span class="k">if</span> <span class="n">target_channels</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">luminance</span><span class="p">,</span> <span class="n">alpha</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">source_channels</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">rgb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">source_channels</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">rgb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">src</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:</span><span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">rgb</span> <span class="o">=</span> <span class="n">src</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">target_channels</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">rgb</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">rgb</span><span class="p">,</span> <span class="n">alpha</span><span class="p">[:,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="convert_image_array_to_mode"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.codec.convert_image_array_to_mode.html#pyflink.multimodal.codec.convert_image_array_to_mode">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">convert_image_array_to_mode</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">,</span> <span class="n">mode</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert an image ndarray to a canonical native IMAGE mode.&quot;&quot;&quot;</span>
+    <span class="n">spec</span> <span class="o">=</span> <span class="n">_image_mode_spec</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span>
+    <span class="n">converted</span> <span class="o">=</span> <span class="n">_convert_channels</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">,</span> <span class="n">spec</span><span class="o">.</span><span class="n">channels</span><span class="p">)</span>
+    <span class="n">converted</span> <span class="o">=</span> <span class="n">_convert_dtype</span><span class="p">(</span><span class="n">converted</span><span class="p">,</span> <span class="n">spec</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">spec</span><span class="o">.</span><span class="n">channels</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">converted</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">converted</span> <span class="o">=</span> <span class="n">converted</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">converted</span></div>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_canonicalize_decoded_pil_image</span><span class="p">(</span><span class="n">pil_image</span><span class="p">,</span> <span class="n">mode</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">pil_image</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;P&quot;</span><span class="p">:</span>
+        <span class="n">pil_image</span> <span class="o">=</span> <span class="n">pil_image</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span>
+            <span class="s2">&quot;RGBA&quot;</span> <span class="k">if</span> <span class="n">pil_image</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;transparency&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">&quot;RGB&quot;</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">normalized_mode</span> <span class="o">=</span> <span class="n">_normalize_image_mode</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span>
+        <span class="n">pixel_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">pil_image</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">pixel_array</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">byteorder</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;&quot;</span><span class="p">):</span>
+            <span class="n">pixel_array</span> <span class="o">=</span> <span class="n">pixel_array</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span>
+                <span class="n">pixel_array</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">newbyteorder</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">),</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">convert_image_array_to_mode</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">,</span> <span class="n">normalized_mode</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">pil_image</span><span class="o">.</span><span class="n">mode</span> <span class="ow">in</span> <span class="n">_PIL_NATIVE_MODES</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">pil_image</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">pil_image</span><span class="o">.</span><span class="n">mode</span> <span class="ow">in</span> <span class="n">_PIL_16BIT_MODES</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">pil_image</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint16</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">pixel_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">pil_image</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">pixel_array</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">byteorder</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;&quot;</span><span class="p">):</span>
+        <span class="n">pixel_array</span> <span class="o">=</span> <span class="n">pixel_array</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">pixel_array</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">newbyteorder</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">),</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">_infer_image_mode</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pixel_array</span>
+
+
+<div class="viewcode-block" id="image_array_to_pil"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.codec.image_array_to_pil.html#pyflink.multimodal.codec.image_array_to_pil">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_array_to_pil</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert ndarray pixels to a PIL Image, converting mode only when requested.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">_PILImage</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+            <span class="s2">&quot;Pillow is required for image operations. &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Install it with: pip install </span><span class="si">{</span><span class="n">dependency_install_requirement</span><span class="p">(</span><span class="s1">&#39;PIL&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">pixel_array</span> <span class="o">=</span> <span class="n">convert_image_array_to_mode</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+    <span class="n">inferred_mode</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">_infer_image_mode</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">inferred_mode</span> <span class="o">==</span> <span class="s2">&quot;L16&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_PILImage</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">inferred_mode</span> <span class="ow">in</span> <span class="n">_PIL_NATIVE_MODES</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_PILImage</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Pillow cannot represent native IMAGE mode </span><span class="si">{</span><span class="n">inferred_mode</span><span class="si">!r}</span><span class="s2"> without &quot;</span>
+        <span class="s2">&quot;an explicit mode conversion&quot;</span>
+    <span class="p">)</span></div>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_pil_fallback_mode_for_array</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">):</span>
+    <span class="n">channels</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">pixel_array</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">pixel_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;L&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;LA&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s2">&quot;RGB&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="s2">&quot;RGBA&quot;</span><span class="p">}[</span><span class="n">channels</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="image_array_to_pil_compatible"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.codec.image_array_to_pil_compatible.html#pyflink.multimodal.codec.image_array_to_pil_compatible">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_array_to_pil_compatible</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert ndarray pixels to a PIL Image, normalizing only when required.</span>
+
+<span class="sd">    Pillow cannot operate directly on high-precision multichannel arrays.</span>
+<span class="sd">    This helper preserves natively supported modes and falls back to the</span>
+<span class="sd">    uint8 mode with the same channel count for PIL-only transforms.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">image_array_to_pil</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">image_array_to_pil</span><span class="p">(</span>
+            <span class="n">pixel_array</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">_pil_fallback_mode_for_array</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">)</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="normalize_image_format"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.codec.normalize_image_format.html#pyflink.multimodal.codec.normalize_image_format">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">normalize_image_format</span><span class="p">(</span><span class="n">image_format</span><span class="p">,</span> <span class="n">param_name</span><span class="o">=</span><span class="s2">&quot;image_format&quot;</span><span class="p">,</span> <span class="n">allow_none</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Normalize and validate an encoded image format name.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">image_format</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">allow_none</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image_format</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">param_name</span><span class="si">}</span><span class="s2"> must be a string&quot;</span><span class="p">)</span>
+    <span class="n">normalized</span> <span class="o">=</span> <span class="n">image_format</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">normalized</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SUPPORTED_IMAGE_FORMATS</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">param_name</span><span class="si">}</span><span class="s2"> must be one of </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">SUPPORTED_IMAGE_FORMATS</span><span class="p">)</span><span class="si">}</span><span class="s2">, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;got </span><span class="si">{</span><span class="n">image_format</span><span class="si">!r}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">normalized</span></div>
+
+
+<div class="viewcode-block" id="validate_image_quality"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.codec.validate_image_quality.html#pyflink.multimodal.codec.validate_image_quality">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">validate_image_quality</span><span class="p">(</span><span class="n">quality</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate JPEG/WebP encode quality.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">quality</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="n">quality</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">quality</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;quality must be an integer in [1, 100], got </span><span class="si">{</span><span class="n">quality</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">quality</span></div>
+
+
+<span class="c1"># Image decode helpers</span>
+
+<span class="c1"># Data-level exceptions from PIL / cv2 that indicate corrupt input.</span>
+<span class="c1"># Kept narrow to avoid masking real bugs (e.g. ImportError from a missing</span>
+<span class="c1"># module). PIL raises OSError for truncated/missing files, ValueError for</span>
+<span class="c1"># invalid headers, and SyntaxError (via PngImagePlugin.FormatError) for</span>
+<span class="c1"># corrupt PNG chunks.</span>
+<span class="n">_PIL_IMAGE_ERRORS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="n">_PILImage</span><span class="o">.</span><span class="n">DecompressionBombError</span><span class="p">,)</span> <span class="k">if</span> <span class="n">_PILImage</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">()</span>
+<span class="p">)</span>
+<span class="n">_IMAGE_DATA_ERRORS</span> <span class="o">=</span> <span class="p">(</span><span class="ne">OSError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">,</span> <span class="ne">SyntaxError</span><span class="p">)</span> <span class="o">+</span> <span class="n">_PIL_IMAGE_ERRORS</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_read_image_dimensions</span><span class="p">(</span><span class="n">image_bytes</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Read image dimensions from file header without decoding.</span>
+
+<span class="sd">    Parses JPEG (SOF0/SOF2), PNG (IHDR), WebP (VP8/VP8L), BMP, and GIF</span>
+<span class="sd">    headers to extract width and height.  Returns ``(width, height)`` on</span>
+<span class="sd">    success, or ``(None, None)`` if the format is unrecognized or the</span>
+<span class="sd">    header is too short to parse.</span>
+
+<span class="sd">    This is a zero-allocation, zero-decode operation - safe to call on</span>
+<span class="sd">    every image before PIL decoding as a memory-bomb guard.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">image_bytes</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_bytes</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+    <span class="c1"># JPEG: scan for SOF0 (0xFFC0) or SOF2 (0xFFC2) marker</span>
+    <span class="k">if</span> <span class="n">image_bytes</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\xff\xd8</span><span class="s1">&#39;</span><span class="p">:</span>
+        <span class="c1"># Scan markers; each marker is 0xFF + non-zero type byte.</span>
+        <span class="c1"># SOF markers contain height (2B) and width (2B) at offset 5-8</span>
+        <span class="c1"># within the marker payload.</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">9</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_bytes</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">image_bytes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="mh">0xFF</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="n">marker</span> <span class="o">=</span> <span class="n">image_bytes</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="c1"># Skip padding 0xFF bytes</span>
+            <span class="k">if</span> <span class="n">marker</span> <span class="o">==</span> <span class="mh">0xFF</span><span class="p">:</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">continue</span>
+            <span class="c1"># Standalone markers (no payload): RST0-RST7, SOI, EOI, TEM</span>
+            <span class="k">if</span> <span class="n">marker</span> <span class="o">==</span> <span class="mh">0xD8</span> <span class="ow">or</span> <span class="n">marker</span> <span class="o">==</span> <span class="mh">0xD9</span> <span class="ow">or</span> <span class="n">marker</span> <span class="o">==</span> <span class="mh">0x01</span><span class="p">:</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">2</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="mh">0xD0</span> <span class="o">&lt;=</span> <span class="n">marker</span> <span class="o">&lt;=</span> <span class="mh">0xD7</span><span class="p">:</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">2</span>
+                <span class="k">continue</span>
+            <span class="c1"># SOS marker - image data follows, stop scanning</span>
+            <span class="k">if</span> <span class="n">marker</span> <span class="o">==</span> <span class="mh">0xDA</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="c1"># Read marker payload length (big-endian uint16, includes itself)</span>
+            <span class="n">seg_len</span> <span class="o">=</span> <span class="p">(</span><span class="n">image_bytes</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">|</span> <span class="n">image_bytes</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">3</span><span class="p">]</span>
+            <span class="c1"># SOF0, SOF1, SOF2 (progressive): height at offset +5, width at +7</span>
+            <span class="k">if</span> <span class="n">marker</span> <span class="ow">in</span> <span class="p">(</span><span class="mh">0xC0</span><span class="p">,</span> <span class="mh">0xC1</span><span class="p">,</span> <span class="mh">0xC2</span><span class="p">):</span>
+                <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">image_bytes</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">5</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">|</span> <span class="n">image_bytes</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">6</span><span class="p">]</span>
+                <span class="n">w</span> <span class="o">=</span> <span class="p">(</span><span class="n">image_bytes</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">7</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">|</span> <span class="n">image_bytes</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">8</span><span class="p">]</span>
+                <span class="k">return</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">seg_len</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+    <span class="c1"># PNG: IHDR chunk at offset 16</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_bytes</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">24</span> <span class="ow">and</span> <span class="n">image_bytes</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x89</span><span class="s1">PNG&#39;</span><span class="p">:</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">image_bytes</span><span class="p">[</span><span class="mi">16</span><span class="p">:</span><span class="mi">20</span><span class="p">],</span> <span class="s1">&#39;big&#39;</span><span class="p">)</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">image_bytes</span><span class="p">[</span><span class="mi">20</span><span class="p">:</span><span class="mi">24</span><span class="p">],</span> <span class="s1">&#39;big&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span>
+
+    <span class="c1"># WebP</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_bytes</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">30</span> <span class="ow">and</span> <span class="n">image_bytes</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;RIFF&#39;</span> <span class="ow">and</span> <span class="n">image_bytes</span><span class="p">[</span><span class="mi">8</span><span class="p">:</span><span class="mi">12</span><span class="p">]</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;WEBP&#39;</span><span class="p">:</span>
+        <span class="c1"># Lossy (VP8): bits 0-3 of header are a signature, then</span>
+        <span class="c1"># width (14 bits) at byte 26, height (14 bits) at byte 28</span>
+        <span class="k">if</span> <span class="n">image_bytes</span><span class="p">[</span><span class="mi">12</span><span class="p">:</span><span class="mi">16</span><span class="p">]</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;VP8 &#39;</span><span class="p">:</span>
+            <span class="n">w</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">image_bytes</span><span class="p">[</span><span class="mi">26</span><span class="p">:</span><span class="mi">28</span><span class="p">],</span> <span class="s1">&#39;little&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x3FFF</span>
+            <span class="n">h</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">image_bytes</span><span class="p">[</span><span class="mi">28</span><span class="p">:</span><span class="mi">30</span><span class="p">],</span> <span class="s1">&#39;little&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x3FFF</span>
+            <span class="k">return</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span>
+        <span class="c1"># Lossless (VP8L): byte 20 is signature 0x2F, then</span>
+        <span class="c1"># width-1 (14 bits) and height-1 (14 bits) packed in 4 bytes</span>
+        <span class="k">if</span> <span class="n">image_bytes</span><span class="p">[</span><span class="mi">12</span><span class="p">:</span><span class="mi">16</span><span class="p">]</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;VP8L&#39;</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_bytes</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">25</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">image_bytes</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0x2F</span><span class="p">:</span>
+                <span class="n">bits</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">image_bytes</span><span class="p">[</span><span class="mi">21</span><span class="p">:</span><span class="mi">25</span><span class="p">],</span> <span class="s1">&#39;little&#39;</span><span class="p">)</span>
+                <span class="n">w</span> <span class="o">=</span> <span class="p">(</span><span class="n">bits</span> <span class="o">&amp;</span> <span class="mh">0x3FFF</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="n">h</span> <span class="o">=</span> <span class="p">((</span><span class="n">bits</span> <span class="o">&gt;&gt;</span> <span class="mi">14</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x3FFF</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="k">return</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span>
+        <span class="c1"># Extended WebP (VP8X): canvas width/height minus 1 are stored</span>
+        <span class="c1"># as 24-bit little-endian integers at bytes 24..29.</span>
+        <span class="k">if</span> <span class="n">image_bytes</span><span class="p">[</span><span class="mi">12</span><span class="p">:</span><span class="mi">16</span><span class="p">]</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;VP8X&#39;</span><span class="p">:</span>
+            <span class="n">w</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">image_bytes</span><span class="p">[</span><span class="mi">24</span><span class="p">:</span><span class="mi">27</span><span class="p">],</span> <span class="s1">&#39;little&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">h</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">image_bytes</span><span class="p">[</span><span class="mi">27</span><span class="p">:</span><span class="mi">30</span><span class="p">],</span> <span class="s1">&#39;little&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+    <span class="c1"># BMP: width at offset 18, height at offset 22 (LE int32)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_bytes</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">26</span> <span class="ow">and</span> <span class="n">image_bytes</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;BM&#39;</span><span class="p">:</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">image_bytes</span><span class="p">[</span><span class="mi">18</span><span class="p">:</span><span class="mi">22</span><span class="p">],</span> <span class="s1">&#39;little&#39;</span><span class="p">)</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">image_bytes</span><span class="p">[</span><span class="mi">22</span><span class="p">:</span><span class="mi">26</span><span class="p">],</span> <span class="s1">&#39;little&#39;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span>
+
+    <span class="c1"># GIF: width at offset 6, height at offset 8 (LE uint16)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_bytes</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">10</span> <span class="ow">and</span> <span class="n">image_bytes</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;GIF8&#39;</span><span class="p">:</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">image_bytes</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">8</span><span class="p">],</span> <span class="s1">&#39;little&#39;</span><span class="p">)</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">image_bytes</span><span class="p">[</span><span class="mi">8</span><span class="p">:</span><span class="mi">10</span><span class="p">],</span> <span class="s1">&#39;little&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span>
+
+    <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="detect_image_format"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.codec.detect_image_format.html#pyflink.multimodal.codec.detect_image_format">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">detect_image_format</span><span class="p">(</span><span class="n">image_bytes</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Detect image format from magic bytes. Returns a format string for PIL save().</span>
+
+<span class="sd">    Returns None if image_bytes is None or format is unrecognized.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">image_bytes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_bytes</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">image_bytes</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\xff\xd8</span><span class="s1">&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;JPEG&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_bytes</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">4</span> <span class="ow">and</span> <span class="n">image_bytes</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x89</span><span class="s1">PNG&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;PNG&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_bytes</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">12</span> <span class="ow">and</span> <span class="n">image_bytes</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;RIFF&#39;</span> <span class="ow">and</span> <span class="n">image_bytes</span><span class="p">[</span><span class="mi">8</span><span class="p">:</span><span class="mi">12</span><span class="p">]</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;WEBP&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;WEBP&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_bytes</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">image_bytes</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;BM&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;BMP&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_bytes</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">4</span> <span class="ow">and</span> <span class="n">image_bytes</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;GIF8&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;GIF&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_bytes</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">4</span> <span class="ow">and</span> <span class="n">image_bytes</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="sa">b</span><span class="s1">&#39;II*</span><span class="se">\x00</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;MM</span><span class="se">\x00</span><span class="s1">*&#39;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;TIFF&quot;</span>
+    <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_convert_for_jpeg</span><span class="p">(</span><span class="n">pil_image</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">pil_image</span><span class="o">.</span><span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;L&quot;</span><span class="p">,</span> <span class="s2">&quot;RGB&quot;</span><span class="p">):</span>
+        <span class="c1"># JPEG only supports 8-bit L/RGB in Pillow; convert explicitly at the</span>
+        <span class="c1"># output boundary instead of letting save() fail with a vague error.</span>
+        <span class="k">return</span> <span class="n">pil_image</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;RGB&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pil_image</span>
+
+
+<div class="viewcode-block" id="image_array_to_jpeg_pil"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.codec.image_array_to_jpeg_pil.html#pyflink.multimodal.codec.image_array_to_jpeg_pil">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_array_to_jpeg_pil</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert ndarray pixels to a PIL Image compatible with JPEG output.&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">pil_image</span> <span class="o">=</span> <span class="n">image_array_to_pil</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="c1"># JPEG cannot preserve high-precision multichannel pixels; normalize</span>
+        <span class="c1"># explicitly at the output boundary.</span>
+        <span class="n">pil_image</span> <span class="o">=</span> <span class="n">image_array_to_pil</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;RGB&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_convert_for_jpeg</span><span class="p">(</span><span class="n">pil_image</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="decode_image_input"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.codec.decode_image_input.html#pyflink.multimodal.codec.decode_image_input">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">decode_image_input</span><span class="p">(</span><span class="n">image_input</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_pixels</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decode an image from raw bytes or a native :class:`Image` into ndarray.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">image_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">target_mode</span> <span class="o">=</span> <span class="n">_normalize_image_mode</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span> <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">max_pixels</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">max_pixels</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;max_pixels must be positive, got </span><span class="si">{</span><span class="n">max_pixels</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image_input</span><span class="p">,</span> <span class="n">Image</span><span class="p">):</span>
+        <span class="n">validate_image</span><span class="p">(</span><span class="n">image_input</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">max_pixels</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">image_input</span><span class="o">.</span><span class="n">height</span> <span class="o">*</span> <span class="n">image_input</span><span class="o">.</span><span class="n">width</span> <span class="o">&gt;</span> <span class="n">max_pixels</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Image dimensions </span><span class="si">{</span><span class="n">image_input</span><span class="o">.</span><span class="n">width</span><span class="si">}</span><span class="s2">x</span><span class="si">{</span><span class="n">image_input</span><span class="o">.</span><span class="n">height</span><span class="si">}</span><span class="s2"> exceed &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;max_pixels=</span><span class="si">{</span><span class="n">max_pixels</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">image_to_ndarray</span><span class="p">(</span><span class="n">image_input</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">target_mode</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">_pil_open</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+            <span class="s2">&quot;Pillow is required for image operations. &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Install it with: pip install </span><span class="si">{</span><span class="n">dependency_install_requirement</span><span class="p">(</span><span class="s1">&#39;PIL&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">max_pixels</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image_input</span><span class="p">,</span> <span class="p">(</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bytearray</span><span class="p">)):</span>
+        <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">_read_image_dimensions</span><span class="p">(</span><span class="n">image_input</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">w</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">h</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">w</span> <span class="o">*</span> <span class="n">h</span> <span class="o">&gt;</span> <span class="n">max_pixels</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Image dimensions </span><span class="si">{</span><span class="n">w</span><span class="si">}</span><span class="s2">x</span><span class="si">{</span><span class="n">h</span><span class="si">}</span><span class="s2"> exceed &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;max_pixels=</span><span class="si">{</span><span class="n">max_pixels</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image_input</span><span class="p">,</span> <span class="p">(</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bytearray</span><span class="p">)):</span>
+        <span class="n">pil_image</span> <span class="o">=</span> <span class="n">_pil_open</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">image_input</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">_canonicalize_decoded_pil_image</span><span class="p">(</span><span class="n">pil_image</span><span class="p">,</span> <span class="n">target_mode</span><span class="p">)</span>
+
+    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+        <span class="s2">&quot;Expected image input to be encoded bytes or Image, got </span><span class="si">%s</span><span class="s2">&quot;</span>
+        <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="n">image_input</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="safe_decode_image_input"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.codec.safe_decode_image_input.html#pyflink.multimodal.codec.safe_decode_image_input">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">safe_decode_image_input</span><span class="p">(</span><span class="n">image_input</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_pixels</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decode an image and return ``None`` for data-level decode failures.</span>
+
+<span class="sd">    This wrapper is for operators that explicitly define bad image data as a</span>
+<span class="sd">    null/filtered row. Configuration errors such as an invalid ``mode`` still</span>
+<span class="sd">    fail fast.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">target_mode</span> <span class="o">=</span> <span class="n">_normalize_image_mode</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span> <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">max_pixels</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">max_pixels</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;max_pixels must be positive, got </span><span class="si">{</span><span class="n">max_pixels</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">decode_image_input</span><span class="p">(</span>
+            <span class="n">image_input</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">target_mode</span><span class="p">,</span> <span class="n">max_pixels</span><span class="o">=</span><span class="n">max_pixels</span>
+        <span class="p">)</span>
+    <span class="k">except</span> <span class="n">_IMAGE_DATA_ERRORS</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Failed to decode image: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="decode_image"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.codec.decode_image.html#pyflink.multimodal.codec.decode_image">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">decode_image</span><span class="p">(</span><span class="n">image_input</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_pixels</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decode encoded bytes or native Image input into a native :class:`Image`.&quot;&quot;&quot;</span>
+    <span class="n">pixel_array</span> <span class="o">=</span> <span class="n">decode_image_input</span><span class="p">(</span><span class="n">image_input</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span> <span class="n">max_pixels</span><span class="o">=</span><span class="n">max_pixels</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">pixel_array</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">target_mode</span> <span class="o">=</span> <span class="n">_native_mode_name</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span> <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">ndarray_to_image</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">target_mode</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="encode_image_input"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.codec.encode_image_input.html#pyflink.multimodal.codec.encode_image_input">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">encode_image_input</span><span class="p">(</span>
+    <span class="n">image_input</span><span class="p">,</span>
+    <span class="n">output_format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">quality</span><span class="o">=</span><span class="n">DEFAULT_IMAGE_ENCODE_QUALITY</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Encode raw bytes or native ``Image`` input to compressed image bytes.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">image_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">output_format</span> <span class="o">=</span> <span class="n">normalize_image_format</span><span class="p">(</span>
+        <span class="n">output_format</span><span class="p">,</span> <span class="n">param_name</span><span class="o">=</span><span class="s2">&quot;output_format&quot;</span><span class="p">,</span> <span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+    <span class="n">quality</span> <span class="o">=</span> <span class="n">validate_image_quality</span><span class="p">(</span><span class="n">quality</span><span class="p">)</span>
+
+    <span class="n">source_format</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image_input</span><span class="p">,</span> <span class="p">(</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bytearray</span><span class="p">)):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">pil_image</span> <span class="o">=</span> <span class="n">_pil_open</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">image_input</span><span class="p">))</span>
+            <span class="n">source_format</span> <span class="o">=</span> <span class="n">pil_image</span><span class="o">.</span><span class="n">format</span> <span class="ow">or</span> <span class="s2">&quot;JPEG&quot;</span>
+            <span class="n">pixel_array</span> <span class="o">=</span> <span class="n">_canonicalize_decoded_pil_image</span><span class="p">(</span><span class="n">pil_image</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">MemoryError</span><span class="p">:</span>
+            <span class="k">raise</span>
+        <span class="k">except</span> <span class="n">_IMAGE_DATA_ERRORS</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Failed to open image: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">pixel_array</span> <span class="o">=</span> <span class="n">decode_image_input</span><span class="p">(</span><span class="n">image_input</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">pixel_array</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="c1"># Native IMAGE values do not store the source container format. Use JPEG as</span>
+    <span class="c1"># the default output boundary unless callers explicitly request PNG/WebP/etc.</span>
+    <span class="n">target_format</span> <span class="o">=</span> <span class="n">output_format</span> <span class="ow">or</span> <span class="n">source_format</span> <span class="ow">or</span> <span class="s2">&quot;JPEG&quot;</span>
+    <span class="n">effective_quality</span> <span class="o">=</span> <span class="n">quality</span>
+
+    <span class="k">if</span> <span class="n">target_format</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;JPEG&quot;</span><span class="p">:</span>
+        <span class="c1"># JPEG cannot preserve alpha or high-precision multichannel pixels, so</span>
+        <span class="c1"># normalize only at the explicit JPEG output boundary.</span>
+        <span class="n">pil_image</span> <span class="o">=</span> <span class="n">image_array_to_jpeg_pil</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">pil_image</span> <span class="o">=</span> <span class="n">image_array_to_pil</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Cannot encode native IMAGE input as </span><span class="si">{</span><span class="n">target_format</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+
+    <span class="n">buf</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">()</span>
+    <span class="n">pil_image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">target_format</span><span class="p">,</span> <span class="n">quality</span><span class="o">=</span><span class="n">effective_quality</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">buf</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="safe_decode_batch"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.codec.safe_decode_batch.html#pyflink.multimodal.codec.safe_decode_batch">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">safe_decode_batch</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_pixels</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decode a batch of bytes/native IMAGE inputs into ndarrays, skipping failures.&quot;&quot;&quot;</span>
+    <span class="n">valid_images</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">valid_indices</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">series</span><span class="p">):</span>
+        <span class="n">pixel_array</span> <span class="o">=</span> <span class="n">safe_decode_image_input</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span> <span class="n">max_pixels</span><span class="o">=</span><span class="n">max_pixels</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">pixel_array</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">valid_images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">)</span>
+            <span class="n">valid_indices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">valid_images</span><span class="p">,</span> <span class="n">valid_indices</span></div>
+
+
+<div class="viewcode-block" id="decode_image_batch"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.codec.decode_image_batch.html#pyflink.multimodal.codec.decode_image_batch">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">decode_image_batch</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_pixels</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decode a batch of bytes/native IMAGE inputs into ndarrays (fail-fast).&quot;&quot;&quot;</span>
+    <span class="n">images</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">valid_idx</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">series</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">item</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">pixel_array</span> <span class="o">=</span> <span class="n">decode_image_input</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span> <span class="n">max_pixels</span><span class="o">=</span><span class="n">max_pixels</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">pixel_array</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">)</span>
+        <span class="n">valid_idx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">images</span><span class="p">,</span> <span class="n">valid_idx</span></div>
+</pre></div>
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

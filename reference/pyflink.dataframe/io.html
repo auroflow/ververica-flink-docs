@@ -24,7 +24,7 @@ under the License.
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Input/Output &#8212; PyFlink 1.20+vvr.11.7.dev0 documentation</title>
+    <title>Input/Output &#8212; PyFlink 11.8.0.preview.2 documentation</title>
   <script>
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
@@ -58,8 +58,8 @@ under the License.
     <link rel="shortcut icon" href="../../_static/navbar-brand-logo.jpg"/>
 
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="pyflink.dataframe.io.read_catalog_table" href="api/pyflink.dataframe.io.read_catalog_table.html" />
-    <link rel="prev" title="pyflink.dataframe.convert.from_records" href="api/pyflink.dataframe.convert.from_records.html" />
+    <link rel="next" title="pyflink.dataframe.read_catalog_table" href="api/pyflink.dataframe.read_catalog_table.html" />
+    <link rel="prev" title="pyflink.dataframe.from_records" href="api/pyflink.dataframe.from_records.html" />
 <script src="_static/pyflink.js" ></script>
 <link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
 
@@ -261,20 +261,21 @@ under the License.
   <div class="bd-toc-item navbar-nav">
     <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../pyflink.table/index.html">PyFlink Table</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pyflink.datastream/index.html">PyFlink DataStream</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">PyFlink DataFrame</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="dataframe.html">DataFrame</a></li>
 <li class="toctree-l2"><a class="reference internal" href="creation.html">DataFrame Creation</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Input/Output</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sql.html">SQL</a></li>
-<li class="toctree-l2"><a class="reference internal" href="datatype.html">DataType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datatype.html">Data Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="udf.html">User Defined Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="config.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="catalog.html">Catalog</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gpu.html">GPU Support</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ai.html">AI / LLM</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../pyflink.multimodal/index.html">PyFlink Multimodal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.datastream/index.html">PyFlink DataStream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyflink.common/index.html">PyFlink Common</a></li>
 </ul>
 
@@ -306,51 +307,84 @@ under the License.
               
   <section id="input-output">
 <h1>Input/Output<a class="headerlink" href="#input-output" title="Permalink to this headline">#</a></h1>
-<p>Functions to read data from external sources into a <code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>.
-For writing data, see the <code class="docutils literal notranslate"><span class="pre">write_catalog_table</span></code>, <code class="docutils literal notranslate"><span class="pre">write_parquet</span></code>, <code class="docutils literal notranslate"><span class="pre">write_kafka</span></code>,
-<code class="docutils literal notranslate"><span class="pre">write_odps</span></code>, <code class="docutils literal notranslate"><span class="pre">write_paimon</span></code>, <code class="docutils literal notranslate"><span class="pre">write_sls</span></code>, <code class="docutils literal notranslate"><span class="pre">write_hologres</span></code>, <code class="docutils literal notranslate"><span class="pre">write_milvus</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">write_custom</span></code> methods on <code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p>
-<p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pf</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s2">&quot;/path/to/data&quot;</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">()})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_kafka</span><span class="p">(</span><span class="s2">&quot;localhost:9092&quot;</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">()},</span> <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;my_topic&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
+<p>Functions to read data from external sources into a DataFrame and methods to
+write DataFrame results to external systems.</p>
+<section id="readers">
+<h2>Readers<a class="headerlink" href="#readers" title="Permalink to this headline">#</a></h2>
 <table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.io.read_catalog_table.html#pyflink.dataframe.io.read_catalog_table" title="pyflink.dataframe.io.read_catalog_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_catalog_table</span></code></a>(path)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.read_catalog_table.html#pyflink.dataframe.read_catalog_table" title="pyflink.dataframe.read_catalog_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_catalog_table</span></code></a>(path)</p></td>
 <td><p>Read a catalog table into a DataFrame.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.io.read_parquet.html#pyflink.dataframe.io.read_parquet" title="pyflink.dataframe.io.read_parquet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_parquet</span></code></a>(path, *[, schema, columns, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.read_parquet.html#pyflink.dataframe.read_parquet" title="pyflink.dataframe.read_parquet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_parquet</span></code></a>(path, *[, schema, columns, ...])</p></td>
 <td><p>Read a Parquet file or directory into a DataFrame.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.io.read_kafka.html#pyflink.dataframe.io.read_kafka" title="pyflink.dataframe.io.read_kafka"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_kafka</span></code></a>(bootstrap_servers, *[, schema, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.read_kafka.html#pyflink.dataframe.read_kafka" title="pyflink.dataframe.read_kafka"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_kafka</span></code></a>(bootstrap_servers, *[, schema, ...])</p></td>
 <td><p>Read data from one or more Kafka topics into a DataFrame.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.io.read_odps.html#pyflink.dataframe.io.read_odps" title="pyflink.dataframe.io.read_odps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_odps</span></code></a>(endpoint, *[, schema, columns, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.read_odps.html#pyflink.dataframe.read_odps" title="pyflink.dataframe.read_odps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_odps</span></code></a>(endpoint, *[, schema, columns, ...])</p></td>
 <td><p>Read a MaxCompute (ODPS) table into a DataFrame.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.io.read_paimon.html#pyflink.dataframe.io.read_paimon" title="pyflink.dataframe.io.read_paimon"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_paimon</span></code></a>([path, schema, primary_key, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.read_paimon.html#pyflink.dataframe.read_paimon" title="pyflink.dataframe.read_paimon"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_paimon</span></code></a>([path, schema, primary_key, ...])</p></td>
 <td><p>Read a Paimon table into a DataFrame.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.io.read_sls.html#pyflink.dataframe.io.read_sls" title="pyflink.dataframe.io.read_sls"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_sls</span></code></a>(endpoint, *, project, logstore[, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.read_sls.html#pyflink.dataframe.read_sls" title="pyflink.dataframe.read_sls"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_sls</span></code></a>(endpoint, *, project, logstore[, ...])</p></td>
 <td><p>Read an SLS (Aliyun Log Service) logstore into a DataFrame.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.io.read_hologres.html#pyflink.dataframe.io.read_hologres" title="pyflink.dataframe.io.read_hologres"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_hologres</span></code></a>(endpoint, *, db_name, ...[, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.read_hologres.html#pyflink.dataframe.read_hologres" title="pyflink.dataframe.read_hologres"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_hologres</span></code></a>(endpoint, *, db_name, ...[, ...])</p></td>
 <td><p>Read a Hologres table into a DataFrame.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.io.read_milvus.html#pyflink.dataframe.io.read_milvus" title="pyflink.dataframe.io.read_milvus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_milvus</span></code></a>(endpoint, *, schema[, columns, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.read_milvus.html#pyflink.dataframe.read_milvus" title="pyflink.dataframe.read_milvus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_milvus</span></code></a>(endpoint, *, schema[, columns, ...])</p></td>
 <td><p>Read a Milvus vector search source into a DataFrame.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.io.read_custom.html#pyflink.dataframe.io.read_custom" title="pyflink.dataframe.io.read_custom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_custom</span></code></a>(connector, *[, schema, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.read_custom.html#pyflink.dataframe.read_custom" title="pyflink.dataframe.read_custom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_custom</span></code></a>(connector, *[, schema, ...])</p></td>
 <td><p>Read data from a custom connector into a DataFrame.</p></td>
 </tr>
 </tbody>
 </table>
+</section>
+<section id="writers">
+<h2>Writers<a class="headerlink" href="#writers" title="Permalink to this headline">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.write_catalog_table.html#pyflink.dataframe.DataFrame.write_catalog_table" title="pyflink.dataframe.DataFrame.write_catalog_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.write_catalog_table</span></code></a>(path, *[, ...])</p></td>
+<td><p>Write the DataFrame to a catalog table.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.write_parquet.html#pyflink.dataframe.DataFrame.write_parquet" title="pyflink.dataframe.DataFrame.write_parquet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.write_parquet</span></code></a>(path, *[, mode, ...])</p></td>
+<td><p>Write the DataFrame to Parquet file(s) at the given path.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.write_kafka.html#pyflink.dataframe.DataFrame.write_kafka" title="pyflink.dataframe.DataFrame.write_kafka"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.write_kafka</span></code></a>(bootstrap_servers, *)</p></td>
+<td><p>Write the DataFrame to a Kafka topic.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.write_odps.html#pyflink.dataframe.DataFrame.write_odps" title="pyflink.dataframe.DataFrame.write_odps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.write_odps</span></code></a>(endpoint, *[, ...])</p></td>
+<td><p>Write the DataFrame to a MaxCompute (ODPS) table.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.write_paimon.html#pyflink.dataframe.DataFrame.write_paimon" title="pyflink.dataframe.DataFrame.write_paimon"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.write_paimon</span></code></a>([path, primary_key, ...])</p></td>
+<td><p>Write the DataFrame to a Paimon table.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.write_sls.html#pyflink.dataframe.DataFrame.write_sls" title="pyflink.dataframe.DataFrame.write_sls"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.write_sls</span></code></a>(endpoint, *, project, ...)</p></td>
+<td><p>Write the DataFrame to an SLS (Aliyun Log Service) logstore.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.write_hologres.html#pyflink.dataframe.DataFrame.write_hologres" title="pyflink.dataframe.DataFrame.write_hologres"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.write_hologres</span></code></a>(endpoint, *, ...[, ...])</p></td>
+<td><p>Write the DataFrame to a Hologres table.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.write_milvus.html#pyflink.dataframe.DataFrame.write_milvus" title="pyflink.dataframe.DataFrame.write_milvus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.write_milvus</span></code></a>(endpoint, *, ...[, ...])</p></td>
+<td><p>Write the DataFrame to a Milvus collection.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.write_custom.html#pyflink.dataframe.DataFrame.write_custom" title="pyflink.dataframe.DataFrame.write_custom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.write_custom</span></code></a>(connector, *[, ...])</p></td>
+<td><p>Write the DataFrame using a custom connector.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
 </section>
 
 
@@ -361,17 +395,17 @@ For writing data, see the <code class="docutils literal notranslate"><span class
             <footer class="bd-footer-article">
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-  <a class='left-prev' id="prev-link" href="api/pyflink.dataframe.convert.from_records.html" title="previous page">
+  <a class='left-prev' id="prev-link" href="api/pyflink.dataframe.from_records.html" title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
           <p class="prev-next-subtitle">previous</p>
-          <p class="prev-next-title">pyflink.dataframe.convert.from_records</p>
+          <p class="prev-next-title">pyflink.dataframe.from_records</p>
       </div>
   </a>
-  <a class='right-next' id="next-link" href="api/pyflink.dataframe.io.read_catalog_table.html" title="next page">
+  <a class='right-next' id="next-link" href="api/pyflink.dataframe.read_catalog_table.html" title="next page">
   <div class="prev-next-info">
       <p class="prev-next-subtitle">next</p>
-      <p class="prev-next-title">pyflink.dataframe.io.read_catalog_table</p>
+      <p class="prev-next-title">pyflink.dataframe.read_catalog_table</p>
   </div>
   <i class="fa-solid fa-angle-right"></i>
   </a>
@@ -384,6 +418,28 @@ For writing data, see the <code class="docutils literal notranslate"><span class
           
             <div class="bd-sidebar-secondary bd-toc">
               
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#readers">
+   Readers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#writers">
+   Writers
+  </a>
+ </li>
+</ul>
+
+</nav>
+</div>
+
 <div class="toc-item">
   
 <div id="searchbox"></div>

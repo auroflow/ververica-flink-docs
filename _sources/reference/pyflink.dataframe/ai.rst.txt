@@ -16,30 +16,33 @@
     limitations under the License.
    ################################################################################
 
-=============
+========
 AI / LLM
-=============
+========
 
-The AI module provides integration with large language models (LLMs) for tasks such as
-classification, sentiment analysis, text extraction, translation, summarization, PII masking,
-and embedding generation. Access these functions through the ``df.llm`` accessor on a
-:class:`~pyflink.dataframe.DataFrame`.
+The AI module provides integration with large language models (LLMs) for tasks
+such as classification, sentiment analysis, text extraction, translation,
+summarization, PII masking, and embedding generation. Access these functions
+through the ``df.llm`` accessor on a DataFrame.
 
-Example:
-::
+Example::
 
     >>> import pyflink.dataframe as pf
     >>> pf.set_provider("openai", api_key="...", model="gpt-4o")
     >>> df = pf.from_dict({"text": ["Hello world", "Bonjour le monde"]})
     >>> df.llm.ai_translate("text", source_lang="auto", target_lang="en").collect()
 
+.. toctree::
+    :hidden:
+
+    ai_provider_api
 
 Providers
 ---------
 
 Register and manage LLM providers.
 
-.. currentmodule:: pyflink.dataframe.ai.llm
+.. currentmodule:: pyflink.dataframe
 
 .. autosummary::
     :toctree: api/
@@ -54,7 +57,7 @@ Provider
 
 Base class and built-in provider implementations.
 
-.. currentmodule:: pyflink.dataframe.ai.providers
+.. currentmodule:: pyflink.dataframe
 
 .. autosummary::
     :toctree: api/
@@ -66,17 +69,18 @@ Base class and built-in provider implementations.
     GenericProvider
 
 
-LLMAccessor
------------
+LLM Accessor
+------------
 
-Accessed via the ``df.llm`` property on a :class:`~pyflink.dataframe.DataFrame`.
-Provides methods for common AI tasks.
+Accessed via the ``df.llm`` property on a DataFrame. Provides methods for
+common AI tasks.
 
 .. currentmodule:: pyflink.dataframe.ai.llm
 
 .. autosummary::
     :toctree: api/
 
+    LLMAccessor.vector_search
     LLMAccessor.predict
     LLMAccessor.ai_classify
     LLMAccessor.ai_sentiment

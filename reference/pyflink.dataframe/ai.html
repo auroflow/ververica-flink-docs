@@ -24,7 +24,7 @@ under the License.
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>AI / LLM &#8212; PyFlink 1.20+vvr.11.7.dev0 documentation</title>
+    <title>AI / LLM &#8212; PyFlink 11.8.0.preview.2 documentation</title>
   <script>
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
@@ -58,8 +58,8 @@ under the License.
     <link rel="shortcut icon" href="../../_static/navbar-brand-logo.jpg"/>
 
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="pyflink.dataframe.ai.llm.set_provider" href="api/pyflink.dataframe.ai.llm.set_provider.html" />
-    <link rel="prev" title="pyflink.dataframe.gpu.get_gpu_infos" href="api/pyflink.dataframe.gpu.get_gpu_infos.html" />
+    <link rel="next" title="Provider Method Reference" href="ai_provider_api.html" />
+    <link rel="prev" title="pyflink.dataframe.get_gpu_infos" href="api/pyflink.dataframe.get_gpu_infos.html" />
 <script src="_static/pyflink.js" ></script>
 <link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
 
@@ -261,20 +261,21 @@ under the License.
   <div class="bd-toc-item navbar-nav">
     <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../pyflink.table/index.html">PyFlink Table</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pyflink.datastream/index.html">PyFlink DataStream</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">PyFlink DataFrame</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="dataframe.html">DataFrame</a></li>
 <li class="toctree-l2"><a class="reference internal" href="creation.html">DataFrame Creation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="io.html">Input/Output</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sql.html">SQL</a></li>
-<li class="toctree-l2"><a class="reference internal" href="datatype.html">DataType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datatype.html">Data Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="udf.html">User Defined Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="config.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="catalog.html">Catalog</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gpu.html">GPU Support</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">AI / LLM</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../pyflink.multimodal/index.html">PyFlink Multimodal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.datastream/index.html">PyFlink DataStream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyflink.common/index.html">PyFlink Common</a></li>
 </ul>
 
@@ -306,16 +307,18 @@ under the License.
               
   <section id="ai-llm">
 <h1>AI / LLM<a class="headerlink" href="#ai-llm" title="Permalink to this headline">#</a></h1>
-<p>The AI module provides integration with large language models (LLMs) for tasks such as
-classification, sentiment analysis, text extraction, translation, summarization, PII masking,
-and embedding generation. Access these functions through the <code class="docutils literal notranslate"><span class="pre">df.llm</span></code> accessor on a
-<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p>
+<p>The AI module provides integration with large language models (LLMs) for tasks
+such as classification, sentiment analysis, text extraction, translation,
+summarization, PII masking, and embedding generation. Access these functions
+through the <code class="docutils literal notranslate"><span class="pre">df.llm</span></code> accessor on a DataFrame.</p>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pf</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pf</span><span class="o">.</span><span class="n">set_provider</span><span class="p">(</span><span class="s2">&quot;openai&quot;</span><span class="p">,</span> <span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;...&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-4o&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">from_dict</span><span class="p">({</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Hello world&quot;</span><span class="p">,</span> <span class="s2">&quot;Bonjour le monde&quot;</span><span class="p">]})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">llm</span><span class="o">.</span><span class="n">ai_translate</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">source_lang</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="n">target_lang</span><span class="o">=</span><span class="s2">&quot;en&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
 </pre></div>
+</div>
+<div class="toctree-wrapper compound">
 </div>
 <section id="providers">
 <h2>Providers<a class="headerlink" href="#providers" title="Permalink to this headline">#</a></h2>
@@ -326,13 +329,13 @@ and embedding generation. Access these functions through the <code class="docuti
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.ai.llm.set_provider.html#pyflink.dataframe.ai.llm.set_provider" title="pyflink.dataframe.ai.llm.set_provider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_provider</span></code></a>(name_or_provider[, provider])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.set_provider.html#pyflink.dataframe.set_provider" title="pyflink.dataframe.set_provider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_provider</span></code></a>(name_or_provider[, provider])</p></td>
 <td><p>Register a global provider configuration.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.ai.llm.set_default_provider.html#pyflink.dataframe.ai.llm.set_default_provider" title="pyflink.dataframe.ai.llm.set_default_provider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_default_provider</span></code></a>(name)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.set_default_provider.html#pyflink.dataframe.set_default_provider" title="pyflink.dataframe.set_default_provider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_default_provider</span></code></a>(name)</p></td>
 <td><p>Set the default provider for AI functions.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.ai.llm.list_providers.html#pyflink.dataframe.ai.llm.list_providers" title="pyflink.dataframe.ai.llm.list_providers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list_providers</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.list_providers.html#pyflink.dataframe.list_providers" title="pyflink.dataframe.list_providers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list_providers</span></code></a>()</p></td>
 <td><p>List all registered provider names.</p></td>
 </tr>
 </tbody>
@@ -347,56 +350,59 @@ and embedding generation. Access these functions through the <code class="docuti
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.ai.providers.Provider.html#pyflink.dataframe.ai.providers.Provider" title="pyflink.dataframe.ai.providers.Provider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Provider</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.Provider.html#pyflink.dataframe.Provider" title="pyflink.dataframe.Provider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Provider</span></code></a>()</p></td>
 <td><p>Base class for model providers.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.ai.providers.OpenAICompatProvider.html#pyflink.dataframe.ai.providers.OpenAICompatProvider" title="pyflink.dataframe.ai.providers.OpenAICompatProvider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OpenAICompatProvider</span></code></a>(*[, endpoint, api_key, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.OpenAICompatProvider.html#pyflink.dataframe.OpenAICompatProvider" title="pyflink.dataframe.OpenAICompatProvider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OpenAICompatProvider</span></code></a>(*[, endpoint, api_key, ...])</p></td>
 <td><p>Provider for all OpenAI-compatible endpoints (openai-compat).</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.ai.providers.DashScopeProvider.html#pyflink.dataframe.ai.providers.DashScopeProvider" title="pyflink.dataframe.ai.providers.DashScopeProvider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DashScopeProvider</span></code></a>(*[, endpoint, api_key, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DashScopeProvider.html#pyflink.dataframe.DashScopeProvider" title="pyflink.dataframe.DashScopeProvider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DashScopeProvider</span></code></a>(*[, endpoint, api_key, ...])</p></td>
 <td><p>Provider for Alibaba Cloud DashScope (dashscope).</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.ai.providers.TritonProvider.html#pyflink.dataframe.ai.providers.TritonProvider" title="pyflink.dataframe.ai.providers.TritonProvider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TritonProvider</span></code></a>(*, endpoint[, model_name, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.TritonProvider.html#pyflink.dataframe.TritonProvider" title="pyflink.dataframe.TritonProvider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TritonProvider</span></code></a>(*, endpoint[, model_name, ...])</p></td>
 <td><p>Provider for NVIDIA Triton Inference Server (triton).</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.ai.providers.GenericProvider.html#pyflink.dataframe.ai.providers.GenericProvider" title="pyflink.dataframe.ai.providers.GenericProvider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GenericProvider</span></code></a>(name, **options)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.GenericProvider.html#pyflink.dataframe.GenericProvider" title="pyflink.dataframe.GenericProvider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GenericProvider</span></code></a>(name, **options)</p></td>
 <td><p>Generic provider for unknown or custom model providers.</p></td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="llmaccessor">
-<h2>LLMAccessor<a class="headerlink" href="#llmaccessor" title="Permalink to this headline">#</a></h2>
-<p>Accessed via the <code class="docutils literal notranslate"><span class="pre">df.llm</span></code> property on a <code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>.
-Provides methods for common AI tasks.</p>
+<section id="llm-accessor">
+<h2>LLM Accessor<a class="headerlink" href="#llm-accessor" title="Permalink to this headline">#</a></h2>
+<p>Accessed via the <code class="docutils literal notranslate"><span class="pre">df.llm</span></code> property on a DataFrame. Provides methods for
+common AI tasks.</p>
 <table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.ai.llm.LLMAccessor.predict.html#pyflink.dataframe.ai.llm.LLMAccessor.predict" title="pyflink.dataframe.ai.llm.LLMAccessor.predict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LLMAccessor.predict</span></code></a>(*input_cols[, provider, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.ai.llm.LLMAccessor.vector_search.html#pyflink.dataframe.ai.llm.LLMAccessor.vector_search" title="pyflink.dataframe.ai.llm.LLMAccessor.vector_search"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LLMAccessor.vector_search</span></code></a>(search_source, ...)</p></td>
+<td><p>Join this DataFrame with vector search results from another source.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.ai.llm.LLMAccessor.predict.html#pyflink.dataframe.ai.llm.LLMAccessor.predict" title="pyflink.dataframe.ai.llm.LLMAccessor.predict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LLMAccessor.predict</span></code></a>(*input_cols[, provider, ...])</p></td>
 <td><p>Perform prediction using a model.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.ai.llm.LLMAccessor.ai_classify.html#pyflink.dataframe.ai.llm.LLMAccessor.ai_classify" title="pyflink.dataframe.ai.llm.LLMAccessor.ai_classify"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LLMAccessor.ai_classify</span></code></a>(input_col, labels, *)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.ai.llm.LLMAccessor.ai_classify.html#pyflink.dataframe.ai.llm.LLMAccessor.ai_classify" title="pyflink.dataframe.ai.llm.LLMAccessor.ai_classify"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LLMAccessor.ai_classify</span></code></a>(input_col, labels, *)</p></td>
 <td><p>Classify text into one of the provided labels.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.ai.llm.LLMAccessor.ai_sentiment.html#pyflink.dataframe.ai.llm.LLMAccessor.ai_sentiment" title="pyflink.dataframe.ai.llm.LLMAccessor.ai_sentiment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LLMAccessor.ai_sentiment</span></code></a>(input_col, *[, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.ai.llm.LLMAccessor.ai_sentiment.html#pyflink.dataframe.ai.llm.LLMAccessor.ai_sentiment" title="pyflink.dataframe.ai.llm.LLMAccessor.ai_sentiment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LLMAccessor.ai_sentiment</span></code></a>(input_col, *[, ...])</p></td>
 <td><p>Analyze the sentiment of input text.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.ai.llm.LLMAccessor.ai_extract.html#pyflink.dataframe.ai.llm.LLMAccessor.ai_extract" title="pyflink.dataframe.ai.llm.LLMAccessor.ai_extract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LLMAccessor.ai_extract</span></code></a>(input_col, schema, *)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.ai.llm.LLMAccessor.ai_extract.html#pyflink.dataframe.ai.llm.LLMAccessor.ai_extract" title="pyflink.dataframe.ai.llm.LLMAccessor.ai_extract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LLMAccessor.ai_extract</span></code></a>(input_col, schema, *)</p></td>
 <td><p>Extract structured information from text.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.ai.llm.LLMAccessor.ai_translate.html#pyflink.dataframe.ai.llm.LLMAccessor.ai_translate" title="pyflink.dataframe.ai.llm.LLMAccessor.ai_translate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LLMAccessor.ai_translate</span></code></a>(input_col, ...[, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.ai.llm.LLMAccessor.ai_translate.html#pyflink.dataframe.ai.llm.LLMAccessor.ai_translate" title="pyflink.dataframe.ai.llm.LLMAccessor.ai_translate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LLMAccessor.ai_translate</span></code></a>(input_col, ...[, ...])</p></td>
 <td><p>Translate text from one language to another.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.ai.llm.LLMAccessor.ai_summarize.html#pyflink.dataframe.ai.llm.LLMAccessor.ai_summarize" title="pyflink.dataframe.ai.llm.LLMAccessor.ai_summarize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LLMAccessor.ai_summarize</span></code></a>(input_col, ...[, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.ai.llm.LLMAccessor.ai_summarize.html#pyflink.dataframe.ai.llm.LLMAccessor.ai_summarize" title="pyflink.dataframe.ai.llm.LLMAccessor.ai_summarize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LLMAccessor.ai_summarize</span></code></a>(input_col, ...[, ...])</p></td>
 <td><p>Summarize text to a maximum length.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.ai.llm.LLMAccessor.ai_mask.html#pyflink.dataframe.ai.llm.LLMAccessor.ai_mask" title="pyflink.dataframe.ai.llm.LLMAccessor.ai_mask"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LLMAccessor.ai_mask</span></code></a>(input_col, entities, *)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.ai.llm.LLMAccessor.ai_mask.html#pyflink.dataframe.ai.llm.LLMAccessor.ai_mask" title="pyflink.dataframe.ai.llm.LLMAccessor.ai_mask"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LLMAccessor.ai_mask</span></code></a>(input_col, entities, *)</p></td>
 <td><p>Mask sensitive information in text.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.ai.llm.LLMAccessor.ai_embed.html#pyflink.dataframe.ai.llm.LLMAccessor.ai_embed" title="pyflink.dataframe.ai.llm.LLMAccessor.ai_embed"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LLMAccessor.ai_embed</span></code></a>(input_col[, dimension, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.ai.llm.LLMAccessor.ai_embed.html#pyflink.dataframe.ai.llm.LLMAccessor.ai_embed" title="pyflink.dataframe.ai.llm.LLMAccessor.ai_embed"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LLMAccessor.ai_embed</span></code></a>(input_col[, dimension, ...])</p></td>
 <td><p>Generate embedding vectors for text.</p></td>
 </tr>
 </tbody>
@@ -412,17 +418,17 @@ Provides methods for common AI tasks.</p>
             <footer class="bd-footer-article">
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-  <a class='left-prev' id="prev-link" href="api/pyflink.dataframe.gpu.get_gpu_infos.html" title="previous page">
+  <a class='left-prev' id="prev-link" href="api/pyflink.dataframe.get_gpu_infos.html" title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
           <p class="prev-next-subtitle">previous</p>
-          <p class="prev-next-title">pyflink.dataframe.gpu.get_gpu_infos</p>
+          <p class="prev-next-title">pyflink.dataframe.get_gpu_infos</p>
       </div>
   </a>
-  <a class='right-next' id="next-link" href="api/pyflink.dataframe.ai.llm.set_provider.html" title="next page">
+  <a class='right-next' id="next-link" href="ai_provider_api.html" title="next page">
   <div class="prev-next-info">
       <p class="prev-next-subtitle">next</p>
-      <p class="prev-next-title">pyflink.dataframe.ai.llm.set_provider</p>
+      <p class="prev-next-title">Provider Method Reference</p>
   </div>
   <i class="fa-solid fa-angle-right"></i>
   </a>
@@ -453,8 +459,8 @@ Provides methods for common AI tasks.</p>
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#llmaccessor">
-   LLMAccessor
+  <a class="reference internal nav-link" href="#llm-accessor">
+   LLM Accessor
   </a>
  </li>
 </ul>

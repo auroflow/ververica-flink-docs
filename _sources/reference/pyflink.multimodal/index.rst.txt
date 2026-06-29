@@ -20,62 +20,12 @@
 PyFlink Multimodal
 ===================
 
-This page gives an overview of all public PyFlink Multimodal image operators.
-
-The multimodal operators live under ``pyflink.multimodal.operators`` and process
-image columns in the :class:`~pyflink.dataframe.DataFrame` API. Each operator is a
-factory that can be used in two styles:
-
-Example::
-
-    >>> from pyflink.dataframe import col
-    >>> from pyflink.multimodal.operators import image_decode, image_resize, image_encode
-    >>>
-    >>> # Curried — configure first, apply later
-    >>> resizer = image_resize(width=512, height=512)
-    >>> df = df.with_columns(resized=resizer(col("img")))
-    >>>
-    >>> # Direct — configure and apply in one step
-    >>> df = df.with_columns(out=image_encode(col("resized"), format="JPEG"))
-
-Operators are organized by functionality:
-
-- :doc:`transform` — codec boundary (decode / encode / compress / to_tensor),
-  pixel transforms (resize, crop, blur, flip, color adjust, …), and model-backed
-  ops (remove background).
-- :doc:`info` — metadata extraction (aspect ratio, sharpness, perceptual hash)
-  and filters (size, shape, file size, validity).
-- :doc:`detect` — object detection (YOLO), instance segmentation (FastSAM),
-  subplot detection, and OCR.
-- :doc:`face` — face detection, face counting, and face blurring.
-- :doc:`quality` — NSFW filtering, aesthetic scoring, composite quality scoring,
-  and watermark filtering.
-- :doc:`embed` — CLIP embedding and image-text similarity scoring.
-
-Dependencies
-------------
-
-Operators depend on third-party libraries that must be installed as needed::
-
-    pip install Pillow>=9.0                    # image_transform, image_info
-    pip install imagehash>=4.0                 # image_hash
-    pip install numpy>=1.20                    # image_info, image_quality
-    pip install rembg>=2.0                     # image_remove_background
-    pip install opencv-python>=4.5             # image_face_*, image_detect_subplot
-    pip install ultralytics>=8.0               # image_detect_objects, image_segment
-    pip install easyocr>=1.6                   # image_ocr
-    pip install transformers>=4.30 torch>=2.0  # image_quality scorers
-    pip install open_clip_torch>=2.20          # image_embedding, image_text_similarity
-
-For the Flink runtime, declare them via
-``env.set_python_requirements("path/to/requirements.txt")``.
+.. automodule:: pyflink.multimodal
+    :noindex:
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
-    transform
-    info
-    detect
-    face
-    quality
-    embed
+    image
+    video
+    utilities

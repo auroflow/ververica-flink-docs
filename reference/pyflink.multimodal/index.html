@@ -24,7 +24,7 @@ under the License.
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>PyFlink Multimodal &#8212; PyFlink 1.20+vvr.11.7.dev0 documentation</title>
+    <title>PyFlink Multimodal &#8212; PyFlink 11.8.0.preview.2 documentation</title>
   <script>
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
@@ -58,7 +58,7 @@ under the License.
     <link rel="shortcut icon" href="../../_static/navbar-brand-logo.jpg"/>
 
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Image Transform" href="transform.html" />
+    <link rel="next" title="Image" href="image.html" />
     <link rel="prev" title="pyflink.dataframe.ai.llm.LLMAccessor.ai_embed" href="../pyflink.dataframe/api/pyflink.dataframe.ai.llm.LLMAccessor.ai_embed.html" />
 <script src="_static/pyflink.js" ></script>
 <link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
@@ -261,17 +261,14 @@ under the License.
   <div class="bd-toc-item navbar-nav">
     <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../pyflink.table/index.html">PyFlink Table</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pyflink.datastream/index.html">PyFlink DataStream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyflink.dataframe/index.html">PyFlink DataFrame</a></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">PyFlink Multimodal</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="transform.html">Image Transform</a></li>
-<li class="toctree-l2"><a class="reference internal" href="info.html">Image Info</a></li>
-<li class="toctree-l2"><a class="reference internal" href="detect.html">Image Detect</a></li>
-<li class="toctree-l2"><a class="reference internal" href="face.html">Image Face</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quality.html">Image Quality</a></li>
-<li class="toctree-l2"><a class="reference internal" href="embed.html">Image Embed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="image.html">Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="video.html">Video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilities.html">Utilities</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.datastream/index.html">PyFlink DataStream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyflink.common/index.html">PyFlink Common</a></li>
 </ul>
 
@@ -303,110 +300,63 @@ under the License.
               
   <section id="pyflink-multimodal">
 <h1>PyFlink Multimodal<a class="headerlink" href="#pyflink-multimodal" title="Permalink to this headline">#</a></h1>
-<p>This page gives an overview of all public PyFlink Multimodal image operators.</p>
-<p>The multimodal operators live under <code class="docutils literal notranslate"><span class="pre">pyflink.multimodal.operators</span></code> and process
-image columns in the <code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code> API. Each operator is a
-factory that can be used in two styles:</p>
-<p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="kn">import</span> <span class="n">col</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.multimodal.operators</span><span class="w"> </span><span class="kn">import</span> <span class="n">image_decode</span><span class="p">,</span> <span class="n">image_resize</span><span class="p">,</span> <span class="n">image_encode</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Curried — configure first, apply later</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">resizer</span> <span class="o">=</span> <span class="n">image_resize</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">512</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span><span class="n">resized</span><span class="o">=</span><span class="n">resizer</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">)))</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Direct — configure and apply in one step</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span><span class="n">out</span><span class="o">=</span><span class="n">image_encode</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;resized&quot;</span><span class="p">),</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;JPEG&quot;</span><span class="p">))</span>
+<p>PyFlink Multimodal Operators.</p>
+<p>Operators live under <code class="docutils literal notranslate"><span class="pre">pyflink.multimodal.operators</span></code> and are organized
+by functionality:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">image_transform</span></code> — codec boundary (decode / encode / compress /
+to_tensor), pixel transforms (resize, crop, blur, flip, color adjust, …),
+and model-backed ops (remove background).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">image_info</span></code> — metadata extraction (aspect ratio, sharpness, perceptual
+hash) and filters (size, shape, file size, validity).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">image_detect</span></code> — object detection (YOLO), instance segmentation
+(FastSAM), subplot detection, and OCR.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">image_face</span></code> — face detection, face counting, and face blurring.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">image_quality</span></code> — NSFW filtering, aesthetic scoring, composite quality
+scoring, and watermark filtering.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">image_embed</span></code> — CLIP embedding and image-text similarity scoring.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">video_frames</span></code> — video metadata probing, segment splitting, and frame
+extraction.</p></li>
+</ul>
+<p>Quick Start:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.multimodal.operators</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">image_decode</span><span class="p">,</span> <span class="n">image_resize</span><span class="p">,</span> <span class="n">image_encode</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Curried — configure first, apply later</span>
+<span class="n">resizer</span> <span class="o">=</span> <span class="n">image_resize</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">512</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span><span class="n">resized</span><span class="o">=</span><span class="n">resizer</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">)))</span>
+
+<span class="c1"># Direct — configure and apply in one step</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span><span class="n">out</span><span class="o">=</span><span class="n">image_encode</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;resized&quot;</span><span class="p">),</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;JPEG&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>Operators are organized by functionality:</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="transform.html"><span class="doc">Image Transform</span></a> — codec boundary (decode / encode / compress / to_tensor),
-pixel transforms (resize, crop, blur, flip, color adjust, …), and model-backed
-ops (remove background).</p></li>
-<li><p><a class="reference internal" href="info.html"><span class="doc">Image Info</span></a> — metadata extraction (aspect ratio, sharpness, perceptual hash)
-and filters (size, shape, file size, validity).</p></li>
-<li><p><a class="reference internal" href="detect.html"><span class="doc">Image Detect</span></a> — object detection (YOLO), instance segmentation (FastSAM),
-subplot detection, and OCR.</p></li>
-<li><p><a class="reference internal" href="face.html"><span class="doc">Image Face</span></a> — face detection, face counting, and face blurring.</p></li>
-<li><p><a class="reference internal" href="quality.html"><span class="doc">Image Quality</span></a> — NSFW filtering, aesthetic scoring, composite quality scoring,
-and watermark filtering.</p></li>
-<li><p><a class="reference internal" href="embed.html"><span class="doc">Image Embed</span></a> — CLIP embedding and image-text similarity scoring.</p></li>
-</ul>
 <section id="dependencies">
 <h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">#</a></h2>
-<p>Operators depend on third-party libraries that must be installed as needed:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">Pillow</span><span class="o">&gt;=</span><span class="mf">9.0</span>                    <span class="c1"># image_transform, image_info</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="n">imagehash</span><span class="o">&gt;=</span><span class="mf">4.0</span>                 <span class="c1"># image_hash</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span><span class="o">&gt;=</span><span class="mf">1.20</span>                    <span class="c1"># image_info, image_quality</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="n">rembg</span><span class="o">&gt;=</span><span class="mf">2.0</span>                     <span class="c1"># image_remove_background</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="n">opencv</span><span class="o">-</span><span class="n">python</span><span class="o">&gt;=</span><span class="mf">4.5</span>             <span class="c1"># image_face_*, image_detect_subplot</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="n">ultralytics</span><span class="o">&gt;=</span><span class="mf">8.0</span>               <span class="c1"># image_detect_objects, image_segment</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="n">easyocr</span><span class="o">&gt;=</span><span class="mf">1.6</span>                   <span class="c1"># image_ocr</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="n">transformers</span><span class="o">&gt;=</span><span class="mf">4.30</span> <span class="n">torch</span><span class="o">&gt;=</span><span class="mf">2.0</span>  <span class="c1"># image_quality scorers</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="n">open_clip_torch</span><span class="o">&gt;=</span><span class="mf">2.20</span>          <span class="c1"># image_embedding, image_text_similarity</span>
+<p>Built-in VVR images install the multimodal runtime dependencies from
+<code class="docutils literal notranslate"><span class="pre">flink-python/dev/multimodal/requirements-multimodal.in</span></code>. The same version
+ranges are checked lazily by model-backed operators when they open, so this
+file remains the compatibility contract for user-overridden dependencies.</p>
+<p>For local source development, install from the same file instead of copying
+package versions into job code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">flink</span><span class="o">-</span><span class="n">python</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">multimodal</span><span class="o">/</span><span class="n">requirements</span><span class="o">-</span><span class="n">multimodal</span><span class="o">.</span><span class="ow">in</span>
 </pre></div>
 </div>
-<p>For the Flink runtime, declare them via
-<code class="docutils literal notranslate"><span class="pre">env.set_python_requirements(&quot;path/to/requirements.txt&quot;)</span></code>.</p>
+<p>Or for Flink runtime:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">env</span><span class="o">.</span><span class="n">set_python_requirements</span><span class="p">(</span><span class="s2">&quot;path/to/requirements.txt&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>When a job overrides a built-in package through Python requirements or Python
+archives, keep the override inside the supported range reported by
+<code class="docutils literal notranslate"><span class="pre">pyflink.model.check_dependencies()</span></code>.</p>
+</section>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="transform.html">Image Transform</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_transform.image_decode.html">pyflink.multimodal.operators.image_transform.image_decode</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_transform.image_encode.html">pyflink.multimodal.operators.image_transform.image_encode</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_transform.image_compress.html">pyflink.multimodal.operators.image_transform.image_compress</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_transform.image_convert_format.html">pyflink.multimodal.operators.image_transform.image_convert_format</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_transform.image_to_tensor.html">pyflink.multimodal.operators.image_transform.image_to_tensor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_transform.image_convert_mode.html">pyflink.multimodal.operators.image_transform.image_convert_mode</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_transform.image_resize.html">pyflink.multimodal.operators.image_transform.image_resize</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_transform.image_rescale.html">pyflink.multimodal.operators.image_transform.image_rescale</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_transform.image_crop.html">pyflink.multimodal.operators.image_transform.image_crop</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_transform.image_crop_black_border.html">pyflink.multimodal.operators.image_transform.image_crop_black_border</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_transform.image_flip.html">pyflink.multimodal.operators.image_transform.image_flip</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_transform.image_blur.html">pyflink.multimodal.operators.image_transform.image_blur</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_transform.image_adjust_color.html">pyflink.multimodal.operators.image_transform.image_adjust_color</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_transform.image_remove_background.html">pyflink.multimodal.operators.image_transform.image_remove_background</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="info.html">Image Info</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_info.image_metadata.html">pyflink.multimodal.operators.image_info.image_metadata</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_info.image_aspect_ratio.html">pyflink.multimodal.operators.image_info.image_aspect_ratio</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_info.image_sharpness.html">pyflink.multimodal.operators.image_info.image_sharpness</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_info.image_hash.html">pyflink.multimodal.operators.image_info.image_hash</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_info.is_valid_image.html">pyflink.multimodal.operators.image_info.is_valid_image</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_info.image_size_filter.html">pyflink.multimodal.operators.image_info.image_size_filter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_info.image_shape_filter.html">pyflink.multimodal.operators.image_info.image_shape_filter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_info.image_file_size_filter.html">pyflink.multimodal.operators.image_info.image_file_size_filter</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="detect.html">Image Detect</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_detect.image_detect_objects.html">pyflink.multimodal.operators.image_detect.image_detect_objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_detect.image_segment.html">pyflink.multimodal.operators.image_detect.image_segment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_detect.image_ocr.html">pyflink.multimodal.operators.image_detect.image_ocr</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_detect.image_detect_subplot.html">pyflink.multimodal.operators.image_detect.image_detect_subplot</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="face.html">Image Face</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_face.image_face_detect.html">pyflink.multimodal.operators.image_face.image_face_detect</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_face.image_face_count.html">pyflink.multimodal.operators.image_face.image_face_count</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_face.image_face_blur.html">pyflink.multimodal.operators.image_face.image_face_blur</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="quality.html">Image Quality</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_quality.image_nsfw_score.html">pyflink.multimodal.operators.image_quality.image_nsfw_score</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_quality.image_aesthetic_score.html">pyflink.multimodal.operators.image_quality.image_aesthetic_score</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_quality.image_quality_score.html">pyflink.multimodal.operators.image_quality.image_quality_score</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_quality.image_watermark_score.html">pyflink.multimodal.operators.image_quality.image_watermark_score</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="embed.html">Image Embed</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_embed.image_embedding.html">pyflink.multimodal.operators.image_embed.image_embedding</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.operators.image_embed.image_text_similarity.html">pyflink.multimodal.operators.image_embed.image_text_similarity</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="image.html">Image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="video.html">Video</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utilities.html">Utilities</a></li>
 </ul>
 </div>
-</section>
 </section>
 
 
@@ -424,10 +374,10 @@ and watermark filtering.</p></li>
           <p class="prev-next-title">pyflink.dataframe.ai.llm.LLMAccessor.ai_embed</p>
       </div>
   </a>
-  <a class='right-next' id="next-link" href="transform.html" title="next page">
+  <a class='right-next' id="next-link" href="image.html" title="next page">
   <div class="prev-next-info">
       <p class="prev-next-subtitle">next</p>
-      <p class="prev-next-title">Image Transform</p>
+      <p class="prev-next-title">Image</p>
   </div>
   <i class="fa-solid fa-angle-right"></i>
   </a>

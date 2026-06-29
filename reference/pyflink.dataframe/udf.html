@@ -24,7 +24,7 @@ under the License.
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>User Defined Functions &#8212; PyFlink 1.20+vvr.11.7.dev0 documentation</title>
+    <title>User Defined Functions &#8212; PyFlink 11.8.0.preview.2 documentation</title>
   <script>
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
@@ -58,8 +58,8 @@ under the License.
     <link rel="shortcut icon" href="../../_static/navbar-brand-logo.jpg"/>
 
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="pyflink.dataframe.udf.udf" href="api/pyflink.dataframe.udf.udf.html" />
-    <link rel="prev" title="pyflink.dataframe.datatype.DataType.tensor" href="api/pyflink.dataframe.datatype.DataType.tensor.html" />
+    <link rel="next" title="pyflink.dataframe.udf" href="api/pyflink.dataframe.udf.html" />
+    <link rel="prev" title="pyflink.dataframe.DataType.image" href="api/pyflink.dataframe.DataType.image.html" />
 <script src="_static/pyflink.js" ></script>
 <link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
 
@@ -261,20 +261,21 @@ under the License.
   <div class="bd-toc-item navbar-nav">
     <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../pyflink.table/index.html">PyFlink Table</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pyflink.datastream/index.html">PyFlink DataStream</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">PyFlink DataFrame</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="dataframe.html">DataFrame</a></li>
 <li class="toctree-l2"><a class="reference internal" href="creation.html">DataFrame Creation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="io.html">Input/Output</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sql.html">SQL</a></li>
-<li class="toctree-l2"><a class="reference internal" href="datatype.html">DataType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datatype.html">Data Types</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">User Defined Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="config.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="catalog.html">Catalog</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gpu.html">GPU Support</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ai.html">AI / LLM</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../pyflink.multimodal/index.html">PyFlink Multimodal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.datastream/index.html">PyFlink DataStream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../pyflink.common/index.html">PyFlink Common</a></li>
 </ul>
 
@@ -306,39 +307,40 @@ under the License.
               
   <section id="user-defined-functions">
 <h1>User Defined Functions<a class="headerlink" href="#user-defined-functions" title="Permalink to this headline">#</a></h1>
-<p>The <a class="reference internal" href="api/pyflink.dataframe.udf.udf.html#pyflink.dataframe.udf.udf" title="pyflink.dataframe.udf.udf"><code class="xref py py-func docutils literal notranslate"><span class="pre">udf()</span></code></a> decorator creates user-defined scalar functions
-for use with the DataFrame API. It supports plain functions, async functions,
-<code class="docutils literal notranslate"><span class="pre">ScalarFunction</span></code> subclasses, and callable classes. The
-<a class="reference internal" href="api/pyflink.dataframe.udf.udtf.html#pyflink.dataframe.udf.udtf" title="pyflink.dataframe.udf.udtf"><code class="xref py py-func docutils literal notranslate"><span class="pre">udtf()</span></code></a> decorator creates user-defined table functions
-that emit zero or more rows per input, for use with
-<code class="xref py py-meth docutils literal notranslate"><span class="pre">flat_map()</span></code> and
-<code class="xref py py-meth docutils literal notranslate"><span class="pre">join_lateral()</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">udf()</span></code> decorator creates user-defined scalar functions for use with the
+DataFrame API. It supports plain functions, async functions, ScalarFunction
+subclasses, and callable classes. The <code class="docutils literal notranslate"><span class="pre">udtf()</span></code> decorator creates
+user-defined table functions that emit zero or more rows per input, for use
+with <code class="docutils literal notranslate"><span class="pre">flat_map()</span></code> and <code class="docutils literal notranslate"><span class="pre">join_lateral()</span></code>.</p>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="kn">import</span> <span class="n">udf</span><span class="p">,</span> <span class="n">udtf</span><span class="p">,</span> <span class="n">DataType</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nd">@udf</span><span class="p">(</span><span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">())</span>
 <span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">to_upper</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nd">@udtf</span><span class="p">(</span><span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">())</span>
 <span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">split_words</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
 <span class="gp">... </span>        <span class="k">yield</span> <span class="n">word</span>
 </pre></div>
 </div>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">#</a></h2>
 <table class="autosummary longtable table autosummary">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.udf.udf.html#pyflink.dataframe.udf.udf" title="pyflink.dataframe.udf.udf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">udf</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.udf.html#pyflink.dataframe.udf" title="pyflink.dataframe.udf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">udf</span></code></a>()</p></td>
 <td><p>Create a user-defined function for DataFrame operations.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.udf.udtf.html#pyflink.dataframe.udf.udtf" title="pyflink.dataframe.udf.udtf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">udtf</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.udtf.html#pyflink.dataframe.udtf" title="pyflink.dataframe.udtf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">udtf</span></code></a>()</p></td>
 <td><p>Create a user-defined table function for DataFrame operations.</p></td>
 </tr>
 </tbody>
 </table>
+</section>
 </section>
 
 
@@ -349,17 +351,17 @@ that emit zero or more rows per input, for use with
             <footer class="bd-footer-article">
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-  <a class='left-prev' id="prev-link" href="api/pyflink.dataframe.datatype.DataType.tensor.html" title="previous page">
+  <a class='left-prev' id="prev-link" href="api/pyflink.dataframe.DataType.image.html" title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
           <p class="prev-next-subtitle">previous</p>
-          <p class="prev-next-title">pyflink.dataframe.datatype.DataType.tensor</p>
+          <p class="prev-next-title">pyflink.dataframe.DataType.image</p>
       </div>
   </a>
-  <a class='right-next' id="next-link" href="api/pyflink.dataframe.udf.udf.html" title="next page">
+  <a class='right-next' id="next-link" href="api/pyflink.dataframe.udf.html" title="next page">
   <div class="prev-next-info">
       <p class="prev-next-subtitle">next</p>
-      <p class="prev-next-title">pyflink.dataframe.udf.udf</p>
+      <p class="prev-next-title">pyflink.dataframe.udf</p>
   </div>
   <i class="fa-solid fa-angle-right"></i>
   </a>
@@ -372,6 +374,23 @@ that emit zero or more rows per input, for use with
           
             <div class="bd-sidebar-secondary bd-toc">
               
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functions">
+   Functions
+  </a>
+ </li>
+</ul>
+
+</nav>
+</div>
+
 <div class="toc-item">
   
 <div id="searchbox"></div>
