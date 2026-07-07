@@ -1,0 +1,469 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>pyflink.table.table_environment.StreamTableEnvironment.to_changelog_stream &#8212; PyFlink 11.8.0rc0 documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/pyflink.table/api/pyflink.table.table_environment.StreamTableEnvironment.to_changelog_stream';</script>
+    <link rel="shortcut icon" href="../../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="pyflink.table.table_environment.StreamTableEnvironment.to_append_stream" href="pyflink.table.table_environment.StreamTableEnvironment.to_append_stream.html" />
+    <link rel="prev" title="pyflink.table.table_environment.StreamTableEnvironment.to_data_stream" href="pyflink.table.table_environment.StreamTableEnvironment.to_data_stream.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="Logo image">
+    <img src="../../../_static/navbar-brand-logo.jpg" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../../index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../../index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Section navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">
+    Section Navigation
+  </p>
+  <div class="bd-toc-item navbar-nav">
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">PyFlink Table</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="reference internal" href="../table_environment.html">TableEnvironment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../table.html">Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_types.html">Data Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../window.html">Window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../expressions.html">Expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../udf.html">User Defined Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../descriptors.html">Descriptors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../statement_set.html">StatementSet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../catalog.html">Catalog</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyflink.dataframe/index.html">PyFlink DataFrame</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyflink.multimodal/index.html">PyFlink Multimodal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyflink.datastream/index.html">PyFlink DataStream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyflink.common/index.html">PyFlink Common</a></li>
+</ul>
+
+  </div>
+</nav>
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <section id="pyflink-table-table-environment-streamtableenvironment-to-changelog-stream">
+<h1>pyflink.table.table_environment.StreamTableEnvironment.to_changelog_stream<a class="headerlink" href="#pyflink-table-table-environment-streamtableenvironment-to-changelog-stream" title="Permalink to this headline">#</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyflink.table.table_environment.StreamTableEnvironment.to_changelog_stream">
+<span class="sig-prename descclassname"><span class="pre">StreamTableEnvironment.</span></span><span class="sig-name descname"><span class="pre">to_changelog_stream</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pyflink.table.table.Table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_schema</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">pyflink.table.schema.Schema</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">changelog_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">pyflink.table.changelog_mode.ChangelogMode</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pyflink.datastream.data_stream.DataStream</span></span></span><a class="reference internal" href="../../../_modules/pyflink/table/table_environment.html#StreamTableEnvironment.to_changelog_stream"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyflink.table.table_environment.StreamTableEnvironment.to_changelog_stream" title="Permalink to this definition">#</a></dt>
+<dd><p>Converts the given Table into a DataStream of changelog entries.</p>
+<p>Compared to <a class="reference internal" href="pyflink.table.table_environment.StreamTableEnvironment.to_data_stream.html#pyflink.table.table_environment.StreamTableEnvironment.to_data_stream" title="pyflink.table.table_environment.StreamTableEnvironment.to_data_stream"><code class="xref py py-func docutils literal notranslate"><span class="pre">to_data_stream()</span></code></a>, this method produces instances of Row and sets the
+RowKind flag that is contained in every record during runtime. The runtime behavior is
+similar to that of a DynamicTableSink.</p>
+<p>If you don’t specify the changelog_mode, the changelog containing all kinds of changes
+(enumerated in RowKind) as the default ChangelogMode.</p>
+<p>The given Schema is used to configure the table runtime to convert columns and internal data
+structures to the desired representation. The following example shows how to
+convert a table column into a Row type.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table_env</span><span class="o">.</span><span class="n">to_changelog_stream</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">table</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">Schema</span><span class="o">.</span><span class="n">new_builder</span><span class="p">()</span>             <span class="o">...</span>         <span class="o">.</span><span class="n">column</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">BIGINT</span><span class="p">())</span>
+<span class="gp">... </span>        <span class="o">.</span><span class="n">column</span><span class="p">(</span><span class="s2">&quot;payload&quot;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">ROW</span><span class="p">(</span>
+<span class="gp">... </span>                                    <span class="p">[</span><span class="n">DataTypes</span><span class="o">.</span><span class="n">FIELD</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">()),</span>
+<span class="gp">... </span>                                     <span class="n">DataTypes</span><span class="o">.</span><span class="n">FIELD</span><span class="p">(</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">INT</span><span class="p">())]))</span>
+<span class="gp">... </span>        <span class="o">.</span><span class="n">build</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Note that the type system of the table ecosystem is richer than the one of the DataStream
+API. The table runtime will make sure to properly serialize the output records to the first
+operator of the DataStream API. Afterwards, the Types semantics of the DataStream API need
+to be considered.</p>
+<p>If the input table contains a single rowtime column, it will be propagated into a stream
+record’s timestamp. Watermarks will be propagated as well.</p>
+<p>If the rowtime should not be a concrete field in the final Row anymore, or the schema should
+be symmetrical for both <a class="reference internal" href="pyflink.table.table_environment.StreamTableEnvironment.from_changelog_stream.html#pyflink.table.table_environment.StreamTableEnvironment.from_changelog_stream" title="pyflink.table.table_environment.StreamTableEnvironment.from_changelog_stream"><code class="xref py py-func docutils literal notranslate"><span class="pre">from_changelog_stream()</span></code></a> and <a class="reference internal" href="#pyflink.table.table_environment.StreamTableEnvironment.to_changelog_stream" title="pyflink.table.table_environment.StreamTableEnvironment.to_changelog_stream"><code class="xref py py-func docutils literal notranslate"><span class="pre">to_changelog_stream()</span></code></a>, the
+rowtime can also be declared as a metadata column that will be propagated into a stream
+record’s timestamp. It is possible to declare a schema without physical/regular columns.
+In this case, those columns will be automatically derived and implicitly put at the
+beginning of the schema declaration.</p>
+<p>The following examples illustrate common schema declarations and their semantics:</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">given</span> <span class="n">a</span> <span class="n">Table</span> <span class="n">of</span> <span class="p">(</span><span class="nb">id</span> <span class="n">INT</span><span class="p">,</span> <span class="n">name</span> <span class="n">STRING</span><span class="p">,</span> <span class="n">my_rowtime</span> <span class="n">TIMESTAMP_LTZ</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="o">===</span> <span class="n">EXAMPLE</span> <span class="mi">1</span> <span class="o">===</span>
+
+<span class="n">no</span> <span class="n">physical</span> <span class="n">columns</span> <span class="n">defined</span><span class="p">,</span> <span class="n">they</span> <span class="n">will</span> <span class="n">be</span> <span class="n">derived</span> <span class="n">automatically</span><span class="p">,</span>
+<span class="n">the</span> <span class="n">last</span> <span class="n">derived</span> <span class="n">physical</span> <span class="n">column</span> <span class="n">will</span> <span class="n">be</span> <span class="n">skipped</span> <span class="ow">in</span> <span class="n">favor</span> <span class="n">of</span> <span class="n">the</span> <span class="n">metadata</span> <span class="n">column</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Schema</span><span class="o">.</span><span class="n">new_builder</span><span class="p">()</span>             <span class="o">...</span>     <span class="o">.</span><span class="n">column_by_metadata</span><span class="p">(</span><span class="s2">&quot;rowtime&quot;</span><span class="p">,</span> <span class="s2">&quot;TIMESTAMP_LTZ(3)&quot;</span><span class="p">)</span>             <span class="o">...</span>     <span class="o">.</span><span class="n">build</span><span class="p">()</span>
+
+<span class="n">equal</span> <span class="n">to</span><span class="p">:</span> <span class="n">CREATE</span> <span class="n">TABLE</span> <span class="p">(</span><span class="nb">id</span> <span class="n">INT</span><span class="p">,</span> <span class="n">name</span> <span class="n">STRING</span><span class="p">,</span> <span class="n">rowtime</span> <span class="n">TIMESTAMP_LTZ</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="n">METADATA</span><span class="p">)</span>
+
+<span class="o">===</span> <span class="n">EXAMPLE</span> <span class="mi">2</span> <span class="o">===</span>
+
+<span class="n">physical</span> <span class="n">columns</span> <span class="n">defined</span><span class="p">,</span> <span class="nb">all</span> <span class="n">columns</span> <span class="n">must</span> <span class="n">be</span> <span class="n">defined</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Schema</span><span class="o">.</span><span class="n">new_builder</span><span class="p">()</span>             <span class="o">...</span>     <span class="o">.</span><span class="n">column</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;INT&quot;</span><span class="p">)</span>             <span class="o">...</span>     <span class="o">.</span><span class="n">column</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;STRING&quot;</span><span class="p">)</span>             <span class="o">...</span>     <span class="o">.</span><span class="n">column_by_metadata</span><span class="p">(</span><span class="s2">&quot;rowtime&quot;</span><span class="p">,</span> <span class="s2">&quot;TIMESTAMP_LTZ(3)&quot;</span><span class="p">)</span>             <span class="o">...</span>     <span class="o">.</span><span class="n">build</span><span class="p">()</span>
+
+<span class="n">equal</span> <span class="n">to</span><span class="p">:</span> <span class="n">CREATE</span> <span class="n">TABLE</span> <span class="p">(</span><span class="nb">id</span> <span class="n">INT</span><span class="p">,</span> <span class="n">name</span> <span class="n">STRING</span><span class="p">,</span> <span class="n">rowtime</span> <span class="n">TIMESTAMP_LTZ</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="n">METADATA</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>table</strong> – The Table to convert. It can be updating or insert-only.</p></li>
+<li><p><strong>target_schema</strong> – The Schema that decides about the final external representation in
+DataStream records.</p></li>
+<li><p><strong>changelog_mode</strong> – The required kinds of changes in the result changelog. An exception
+will be thrown if the given updating table cannot be represented in this changelog mode.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The converted changelog stream of Row.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="pyflink.table.table_environment.StreamTableEnvironment.to_data_stream.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">pyflink.table.table_environment.StreamTableEnvironment.to_data_stream</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="pyflink.table.table_environment.StreamTableEnvironment.to_append_stream.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">pyflink.table.table_environment.StreamTableEnvironment.to_append_stream</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+<div class="tocsection sourcelink">
+    <a href="../../../_sources/reference/pyflink.table/api/pyflink.table.table_environment.StreamTableEnvironment.to_changelog_stream.rst.txt">
+        <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+</div>
+
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

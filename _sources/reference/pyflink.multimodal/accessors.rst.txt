@@ -1,0 +1,216 @@
+.. ################################################################################
+     Licensed to the Apache Software Foundation (ASF) under one
+     or more contributor license agreements.  See the NOTICE file
+     distributed with this work for additional information
+     regarding copyright ownership.  The ASF licenses this file
+     to you under the Apache License, Version 2.0 (the
+     "License"); you may not use this file except in compliance
+     with the License.  You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+    limitations under the License.
+   ################################################################################
+
+=========
+Accessors
+=========
+
+PyFlink expressions provide ``image``, ``video``, and ``audio`` namespaces for
+invoking multimodal operations with the expression on the left side. The
+examples below show one way to use them.
+
+Examples::
+
+    >>> from pyflink.dataframe import col
+    >>> df = df.with_column(
+    ...     "thumbnail", col("img").image.resize(width=224, height=224))
+    >>> df = df.with_column(
+    ...     "frames", col("video_uri").video.extract_frames(max_frames=16))
+    >>> df = df.with_column(
+    ...     "transcript", col("audio_bytes").audio.asr_whisper())
+
+Image Accessor
+--------------
+
+Use the ``image`` namespace on PyFlink expressions to call image operations.
+
+.. currentmodule:: pyflink.multimodal.expression
+
+.. autosummary::
+    :toctree: api/
+
+    ImageExpressionAccessor
+
+Image Transform
+~~~~~~~~~~~~~~~
+
+.. currentmodule:: pyflink.multimodal.expression
+
+.. autosummary::
+    :toctree: api/
+
+    ImageExpressionAccessor.decode
+    ImageExpressionAccessor.encode
+    ImageExpressionAccessor.compress
+    ImageExpressionAccessor.convert_format
+    ImageExpressionAccessor.to_tensor
+    ImageExpressionAccessor.convert_mode
+    ImageExpressionAccessor.resize
+    ImageExpressionAccessor.rescale
+    ImageExpressionAccessor.crop
+    ImageExpressionAccessor.crop_black_border
+    ImageExpressionAccessor.flip
+    ImageExpressionAccessor.blur
+    ImageExpressionAccessor.adjust_color
+    ImageExpressionAccessor.remove_background
+
+
+Image Information
+~~~~~~~~~~~~~~~~~
+
+.. currentmodule:: pyflink.multimodal.expression
+
+.. autosummary::
+    :toctree: api/
+
+    ImageExpressionAccessor.metadata
+    ImageExpressionAccessor.aspect_ratio
+    ImageExpressionAccessor.sharpness
+    ImageExpressionAccessor.hash
+    ImageExpressionAccessor.is_valid
+    ImageExpressionAccessor.size_filter
+    ImageExpressionAccessor.shape_filter
+    ImageExpressionAccessor.file_size_filter
+
+
+Image Detection
+~~~~~~~~~~~~~~~
+
+.. currentmodule:: pyflink.multimodal.expression
+
+.. autosummary::
+    :toctree: api/
+
+    ImageExpressionAccessor.detect_objects
+    ImageExpressionAccessor.segment
+    ImageExpressionAccessor.ocr
+    ImageExpressionAccessor.detect_subplot
+
+
+Image Face
+~~~~~~~~~~
+
+.. currentmodule:: pyflink.multimodal.expression
+
+.. autosummary::
+    :toctree: api/
+
+    ImageExpressionAccessor.face_detect
+    ImageExpressionAccessor.face_count
+    ImageExpressionAccessor.face_blur
+
+
+Image Quality
+~~~~~~~~~~~~~
+
+.. currentmodule:: pyflink.multimodal.expression
+
+.. autosummary::
+    :toctree: api/
+
+    ImageExpressionAccessor.nsfw_score
+    ImageExpressionAccessor.aesthetic_score
+    ImageExpressionAccessor.quality_score
+    ImageExpressionAccessor.watermark_score
+
+
+Image Embedding
+~~~~~~~~~~~~~~~
+
+.. currentmodule:: pyflink.multimodal.expression
+
+.. autosummary::
+    :toctree: api/
+
+    ImageExpressionAccessor.embedding
+    ImageExpressionAccessor.text_similarity
+
+
+Video Accessor
+--------------
+
+Use the ``video`` namespace on PyFlink expressions to call video operations.
+
+.. currentmodule:: pyflink.multimodal.expression
+
+.. autosummary::
+    :toctree: api/
+
+    VideoExpressionAccessor
+    VideoExpressionAccessor.metadata
+    VideoExpressionAccessor.extract_frames
+
+
+Audio Accessor
+--------------
+
+Use the ``audio`` namespace on PyFlink expressions to call audio operations.
+
+.. currentmodule:: pyflink.multimodal.expression
+
+.. autosummary::
+    :toctree: api/
+
+    AudioExpressionAccessor
+
+Audio Information
+~~~~~~~~~~~~~~~~~
+
+.. currentmodule:: pyflink.multimodal.expression
+
+.. autosummary::
+    :toctree: api/
+
+    AudioExpressionAccessor.is_valid
+    AudioExpressionAccessor.metadata
+    AudioExpressionAccessor.duration
+    AudioExpressionAccessor.duration_filter
+    AudioExpressionAccessor.size_filter
+    AudioExpressionAccessor.silence_detection
+    AudioExpressionAccessor.detect_speech
+
+
+Audio Transform
+~~~~~~~~~~~~~~~
+
+.. currentmodule:: pyflink.multimodal.expression
+
+.. autosummary::
+    :toctree: api/
+
+    AudioExpressionAccessor.decode
+    AudioExpressionAccessor.encode
+    AudioExpressionAccessor.convert_format
+    AudioExpressionAccessor.standardize
+    AudioExpressionAccessor.resample
+    AudioExpressionAccessor.split_by_duration
+    AudioExpressionAccessor.split_by_timestamp
+    AudioExpressionAccessor.split_by_speech
+    AudioExpressionAccessor.concat
+
+
+Audio Speech
+~~~~~~~~~~~~
+
+.. currentmodule:: pyflink.multimodal.expression
+
+.. autosummary::
+    :toctree: api/
+
+    AudioExpressionAccessor.asr_whisper
+    AudioExpressionAccessor.detect_language

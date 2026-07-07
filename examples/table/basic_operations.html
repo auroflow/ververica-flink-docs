@@ -1,0 +1,880 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Basic Operations &#8212; PyFlink 11.8.0rc0 documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/table/basic_operations';</script>
+    <link rel="shortcut icon" href="../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Mixing Use Of Datastream And Table" href="mixing_use_of_datastream_and_table.html" />
+    <link rel="prev" title="Json Data Process" href="process_json_data.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="Logo image">
+    <img src="../../_static/navbar-brand-logo.jpg" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Section navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">
+    Section Navigation
+  </p>
+  <div class="bd-toc-item navbar-nav">
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Table Examples</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="word_count.html">Word Count</a></li>
+<li class="toctree-l2"><a class="reference internal" href="process_json_data.html">Json Data Process</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Basic Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mixing_use_of_datastream_and_table.html">Mixing Use Of Datastream And Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pandas.html">Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="window.html">Window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi_sink.html">Multi Sink</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../datastream/index.html">DataStream Examples</a></li>
+</ul>
+
+  </div>
+</nav>
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <section id="basic-operations">
+<h1>Basic Operations<a class="headerlink" href="#basic-operations" title="Permalink to this headline">#</a></h1>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">################################################################################</span>
+<span class="c1">#  Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="c1">#  or more contributor license agreements.  See the NOTICE file</span>
+<span class="c1">#  distributed with this work for additional information</span>
+<span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
+<span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
+<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  with the License.  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">################################################################################</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">Row</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">DataTypes</span><span class="p">,</span> <span class="n">TableEnvironment</span><span class="p">,</span> <span class="n">EnvironmentSettings</span><span class="p">,</span> <span class="n">ExplainDetail</span><span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.expressions</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.udf</span><span class="w"> </span><span class="kn">import</span> <span class="n">udtf</span><span class="p">,</span> <span class="n">udf</span><span class="p">,</span> <span class="n">udaf</span><span class="p">,</span> <span class="n">AggregateFunction</span><span class="p">,</span> <span class="n">TableAggregateFunction</span><span class="p">,</span> <span class="n">udtaf</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">basic_operations</span><span class="p">():</span>
+    <span class="n">t_env</span> <span class="o">=</span> <span class="n">TableEnvironment</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">EnvironmentSettings</span><span class="o">.</span><span class="n">in_streaming_mode</span><span class="p">())</span>
+
+    <span class="c1"># define the source</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">t_env</span><span class="o">.</span><span class="n">from_elements</span><span class="p">(</span>
+        <span class="n">elements</span><span class="o">=</span><span class="p">[</span>
+            <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;{&quot;name&quot;: &quot;Flink&quot;, &quot;tel&quot;: 123, &quot;addr&quot;: {&quot;country&quot;: &quot;Germany&quot;, &quot;city&quot;: &quot;Berlin&quot;}}&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;{&quot;name&quot;: &quot;hello&quot;, &quot;tel&quot;: 135, &quot;addr&quot;: {&quot;country&quot;: &quot;China&quot;, &quot;city&quot;: &quot;Shanghai&quot;}}&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;{&quot;name&quot;: &quot;world&quot;, &quot;tel&quot;: 124, &quot;addr&quot;: {&quot;country&quot;: &quot;USA&quot;, &quot;city&quot;: &quot;NewYork&quot;}}&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;{&quot;name&quot;: &quot;PyFlink&quot;, &quot;tel&quot;: 32, &quot;addr&quot;: {&quot;country&quot;: &quot;China&quot;, &quot;city&quot;: &quot;Hangzhou&quot;}}&#39;</span><span class="p">)</span>
+        <span class="p">],</span>
+        <span class="n">schema</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">])</span>
+
+    <span class="n">right_table</span> <span class="o">=</span> <span class="n">t_env</span><span class="o">.</span><span class="n">from_elements</span><span class="p">(</span><span class="n">elements</span><span class="o">=</span><span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">18</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">)],</span>
+                                      <span class="n">schema</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">])</span>
+
+    <span class="n">table</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">add_columns</span><span class="p">(</span>
+                    <span class="n">col</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">json_value</span><span class="p">(</span><span class="s1">&#39;$.name&#39;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">())</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">),</span>
+                    <span class="n">col</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">json_value</span><span class="p">(</span><span class="s1">&#39;$.tel&#39;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">())</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;tel&#39;</span><span class="p">),</span>
+                    <span class="n">col</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">json_value</span><span class="p">(</span><span class="s1">&#39;$.addr.country&#39;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">())</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">))</span> \
+                 <span class="o">.</span><span class="n">drop_columns</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">))</span>
+    <span class="n">table</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+    <span class="c1"># +----+----------------------+--------------------------------+--------------------------------+--------------------------------+</span>
+    <span class="c1"># | op |                   id |                           name |                            tel |                        country |</span>
+    <span class="c1"># +----+----------------------+--------------------------------+--------------------------------+--------------------------------+</span>
+    <span class="c1"># | +I |                    1 |                          Flink |                            123 |                        Germany |</span>
+    <span class="c1"># | +I |                    2 |                          hello |                            135 |                          China |</span>
+    <span class="c1"># | +I |                    3 |                          world |                            124 |                            USA |</span>
+    <span class="c1"># | +I |                    4 |                        PyFlink |                             32 |                          China |</span>
+    <span class="c1"># +----+----------------------+--------------------------------+--------------------------------+--------------------------------+</span>
+
+    <span class="c1"># limit the number of outputs</span>
+    <span class="n">table</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+    <span class="c1"># +----+----------------------+--------------------------------+--------------------------------+--------------------------------+</span>
+    <span class="c1"># | op |                   id |                           name |                            tel |                        country |</span>
+    <span class="c1"># +----+----------------------+--------------------------------+--------------------------------+--------------------------------+</span>
+    <span class="c1"># | +I |                    1 |                          Flink |                            123 |                        Germany |</span>
+    <span class="c1"># | +I |                    2 |                          hello |                            135 |                          China |</span>
+    <span class="c1"># | +I |                    3 |                          world |                            124 |                            USA |</span>
+    <span class="c1"># +----+----------------------+--------------------------------+--------------------------------+--------------------------------+</span>
+
+    <span class="c1"># filter</span>
+    <span class="n">table</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+    <span class="c1"># +----+----------------------+--------------------------------+--------------------------------+--------------------------------+</span>
+    <span class="c1"># | op |                   id |                           name |                            tel |                        country |</span>
+    <span class="c1"># +----+----------------------+--------------------------------+--------------------------------+--------------------------------+</span>
+    <span class="c1"># | +I |                    1 |                          Flink |                            123 |                        Germany |</span>
+    <span class="c1"># | +I |                    2 |                          hello |                            135 |                          China |</span>
+    <span class="c1"># | +I |                    4 |                        PyFlink |                             32 |                          China |</span>
+    <span class="c1"># +----+----------------------+--------------------------------+--------------------------------+--------------------------------+</span>
+
+    <span class="c1"># aggregation</span>
+    <span class="n">table</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">))</span> \
+         <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">),</span> <span class="n">col</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s1">&#39;tel&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">DataTypes</span><span class="o">.</span><span class="n">BIGINT</span><span class="p">())</span><span class="o">.</span><span class="n">max</span><span class="p">)</span> \
+         <span class="o">.</span><span class="n">execute</span><span class="p">()</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+    <span class="c1"># +----+--------------------------------+----------------------+----------------------+</span>
+    <span class="c1"># | op |                        country |               EXPR$0 |               EXPR$1 |</span>
+    <span class="c1"># +----+--------------------------------+----------------------+----------------------+</span>
+    <span class="c1"># | +I |                        Germany |                    1 |                  123 |</span>
+    <span class="c1"># | +I |                            USA |                    1 |                  124 |</span>
+    <span class="c1"># | +I |                          China |                    1 |                  135 |</span>
+    <span class="c1"># | -U |                          China |                    1 |                  135 |</span>
+    <span class="c1"># | +U |                          China |                    2 |                  135 |</span>
+    <span class="c1"># +----+--------------------------------+----------------------+----------------------+</span>
+
+    <span class="c1"># distinct</span>
+    <span class="n">table</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span> \
+         <span class="o">.</span><span class="n">execute</span><span class="p">()</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+    <span class="c1"># +----+--------------------------------+</span>
+    <span class="c1"># | op |                        country |</span>
+    <span class="c1"># +----+--------------------------------+</span>
+    <span class="c1"># | +I |                        Germany |</span>
+    <span class="c1"># | +I |                          China |</span>
+    <span class="c1"># | +I |                            USA |</span>
+    <span class="c1"># +----+--------------------------------+</span>
+
+    <span class="c1"># join</span>
+    <span class="c1"># Note that it still doesn&#39;t support duplicate column names between the joined tables</span>
+    <span class="n">table</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">right_table</span><span class="o">.</span><span class="n">rename_columns</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;r_id&#39;</span><span class="p">)),</span> <span class="n">col</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">col</span><span class="p">(</span><span class="s1">&#39;r_id&#39;</span><span class="p">))</span> \
+         <span class="o">.</span><span class="n">execute</span><span class="p">()</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+    <span class="c1"># +----+----------------------+--------------------------------+--------------------------------+--------------------------------+----------------------+----------------------+</span>
+    <span class="c1"># | op |                   id |                           name |                            tel |                        country |                 r_id |                  age |</span>
+    <span class="c1"># +----+----------------------+--------------------------------+--------------------------------+--------------------------------+----------------------+----------------------+</span>
+    <span class="c1"># | +I |                    4 |                        PyFlink |                             32 |                          China |                    4 |                   10 |</span>
+    <span class="c1"># | +I |                    1 |                          Flink |                            123 |                        Germany |                    1 |                   18 |</span>
+    <span class="c1"># | +I |                    2 |                          hello |                            135 |                          China |                    2 |                   30 |</span>
+    <span class="c1"># | +I |                    3 |                          world |                            124 |                            USA |                    3 |                   25 |</span>
+    <span class="c1"># +----+----------------------+--------------------------------+--------------------------------+--------------------------------+----------------------+----------------------+</span>
+
+    <span class="c1"># join lateral</span>
+    <span class="nd">@udtf</span><span class="p">(</span><span class="n">result_types</span><span class="o">=</span><span class="p">[</span><span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">()])</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">split</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="n">Row</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;i&quot;</span><span class="p">):</span>
+            <span class="k">yield</span> <span class="n">s</span>
+
+    <span class="n">table</span><span class="o">.</span><span class="n">join_lateral</span><span class="p">(</span><span class="n">split</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">))</span> \
+         <span class="o">.</span><span class="n">execute</span><span class="p">()</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+    <span class="c1"># +----+----------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+</span>
+    <span class="c1"># | op |                   id |                           name |                            tel |                        country |                              a |</span>
+    <span class="c1"># +----+----------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+</span>
+    <span class="c1"># | +I |                    1 |                          Flink |                            123 |                        Germany |                             Fl |</span>
+    <span class="c1"># | +I |                    1 |                          Flink |                            123 |                        Germany |                             nk |</span>
+    <span class="c1"># | +I |                    2 |                          hello |                            135 |                          China |                          hello |</span>
+    <span class="c1"># | +I |                    3 |                          world |                            124 |                            USA |                          world |</span>
+    <span class="c1"># | +I |                    4 |                        PyFlink |                             32 |                          China |                           PyFl |</span>
+    <span class="c1"># | +I |                    4 |                        PyFlink |                             32 |                          China |                             nk |</span>
+    <span class="c1"># +----+----------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+</span>
+
+    <span class="c1"># show schema</span>
+    <span class="n">table</span><span class="o">.</span><span class="n">print_schema</span><span class="p">()</span>
+    <span class="c1"># (</span>
+    <span class="c1">#   `id` BIGINT,</span>
+    <span class="c1">#   `name` STRING,</span>
+    <span class="c1">#   `tel` STRING,</span>
+    <span class="c1">#   `country` STRING</span>
+    <span class="c1"># )</span>
+
+    <span class="c1"># show execute plan</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">join_lateral</span><span class="p">(</span><span class="n">split</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">explain</span><span class="p">())</span>
+    <span class="c1"># == Abstract Syntax Tree ==</span>
+    <span class="c1"># LogicalCorrelate(correlation=[$cor1], joinType=[inner], requiredColumns=[{}])</span>
+    <span class="c1"># :- LogicalProject(id=[$0], name=[JSON_VALUE($1, _UTF-16LE&#39;$.name&#39;, FLAG(NULL), FLAG(ON EMPTY), FLAG(NULL), FLAG(ON ERROR))], tel=[JSON_VALUE($1, _UTF-16LE&#39;$.tel&#39;, FLAG(NULL), FLAG(ON EMPTY), FLAG(NULL), FLAG(ON ERROR))], country=[JSON_VALUE($1, _UTF-16LE&#39;$.addr.country&#39;, FLAG(NULL), FLAG(ON EMPTY), FLAG(NULL), FLAG(ON ERROR))])</span>
+    <span class="c1"># :  +- LogicalTableScan(table=[[default_catalog, default_database, Unregistered_TableSource_249535355, source: [PythonInputFormatTableSource(id, data)]]])</span>
+    <span class="c1"># +- LogicalTableFunctionScan(invocation=[*org.apache.flink.table.functions.python.PythonTableFunction$1f0568d1f39bef59b4c969a5d620ba46*($0, $1, $2, $3)], rowType=[RecordType(VARCHAR(2147483647) a)], elementType=[class [Ljava.lang.Object;])</span>
+    <span class="c1">#</span>
+    <span class="c1"># == Optimized Physical Plan ==</span>
+    <span class="c1"># PythonCorrelate(invocation=[*org.apache.flink.table.functions.python.PythonTableFunction$1f0568d1f39bef59b4c969a5d620ba46*($0, $1, $2, $3)], correlate=[table(split(id,name,tel,country))], select=[id,name,tel,country,a], rowType=[RecordType(BIGINT id, VARCHAR(2147483647) name, VARCHAR(2147483647) tel, VARCHAR(2147483647) country, VARCHAR(2147483647) a)], joinType=[INNER])</span>
+    <span class="c1"># +- Calc(select=[id, JSON_VALUE(data, _UTF-16LE&#39;$.name&#39;, FLAG(NULL), FLAG(ON EMPTY), FLAG(NULL), FLAG(ON ERROR)) AS name, JSON_VALUE(data, _UTF-16LE&#39;$.tel&#39;, FLAG(NULL), FLAG(ON EMPTY), FLAG(NULL), FLAG(ON ERROR)) AS tel, JSON_VALUE(data, _UTF-16LE&#39;$.addr.country&#39;, FLAG(NULL), FLAG(ON EMPTY), FLAG(NULL), FLAG(ON ERROR)) AS country])</span>
+    <span class="c1">#    +- LegacyTableSourceScan(table=[[default_catalog, default_database, Unregistered_TableSource_249535355, source: [PythonInputFormatTableSource(id, data)]]], fields=[id, data])</span>
+    <span class="c1">#</span>
+    <span class="c1"># == Optimized Execution Plan ==</span>
+    <span class="c1"># PythonCorrelate(invocation=[*org.apache.flink.table.functions.python.PythonTableFunction$1f0568d1f39bef59b4c969a5d620ba46*($0, $1, $2, $3)], correlate=[table(split(id,name,tel,country))], select=[id,name,tel,country,a], rowType=[RecordType(BIGINT id, VARCHAR(2147483647) name, VARCHAR(2147483647) tel, VARCHAR(2147483647) country, VARCHAR(2147483647) a)], joinType=[INNER])</span>
+    <span class="c1"># +- Calc(select=[id, JSON_VALUE(data, &#39;$.name&#39;, NULL, ON EMPTY, NULL, ON ERROR) AS name, JSON_VALUE(data, &#39;$.tel&#39;, NULL, ON EMPTY, NULL, ON ERROR) AS tel, JSON_VALUE(data, &#39;$.addr.country&#39;, NULL, ON EMPTY, NULL, ON ERROR) AS country])</span>
+    <span class="c1">#    +- LegacyTableSourceScan(table=[[default_catalog, default_database, Unregistered_TableSource_249535355, source: [PythonInputFormatTableSource(id, data)]]], fields=[id, data])</span>
+
+    <span class="c1"># show execute plan with advice</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">join_lateral</span><span class="p">(</span><span class="n">split</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="n">ExplainDetail</span><span class="o">.</span><span class="n">PLAN_ADVICE</span><span class="p">))</span>
+    <span class="c1"># == Abstract Syntax Tree ==</span>
+    <span class="c1"># LogicalCorrelate(correlation=[$cor2], joinType=[inner], requiredColumns=[{}])</span>
+    <span class="c1"># :- LogicalProject(id=[$0], name=[JSON_VALUE($1, _UTF-16LE&#39;$.name&#39;, FLAG(NULL), FLAG(ON EMPTY), FLAG(NULL), FLAG(ON ERROR))], tel=[JSON_VALUE($1, _UTF-16LE&#39;$.tel&#39;, FLAG(NULL), FLAG(ON EMPTY), FLAG(NULL), FLAG(ON ERROR))], country=[JSON_VALUE($1, _UTF-16LE&#39;$.addr.country&#39;, FLAG(NULL), FLAG(ON EMPTY), FLAG(NULL), FLAG(ON ERROR))])</span>
+    <span class="c1"># :  +- LogicalTableScan(table=[[*anonymous_python-input-format$1*]])</span>
+    <span class="c1"># +- LogicalTableFunctionScan(invocation=[*org.apache.flink.table.functions.python.PythonTableFunction$720258394f6a31d31376164d23142f53*($0, $1, $2, $3)], rowType=[RecordType(VARCHAR(2147483647) a)])</span>
+    <span class="c1">#</span>
+    <span class="c1"># == Optimized Physical Plan With Advice ==</span>
+    <span class="c1"># PythonCorrelate(invocation=[*org.apache.flink.table.functions.python.PythonTableFunction$720258394f6a31d31376164d23142f53*($0, $1, $2, $3)], correlate=[table(*org.apache.flink.table.functions.python.PythonTableFunction$720258394f6a31d31376164d23142f53*(id,name,tel,country))], select=[id,name,tel,country,a], rowType=[RecordType(BIGINT id, VARCHAR(2147483647) name, VARCHAR(2147483647) tel, VARCHAR(2147483647) country, VARCHAR(2147483647) a)], joinType=[INNER])</span>
+    <span class="c1"># +- Calc(select=[id, JSON_VALUE(data, _UTF-16LE&#39;$.name&#39;, FLAG(NULL), FLAG(ON EMPTY), FLAG(NULL), FLAG(ON ERROR)) AS name, JSON_VALUE(data, _UTF-16LE&#39;$.tel&#39;, FLAG(NULL), FLAG(ON EMPTY), FLAG(NULL), FLAG(ON ERROR)) AS tel, JSON_VALUE(data, _UTF-16LE&#39;$.addr.country&#39;, FLAG(NULL), FLAG(ON EMPTY), FLAG(NULL), FLAG(ON ERROR)) AS country])</span>
+    <span class="c1">#    +- TableSourceScan(table=[[*anonymous_python-input-format$1*]], fields=[id, data])</span>
+    <span class="c1">#</span>
+    <span class="c1"># No available advice...</span>
+    <span class="c1">#</span>
+    <span class="c1"># == Optimized Execution Plan ==</span>
+    <span class="c1"># PythonCorrelate(invocation=[*org.apache.flink.table.functions.python.PythonTableFunction$720258394f6a31d31376164d23142f53*($0, $1, $2, $3)], correlate=[table(*org.apache.flink.table.functions.python.PythonTableFunction$720258394f6a31d31376164d23142f53*(id,name,tel,country))], select=[id,name,tel,country,a], rowType=[RecordType(BIGINT id, VARCHAR(2147483647) name, VARCHAR(2147483647) tel, VARCHAR(2147483647) country, VARCHAR(2147483647) a)], joinType=[INNER])</span>
+    <span class="c1"># +- Calc(select=[id, JSON_VALUE(data, &#39;$.name&#39;, NULL, ON EMPTY, NULL, ON ERROR) AS name, JSON_VALUE(data, &#39;$.tel&#39;, NULL, ON EMPTY, NULL, ON ERROR) AS tel, JSON_VALUE(data, &#39;$.addr.country&#39;, NULL, ON EMPTY, NULL, ON ERROR) AS country])</span>
+    <span class="c1">#    +- TableSourceScan(table=[[*anonymous_python-input-format$1*]], fields=[id, data])</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">sql_operations</span><span class="p">():</span>
+    <span class="n">t_env</span> <span class="o">=</span> <span class="n">TableEnvironment</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">EnvironmentSettings</span><span class="o">.</span><span class="n">in_streaming_mode</span><span class="p">())</span>
+
+    <span class="c1"># define the source</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">t_env</span><span class="o">.</span><span class="n">from_elements</span><span class="p">(</span>
+        <span class="n">elements</span><span class="o">=</span><span class="p">[</span>
+            <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;{&quot;name&quot;: &quot;Flink&quot;, &quot;tel&quot;: 123, &quot;addr&quot;: {&quot;country&quot;: &quot;Germany&quot;, &quot;city&quot;: &quot;Berlin&quot;}}&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;{&quot;name&quot;: &quot;hello&quot;, &quot;tel&quot;: 135, &quot;addr&quot;: {&quot;country&quot;: &quot;China&quot;, &quot;city&quot;: &quot;Shanghai&quot;}}&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;{&quot;name&quot;: &quot;world&quot;, &quot;tel&quot;: 124, &quot;addr&quot;: {&quot;country&quot;: &quot;USA&quot;, &quot;city&quot;: &quot;NewYork&quot;}}&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;{&quot;name&quot;: &quot;PyFlink&quot;, &quot;tel&quot;: 32, &quot;addr&quot;: {&quot;country&quot;: &quot;China&quot;, &quot;city&quot;: &quot;Hangzhou&quot;}}&#39;</span><span class="p">)</span>
+        <span class="p">],</span>
+        <span class="n">schema</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">])</span>
+
+    <span class="n">t_env</span><span class="o">.</span><span class="n">sql_query</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">table</span><span class="p">)</span> \
+         <span class="o">.</span><span class="n">execute</span><span class="p">()</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+    <span class="c1"># +----+----------------------+--------------------------------+</span>
+    <span class="c1"># | op |                   id |                           data |</span>
+    <span class="c1"># +----+----------------------+--------------------------------+</span>
+    <span class="c1"># | +I |                    1 | {&quot;name&quot;: &quot;Flink&quot;, &quot;tel&quot;: 12... |</span>
+    <span class="c1"># | +I |                    2 | {&quot;name&quot;: &quot;hello&quot;, &quot;tel&quot;: 13... |</span>
+    <span class="c1"># | +I |                    3 | {&quot;name&quot;: &quot;world&quot;, &quot;tel&quot;: 12... |</span>
+    <span class="c1"># | +I |                    4 | {&quot;name&quot;: &quot;PyFlink&quot;, &quot;tel&quot;: ... |</span>
+    <span class="c1"># +----+----------------------+--------------------------------+</span>
+
+    <span class="c1"># execute sql statement</span>
+    <span class="nd">@udtf</span><span class="p">(</span><span class="n">result_types</span><span class="o">=</span><span class="p">[</span><span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">(),</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">INT</span><span class="p">(),</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">()])</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parse_data</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">json_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">yield</span> <span class="n">json_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="n">json_data</span><span class="p">[</span><span class="s1">&#39;tel&#39;</span><span class="p">],</span> <span class="n">json_data</span><span class="p">[</span><span class="s1">&#39;addr&#39;</span><span class="p">][</span><span class="s1">&#39;country&#39;</span><span class="p">]</span>
+
+    <span class="n">t_env</span><span class="o">.</span><span class="n">create_temporary_function</span><span class="p">(</span><span class="s1">&#39;parse_data&#39;</span><span class="p">,</span> <span class="n">parse_data</span><span class="p">)</span>
+    <span class="n">t_env</span><span class="o">.</span><span class="n">execute_sql</span><span class="p">(</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        SELECT *</span>
+<span class="sd">        FROM %s, LATERAL TABLE(parse_data(`data`)) t(name, tel, country)</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="o">%</span> <span class="n">table</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+    <span class="c1"># +----+----------------------+--------------------------------+--------------------------------+-------------+--------------------------------+</span>
+    <span class="c1"># | op |                   id |                           data |                           name |         tel |                        country |</span>
+    <span class="c1"># +----+----------------------+--------------------------------+--------------------------------+-------------+--------------------------------+</span>
+    <span class="c1"># | +I |                    1 | {&quot;name&quot;: &quot;Flink&quot;, &quot;tel&quot;: 12... |                          Flink |         123 |                        Germany |</span>
+    <span class="c1"># | +I |                    2 | {&quot;name&quot;: &quot;hello&quot;, &quot;tel&quot;: 13... |                          hello |         135 |                          China |</span>
+    <span class="c1"># | +I |                    3 | {&quot;name&quot;: &quot;world&quot;, &quot;tel&quot;: 12... |                          world |         124 |                            USA |</span>
+    <span class="c1"># | +I |                    4 | {&quot;name&quot;: &quot;PyFlink&quot;, &quot;tel&quot;: ... |                        PyFlink |          32 |                          China |</span>
+    <span class="c1"># +----+----------------------+--------------------------------+--------------------------------+-------------+--------------------------------+</span>
+
+    <span class="c1"># explain sql plan</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">t_env</span><span class="o">.</span><span class="n">explain_sql</span><span class="p">(</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        SELECT *</span>
+<span class="sd">        FROM %s, LATERAL TABLE(parse_data(`data`)) t(name, tel, country)</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="o">%</span> <span class="n">table</span>
+    <span class="p">))</span>
+    <span class="c1"># == Abstract Syntax Tree ==</span>
+    <span class="c1"># LogicalProject(id=[$0], data=[$1], name=[$2], tel=[$3], country=[$4])</span>
+    <span class="c1"># +- LogicalCorrelate(correlation=[$cor1], joinType=[inner], requiredColumns=[{1}])</span>
+    <span class="c1">#    :- LogicalTableScan(table=[[default_catalog, default_database, Unregistered_TableSource_734856049, source: [PythonInputFormatTableSource(id, data)]]])</span>
+    <span class="c1">#    +- LogicalTableFunctionScan(invocation=[parse_data($cor1.data)], rowType=[RecordType:peek_no_expand(VARCHAR(2147483647) f0, INTEGER f1, VARCHAR(2147483647) f2)])</span>
+    <span class="c1">#</span>
+    <span class="c1"># == Optimized Physical Plan ==</span>
+    <span class="c1"># PythonCorrelate(invocation=[parse_data($1)], correlate=[table(parse_data(data))], select=[id,data,f0,f1,f2], rowType=[RecordType(BIGINT id, VARCHAR(2147483647) data, VARCHAR(2147483647) f0, INTEGER f1, VARCHAR(2147483647) f2)], joinType=[INNER])</span>
+    <span class="c1"># +- LegacyTableSourceScan(table=[[default_catalog, default_database, Unregistered_TableSource_734856049, source: [PythonInputFormatTableSource(id, data)]]], fields=[id, data])</span>
+    <span class="c1">#</span>
+    <span class="c1"># == Optimized Execution Plan ==</span>
+    <span class="c1"># PythonCorrelate(invocation=[parse_data($1)], correlate=[table(parse_data(data))], select=[id,data,f0,f1,f2], rowType=[RecordType(BIGINT id, VARCHAR(2147483647) data, VARCHAR(2147483647) f0, INTEGER f1, VARCHAR(2147483647) f2)], joinType=[INNER])</span>
+    <span class="c1"># +- LegacyTableSourceScan(table=[[default_catalog, default_database, Unregistered_TableSource_734856049, source: [PythonInputFormatTableSource(id, data)]]], fields=[id, data])</span>
+
+    <span class="c1"># explain sql plan with advice</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">t_env</span><span class="o">.</span><span class="n">explain_sql</span><span class="p">(</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        SELECT *</span>
+<span class="sd">        FROM %s, LATERAL TABLE(parse_data(`data`)) t(name, tel, country)</span>
+<span class="sd">        &quot;&quot;&quot;</span> <span class="o">%</span> <span class="n">table</span><span class="p">,</span> <span class="n">ExplainDetail</span><span class="o">.</span><span class="n">PLAN_ADVICE</span>
+    <span class="p">))</span>
+    <span class="c1"># == Abstract Syntax Tree ==</span>
+    <span class="c1"># LogicalProject(id=[$0], data=[$1], name=[$2], tel=[$3], country=[$4])</span>
+    <span class="c1"># +- LogicalCorrelate(correlation=[$cor1], joinType=[inner], requiredColumns=[{1}])</span>
+    <span class="c1">#    :- LogicalTableScan(table=[[*anonymous_python-input-format$10*]])</span>
+    <span class="c1">#    +- LogicalTableFunctionScan(invocation=[parse_data($cor2.data)], rowType=[RecordType:peek_no_expand(VARCHAR(2147483647) f0, INTEGER f1, VARCHAR(2147483647) f2)])</span>
+    <span class="c1">#</span>
+    <span class="c1"># == Optimized Physical Plan With Advice ==</span>
+    <span class="c1"># PythonCorrelate(invocation=[parse_data($1)], correlate=[table(parse_data(data))], select=[id,data,f0,f1,f2], rowType=[RecordType(BIGINT id, VARCHAR(2147483647) data, VARCHAR(2147483647) f0, INTEGER f1, VARCHAR(2147483647) f2)], joinType=[INNER])</span>
+    <span class="c1"># +- TableSourceScan(table=[[*anonymous_python-input-format$10*]], fields=[id, data])</span>
+    <span class="c1">#</span>
+    <span class="c1"># No available advice...</span>
+    <span class="c1">#</span>
+    <span class="c1"># == Optimized Execution Plan ==</span>
+    <span class="c1"># PythonCorrelate(invocation=[parse_data($1)], correlate=[table(parse_data(data))], select=[id,data,f0,f1,f2], rowType=[RecordType(BIGINT id, VARCHAR(2147483647) data, VARCHAR(2147483647) f0, INTEGER f1, VARCHAR(2147483647) f2)], joinType=[INNER])</span>
+    <span class="c1"># +- TableSourceScan(table=[[*anonymous_python-input-format$10*]], fields=[id, data])</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">column_operations</span><span class="p">():</span>
+    <span class="n">t_env</span> <span class="o">=</span> <span class="n">TableEnvironment</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">EnvironmentSettings</span><span class="o">.</span><span class="n">in_streaming_mode</span><span class="p">())</span>
+
+    <span class="c1"># define the source</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">t_env</span><span class="o">.</span><span class="n">from_elements</span><span class="p">(</span>
+        <span class="n">elements</span><span class="o">=</span><span class="p">[</span>
+            <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;{&quot;name&quot;: &quot;Flink&quot;, &quot;tel&quot;: 123, &quot;addr&quot;: {&quot;country&quot;: &quot;Germany&quot;, &quot;city&quot;: &quot;Berlin&quot;}}&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;{&quot;name&quot;: &quot;hello&quot;, &quot;tel&quot;: 135, &quot;addr&quot;: {&quot;country&quot;: &quot;China&quot;, &quot;city&quot;: &quot;Shanghai&quot;}}&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;{&quot;name&quot;: &quot;world&quot;, &quot;tel&quot;: 124, &quot;addr&quot;: {&quot;country&quot;: &quot;USA&quot;, &quot;city&quot;: &quot;NewYork&quot;}}&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;{&quot;name&quot;: &quot;PyFlink&quot;, &quot;tel&quot;: 32, &quot;addr&quot;: {&quot;country&quot;: &quot;China&quot;, &quot;city&quot;: &quot;Hangzhou&quot;}}&#39;</span><span class="p">)</span>
+        <span class="p">],</span>
+        <span class="n">schema</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">])</span>
+
+    <span class="c1"># add columns</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">add_columns</span><span class="p">(</span>
+        <span class="n">col</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">json_value</span><span class="p">(</span><span class="s1">&#39;$.name&#39;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">())</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">),</span>
+        <span class="n">col</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">json_value</span><span class="p">(</span><span class="s1">&#39;$.tel&#39;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">())</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;tel&#39;</span><span class="p">),</span>
+        <span class="n">col</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">json_value</span><span class="p">(</span><span class="s1">&#39;$.addr.country&#39;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">())</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">))</span>
+
+    <span class="n">table</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+    <span class="c1"># +----+----------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+</span>
+    <span class="c1"># | op |                   id |                           data |                           name |                            tel |                        country |</span>
+    <span class="c1"># +----+----------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+</span>
+    <span class="c1"># | +I |                    1 | {&quot;name&quot;: &quot;Flink&quot;, &quot;tel&quot;: 12... |                          Flink |                            123 |                        Germany |</span>
+    <span class="c1"># | +I |                    2 | {&quot;name&quot;: &quot;hello&quot;, &quot;tel&quot;: 13... |                          hello |                            135 |                          China |</span>
+    <span class="c1"># | +I |                    3 | {&quot;name&quot;: &quot;world&quot;, &quot;tel&quot;: 12... |                          world |                            124 |                            USA |</span>
+    <span class="c1"># | +I |                    4 | {&quot;name&quot;: &quot;PyFlink&quot;, &quot;tel&quot;: ... |                        PyFlink |                             32 |                          China |</span>
+    <span class="c1"># +----+----------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+</span>
+
+    <span class="c1"># drop columns</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">drop_columns</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">))</span>
+    <span class="n">table</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+    <span class="c1"># +----+----------------------+--------------------------------+--------------------------------+--------------------------------+</span>
+    <span class="c1"># | op |                   id |                           name |                            tel |                        country |</span>
+    <span class="c1"># +----+----------------------+--------------------------------+--------------------------------+--------------------------------+</span>
+    <span class="c1"># | +I |                    1 |                          Flink |                            123 |                        Germany |</span>
+    <span class="c1"># | +I |                    2 |                          hello |                            135 |                          China |</span>
+    <span class="c1"># | +I |                    3 |                          world |                            124 |                            USA |</span>
+    <span class="c1"># | +I |                    4 |                        PyFlink |                             32 |                          China |</span>
+    <span class="c1"># +----+----------------------+--------------------------------+--------------------------------+--------------------------------+</span>
+
+    <span class="c1"># rename columns</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">rename_columns</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;tel&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;telephone&#39;</span><span class="p">))</span>
+    <span class="n">table</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+    <span class="c1"># +----+----------------------+--------------------------------+--------------------------------+--------------------------------+</span>
+    <span class="c1"># | op |                   id |                           name |                      telephone |                        country |</span>
+    <span class="c1"># +----+----------------------+--------------------------------+--------------------------------+--------------------------------+</span>
+    <span class="c1"># | +I |                    1 |                          Flink |                            123 |                        Germany |</span>
+    <span class="c1"># | +I |                    2 |                          hello |                            135 |                          China |</span>
+    <span class="c1"># | +I |                    3 |                          world |                            124 |                            USA |</span>
+    <span class="c1"># | +I |                    4 |                        PyFlink |                             32 |                          China |</span>
+    <span class="c1"># +----+----------------------+--------------------------------+--------------------------------+--------------------------------+</span>
+
+    <span class="c1"># replace columns</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">add_or_replace_columns</span><span class="p">(</span>
+        <span class="n">concat</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">()),</span> <span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">))</span>
+    <span class="n">table</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+    <span class="c1"># +----+--------------------------------+--------------------------------+--------------------------------+--------------------------------+</span>
+    <span class="c1"># | op |                             id |                           name |                      telephone |                        country |</span>
+    <span class="c1"># +----+--------------------------------+--------------------------------+--------------------------------+--------------------------------+</span>
+    <span class="c1"># | +I |                        1_Flink |                          Flink |                            123 |                        Germany |</span>
+    <span class="c1"># | +I |                        2_hello |                          hello |                            135 |                          China |</span>
+    <span class="c1"># | +I |                        3_world |                          world |                            124 |                            USA |</span>
+    <span class="c1"># | +I |                      4_PyFlink |                        PyFlink |                             32 |                          China |</span>
+    <span class="c1"># +----+--------------------------------+--------------------------------+--------------------------------+--------------------------------+</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">row_operations</span><span class="p">():</span>
+    <span class="n">t_env</span> <span class="o">=</span> <span class="n">TableEnvironment</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">EnvironmentSettings</span><span class="o">.</span><span class="n">in_streaming_mode</span><span class="p">())</span>
+
+    <span class="c1"># define the source</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">t_env</span><span class="o">.</span><span class="n">from_elements</span><span class="p">(</span>
+        <span class="n">elements</span><span class="o">=</span><span class="p">[</span>
+            <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;{&quot;name&quot;: &quot;Flink&quot;, &quot;tel&quot;: 123, &quot;addr&quot;: {&quot;country&quot;: &quot;Germany&quot;, &quot;city&quot;: &quot;Berlin&quot;}}&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;{&quot;name&quot;: &quot;hello&quot;, &quot;tel&quot;: 135, &quot;addr&quot;: {&quot;country&quot;: &quot;China&quot;, &quot;city&quot;: &quot;Shanghai&quot;}}&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;{&quot;name&quot;: &quot;world&quot;, &quot;tel&quot;: 124, &quot;addr&quot;: {&quot;country&quot;: &quot;China&quot;, &quot;city&quot;: &quot;NewYork&quot;}}&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;{&quot;name&quot;: &quot;PyFlink&quot;, &quot;tel&quot;: 32, &quot;addr&quot;: {&quot;country&quot;: &quot;China&quot;, &quot;city&quot;: &quot;Hangzhou&quot;}}&#39;</span><span class="p">)</span>
+        <span class="p">],</span>
+        <span class="n">schema</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">])</span>
+
+    <span class="c1"># map operation</span>
+    <span class="nd">@udf</span><span class="p">(</span><span class="n">result_type</span><span class="o">=</span><span class="n">DataTypes</span><span class="o">.</span><span class="n">ROW</span><span class="p">([</span><span class="n">DataTypes</span><span class="o">.</span><span class="n">FIELD</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">BIGINT</span><span class="p">()),</span>
+                                    <span class="n">DataTypes</span><span class="o">.</span><span class="n">FIELD</span><span class="p">(</span><span class="s2">&quot;country&quot;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">())]))</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extract_country</span><span class="p">(</span><span class="n">input_row</span><span class="p">:</span> <span class="n">Row</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">input_row</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Row</span><span class="p">(</span><span class="n">input_row</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;addr&#39;</span><span class="p">][</span><span class="s1">&#39;country&#39;</span><span class="p">])</span>
+
+    <span class="n">table</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">extract_country</span><span class="p">)</span> \
+         <span class="o">.</span><span class="n">execute</span><span class="p">()</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+    <span class="c1"># +----+----------------------+--------------------------------+</span>
+    <span class="c1"># | op |                   id |                        country |</span>
+    <span class="c1"># +----+----------------------+--------------------------------+</span>
+    <span class="c1"># | +I |                    1 |                        Germany |</span>
+    <span class="c1"># | +I |                    2 |                          China |</span>
+    <span class="c1"># | +I |                    3 |                          China |</span>
+    <span class="c1"># | +I |                    4 |                          China |</span>
+    <span class="c1"># +----+----------------------+--------------------------------+</span>
+
+    <span class="c1"># flat_map operation</span>
+    <span class="nd">@udtf</span><span class="p">(</span><span class="n">result_types</span><span class="o">=</span><span class="p">[</span><span class="n">DataTypes</span><span class="o">.</span><span class="n">BIGINT</span><span class="p">(),</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">()])</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extract_city</span><span class="p">(</span><span class="n">input_row</span><span class="p">:</span> <span class="n">Row</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">input_row</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">yield</span> <span class="n">input_row</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;addr&#39;</span><span class="p">][</span><span class="s1">&#39;city&#39;</span><span class="p">]</span>
+
+    <span class="n">table</span><span class="o">.</span><span class="n">flat_map</span><span class="p">(</span><span class="n">extract_city</span><span class="p">)</span> \
+         <span class="o">.</span><span class="n">execute</span><span class="p">()</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+    <span class="c1"># +----+----------------------+--------------------------------+</span>
+    <span class="c1"># | op |                   f0 |                             f1 |</span>
+    <span class="c1"># +----+----------------------+--------------------------------+</span>
+    <span class="c1"># | +I |                    1 |                         Berlin |</span>
+    <span class="c1"># | +I |                    2 |                       Shanghai |</span>
+    <span class="c1"># | +I |                    3 |                        NewYork |</span>
+    <span class="c1"># | +I |                    4 |                       Hangzhou |</span>
+    <span class="c1"># +----+----------------------+--------------------------------+</span>
+
+    <span class="c1"># aggregate operation</span>
+    <span class="k">class</span><span class="w"> </span><span class="nc">CountAndSumAggregateFunction</span><span class="p">(</span><span class="n">AggregateFunction</span><span class="p">):</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">accumulator</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Row</span><span class="p">(</span><span class="n">accumulator</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">accumulator</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">create_accumulator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Row</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">accumulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">accumulator</span><span class="p">,</span> <span class="n">input_row</span><span class="p">):</span>
+            <span class="n">accumulator</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">accumulator</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">input_row</span><span class="o">.</span><span class="n">tel</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">retract</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">accumulator</span><span class="p">,</span> <span class="n">input_row</span><span class="p">):</span>
+            <span class="n">accumulator</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">accumulator</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="nb">int</span><span class="p">(</span><span class="n">input_row</span><span class="o">.</span><span class="n">tel</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">merge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">accumulator</span><span class="p">,</span> <span class="n">accumulators</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">other_acc</span> <span class="ow">in</span> <span class="n">accumulators</span><span class="p">:</span>
+                <span class="n">accumulator</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">other_acc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">accumulator</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">other_acc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">get_accumulator_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">ROW</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">DataTypes</span><span class="o">.</span><span class="n">FIELD</span><span class="p">(</span><span class="s2">&quot;cnt&quot;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">BIGINT</span><span class="p">()),</span>
+                 <span class="n">DataTypes</span><span class="o">.</span><span class="n">FIELD</span><span class="p">(</span><span class="s2">&quot;sum&quot;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">BIGINT</span><span class="p">())])</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">get_result_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">ROW</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">DataTypes</span><span class="o">.</span><span class="n">FIELD</span><span class="p">(</span><span class="s2">&quot;cnt&quot;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">BIGINT</span><span class="p">()),</span>
+                 <span class="n">DataTypes</span><span class="o">.</span><span class="n">FIELD</span><span class="p">(</span><span class="s2">&quot;sum&quot;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">BIGINT</span><span class="p">())])</span>
+
+    <span class="n">count_sum</span> <span class="o">=</span> <span class="n">udaf</span><span class="p">(</span><span class="n">CountAndSumAggregateFunction</span><span class="p">())</span>
+    <span class="n">table</span><span class="o">.</span><span class="n">add_columns</span><span class="p">(</span>
+            <span class="n">col</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">json_value</span><span class="p">(</span><span class="s1">&#39;$.name&#39;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">())</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">),</span>
+            <span class="n">col</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">json_value</span><span class="p">(</span><span class="s1">&#39;$.tel&#39;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">())</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;tel&#39;</span><span class="p">),</span>
+            <span class="n">col</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">json_value</span><span class="p">(</span><span class="s1">&#39;$.addr.country&#39;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">())</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">))</span> \
+         <span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">))</span> \
+         <span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">count_sum</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;cnt&quot;</span><span class="p">,</span> <span class="s2">&quot;sum&quot;</span><span class="p">))</span> \
+         <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">),</span> <span class="n">col</span><span class="p">(</span><span class="s1">&#39;cnt&#39;</span><span class="p">),</span> <span class="n">col</span><span class="p">(</span><span class="s1">&#39;sum&#39;</span><span class="p">))</span> \
+         <span class="o">.</span><span class="n">execute</span><span class="p">()</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+    <span class="c1"># +----+--------------------------------+----------------------+----------------------+</span>
+    <span class="c1"># | op |                        country |                  cnt |                  sum |</span>
+    <span class="c1"># +----+--------------------------------+----------------------+----------------------+</span>
+    <span class="c1"># | +I |                          China |                    3 |                  291 |</span>
+    <span class="c1"># | +I |                        Germany |                    1 |                  123 |</span>
+    <span class="c1"># +----+--------------------------------+----------------------+----------------------+</span>
+
+    <span class="c1"># flat_aggregate operation</span>
+    <span class="k">class</span><span class="w"> </span><span class="nc">Top2</span><span class="p">(</span><span class="n">TableAggregateFunction</span><span class="p">):</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">emit_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">accumulator</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">accumulator</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">v</span><span class="p">:</span>
+                    <span class="k">yield</span> <span class="n">Row</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">create_accumulator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">accumulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">accumulator</span><span class="p">,</span> <span class="n">input_row</span><span class="p">):</span>
+            <span class="n">tel</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">input_row</span><span class="o">.</span><span class="n">tel</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">accumulator</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">tel</span> <span class="o">&gt;</span> <span class="n">accumulator</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="n">accumulator</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">accumulator</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">accumulator</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">tel</span>
+            <span class="k">elif</span> <span class="n">accumulator</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">tel</span> <span class="o">&gt;</span> <span class="n">accumulator</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">accumulator</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">tel</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">get_accumulator_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">ARRAY</span><span class="p">(</span><span class="n">DataTypes</span><span class="o">.</span><span class="n">BIGINT</span><span class="p">())</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">get_result_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">ROW</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">DataTypes</span><span class="o">.</span><span class="n">FIELD</span><span class="p">(</span><span class="s2">&quot;tel&quot;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">BIGINT</span><span class="p">())])</span>
+
+    <span class="n">top2</span> <span class="o">=</span> <span class="n">udtaf</span><span class="p">(</span><span class="n">Top2</span><span class="p">())</span>
+    <span class="n">table</span><span class="o">.</span><span class="n">add_columns</span><span class="p">(</span>
+            <span class="n">col</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">json_value</span><span class="p">(</span><span class="s1">&#39;$.name&#39;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">())</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">),</span>
+            <span class="n">col</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">json_value</span><span class="p">(</span><span class="s1">&#39;$.tel&#39;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">())</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;tel&#39;</span><span class="p">),</span>
+            <span class="n">col</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">json_value</span><span class="p">(</span><span class="s1">&#39;$.addr.country&#39;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">())</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">))</span> \
+        <span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">))</span> \
+        <span class="o">.</span><span class="n">flat_aggregate</span><span class="p">(</span><span class="n">top2</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">),</span> <span class="n">col</span><span class="p">(</span><span class="s1">&#39;tel&#39;</span><span class="p">))</span> \
+        <span class="o">.</span><span class="n">execute</span><span class="p">()</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+    <span class="c1"># +----+--------------------------------+----------------------+</span>
+    <span class="c1"># | op |                        country |                  tel |</span>
+    <span class="c1"># +----+--------------------------------+----------------------+</span>
+    <span class="c1"># | +I |                          China |                  135 |</span>
+    <span class="c1"># | +I |                          China |                  124 |</span>
+    <span class="c1"># | +I |                        Germany |                  123 |</span>
+    <span class="c1"># +----+--------------------------------+----------------------+</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">stream</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">basic_operations</span><span class="p">()</span>
+    <span class="n">sql_operations</span><span class="p">()</span>
+    <span class="n">column_operations</span><span class="p">()</span>
+    <span class="n">row_operations</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="process_json_data.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Json Data Process</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="mixing_use_of_datastream_and_table.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Mixing Use Of Datastream And Table</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+<div class="tocsection sourcelink">
+    <a href="../../_sources/examples/table/basic_operations.rst.txt">
+        <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+</div>
+
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,508 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>PyFlink Table &#8212; PyFlink 11.8.0rc0 documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/pyflink.table/index';</script>
+    <link rel="shortcut icon" href="../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="TableEnvironment" href="table_environment.html" />
+    <link rel="prev" title="API Reference" href="../index.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="Logo image">
+    <img src="../../_static/navbar-brand-logo.jpg" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Section navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">
+    Section Navigation
+  </p>
+  <div class="bd-toc-item navbar-nav">
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">PyFlink Table</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="table_environment.html">TableEnvironment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="table.html">Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_types.html">Data Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="window.html">Window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expressions.html">Expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="udf.html">User Defined Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="descriptors.html">Descriptors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="statement_set.html">StatementSet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="catalog.html">Catalog</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.dataframe/index.html">PyFlink DataFrame</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.multimodal/index.html">PyFlink Multimodal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.datastream/index.html">PyFlink DataStream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.common/index.html">PyFlink Common</a></li>
+</ul>
+
+  </div>
+</nav>
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <section id="pyflink-table">
+<h1>PyFlink Table<a class="headerlink" href="#pyflink-table" title="Permalink to this headline">#</a></h1>
+<p>This page gives an overview of all public PyFlink Table API.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="table_environment.html">TableEnvironment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="table_environment.html#environmentsettings">EnvironmentSettings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="table_environment.html#tableconfig">TableConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="table_environment.html#id1">TableEnvironment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="table_environment.html#streamtableenvironment">StreamTableEnvironment</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="table.html">Table</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="table.html#id1">Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="table.html#groupedtable">GroupedTable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="table.html#groupwindowedtable">GroupWindowedTable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="table.html#windowgroupedtable">WindowGroupedTable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="table.html#overwindowedtable">OverWindowedTable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="table.html#aggregatedtable">AggregatedTable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="table.html#flataggregatetable">FlatAggregateTable</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="data_types.html">Data Types</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.NULL.html">pyflink.table.types.DataTypes.NULL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.CHAR.html">pyflink.table.types.DataTypes.CHAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.VARCHAR.html">pyflink.table.types.DataTypes.VARCHAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.STRING.html">pyflink.table.types.DataTypes.STRING</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.BOOLEAN.html">pyflink.table.types.DataTypes.BOOLEAN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.BINARY.html">pyflink.table.types.DataTypes.BINARY</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.VARBINARY.html">pyflink.table.types.DataTypes.VARBINARY</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.BYTES.html">pyflink.table.types.DataTypes.BYTES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.DECIMAL.html">pyflink.table.types.DataTypes.DECIMAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.TINYINT.html">pyflink.table.types.DataTypes.TINYINT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.SMALLINT.html">pyflink.table.types.DataTypes.SMALLINT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.INT.html">pyflink.table.types.DataTypes.INT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.BIGINT.html">pyflink.table.types.DataTypes.BIGINT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.FLOAT.html">pyflink.table.types.DataTypes.FLOAT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.DOUBLE.html">pyflink.table.types.DataTypes.DOUBLE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.DATE.html">pyflink.table.types.DataTypes.DATE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.TIME.html">pyflink.table.types.DataTypes.TIME</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.TIMESTAMP.html">pyflink.table.types.DataTypes.TIMESTAMP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.TIMESTAMP_WITH_LOCAL_TIME_ZONE.html">pyflink.table.types.DataTypes.TIMESTAMP_WITH_LOCAL_TIME_ZONE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.TIMESTAMP_LTZ.html">pyflink.table.types.DataTypes.TIMESTAMP_LTZ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.ARRAY.html">pyflink.table.types.DataTypes.ARRAY</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.LIST_VIEW.html">pyflink.table.types.DataTypes.LIST_VIEW</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.MAP.html">pyflink.table.types.DataTypes.MAP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.MAP_VIEW.html">pyflink.table.types.DataTypes.MAP_VIEW</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.MULTISET.html">pyflink.table.types.DataTypes.MULTISET</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.ROW.html">pyflink.table.types.DataTypes.ROW</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.FIELD.html">pyflink.table.types.DataTypes.FIELD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.SECOND.html">pyflink.table.types.DataTypes.SECOND</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.MINUTE.html">pyflink.table.types.DataTypes.MINUTE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.HOUR.html">pyflink.table.types.DataTypes.HOUR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.DAY.html">pyflink.table.types.DataTypes.DAY</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.MONTH.html">pyflink.table.types.DataTypes.MONTH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.YEAR.html">pyflink.table.types.DataTypes.YEAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.table.types.DataTypes.INTERVAL.html">pyflink.table.types.DataTypes.INTERVAL</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="window.html">Window</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="window.html#tumble-window">Tumble Window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="window.html#sliding-window">Sliding Window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="window.html#session-window">Session Window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="window.html#over-window">Over Window</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="expressions.html">Expressions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="expressions.html#id1">Expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expressions.html#expression">Expression</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="udf.html">User Defined Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="udf.html#scalar-function">Scalar Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="udf.html#table-function">Table Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="udf.html#aggregate-function">Aggregate Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="udf.html#table-aggregate-function">Table Aggregate Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="udf.html#dataview">DataView</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="descriptors.html">Descriptors</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="descriptors.html#tabledescriptor">TableDescriptor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="descriptors.html#formatdescriptor">FormatDescriptor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="descriptors.html#schema">Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="descriptors.html#tableschema">TableSchema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="descriptors.html#changelogmode">ChangelogMode</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="statement_set.html">StatementSet</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="statement_set.html#id1">StatementSet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="statement_set.html#tableresult">TableResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="statement_set.html#resultkind">ResultKind</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="catalog.html">Catalog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="catalog.html#id1">Catalog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="catalog.html#catalogdatabase">CatalogDatabase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="catalog.html#catalogbasetable">CatalogBaseTable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="catalog.html#catalogpartition">CatalogPartition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="catalog.html#catalogfunction">CatalogFunction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="catalog.html#objectpath">ObjectPath</a></li>
+<li class="toctree-l2"><a class="reference internal" href="catalog.html#catalogpartitionspec">CatalogPartitionSpec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="catalog.html#catalogtablestatistics">CatalogTableStatistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="catalog.html#catalogcolumnstatistics">CatalogColumnStatistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="catalog.html#hivecatalog">HiveCatalog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="catalog.html#jdbccatalog">JdbcCatalog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="catalog.html#column">Column</a></li>
+<li class="toctree-l2"><a class="reference internal" href="catalog.html#watermarkspec">WatermarkSpec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="catalog.html#constraint">Constraint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="catalog.html#resolvedschema">ResolvedSchema</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="../index.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">API Reference</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="table_environment.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">TableEnvironment</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+<div class="tocsection sourcelink">
+    <a href="../../_sources/reference/pyflink.table/index.rst.txt">
+        <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+</div>
+
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

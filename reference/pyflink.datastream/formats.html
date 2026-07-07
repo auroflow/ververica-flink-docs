@@ -1,0 +1,548 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Formats &#8212; PyFlink 11.8.0rc0 documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/pyflink.datastream/formats';</script>
+    <link rel="shortcut icon" href="../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pyflink.datastream.formats.avro.AvroSchema" href="api/pyflink.datastream.formats.avro.AvroSchema.html" />
+    <link rel="prev" title="pyflink.datastream.connectors.cassandra.CassandraFailureHandler" href="api/pyflink.datastream.connectors.cassandra.CassandraFailureHandler.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="Logo image">
+    <img src="../../_static/navbar-brand-logo.jpg" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Section navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">
+    Section Navigation
+  </p>
+  <div class="bd-toc-item navbar-nav">
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.table/index.html">PyFlink Table</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.dataframe/index.html">PyFlink DataFrame</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.multimodal/index.html">PyFlink Multimodal</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">PyFlink DataStream</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="stream_execution_environment.html">StreamExecutionEnvironment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datastream.html">DataStream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="state.html">State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timer.html">Timer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="window.html">Window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.html">Checkpoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sideoutput.html">Side Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asyncio.html">Asynchronous I/O</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connectors.html">Connectors</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Formats</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.common/index.html">PyFlink Common</a></li>
+</ul>
+
+  </div>
+</nav>
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <section id="formats">
+<h1>Formats<a class="headerlink" href="#formats" title="Permalink to this headline">#</a></h1>
+<section id="avro">
+<h2>Avro<a class="headerlink" href="#avro" title="Permalink to this headline">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.formats.avro.AvroSchema.html#pyflink.datastream.formats.avro.AvroSchema" title="pyflink.datastream.formats.avro.AvroSchema"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AvroSchema</span></code></a>(j_schema)</p></td>
+<td><p>Avro Schema class contains Java org.apache.avro.Schema.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.formats.avro.GenericRecordAvroTypeInfo.html#pyflink.datastream.formats.avro.GenericRecordAvroTypeInfo" title="pyflink.datastream.formats.avro.GenericRecordAvroTypeInfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GenericRecordAvroTypeInfo</span></code></a>(schema)</p></td>
+<td><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">TypeInformation</span></code> of Avro's GenericRecord, including the schema.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.formats.avro.AvroInputFormat.html#pyflink.datastream.formats.avro.AvroInputFormat" title="pyflink.datastream.formats.avro.AvroInputFormat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AvroInputFormat</span></code></a>(path, schema)</p></td>
+<td><p>Provides a FileInputFormat for Avro records.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.formats.avro.AvroBulkWriters.html#pyflink.datastream.formats.avro.AvroBulkWriters" title="pyflink.datastream.formats.avro.AvroBulkWriters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AvroBulkWriters</span></code></a>()</p></td>
+<td><p>Convenience builder to create <a class="reference internal" href="../pyflink.common/api/pyflink.common.serialization.BulkWriterFactory.html#pyflink.common.serialization.BulkWriterFactory" title="pyflink.common.serialization.BulkWriterFactory"><code class="xref py py-class docutils literal notranslate"><span class="pre">BulkWriterFactory</span></code></a> for Avro types.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.formats.avro.AvroRowDeserializationSchema.html#pyflink.datastream.formats.avro.AvroRowDeserializationSchema" title="pyflink.datastream.formats.avro.AvroRowDeserializationSchema"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AvroRowDeserializationSchema</span></code></a>([record_class, ...])</p></td>
+<td><p>Deserialization schema from Avro bytes to Row.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.formats.avro.AvroRowSerializationSchema.html#pyflink.datastream.formats.avro.AvroRowSerializationSchema" title="pyflink.datastream.formats.avro.AvroRowSerializationSchema"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AvroRowSerializationSchema</span></code></a>([record_class, ...])</p></td>
+<td><p>Serialization schema that serializes to Avro binary format.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="csv">
+<h2>CSV<a class="headerlink" href="#csv" title="Permalink to this headline">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.formats.csv.CsvSchema.html#pyflink.datastream.formats.csv.CsvSchema" title="pyflink.datastream.formats.csv.CsvSchema"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CsvSchema</span></code></a>(j_schema, row_type)</p></td>
+<td><p>CsvSchema holds schema information of a csv file, corresponding to Java <code class="docutils literal notranslate"><span class="pre">com.fasterxml.jackson.dataformat.csv.CsvSchema</span></code> class.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.formats.csv.CsvSchemaBuilder.html#pyflink.datastream.formats.csv.CsvSchemaBuilder" title="pyflink.datastream.formats.csv.CsvSchemaBuilder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CsvSchemaBuilder</span></code></a>()</p></td>
+<td><p>CsvSchemaBuilder is for building a <a class="reference internal" href="api/pyflink.datastream.formats.csv.CsvSchema.html#pyflink.datastream.formats.csv.CsvSchema" title="pyflink.datastream.formats.csv.CsvSchema"><code class="xref py py-class docutils literal notranslate"><span class="pre">CsvSchema</span></code></a>, corresponding to Java <code class="docutils literal notranslate"><span class="pre">com.fasterxml.jackson.dataformat.csv.CsvSchema.Builder</span></code> class.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.formats.csv.CsvReaderFormat.html#pyflink.datastream.formats.csv.CsvReaderFormat" title="pyflink.datastream.formats.csv.CsvReaderFormat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CsvReaderFormat</span></code></a>(j_csv_format)</p></td>
+<td><p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">StreamFormat</span></code> for reading csv files.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.formats.csv.CsvBulkWriters.html#pyflink.datastream.formats.csv.CsvBulkWriters" title="pyflink.datastream.formats.csv.CsvBulkWriters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CsvBulkWriters</span></code></a>()</p></td>
+<td><p>CsvBulkWriter is for building <a class="reference internal" href="../pyflink.common/api/pyflink.common.serialization.BulkWriterFactory.html#pyflink.common.serialization.BulkWriterFactory" title="pyflink.common.serialization.BulkWriterFactory"><code class="xref py py-class docutils literal notranslate"><span class="pre">BulkWriterFactory</span></code></a> to write Rows with a predefined CSV schema to partitioned files in a bulk fashion.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.formats.csv.CsvRowDeserializationSchema.html#pyflink.datastream.formats.csv.CsvRowDeserializationSchema" title="pyflink.datastream.formats.csv.CsvRowDeserializationSchema"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CsvRowDeserializationSchema</span></code></a>(...)</p></td>
+<td><p>Deserialization schema from CSV to Flink types.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.formats.csv.CsvRowSerializationSchema.html#pyflink.datastream.formats.csv.CsvRowSerializationSchema" title="pyflink.datastream.formats.csv.CsvRowSerializationSchema"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CsvRowSerializationSchema</span></code></a>(...)</p></td>
+<td><p>Serialization schema that serializes an object of Flink types into a CSV bytes.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="json">
+<h2>Json<a class="headerlink" href="#json" title="Permalink to this headline">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.formats.json.JsonRowDeserializationSchema.html#pyflink.datastream.formats.json.JsonRowDeserializationSchema" title="pyflink.datastream.formats.json.JsonRowDeserializationSchema"><code class="xref py py-obj docutils literal notranslate"><span class="pre">JsonRowDeserializationSchema</span></code></a>(...)</p></td>
+<td><p>Deserialization schema from JSON to Flink types.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.formats.json.JsonRowSerializationSchema.html#pyflink.datastream.formats.json.JsonRowSerializationSchema" title="pyflink.datastream.formats.json.JsonRowSerializationSchema"><code class="xref py py-obj docutils literal notranslate"><span class="pre">JsonRowSerializationSchema</span></code></a>(...)</p></td>
+<td><p>Serialization schema that serializes an object of Flink types into a JSON bytes.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="orc">
+<h2>Orc<a class="headerlink" href="#orc" title="Permalink to this headline">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.formats.orc.OrcBulkWriters.html#pyflink.datastream.formats.orc.OrcBulkWriters" title="pyflink.datastream.formats.orc.OrcBulkWriters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OrcBulkWriters</span></code></a>()</p></td>
+<td><p>Convenient builder to create a <a class="reference internal" href="../pyflink.common/api/pyflink.common.serialization.BulkWriterFactory.html#pyflink.common.serialization.BulkWriterFactory" title="pyflink.common.serialization.BulkWriterFactory"><code class="xref py py-class docutils literal notranslate"><span class="pre">BulkWriterFactory</span></code></a> that writes records with a predefined schema into Orc files in a batch fashion.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="parquet">
+<h2>Parquet<a class="headerlink" href="#parquet" title="Permalink to this headline">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.formats.parquet.AvroParquetReaders.html#pyflink.datastream.formats.parquet.AvroParquetReaders" title="pyflink.datastream.formats.parquet.AvroParquetReaders"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AvroParquetReaders</span></code></a>()</p></td>
+<td><p>A convenience builder to create reader format that reads individual Avro records from a Parquet stream.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.formats.parquet.AvroParquetWriters.html#pyflink.datastream.formats.parquet.AvroParquetWriters" title="pyflink.datastream.formats.parquet.AvroParquetWriters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AvroParquetWriters</span></code></a>()</p></td>
+<td><p>Convenient builder to create Parquet BulkWriterFactory instances for Avro types.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.formats.parquet.ParquetColumnarRowInputFormat.html#pyflink.datastream.formats.parquet.ParquetColumnarRowInputFormat" title="pyflink.datastream.formats.parquet.ParquetColumnarRowInputFormat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ParquetColumnarRowInputFormat</span></code></a>(row_type[, ...])</p></td>
+<td><p>A ParquetVectorizedInputFormat to provide RowData iterator.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.formats.parquet.ParquetBulkWriters.html#pyflink.datastream.formats.parquet.ParquetBulkWriters" title="pyflink.datastream.formats.parquet.ParquetBulkWriters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ParquetBulkWriters</span></code></a>()</p></td>
+<td><p>Convenient builder to create a <a class="reference internal" href="../pyflink.common/api/pyflink.common.serialization.BulkWriterFactory.html#pyflink.common.serialization.BulkWriterFactory" title="pyflink.common.serialization.BulkWriterFactory"><code class="xref py py-class docutils literal notranslate"><span class="pre">BulkWriterFactory</span></code></a> that writes records with a predefined schema into Parquet files in a batch fashion.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="api/pyflink.datastream.connectors.cassandra.CassandraFailureHandler.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">pyflink.datastream.connectors.cassandra.CassandraFailureHandler</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="api/pyflink.datastream.formats.avro.AvroSchema.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">pyflink.datastream.formats.avro.AvroSchema</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#avro">
+   Avro
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#csv">
+   CSV
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#json">
+   Json
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#orc">
+   Orc
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parquet">
+   Parquet
+  </a>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+<div class="tocsection sourcelink">
+    <a href="../../_sources/reference/pyflink.datastream/formats.rst.txt">
+        <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+</div>
+
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

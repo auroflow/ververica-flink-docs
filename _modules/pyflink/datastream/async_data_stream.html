@@ -1,0 +1,514 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyflink.datastream.async_data_stream &#8212; PyFlink 11.8.0rc0 documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyflink/datastream/async_data_stream';</script>
+    <link rel="shortcut icon" href="../../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../../search.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="Logo image">
+    <img src="../../../_static/navbar-brand-logo.jpg" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <h1>Source code for pyflink.datastream.async_data_stream</h1><div class="highlight"><pre>
+<span></span><span class="c1">################################################################################</span>
+<span class="c1">#  Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="c1">#  or more contributor license agreements.  See the NOTICE file</span>
+<span class="c1">#  distributed with this work for additional information</span>
+<span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
+<span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
+<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  with the License.  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">################################################################################</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">Time</span><span class="p">,</span> <span class="n">TypeInformation</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream</span><span class="w"> </span><span class="kn">import</span> <span class="n">async_retry_strategies</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream.data_stream</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataStream</span><span class="p">,</span> <span class="n">_get_one_input_stream_operator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">AsyncFunctionDescriptor</span><span class="p">,</span> <span class="n">AsyncFunction</span><span class="p">,</span> <span class="n">AsyncRetryStrategy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.java_gateway</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_gateway</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.util.java_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_j_env_configuration</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">AsyncDataStream</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A helper class to apply :class:`~AsyncFunction` to a data stream.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="AsyncDataStream.unordered_wait"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.async_data_stream.AsyncDataStream.unordered_wait.html#pyflink.datastream.async_data_stream.AsyncDataStream.unordered_wait">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unordered_wait</span><span class="p">(</span>
+            <span class="n">data_stream</span><span class="p">:</span> <span class="n">DataStream</span><span class="p">,</span>
+            <span class="n">async_function</span><span class="p">:</span> <span class="n">AsyncFunction</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="p">:</span> <span class="n">Time</span><span class="p">,</span>
+            <span class="n">capacity</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+            <span class="n">output_type</span><span class="p">:</span> <span class="n">TypeInformation</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;DataStream&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds an async function to the data stream. The order of output stream records may be</span>
+<span class="sd">        reordered.</span>
+
+<span class="sd">        :param data_stream: The input data stream.</span>
+<span class="sd">        :param async_function: The async function.</span>
+<span class="sd">        :param timeout: The timeout for the asynchronous operation to complete.</span>
+<span class="sd">        :param capacity: The max number of async i/o operation that can be triggered.</span>
+<span class="sd">        :param output_type: The output data type.</span>
+<span class="sd">        :return: The transformed DataStream.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">AsyncDataStream</span><span class="o">.</span><span class="n">unordered_wait_with_retry</span><span class="p">(</span>
+            <span class="n">data_stream</span><span class="p">,</span> <span class="n">async_function</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">async_retry_strategies</span><span class="o">.</span><span class="n">NO_RETRY_STRATEGY</span><span class="p">,</span>
+            <span class="n">capacity</span><span class="p">,</span> <span class="n">output_type</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AsyncDataStream.unordered_wait_with_retry"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.async_data_stream.AsyncDataStream.unordered_wait_with_retry.html#pyflink.datastream.async_data_stream.AsyncDataStream.unordered_wait_with_retry">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unordered_wait_with_retry</span><span class="p">(</span>
+            <span class="n">data_stream</span><span class="p">:</span> <span class="n">DataStream</span><span class="p">,</span>
+            <span class="n">async_function</span><span class="p">:</span> <span class="n">AsyncFunction</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="p">:</span> <span class="n">Time</span><span class="p">,</span>
+            <span class="n">async_retry_strategy</span><span class="p">:</span> <span class="n">AsyncRetryStrategy</span><span class="p">,</span>
+            <span class="n">capacity</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+            <span class="n">output_type</span><span class="p">:</span> <span class="n">TypeInformation</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;DataStream&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds an async function with an AsyncRetryStrategy to support retry of AsyncFunction to the</span>
+<span class="sd">        data stream. The order of output stream records may be reordered.</span>
+
+<span class="sd">        :param data_stream: The input data stream.</span>
+<span class="sd">        :param async_function: The async function.</span>
+<span class="sd">        :param timeout: The timeout for the asynchronous operation to complete.</span>
+<span class="sd">        :param async_retry_strategy: The strategy of reattempt async i/o operation that can be</span>
+<span class="sd">                                     triggered</span>
+<span class="sd">        :param capacity: The max number of async i/o operation that can be triggered.</span>
+<span class="sd">        :param output_type: The output data type.</span>
+<span class="sd">        :return: The transformed DataStream.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">AsyncDataStream</span><span class="o">.</span><span class="n">_validate</span><span class="p">(</span><span class="n">data_stream</span><span class="p">,</span> <span class="n">async_function</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">async_retry_strategy</span><span class="p">)</span>
+
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.fn_execution</span><span class="w"> </span><span class="kn">import</span> <span class="n">flink_fn_execution_pb2</span>
+        <span class="n">j_python_data_stream_function_operator</span><span class="p">,</span> <span class="n">j_output_type_info</span> <span class="o">=</span> \
+            <span class="n">_get_one_input_stream_operator</span><span class="p">(</span>
+                <span class="n">data_stream</span><span class="p">,</span>
+                <span class="n">AsyncFunctionDescriptor</span><span class="p">(</span>
+                    <span class="n">async_function</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">capacity</span><span class="p">,</span> <span class="n">async_retry_strategy</span><span class="p">,</span>
+                    <span class="n">AsyncFunctionDescriptor</span><span class="o">.</span><span class="n">OutputMode</span><span class="o">.</span><span class="n">UNORDERED</span><span class="p">),</span>
+                <span class="n">flink_fn_execution_pb2</span><span class="o">.</span><span class="n">UserDefinedDataStreamFunction</span><span class="o">.</span><span class="n">PROCESS</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
+                <span class="n">output_type</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">DataStream</span><span class="p">(</span><span class="n">data_stream</span><span class="o">.</span><span class="n">_j_data_stream</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span>
+            <span class="s2">&quot;async wait operator&quot;</span><span class="p">,</span>
+            <span class="n">j_output_type_info</span><span class="p">,</span>
+            <span class="n">j_python_data_stream_function_operator</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="AsyncDataStream.ordered_wait"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.async_data_stream.AsyncDataStream.ordered_wait.html#pyflink.datastream.async_data_stream.AsyncDataStream.ordered_wait">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ordered_wait</span><span class="p">(</span>
+            <span class="n">data_stream</span><span class="p">:</span> <span class="n">DataStream</span><span class="p">,</span>
+            <span class="n">async_function</span><span class="p">:</span> <span class="n">AsyncFunction</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="p">:</span> <span class="n">Time</span><span class="p">,</span>
+            <span class="n">capacity</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+            <span class="n">output_type</span><span class="p">:</span> <span class="n">TypeInformation</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;DataStream&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds an async function to the data stream. The order to process input records</span>
+<span class="sd">        is guaranteed to be the same as input ones.</span>
+
+<span class="sd">        :param data_stream: The input data stream.</span>
+<span class="sd">        :param async_function: The async function.</span>
+<span class="sd">        :param timeout: The timeout for the asynchronous operation to complete.</span>
+<span class="sd">        :param capacity: The max number of async i/o operation that can be triggered.</span>
+<span class="sd">        :param output_type: The output data type.</span>
+<span class="sd">        :return: The transformed DataStream.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">AsyncDataStream</span><span class="o">.</span><span class="n">ordered_wait_with_retry</span><span class="p">(</span>
+            <span class="n">data_stream</span><span class="p">,</span> <span class="n">async_function</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">async_retry_strategies</span><span class="o">.</span><span class="n">NO_RETRY_STRATEGY</span><span class="p">,</span>
+            <span class="n">capacity</span><span class="p">,</span> <span class="n">output_type</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AsyncDataStream.ordered_wait_with_retry"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.async_data_stream.AsyncDataStream.ordered_wait_with_retry.html#pyflink.datastream.async_data_stream.AsyncDataStream.ordered_wait_with_retry">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ordered_wait_with_retry</span><span class="p">(</span>
+            <span class="n">data_stream</span><span class="p">:</span> <span class="n">DataStream</span><span class="p">,</span>
+            <span class="n">async_function</span><span class="p">:</span> <span class="n">AsyncFunction</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="p">:</span> <span class="n">Time</span><span class="p">,</span>
+            <span class="n">async_retry_strategy</span><span class="p">:</span> <span class="n">AsyncRetryStrategy</span><span class="p">,</span>
+            <span class="n">capacity</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+            <span class="n">output_type</span><span class="p">:</span> <span class="n">TypeInformation</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;DataStream&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds an async function with an AsyncRetryStrategy to support retry of AsyncFunction to the</span>
+<span class="sd">        data stream. The order to process input records is guaranteed to be the same as input ones.</span>
+
+<span class="sd">        :param data_stream: The input data stream.</span>
+<span class="sd">        :param async_function: The async function.</span>
+<span class="sd">        :param timeout: The timeout for the asynchronous operation to complete.</span>
+<span class="sd">        :param async_retry_strategy: The strategy of reattempt async i/o operation that can be</span>
+<span class="sd">                                     triggered</span>
+<span class="sd">        :param capacity: The max number of async i/o operation that can be triggered.</span>
+<span class="sd">        :param output_type: The output data type.</span>
+<span class="sd">        :return: The transformed DataStream.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">AsyncDataStream</span><span class="o">.</span><span class="n">_validate</span><span class="p">(</span><span class="n">data_stream</span><span class="p">,</span> <span class="n">async_function</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">async_retry_strategy</span><span class="p">)</span>
+
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.fn_execution</span><span class="w"> </span><span class="kn">import</span> <span class="n">flink_fn_execution_pb2</span>
+        <span class="n">j_python_data_stream_function_operator</span><span class="p">,</span> <span class="n">j_output_type_info</span> <span class="o">=</span> \
+            <span class="n">_get_one_input_stream_operator</span><span class="p">(</span>
+                <span class="n">data_stream</span><span class="p">,</span>
+                <span class="n">AsyncFunctionDescriptor</span><span class="p">(</span>
+                    <span class="n">async_function</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">capacity</span><span class="p">,</span> <span class="n">async_retry_strategy</span><span class="p">,</span>
+                    <span class="n">AsyncFunctionDescriptor</span><span class="o">.</span><span class="n">OutputMode</span><span class="o">.</span><span class="n">ORDERED</span><span class="p">),</span>
+                <span class="n">flink_fn_execution_pb2</span><span class="o">.</span><span class="n">UserDefinedDataStreamFunction</span><span class="o">.</span><span class="n">PROCESS</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
+                <span class="n">output_type</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">DataStream</span><span class="p">(</span><span class="n">data_stream</span><span class="o">.</span><span class="n">_j_data_stream</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span>
+            <span class="s2">&quot;async wait operator&quot;</span><span class="p">,</span>
+            <span class="n">j_output_type_info</span><span class="p">,</span>
+            <span class="n">j_python_data_stream_function_operator</span><span class="p">))</span></div>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_validate</span><span class="p">(</span><span class="n">data_stream</span><span class="p">:</span> <span class="n">DataStream</span><span class="p">,</span> <span class="n">async_function</span><span class="p">:</span> <span class="n">AsyncFunction</span><span class="p">,</span>
+                  <span class="n">timeout</span><span class="p">:</span> <span class="n">Time</span><span class="p">,</span> <span class="n">async_retry_strategy</span><span class="p">:</span> <span class="n">AsyncRetryStrategy</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">inspect</span><span class="o">.</span><span class="n">iscoroutinefunction</span><span class="p">(</span><span class="n">async_function</span><span class="o">.</span><span class="n">async_invoke</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Method &#39;async_invoke&#39; of class &#39;</span><span class="si">%s</span><span class="s2">&#39; should be declared as &#39;async def&#39;.&quot;</span>
+                            <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="n">async_function</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">async_retry_strategy</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Async retry strategy should not be None.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">async_retry_strategy</span> <span class="o">!=</span> <span class="n">async_retry_strategies</span><span class="o">.</span><span class="n">NO_RETRY_STRATEGY</span> <span class="ow">and</span>
+                <span class="n">timeout</span><span class="o">.</span><span class="n">to_milliseconds</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Timeout should be configured when do async with retry.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">async_retry_strategy</span><span class="o">.</span><span class="n">get_retry_predicate</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Retry predicate of the async retry strategy &#39;</span><span class="si">%s</span><span class="s2">&#39; is None.&quot;</span>
+                            <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="n">async_retry_strategy</span><span class="p">))</span>
+
+        <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
+        <span class="n">j_conf</span> <span class="o">=</span> <span class="n">get_j_env_configuration</span><span class="p">(</span><span class="n">data_stream</span><span class="o">.</span><span class="n">_j_data_stream</span><span class="o">.</span><span class="n">getExecutionEnvironment</span><span class="p">())</span>
+        <span class="n">python_execution_mode</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">j_conf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">PythonOptions</span><span class="o">.</span><span class="n">PYTHON_EXECUTION_MODE</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">python_execution_mode</span> <span class="o">==</span> <span class="s1">&#39;thread&#39;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;AsyncFunction is still not supported for &#39;thread&#39; mode.&quot;</span><span class="p">)</span>
+</pre></div>
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

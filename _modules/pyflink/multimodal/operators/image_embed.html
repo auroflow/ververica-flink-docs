@@ -1,0 +1,747 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyflink.multimodal.operators.image_embed &#8212; PyFlink 11.8.0rc0 documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyflink/multimodal/operators/image_embed';</script>
+    <link rel="shortcut icon" href="../../../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../../../search.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="Logo image">
+    <img src="../../../../_static/navbar-brand-logo.jpg" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <h1>Source code for pyflink.multimodal.operators.image_embed</h1><div class="highlight"><pre>
+<span></span><span class="c1">################################################################################</span>
+<span class="c1">#  Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="c1">#  or more contributor license agreements.  See the NOTICE file</span>
+<span class="c1">#  distributed with this work for additional information</span>
+<span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
+<span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
+<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  with the License.  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">################################################################################</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Image embedding and similarity operators.</span>
+
+<span class="sd">Operators in this module generate vector embeddings from images or</span>
+<span class="sd">compute image-text similarity scores using CLIP.</span>
+
+<span class="sd">All operators in this module use pandas batch UDFs and run CLIP inference</span>
+<span class="sd">once per input batch.</span>
+
+<span class="sd">Example::</span>
+
+<span class="sd">    &gt;&gt;&gt; from pyflink.multimodal.operators.image_embed import (</span>
+<span class="sd">    ...     image_embedding, image_text_similarity,</span>
+<span class="sd">    ... )</span>
+
+<span class="sd">    &gt;&gt;&gt; embed = image_embedding(model=&quot;ViT-B/32&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; df = df.with_column(&quot;vector&quot;, embed(col(&quot;img&quot;)))</span>
+
+<span class="sd">    &gt;&gt;&gt; # Fixed text mode — compare all images against one prompt</span>
+<span class="sd">    &gt;&gt;&gt; sim = image_text_similarity(text=&quot;a photo of a cat&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; df = df.with_column(&quot;score&quot;, sim(col(&quot;img&quot;)))</span>
+
+<span class="sd">    &gt;&gt;&gt; # Per-row text mode — each row has its own text</span>
+<span class="sd">    &gt;&gt;&gt; sim = image_text_similarity()</span>
+<span class="sd">    &gt;&gt;&gt; df = df.with_column(&quot;score&quot;, sim(col(&quot;img&quot;), col(&quot;text&quot;)))</span>
+
+<span class="sd">Runtime args:</span>
+<span class="sd">    ``concurrency``, ``batch_size``, ``num_gpus``, and ``gpu_type`` are</span>
+<span class="sd">    forwarded to the DataFrame UDF runtime.</span>
+
+<span class="sd">Requires: ``pip install open_clip_torch torch pillow``</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="kn">import</span> <span class="n">udf</span><span class="p">,</span> <span class="n">DataType</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.model.backends.open_clip</span><span class="w"> </span><span class="kn">import</span> <span class="n">OpenClipModelAdapter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.model.cache_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">prepare_and_load_model_handle</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.multimodal.codec</span><span class="w"> </span><span class="kn">import</span> <span class="n">image_batch_to_ndarrays</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.multimodal.utils</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">_build_or_apply_udf</span><span class="p">,</span>
+    <span class="n">scatter_results</span><span class="p">,</span>
+    <span class="n">_udf_runtime_kwargs</span><span class="p">,</span>
+    <span class="n">run_image_batch_inference</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.udf</span><span class="w"> </span><span class="kn">import</span> <span class="n">ScalarFunction</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;image_embedding&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;image_text_similarity&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">_ImageEmbedding</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate CLIP embedding vectors for image batches.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;ViT-B/32&quot;</span><span class="p">,</span> <span class="n">pretrained</span><span class="o">=</span><span class="s2">&quot;openai&quot;</span><span class="p">,</span> <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pretrained</span> <span class="o">=</span> <span class="n">pretrained</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_sharing</span> <span class="o">=</span> <span class="n">model_sharing</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span> <span class="o">=</span> <span class="n">num_gpus</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_gpu_type</span> <span class="o">=</span> <span class="n">gpu_type</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_predict_batch</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">pixel_arrays</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">encode_images</span><span class="p">(</span><span class="n">pixel_arrays</span><span class="p">)</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_context</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span> <span class="o">=</span> <span class="n">prepare_and_load_model_handle</span><span class="p">(</span>
+            <span class="n">adapter_cls</span><span class="o">=</span><span class="n">OpenClipModelAdapter</span><span class="p">,</span>
+            <span class="n">config</span><span class="o">=</span><span class="p">{},</span>
+            <span class="n">function_context</span><span class="o">=</span><span class="n">function_context</span><span class="p">,</span>
+            <span class="n">model_sharing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model_sharing</span><span class="p">,</span>
+            <span class="n">dependencies</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;open_clip&quot;</span><span class="p">,</span> <span class="s2">&quot;torch&quot;</span><span class="p">,</span> <span class="s2">&quot;PIL&quot;</span><span class="p">),</span>
+            <span class="n">model_id</span><span class="o">=</span><span class="n">OpenClipModelAdapter</span><span class="o">.</span><span class="n">build_model_id</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pretrained</span>
+            <span class="p">),</span>
+            <span class="n">requested_num_gpus</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span><span class="p">,</span>
+            <span class="n">requested_gpu_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_gpu_type</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span><span class="o">.</span><span class="n">register_operation</span><span class="p">(</span>
+            <span class="s2">&quot;image_embedding&quot;</span><span class="p">,</span> <span class="n">_ImageEmbedding</span><span class="o">.</span><span class="n">_predict_batch</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_model_handle&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_series</span><span class="p">:</span> <span class="s2">&quot;pd.Series&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;pd.Series&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">run_image_batch_inference</span><span class="p">(</span>
+            <span class="n">image_series</span><span class="p">,</span>
+            <span class="k">lambda</span> <span class="n">image_arrays</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
+                <span class="s2">&quot;image_embedding&quot;</span><span class="p">,</span> <span class="n">image_arrays</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+
+
+<div class="viewcode-block" id="image_embedding"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_embedding.html#pyflink.multimodal.operators.image_embedding">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_embedding</span><span class="p">(</span>
+    <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;ViT-B/32&quot;</span><span class="p">,</span>
+    <span class="n">pretrained</span><span class="o">=</span><span class="s2">&quot;openai&quot;</span><span class="p">,</span>
+    <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create an image embedding UDF (CLIP / open_clip-based).</span>
+
+<span class="sd">    Requires ``pip install open_clip_torch torch Pillow``. This is a pandas</span>
+<span class="sd">    batch UDF that supports GPU acceleration via ``num_gpus`` / ``gpu_type``.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        *columns: Optional image column(s). When provided, the UDF is</span>
+<span class="sd">            applied directly instead of returning a factory.</span>
+<span class="sd">        model: CLIP model architecture name. Default ``&quot;ViT-B/32&quot;``.</span>
+<span class="sd">        pretrained: Pretrained weights checkpoint. Default ``&quot;openai&quot;``.</span>
+<span class="sd">        model_sharing: Model sharing mode across parallel subtasks.</span>
+<span class="sd">            ``None`` uses per-process caching.</span>
+<span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
+<span class="sd">        batch_size: Pandas batch size. ``None`` uses the framework default.</span>
+<span class="sd">        num_gpus: Fractional GPU count per subtask, e.g. ``0.5``. ``None``</span>
+<span class="sd">            runs on CPU.</span>
+<span class="sd">        gpu_type: Required GPU type, e.g. ``&quot;A10&quot;``. ``None`` accepts any</span>
+<span class="sd">            available GPU.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A UDF that returns a L2-normalized ``list[float32]`` embedding vector,</span>
+<span class="sd">        or ``None`` for null image inputs. The vector dimension depends on the</span>
+<span class="sd">        model (e.g. 512 for ``ViT-B/32``).</span>
+
+<span class="sd">    Example::</span>
+<span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
+<span class="sd">        &gt;&gt;&gt; embed = image_embedding(model=&quot;ViT-B/32&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;vector&quot;, embed(col(&quot;img&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Inline</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;vector&quot;, image_embedding(col(&quot;img&quot;)))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
+        <span class="n">_ImageEmbedding</span><span class="p">(</span>
+            <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+            <span class="n">pretrained</span><span class="o">=</span><span class="n">pretrained</span><span class="p">,</span>
+            <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">,</span>
+            <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+            <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">func_type</span><span class="o">=</span><span class="s2">&quot;pandas&quot;</span><span class="p">,</span>
+        <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">DataType</span><span class="o">.</span><span class="n">float32</span><span class="p">()),</span>
+        <span class="o">**</span><span class="n">_udf_runtime_kwargs</span><span class="p">(</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+            <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+            <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+            <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_build_or_apply_udf</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">)</span></div>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">_ImageFixedTextSimilarity</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute image-text similarity against a fixed text prompt.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;ViT-B/32&quot;</span><span class="p">,</span> <span class="n">pretrained</span><span class="o">=</span><span class="s2">&quot;openai&quot;</span><span class="p">,</span>
+                 <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;image_text_similarity requires non-empty text.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">text</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pretrained</span> <span class="o">=</span> <span class="n">pretrained</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_sharing</span> <span class="o">=</span> <span class="n">model_sharing</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span> <span class="o">=</span> <span class="n">num_gpus</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_gpu_type</span> <span class="o">=</span> <span class="n">gpu_type</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_predict_batch</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">pixel_arrays</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">score_images_against_text</span><span class="p">(</span><span class="n">pixel_arrays</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_context</span><span class="p">):</span>
+        <span class="c1"># Reuses the same CLIP model handle as ImageEmbedding.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span> <span class="o">=</span> <span class="n">prepare_and_load_model_handle</span><span class="p">(</span>
+            <span class="n">adapter_cls</span><span class="o">=</span><span class="n">OpenClipModelAdapter</span><span class="p">,</span>
+            <span class="n">config</span><span class="o">=</span><span class="p">{},</span>
+            <span class="n">function_context</span><span class="o">=</span><span class="n">function_context</span><span class="p">,</span>
+            <span class="n">model_sharing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model_sharing</span><span class="p">,</span>
+            <span class="n">dependencies</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;open_clip&quot;</span><span class="p">,</span> <span class="s2">&quot;torch&quot;</span><span class="p">,</span> <span class="s2">&quot;PIL&quot;</span><span class="p">),</span>
+            <span class="n">model_id</span><span class="o">=</span><span class="n">OpenClipModelAdapter</span><span class="o">.</span><span class="n">build_model_id</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pretrained</span>
+            <span class="p">),</span>
+            <span class="n">requested_num_gpus</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span><span class="p">,</span>
+            <span class="n">requested_gpu_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_gpu_type</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span><span class="o">.</span><span class="n">register_operation</span><span class="p">(</span>
+            <span class="s2">&quot;image_fixed_text_similarity&quot;</span><span class="p">,</span>
+            <span class="n">_ImageFixedTextSimilarity</span><span class="o">.</span><span class="n">_predict_batch</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_model_handle&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_series</span><span class="p">:</span> <span class="s2">&quot;pd.Series&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;pd.Series&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">run_image_batch_inference</span><span class="p">(</span>
+            <span class="n">image_series</span><span class="p">,</span>
+            <span class="k">lambda</span> <span class="n">image_arrays</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
+                <span class="s2">&quot;image_fixed_text_similarity&quot;</span><span class="p">,</span> <span class="n">image_arrays</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">_ImageTextSimilarity</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute per-row image-text similarity scores.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;ViT-B/32&quot;</span><span class="p">,</span> <span class="n">pretrained</span><span class="o">=</span><span class="s2">&quot;openai&quot;</span><span class="p">,</span> <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pretrained</span> <span class="o">=</span> <span class="n">pretrained</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_sharing</span> <span class="o">=</span> <span class="n">model_sharing</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span> <span class="o">=</span> <span class="n">num_gpus</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_gpu_type</span> <span class="o">=</span> <span class="n">gpu_type</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_predict_batch</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">pixel_arrays</span><span class="p">,</span> <span class="n">texts</span><span class="p">):</span>
+        <span class="n">image_features</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">encode_images</span><span class="p">(</span><span class="n">pixel_arrays</span><span class="p">)</span>
+        <span class="n">text_features</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">encode_texts</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span>
+        <span class="c1"># _OpenClipModel encode helpers return L2-normalized vectors,</span>
+        <span class="c1"># so row-wise dot product == cosine similarity for paired inputs.</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="p">(</span><span class="n">image_features</span> <span class="o">*</span> <span class="n">text_features</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">scores</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_context</span><span class="p">):</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+        <span class="c1"># Per-row text mode filters null text after image decoding, so it cannot</span>
+        <span class="c1"># use run_image_batch_inference directly.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pd</span> <span class="o">=</span> <span class="n">pd</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span> <span class="o">=</span> <span class="n">prepare_and_load_model_handle</span><span class="p">(</span>
+            <span class="n">adapter_cls</span><span class="o">=</span><span class="n">OpenClipModelAdapter</span><span class="p">,</span>
+            <span class="n">config</span><span class="o">=</span><span class="p">{},</span>
+            <span class="n">function_context</span><span class="o">=</span><span class="n">function_context</span><span class="p">,</span>
+            <span class="n">model_sharing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model_sharing</span><span class="p">,</span>
+            <span class="n">dependencies</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;open_clip&quot;</span><span class="p">,</span> <span class="s2">&quot;torch&quot;</span><span class="p">,</span> <span class="s2">&quot;PIL&quot;</span><span class="p">),</span>
+            <span class="n">model_id</span><span class="o">=</span><span class="n">OpenClipModelAdapter</span><span class="o">.</span><span class="n">build_model_id</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pretrained</span>
+            <span class="p">),</span>
+            <span class="n">requested_num_gpus</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span><span class="p">,</span>
+            <span class="n">requested_gpu_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_gpu_type</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span><span class="o">.</span><span class="n">register_operation</span><span class="p">(</span>
+            <span class="s2">&quot;image_text_similarity&quot;</span><span class="p">,</span>
+            <span class="n">_ImageTextSimilarity</span><span class="o">.</span><span class="n">_predict_batch</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_model_handle&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pd</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">image_series</span><span class="p">:</span> <span class="s2">&quot;pd.Series&quot;</span><span class="p">,</span> <span class="n">text_series</span><span class="p">:</span> <span class="s2">&quot;pd.Series&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;pd.Series&quot;</span><span class="p">:</span>
+        <span class="n">pd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pd</span>
+
+        <span class="n">pixel_arrays</span><span class="p">,</span> <span class="n">valid_idx</span> <span class="o">=</span> <span class="n">image_batch_to_ndarrays</span><span class="p">(</span><span class="n">image_series</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;RGB&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">pixel_arrays</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_series</span><span class="p">))</span>
+
+        <span class="n">filtered_pixel_arrays</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">filtered_idx</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">texts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">pixel_array</span><span class="p">,</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">pixel_arrays</span><span class="p">,</span> <span class="n">valid_idx</span><span class="p">):</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">text_series</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+                <span class="k">continue</span>
+            <span class="n">filtered_pixel_arrays</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">)</span>
+            <span class="n">filtered_idx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+            <span class="n">texts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">filtered_pixel_arrays</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_series</span><span class="p">))</span>
+
+        <span class="n">valid_results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
+            <span class="s2">&quot;image_text_similarity&quot;</span><span class="p">,</span> <span class="n">filtered_pixel_arrays</span><span class="p">,</span> <span class="n">texts</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">scatter_results</span><span class="p">(</span><span class="n">valid_results</span><span class="p">,</span> <span class="n">filtered_idx</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_series</span><span class="p">)))</span>
+
+
+<div class="viewcode-block" id="image_text_similarity"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_text_similarity.html#pyflink.multimodal.operators.image_text_similarity">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_text_similarity</span><span class="p">(</span>
+    <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
+    <span class="n">text</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;ViT-B/32&quot;</span><span class="p">,</span>
+    <span class="n">pretrained</span><span class="o">=</span><span class="s2">&quot;openai&quot;</span><span class="p">,</span>
+    <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create an image-text similarity scoring UDF (CLIP / open_clip-based).</span>
+
+<span class="sd">    When ``text`` is provided, computes similarity of all images against that</span>
+<span class="sd">    fixed text prompt (single-column UDF). When ``text`` is ``None``, computes</span>
+<span class="sd">    per-row similarity between an image column and a text column (two-column UDF).</span>
+
+<span class="sd">    Requires ``pip install open_clip_torch torch Pillow``. This is a pandas</span>
+<span class="sd">    batch UDF that supports GPU acceleration via ``num_gpus`` / ``gpu_type``.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        *columns: Optional image column(s). When provided, the UDF is</span>
+<span class="sd">            applied directly instead of returning a factory.</span>
+<span class="sd">        text: Fixed text prompt to compare against all images. ``None``</span>
+<span class="sd">            (default) enables per-row mode where a text column is passed</span>
+<span class="sd">            at call time.</span>
+<span class="sd">        model: CLIP model architecture name. Default ``&quot;ViT-B/32&quot;``.</span>
+<span class="sd">        pretrained: Pretrained weights checkpoint. Default ``&quot;openai&quot;``.</span>
+<span class="sd">        model_sharing: Model sharing mode across parallel subtasks.</span>
+<span class="sd">            ``None`` uses per-process caching.</span>
+<span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
+<span class="sd">        batch_size: Pandas batch size. ``None`` uses the framework default.</span>
+<span class="sd">        num_gpus: Fractional GPU count per subtask, e.g. ``0.5``. ``None``</span>
+<span class="sd">            runs on CPU.</span>
+<span class="sd">        gpu_type: Required GPU type, e.g. ``&quot;A10&quot;``. ``None`` accepts any</span>
+<span class="sd">            available GPU.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A UDF that returns a cosine similarity score in ``[-1, 1]``, or</span>
+<span class="sd">        ``None`` for null image inputs. Per-row mode also returns ``None`` for</span>
+<span class="sd">        null text inputs.</span>
+
+<span class="sd">    Example::</span>
+<span class="sd">        &gt;&gt;&gt; # As a reusable variable (fixed text mode)</span>
+<span class="sd">        &gt;&gt;&gt; sim = image_text_similarity(text=&quot;a photo of a cat&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;score&quot;, sim(col(&quot;img&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # As a reusable variable (per-row text mode)</span>
+<span class="sd">        &gt;&gt;&gt; sim = image_text_similarity()</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;score&quot;, sim(col(&quot;img&quot;), col(&quot;text&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Inline</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(</span>
+<span class="sd">        ...     &quot;score&quot;, image_text_similarity(col(&quot;img&quot;), col(&quot;text&quot;))</span>
+<span class="sd">        ... )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">runtime_kwargs</span> <span class="o">=</span> <span class="n">_udf_runtime_kwargs</span><span class="p">(</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+        <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+        <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">text</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
+            <span class="n">_ImageFixedTextSimilarity</span><span class="p">(</span>
+                <span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">,</span>
+                <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+                <span class="n">pretrained</span><span class="o">=</span><span class="n">pretrained</span><span class="p">,</span>
+                <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">,</span>
+                <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+                <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="n">func_type</span><span class="o">=</span><span class="s2">&quot;pandas&quot;</span><span class="p">,</span>
+            <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">(),</span>
+            <span class="o">**</span><span class="n">runtime_kwargs</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
+            <span class="n">_ImageTextSimilarity</span><span class="p">(</span>
+                <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+                <span class="n">pretrained</span><span class="o">=</span><span class="n">pretrained</span><span class="p">,</span>
+                <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">,</span>
+                <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+                <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="n">func_type</span><span class="o">=</span><span class="s2">&quot;pandas&quot;</span><span class="p">,</span>
+            <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">(),</span>
+            <span class="o">**</span><span class="n">runtime_kwargs</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_build_or_apply_udf</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">)</span></div>
+</pre></div>
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

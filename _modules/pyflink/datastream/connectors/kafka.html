@@ -1,0 +1,1505 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyflink.datastream.connectors.kafka &#8212; PyFlink 11.8.0rc0 documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyflink/datastream/connectors/kafka';</script>
+    <link rel="shortcut icon" href="../../../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../../../search.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="Logo image">
+    <img src="../../../../_static/navbar-brand-logo.jpg" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <h1>Source code for pyflink.datastream.connectors.kafka</h1><div class="highlight"><pre>
+<span></span><span class="c1">################################################################################</span>
+<span class="c1">#  Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="c1">#  or more contributor license agreements.  See the NOTICE file</span>
+<span class="c1">#  distributed with this work for additional information</span>
+<span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
+<span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
+<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  with the License.  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">################################################################################</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">py4j.java_gateway</span><span class="w"> </span><span class="kn">import</span> <span class="n">JavaObject</span><span class="p">,</span> <span class="n">get_java_class</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeserializationSchema</span><span class="p">,</span> <span class="n">TypeInformation</span><span class="p">,</span> <span class="n">typeinfo</span><span class="p">,</span> <span class="n">SerializationSchema</span><span class="p">,</span> \
+    <span class="n">Types</span><span class="p">,</span> <span class="n">Row</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream.connectors</span><span class="w"> </span><span class="kn">import</span> <span class="n">Source</span><span class="p">,</span> <span class="n">Sink</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream.connectors.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeliveryGuarantee</span><span class="p">,</span> <span class="n">SupportsPreprocessing</span><span class="p">,</span> \
+    <span class="n">StreamTransformer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">SinkFunction</span><span class="p">,</span> <span class="n">SourceFunction</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.java_gateway</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_gateway</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.util.java_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">to_jarray</span><span class="p">,</span> <span class="n">get_field</span><span class="p">,</span> <span class="n">get_field_value</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;FlinkKafkaConsumer&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;FlinkKafkaProducer&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;KafkaSource&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;KafkaSourceBuilder&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;KafkaSink&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;KafkaSinkBuilder&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Semantic&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;KafkaTopicPartition&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;KafkaOffsetsInitializer&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;KafkaOffsetResetStrategy&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;KafkaRecordSerializationSchema&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;KafkaRecordSerializationSchemaBuilder&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;KafkaTopicSelector&#39;</span>
+<span class="p">]</span>
+
+
+<span class="c1"># ---- FlinkKafkaConsumer ----</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">FlinkKafkaConsumerBase</span><span class="p">(</span><span class="n">SourceFunction</span><span class="p">,</span> <span class="n">ABC</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class of all Flink Kafka Consumer data sources. This implements the common behavior across</span>
+<span class="sd">    all kafka versions.</span>
+
+<span class="sd">    The Kafka version specific behavior is defined mainly in the specific subclasses.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_flink_kafka_consumer</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">FlinkKafkaConsumerBase</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">source_func</span><span class="o">=</span><span class="n">j_flink_kafka_consumer</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_commit_offsets_on_checkpoints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                          <span class="n">commit_on_checkpoints</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;FlinkKafkaConsumerBase&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Specifies whether or not the consumer should commit offsets back to kafka on checkpoints.</span>
+<span class="sd">        This setting will only have effect if checkpointing is enabled for the job. If checkpointing</span>
+<span class="sd">        isn&#39;t enabled, only the &quot;auto.commit.enable&quot; (for 0.8) / &quot;enable.auto.commit&quot; (for 0.9+)</span>
+<span class="sd">        property settings will be used.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_function</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_function</span> \
+            <span class="o">.</span><span class="n">setCommitOffsetsOnCheckpoints</span><span class="p">(</span><span class="n">commit_on_checkpoints</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_start_from_earliest</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;FlinkKafkaConsumerBase&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Specifies the consumer to start reading from the earliest offset for all partitions. This</span>
+<span class="sd">        lets the consumer ignore any committed group offsets in Zookeeper/ Kafka brokers.</span>
+
+<span class="sd">        This method does not affect where partitions are read from when the consumer is restored</span>
+<span class="sd">        from a checkpoint or savepoint. When the consumer is restored from a checkpoint or</span>
+<span class="sd">        savepoint, only the offsets in the restored state will be used.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_function</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_function</span><span class="o">.</span><span class="n">setStartFromEarliest</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_start_from_latest</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;FlinkKafkaConsumerBase&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Specifies the consuer to start reading from the latest offset for all partitions. This lets</span>
+<span class="sd">        the consumer ignore any committed group offsets in Zookeeper / Kafka brokers.</span>
+
+<span class="sd">        This method does not affect where partitions are read from when the consumer is restored</span>
+<span class="sd">        from a checkpoint or savepoint. When the consumer is restored from a checkpoint or</span>
+<span class="sd">        savepoint, only the offsets in the restored state will be used.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_function</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_function</span><span class="o">.</span><span class="n">setStartFromLatest</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_start_from_timestamp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">startup_offsets_timestamp</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;FlinkKafkaConsumerBase&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Specifies the consumer to start reading partitions from a specified timestamp. The specified</span>
+<span class="sd">        timestamp must be before the current timestamp. This lets the consumer ignore any committed</span>
+<span class="sd">        group offsets in Zookeeper / Kafka brokers.</span>
+
+<span class="sd">        The consumer will look up the earliest offset whose timestamp is greater than or equal to</span>
+<span class="sd">        the specific timestamp from Kafka. If there&#39;s no such offset, the consumer will use the</span>
+<span class="sd">        latest offset to read data from Kafka.</span>
+
+<span class="sd">        This method does not affect where partitions are read from when the consumer is restored</span>
+<span class="sd">        from a checkpoint or savepoint. When the consumer is restored from a checkpoint or</span>
+<span class="sd">        savepoint, only the offsets in the restored state will be used.</span>
+
+<span class="sd">        :param startup_offsets_timestamp: timestamp for the startup offsets, as milliseconds for</span>
+<span class="sd">                                          epoch.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_function</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_function</span><span class="o">.</span><span class="n">setStartFromTimestamp</span><span class="p">(</span>
+            <span class="n">startup_offsets_timestamp</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_start_from_group_offsets</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;FlinkKafkaConsumerBase&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Specifies the consumer to start reading from any committed group offsets found in Zookeeper/</span>
+<span class="sd">        Kafka brokers. The &#39;group.id&#39; property must be set in the configuration properties. If no</span>
+<span class="sd">        offset can be found for a partition, the behaviour in &#39;auto.offset.reset&#39; set in the</span>
+<span class="sd">        configuration properties will be used for the partition.</span>
+
+<span class="sd">        This method does not affect where partitions are read from when the consumer is restored</span>
+<span class="sd">        from a checkpoint or savepoint. When the consumer is restored from a checkpoint or</span>
+<span class="sd">        savepoint, only the offsets in the restored state will be used.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_function</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_function</span><span class="o">.</span><span class="n">setStartFromGroupOffsets</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">disable_filter_restored_partitions_with_subscribed_topics</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;FlinkKafkaConsumerBase&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        By default, when restoring from a checkpoint / savepoint, the consumer always ignores</span>
+<span class="sd">        restored partitions that are no longer associated with the current specified topics or topic</span>
+<span class="sd">        pattern to subscribe to.</span>
+
+<span class="sd">        This method does not affect where partitions are read from when the consumer is restored</span>
+<span class="sd">        from a checkpoint or savepoint. When the consumer is restored from a checkpoint or</span>
+<span class="sd">        savepoint, only the offsets in the restored state will be used.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_function</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_function</span> \
+            <span class="o">.</span><span class="n">disableFilterRestoredPartitionsWithSubscribedTopics</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_produced_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeInformation</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">typeinfo</span><span class="o">.</span><span class="n">_from_java_type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_function</span><span class="o">.</span><span class="n">getProducedType</span><span class="p">())</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_kafka_consumer</span><span class="p">(</span><span class="n">topics</span><span class="p">,</span> <span class="n">properties</span><span class="p">,</span> <span class="n">deserialization_schema</span><span class="p">,</span> <span class="n">j_consumer_clz</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">topics</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">topics</span> <span class="o">=</span> <span class="p">[</span><span class="n">topics</span><span class="p">]</span>
+    <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
+    <span class="n">j_properties</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">Properties</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">properties</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">j_properties</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="n">j_flink_kafka_consumer</span> <span class="o">=</span> <span class="n">j_consumer_clz</span><span class="p">(</span><span class="n">topics</span><span class="p">,</span>
+                                            <span class="n">deserialization_schema</span><span class="o">.</span><span class="n">_j_deserialization_schema</span><span class="p">,</span>
+                                            <span class="n">j_properties</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">j_flink_kafka_consumer</span>
+
+
+<div class="viewcode-block" id="FlinkKafkaConsumer"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.kafka.FlinkKafkaConsumer.html#pyflink.datastream.connectors.kafka.FlinkKafkaConsumer">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">FlinkKafkaConsumer</span><span class="p">(</span><span class="n">FlinkKafkaConsumerBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The Flink Kafka Consumer is a streaming data source that pulls a parallel data stream from</span>
+<span class="sd">    Apache Kafka. The consumer can run in multiple parallel instances, each of which will</span>
+<span class="sd">    pull data from one or more Kafka partitions.</span>
+
+<span class="sd">    The Flink Kafka Consumer participates in checkpointing and guarantees that no data is lost</span>
+<span class="sd">    during a failure, and that the computation processes elements &#39;exactly once. (These guarantees</span>
+<span class="sd">    naturally assume that Kafka itself does not lose any data.)</span>
+
+<span class="sd">    Please note that Flink snapshots the offsets internally as part of its distributed checkpoints.</span>
+<span class="sd">    The offsets committed to Kafka / Zookeeper are only to bring the outside view of progress in</span>
+<span class="sd">    sync with Flink&#39;s view of the progress. That way, monitoring and other jobs can get a view of</span>
+<span class="sd">    how far the Flink Kafka consumer has consumed a topic.</span>
+
+<span class="sd">    Please refer to Kafka&#39;s documentation for the available configuration properties:</span>
+<span class="sd">    http://kafka.apache.org/documentation.html#newconsumerconfigs</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topics</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">deserialization_schema</span><span class="p">:</span> <span class="n">DeserializationSchema</span><span class="p">,</span>
+                 <span class="n">properties</span><span class="p">:</span> <span class="n">Dict</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a new Kafka streaming source consumer for Kafka 0.10.x.</span>
+
+<span class="sd">        This constructor allows passing multiple topics to the consumer.</span>
+
+<span class="sd">        :param topics: The Kafka topics to read from.</span>
+<span class="sd">        :param deserialization_schema: The de-/serializer used to convert between Kafka&#39;s byte</span>
+<span class="sd">                                       messages and Flink&#39;s objects.</span>
+<span class="sd">        :param properties: The properties that are used to configure both the fetcher and the offset</span>
+<span class="sd">                           handler.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Deprecated in 1.16. Use KafkaSource instead.&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+        <span class="n">JFlinkKafkaConsumer</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span> \
+            <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">streaming</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">kafka</span><span class="o">.</span><span class="n">FlinkKafkaConsumer</span>
+        <span class="n">j_flink_kafka_consumer</span> <span class="o">=</span> <span class="n">_get_kafka_consumer</span><span class="p">(</span><span class="n">topics</span><span class="p">,</span> <span class="n">properties</span><span class="p">,</span> <span class="n">deserialization_schema</span><span class="p">,</span>
+                                                     <span class="n">JFlinkKafkaConsumer</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">FlinkKafkaConsumer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">j_flink_kafka_consumer</span><span class="o">=</span><span class="n">j_flink_kafka_consumer</span><span class="p">)</span></div>
+
+
+<span class="c1"># ---- FlinkKafkaProducer ----</span>
+
+
+<div class="viewcode-block" id="Semantic"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.kafka.Semantic.html#pyflink.datastream.connectors.kafka.Semantic">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">Semantic</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Semantics that can be chosen.</span>
+
+<span class="sd">    :data: `EXACTLY_ONCE`:</span>
+
+<span class="sd">    The Flink producer will write all messages in a Kafka transaction that will be committed to</span>
+<span class="sd">    the Kafka on a checkpoint. In this mode FlinkKafkaProducer sets up a pool of</span>
+<span class="sd">    FlinkKafkaProducer. Between each checkpoint there is created new Kafka transaction, which is</span>
+<span class="sd">    being committed on FlinkKafkaProducer.notifyCheckpointComplete(long). If checkpoint</span>
+<span class="sd">    complete notifications are running late, FlinkKafkaProducer can run out of</span>
+<span class="sd">    FlinkKafkaProducers in the pool. In that case any subsequent FlinkKafkaProducer.snapshot-</span>
+<span class="sd">    State() requests will fail and the FlinkKafkaProducer will keep using the</span>
+<span class="sd">    FlinkKafkaProducer from previous checkpoint. To decrease chances of failing checkpoints</span>
+<span class="sd">    there are four options:</span>
+
+<span class="sd">        1. decrease number of max concurrent checkpoints</span>
+<span class="sd">        2. make checkpoints mre reliable (so that they complete faster)</span>
+<span class="sd">        3. increase delay between checkpoints</span>
+<span class="sd">        4. increase size of FlinkKafkaProducers pool</span>
+
+<span class="sd">    :data: `AT_LEAST_ONCE`:</span>
+
+<span class="sd">    The Flink producer will wait for all outstanding messages in the Kafka buffers to be</span>
+<span class="sd">    acknowledged by the Kafka producer on a checkpoint.</span>
+
+<span class="sd">    :data: `NONE`:</span>
+
+<span class="sd">    Means that nothing will be guaranteed. Messages can be lost and/or duplicated in case of</span>
+<span class="sd">    failure.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">EXACTLY_ONCE</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">AT_LEAST_ONCE</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">NONE</span> <span class="o">=</span> <span class="mi">2</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_to_j_semantic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">JSemantic</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span> \
+            <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">streaming</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">kafka</span><span class="o">.</span><span class="n">FlinkKafkaProducer</span><span class="o">.</span><span class="n">Semantic</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">JSemantic</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">FlinkKafkaProducerBase</span><span class="p">(</span><span class="n">SinkFunction</span><span class="p">,</span> <span class="n">ABC</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Flink Sink to produce data into a Kafka topic.</span>
+
+<span class="sd">    Please note that this producer provides at-least-once reliability guarantees when checkpoints</span>
+<span class="sd">    are enabled and set_flush_on_checkpoint(True) is set. Otherwise, the producer doesn;t provid any</span>
+<span class="sd">    reliability guarantees.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_flink_kafka_producer</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">FlinkKafkaProducerBase</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">sink_func</span><span class="o">=</span><span class="n">j_flink_kafka_producer</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_log_failures_only</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_failures_only</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;FlinkKafkaProducerBase&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Defines whether the producer should fail on errors, or only log them. If this is set to</span>
+<span class="sd">        true, then exceptions will be only logged, if set to false, exceptions will be eventually</span>
+<span class="sd">        thrown and cause the streaming program to fail (and enter recovery).</span>
+
+<span class="sd">        :param log_failures_only: The flag to indicate logging-only on exceptions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_function</span><span class="o">.</span><span class="n">setLogFailuresOnly</span><span class="p">(</span><span class="n">log_failures_only</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_flush_on_checkpoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flush_on_checkpoint</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;FlinkKafkaProducerBase&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        If set to true, the Flink producer will wait for all outstanding messages in the Kafka</span>
+<span class="sd">        buffers to be acknowledged by the Kafka producer on a checkpoint.</span>
+
+<span class="sd">        This way, the producer can guarantee that messages in the Kafka buffers are part of the</span>
+<span class="sd">        checkpoint.</span>
+
+<span class="sd">        :param flush_on_checkpoint: Flag indicating the flush mode (true = flush on checkpoint)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_function</span><span class="o">.</span><span class="n">setFlushOnCheckpoint</span><span class="p">(</span><span class="n">flush_on_checkpoint</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_write_timestamp_to_kafka</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                     <span class="n">write_timestamp_to_kafka</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;FlinkKafkaProducerBase&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        If set to true, Flink will write the (event time) timestamp attached to each record into</span>
+<span class="sd">        Kafka. Timestamps must be positive for Kafka to accept them.</span>
+
+<span class="sd">        :param write_timestamp_to_kafka: Flag indicating if Flink&#39;s internal timestamps are written</span>
+<span class="sd">                                         to Kafka.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_function</span><span class="o">.</span><span class="n">setWriteTimestampToKafka</span><span class="p">(</span><span class="n">write_timestamp_to_kafka</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+
+<div class="viewcode-block" id="FlinkKafkaProducer"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.kafka.FlinkKafkaProducer.html#pyflink.datastream.connectors.kafka.FlinkKafkaProducer">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">FlinkKafkaProducer</span><span class="p">(</span><span class="n">FlinkKafkaProducerBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Flink Sink to produce data into a Kafka topic. By</span>
+<span class="sd">    default producer will use AT_LEAST_ONCE semantic. Before using EXACTLY_ONCE please refer to</span>
+<span class="sd">    Flink&#39;s Kafka connector documentation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topic</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">serialization_schema</span><span class="p">:</span> <span class="n">SerializationSchema</span><span class="p">,</span>
+                 <span class="n">producer_config</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">kafka_producer_pool_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+                 <span class="n">semantic</span><span class="o">=</span><span class="n">Semantic</span><span class="o">.</span><span class="n">AT_LEAST_ONCE</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a FlinkKafkaProducer for a given topic. The sink produces a DataStream to the topic.</span>
+
+<span class="sd">        Using this constructor, the default FlinkFixedPartitioner will be used as the partitioner.</span>
+<span class="sd">        This default partitioner maps each sink subtask to a single Kafka partition (i.e. all</span>
+<span class="sd">        records received by a sink subtask will end up in the same Kafka partition).</span>
+
+<span class="sd">        :param topic: ID of the Kafka topic.</span>
+<span class="sd">        :param serialization_schema: User defined key-less serialization schema.</span>
+<span class="sd">        :param producer_config: Properties with the producer configuration.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
+        <span class="n">j_properties</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">Properties</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">producer_config</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">j_properties</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+        <span class="n">JFlinkKafkaProducer</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span> \
+            <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">streaming</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">kafka</span><span class="o">.</span><span class="n">FlinkKafkaProducer</span>
+
+        <span class="n">j_flink_kafka_producer</span> <span class="o">=</span> <span class="n">JFlinkKafkaProducer</span><span class="p">(</span>
+            <span class="n">topic</span><span class="p">,</span> <span class="n">serialization_schema</span><span class="o">.</span><span class="n">_j_serialization_schema</span><span class="p">,</span> <span class="n">j_properties</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">semantic</span><span class="o">.</span><span class="n">_to_j_semantic</span><span class="p">(),</span> <span class="n">kafka_producer_pool_size</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">FlinkKafkaProducer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">j_flink_kafka_producer</span><span class="o">=</span><span class="n">j_flink_kafka_producer</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">ignore_failures_after_transaction_timeout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;FlinkKafkaProducer&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Disables the propagation of exceptions thrown when committing presumably timed out Kafka</span>
+<span class="sd">        transactions during recovery of the job. If a Kafka transaction is timed out, a commit will</span>
+<span class="sd">        never be successful. Hence, use this feature to avoid recovery loops of the Job. Exceptions</span>
+<span class="sd">        will still be logged to inform the user that data loss might have occurred.</span>
+
+<span class="sd">        Note that we use the System.currentTimeMillis() to track the age of a transaction. Moreover,</span>
+<span class="sd">        only exceptions thrown during the recovery are caught, i.e., the producer will attempt at</span>
+<span class="sd">        least one commit of the transaction before giving up.</span>
+
+<span class="sd">        :return: This FlinkKafkaProducer.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_function</span><span class="o">.</span><span class="n">ignoreFailuresAfterTransactionTimeout</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<span class="c1"># ---- KafkaSource ----</span>
+
+
+<div class="viewcode-block" id="KafkaSource"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.kafka.KafkaSource.html#pyflink.datastream.connectors.kafka.KafkaSource">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">KafkaSource</span><span class="p">(</span><span class="n">Source</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The Source implementation of Kafka. Please use a :class:`KafkaSourceBuilder` to construct a</span>
+<span class="sd">    :class:`KafkaSource`. The following example shows how to create a KafkaSource emitting records</span>
+<span class="sd">    of String type.</span>
+
+<span class="sd">    ::</span>
+
+<span class="sd">        &gt;&gt;&gt; source = KafkaSource \\</span>
+<span class="sd">        ...     .builder() \\</span>
+<span class="sd">        ...     .set_bootstrap_servers(&#39;MY_BOOTSTRAP_SERVERS&#39;) \\</span>
+<span class="sd">        ...     .set_group_id(&#39;MY_GROUP&#39;) \\</span>
+<span class="sd">        ...     .set_topics(&#39;TOPIC1&#39;, &#39;TOPIC2&#39;) \\</span>
+<span class="sd">        ...     .set_value_only_deserializer(SimpleStringSchema()) \\</span>
+<span class="sd">        ...     .set_starting_offsets(KafkaOffsetsInitializer.earliest()) \\</span>
+<span class="sd">        ...     .build()</span>
+
+<span class="sd">    .. versionadded:: 1.16.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_kafka_source</span><span class="p">:</span> <span class="n">JavaObject</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">j_kafka_source</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">builder</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;KafkaSourceBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a kafkaSourceBuilder to build a :class:`KafkaSource`.</span>
+
+<span class="sd">        :return: a Kafka source builder.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">KafkaSourceBuilder</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="KafkaSourceBuilder"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.kafka.KafkaSourceBuilder.html#pyflink.datastream.connectors.kafka.KafkaSourceBuilder">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">KafkaSourceBuilder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The builder class for :class:`KafkaSource` to make it easier for the users to construct a</span>
+<span class="sd">    :class:`KafkaSource`.</span>
+
+<span class="sd">    The following example shows the minimum setup to create a KafkaSource that reads the String</span>
+<span class="sd">    values from a Kafka topic.</span>
+
+<span class="sd">    ::</span>
+
+<span class="sd">        &gt;&gt;&gt; source = KafkaSource.builder() \\</span>
+<span class="sd">        ...     .set_bootstrap_servers(&#39;MY_BOOTSTRAP_SERVERS&#39;) \\</span>
+<span class="sd">        ...     .set_topics(&#39;TOPIC1&#39;, &#39;TOPIC2&#39;) \\</span>
+<span class="sd">        ...     .set_value_only_deserializer(SimpleStringSchema()) \\</span>
+<span class="sd">        ...     .build()</span>
+
+<span class="sd">    The bootstrap servers, topics/partitions to consume, and the record deserializer are required</span>
+<span class="sd">    fields that must be set.</span>
+
+<span class="sd">    To specify the starting offsets of the KafkaSource, one can call :meth:`set_starting_offsets`.</span>
+
+<span class="sd">    By default, the KafkaSource runs in an CONTINUOUS_UNBOUNDED mode and never stops until the Flink</span>
+<span class="sd">    job is canceled or fails. To let the KafkaSource run in CONTINUOUS_UNBOUNDED but stops at some</span>
+<span class="sd">    given offsets, one can call :meth:`set_stopping_offsets`. For example the following KafkaSource</span>
+<span class="sd">    stops after it consumes up to the latest partition offsets at the point when the Flink started.</span>
+
+<span class="sd">    ::</span>
+
+<span class="sd">        &gt;&gt;&gt; source = KafkaSource.builder() \\</span>
+<span class="sd">        ...     .set_bootstrap_servers(&#39;MY_BOOTSTRAP_SERVERS&#39;) \\</span>
+<span class="sd">        ...     .set_topics(&#39;TOPIC1&#39;, &#39;TOPIC2&#39;) \\</span>
+<span class="sd">        ...     .set_value_only_deserializer(SimpleStringSchema()) \\</span>
+<span class="sd">        ...     .set_unbounded(KafkaOffsetsInitializer.latest()) \\</span>
+<span class="sd">        ...     .build()</span>
+
+<span class="sd">    .. versionadded:: 1.16.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">kafka</span><span class="o">.</span><span class="n">source</span> \
+            <span class="o">.</span><span class="n">KafkaSource</span><span class="o">.</span><span class="n">builder</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;KafkaSource&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">KafkaSource</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">build</span><span class="p">())</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_bootstrap_servers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bootstrap_servers</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;KafkaSourceBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the bootstrap servers for the KafkaConsumer of the KafkaSource.</span>
+
+<span class="sd">        :param bootstrap_servers: the bootstrap servers of the Kafka cluster.</span>
+<span class="sd">        :return: this KafkaSourceBuilder.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setBootstrapServers</span><span class="p">(</span><span class="n">bootstrap_servers</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_group_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;KafkaSourceBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the consumer group id of the KafkaSource.</span>
+
+<span class="sd">        :param group_id: the group id of the KafkaSource.</span>
+<span class="sd">        :return: this KafkaSourceBuilder.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setGroupId</span><span class="p">(</span><span class="n">group_id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_topics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">topics</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;KafkaSourceBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set a list of topics the KafkaSource should consume from. All the topics in the list should</span>
+<span class="sd">        have existed in the Kafka cluster. Otherwise, an exception will be thrown. To allow some</span>
+<span class="sd">        topics to be created lazily, please use :meth:`set_topic_pattern` instead.</span>
+
+<span class="sd">        :param topics: the list of topics to consume from.</span>
+<span class="sd">        :return: this KafkaSourceBuilder.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setTopics</span><span class="p">(</span><span class="n">to_jarray</span><span class="p">(</span><span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">java</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">String</span><span class="p">,</span> <span class="n">topics</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_topic_pattern</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topic_pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;KafkaSourceBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set a topic pattern to consume from use the java Pattern. For grammar, check out</span>
+<span class="sd">        `JavaDoc &lt;https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html&gt;`_ .</span>
+
+<span class="sd">        :param topic_pattern: the pattern of the topic name to consume from.</span>
+<span class="sd">        :return: this KafkaSourceBuilder.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setTopicPattern</span><span class="p">(</span><span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">regex</span>
+                                        <span class="o">.</span><span class="n">Pattern</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">topic_pattern</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_partitions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">partitions</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="s1">&#39;KafkaTopicPartition&#39;</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s1">&#39;KafkaSourceBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set a set of partitions to consume from.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; KafkaSource.builder().set_partitions({</span>
+<span class="sd">            ...     KafkaTopicPartition(&#39;TOPIC1&#39;, 0),</span>
+<span class="sd">            ...     KafkaTopicPartition(&#39;TOPIC1&#39;, 1),</span>
+<span class="sd">            ... })</span>
+
+<span class="sd">        :param partitions: the set of partitions to consume from.</span>
+<span class="sd">        :return: this KafkaSourceBuilder.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">j_set</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">HashSet</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">tp</span> <span class="ow">in</span> <span class="n">partitions</span><span class="p">:</span>
+            <span class="n">j_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tp</span><span class="o">.</span><span class="n">_to_j_topic_partition</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setPartitions</span><span class="p">(</span><span class="n">j_set</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_starting_offsets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">starting_offsets_initializer</span><span class="p">:</span> <span class="s1">&#39;KafkaOffsetsInitializer&#39;</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;KafkaSourceBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Specify from which offsets the KafkaSource should start consume from by providing an</span>
+<span class="sd">        :class:`KafkaOffsetsInitializer`.</span>
+
+<span class="sd">        The following :class:`KafkaOffsetsInitializer` s are commonly used and provided out of the</span>
+<span class="sd">        box. Currently, customized offset initializer is not supported in PyFlink.</span>
+
+<span class="sd">        * :meth:`KafkaOffsetsInitializer.earliest` - starting from the earliest offsets. This is</span>
+<span class="sd">          also the default offset initializer of the KafkaSource for starting offsets.</span>
+<span class="sd">        * :meth:`KafkaOffsetsInitializer.latest` - starting from the latest offsets.</span>
+<span class="sd">        * :meth:`KafkaOffsetsInitializer.committedOffsets` - starting from the committed offsets of</span>
+<span class="sd">          the consumer group. If there is no committed offsets, starting from the offsets</span>
+<span class="sd">          specified by the :class:`KafkaOffsetResetStrategy`.</span>
+<span class="sd">        * :meth:`KafkaOffsetsInitializer.offsets` - starting from the specified offsets for each</span>
+<span class="sd">          partition.</span>
+<span class="sd">        * :meth:`KafkaOffsetsInitializer.timestamp` - starting from the specified timestamp for each</span>
+<span class="sd">          partition. Note that the guarantee here is that all the records in Kafka whose timestamp</span>
+<span class="sd">          is greater than the given starting timestamp will be consumed. However, it is possible</span>
+<span class="sd">          that some consumer records whose timestamp is smaller than the given starting timestamp</span>
+<span class="sd">          are also consumed.</span>
+
+<span class="sd">        :param starting_offsets_initializer: the :class:`KafkaOffsetsInitializer` setting the</span>
+<span class="sd">            starting offsets for the Source.</span>
+<span class="sd">        :return: this KafkaSourceBuilder.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setStartingOffsets</span><span class="p">(</span><span class="n">starting_offsets_initializer</span><span class="o">.</span><span class="n">_j_initializer</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_unbounded</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stopping_offsets_initializer</span><span class="p">:</span> <span class="s1">&#39;KafkaOffsetsInitializer&#39;</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;KafkaSourceBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        By default, the KafkaSource is set to run in CONTINUOUS_UNBOUNDED manner and thus never</span>
+<span class="sd">        stops until the Flink job fails or is canceled. To let the KafkaSource run as a streaming</span>
+<span class="sd">        source but still stops at some point, one can set an :class:`KafkaOffsetsInitializer`</span>
+<span class="sd">        to specify the stopping offsets for each partition. When all the partitions have reached</span>
+<span class="sd">        their stopping offsets, the KafkaSource will then exit.</span>
+
+<span class="sd">        This method is different from :meth:`set_bounded` that after setting the stopping offsets</span>
+<span class="sd">        with this method, KafkaSource will still be CONTINUOUS_UNBOUNDED even though it will stop at</span>
+<span class="sd">        the stopping offsets specified by the stopping offset initializer.</span>
+
+<span class="sd">        The following :class:`KafkaOffsetsInitializer` s are commonly used and provided out of the</span>
+<span class="sd">        box. Currently, customized offset initializer is not supported in PyFlink.</span>
+
+<span class="sd">        * :meth:`KafkaOffsetsInitializer.latest` - starting from the latest offsets.</span>
+<span class="sd">        * :meth:`KafkaOffsetsInitializer.committedOffsets` - starting from the committed offsets of</span>
+<span class="sd">          the consumer group. If there is no committed offsets, starting from the offsets</span>
+<span class="sd">          specified by the :class:`KafkaOffsetResetStrategy`.</span>
+<span class="sd">        * :meth:`KafkaOffsetsInitializer.offsets` - starting from the specified offsets for each</span>
+<span class="sd">          partition.</span>
+<span class="sd">        * :meth:`KafkaOffsetsInitializer.timestamp` - starting from the specified timestamp for each</span>
+<span class="sd">          partition. Note that the guarantee here is that all the records in Kafka whose timestamp</span>
+<span class="sd">          is greater than the given starting timestamp will be consumed. However, it is possible</span>
+<span class="sd">          that some consumer records whose timestamp is smaller than the given starting timestamp</span>
+<span class="sd">          are also consumed.</span>
+
+<span class="sd">        :param stopping_offsets_initializer: the :class:`KafkaOffsetsInitializer` to specify the</span>
+<span class="sd">            stopping offsets.</span>
+<span class="sd">        :return: this KafkaSourceBuilder</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setUnbounded</span><span class="p">(</span><span class="n">stopping_offsets_initializer</span><span class="o">.</span><span class="n">_j_initializer</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_bounded</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stopping_offsets_initializer</span><span class="p">:</span> <span class="s1">&#39;KafkaOffsetsInitializer&#39;</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;KafkaSourceBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        By default, the KafkaSource is set to run in CONTINUOUS_UNBOUNDED manner and thus never</span>
+<span class="sd">        stops until the Flink job fails or is canceled. To let the KafkaSource run in BOUNDED manner</span>
+<span class="sd">        and stop at some point, one can set an :class:`KafkaOffsetsInitializer` to specify the</span>
+<span class="sd">        stopping offsets for each partition. When all the partitions have reached their stopping</span>
+<span class="sd">        offsets, the KafkaSource will then exit.</span>
+
+<span class="sd">        This method is different from :meth:`set_unbounded` that after setting the stopping offsets</span>
+<span class="sd">        with this method, :meth:`KafkaSource.get_boundedness` will return BOUNDED instead of</span>
+<span class="sd">        CONTINUOUS_UNBOUNDED.</span>
+
+<span class="sd">        The following :class:`KafkaOffsetsInitializer` s are commonly used and provided out of the</span>
+<span class="sd">        box. Currently, customized offset initializer is not supported in PyFlink.</span>
+
+<span class="sd">        * :meth:`KafkaOffsetsInitializer.latest` - starting from the latest offsets.</span>
+<span class="sd">        * :meth:`KafkaOffsetsInitializer.committedOffsets` - starting from the committed offsets of</span>
+<span class="sd">          the consumer group. If there is no committed offsets, starting from the offsets</span>
+<span class="sd">          specified by the :class:`KafkaOffsetResetStrategy`.</span>
+<span class="sd">        * :meth:`KafkaOffsetsInitializer.offsets` - starting from the specified offsets for each</span>
+<span class="sd">          partition.</span>
+<span class="sd">        * :meth:`KafkaOffsetsInitializer.timestamp` - starting from the specified timestamp for each</span>
+<span class="sd">          partition. Note that the guarantee here is that all the records in Kafka whose timestamp</span>
+<span class="sd">          is greater than the given starting timestamp will be consumed. However, it is possible</span>
+<span class="sd">          that some consumer records whose timestamp is smaller than the given starting timestamp</span>
+<span class="sd">          are also consumed.</span>
+
+<span class="sd">        :param stopping_offsets_initializer: the :class:`KafkaOffsetsInitializer` to specify the</span>
+<span class="sd">            stopping offsets.</span>
+<span class="sd">        :return: this KafkaSourceBuilder</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setBounded</span><span class="p">(</span><span class="n">stopping_offsets_initializer</span><span class="o">.</span><span class="n">_j_initializer</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_value_only_deserializer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">deserialization_schema</span><span class="p">:</span> <span class="n">DeserializationSchema</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;KafkaSourceBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the :class:`~pyflink.common.serialization.DeserializationSchema` for deserializing the</span>
+<span class="sd">        value of Kafka&#39;s ConsumerRecord. The other information (e.g. key) in a ConsumerRecord will</span>
+<span class="sd">        be ignored.</span>
+
+<span class="sd">        :param deserialization_schema: the :class:`DeserializationSchema` to use for</span>
+<span class="sd">            deserialization.</span>
+<span class="sd">        :return: this KafkaSourceBuilder.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setValueOnlyDeserializer</span><span class="p">(</span><span class="n">deserialization_schema</span><span class="o">.</span><span class="n">_j_deserialization_schema</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_client_id_prefix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;KafkaSourceBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the client id prefix of this KafkaSource.</span>
+
+<span class="sd">        :param prefix: the client id prefix to use for this KafkaSource.</span>
+<span class="sd">        :return: this KafkaSourceBuilder.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setClientIdPrefix</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;KafkaSourceBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set an arbitrary property for the KafkaSource and KafkaConsumer. The valid keys can be found</span>
+<span class="sd">        in ConsumerConfig and KafkaSourceOptions.</span>
+
+<span class="sd">        Note that the following keys will be overridden by the builder when the KafkaSource is</span>
+<span class="sd">        created.</span>
+
+<span class="sd">        * ``key.deserializer`` is always set to ByteArrayDeserializer.</span>
+<span class="sd">        * ``value.deserializer`` is always set to ByteArrayDeserializer.</span>
+<span class="sd">        * ``auto.offset.reset.strategy`` is overridden by AutoOffsetResetStrategy returned by</span>
+<span class="sd">          :class:`KafkaOffsetsInitializer` for the starting offsets, which is by default</span>
+<span class="sd">          :meth:`KafkaOffsetsInitializer.earliest`.</span>
+<span class="sd">        * ``partition.discovery.interval.ms`` is overridden to -1 when :meth:`set_bounded` has been</span>
+<span class="sd">          invoked.</span>
+
+<span class="sd">        :param key: the key of the property.</span>
+<span class="sd">        :param value: the value of the property.</span>
+<span class="sd">        :return: this KafkaSourceBuilder.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">props</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;KafkaSourceBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set arbitrary properties for the KafkaSource and KafkaConsumer. The valid keys can be found</span>
+<span class="sd">        in ConsumerConfig and KafkaSourceOptions.</span>
+
+<span class="sd">        Note that the following keys will be overridden by the builder when the KafkaSource is</span>
+<span class="sd">        created.</span>
+
+<span class="sd">        * ``key.deserializer`` is always set to ByteArrayDeserializer.</span>
+<span class="sd">        * ``value.deserializer`` is always set to ByteArrayDeserializer.</span>
+<span class="sd">        * ``auto.offset.reset.strategy`` is overridden by AutoOffsetResetStrategy returned by</span>
+<span class="sd">          :class:`KafkaOffsetsInitializer` for the starting offsets, which is by default</span>
+<span class="sd">          :meth:`KafkaOffsetsInitializer.earliest`.</span>
+<span class="sd">        * ``partition.discovery.interval.ms`` is overridden to -1 when :meth:`set_bounded` has been</span>
+<span class="sd">          invoked.</span>
+<span class="sd">        * ``client.id`` is overridden to &quot;client.id.prefix-RANDOM_LONG&quot;, or &quot;group.id-RANDOM_LONG&quot;</span>
+<span class="sd">          if the client id prefix is not set.</span>
+
+<span class="sd">        :param props: the properties to set for the KafkaSource.</span>
+<span class="sd">        :return: this KafkaSourceBuilder.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
+        <span class="n">j_properties</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">Properties</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">props</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">j_properties</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setProperties</span><span class="p">(</span><span class="n">j_properties</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="KafkaTopicPartition"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.kafka.KafkaTopicPartition.html#pyflink.datastream.connectors.kafka.KafkaTopicPartition">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">KafkaTopicPartition</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Corresponding to Java ``org.apache.kafka.common.TopicPartition`` class.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        &gt;&gt;&gt; topic_partition = KafkaTopicPartition(&#39;TOPIC1&#39;, 0)</span>
+
+<span class="sd">    .. versionadded:: 1.16.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topic</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">partition</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_topic</span> <span class="o">=</span> <span class="n">topic</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_partition</span> <span class="o">=</span> <span class="n">partition</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_to_j_topic_partition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">jvm</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>
+        <span class="k">return</span> <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">kafka</span><span class="o">.</span><span class="n">shaded</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">kafka</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">TopicPartition</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_topic</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_partition</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">KafkaTopicPartition</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_topic</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_topic</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_partition</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_partition</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">31</span> <span class="o">*</span> <span class="p">(</span><span class="mi">31</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_partition</span><span class="p">)</span> <span class="o">+</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_topic</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="KafkaOffsetResetStrategy"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.kafka.KafkaOffsetResetStrategy.html#pyflink.datastream.connectors.kafka.KafkaOffsetResetStrategy">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">KafkaOffsetResetStrategy</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Corresponding to Java ``org.apache.kafka.client.consumer.OffsetResetStrategy`` class.</span>
+
+<span class="sd">    .. versionadded:: 1.16.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">LATEST</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">EARLIEST</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">NONE</span> <span class="o">=</span> <span class="mi">2</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_to_j_offset_reset_strategy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">JOffsetResetStrategy</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">kafka</span><span class="o">.</span><span class="n">shaded</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">kafka</span><span class="o">.</span>\
+            <span class="n">clients</span><span class="o">.</span><span class="n">consumer</span><span class="o">.</span><span class="n">OffsetResetStrategy</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">JOffsetResetStrategy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="KafkaOffsetsInitializer"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.kafka.KafkaOffsetsInitializer.html#pyflink.datastream.connectors.kafka.KafkaOffsetsInitializer">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">KafkaOffsetsInitializer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    An interface for users to specify the starting / stopping offset of a KafkaPartitionSplit.</span>
+
+<span class="sd">    .. versionadded:: 1.16.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_initializer</span><span class="p">:</span> <span class="n">JavaObject</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_initializer</span> <span class="o">=</span> <span class="n">j_initializer</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">committed_offsets</span><span class="p">(</span>
+            <span class="n">offset_reset_strategy</span><span class="p">:</span> <span class="s1">&#39;KafkaOffsetResetStrategy&#39;</span> <span class="o">=</span> <span class="n">KafkaOffsetResetStrategy</span><span class="o">.</span><span class="n">NONE</span><span class="p">)</span> <span class="o">-&gt;</span> \
+            <span class="s1">&#39;KafkaOffsetsInitializer&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get an :class:`KafkaOffsetsInitializer` which initializes the offsets to the committed</span>
+<span class="sd">        offsets. An exception will be thrown at runtime if there is no committed offsets.</span>
+
+<span class="sd">        An optional :class:`KafkaOffsetResetStrategy` can be specified to initialize the offsets if</span>
+<span class="sd">        the committed offsets does not exist.</span>
+
+<span class="sd">        :param offset_reset_strategy: the offset reset strategy to use when the committed offsets do</span>
+<span class="sd">            not exist.</span>
+<span class="sd">        :return: an offset initializer which initialize the offsets to the committed offsets.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">JOffsetsInitializer</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">kafka</span><span class="o">.</span><span class="n">source</span><span class="o">.</span>\
+            <span class="n">enumerator</span><span class="o">.</span><span class="n">initializer</span><span class="o">.</span><span class="n">OffsetsInitializer</span>
+        <span class="k">return</span> <span class="n">KafkaOffsetsInitializer</span><span class="p">(</span><span class="n">JOffsetsInitializer</span><span class="o">.</span><span class="n">committedOffsets</span><span class="p">(</span>
+            <span class="n">offset_reset_strategy</span><span class="o">.</span><span class="n">_to_j_offset_reset_strategy</span><span class="p">()))</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">timestamp</span><span class="p">(</span><span class="n">timestamp</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;KafkaOffsetsInitializer&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get an :class:`KafkaOffsetsInitializer` which initializes the offsets in each partition so</span>
+<span class="sd">        that the initialized offset is the offset of the first record whose record timestamp is</span>
+<span class="sd">        greater than or equals the give timestamp.</span>
+
+<span class="sd">        :param timestamp: the timestamp to start the consumption.</span>
+<span class="sd">        :return: an :class:`OffsetsInitializer` which initializes the offsets based on the given</span>
+<span class="sd">            timestamp.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">JOffsetsInitializer</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">kafka</span><span class="o">.</span><span class="n">source</span><span class="o">.</span> \
+            <span class="n">enumerator</span><span class="o">.</span><span class="n">initializer</span><span class="o">.</span><span class="n">OffsetsInitializer</span>
+        <span class="k">return</span> <span class="n">KafkaOffsetsInitializer</span><span class="p">(</span><span class="n">JOffsetsInitializer</span><span class="o">.</span><span class="n">timestamp</span><span class="p">(</span><span class="n">timestamp</span><span class="p">))</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">earliest</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;KafkaOffsetsInitializer&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get an :class:`KafkaOffsetsInitializer` which initializes the offsets to the earliest</span>
+<span class="sd">        available offsets of each partition.</span>
+
+<span class="sd">        :return: an :class:`KafkaOffsetsInitializer` which initializes the offsets to the earliest</span>
+<span class="sd">            available offsets.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">JOffsetsInitializer</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">kafka</span><span class="o">.</span><span class="n">source</span><span class="o">.</span> \
+            <span class="n">enumerator</span><span class="o">.</span><span class="n">initializer</span><span class="o">.</span><span class="n">OffsetsInitializer</span>
+        <span class="k">return</span> <span class="n">KafkaOffsetsInitializer</span><span class="p">(</span><span class="n">JOffsetsInitializer</span><span class="o">.</span><span class="n">earliest</span><span class="p">())</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">latest</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;KafkaOffsetsInitializer&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get an :class:`KafkaOffsetsInitializer` which initializes the offsets to the latest offsets</span>
+<span class="sd">        of each partition.</span>
+
+<span class="sd">        :return: an :class:`KafkaOffsetsInitializer` which initializes the offsets to the latest</span>
+<span class="sd">            offsets.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">JOffsetsInitializer</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">kafka</span><span class="o">.</span><span class="n">source</span><span class="o">.</span> \
+            <span class="n">enumerator</span><span class="o">.</span><span class="n">initializer</span><span class="o">.</span><span class="n">OffsetsInitializer</span>
+        <span class="k">return</span> <span class="n">KafkaOffsetsInitializer</span><span class="p">(</span><span class="n">JOffsetsInitializer</span><span class="o">.</span><span class="n">latest</span><span class="p">())</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">offsets</span><span class="p">(</span><span class="n">offsets</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="s1">&#39;KafkaTopicPartition&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+                <span class="n">offset_reset_strategy</span><span class="p">:</span> <span class="s1">&#39;KafkaOffsetResetStrategy&#39;</span> <span class="o">=</span>
+                <span class="n">KafkaOffsetResetStrategy</span><span class="o">.</span><span class="n">EARLIEST</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;KafkaOffsetsInitializer&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get an :class:`KafkaOffsetsInitializer` which initializes the offsets to the specified</span>
+<span class="sd">        offsets.</span>
+
+<span class="sd">        An optional :class:`KafkaOffsetResetStrategy` can be specified to initialize the offsets in</span>
+<span class="sd">        case the specified offset is out of range.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; KafkaOffsetsInitializer.offsets({</span>
+<span class="sd">            ...     KafkaTopicPartition(&#39;TOPIC1&#39;, 0): 0,</span>
+<span class="sd">            ...     KafkaTopicPartition(&#39;TOPIC1&#39;, 1): 10000</span>
+<span class="sd">            ... }, KafkaOffsetResetStrategy.EARLIEST)</span>
+
+<span class="sd">        :param offsets: the specified offsets for each partition.</span>
+<span class="sd">        :param offset_reset_strategy: the :class:`KafkaOffsetResetStrategy` to use when the</span>
+<span class="sd">            specified offset is out of range.</span>
+<span class="sd">        :return: an :class:`KafkaOffsetsInitializer` which initializes the offsets to the specified</span>
+<span class="sd">            offsets.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">jvm</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>
+        <span class="n">j_map_wrapper</span> <span class="o">=</span> <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">HashMapWrapper</span><span class="p">(</span>
+            <span class="kc">None</span><span class="p">,</span> <span class="n">get_java_class</span><span class="p">(</span><span class="n">jvm</span><span class="o">.</span><span class="n">Long</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">tp</span><span class="p">,</span> <span class="n">offset</span> <span class="ow">in</span> <span class="n">offsets</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">j_map_wrapper</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">tp</span><span class="o">.</span><span class="n">_to_j_topic_partition</span><span class="p">(),</span> <span class="n">offset</span><span class="p">)</span>
+
+        <span class="n">JOffsetsInitializer</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">kafka</span><span class="o">.</span><span class="n">source</span><span class="o">.</span> \
+            <span class="n">enumerator</span><span class="o">.</span><span class="n">initializer</span><span class="o">.</span><span class="n">OffsetsInitializer</span>
+        <span class="k">return</span> <span class="n">KafkaOffsetsInitializer</span><span class="p">(</span><span class="n">JOffsetsInitializer</span><span class="o">.</span><span class="n">offsets</span><span class="p">(</span>
+            <span class="n">j_map_wrapper</span><span class="o">.</span><span class="n">asMap</span><span class="p">(),</span> <span class="n">offset_reset_strategy</span><span class="o">.</span><span class="n">_to_j_offset_reset_strategy</span><span class="p">()))</span></div>
+
+
+<div class="viewcode-block" id="KafkaSink"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.kafka.KafkaSink.html#pyflink.datastream.connectors.kafka.KafkaSink">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">KafkaSink</span><span class="p">(</span><span class="n">Sink</span><span class="p">,</span> <span class="n">SupportsPreprocessing</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Flink Sink to produce data into a Kafka topic. The sink supports all delivery guarantees</span>
+<span class="sd">    described by :class:`DeliveryGuarantee`.</span>
+
+<span class="sd">    * :attr:`DeliveryGuarantee.NONE` does not provide any guarantees: messages may be lost in case</span>
+<span class="sd">      of issues on the Kafka broker and messages may be duplicated in case of a Flink failure.</span>
+<span class="sd">    * :attr:`DeliveryGuarantee.AT_LEAST_ONCE` the sink will wait for all outstanding records in the</span>
+<span class="sd">      Kafka buffers to be acknowledged by the Kafka producer on a checkpoint. No messages will be</span>
+<span class="sd">      lost in case of any issue with the Kafka brokers but messages may be duplicated when Flink</span>
+<span class="sd">      restarts.</span>
+<span class="sd">    * :attr:`DeliveryGuarantee.EXACTLY_ONCE`: In this mode the KafkaSink will write all messages in</span>
+<span class="sd">      a Kafka transaction that will be committed to Kafka on a checkpoint. Thus, if the consumer</span>
+<span class="sd">      reads only committed data (see Kafka consumer config ``isolation.level``), no duplicates</span>
+<span class="sd">      will be seen in case of a Flink restart. However, this delays record writing effectively</span>
+<span class="sd">      until a checkpoint is written, so adjust the checkpoint duration accordingly. Please ensure</span>
+<span class="sd">      that you use unique transactional id prefixes across your applications running on the same</span>
+<span class="sd">      Kafka cluster such that multiple running jobs do not interfere in their transactions!</span>
+<span class="sd">      Additionally, it is highly recommended to tweak Kafka transaction timeout (link) &gt;&gt; maximum</span>
+<span class="sd">      checkpoint duration + maximum restart duration or data loss may happen when Kafka expires an</span>
+<span class="sd">      uncommitted transaction.</span>
+
+<span class="sd">    .. versionadded:: 1.16.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_kafka_sink</span><span class="p">,</span> <span class="n">transformer</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">StreamTransformer</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">j_kafka_sink</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_transformer</span> <span class="o">=</span> <span class="n">transformer</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">builder</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;KafkaSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a :class:`KafkaSinkBuilder` to construct :class:`KafkaSink`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">KafkaSinkBuilder</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_transformer</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">StreamTransformer</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transformer</span></div>
+
+
+<div class="viewcode-block" id="KafkaSinkBuilder"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.kafka.KafkaSinkBuilder.html#pyflink.datastream.connectors.kafka.KafkaSinkBuilder">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">KafkaSinkBuilder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Builder to construct :class:`KafkaSink`.</span>
+
+<span class="sd">    The following example shows the minimum setup to create a KafkaSink that writes String values</span>
+<span class="sd">    to a Kafka topic.</span>
+
+<span class="sd">    ::</span>
+
+<span class="sd">        &gt;&gt;&gt; record_serializer = KafkaRecordSerializationSchema.builder() \\</span>
+<span class="sd">        ...     .set_topic(MY_SINK_TOPIC) \\</span>
+<span class="sd">        ...     .set_value_serialization_schema(SimpleStringSchema()) \\</span>
+<span class="sd">        ...     .build()</span>
+<span class="sd">        &gt;&gt;&gt; sink = KafkaSink.builder() \\</span>
+<span class="sd">        ...     .set_bootstrap_servers(MY_BOOTSTRAP_SERVERS) \\</span>
+<span class="sd">        ...     .set_record_serializer(record_serializer) \\</span>
+<span class="sd">        ...     .build()</span>
+
+<span class="sd">    One can also configure different :class:`DeliveryGuarantee` by using</span>
+<span class="sd">    :meth:`set_delivery_guarantee` but keep in mind when using</span>
+<span class="sd">    :attr:`DeliveryGuarantee.EXACTLY_ONCE`, one must set the transactional id prefix</span>
+<span class="sd">    :meth:`set_transactional_id_prefix`.</span>
+
+<span class="sd">    .. versionadded:: 1.16.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">jvm</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span> <span class="o">=</span> <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">kafka</span><span class="o">.</span><span class="n">sink</span><span class="o">.</span><span class="n">KafkaSink</span><span class="o">.</span><span class="n">builder</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_preprocessing</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;KafkaSink&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructs the :class:`KafkaSink` with the configured properties.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">KafkaSink</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">build</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_preprocessing</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_bootstrap_servers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bootstrap_servers</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;KafkaSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the Kafka bootstrap servers.</span>
+
+<span class="sd">        :param bootstrap_servers: A comma separated list of valid URIs to reach the Kafka broker.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setBootstrapServers</span><span class="p">(</span><span class="n">bootstrap_servers</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_delivery_guarantee</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delivery_guarantee</span><span class="p">:</span> <span class="n">DeliveryGuarantee</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;KafkaSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the wanted :class:`DeliveryGuarantee`. The default delivery guarantee is</span>
+<span class="sd">        :attr:`DeliveryGuarantee.NONE`.</span>
+
+<span class="sd">        :param delivery_guarantee: The wanted :class:`DeliveryGuarantee`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setDeliveryGuarantee</span><span class="p">(</span><span class="n">delivery_guarantee</span><span class="o">.</span><span class="n">_to_j_delivery_guarantee</span><span class="p">())</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_transactional_id_prefix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transactional_id_prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;KafkaSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the prefix for all created transactionalIds if :attr:`DeliveryGuarantee.EXACTLY_ONCE`</span>
+<span class="sd">        is configured.</span>
+
+<span class="sd">        It is mandatory to always set this value with :attr:`DeliveryGuarantee.EXACTLY_ONCE` to</span>
+<span class="sd">        prevent corrupted transactions if multiple jobs using the KafkaSink run against the same</span>
+<span class="sd">        Kafka Cluster. The default prefix is ``&quot;kafka-sink&quot;``.</span>
+
+<span class="sd">        The size of the prefix is capped by MAXIMUM_PREFIX_BYTES (6400) formatted with UTF-8.</span>
+
+<span class="sd">        It is important to keep the prefix stable across application restarts. If the prefix changes</span>
+<span class="sd">        it might happen that lingering transactions are not correctly aborted and newly written</span>
+<span class="sd">        messages are not immediately consumable until transactions timeout.</span>
+
+<span class="sd">        :param transactional_id_prefix: The transactional id prefix.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setTransactionalIdPrefix</span><span class="p">(</span><span class="n">transactional_id_prefix</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_record_serializer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record_serializer</span><span class="p">:</span> <span class="s1">&#39;KafkaRecordSerializationSchema&#39;</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;KafkaSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the :class:`KafkaRecordSerializationSchema` that transforms incoming records to kafka</span>
+<span class="sd">        producer records.</span>
+
+<span class="sd">        :param record_serializer: The :class:`KafkaRecordSerializationSchema`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># NOTE: If topic selector is a generated first-column selector, do extra preprocessing</span>
+        <span class="n">j_topic_selector</span> <span class="o">=</span> <span class="n">get_field_value</span><span class="p">(</span><span class="n">record_serializer</span><span class="o">.</span><span class="n">_j_serialization_schema</span><span class="p">,</span>
+                                           <span class="s1">&#39;topicSelector&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">j_topic_selector</span><span class="o">.</span><span class="n">getClass</span><span class="p">()</span><span class="o">.</span><span class="n">getCanonicalName</span><span class="p">()</span> <span class="o">==</span>
+            <span class="s1">&#39;org.apache.flink.connector.kafka.sink.KafkaRecordSerializationSchemaBuilder.&#39;</span>
+            <span class="s1">&#39;CachingTopicSelector&#39;</span>
+        <span class="p">)</span> <span class="ow">and</span> <span class="p">(</span>
+            <span class="n">get_field_value</span><span class="p">(</span><span class="n">j_topic_selector</span><span class="p">,</span> <span class="s1">&#39;topicSelector&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getClass</span><span class="p">()</span><span class="o">.</span><span class="n">getCanonicalName</span><span class="p">()</span>
+            <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span>
+            <span class="p">(</span><span class="n">get_field_value</span><span class="p">(</span><span class="n">j_topic_selector</span><span class="p">,</span> <span class="s1">&#39;topicSelector&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getClass</span><span class="p">()</span><span class="o">.</span><span class="n">getCanonicalName</span><span class="p">()</span>
+             <span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;com.sun.proxy&#39;</span><span class="p">)</span> <span class="ow">or</span>
+             <span class="n">get_field_value</span><span class="p">(</span><span class="n">j_topic_selector</span><span class="p">,</span> <span class="s1">&#39;topicSelector&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getClass</span><span class="p">()</span><span class="o">.</span><span class="n">getCanonicalName</span><span class="p">()</span>
+             <span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;jdk.proxy&#39;</span><span class="p">))</span>
+        <span class="p">):</span>
+            <span class="n">record_serializer</span><span class="o">.</span><span class="n">_wrap_serialization_schema</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_preprocessing</span> <span class="o">=</span> <span class="n">record_serializer</span><span class="o">.</span><span class="n">_build_preprocessing</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setRecordSerializer</span><span class="p">(</span><span class="n">record_serializer</span><span class="o">.</span><span class="n">_j_serialization_schema</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;KafkaSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets kafka producer config.</span>
+
+<span class="sd">        :param key: Kafka producer config key.</span>
+<span class="sd">        :param value: Kafka producer config value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="KafkaRecordSerializationSchema"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.kafka.KafkaRecordSerializationSchema.html#pyflink.datastream.connectors.kafka.KafkaRecordSerializationSchema">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">KafkaRecordSerializationSchema</span><span class="p">(</span><span class="n">SerializationSchema</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A serialization schema which defines how to convert the stream record to kafka producer record.</span>
+
+<span class="sd">    .. versionadded:: 1.16.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_serialization_schema</span><span class="p">,</span>
+                 <span class="n">topic_selector</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;KafkaTopicSelector&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">j_serialization_schema</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_topic_selector</span> <span class="o">=</span> <span class="n">topic_selector</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">builder</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;KafkaRecordSerializationSchemaBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a default schema builder to provide common building blocks i.e. key serialization,</span>
+<span class="sd">        value serialization, topic selection.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">KafkaRecordSerializationSchemaBuilder</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_wrap_serialization_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">jvm</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">_wrap_schema</span><span class="p">(</span><span class="n">field_name</span><span class="p">):</span>
+            <span class="n">j_schema_field</span> <span class="o">=</span> <span class="n">get_field</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_serialization_schema</span><span class="o">.</span><span class="n">getClass</span><span class="p">(),</span> <span class="n">field_name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">j_schema_field</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_serialization_schema</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">j_schema_field</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_j_serialization_schema</span><span class="p">,</span>
+                    <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">PythonConnectorUtils</span>
+                    <span class="o">.</span><span class="n">SecondColumnSerializationSchema</span><span class="p">(</span>
+                        <span class="n">j_schema_field</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_serialization_schema</span><span class="p">)</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+
+        <span class="n">_wrap_schema</span><span class="p">(</span><span class="s1">&#39;keySerializationSchema&#39;</span><span class="p">)</span>
+        <span class="n">_wrap_schema</span><span class="p">(</span><span class="s1">&#39;valueSerializationSchema&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_build_preprocessing</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StreamTransformer</span><span class="p">:</span>
+        <span class="k">class</span><span class="w"> </span><span class="nc">SelectTopicTransformer</span><span class="p">(</span><span class="n">StreamTransformer</span><span class="p">):</span>
+
+            <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topic_selector</span><span class="p">:</span> <span class="n">KafkaTopicSelector</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_topic_selector</span> <span class="o">=</span> <span class="n">topic_selector</span>
+
+            <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ds</span><span class="p">):</span>
+                <span class="n">output_type</span> <span class="o">=</span> <span class="n">Types</span><span class="o">.</span><span class="n">ROW</span><span class="p">([</span><span class="n">Types</span><span class="o">.</span><span class="n">STRING</span><span class="p">(),</span> <span class="n">ds</span><span class="o">.</span><span class="n">get_type</span><span class="p">()])</span>
+                <span class="k">return</span> <span class="n">ds</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">Row</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_topic_selector</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="n">v</span><span class="p">),</span>
+                              <span class="n">output_type</span><span class="o">=</span><span class="n">output_type</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">SelectTopicTransformer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_topic_selector</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="KafkaRecordSerializationSchemaBuilder"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.kafka.KafkaRecordSerializationSchemaBuilder.html#pyflink.datastream.connectors.kafka.KafkaRecordSerializationSchemaBuilder">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">KafkaRecordSerializationSchemaBuilder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Builder to construct :class:`KafkaRecordSerializationSchema`.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        &gt;&gt;&gt; KafkaRecordSerializationSchema.builder() \\</span>
+<span class="sd">        ...     .set_topic(&#39;topic&#39;) \\</span>
+<span class="sd">        ...     .set_key_serialization_schema(SimpleStringSchema()) \\</span>
+<span class="sd">        ...     .set_value_serialization_schema(SimpleStringSchema()) \\</span>
+<span class="sd">        ...     .build()</span>
+
+<span class="sd">    And the sink topic can be calculated dynamically from each record:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        &gt;&gt;&gt; KafkaRecordSerializationSchema.builder() \\</span>
+<span class="sd">        ...     .set_topic_selector(lambda row: &#39;topic-&#39; + row[&#39;category&#39;]) \\</span>
+<span class="sd">        ...     .set_value_serialization_schema(</span>
+<span class="sd">        ...         JsonRowSerializationSchema.builder().with_type_info(ROW_TYPE).build()) \\</span>
+<span class="sd">        ...     .build()</span>
+
+<span class="sd">    It is necessary to configure exactly one serialization method for the value and a topic.</span>
+
+<span class="sd">    .. versionadded:: 1.16.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">jvm</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span> <span class="o">=</span> <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">kafka</span><span class="o">.</span><span class="n">sink</span> \
+            <span class="o">.</span><span class="n">KafkaRecordSerializationSchemaBuilder</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fixed_topic</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># type: bool</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_topic_selector</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># type: Optional[KafkaTopicSelector]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_key_serialization_schema</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># type: Optional[SerializationSchema]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value_serialization_schema</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># type: Optional[SerializationSchema]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;KafkaRecordSerializationSchema&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructs the :class:`KafkaRecordSerializationSchemaBuilder` with the configured</span>
+<span class="sd">        properties.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fixed_topic</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">KafkaRecordSerializationSchema</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">build</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">KafkaRecordSerializationSchema</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">build</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_topic_selector</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_topic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topic</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;KafkaRecordSerializationSchemaBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets a fixed topic which used as destination for all records.</span>
+
+<span class="sd">        :param topic: The fixed topic.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setTopic</span><span class="p">(</span><span class="n">topic</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fixed_topic</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_topic_selector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topic_selector</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="s1">&#39;KafkaTopicSelector&#39;</span><span class="p">])</span>\
+            <span class="o">-&gt;</span> <span class="s1">&#39;KafkaRecordSerializationSchemaBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets a topic selector which computes the target topic for every incoming record.</span>
+
+<span class="sd">        :param topic_selector: A :class:`KafkaTopicSelector` implementation or a function that</span>
+<span class="sd">            consumes each incoming record and return the topic string.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">topic_selector</span><span class="p">,</span> <span class="n">KafkaTopicSelector</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">callable</span><span class="p">(</span><span class="n">topic_selector</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;topic_selector must be KafkaTopicSelector or a callable&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">topic_selector</span><span class="p">,</span> <span class="n">KafkaTopicSelector</span><span class="p">):</span>
+            <span class="k">class</span><span class="w"> </span><span class="nc">TopicSelectorFunctionAdapter</span><span class="p">(</span><span class="n">KafkaTopicSelector</span><span class="p">):</span>
+
+                <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="nb">str</span><span class="p">]):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_f</span> <span class="o">=</span> <span class="n">f</span>
+
+                <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_f</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+            <span class="n">topic_selector</span> <span class="o">=</span> <span class="n">TopicSelectorFunctionAdapter</span><span class="p">(</span><span class="n">topic_selector</span><span class="p">)</span>
+
+        <span class="n">jvm</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setTopicSelector</span><span class="p">(</span>
+            <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">PythonConnectorUtils</span><span class="o">.</span><span class="n">createFirstColumnTopicSelector</span><span class="p">(</span>
+                <span class="n">get_java_class</span><span class="p">(</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">kafka</span><span class="o">.</span><span class="n">sink</span><span class="o">.</span><span class="n">TopicSelector</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fixed_topic</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_topic_selector</span> <span class="o">=</span> <span class="n">topic_selector</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_key_serialization_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key_serialization_schema</span><span class="p">:</span> <span class="n">SerializationSchema</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;KafkaRecordSerializationSchemaBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets a :class:`SerializationSchema` which is used to serialize the incoming element to the</span>
+<span class="sd">        key of the producer record. The key serialization is optional, if not set, the key of the</span>
+<span class="sd">        producer record will be null.</span>
+
+<span class="sd">        :param key_serialization_schema: The :class:`SerializationSchema` to serialize each incoming</span>
+<span class="sd">            record as the key of producer record.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_key_serialization_schema</span> <span class="o">=</span> <span class="n">key_serialization_schema</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setKeySerializationSchema</span><span class="p">(</span><span class="n">key_serialization_schema</span><span class="o">.</span><span class="n">_j_serialization_schema</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_value_serialization_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value_serialization_schema</span><span class="p">:</span> <span class="n">SerializationSchema</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;KafkaRecordSerializationSchemaBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets a :class:`SerializationSchema` which is used to serialize the incoming element to the</span>
+<span class="sd">        value of the producer record. The value serialization is required.</span>
+
+<span class="sd">        :param value_serialization_schema: The :class:`SerializationSchema` to serialize each data</span>
+<span class="sd">            record as the key of producer record.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value_serialization_schema</span> <span class="o">=</span> <span class="n">value_serialization_schema</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setValueSerializationSchema</span><span class="p">(</span>
+            <span class="n">value_serialization_schema</span><span class="o">.</span><span class="n">_j_serialization_schema</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="KafkaTopicSelector"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.kafka.KafkaTopicSelector.html#pyflink.datastream.connectors.kafka.KafkaTopicSelector">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">KafkaTopicSelector</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Select topic for an incoming record</span>
+
+<span class="sd">    .. versionadded:: 1.16.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">pass</span></div>
+</pre></div>
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

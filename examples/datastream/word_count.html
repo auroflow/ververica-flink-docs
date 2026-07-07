@@ -1,0 +1,658 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Word Count &#8212; PyFlink 11.8.0rc0 documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/datastream/word_count';</script>
+    <link rel="shortcut icon" href="../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Json Data Process" href="process_json_data.html" />
+    <link rel="prev" title="DataStream Examples" href="index.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="Logo image">
+    <img src="../../_static/navbar-brand-logo.jpg" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Section navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">
+    Section Navigation
+  </p>
+  <div class="bd-toc-item navbar-nav">
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../table/index.html">Table Examples</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">DataStream Examples</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Word Count</a></li>
+<li class="toctree-l2"><a class="reference internal" href="process_json_data.html">Json Data Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_operations.html">Basic Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timer.html">Timer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="state.html">State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="window.html">Window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connectors.html">Connectors</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</nav>
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <section id="word-count">
+<h1>Word Count<a class="headerlink" href="#word-count" title="Permalink to this headline">#</a></h1>
+<section id="id1">
+<h2>Word Count<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">################################################################################</span>
+<span class="c1">#  Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="c1">#  or more contributor license agreements.  See the NOTICE file</span>
+<span class="c1">#  distributed with this work for additional information</span>
+<span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
+<span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
+<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  with the License.  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">################################################################################</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">WatermarkStrategy</span><span class="p">,</span> <span class="n">Encoder</span><span class="p">,</span> <span class="n">Types</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream</span><span class="w"> </span><span class="kn">import</span> <span class="n">StreamExecutionEnvironment</span><span class="p">,</span> <span class="n">RuntimeExecutionMode</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream.connectors.file_system</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">FileSource</span><span class="p">,</span> <span class="n">StreamFormat</span><span class="p">,</span> <span class="n">FileSink</span><span class="p">,</span>
+                                                       <span class="n">OutputFileConfig</span><span class="p">,</span> <span class="n">RollingPolicy</span><span class="p">)</span>
+
+
+<span class="n">word_count_data</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;To be, or not to be,--that is the question:--&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;Whether &#39;tis nobler in the mind to suffer&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;The slings and arrows of outrageous fortune&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;Or to take arms against a sea of troubles,&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;And by opposing end them?--To die,--to sleep,--&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;No more; and by a sleep to say we end&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;The heartache, and the thousand natural shocks&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;That flesh is heir to,--&#39;tis a consummation&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;Devoutly to be wish&#39;d. To die,--to sleep;--&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;To sleep! perchance to dream:--ay, there&#39;s the rub;&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;For in that sleep of death what dreams may come,&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;When we have shuffled off this mortal coil,&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;Must give us pause: there&#39;s the respect&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;That makes calamity of so long life;&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;For who would bear the whips and scorns of time,&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;The oppressor&#39;s wrong, the proud man&#39;s contumely,&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;The pangs of despis&#39;d love, the law&#39;s delay,&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;The insolence of office, and the spurns&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;That patient merit of the unworthy takes,&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;When he himself might his quietus make&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;With a bare bodkin? who would these fardels bear,&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;To grunt and sweat under a weary life,&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;But that the dread of something after death,--&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;The undiscover&#39;d country, from whose bourn&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;No traveller returns,--puzzles the will,&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;And makes us rather bear those ills we have&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;Than fly to others that we know not of?&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;Thus conscience does make cowards of us all;&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;And thus the native hue of resolution&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;Is sicklied o&#39;er with the pale cast of thought;&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;And enterprises of great pith and moment,&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;With this regard, their currents turn awry,&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;And lose the name of action.--Soft you now!&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;The fair Ophelia!--Nymph, in thy orisons&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;Be all my sins remember&#39;d.&quot;</span><span class="p">]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">word_count</span><span class="p">(</span><span class="n">input_path</span><span class="p">,</span> <span class="n">output_path</span><span class="p">):</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">StreamExecutionEnvironment</span><span class="o">.</span><span class="n">get_execution_environment</span><span class="p">()</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">set_runtime_mode</span><span class="p">(</span><span class="n">RuntimeExecutionMode</span><span class="o">.</span><span class="n">BATCH</span><span class="p">)</span>
+    <span class="c1"># write all the data to one file</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">set_parallelism</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># define the source</span>
+    <span class="k">if</span> <span class="n">input_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ds</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">from_source</span><span class="p">(</span>
+            <span class="n">source</span><span class="o">=</span><span class="n">FileSource</span><span class="o">.</span><span class="n">for_record_stream_format</span><span class="p">(</span><span class="n">StreamFormat</span><span class="o">.</span><span class="n">text_line_format</span><span class="p">(),</span>
+                                                       <span class="n">input_path</span><span class="p">)</span>
+                             <span class="o">.</span><span class="n">process_static_file_set</span><span class="p">()</span><span class="o">.</span><span class="n">build</span><span class="p">(),</span>
+            <span class="n">watermark_strategy</span><span class="o">=</span><span class="n">WatermarkStrategy</span><span class="o">.</span><span class="n">for_monotonous_timestamps</span><span class="p">(),</span>
+            <span class="n">source_name</span><span class="o">=</span><span class="s2">&quot;file_source&quot;</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Executing word_count example with default input data set.&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Use --input to specify file input.&quot;</span><span class="p">)</span>
+        <span class="n">ds</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">from_collection</span><span class="p">(</span><span class="n">word_count_data</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">split</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+        <span class="k">yield from</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+    <span class="c1"># compute word count</span>
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">flat_map</span><span class="p">(</span><span class="n">split</span><span class="p">)</span> \
+           <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">output_type</span><span class="o">=</span><span class="n">Types</span><span class="o">.</span><span class="n">TUPLE</span><span class="p">([</span><span class="n">Types</span><span class="o">.</span><span class="n">STRING</span><span class="p">(),</span> <span class="n">Types</span><span class="o">.</span><span class="n">INT</span><span class="p">()]))</span> \
+           <span class="o">.</span><span class="n">key_by</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> \
+           <span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">j</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+    <span class="c1"># define the sink</span>
+    <span class="k">if</span> <span class="n">output_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ds</span><span class="o">.</span><span class="n">sink_to</span><span class="p">(</span>
+            <span class="n">sink</span><span class="o">=</span><span class="n">FileSink</span><span class="o">.</span><span class="n">for_row_format</span><span class="p">(</span>
+                <span class="n">base_path</span><span class="o">=</span><span class="n">output_path</span><span class="p">,</span>
+                <span class="n">encoder</span><span class="o">=</span><span class="n">Encoder</span><span class="o">.</span><span class="n">simple_string_encoder</span><span class="p">())</span>
+            <span class="o">.</span><span class="n">with_output_file_config</span><span class="p">(</span>
+                <span class="n">OutputFileConfig</span><span class="o">.</span><span class="n">builder</span><span class="p">()</span>
+                <span class="o">.</span><span class="n">with_part_prefix</span><span class="p">(</span><span class="s2">&quot;prefix&quot;</span><span class="p">)</span>
+                <span class="o">.</span><span class="n">with_part_suffix</span><span class="p">(</span><span class="s2">&quot;.ext&quot;</span><span class="p">)</span>
+                <span class="o">.</span><span class="n">build</span><span class="p">())</span>
+            <span class="o">.</span><span class="n">with_rolling_policy</span><span class="p">(</span><span class="n">RollingPolicy</span><span class="o">.</span><span class="n">default_rolling_policy</span><span class="p">())</span>
+            <span class="o">.</span><span class="n">build</span><span class="p">()</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Printing result to stdout. Use --output to specify output path.&quot;</span><span class="p">)</span>
+        <span class="n">ds</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+
+    <span class="c1"># submit for execution</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">stream</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;--input&#39;</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;input&#39;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Input file to process.&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;--output&#39;</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;output&#39;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Output file to write results to.&#39;</span><span class="p">)</span>
+
+    <span class="n">argv</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="n">known_args</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_known_args</span><span class="p">(</span><span class="n">argv</span><span class="p">)</span>
+
+    <span class="n">word_count</span><span class="p">(</span><span class="n">known_args</span><span class="o">.</span><span class="n">input</span><span class="p">,</span> <span class="n">known_args</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="streaming-word-count">
+<h2>Streaming Word Count<a class="headerlink" href="#streaming-word-count" title="Permalink to this headline">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">################################################################################</span>
+<span class="c1">#  Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="c1">#  or more contributor license agreements.  See the NOTICE file</span>
+<span class="c1">#  distributed with this work for additional information</span>
+<span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
+<span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
+<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  with the License.  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">################################################################################</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">Encoder</span><span class="p">,</span> <span class="n">Types</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream</span><span class="w"> </span><span class="kn">import</span> <span class="n">StreamExecutionEnvironment</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream.connectors.file_system</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">FileSink</span><span class="p">,</span> <span class="n">OutputFileConfig</span><span class="p">,</span> <span class="n">RollingPolicy</span><span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table</span><span class="w"> </span><span class="kn">import</span> <span class="n">StreamTableEnvironment</span><span class="p">,</span> <span class="n">TableDescriptor</span><span class="p">,</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">DataTypes</span>
+
+<span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;flink&quot;</span><span class="p">,</span> <span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="s2">&quot;timer&quot;</span><span class="p">,</span> <span class="s2">&quot;event_time&quot;</span><span class="p">,</span> <span class="s2">&quot;processing_time&quot;</span><span class="p">,</span> <span class="s2">&quot;state&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;connector&quot;</span><span class="p">,</span> <span class="s2">&quot;pyflink&quot;</span><span class="p">,</span> <span class="s2">&quot;checkpoint&quot;</span><span class="p">,</span> <span class="s2">&quot;watermark&quot;</span><span class="p">,</span> <span class="s2">&quot;sideoutput&quot;</span><span class="p">,</span> <span class="s2">&quot;sql&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;datastream&quot;</span><span class="p">,</span> <span class="s2">&quot;broadcast&quot;</span><span class="p">,</span> <span class="s2">&quot;asyncio&quot;</span><span class="p">,</span> <span class="s2">&quot;catalog&quot;</span><span class="p">,</span> <span class="s2">&quot;batch&quot;</span><span class="p">,</span> <span class="s2">&quot;streaming&quot;</span><span class="p">]</span>
+
+<span class="n">max_word_id</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">word_count</span><span class="p">(</span><span class="n">output_path</span><span class="p">):</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">StreamExecutionEnvironment</span><span class="o">.</span><span class="n">get_execution_environment</span><span class="p">()</span>
+    <span class="n">t_env</span> <span class="o">=</span> <span class="n">StreamTableEnvironment</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">stream_execution_environment</span><span class="o">=</span><span class="n">env</span><span class="p">)</span>
+
+    <span class="c1"># define the source</span>
+    <span class="c1"># randomly select 5 words per second from a predefined list</span>
+    <span class="n">t_env</span><span class="o">.</span><span class="n">create_temporary_table</span><span class="p">(</span>
+        <span class="s1">&#39;source&#39;</span><span class="p">,</span>
+        <span class="n">TableDescriptor</span><span class="o">.</span><span class="n">for_connector</span><span class="p">(</span><span class="s1">&#39;datagen&#39;</span><span class="p">)</span>
+                       <span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">Schema</span><span class="o">.</span><span class="n">new_builder</span><span class="p">()</span>
+                               <span class="o">.</span><span class="n">column</span><span class="p">(</span><span class="s1">&#39;word_id&#39;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">INT</span><span class="p">())</span>
+                               <span class="o">.</span><span class="n">build</span><span class="p">())</span>
+                       <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s1">&#39;fields.word_id.kind&#39;</span><span class="p">,</span> <span class="s1">&#39;random&#39;</span><span class="p">)</span>
+                       <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s1">&#39;fields.word_id.min&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">)</span>
+                       <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s1">&#39;fields.word_id.max&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">max_word_id</span><span class="p">))</span>
+                       <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s1">&#39;rows-per-second&#39;</span><span class="p">,</span> <span class="s1">&#39;5&#39;</span><span class="p">)</span>
+                       <span class="o">.</span><span class="n">build</span><span class="p">())</span>
+
+    <span class="n">table</span> <span class="o">=</span> <span class="n">t_env</span><span class="o">.</span><span class="n">from_path</span><span class="p">(</span><span class="s1">&#39;source&#39;</span><span class="p">)</span>
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">t_env</span><span class="o">.</span><span class="n">to_data_stream</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">id_to_word</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+        <span class="c1"># word_id is the first column of the input row</span>
+        <span class="k">return</span> <span class="n">words</span><span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+    <span class="c1"># compute word count</span>
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">id_to_word</span><span class="p">)</span> \
+           <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">output_type</span><span class="o">=</span><span class="n">Types</span><span class="o">.</span><span class="n">TUPLE</span><span class="p">([</span><span class="n">Types</span><span class="o">.</span><span class="n">STRING</span><span class="p">(),</span> <span class="n">Types</span><span class="o">.</span><span class="n">INT</span><span class="p">()]))</span> \
+           <span class="o">.</span><span class="n">key_by</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> \
+           <span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">j</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+    <span class="c1"># define the sink</span>
+    <span class="k">if</span> <span class="n">output_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ds</span><span class="o">.</span><span class="n">sink_to</span><span class="p">(</span>
+            <span class="n">sink</span><span class="o">=</span><span class="n">FileSink</span><span class="o">.</span><span class="n">for_row_format</span><span class="p">(</span>
+                <span class="n">base_path</span><span class="o">=</span><span class="n">output_path</span><span class="p">,</span>
+                <span class="n">encoder</span><span class="o">=</span><span class="n">Encoder</span><span class="o">.</span><span class="n">simple_string_encoder</span><span class="p">())</span>
+            <span class="o">.</span><span class="n">with_output_file_config</span><span class="p">(</span>
+                <span class="n">OutputFileConfig</span><span class="o">.</span><span class="n">builder</span><span class="p">()</span>
+                <span class="o">.</span><span class="n">with_part_prefix</span><span class="p">(</span><span class="s2">&quot;prefix&quot;</span><span class="p">)</span>
+                <span class="o">.</span><span class="n">with_part_suffix</span><span class="p">(</span><span class="s2">&quot;.ext&quot;</span><span class="p">)</span>
+                <span class="o">.</span><span class="n">build</span><span class="p">())</span>
+            <span class="o">.</span><span class="n">with_rolling_policy</span><span class="p">(</span><span class="n">RollingPolicy</span><span class="o">.</span><span class="n">default_rolling_policy</span><span class="p">())</span>
+            <span class="o">.</span><span class="n">build</span><span class="p">()</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Printing result to stdout. Use --output to specify output path.&quot;</span><span class="p">)</span>
+        <span class="n">ds</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+
+    <span class="c1"># submit for execution</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">stream</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;--output&#39;</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;output&#39;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Output file to write results to.&#39;</span><span class="p">)</span>
+
+    <span class="n">argv</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="n">known_args</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_known_args</span><span class="p">(</span><span class="n">argv</span><span class="p">)</span>
+
+    <span class="n">word_count</span><span class="p">(</span><span class="n">known_args</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="index.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">DataStream Examples</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="process_json_data.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">Json Data Process</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Word Count
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#streaming-word-count">
+   Streaming Word Count
+  </a>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+<div class="tocsection sourcelink">
+    <a href="../../_sources/examples/datastream/word_count.rst.txt">
+        <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+</div>
+
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

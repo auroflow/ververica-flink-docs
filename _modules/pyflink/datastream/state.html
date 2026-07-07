@@ -1,0 +1,1369 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyflink.datastream.state &#8212; PyFlink 11.8.0rc0 documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyflink/datastream/state';</script>
+    <link rel="shortcut icon" href="../../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../../search.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="Logo image">
+    <img src="../../../_static/navbar-brand-logo.jpg" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <h1>Source code for pyflink.datastream.state</h1><div class="highlight"><pre>
+<span></span><span class="c1">################################################################################</span>
+<span class="c1">#  Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="c1">#  or more contributor license agreements.  See the NOTICE file</span>
+<span class="c1">#  distributed with this work for additional information</span>
+<span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
+<span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
+<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  with the License.  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">################################################################################</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Generic</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common.time</span><span class="w"> </span><span class="kn">import</span> <span class="n">Duration</span><span class="p">,</span> <span class="n">Time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common.typeinfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypeInformation</span><span class="p">,</span> <span class="n">Types</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;ValueStateDescriptor&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ValueState&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ListStateDescriptor&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ListState&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;MapStateDescriptor&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;MapState&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ReducingStateDescriptor&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ReducingState&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;AggregatingStateDescriptor&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;AggregatingState&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ReadOnlyBroadcastState&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;BroadcastState&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;StateTtlConfig&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;OperatorStateStore&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">)</span>
+<span class="n">K</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;K&#39;</span><span class="p">)</span>
+<span class="n">V</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;V&#39;</span><span class="p">)</span>
+<span class="n">IN</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;IN&#39;</span><span class="p">)</span>
+<span class="n">OUT</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;OUT&#39;</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">OperatorStateStore</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Interface for getting operator states. Currently, only :class:`~state.BroadcastState` is</span>
+<span class="sd">    supported.</span>
+<span class="sd">    .. versionadded:: 1.16.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="OperatorStateStore.get_broadcast_state"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.state.OperatorStateStore.get_broadcast_state.html#pyflink.datastream.state.OperatorStateStore.get_broadcast_state">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_broadcast_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state_descriptor</span><span class="p">:</span> <span class="s1">&#39;MapStateDescriptor&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;BroadcastState&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fetches the :class:`~state.BroadcastState` described by :class:`~state.MapStateDescriptor`,</span>
+<span class="sd">        which has read/write access to the broadcast operator state.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">State</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Interface that different types of partitioned state must implement.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Removes the value mapped under the current key.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+
+<div class="viewcode-block" id="ValueState"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.state.ValueState.html#pyflink.datastream.state.ValueState">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">ValueState</span><span class="p">(</span><span class="n">State</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">T</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :class:`State` interface for partitioned single-value state. The value can be retrieved or</span>
+<span class="sd">    updated.</span>
+
+<span class="sd">    The state is accessed and modified by user functions, and checkpointed consistently by the</span>
+<span class="sd">    system as part of the distributed snapshots.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the current value for the state. When the state is not partitioned the returned</span>
+<span class="sd">        value is the same for all inputs in a given operator instance. If state partitioning is</span>
+<span class="sd">        applied, the value returned depends on the current operator input, as the operator</span>
+<span class="sd">        maintains an independent state for each partition.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Updates the operator state accessible by :func:`value` to the given value. The next time</span>
+<span class="sd">        :func:`value` is called (for the same state partition) the returned state will represent</span>
+<span class="sd">        the updated value. When a partitioned state is updated with null, the state for the current</span>
+<span class="sd">        key will be removed and the default value is returned on the next access.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="AppendingState"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.state.AppendingState.html#pyflink.datastream.state.AppendingState">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">AppendingState</span><span class="p">(</span><span class="n">State</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">IN</span><span class="p">,</span> <span class="n">OUT</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base interface for partitioned state that supports adding elements and inspecting the current</span>
+<span class="sd">    state. Elements can either be kept in a buffer (list-like) or aggregated into one value.</span>
+
+<span class="sd">    This state is accessed and modified by user functions, and checkpointed consistently by the</span>
+<span class="sd">    system as part of the distributed snapshots.</span>
+
+<span class="sd">    The state is only accessible by functions applied on a KeyedStream. The key is automatically</span>
+<span class="sd">    supplied by the system, so the function always sees the value mapped to the key of the current</span>
+<span class="sd">    element. That way, the system can handle stream and state partitioning consistently together.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OUT</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the elements under the current key.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">IN</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adding the given value to the tail of this list state.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="MergingState"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.state.MergingState.html#pyflink.datastream.state.MergingState">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">MergingState</span><span class="p">(</span><span class="n">AppendingState</span><span class="p">[</span><span class="n">IN</span><span class="p">,</span> <span class="n">OUT</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extension of AppendingState that allows merging of state. That is, two instance of MergingState</span>
+<span class="sd">    can be combined into a single instance that contains all the information of the two merged</span>
+<span class="sd">    states.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="ReducingState"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.state.ReducingState.html#pyflink.datastream.state.ReducingState">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">ReducingState</span><span class="p">(</span><span class="n">MergingState</span><span class="p">[</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :class:`State` interface for reducing state. Elements can be added to the state, they will be</span>
+<span class="sd">    combined using a reduce function. The current state can be inspected.</span>
+
+<span class="sd">    The state is accessed and modified by user functions, and checkpointed consistently by the</span>
+<span class="sd">    system as part of the distributed snapshots.</span>
+
+<span class="sd">    The state is only accessible by functions applied on a KeyedStream. The key is automatically</span>
+<span class="sd">    supplied by the system, so the function always sees the value mapped to the key of the current</span>
+<span class="sd">    element. That way, the system can handle stream and state partitioning consistently together.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="AggregatingState"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.state.AggregatingState.html#pyflink.datastream.state.AggregatingState">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">AggregatingState</span><span class="p">(</span><span class="n">MergingState</span><span class="p">[</span><span class="n">IN</span><span class="p">,</span> <span class="n">OUT</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :class:`State` interface for aggregating state, based on an</span>
+<span class="sd">    :class:`~pyflink.datastream.functions.AggregateFunction`. Elements that are added to this type</span>
+<span class="sd">    of state will be eagerly pre-aggregated using a given AggregateFunction.</span>
+
+<span class="sd">    The state holds internally always the accumulator type of the AggregateFunction. When</span>
+<span class="sd">    accessing the result of the state, the function&#39;s</span>
+<span class="sd">    :func:`~pyflink.datastream.functions.AggregateFunction.get_result` method.</span>
+
+<span class="sd">    The state is accessed and modified by user functions, and checkpointed consistently by the</span>
+<span class="sd">    system as part of the distributed snapshots.</span>
+
+<span class="sd">    The state is only accessible by functions applied on a KeyedStream. The key is automatically</span>
+<span class="sd">    supplied by the system, so the function always sees the value mapped to the key of the current</span>
+<span class="sd">    element. That way, the system can handle stream and state partitioning consistently together.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="ListState"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.state.ListState.html#pyflink.datastream.state.ListState">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">ListState</span><span class="p">(</span><span class="n">MergingState</span><span class="p">[</span><span class="n">T</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">T</span><span class="p">]]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :class:`State` interface for partitioned list state in Operations.</span>
+<span class="sd">    The state is accessed and modified by user functions, and checkpointed consistently</span>
+<span class="sd">    by the system as part of the distributed snapshots.</span>
+
+<span class="sd">    Currently only keyed list state is supported.</span>
+
+<span class="sd">    When it is a keyed list state, the state key is automatically supplied by the system, so the</span>
+<span class="sd">    user function always sees the value mapped to the key of the current element. That way, the</span>
+<span class="sd">    system can handle stream and state partitioning consistently together.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Updating existing values to the given list of values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adding the given values to the tail of this list state.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="MapState"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.state.MapState.html#pyflink.datastream.state.MapState">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">MapState</span><span class="p">(</span><span class="n">State</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">K</span><span class="p">,</span> <span class="n">V</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :class:`State` interface for partitioned key-value state. The key-value pair can be added,</span>
+<span class="sd">    updated and retrieved.</span>
+<span class="sd">    The state is accessed and modified by user functions, and checkpointed consistently by the</span>
+<span class="sd">    system as part of the distributed snapshots.</span>
+
+<span class="sd">    The state key is automatically supplied by the system, so the function always sees the value</span>
+<span class="sd">    mapped to the key of the current element. That way, the system can handle stream and state</span>
+<span class="sd">    partitioning consistently together.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">K</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">V</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the current value associated with the given key.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">K</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">V</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Associates a new value with the given key.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">put_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dict_value</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">K</span><span class="p">,</span> <span class="n">V</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Copies all of the mappings from the given map into the state.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">K</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deletes the mapping of the given key.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">K</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns whether there exists the given mapping.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">items</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">K</span><span class="p">,</span> <span class="n">V</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns all the mappings in the state.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">keys</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">K</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns all the keys in the state.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">values</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">V</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns all the values in the state.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns true if this state contains no key-value mappings, otherwise false.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">K</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">V</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">K</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">V</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">K</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">K</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">K</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="ReadOnlyBroadcastState"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.state.ReadOnlyBroadcastState.html#pyflink.datastream.state.ReadOnlyBroadcastState">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">ReadOnlyBroadcastState</span><span class="p">(</span><span class="n">State</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">K</span><span class="p">,</span> <span class="n">V</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A read-only view of the :class:`BroadcastState`.</span>
+<span class="sd">    Although read-only, the user code should not modify the value returned by the :meth:`get` or the</span>
+<span class="sd">    items returned by :meth:`items`, as this can lead to inconsistent states. The reason for this is</span>
+<span class="sd">    that we do not create extra copies of the elements for performance reasons.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">K</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">V</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the current value associated with the given key.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">K</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns whether there exists the given mapping.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">items</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">K</span><span class="p">,</span> <span class="n">V</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns all the mappings in the state.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">keys</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">K</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns all the keys in the state.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">values</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">V</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns all the values in the state.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns true if this state contains no key-value mappings, otherwise false.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">K</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">V</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">K</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">K</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="BroadcastState"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.state.BroadcastState.html#pyflink.datastream.state.BroadcastState">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">BroadcastState</span><span class="p">(</span><span class="n">ReadOnlyBroadcastState</span><span class="p">[</span><span class="n">K</span><span class="p">,</span> <span class="n">V</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A type of state that can be created to store the state of a :class:`BroadcastStream`. This state</span>
+<span class="sd">    assumes that the same elements are sent to all instances of an operator.</span>
+<span class="sd">    CAUTION: the user has to guarantee that all task instances store the same elements in</span>
+<span class="sd">    this type of state.</span>
+<span class="sd">    Each operator instance individually maintains and stores elements in the broadcast state. The</span>
+<span class="sd">    fact that the incoming stream is a broadcast one guarantees that all instances see all the</span>
+<span class="sd">    elements. Upon recovery or re-scaling, the same state is given to each of the instances.</span>
+<span class="sd">    To avoid hotspots, each task reads its previous partition, and if there are more tasks (scale up</span>
+<span class="sd">    ), then the new instances read from the old instances in a round-robin fashion. This is why each</span>
+<span class="sd">    instance has to guarantee that it stores the same elements as the rest. If not, upon recovery or</span>
+<span class="sd">    rescaling you may have unpredictable redistribution of the partitions, thus unpredictable</span>
+<span class="sd">    results.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">K</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">V</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Associates a new value with the given key.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">put_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dict_value</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">K</span><span class="p">,</span> <span class="n">V</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Copies all of the mappings from the given map into the state.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">K</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deletes the mapping of the given key.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">K</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">V</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">K</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">key</span><span class="p">)</span></div>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">StateDescriptor</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class for state descriptors. A StateDescriptor is used for creating partitioned State in</span>
+<span class="sd">    stateful operations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">type_info</span><span class="p">:</span> <span class="n">TypeInformation</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor for StateDescriptor.</span>
+
+<span class="sd">        :param name: The name of the state</span>
+<span class="sd">        :param type_info: The type information of the value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type_info</span> <span class="o">=</span> <span class="n">type_info</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ttl_config</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># type: Optional[StateTtlConfig]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the name of the state.</span>
+
+<span class="sd">        :return: The name of the state.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">enable_time_to_live</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ttl_config</span><span class="p">:</span> <span class="s1">&#39;StateTtlConfig&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Configures optional activation of state time-to-live (TTL).</span>
+
+<span class="sd">        State user value will expire, become unavailable and be cleaned up in storage depending on</span>
+<span class="sd">        configured StateTtlConfig.</span>
+
+<span class="sd">        :param ttl_config: Configuration of state TTL</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ttl_config</span> <span class="o">=</span> <span class="n">ttl_config</span>
+
+
+<div class="viewcode-block" id="ValueStateDescriptor"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.state.ValueStateDescriptor.html#pyflink.datastream.state.ValueStateDescriptor">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">ValueStateDescriptor</span><span class="p">(</span><span class="n">StateDescriptor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    StateDescriptor for ValueState. This can be used to create partitioned value state using</span>
+<span class="sd">    RuntimeContext.get_state(ValueStateDescriptor).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value_type_info</span><span class="p">:</span> <span class="n">TypeInformation</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor of the ValueStateDescriptor.</span>
+
+<span class="sd">        :param name: The name of the state.</span>
+<span class="sd">        :param value_type_info: the type information of the state.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ValueStateDescriptor</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value_type_info</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ListStateDescriptor"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.state.ListStateDescriptor.html#pyflink.datastream.state.ListStateDescriptor">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">ListStateDescriptor</span><span class="p">(</span><span class="n">StateDescriptor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    StateDescriptor for ListState. This can be used to create state where the type is a list that</span>
+<span class="sd">    can be appended and iterated over.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">elem_type_info</span><span class="p">:</span> <span class="n">TypeInformation</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor of the ListStateDescriptor.</span>
+
+<span class="sd">        :param name: The name of the state.</span>
+<span class="sd">        :param elem_type_info: the type information of the state element.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ListStateDescriptor</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">Types</span><span class="o">.</span><span class="n">LIST</span><span class="p">(</span><span class="n">elem_type_info</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="MapStateDescriptor"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.state.MapStateDescriptor.html#pyflink.datastream.state.MapStateDescriptor">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">MapStateDescriptor</span><span class="p">(</span><span class="n">StateDescriptor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    StateDescriptor for MapState. This can be used to create state where the type is a map that can</span>
+<span class="sd">    be updated and iterated over.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">key_type_info</span><span class="p">:</span> <span class="n">TypeInformation</span><span class="p">,</span> <span class="n">value_type_info</span><span class="p">:</span> <span class="n">TypeInformation</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor of the MapStateDescriptor.</span>
+
+<span class="sd">        :param name: The name of the state.</span>
+<span class="sd">        :param key_type_info: The type information of the key.</span>
+<span class="sd">        :param value_type_info: the type information of the value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MapStateDescriptor</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">Types</span><span class="o">.</span><span class="n">MAP</span><span class="p">(</span><span class="n">key_type_info</span><span class="p">,</span> <span class="n">value_type_info</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="ReducingStateDescriptor"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.state.ReducingStateDescriptor.html#pyflink.datastream.state.ReducingStateDescriptor">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">ReducingStateDescriptor</span><span class="p">(</span><span class="n">StateDescriptor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    StateDescriptor for ReducingState. This can be used to create partitioned reducing state using</span>
+<span class="sd">    RuntimeContext.get_reducing_state(ReducingStateDescriptor).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                 <span class="n">reduce_function</span><span class="p">,</span>
+                 <span class="n">type_info</span><span class="p">:</span> <span class="n">TypeInformation</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor of the ReducingStateDescriptor.</span>
+
+<span class="sd">        :param name: The name of the state.</span>
+<span class="sd">        :param reduce_function: The ReduceFunction used to aggregate the state.</span>
+<span class="sd">        :param type_info: The type of the values in the state.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ReducingStateDescriptor</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">type_info</span><span class="p">)</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ReduceFunction</span><span class="p">,</span> <span class="n">ReduceFunctionWrapper</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reduce_function</span><span class="p">,</span> <span class="n">ReduceFunction</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">reduce_function</span><span class="p">):</span>
+                <span class="n">reduce_function</span> <span class="o">=</span> <span class="n">ReduceFunctionWrapper</span><span class="p">(</span><span class="n">reduce_function</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The input must be a ReduceFunction or a callable function!&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_reduce_function</span> <span class="o">=</span> <span class="n">reduce_function</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_reduce_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reduce_function</span></div>
+
+
+<div class="viewcode-block" id="AggregatingStateDescriptor"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.state.AggregatingStateDescriptor.html#pyflink.datastream.state.AggregatingStateDescriptor">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">AggregatingStateDescriptor</span><span class="p">(</span><span class="n">StateDescriptor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A StateDescriptor for AggregatingState.</span>
+
+<span class="sd">    The type internally stored in the state is the type of the Accumulator of the</span>
+<span class="sd">    :func:`~pyflink.datastream.functions.AggregateFunction`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                 <span class="n">agg_function</span><span class="p">,</span>
+                 <span class="n">state_type_info</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">AggregatingStateDescriptor</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">state_type_info</span><span class="p">)</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">AggregateFunction</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">agg_function</span><span class="p">,</span> <span class="n">AggregateFunction</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The input must be a pyflink.datastream.functions.AggregateFunction!&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_agg_function</span> <span class="o">=</span> <span class="n">agg_function</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_agg_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_agg_function</span></div>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">StateTtlConfig</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="StateTtlConfig.UpdateType"><a class="viewcode-back" href="../../../reference/pyflink.datastream/state.html#pyflink.datastream.state.StateTtlConfig.UpdateType">[docs]</a>    <span class="k">class</span><span class="w"> </span><span class="nc">UpdateType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This option value configures when to update last access timestamp which prolongs state TTL.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">Disabled</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        TTL is disabled. State does not expire.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">OnCreateAndWrite</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Last access timestamp is initialised when state is created and updated on every write</span>
+<span class="sd">        operation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">OnReadAndWrite</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The same as OnCreateAndWrite but also updated on read.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">_to_proto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.fn_execution.flink_fn_execution_pb2</span><span class="w"> </span><span class="kn">import</span> <span class="n">StateDescriptor</span>
+            <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">StateDescriptor</span><span class="o">.</span><span class="n">StateTTLConfig</span><span class="o">.</span><span class="n">UpdateType</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="nd">@staticmethod</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">_from_proto</span><span class="p">(</span><span class="n">proto</span><span class="p">):</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.fn_execution.flink_fn_execution_pb2</span><span class="w"> </span><span class="kn">import</span> <span class="n">StateDescriptor</span>
+            <span class="n">update_type_name</span> <span class="o">=</span> <span class="n">StateDescriptor</span><span class="o">.</span><span class="n">StateTTLConfig</span><span class="o">.</span><span class="n">UpdateType</span><span class="o">.</span><span class="n">Name</span><span class="p">(</span><span class="n">proto</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">UpdateType</span><span class="p">[</span><span class="n">update_type_name</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="StateTtlConfig.StateVisibility"><a class="viewcode-back" href="../../../reference/pyflink.datastream/state.html#pyflink.datastream.state.StateTtlConfig.StateVisibility">[docs]</a>    <span class="k">class</span><span class="w"> </span><span class="nc">StateVisibility</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This option configures whether expired user value can be returned or not.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">ReturnExpiredIfNotCleanedUp</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return expired user value if it is not cleaned up yet.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">NeverReturnExpired</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Never return expired user value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">_to_proto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.fn_execution.flink_fn_execution_pb2</span><span class="w"> </span><span class="kn">import</span> <span class="n">StateDescriptor</span>
+            <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">StateDescriptor</span><span class="o">.</span><span class="n">StateTTLConfig</span><span class="o">.</span><span class="n">StateVisibility</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="nd">@staticmethod</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">_from_proto</span><span class="p">(</span><span class="n">proto</span><span class="p">):</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.fn_execution.flink_fn_execution_pb2</span><span class="w"> </span><span class="kn">import</span> <span class="n">StateDescriptor</span>
+            <span class="n">state_visibility_name</span> <span class="o">=</span> <span class="n">StateDescriptor</span><span class="o">.</span><span class="n">StateTTLConfig</span><span class="o">.</span><span class="n">StateVisibility</span><span class="o">.</span><span class="n">Name</span><span class="p">(</span><span class="n">proto</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">StateVisibility</span><span class="p">[</span><span class="n">state_visibility_name</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="StateTtlConfig.TtlTimeCharacteristic"><a class="viewcode-back" href="../../../reference/pyflink.datastream/state.html#pyflink.datastream.state.StateTtlConfig.TtlTimeCharacteristic">[docs]</a>    <span class="k">class</span><span class="w"> </span><span class="nc">TtlTimeCharacteristic</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This option configures time scale to use for ttl.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">ProcessingTime</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Processing time</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">_to_proto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.fn_execution.flink_fn_execution_pb2</span><span class="w"> </span><span class="kn">import</span> <span class="n">StateDescriptor</span>
+            <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">StateDescriptor</span><span class="o">.</span><span class="n">StateTTLConfig</span><span class="o">.</span><span class="n">TtlTimeCharacteristic</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="nd">@staticmethod</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">_from_proto</span><span class="p">(</span><span class="n">proto</span><span class="p">):</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.fn_execution.flink_fn_execution_pb2</span><span class="w"> </span><span class="kn">import</span> <span class="n">StateDescriptor</span>
+            <span class="n">ttl_time_characteristic_name</span> <span class="o">=</span> \
+                <span class="n">StateDescriptor</span><span class="o">.</span><span class="n">StateTTLConfig</span><span class="o">.</span><span class="n">TtlTimeCharacteristic</span><span class="o">.</span><span class="n">Name</span><span class="p">(</span><span class="n">proto</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">TtlTimeCharacteristic</span><span class="p">[</span><span class="n">ttl_time_characteristic_name</span><span class="p">]</span></div>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">update_type</span><span class="p">:</span> <span class="n">UpdateType</span><span class="p">,</span>
+                 <span class="n">state_visibility</span><span class="p">:</span> <span class="n">StateVisibility</span><span class="p">,</span>
+                 <span class="n">ttl_time_characteristic</span><span class="p">:</span> <span class="n">TtlTimeCharacteristic</span><span class="p">,</span>
+                 <span class="n">ttl</span><span class="p">:</span> <span class="n">Time</span><span class="p">,</span>
+                 <span class="n">cleanup_strategies</span><span class="p">:</span> <span class="s1">&#39;StateTtlConfig.CleanupStrategies&#39;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_type</span> <span class="o">=</span> <span class="n">update_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_state_visibility</span> <span class="o">=</span> <span class="n">state_visibility</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ttl_time_characteristic</span> <span class="o">=</span> <span class="n">ttl_time_characteristic</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ttl</span> <span class="o">=</span> <span class="n">ttl</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cleanup_strategies</span> <span class="o">=</span> <span class="n">cleanup_strategies</span>
+
+<div class="viewcode-block" id="StateTtlConfig.new_builder"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.state.StateTtlConfig.new_builder.html#pyflink.datastream.state.StateTtlConfig.new_builder">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">new_builder</span><span class="p">(</span><span class="n">ttl</span><span class="p">:</span> <span class="n">Time</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">Builder</span><span class="p">(</span><span class="n">ttl</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="StateTtlConfig.get_update_type"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.state.StateTtlConfig.get_update_type.html#pyflink.datastream.state.StateTtlConfig.get_update_type">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_update_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StateTtlConfig.UpdateType&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_type</span></div>
+
+<div class="viewcode-block" id="StateTtlConfig.get_state_visibility"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.state.StateTtlConfig.get_state_visibility.html#pyflink.datastream.state.StateTtlConfig.get_state_visibility">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_state_visibility</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StateTtlConfig.StateVisibility&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state_visibility</span></div>
+
+<div class="viewcode-block" id="StateTtlConfig.get_ttl"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.state.StateTtlConfig.get_ttl.html#pyflink.datastream.state.StateTtlConfig.get_ttl">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_ttl</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Time</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ttl</span></div>
+
+<div class="viewcode-block" id="StateTtlConfig.get_ttl_time_characteristic"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.state.StateTtlConfig.get_ttl_time_characteristic.html#pyflink.datastream.state.StateTtlConfig.get_ttl_time_characteristic">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_ttl_time_characteristic</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StateTtlConfig.TtlTimeCharacteristic&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ttl_time_characteristic</span></div>
+
+<div class="viewcode-block" id="StateTtlConfig.is_enabled"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.state.StateTtlConfig.is_enabled.html#pyflink.datastream.state.StateTtlConfig.is_enabled">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">is_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_type</span><span class="o">.</span><span class="n">value</span> <span class="o">!=</span> <span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">UpdateType</span><span class="o">.</span><span class="n">Disabled</span><span class="o">.</span><span class="n">value</span></div>
+
+<div class="viewcode-block" id="StateTtlConfig.get_cleanup_strategies"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.state.StateTtlConfig.get_cleanup_strategies.html#pyflink.datastream.state.StateTtlConfig.get_cleanup_strategies">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_cleanup_strategies</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StateTtlConfig.CleanupStrategies&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cleanup_strategies</span></div>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_to_proto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.fn_execution.flink_fn_execution_pb2</span><span class="w"> </span><span class="kn">import</span> <span class="n">StateDescriptor</span>
+        <span class="n">state_ttl_config</span> <span class="o">=</span> <span class="n">StateDescriptor</span><span class="o">.</span><span class="n">StateTTLConfig</span><span class="p">()</span>
+        <span class="n">state_ttl_config</span><span class="o">.</span><span class="n">update_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_type</span><span class="o">.</span><span class="n">_to_proto</span><span class="p">()</span>
+        <span class="n">state_ttl_config</span><span class="o">.</span><span class="n">state_visibility</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state_visibility</span><span class="o">.</span><span class="n">_to_proto</span><span class="p">()</span>
+        <span class="n">state_ttl_config</span><span class="o">.</span><span class="n">ttl_time_characteristic</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ttl_time_characteristic</span><span class="o">.</span><span class="n">_to_proto</span><span class="p">()</span>
+        <span class="n">state_ttl_config</span><span class="o">.</span><span class="n">ttl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ttl</span><span class="o">.</span><span class="n">to_milliseconds</span><span class="p">()</span>
+        <span class="n">state_ttl_config</span><span class="o">.</span><span class="n">cleanup_strategies</span><span class="o">.</span><span class="n">CopyFrom</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cleanup_strategies</span><span class="o">.</span><span class="n">_to_proto</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">state_ttl_config</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_from_proto</span><span class="p">(</span><span class="n">proto</span><span class="p">):</span>
+        <span class="n">update_type</span> <span class="o">=</span> <span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">UpdateType</span><span class="o">.</span><span class="n">_from_proto</span><span class="p">(</span><span class="n">proto</span><span class="o">.</span><span class="n">update_type</span><span class="p">)</span>
+        <span class="n">state_visibility</span> <span class="o">=</span> <span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">StateVisibility</span><span class="o">.</span><span class="n">_from_proto</span><span class="p">(</span><span class="n">proto</span><span class="o">.</span><span class="n">state_visibility</span><span class="p">)</span>
+        <span class="n">ttl_time_characteristic</span> <span class="o">=</span> \
+            <span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">TtlTimeCharacteristic</span><span class="o">.</span><span class="n">_from_proto</span><span class="p">(</span><span class="n">proto</span><span class="o">.</span><span class="n">ttl_time_characteristic</span><span class="p">)</span>
+        <span class="n">ttl</span> <span class="o">=</span> <span class="n">Time</span><span class="o">.</span><span class="n">milliseconds</span><span class="p">(</span><span class="n">proto</span><span class="o">.</span><span class="n">ttl</span><span class="p">)</span>
+        <span class="n">cleanup_strategies</span> <span class="o">=</span> <span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">CleanupStrategies</span><span class="o">.</span><span class="n">_from_proto</span><span class="p">(</span><span class="n">proto</span><span class="o">.</span><span class="n">cleanup_strategies</span><span class="p">)</span>
+        <span class="n">builder</span> <span class="o">=</span> <span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">new_builder</span><span class="p">(</span><span class="n">ttl</span><span class="p">)</span> \
+            <span class="o">.</span><span class="n">set_update_type</span><span class="p">(</span><span class="n">update_type</span><span class="p">)</span> \
+            <span class="o">.</span><span class="n">set_state_visibility</span><span class="p">(</span><span class="n">state_visibility</span><span class="p">)</span> \
+            <span class="o">.</span><span class="n">set_ttl_time_characteristic</span><span class="p">(</span><span class="n">ttl_time_characteristic</span><span class="p">)</span>
+        <span class="n">builder</span><span class="o">.</span><span class="n">_strategies</span> <span class="o">=</span> <span class="n">cleanup_strategies</span><span class="o">.</span><span class="n">_strategies</span>
+        <span class="n">builder</span><span class="o">.</span><span class="n">_is_cleanup_in_background</span> <span class="o">=</span> <span class="n">cleanup_strategies</span><span class="o">.</span><span class="n">_is_cleanup_in_background</span>
+        <span class="k">return</span> <span class="n">builder</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;StateTtlConfig&lt;&quot;</span> \
+               <span class="s2">&quot;update_type=</span><span class="si">{}</span><span class="s2">,&quot;</span> \
+               <span class="s2">&quot; state_visibility=</span><span class="si">{}</span><span class="s2">,&quot;</span> \
+               <span class="s2">&quot;ttl_time_characteristic =</span><span class="si">{}</span><span class="s2">,&quot;</span> \
+               <span class="s2">&quot;ttl=</span><span class="si">{}</span><span class="s2">&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_type</span><span class="p">,</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">_state_visibility</span><span class="p">,</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">_ttl_time_characteristic</span><span class="p">,</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">_ttl</span><span class="p">)</span>
+
+    <span class="k">class</span><span class="w"> </span><span class="nc">Builder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Builder for the StateTtlConfig.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ttl</span><span class="p">:</span> <span class="n">Time</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ttl</span> <span class="o">=</span> <span class="n">ttl</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_update_type</span> <span class="o">=</span> <span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">UpdateType</span><span class="o">.</span><span class="n">OnCreateAndWrite</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_state_visibility</span> <span class="o">=</span> <span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">StateVisibility</span><span class="o">.</span><span class="n">NeverReturnExpired</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ttl_time_characteristic</span> <span class="o">=</span> <span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">TtlTimeCharacteristic</span><span class="o">.</span><span class="n">ProcessingTime</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_is_cleanup_in_background</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_strategies</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># type: Dict</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">set_update_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                            <span class="n">update_type</span><span class="p">:</span> <span class="s1">&#39;StateTtlConfig.UpdateType&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StateTtlConfig.Builder&#39;</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Sets the ttl update type.</span>
+
+<span class="sd">            :param update_type: The ttl update type configures when to update last access timestamp</span>
+<span class="sd">                which prolongs state TTL.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_update_type</span> <span class="o">=</span> <span class="n">update_type</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">update_ttl_on_create_and_write</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StateTtlConfig.Builder&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_update_type</span><span class="p">(</span><span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">UpdateType</span><span class="o">.</span><span class="n">OnCreateAndWrite</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">update_ttl_on_read_and_write</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StateTtlConfig.Builder&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_update_type</span><span class="p">(</span><span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">UpdateType</span><span class="o">.</span><span class="n">OnReadAndWrite</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">set_state_visibility</span><span class="p">(</span>
+                <span class="bp">self</span><span class="p">,</span>
+                <span class="n">state_visibility</span><span class="p">:</span> <span class="s1">&#39;StateTtlConfig.StateVisibility&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StateTtlConfig.Builder&#39;</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Sets the state visibility.</span>
+
+<span class="sd">            :param state_visibility: The state visibility configures whether expired user value can</span>
+<span class="sd">                be returned or not.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_state_visibility</span> <span class="o">=</span> <span class="n">state_visibility</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">return_expired_if_not_cleaned_up</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StateTtlConfig.Builder&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_state_visibility</span><span class="p">(</span>
+                <span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">StateVisibility</span><span class="o">.</span><span class="n">ReturnExpiredIfNotCleanedUp</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">never_return_expired</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StateTtlConfig.Builder&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_state_visibility</span><span class="p">(</span><span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">StateVisibility</span><span class="o">.</span><span class="n">NeverReturnExpired</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">set_ttl_time_characteristic</span><span class="p">(</span>
+                <span class="bp">self</span><span class="p">,</span>
+                <span class="n">ttl_time_characteristic</span><span class="p">:</span> <span class="s1">&#39;StateTtlConfig.TtlTimeCharacteristic&#39;</span><span class="p">)</span> \
+                <span class="o">-&gt;</span> <span class="s1">&#39;StateTtlConfig.Builder&#39;</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Sets the time characteristic.</span>
+
+<span class="sd">            :param ttl_time_characteristic: The time characteristic configures time scale to use for</span>
+<span class="sd">                ttl.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ttl_time_characteristic</span> <span class="o">=</span> <span class="n">ttl_time_characteristic</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">use_processing_time</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StateTtlConfig.Builder&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_ttl_time_characteristic</span><span class="p">(</span>
+                <span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">TtlTimeCharacteristic</span><span class="o">.</span><span class="n">ProcessingTime</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">cleanup_full_snapshot</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StateTtlConfig.Builder&#39;</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Cleanup expired state in full snapshot on checkpoint.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_strategies</span><span class="p">[</span>
+                <span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">CleanupStrategies</span><span class="o">.</span><span class="n">Strategies</span><span class="o">.</span><span class="n">FULL_STATE_SCAN_SNAPSHOT</span><span class="p">]</span> <span class="o">=</span> \
+                <span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">CleanupStrategies</span><span class="o">.</span><span class="n">EMPTY_STRATEGY</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">cleanup_incrementally</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                  <span class="n">cleanup_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                                  <span class="n">run_cleanup_for_every_record</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StateTtlConfig.Builder&#39;</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Cleanup expired state incrementally cleanup local state.</span>
+
+<span class="sd">            Upon every state access this cleanup strategy checks a bunch of state keys for</span>
+<span class="sd">            expiration and cleans up expired ones. It keeps a lazy iterator through all keys with</span>
+<span class="sd">            relaxed consistency if backend supports it. This way all keys should be regularly</span>
+<span class="sd">            checked and cleaned eventually over time if any state is constantly being accessed.</span>
+
+<span class="sd">            Additionally to the incremental cleanup upon state access, it can also run per every</span>
+<span class="sd">            record. Caution: if there are a lot of registered states using this option, they all</span>
+<span class="sd">            will be iterated for every record to check if there is something to cleanup.</span>
+
+<span class="sd">            if no access happens to this state or no records are processed in case of</span>
+<span class="sd">            run_cleanup_for_every_record, expired state will persist.</span>
+
+<span class="sd">            Time spent for the incremental cleanup increases record processing latency.</span>
+
+<span class="sd">            Note:</span>
+
+<span class="sd">            At the moment incremental cleanup is implemented only for Heap state backend.</span>
+<span class="sd">            Setting it for RocksDB will have no effect.</span>
+
+<span class="sd">            Note:</span>
+
+<span class="sd">            If heap state backend is used with synchronous snapshotting, the global iterator keeps a</span>
+<span class="sd">            copy of all keys while iterating because of its specific implementation which does not</span>
+<span class="sd">            support concurrent modifications. Enabling of this feature will increase memory</span>
+<span class="sd">            consumption then. Asynchronous snapshotting does not have this problem.</span>
+
+<span class="sd">            :param cleanup_size: max number of keys pulled from queue for clean up upon state touch</span>
+<span class="sd">                for any key</span>
+<span class="sd">            :param run_cleanup_for_every_record: run incremental cleanup per each processed record</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_strategies</span><span class="p">[</span><span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">CleanupStrategies</span><span class="o">.</span><span class="n">Strategies</span><span class="o">.</span><span class="n">INCREMENTAL_CLEANUP</span><span class="p">]</span> <span class="o">=</span> \
+                <span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">CleanupStrategies</span><span class="o">.</span><span class="n">IncrementalCleanupStrategy</span><span class="p">(</span>
+                    <span class="n">cleanup_size</span><span class="p">,</span> <span class="n">run_cleanup_for_every_record</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">cleanup_in_rocksdb_compact_filter</span><span class="p">(</span>
+                <span class="bp">self</span><span class="p">,</span>
+                <span class="n">query_time_after_num_entries</span><span class="p">,</span>
+                <span class="n">periodic_compaction_time</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> \
+                <span class="s1">&#39;StateTtlConfig.Builder&#39;</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Cleanup expired state while Rocksdb compaction is running.</span>
+
+<span class="sd">            RocksDB compaction filter will query current timestamp, used to check expiration, from</span>
+<span class="sd">            Flink every time after processing {@code queryTimeAfterNumEntries} number of state</span>
+<span class="sd">            entries. Updating the timestamp more often can improve cleanup speed but it decreases</span>
+<span class="sd">            compaction performance because it uses JNI call from native code.</span>
+
+<span class="sd">            Periodic compaction could speed up expired state entries cleanup, especially for state</span>
+<span class="sd">            entries rarely accessed. Files older than this value will be picked up for compaction,</span>
+<span class="sd">            and re-written to the same level as they were before. It makes sure a file goes through</span>
+<span class="sd">            compaction filters periodically.</span>
+
+<span class="sd">            :param query_time_after_num_entries:  number of state entries to process by compaction</span>
+<span class="sd">                filter before updating current timestamp</span>
+<span class="sd">            :param periodic_compaction_time:   periodic compaction which could</span>
+<span class="sd">                speed up expired state cleanup. 0 means turning off periodic compaction.</span>
+<span class="sd">            :return:</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_strategies</span><span class="p">[</span>
+                <span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">CleanupStrategies</span><span class="o">.</span><span class="n">Strategies</span><span class="o">.</span><span class="n">ROCKSDB_COMPACTION_FILTER</span><span class="p">]</span> <span class="o">=</span> \
+                <span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">CleanupStrategies</span><span class="o">.</span><span class="n">RocksdbCompactFilterCleanupStrategy</span><span class="p">(</span>
+                    <span class="n">query_time_after_num_entries</span><span class="p">,</span>
+                    <span class="n">periodic_compaction_time</span> <span class="k">if</span> <span class="n">periodic_compaction_time</span> <span class="k">else</span> <span class="n">Duration</span><span class="o">.</span><span class="n">of_days</span><span class="p">(</span><span class="mi">30</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">disable_cleanup_in_background</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StateTtlConfig.Builder&#39;</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Disable default cleanup of expired state in background (enabled by default).</span>
+
+<span class="sd">            If some specific cleanup is configured, e.g. :func:`cleanup_incrementally` or</span>
+<span class="sd">            :func:`cleanup_in_rocksdb_compact_filter`, this setting does not disable it.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_is_cleanup_in_background</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">set_ttl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ttl</span><span class="p">:</span> <span class="n">Time</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StateTtlConfig.Builder&#39;</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Sets the ttl time.</span>
+
+<span class="sd">            :param ttl: The ttl time.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ttl</span> <span class="o">=</span> <span class="n">ttl</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StateTtlConfig&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">StateTtlConfig</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_update_type</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_state_visibility</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_ttl_time_characteristic</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_ttl</span><span class="p">,</span>
+                <span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">CleanupStrategies</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_strategies</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_cleanup_in_background</span><span class="p">)</span>
+            <span class="p">)</span>
+
+<div class="viewcode-block" id="StateTtlConfig.CleanupStrategies"><a class="viewcode-back" href="../../../reference/pyflink.datastream/state.html#pyflink.datastream.state.StateTtlConfig.CleanupStrategies">[docs]</a>    <span class="k">class</span><span class="w"> </span><span class="nc">CleanupStrategies</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        TTL cleanup strategies.</span>
+
+<span class="sd">        This class configures when to cleanup expired state with TTL. By default, state is always</span>
+<span class="sd">        cleaned up on explicit read access if found expired. Currently cleanup of state full</span>
+<span class="sd">        snapshot can be additionally activated.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="StateTtlConfig.CleanupStrategies.Strategies"><a class="viewcode-back" href="../../../reference/pyflink.datastream/state.html#pyflink.datastream.state.StateTtlConfig.CleanupStrategies.Strategies">[docs]</a>        <span class="k">class</span><span class="w"> </span><span class="nc">Strategies</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Fixed strategies ordinals in strategies config field.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="n">FULL_STATE_SCAN_SNAPSHOT</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">INCREMENTAL_CLEANUP</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">ROCKSDB_COMPACTION_FILTER</span> <span class="o">=</span> <span class="mi">2</span>
+
+            <span class="k">def</span><span class="w"> </span><span class="nf">_to_proto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.fn_execution.flink_fn_execution_pb2</span><span class="w"> </span><span class="kn">import</span> <span class="n">StateDescriptor</span>
+                <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span>
+                    <span class="n">StateDescriptor</span><span class="o">.</span><span class="n">StateTTLConfig</span><span class="o">.</span><span class="n">CleanupStrategies</span><span class="o">.</span><span class="n">Strategies</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+            <span class="nd">@staticmethod</span>
+            <span class="k">def</span><span class="w"> </span><span class="nf">_from_proto</span><span class="p">(</span><span class="n">proto</span><span class="p">):</span>
+                <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.fn_execution.flink_fn_execution_pb2</span><span class="w"> </span><span class="kn">import</span> <span class="n">StateDescriptor</span>
+                <span class="n">strategies_name</span> <span class="o">=</span> \
+                    <span class="n">StateDescriptor</span><span class="o">.</span><span class="n">StateTTLConfig</span><span class="o">.</span><span class="n">CleanupStrategies</span><span class="o">.</span><span class="n">Strategies</span><span class="o">.</span><span class="n">Name</span><span class="p">(</span><span class="n">proto</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">CleanupStrategies</span><span class="o">.</span><span class="n">Strategies</span><span class="p">[</span><span class="n">strategies_name</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="StateTtlConfig.CleanupStrategies.CleanupStrategy"><a class="viewcode-back" href="../../../reference/pyflink.datastream/state.html#pyflink.datastream.state.StateTtlConfig.CleanupStrategies.CleanupStrategy">[docs]</a>        <span class="k">class</span><span class="w"> </span><span class="nc">CleanupStrategy</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Base interface for cleanup strategies configurations.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="StateTtlConfig.CleanupStrategies.EmptyCleanupStrategy"><a class="viewcode-back" href="../../../reference/pyflink.datastream/state.html#pyflink.datastream.state.StateTtlConfig.CleanupStrategies.EmptyCleanupStrategy">[docs]</a>        <span class="k">class</span><span class="w"> </span><span class="nc">EmptyCleanupStrategy</span><span class="p">(</span><span class="n">CleanupStrategy</span><span class="p">):</span>
+            <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="StateTtlConfig.CleanupStrategies.IncrementalCleanupStrategy"><a class="viewcode-back" href="../../../reference/pyflink.datastream/state.html#pyflink.datastream.state.StateTtlConfig.CleanupStrategies.IncrementalCleanupStrategy">[docs]</a>        <span class="k">class</span><span class="w"> </span><span class="nc">IncrementalCleanupStrategy</span><span class="p">(</span><span class="n">CleanupStrategy</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Configuration of cleanup strategy while taking the full snapshot.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cleanup_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">run_cleanup_for_every_record</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_cleanup_size</span> <span class="o">=</span> <span class="n">cleanup_size</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_run_cleanup_for_every_record</span> <span class="o">=</span> <span class="n">run_cleanup_for_every_record</span>
+
+            <span class="k">def</span><span class="w"> </span><span class="nf">get_cleanup_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cleanup_size</span>
+
+            <span class="k">def</span><span class="w"> </span><span class="nf">run_cleanup_for_every_record</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_cleanup_for_every_record</span></div>
+
+<div class="viewcode-block" id="StateTtlConfig.CleanupStrategies.RocksdbCompactFilterCleanupStrategy"><a class="viewcode-back" href="../../../reference/pyflink.datastream/state.html#pyflink.datastream.state.StateTtlConfig.CleanupStrategies.RocksdbCompactFilterCleanupStrategy">[docs]</a>        <span class="k">class</span><span class="w"> </span><span class="nc">RocksdbCompactFilterCleanupStrategy</span><span class="p">(</span><span class="n">CleanupStrategy</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Configuration of cleanup strategy using custom compaction filter in RocksDB.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                         <span class="n">query_time_after_num_entries</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                         <span class="n">periodic_compaction_time</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_query_time_after_num_entries</span> <span class="o">=</span> <span class="n">query_time_after_num_entries</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_periodic_compaction_time</span> <span class="o">=</span> <span class="n">periodic_compaction_time</span> \
+                    <span class="k">if</span> <span class="n">periodic_compaction_time</span> <span class="k">else</span> <span class="n">Duration</span><span class="o">.</span><span class="n">of_days</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+
+            <span class="k">def</span><span class="w"> </span><span class="nf">get_query_time_after_num_entries</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_time_after_num_entries</span>
+
+            <span class="k">def</span><span class="w"> </span><span class="nf">get_periodic_compaction_time</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Duration</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_periodic_compaction_time</span></div>
+
+        <span class="n">EMPTY_STRATEGY</span> <span class="o">=</span> <span class="n">EmptyCleanupStrategy</span><span class="p">()</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                     <span class="n">strategies</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Strategies</span><span class="p">,</span> <span class="n">CleanupStrategy</span><span class="p">],</span>
+                     <span class="n">is_cleanup_in_background</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_strategies</span> <span class="o">=</span> <span class="n">strategies</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_is_cleanup_in_background</span> <span class="o">=</span> <span class="n">is_cleanup_in_background</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">is_cleanup_in_background</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_cleanup_in_background</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">in_full_snapshot</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">CleanupStrategies</span><span class="o">.</span><span class="n">Strategies</span><span class="o">.</span><span class="n">FULL_STATE_SCAN_SNAPSHOT</span> <span class="ow">in</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_strategies</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">get_incremental_cleanup_strategy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> \
+                <span class="o">-&gt;</span> <span class="s1">&#39;StateTtlConfig.CleanupStrategies.IncrementalCleanupStrategy&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_cleanup_in_background</span><span class="p">:</span>
+                <span class="n">default_strategy</span> <span class="o">=</span> \
+                    <span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">CleanupStrategies</span><span class="o">.</span><span class="n">IncrementalCleanupStrategy</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">default_strategy</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_strategies</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
+                <span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">CleanupStrategies</span><span class="o">.</span><span class="n">Strategies</span><span class="o">.</span><span class="n">INCREMENTAL_CLEANUP</span><span class="p">,</span>
+                <span class="n">default_strategy</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">get_rocksdb_compact_filter_cleanup_strategy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> \
+                <span class="o">-&gt;</span> <span class="s1">&#39;StateTtlConfig.CleanupStrategies.RocksdbCompactFilterCleanupStrategy&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_cleanup_in_background</span><span class="p">:</span>
+                <span class="n">default_strategy</span> <span class="o">=</span> \
+                    <span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">CleanupStrategies</span><span class="o">.</span><span class="n">RocksdbCompactFilterCleanupStrategy</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">default_strategy</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_strategies</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
+                <span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">CleanupStrategies</span><span class="o">.</span><span class="n">Strategies</span><span class="o">.</span><span class="n">ROCKSDB_COMPACTION_FILTER</span><span class="p">,</span>
+                <span class="n">default_strategy</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">_to_proto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.fn_execution.flink_fn_execution_pb2</span><span class="w"> </span><span class="kn">import</span> <span class="n">StateDescriptor</span>
+            <span class="n">DescriptorCleanupStrategies</span> <span class="o">=</span> <span class="n">StateDescriptor</span><span class="o">.</span><span class="n">StateTTLConfig</span><span class="o">.</span><span class="n">CleanupStrategies</span>
+            <span class="n">CleanupStrategies</span> <span class="o">=</span> <span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">CleanupStrategies</span>
+
+            <span class="n">cleanup_strategies</span> <span class="o">=</span> <span class="n">StateDescriptor</span><span class="o">.</span><span class="n">StateTTLConfig</span><span class="o">.</span><span class="n">CleanupStrategies</span><span class="p">()</span>
+            <span class="n">cleanup_strategies</span><span class="o">.</span><span class="n">is_cleanup_in_background</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_cleanup_in_background</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_strategies</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">cleanup_strategy</span> <span class="o">=</span> <span class="n">cleanup_strategies</span><span class="o">.</span><span class="n">strategies</span><span class="o">.</span><span class="n">add</span><span class="p">()</span>
+                <span class="n">cleanup_strategy</span><span class="o">.</span><span class="n">strategy</span> <span class="o">=</span> <span class="n">k</span><span class="o">.</span><span class="n">_to_proto</span><span class="p">()</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">CleanupStrategies</span><span class="o">.</span><span class="n">EmptyCleanupStrategy</span><span class="p">):</span>
+                    <span class="n">empty_strategy</span> <span class="o">=</span> <span class="n">DescriptorCleanupStrategies</span><span class="o">.</span><span class="n">EmptyCleanupStrategy</span><span class="o">.</span><span class="n">EMPTY_STRATEGY</span>
+                    <span class="n">cleanup_strategy</span><span class="o">.</span><span class="n">empty_strategy</span> <span class="o">=</span> <span class="n">empty_strategy</span>
+                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">CleanupStrategies</span><span class="o">.</span><span class="n">IncrementalCleanupStrategy</span><span class="p">):</span>
+                    <span class="n">incremental_cleanup_strategy</span> <span class="o">=</span> \
+                        <span class="n">DescriptorCleanupStrategies</span><span class="o">.</span><span class="n">IncrementalCleanupStrategy</span><span class="p">()</span>
+                    <span class="n">incremental_cleanup_strategy</span><span class="o">.</span><span class="n">cleanup_size</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">_cleanup_size</span>
+                    <span class="n">incremental_cleanup_strategy</span><span class="o">.</span><span class="n">run_cleanup_for_every_record</span> <span class="o">=</span> \
+                        <span class="n">v</span><span class="o">.</span><span class="n">_run_cleanup_for_every_record</span>
+                    <span class="n">cleanup_strategy</span><span class="o">.</span><span class="n">incremental_cleanup_strategy</span><span class="o">.</span><span class="n">CopyFrom</span><span class="p">(</span>
+                        <span class="n">incremental_cleanup_strategy</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">CleanupStrategies</span><span class="o">.</span><span class="n">RocksdbCompactFilterCleanupStrategy</span><span class="p">):</span>
+                    <span class="n">rocksdb_compact_filter_cleanup_strategy</span> <span class="o">=</span> \
+                        <span class="n">DescriptorCleanupStrategies</span><span class="o">.</span><span class="n">RocksdbCompactFilterCleanupStrategy</span><span class="p">()</span>
+                    <span class="n">rocksdb_compact_filter_cleanup_strategy</span><span class="o">.</span><span class="n">query_time_after_num_entries</span> <span class="o">=</span> \
+                        <span class="n">v</span><span class="o">.</span><span class="n">_query_time_after_num_entries</span>
+                    <span class="n">cleanup_strategy</span><span class="o">.</span><span class="n">rocksdb_compact_filter_cleanup_strategy</span><span class="o">.</span><span class="n">CopyFrom</span><span class="p">(</span>
+                        <span class="n">rocksdb_compact_filter_cleanup_strategy</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">cleanup_strategies</span>
+
+        <span class="nd">@staticmethod</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">_from_proto</span><span class="p">(</span><span class="n">proto</span><span class="p">):</span>
+            <span class="n">CleanupStrategies</span> <span class="o">=</span> <span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">CleanupStrategies</span>
+
+            <span class="n">strategies</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">is_cleanup_in_background</span> <span class="o">=</span> <span class="n">proto</span><span class="o">.</span><span class="n">is_cleanup_in_background</span>
+            <span class="k">for</span> <span class="n">strategy_entry</span> <span class="ow">in</span> <span class="n">proto</span><span class="o">.</span><span class="n">strategies</span><span class="p">:</span>
+                <span class="n">strategy</span> <span class="o">=</span> <span class="n">CleanupStrategies</span><span class="o">.</span><span class="n">Strategies</span><span class="o">.</span><span class="n">_from_proto</span><span class="p">(</span><span class="n">strategy_entry</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">strategy_entry</span><span class="o">.</span><span class="n">HasField</span><span class="p">(</span><span class="s1">&#39;empty_strategy&#39;</span><span class="p">):</span>
+                    <span class="n">strategies</span><span class="p">[</span><span class="n">strategy</span><span class="p">]</span> <span class="o">=</span> <span class="n">CleanupStrategies</span><span class="o">.</span><span class="n">EmptyCleanupStrategy</span>
+                <span class="k">elif</span> <span class="n">strategy_entry</span><span class="o">.</span><span class="n">HasField</span><span class="p">(</span><span class="s1">&#39;incremental_cleanup_strategy&#39;</span><span class="p">):</span>
+                    <span class="n">incremental_cleanup_strategy</span> <span class="o">=</span> <span class="n">strategy_entry</span><span class="o">.</span><span class="n">incremental_cleanup_strategy</span>
+                    <span class="n">strategies</span><span class="p">[</span><span class="n">strategy</span><span class="p">]</span> <span class="o">=</span> <span class="n">CleanupStrategies</span><span class="o">.</span><span class="n">IncrementalCleanupStrategy</span><span class="p">(</span>
+                        <span class="n">incremental_cleanup_strategy</span><span class="o">.</span><span class="n">cleanup_size</span><span class="p">,</span>
+                        <span class="n">incremental_cleanup_strategy</span><span class="o">.</span><span class="n">run_cleanup_for_every_record</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">strategy_entry</span><span class="o">.</span><span class="n">HasField</span><span class="p">(</span><span class="s1">&#39;rocksdb_compact_filter_cleanup_strategy&#39;</span><span class="p">):</span>
+                    <span class="n">rocksdb_compact_filter_cleanup_strategy</span> <span class="o">=</span> \
+                        <span class="n">strategy_entry</span><span class="o">.</span><span class="n">rocksdb_compact_filter_cleanup_strategy</span>
+                    <span class="n">strategies</span><span class="p">[</span><span class="n">strategy</span><span class="p">]</span> <span class="o">=</span> <span class="n">CleanupStrategies</span><span class="o">.</span><span class="n">RocksdbCompactFilterCleanupStrategy</span><span class="p">(</span>
+                        <span class="n">rocksdb_compact_filter_cleanup_strategy</span><span class="o">.</span><span class="n">query_time_after_num_entries</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">CleanupStrategies</span><span class="p">(</span><span class="n">strategies</span><span class="p">,</span> <span class="n">is_cleanup_in_background</span><span class="p">)</span></div>
+</pre></div>
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

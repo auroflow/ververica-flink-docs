@@ -1,0 +1,930 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>DataStream &#8212; PyFlink 11.8.0rc0 documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/pyflink.datastream/datastream';</script>
+    <link rel="shortcut icon" href="../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pyflink.datastream.data_stream.DataStream.get_name" href="api/pyflink.datastream.data_stream.DataStream.get_name.html" />
+    <link rel="prev" title="pyflink.datastream.slot_sharing_group.MemorySize" href="api/pyflink.datastream.slot_sharing_group.MemorySize.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="Logo image">
+    <img src="../../_static/navbar-brand-logo.jpg" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Section navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">
+    Section Navigation
+  </p>
+  <div class="bd-toc-item navbar-nav">
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.table/index.html">PyFlink Table</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.dataframe/index.html">PyFlink DataFrame</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.multimodal/index.html">PyFlink Multimodal</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">PyFlink DataStream</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="stream_execution_environment.html">StreamExecutionEnvironment</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">DataStream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="state.html">State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timer.html">Timer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="window.html">Window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.html">Checkpoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sideoutput.html">Side Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asyncio.html">Asynchronous I/O</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connectors.html">Connectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html">Formats</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.common/index.html">PyFlink Common</a></li>
+</ul>
+
+  </div>
+</nav>
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <section id="datastream">
+<h1>DataStream<a class="headerlink" href="#datastream" title="Permalink to this headline">#</a></h1>
+<section id="id1">
+<h2>DataStream<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<p>A DataStream represents a stream of elements of the same type.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.get_name.html#pyflink.datastream.data_stream.DataStream.get_name" title="pyflink.datastream.data_stream.DataStream.get_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.get_name</span></code></a>()</p></td>
+<td><p>Gets the name of the current data stream.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.name.html#pyflink.datastream.data_stream.DataStream.name" title="pyflink.datastream.data_stream.DataStream.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.name</span></code></a>(name)</p></td>
+<td><p>Sets the name of the current data stream.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.uid.html#pyflink.datastream.data_stream.DataStream.uid" title="pyflink.datastream.data_stream.DataStream.uid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.uid</span></code></a>(uid)</p></td>
+<td><p>Sets an ID for this operator.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.set_uid_hash.html#pyflink.datastream.data_stream.DataStream.set_uid_hash" title="pyflink.datastream.data_stream.DataStream.set_uid_hash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.set_uid_hash</span></code></a>(uid_hash)</p></td>
+<td><p>Sets an user provided hash for this operator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.set_parallelism.html#pyflink.datastream.data_stream.DataStream.set_parallelism" title="pyflink.datastream.data_stream.DataStream.set_parallelism"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.set_parallelism</span></code></a>(parallelism)</p></td>
+<td><p>Sets the parallelism for this operator.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.set_max_parallelism.html#pyflink.datastream.data_stream.DataStream.set_max_parallelism" title="pyflink.datastream.data_stream.DataStream.set_max_parallelism"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.set_max_parallelism</span></code></a>(max_parallelism)</p></td>
+<td><p>Sets the maximum parallelism of this operator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.get_type.html#pyflink.datastream.data_stream.DataStream.get_type" title="pyflink.datastream.data_stream.DataStream.get_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.get_type</span></code></a>()</p></td>
+<td><p>Gets the type of the stream.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.get_execution_environment.html#pyflink.datastream.data_stream.DataStream.get_execution_environment" title="pyflink.datastream.data_stream.DataStream.get_execution_environment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.get_execution_environment</span></code></a>()</p></td>
+<td><p>Returns the StreamExecutionEnvironment that was used to create this DataStream.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.force_non_parallel.html#pyflink.datastream.data_stream.DataStream.force_non_parallel" title="pyflink.datastream.data_stream.DataStream.force_non_parallel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.force_non_parallel</span></code></a>()</p></td>
+<td><p>Sets the parallelism and maximum parallelism of this operator to one.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.set_buffer_timeout.html#pyflink.datastream.data_stream.DataStream.set_buffer_timeout" title="pyflink.datastream.data_stream.DataStream.set_buffer_timeout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.set_buffer_timeout</span></code></a>(timeout_millis)</p></td>
+<td><p>Sets the buffering timeout for data produced by this operation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.start_new_chain.html#pyflink.datastream.data_stream.DataStream.start_new_chain" title="pyflink.datastream.data_stream.DataStream.start_new_chain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.start_new_chain</span></code></a>()</p></td>
+<td><p>Starts a new task chain beginning at this operator.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.disable_chaining.html#pyflink.datastream.data_stream.DataStream.disable_chaining" title="pyflink.datastream.data_stream.DataStream.disable_chaining"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.disable_chaining</span></code></a>()</p></td>
+<td><p>Turns off chaining for this operator so thread co-location will not be used as an optimization.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.slot_sharing_group.html#pyflink.datastream.data_stream.DataStream.slot_sharing_group" title="pyflink.datastream.data_stream.DataStream.slot_sharing_group"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.slot_sharing_group</span></code></a>(slot_sharing_group)</p></td>
+<td><p>Sets the slot sharing group of this operation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.set_description.html#pyflink.datastream.data_stream.DataStream.set_description" title="pyflink.datastream.data_stream.DataStream.set_description"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.set_description</span></code></a>(description)</p></td>
+<td><p>Sets the description for this operator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.map.html#pyflink.datastream.data_stream.DataStream.map" title="pyflink.datastream.data_stream.DataStream.map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.map</span></code></a>(func[, output_type])</p></td>
+<td><p>Applies a Map transformation on a DataStream.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.flat_map.html#pyflink.datastream.data_stream.DataStream.flat_map" title="pyflink.datastream.data_stream.DataStream.flat_map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.flat_map</span></code></a>(func[, output_type])</p></td>
+<td><p>Applies a FlatMap transformation on a DataStream.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.key_by.html#pyflink.datastream.data_stream.DataStream.key_by" title="pyflink.datastream.data_stream.DataStream.key_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.key_by</span></code></a>(key_selector[, key_type])</p></td>
+<td><p>Creates a new KeyedStream that uses the provided key for partitioning its operator states.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.filter.html#pyflink.datastream.data_stream.DataStream.filter" title="pyflink.datastream.data_stream.DataStream.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.filter</span></code></a>(func)</p></td>
+<td><p>Applies a Filter transformation on a DataStream.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.window_all.html#pyflink.datastream.data_stream.DataStream.window_all" title="pyflink.datastream.data_stream.DataStream.window_all"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.window_all</span></code></a>(window_assigner)</p></td>
+<td><p>Windows this data stream to a AllWindowedStream, which evaluates windows over a non key grouped stream.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.union.html#pyflink.datastream.data_stream.DataStream.union" title="pyflink.datastream.data_stream.DataStream.union"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.union</span></code></a>(*streams)</p></td>
+<td><p>Creates a new DataStream by merging DataStream outputs of the same type with each other.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.connect.html#pyflink.datastream.data_stream.DataStream.connect" title="pyflink.datastream.data_stream.DataStream.connect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.connect</span></code></a>()</p></td>
+<td><p>If ds is a <code class="xref py py-class docutils literal notranslate"><span class="pre">DataStream</span></code>, creates a new <code class="xref py py-class docutils literal notranslate"><span class="pre">ConnectedStreams</span></code> by connecting DataStream outputs of (possible) different types with each other.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.shuffle.html#pyflink.datastream.data_stream.DataStream.shuffle" title="pyflink.datastream.data_stream.DataStream.shuffle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.shuffle</span></code></a>()</p></td>
+<td><p>Sets the partitioning of the DataStream so that the output elements are shuffled uniformly randomly to the next operation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.project.html#pyflink.datastream.data_stream.DataStream.project" title="pyflink.datastream.data_stream.DataStream.project"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.project</span></code></a>(*field_indexes)</p></td>
+<td><p>Initiates a Project transformation on a Tuple DataStream.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.rescale.html#pyflink.datastream.data_stream.DataStream.rescale" title="pyflink.datastream.data_stream.DataStream.rescale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.rescale</span></code></a>()</p></td>
+<td><p>Sets the partitioning of the DataStream so that the output elements are distributed evenly to a subset of instances of the next operation in a round-robin fashion.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.rebalance.html#pyflink.datastream.data_stream.DataStream.rebalance" title="pyflink.datastream.data_stream.DataStream.rebalance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.rebalance</span></code></a>()</p></td>
+<td><p>Sets the partitioning of the DataStream so that the output elements are distributed evenly to instances of the next operation in a round-robin fashion.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.forward.html#pyflink.datastream.data_stream.DataStream.forward" title="pyflink.datastream.data_stream.DataStream.forward"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.forward</span></code></a>()</p></td>
+<td><p>Sets the partitioning of the DataStream so that the output elements are forwarded to the local sub-task of the next operation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.broadcast.html#pyflink.datastream.data_stream.DataStream.broadcast" title="pyflink.datastream.data_stream.DataStream.broadcast"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.broadcast</span></code></a>()</p></td>
+<td><p>Sets the partitioning of the DataStream so that the output elements are broadcasted to every parallel instance of the next operation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.process.html#pyflink.datastream.data_stream.DataStream.process" title="pyflink.datastream.data_stream.DataStream.process"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.process</span></code></a>(func[, output_type])</p></td>
+<td><p>Applies the given ProcessFunction on the input stream, thereby creating a transformed output stream.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.assign_timestamps_and_watermarks.html#pyflink.datastream.data_stream.DataStream.assign_timestamps_and_watermarks" title="pyflink.datastream.data_stream.DataStream.assign_timestamps_and_watermarks"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.assign_timestamps_and_watermarks</span></code></a>(...)</p></td>
+<td><p>Assigns timestamps to the elements in the data stream and generates watermarks to signal event time progress.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.partition_custom.html#pyflink.datastream.data_stream.DataStream.partition_custom" title="pyflink.datastream.data_stream.DataStream.partition_custom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.partition_custom</span></code></a>(partitioner, ...)</p></td>
+<td><p>Partitions a DataStream on the key returned by the selector, using a custom partitioner.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.add_sink.html#pyflink.datastream.data_stream.DataStream.add_sink" title="pyflink.datastream.data_stream.DataStream.add_sink"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.add_sink</span></code></a>(sink_func)</p></td>
+<td><p>Adds the given sink to this DataStream.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.sink_to.html#pyflink.datastream.data_stream.DataStream.sink_to" title="pyflink.datastream.data_stream.DataStream.sink_to"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.sink_to</span></code></a>(sink)</p></td>
+<td><p>Adds the given sink to this DataStream.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.execute_and_collect.html#pyflink.datastream.data_stream.DataStream.execute_and_collect" title="pyflink.datastream.data_stream.DataStream.execute_and_collect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.execute_and_collect</span></code></a>([...])</p></td>
+<td><p>Triggers the distributed execution of the streaming dataflow and returns an iterator over the elements of the given DataStream.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.print.html#pyflink.datastream.data_stream.DataStream.print" title="pyflink.datastream.data_stream.DataStream.print"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.print</span></code></a>([sink_identifier])</p></td>
+<td><p>Writes a DataStream to the standard output stream (stdout).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.get_side_output.html#pyflink.datastream.data_stream.DataStream.get_side_output" title="pyflink.datastream.data_stream.DataStream.get_side_output"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.get_side_output</span></code></a>(output_tag)</p></td>
+<td><p>Gets the <code class="xref py py-class docutils literal notranslate"><span class="pre">DataStream</span></code> that contains the elements that are emitted from an operation into the side output with the given <code class="xref py py-class docutils literal notranslate"><span class="pre">OutputTag</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStream.cache.html#pyflink.datastream.data_stream.DataStream.cache" title="pyflink.datastream.data_stream.DataStream.cache"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStream.cache</span></code></a>()</p></td>
+<td><p>Cache the intermediate result of the transformation.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="datastreamsink">
+<h2>DataStreamSink<a class="headerlink" href="#datastreamsink" title="Permalink to this headline">#</a></h2>
+<p>A Stream Sink. This is used for emitting elements from a streaming topology.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStreamSink.name.html#pyflink.datastream.data_stream.DataStreamSink.name" title="pyflink.datastream.data_stream.DataStreamSink.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStreamSink.name</span></code></a>(name)</p></td>
+<td><p>Sets the name of this sink.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStreamSink.uid.html#pyflink.datastream.data_stream.DataStreamSink.uid" title="pyflink.datastream.data_stream.DataStreamSink.uid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStreamSink.uid</span></code></a>(uid)</p></td>
+<td><p>Sets an ID for this operator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStreamSink.set_uid_hash.html#pyflink.datastream.data_stream.DataStreamSink.set_uid_hash" title="pyflink.datastream.data_stream.DataStreamSink.set_uid_hash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStreamSink.set_uid_hash</span></code></a>(uid_hash)</p></td>
+<td><p>Sets an user provided hash for this operator.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStreamSink.set_parallelism.html#pyflink.datastream.data_stream.DataStreamSink.set_parallelism" title="pyflink.datastream.data_stream.DataStreamSink.set_parallelism"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStreamSink.set_parallelism</span></code></a>(parallelism)</p></td>
+<td><p>Sets the parallelism for this operator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStreamSink.set_description.html#pyflink.datastream.data_stream.DataStreamSink.set_description" title="pyflink.datastream.data_stream.DataStreamSink.set_description"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStreamSink.set_description</span></code></a>(description)</p></td>
+<td><p>Sets the description for this sink.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStreamSink.disable_chaining.html#pyflink.datastream.data_stream.DataStreamSink.disable_chaining" title="pyflink.datastream.data_stream.DataStreamSink.disable_chaining"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStreamSink.disable_chaining</span></code></a>()</p></td>
+<td><p>Turns off chaining for this operator so thread co-location will not be used as an optimization.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.DataStreamSink.slot_sharing_group.html#pyflink.datastream.data_stream.DataStreamSink.slot_sharing_group" title="pyflink.datastream.data_stream.DataStreamSink.slot_sharing_group"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataStreamSink.slot_sharing_group</span></code></a>(...)</p></td>
+<td><p>Sets the slot sharing group of this operation.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="keyedstream">
+<h2>KeyedStream<a class="headerlink" href="#keyedstream" title="Permalink to this headline">#</a></h2>
+<p>A Stream Sink. This is used for emitting elements from a streaming topology.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.KeyedStream.map.html#pyflink.datastream.data_stream.KeyedStream.map" title="pyflink.datastream.data_stream.KeyedStream.map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeyedStream.map</span></code></a>(func[, output_type])</p></td>
+<td><p>Applies a Map transformation on a KeyedStream.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.KeyedStream.flat_map.html#pyflink.datastream.data_stream.KeyedStream.flat_map" title="pyflink.datastream.data_stream.KeyedStream.flat_map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeyedStream.flat_map</span></code></a>(func[, output_type])</p></td>
+<td><p>Applies a FlatMap transformation on a KeyedStream.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.KeyedStream.reduce.html#pyflink.datastream.data_stream.KeyedStream.reduce" title="pyflink.datastream.data_stream.KeyedStream.reduce"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeyedStream.reduce</span></code></a>(func)</p></td>
+<td><p>Applies a reduce transformation on the grouped data stream grouped on by the given key position.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.KeyedStream.filter.html#pyflink.datastream.data_stream.KeyedStream.filter" title="pyflink.datastream.data_stream.KeyedStream.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeyedStream.filter</span></code></a>(func)</p></td>
+<td><p>Applies a Filter transformation on a DataStream.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.KeyedStream.sum.html#pyflink.datastream.data_stream.KeyedStream.sum" title="pyflink.datastream.data_stream.KeyedStream.sum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeyedStream.sum</span></code></a>([position_to_sum])</p></td>
+<td><p>Applies an aggregation that gives a rolling sum of the data stream at the given position grouped by the given key.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.KeyedStream.min.html#pyflink.datastream.data_stream.KeyedStream.min" title="pyflink.datastream.data_stream.KeyedStream.min"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeyedStream.min</span></code></a>([position_to_min])</p></td>
+<td><p>Applies an aggregation that gives the current minimum of the data stream at the given position by the given key.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.KeyedStream.max.html#pyflink.datastream.data_stream.KeyedStream.max" title="pyflink.datastream.data_stream.KeyedStream.max"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeyedStream.max</span></code></a>([position_to_max])</p></td>
+<td><p>Applies an aggregation that gives the current maximize of the data stream at the given position by the given key.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.KeyedStream.min_by.html#pyflink.datastream.data_stream.KeyedStream.min_by" title="pyflink.datastream.data_stream.KeyedStream.min_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeyedStream.min_by</span></code></a>([position_to_min_by])</p></td>
+<td><p>Applies an aggregation that gives the current element with the minimum value at the given position by the given key.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.KeyedStream.max_by.html#pyflink.datastream.data_stream.KeyedStream.max_by" title="pyflink.datastream.data_stream.KeyedStream.max_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeyedStream.max_by</span></code></a>([position_to_max_by])</p></td>
+<td><p>Applies an aggregation that gives the current element with the maximize value at the given position by the given key.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.KeyedStream.add_sink.html#pyflink.datastream.data_stream.KeyedStream.add_sink" title="pyflink.datastream.data_stream.KeyedStream.add_sink"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeyedStream.add_sink</span></code></a>(sink_func)</p></td>
+<td><p>Adds the given sink to this DataStream.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.KeyedStream.key_by.html#pyflink.datastream.data_stream.KeyedStream.key_by" title="pyflink.datastream.data_stream.KeyedStream.key_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeyedStream.key_by</span></code></a>(key_selector[, key_type])</p></td>
+<td><p>Creates a new KeyedStream that uses the provided key for partitioning its operator states.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.KeyedStream.process.html#pyflink.datastream.data_stream.KeyedStream.process" title="pyflink.datastream.data_stream.KeyedStream.process"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeyedStream.process</span></code></a>(func[, output_type])</p></td>
+<td><p>Applies the given ProcessFunction on the input stream, thereby creating a transformed output stream.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.KeyedStream.window.html#pyflink.datastream.data_stream.KeyedStream.window" title="pyflink.datastream.data_stream.KeyedStream.window"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeyedStream.window</span></code></a>(window_assigner)</p></td>
+<td><p>Windows this data stream to a WindowedStream, which evaluates windows over a key grouped stream.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.KeyedStream.count_window.html#pyflink.datastream.data_stream.KeyedStream.count_window" title="pyflink.datastream.data_stream.KeyedStream.count_window"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeyedStream.count_window</span></code></a>(size[, slide])</p></td>
+<td><p>Windows this KeyedStream into tumbling or sliding count windows.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.KeyedStream.union.html#pyflink.datastream.data_stream.KeyedStream.union" title="pyflink.datastream.data_stream.KeyedStream.union"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeyedStream.union</span></code></a>(*streams)</p></td>
+<td><p>Creates a new DataStream by merging DataStream outputs of the same type with each other.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.KeyedStream.connect.html#pyflink.datastream.data_stream.KeyedStream.connect" title="pyflink.datastream.data_stream.KeyedStream.connect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeyedStream.connect</span></code></a>()</p></td>
+<td><p>If ds is a <code class="xref py py-class docutils literal notranslate"><span class="pre">DataStream</span></code>, creates a new <code class="xref py py-class docutils literal notranslate"><span class="pre">ConnectedStreams</span></code> by connecting DataStream outputs of (possible) different types with each other.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.KeyedStream.partition_custom.html#pyflink.datastream.data_stream.KeyedStream.partition_custom" title="pyflink.datastream.data_stream.KeyedStream.partition_custom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeyedStream.partition_custom</span></code></a>(partitioner, ...)</p></td>
+<td><p>Partitions a DataStream on the key returned by the selector, using a custom partitioner.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.KeyedStream.print.html#pyflink.datastream.data_stream.KeyedStream.print" title="pyflink.datastream.data_stream.KeyedStream.print"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeyedStream.print</span></code></a>([sink_identifier])</p></td>
+<td><p>Writes a DataStream to the standard output stream (stdout).</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cacheddatastream">
+<h2>CachedDataStream<a class="headerlink" href="#cacheddatastream" title="Permalink to this headline">#</a></h2>
+<p>CachedDataStream represents a DataStream whose intermediate result will be cached at the first
+time when it is computed. And the cached intermediate result can be used in later job that using
+the same CachedDataStream to avoid re-computing the intermediate result.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.CachedDataStream.get_type.html#pyflink.datastream.data_stream.CachedDataStream.get_type" title="pyflink.datastream.data_stream.CachedDataStream.get_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CachedDataStream.get_type</span></code></a>()</p></td>
+<td><p>Gets the type of the stream.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.CachedDataStream.get_execution_environment.html#pyflink.datastream.data_stream.CachedDataStream.get_execution_environment" title="pyflink.datastream.data_stream.CachedDataStream.get_execution_environment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CachedDataStream.get_execution_environment</span></code></a>()</p></td>
+<td><p>Returns the StreamExecutionEnvironment that was used to create this DataStream.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.CachedDataStream.set_description.html#pyflink.datastream.data_stream.CachedDataStream.set_description" title="pyflink.datastream.data_stream.CachedDataStream.set_description"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CachedDataStream.set_description</span></code></a>(description)</p></td>
+<td><p>Sets the description for this operator.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.CachedDataStream.map.html#pyflink.datastream.data_stream.CachedDataStream.map" title="pyflink.datastream.data_stream.CachedDataStream.map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CachedDataStream.map</span></code></a>(func[, output_type])</p></td>
+<td><p>Applies a Map transformation on a DataStream.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.CachedDataStream.flat_map.html#pyflink.datastream.data_stream.CachedDataStream.flat_map" title="pyflink.datastream.data_stream.CachedDataStream.flat_map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CachedDataStream.flat_map</span></code></a>(func[, output_type])</p></td>
+<td><p>Applies a FlatMap transformation on a DataStream.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.CachedDataStream.key_by.html#pyflink.datastream.data_stream.CachedDataStream.key_by" title="pyflink.datastream.data_stream.CachedDataStream.key_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CachedDataStream.key_by</span></code></a>(key_selector[, key_type])</p></td>
+<td><p>Creates a new KeyedStream that uses the provided key for partitioning its operator states.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.CachedDataStream.filter.html#pyflink.datastream.data_stream.CachedDataStream.filter" title="pyflink.datastream.data_stream.CachedDataStream.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CachedDataStream.filter</span></code></a>(func)</p></td>
+<td><p>Applies a Filter transformation on a DataStream.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.CachedDataStream.window_all.html#pyflink.datastream.data_stream.CachedDataStream.window_all" title="pyflink.datastream.data_stream.CachedDataStream.window_all"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CachedDataStream.window_all</span></code></a>(window_assigner)</p></td>
+<td><p>Windows this data stream to a AllWindowedStream, which evaluates windows over a non key grouped stream.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.CachedDataStream.union.html#pyflink.datastream.data_stream.CachedDataStream.union" title="pyflink.datastream.data_stream.CachedDataStream.union"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CachedDataStream.union</span></code></a>(*streams)</p></td>
+<td><p>Creates a new DataStream by merging DataStream outputs of the same type with each other.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.CachedDataStream.connect.html#pyflink.datastream.data_stream.CachedDataStream.connect" title="pyflink.datastream.data_stream.CachedDataStream.connect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CachedDataStream.connect</span></code></a>(ds)</p></td>
+<td><p>If ds is a <code class="xref py py-class docutils literal notranslate"><span class="pre">DataStream</span></code>, creates a new <code class="xref py py-class docutils literal notranslate"><span class="pre">ConnectedStreams</span></code> by connecting DataStream outputs of (possible) different types with each other.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.CachedDataStream.shuffle.html#pyflink.datastream.data_stream.CachedDataStream.shuffle" title="pyflink.datastream.data_stream.CachedDataStream.shuffle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CachedDataStream.shuffle</span></code></a>()</p></td>
+<td><p>Sets the partitioning of the DataStream so that the output elements are shuffled uniformly randomly to the next operation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.CachedDataStream.project.html#pyflink.datastream.data_stream.CachedDataStream.project" title="pyflink.datastream.data_stream.CachedDataStream.project"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CachedDataStream.project</span></code></a>(*field_indexes)</p></td>
+<td><p>Initiates a Project transformation on a Tuple DataStream.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.CachedDataStream.rescale.html#pyflink.datastream.data_stream.CachedDataStream.rescale" title="pyflink.datastream.data_stream.CachedDataStream.rescale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CachedDataStream.rescale</span></code></a>()</p></td>
+<td><p>Sets the partitioning of the DataStream so that the output elements are distributed evenly to a subset of instances of the next operation in a round-robin fashion.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.CachedDataStream.rebalance.html#pyflink.datastream.data_stream.CachedDataStream.rebalance" title="pyflink.datastream.data_stream.CachedDataStream.rebalance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CachedDataStream.rebalance</span></code></a>()</p></td>
+<td><p>Sets the partitioning of the DataStream so that the output elements are distributed evenly to instances of the next operation in a round-robin fashion.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.CachedDataStream.forward.html#pyflink.datastream.data_stream.CachedDataStream.forward" title="pyflink.datastream.data_stream.CachedDataStream.forward"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CachedDataStream.forward</span></code></a>()</p></td>
+<td><p>Sets the partitioning of the DataStream so that the output elements are forwarded to the local sub-task of the next operation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.CachedDataStream.broadcast.html#pyflink.datastream.data_stream.CachedDataStream.broadcast" title="pyflink.datastream.data_stream.CachedDataStream.broadcast"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CachedDataStream.broadcast</span></code></a>([...])</p></td>
+<td><p>Sets the partitioning of the DataStream so that the output elements are broadcasted to every parallel instance of the next operation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.CachedDataStream.process.html#pyflink.datastream.data_stream.CachedDataStream.process" title="pyflink.datastream.data_stream.CachedDataStream.process"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CachedDataStream.process</span></code></a>(func[, output_type])</p></td>
+<td><p>Applies the given ProcessFunction on the input stream, thereby creating a transformed output stream.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.CachedDataStream.assign_timestamps_and_watermarks.html#pyflink.datastream.data_stream.CachedDataStream.assign_timestamps_and_watermarks" title="pyflink.datastream.data_stream.CachedDataStream.assign_timestamps_and_watermarks"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CachedDataStream.assign_timestamps_and_watermarks</span></code></a>(...)</p></td>
+<td><p>Assigns timestamps to the elements in the data stream and generates watermarks to signal event time progress.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.CachedDataStream.partition_custom.html#pyflink.datastream.data_stream.CachedDataStream.partition_custom" title="pyflink.datastream.data_stream.CachedDataStream.partition_custom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CachedDataStream.partition_custom</span></code></a>(...)</p></td>
+<td><p>Partitions a DataStream on the key returned by the selector, using a custom partitioner.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.CachedDataStream.add_sink.html#pyflink.datastream.data_stream.CachedDataStream.add_sink" title="pyflink.datastream.data_stream.CachedDataStream.add_sink"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CachedDataStream.add_sink</span></code></a>(sink_func)</p></td>
+<td><p>Adds the given sink to this DataStream.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.CachedDataStream.sink_to.html#pyflink.datastream.data_stream.CachedDataStream.sink_to" title="pyflink.datastream.data_stream.CachedDataStream.sink_to"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CachedDataStream.sink_to</span></code></a>(sink)</p></td>
+<td><p>Adds the given sink to this DataStream.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.CachedDataStream.execute_and_collect.html#pyflink.datastream.data_stream.CachedDataStream.execute_and_collect" title="pyflink.datastream.data_stream.CachedDataStream.execute_and_collect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CachedDataStream.execute_and_collect</span></code></a>([...])</p></td>
+<td><p>Triggers the distributed execution of the streaming dataflow and returns an iterator over the elements of the given DataStream.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.CachedDataStream.print.html#pyflink.datastream.data_stream.CachedDataStream.print" title="pyflink.datastream.data_stream.CachedDataStream.print"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CachedDataStream.print</span></code></a>([sink_identifier])</p></td>
+<td><p>Writes a DataStream to the standard output stream (stdout).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.CachedDataStream.get_side_output.html#pyflink.datastream.data_stream.CachedDataStream.get_side_output" title="pyflink.datastream.data_stream.CachedDataStream.get_side_output"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CachedDataStream.get_side_output</span></code></a>(output_tag)</p></td>
+<td><p>Gets the <code class="xref py py-class docutils literal notranslate"><span class="pre">DataStream</span></code> that contains the elements that are emitted from an operation into the side output with the given <code class="xref py py-class docutils literal notranslate"><span class="pre">OutputTag</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.CachedDataStream.cache.html#pyflink.datastream.data_stream.CachedDataStream.cache" title="pyflink.datastream.data_stream.CachedDataStream.cache"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CachedDataStream.cache</span></code></a>()</p></td>
+<td><p>Cache the intermediate result of the transformation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.CachedDataStream.invalidate.html#pyflink.datastream.data_stream.CachedDataStream.invalidate" title="pyflink.datastream.data_stream.CachedDataStream.invalidate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CachedDataStream.invalidate</span></code></a>()</p></td>
+<td><p>Invalidate the cache intermediate result of this DataStream to release the physical resources.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="windowedstream">
+<h2>WindowedStream<a class="headerlink" href="#windowedstream" title="Permalink to this headline">#</a></h2>
+<p>A WindowedStream represents a data stream where elements are grouped by key, and for each
+key, the stream of elements is split into windows based on a WindowAssigner. Window emission
+is triggered based on a Trigger.</p>
+<p>The windows are conceptually evaluated for each key individually, meaning windows can trigger
+at different points for each key.</p>
+<p>Note that the WindowedStream is purely an API construct, during runtime the WindowedStream will
+be collapsed together with the KeyedStream and the operation over the window into one single
+operation.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.WindowedStream.get_execution_environment.html#pyflink.datastream.data_stream.WindowedStream.get_execution_environment" title="pyflink.datastream.data_stream.WindowedStream.get_execution_environment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WindowedStream.get_execution_environment</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.WindowedStream.get_input_type.html#pyflink.datastream.data_stream.WindowedStream.get_input_type" title="pyflink.datastream.data_stream.WindowedStream.get_input_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WindowedStream.get_input_type</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.WindowedStream.trigger.html#pyflink.datastream.data_stream.WindowedStream.trigger" title="pyflink.datastream.data_stream.WindowedStream.trigger"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WindowedStream.trigger</span></code></a>(trigger)</p></td>
+<td><p>Sets the Trigger that should be used to trigger window emission.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.WindowedStream.allowed_lateness.html#pyflink.datastream.data_stream.WindowedStream.allowed_lateness" title="pyflink.datastream.data_stream.WindowedStream.allowed_lateness"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WindowedStream.allowed_lateness</span></code></a>(time_ms)</p></td>
+<td><p>Sets the time by which elements are allowed to be late.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.WindowedStream.side_output_late_data.html#pyflink.datastream.data_stream.WindowedStream.side_output_late_data" title="pyflink.datastream.data_stream.WindowedStream.side_output_late_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WindowedStream.side_output_late_data</span></code></a>(output_tag)</p></td>
+<td><p>Send late arriving data to the side output identified by the given <code class="xref py py-class docutils literal notranslate"><span class="pre">OutputTag</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.WindowedStream.reduce.html#pyflink.datastream.data_stream.WindowedStream.reduce" title="pyflink.datastream.data_stream.WindowedStream.reduce"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WindowedStream.reduce</span></code></a>(reduce_function[, ...])</p></td>
+<td><p>Applies a reduce function to the window.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.WindowedStream.aggregate.html#pyflink.datastream.data_stream.WindowedStream.aggregate" title="pyflink.datastream.data_stream.WindowedStream.aggregate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WindowedStream.aggregate</span></code></a>(aggregate_function)</p></td>
+<td><p>Applies the given window function to each window.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.WindowedStream.apply.html#pyflink.datastream.data_stream.WindowedStream.apply" title="pyflink.datastream.data_stream.WindowedStream.apply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WindowedStream.apply</span></code></a>(window_function[, ...])</p></td>
+<td><p>Applies the given window function to each window.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.WindowedStream.process.html#pyflink.datastream.data_stream.WindowedStream.process" title="pyflink.datastream.data_stream.WindowedStream.process"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WindowedStream.process</span></code></a>(process_window_function)</p></td>
+<td><p>Applies the given window function to each window.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="allwindowedstream">
+<h2>AllWindowedStream<a class="headerlink" href="#allwindowedstream" title="Permalink to this headline">#</a></h2>
+<p>A AllWindowedStream represents a data stream where the stream of elements is split into windows
+based on a WindowAssigner. Window emission is triggered based on a Trigger.</p>
+<p>If an Evictor is specified it will be used to evict elements from the window after evaluation
+was triggered by the Trigger but before the actual evaluation of the window.
+When using an evictor, window performance will degrade significantly, since pre-aggregation of
+window results cannot be used.</p>
+<p>Note that the AllWindowedStream is purely an API construct, during runtime the AllWindowedStream
+will be collapsed together with the operation over the window into one single operation.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.AllWindowedStream.get_execution_environment.html#pyflink.datastream.data_stream.AllWindowedStream.get_execution_environment" title="pyflink.datastream.data_stream.AllWindowedStream.get_execution_environment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AllWindowedStream.get_execution_environment</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.AllWindowedStream.get_input_type.html#pyflink.datastream.data_stream.AllWindowedStream.get_input_type" title="pyflink.datastream.data_stream.AllWindowedStream.get_input_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AllWindowedStream.get_input_type</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.AllWindowedStream.trigger.html#pyflink.datastream.data_stream.AllWindowedStream.trigger" title="pyflink.datastream.data_stream.AllWindowedStream.trigger"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AllWindowedStream.trigger</span></code></a>(trigger)</p></td>
+<td><p>Sets the Trigger that should be used to trigger window emission.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.AllWindowedStream.allowed_lateness.html#pyflink.datastream.data_stream.AllWindowedStream.allowed_lateness" title="pyflink.datastream.data_stream.AllWindowedStream.allowed_lateness"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AllWindowedStream.allowed_lateness</span></code></a>(time_ms)</p></td>
+<td><p>Sets the time by which elements are allowed to be late.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.AllWindowedStream.side_output_late_data.html#pyflink.datastream.data_stream.AllWindowedStream.side_output_late_data" title="pyflink.datastream.data_stream.AllWindowedStream.side_output_late_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AllWindowedStream.side_output_late_data</span></code></a>(...)</p></td>
+<td><p>Send late arriving data to the side output identified by the given <code class="xref py py-class docutils literal notranslate"><span class="pre">OutputTag</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.AllWindowedStream.reduce.html#pyflink.datastream.data_stream.AllWindowedStream.reduce" title="pyflink.datastream.data_stream.AllWindowedStream.reduce"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AllWindowedStream.reduce</span></code></a>(reduce_function[, ...])</p></td>
+<td><p>Applies the given window function to each window.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.AllWindowedStream.aggregate.html#pyflink.datastream.data_stream.AllWindowedStream.aggregate" title="pyflink.datastream.data_stream.AllWindowedStream.aggregate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AllWindowedStream.aggregate</span></code></a>(aggregate_function)</p></td>
+<td><p>Applies the given window function to each window.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.AllWindowedStream.apply.html#pyflink.datastream.data_stream.AllWindowedStream.apply" title="pyflink.datastream.data_stream.AllWindowedStream.apply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AllWindowedStream.apply</span></code></a>(window_function[, ...])</p></td>
+<td><p>Applies the given window function to each window.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.AllWindowedStream.process.html#pyflink.datastream.data_stream.AllWindowedStream.process" title="pyflink.datastream.data_stream.AllWindowedStream.process"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AllWindowedStream.process</span></code></a>(...[, output_type])</p></td>
+<td><p>Applies the given window function to each window.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="connectedstreams">
+<h2>ConnectedStreams<a class="headerlink" href="#connectedstreams" title="Permalink to this headline">#</a></h2>
+<p>ConnectedStreams represent two connected streams of (possibly) different data types.
+Connected streams are useful for cases where operations on one stream directly
+affect the operations on the other stream, usually via shared state between the streams.</p>
+<p>An example for the use of connected streams would be to apply rules that change over time
+onto another stream. One of the connected streams has the rules, the other stream the
+elements to apply the rules to. The operation on the connected stream maintains the
+current set of rules in the state. It may receive either a rule update and update the state
+or a data element and apply the rules in the state to the element.</p>
+<p>The connected stream can be conceptually viewed as a union stream of an Either type, that
+holds either the first stream’s type or the second stream’s type.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.ConnectedStreams.key_by.html#pyflink.datastream.data_stream.ConnectedStreams.key_by" title="pyflink.datastream.data_stream.ConnectedStreams.key_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ConnectedStreams.key_by</span></code></a>(key_selector1, ...)</p></td>
+<td><p>KeyBy operation for connected data stream.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.ConnectedStreams.map.html#pyflink.datastream.data_stream.ConnectedStreams.map" title="pyflink.datastream.data_stream.ConnectedStreams.map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ConnectedStreams.map</span></code></a>(func[, output_type])</p></td>
+<td><p>Applies a CoMap transformation on a <cite>ConnectedStreams</cite> and maps the output to a common type.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.ConnectedStreams.flat_map.html#pyflink.datastream.data_stream.ConnectedStreams.flat_map" title="pyflink.datastream.data_stream.ConnectedStreams.flat_map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ConnectedStreams.flat_map</span></code></a>(func[, output_type])</p></td>
+<td><p>Applies a CoFlatMap transformation on a <cite>ConnectedStreams</cite> and maps the output to a common type.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.ConnectedStreams.process.html#pyflink.datastream.data_stream.ConnectedStreams.process" title="pyflink.datastream.data_stream.ConnectedStreams.process"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ConnectedStreams.process</span></code></a>(func[, output_type])</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="broadcaststream">
+<h2>BroadcastStream<a class="headerlink" href="#broadcaststream" title="Permalink to this headline">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.BroadcastStream.html#pyflink.datastream.data_stream.BroadcastStream" title="pyflink.datastream.data_stream.BroadcastStream"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BroadcastStream</span></code></a>(input_stream, ...)</p></td>
+<td><p>A BroadcastStream is a stream with <code class="xref py py-class docutils literal notranslate"><span class="pre">state.BroadcastState</span></code> (s).</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="broadcastconnectedstream">
+<h2>BroadcastConnectedStream<a class="headerlink" href="#broadcastconnectedstream" title="Permalink to this headline">#</a></h2>
+<p>A BroadcastConnectedStream represents the result of connecting a keyed or non-keyed stream, with
+a <a class="reference internal" href="api/pyflink.datastream.data_stream.BroadcastStream.html#pyflink.datastream.data_stream.BroadcastStream" title="pyflink.datastream.data_stream.BroadcastStream"><code class="xref py py-class docutils literal notranslate"><span class="pre">BroadcastStream</span></code></a> with <code class="xref py py-class docutils literal notranslate"><span class="pre">BroadcastState</span></code> (s). As in the case of
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ConnectedStreams</span></code> these streams are useful for cases where operations on one stream
+directly affect the operations on the other stream, usually via shared state between the
+streams.</p>
+<p>An example for the use of such connected streams would be to apply rules that change over time
+onto another, possibly keyed stream. The stream with the broadcast state has the rules, and will
+store them in the broadcast state, while the other stream will contain the elements to apply the
+rules to. By broadcasting the rules, these will be available in all parallel instances, and can
+be applied to all partitions of the other stream.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.data_stream.BroadcastConnectedStream.process.html#pyflink.datastream.data_stream.BroadcastConnectedStream.process" title="pyflink.datastream.data_stream.BroadcastConnectedStream.process"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BroadcastConnectedStream.process</span></code></a>()</p></td>
+<td><p>Assumes as inputs a <a class="reference internal" href="api/pyflink.datastream.data_stream.BroadcastStream.html#pyflink.datastream.data_stream.BroadcastStream" title="pyflink.datastream.data_stream.BroadcastStream"><code class="xref py py-class docutils literal notranslate"><span class="pre">BroadcastStream</span></code></a> and a <code class="xref py py-class docutils literal notranslate"><span class="pre">DataStream</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">KeyedStream</span></code> and applies the given <code class="xref py py-class docutils literal notranslate"><span class="pre">BroadcastProcessFunction</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">KeyedBroadcastProcessFunction</span></code> on them, thereby creating a transformed output stream.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="api/pyflink.datastream.slot_sharing_group.MemorySize.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">pyflink.datastream.slot_sharing_group.MemorySize</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="api/pyflink.datastream.data_stream.DataStream.get_name.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">pyflink.datastream.data_stream.DataStream.get_name</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   DataStream
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#datastreamsink">
+   DataStreamSink
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#keyedstream">
+   KeyedStream
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cacheddatastream">
+   CachedDataStream
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#windowedstream">
+   WindowedStream
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#allwindowedstream">
+   AllWindowedStream
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#connectedstreams">
+   ConnectedStreams
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#broadcaststream">
+   BroadcastStream
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#broadcastconnectedstream">
+   BroadcastConnectedStream
+  </a>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+<div class="tocsection sourcelink">
+    <a href="../../_sources/reference/pyflink.datastream/datastream.rst.txt">
+        <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+</div>
+
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

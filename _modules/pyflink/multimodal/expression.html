@@ -1,0 +1,2276 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyflink.multimodal.expression &#8212; PyFlink 11.8.0rc0 documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyflink/multimodal/expression';</script>
+    <link rel="shortcut icon" href="../../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../../search.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="Logo image">
+    <img src="../../../_static/navbar-brand-logo.jpg" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <h1>Source code for pyflink.multimodal.expression</h1><div class="highlight"><pre>
+<span></span><span class="c1">################################################################################</span>
+<span class="c1">#  Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="c1">#  or more contributor license agreements.  See the NOTICE file</span>
+<span class="c1">#  distributed with this work for additional information</span>
+<span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
+<span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
+<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  with the License.  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">################################################################################</span>
+<span class="sd">&quot;&quot;&quot;Multimodal expression namespaces.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">importlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">import_module</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.expression</span><span class="w"> </span><span class="kn">import</span> <span class="n">Expression</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.multimodal.codec.audio</span><span class="w"> </span><span class="kn">import</span> <span class="n">DEFAULT_MAX_DECODED_AUDIO_BYTES</span>
+
+<span class="n">_DEFAULT_AESTHETIC_SCORER_MODEL</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;shunk031/aesthetics-predictor-v2-sac-logos-ava1-l14-linearMSE&quot;</span>
+<span class="p">)</span>
+<span class="n">_DEFAULT_IMAGE_ENCODE_QUALITY</span> <span class="o">=</span> <span class="mi">85</span>
+<span class="n">_DEFAULT_NSFW_MODEL</span> <span class="o">=</span> <span class="s2">&quot;Falconsai/nsfw_image_detection&quot;</span>
+<span class="n">_DEFAULT_WATERMARK_MODEL</span> <span class="o">=</span> <span class="s2">&quot;amrul-hzz/watermark_detector&quot;</span>
+
+<span class="n">_IMAGE_DETECT</span> <span class="o">=</span> <span class="s2">&quot;pyflink.multimodal.operators.image_detect&quot;</span>
+<span class="n">_IMAGE_EMBED</span> <span class="o">=</span> <span class="s2">&quot;pyflink.multimodal.operators.image_embed&quot;</span>
+<span class="n">_IMAGE_FACE</span> <span class="o">=</span> <span class="s2">&quot;pyflink.multimodal.operators.image_face&quot;</span>
+<span class="n">_IMAGE_INFO</span> <span class="o">=</span> <span class="s2">&quot;pyflink.multimodal.operators.image_info&quot;</span>
+<span class="n">_IMAGE_QUALITY</span> <span class="o">=</span> <span class="s2">&quot;pyflink.multimodal.operators.image_quality&quot;</span>
+<span class="n">_IMAGE_TRANSFORM</span> <span class="o">=</span> <span class="s2">&quot;pyflink.multimodal.operators.image_transform&quot;</span>
+<span class="n">_AUDIO_INFO</span> <span class="o">=</span> <span class="s2">&quot;pyflink.multimodal.operators.audio_info&quot;</span>
+<span class="n">_AUDIO_SPEECH</span> <span class="o">=</span> <span class="s2">&quot;pyflink.multimodal.operators.audio_speech&quot;</span>
+<span class="n">_AUDIO_TRANSFORM</span> <span class="o">=</span> <span class="s2">&quot;pyflink.multimodal.operators.audio_transform&quot;</span>
+<span class="n">_VIDEO_FRAMES</span> <span class="o">=</span> <span class="s2">&quot;pyflink.multimodal.operators.video_frames&quot;</span>
+
+<span class="n">_DEFAULT_AUDIO_MODEL</span> <span class="o">=</span> <span class="s2">&quot;openai/whisper-tiny&quot;</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">_ExpressionAccessor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for expression-bound scalar operator namespaces.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expression</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_expression</span> <span class="o">=</span> <span class="n">expression</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">module_name</span><span class="p">,</span> <span class="n">function_name</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">function</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">import_module</span><span class="p">(</span><span class="n">module_name</span><span class="p">),</span> <span class="n">function_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">function</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_expression</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="ImageExpressionAccessor"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.html#pyflink.multimodal.expression.ImageExpressionAccessor">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">ImageExpressionAccessor</span><span class="p">(</span><span class="n">_ExpressionAccessor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Image operations available on a DataFrame expression.</span>
+
+<span class="sd">    These methods use the expression on the left side as the image input. For</span>
+<span class="sd">    example, ``col(&quot;img&quot;).image.resize(width=224, height=224)`` is the</span>
+<span class="sd">    expression-accessor form of ``image_resize(col(&quot;img&quot;), width=224,</span>
+<span class="sd">    height=224)``.</span>
+
+<span class="sd">    Examples::</span>
+<span class="sd">        &gt;&gt;&gt; from pyflink.dataframe import col</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(</span>
+<span class="sd">        ...     &quot;small&quot;, col(&quot;img&quot;).image.resize(width=224, height=224))</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(</span>
+<span class="sd">        ...     &quot;jpeg&quot;, col(&quot;small&quot;).image.encode(format=&quot;JPEG&quot;))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.decode"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.decode.html#pyflink.multimodal.expression.ImageExpressionAccessor.decode">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">decode</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">on_error</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">,</span>
+        <span class="n">mode</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">pixel_limit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Decode image bytes into image values.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_decode`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            on_error: ``&quot;raise&quot;`` to propagate decode failures, or ``&quot;null&quot;``</span>
+<span class="sd">                to return null for unreadable inputs.</span>
+<span class="sd">            mode: Optional output image mode, such as ``&quot;RGB&quot;``.</span>
+<span class="sd">            pixel_limit: Optional maximum decoded pixel count.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces decoded ``IMAGE`` values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_TRANSFORM</span><span class="p">,</span>
+            <span class="s2">&quot;image_decode&quot;</span><span class="p">,</span>
+            <span class="n">on_error</span><span class="o">=</span><span class="n">on_error</span><span class="p">,</span>
+            <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span>
+            <span class="n">pixel_limit</span><span class="o">=</span><span class="n">pixel_limit</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.encode"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.encode.html#pyflink.multimodal.expression.ImageExpressionAccessor.encode">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">encode</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">quality</span><span class="o">=</span><span class="n">_DEFAULT_IMAGE_ENCODE_QUALITY</span><span class="p">,</span>
+        <span class="n">output</span><span class="o">=</span><span class="s2">&quot;bytes&quot;</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Encode image values into bytes or data URLs.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_encode`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            format: Optional output image format, such as ``&quot;JPEG&quot;`` or</span>
+<span class="sd">                ``&quot;PNG&quot;``.</span>
+<span class="sd">            quality: Output quality for lossy formats.</span>
+<span class="sd">            output: Output representation, such as ``&quot;bytes&quot;`` or</span>
+<span class="sd">                ``&quot;data_url&quot;``.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces ``BINARY`` values, or ``STRING``</span>
+<span class="sd">            values when ``output=&quot;data_url&quot;``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_TRANSFORM</span><span class="p">,</span>
+            <span class="s2">&quot;image_encode&quot;</span><span class="p">,</span>
+            <span class="nb">format</span><span class="o">=</span><span class="nb">format</span><span class="p">,</span>
+            <span class="n">quality</span><span class="o">=</span><span class="n">quality</span><span class="p">,</span>
+            <span class="n">output</span><span class="o">=</span><span class="n">output</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.compress"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.compress.html#pyflink.multimodal.expression.ImageExpressionAccessor.compress">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">compress</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">quality</span><span class="o">=</span><span class="n">_DEFAULT_IMAGE_ENCODE_QUALITY</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;JPEG&quot;</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compress image values using the requested format and quality.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_compress`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            quality: Output quality for lossy compression.</span>
+<span class="sd">            format: Output image format used for compression.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces compressed ``BINARY`` image bytes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_TRANSFORM</span><span class="p">,</span>
+            <span class="s2">&quot;image_compress&quot;</span><span class="p">,</span>
+            <span class="n">quality</span><span class="o">=</span><span class="n">quality</span><span class="p">,</span>
+            <span class="nb">format</span><span class="o">=</span><span class="nb">format</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.convert_format"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.convert_format.html#pyflink.multimodal.expression.ImageExpressionAccessor.convert_format">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">convert_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert image values to a different encoded image format.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_convert_format`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            format: Required target image format, such as ``&quot;JPEG&quot;`` or</span>
+<span class="sd">                ``&quot;PNG&quot;``.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces encoded ``BINARY`` image bytes in the</span>
+<span class="sd">            target format.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_TRANSFORM</span><span class="p">,</span>
+            <span class="s2">&quot;image_convert_format&quot;</span><span class="p">,</span>
+            <span class="nb">format</span><span class="o">=</span><span class="nb">format</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.to_tensor"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.to_tensor.html#pyflink.multimodal.expression.ImageExpressionAccessor.to_tensor">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_tensor</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">width</span><span class="p">,</span>
+        <span class="n">height</span><span class="p">,</span>
+        <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;RGB&quot;</span><span class="p">,</span>
+        <span class="n">layout</span><span class="o">=</span><span class="s2">&quot;CHW&quot;</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert already prepared image values to fixed-shape tensors.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_to_tensor`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+<span class="sd">        This operation does not resize or convert image mode. Use</span>
+<span class="sd">        ``.image.resize(...)`` or ``.image.convert_mode(...)`` upstream when</span>
+<span class="sd">        needed.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            width: Expected input image width in pixels.</span>
+<span class="sd">            height: Expected input image height in pixels.</span>
+<span class="sd">            mode: Expected input image mode before tensor conversion.</span>
+<span class="sd">            layout: Tensor layout, such as ``&quot;CHW&quot;`` or ``&quot;HWC&quot;``.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces a ``FLOAT32`` tensor with</span>
+<span class="sd">            the requested shape and layout.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_TRANSFORM</span><span class="p">,</span>
+            <span class="s2">&quot;image_to_tensor&quot;</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
+            <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span>
+            <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span>
+            <span class="n">layout</span><span class="o">=</span><span class="n">layout</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.convert_mode"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.convert_mode.html#pyflink.multimodal.expression.ImageExpressionAccessor.convert_mode">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">convert_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert image values to another image mode.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_convert_mode`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            mode: Target image mode, such as ``&quot;RGB&quot;`` or ``&quot;L&quot;``.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces ``IMAGE`` values in the</span>
+<span class="sd">            requested mode.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_TRANSFORM</span><span class="p">,</span>
+            <span class="s2">&quot;image_convert_mode&quot;</span><span class="p">,</span>
+            <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.resize"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.resize.html#pyflink.multimodal.expression.ImageExpressionAccessor.resize">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">resize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;lanczos&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Resize image values to a fixed width and height.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_resize`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            width: Target width in pixels.</span>
+<span class="sd">            height: Target height in pixels.</span>
+<span class="sd">            method: Resize interpolation method.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces resized ``IMAGE`` values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_TRANSFORM</span><span class="p">,</span>
+            <span class="s2">&quot;image_resize&quot;</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
+            <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span>
+            <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.rescale"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.rescale.html#pyflink.multimodal.expression.ImageExpressionAccessor.rescale">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">rescale</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;lanczos&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Scale image values by a ratio.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_rescale`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            scale: Scale factor applied to both width and height.</span>
+<span class="sd">            method: Resize interpolation method.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces rescaled ``IMAGE`` values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_TRANSFORM</span><span class="p">,</span>
+            <span class="s2">&quot;image_rescale&quot;</span><span class="p">,</span>
+            <span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span>
+            <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.crop"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.crop.html#pyflink.multimodal.expression.ImageExpressionAccessor.crop">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">crop</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">crop_coords</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">crop_type</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
+        <span class="n">crop_ratio</span><span class="o">=</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">),</span>
+        <span class="n">crop_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Crop image values by coordinates, crop type, ratio, or size.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_crop`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            crop_coords: Explicit crop box coordinates.</span>
+<span class="sd">            crop_type: Preset crop mode, such as center crop.</span>
+<span class="sd">            crop_ratio: Crop ratio used by ratio-based modes.</span>
+<span class="sd">            crop_size: Target crop size used by size-based modes.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces cropped ``IMAGE`` values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_TRANSFORM</span><span class="p">,</span>
+            <span class="s2">&quot;image_crop&quot;</span><span class="p">,</span>
+            <span class="n">crop_coords</span><span class="o">=</span><span class="n">crop_coords</span><span class="p">,</span>
+            <span class="n">crop_type</span><span class="o">=</span><span class="n">crop_type</span><span class="p">,</span>
+            <span class="n">crop_ratio</span><span class="o">=</span><span class="n">crop_ratio</span><span class="p">,</span>
+            <span class="n">crop_size</span><span class="o">=</span><span class="n">crop_size</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.crop_black_border"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.crop_black_border.html#pyflink.multimodal.expression.ImageExpressionAccessor.crop_black_border">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">crop_black_border</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">threshold</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">detect_algorithm</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+        <span class="n">black_threshold</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">edge_sensitivity</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">min_border_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remove black borders from image values.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_crop_black_border`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            threshold: Optional border detection threshold.</span>
+<span class="sd">            detect_algorithm: Border detection algorithm.</span>
+<span class="sd">            black_threshold: Pixel threshold used to classify black borders.</span>
+<span class="sd">            edge_sensitivity: Sensitivity for detecting border edges.</span>
+<span class="sd">            min_border_size: Minimum border size in pixels.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces ``IMAGE`` values with black</span>
+<span class="sd">            borders removed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_TRANSFORM</span><span class="p">,</span>
+            <span class="s2">&quot;image_crop_black_border&quot;</span><span class="p">,</span>
+            <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span>
+            <span class="n">detect_algorithm</span><span class="o">=</span><span class="n">detect_algorithm</span><span class="p">,</span>
+            <span class="n">black_threshold</span><span class="o">=</span><span class="n">black_threshold</span><span class="p">,</span>
+            <span class="n">edge_sensitivity</span><span class="o">=</span><span class="n">edge_sensitivity</span><span class="p">,</span>
+            <span class="n">min_border_size</span><span class="o">=</span><span class="n">min_border_size</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.flip"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.flip.html#pyflink.multimodal.expression.ImageExpressionAccessor.flip">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">flip</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Flip image values horizontally or vertically.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_flip`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            mode: Flip mode, such as ``&quot;horizontal&quot;`` or ``&quot;vertical&quot;``.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces flipped ``IMAGE`` values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_TRANSFORM</span><span class="p">,</span>
+            <span class="s2">&quot;image_flip&quot;</span><span class="p">,</span>
+            <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.blur"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.blur.html#pyflink.multimodal.expression.ImageExpressionAccessor.blur">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">blur</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">blur_type</span><span class="o">=</span><span class="s2">&quot;gaussian&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Blur image values.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_blur`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            radius: Blur radius.</span>
+<span class="sd">            blur_type: Blur algorithm, such as ``&quot;gaussian&quot;``.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces blurred ``IMAGE`` values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_TRANSFORM</span><span class="p">,</span>
+            <span class="s2">&quot;image_blur&quot;</span><span class="p">,</span>
+            <span class="n">radius</span><span class="o">=</span><span class="n">radius</span><span class="p">,</span>
+            <span class="n">blur_type</span><span class="o">=</span><span class="n">blur_type</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.adjust_color"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.adjust_color.html#pyflink.multimodal.expression.ImageExpressionAccessor.adjust_color">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">adjust_color</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">brightness</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">contrast</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">saturation</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adjust image brightness, contrast, and saturation.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_adjust_color`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            brightness: Brightness multiplier.</span>
+<span class="sd">            contrast: Contrast multiplier.</span>
+<span class="sd">            saturation: Saturation multiplier.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces color-adjusted ``IMAGE``</span>
+<span class="sd">            values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_TRANSFORM</span><span class="p">,</span>
+            <span class="s2">&quot;image_adjust_color&quot;</span><span class="p">,</span>
+            <span class="n">brightness</span><span class="o">=</span><span class="n">brightness</span><span class="p">,</span>
+            <span class="n">contrast</span><span class="o">=</span><span class="n">contrast</span><span class="p">,</span>
+            <span class="n">saturation</span><span class="o">=</span><span class="n">saturation</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.remove_background"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.remove_background.html#pyflink.multimodal.expression.ImageExpressionAccessor.remove_background">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">remove_background</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">alpha_matting</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">alpha_matting_foreground_threshold</span><span class="o">=</span><span class="mi">240</span><span class="p">,</span>
+        <span class="n">alpha_matting_background_threshold</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">alpha_matting_erode_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">bgcolor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remove image backgrounds and optionally composite a new background.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_remove_background`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            alpha_matting: Whether to refine the foreground mask with alpha</span>
+<span class="sd">                matting.</span>
+<span class="sd">            alpha_matting_foreground_threshold: Foreground threshold for alpha</span>
+<span class="sd">                matting.</span>
+<span class="sd">            alpha_matting_background_threshold: Background threshold for alpha</span>
+<span class="sd">                matting.</span>
+<span class="sd">            alpha_matting_erode_size: Erosion size for alpha matting.</span>
+<span class="sd">            bgcolor: Optional replacement background color.</span>
+<span class="sd">            model_sharing: Optional model sharing mode.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+<span class="sd">            batch_size: Optional inference batch size.</span>
+<span class="sd">            num_gpus: Optional number of GPUs requested for model inference.</span>
+<span class="sd">            gpu_type: GPU type requested for model inference. The DataFrame UDF</span>
+<span class="sd">                runtime requires this when ``num_gpus`` is set.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces foreground ``IMAGE`` values,</span>
+<span class="sd">            optionally composited with the requested background.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_TRANSFORM</span><span class="p">,</span>
+            <span class="s2">&quot;image_remove_background&quot;</span><span class="p">,</span>
+            <span class="n">alpha_matting</span><span class="o">=</span><span class="n">alpha_matting</span><span class="p">,</span>
+            <span class="n">alpha_matting_foreground_threshold</span><span class="o">=</span><span class="n">alpha_matting_foreground_threshold</span><span class="p">,</span>
+            <span class="n">alpha_matting_background_threshold</span><span class="o">=</span><span class="n">alpha_matting_background_threshold</span><span class="p">,</span>
+            <span class="n">alpha_matting_erode_size</span><span class="o">=</span><span class="n">alpha_matting_erode_size</span><span class="p">,</span>
+            <span class="n">bgcolor</span><span class="o">=</span><span class="n">bgcolor</span><span class="p">,</span>
+            <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+            <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+            <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+            <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.metadata"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.metadata.html#pyflink.multimodal.expression.ImageExpressionAccessor.metadata">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extract image metadata.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_metadata`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces a metadata ``ROW`` with</span>
+<span class="sd">            ``width``, ``height``, ``channels``, ``mode``, and ``format`` fields.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span><span class="n">_IMAGE_INFO</span><span class="p">,</span> <span class="s2">&quot;image_metadata&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.aspect_ratio"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.aspect_ratio.html#pyflink.multimodal.expression.ImageExpressionAccessor.aspect_ratio">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">aspect_ratio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute image aspect ratio.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_aspect_ratio`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces a ``DOUBLE`` width-to-height</span>
+<span class="sd">            ratio.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span><span class="n">_IMAGE_INFO</span><span class="p">,</span> <span class="s2">&quot;image_aspect_ratio&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.sharpness"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.sharpness.html#pyflink.multimodal.expression.ImageExpressionAccessor.sharpness">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">sharpness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">max_edge</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">allow_upscale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Estimate image sharpness.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_sharpness`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            max_edge: Optional maximum edge size used before scoring.</span>
+<span class="sd">            allow_upscale: Whether resizing may upscale smaller images.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces a ``DOUBLE`` sharpness</span>
+<span class="sd">            score.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_INFO</span><span class="p">,</span>
+            <span class="s2">&quot;image_sharpness&quot;</span><span class="p">,</span>
+            <span class="n">max_edge</span><span class="o">=</span><span class="n">max_edge</span><span class="p">,</span>
+            <span class="n">allow_upscale</span><span class="o">=</span><span class="n">allow_upscale</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.hash"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.hash.html#pyflink.multimodal.expression.ImageExpressionAccessor.hash">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">hash</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;phash&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute an image perceptual hash.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_hash`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            method: Hash algorithm name.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces a ``STRING`` perceptual hash.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_INFO</span><span class="p">,</span>
+            <span class="s2">&quot;image_hash&quot;</span><span class="p">,</span>
+            <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.is_valid"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.is_valid.html#pyflink.multimodal.expression.ImageExpressionAccessor.is_valid">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">is_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pixel_limit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check whether image inputs can be decoded as valid images.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.is_valid_image`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            mode: Optional expected image mode.</span>
+<span class="sd">            pixel_limit: Optional maximum decoded pixel count.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces ``BOOLEAN`` validity flags.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_INFO</span><span class="p">,</span>
+            <span class="s2">&quot;is_valid_image&quot;</span><span class="p">,</span>
+            <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span>
+            <span class="n">pixel_limit</span><span class="o">=</span><span class="n">pixel_limit</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.size_filter"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.size_filter.html#pyflink.multimodal.expression.ImageExpressionAccessor.size_filter">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">size_filter</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">min_w</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">min_h</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_w</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_h</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Filter images by width and height bounds.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_size_filter`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            min_w: Optional minimum width in pixels.</span>
+<span class="sd">            min_h: Optional minimum height in pixels.</span>
+<span class="sd">            max_w: Optional maximum width in pixels.</span>
+<span class="sd">            max_h: Optional maximum height in pixels.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces ``BOOLEAN`` filter results.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_INFO</span><span class="p">,</span>
+            <span class="s2">&quot;image_size_filter&quot;</span><span class="p">,</span>
+            <span class="n">min_w</span><span class="o">=</span><span class="n">min_w</span><span class="p">,</span>
+            <span class="n">min_h</span><span class="o">=</span><span class="n">min_h</span><span class="p">,</span>
+            <span class="n">max_w</span><span class="o">=</span><span class="n">max_w</span><span class="p">,</span>
+            <span class="n">max_h</span><span class="o">=</span><span class="n">max_h</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.shape_filter"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.shape_filter.html#pyflink.multimodal.expression.ImageExpressionAccessor.shape_filter">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">shape_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">min_ratio</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_ratio</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Filter images by aspect ratio.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_shape_filter`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            min_ratio: Optional minimum width-to-height ratio.</span>
+<span class="sd">            max_ratio: Optional maximum width-to-height ratio.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces ``BOOLEAN`` filter results.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_INFO</span><span class="p">,</span>
+            <span class="s2">&quot;image_shape_filter&quot;</span><span class="p">,</span>
+            <span class="n">min_ratio</span><span class="o">=</span><span class="n">min_ratio</span><span class="p">,</span>
+            <span class="n">max_ratio</span><span class="o">=</span><span class="n">max_ratio</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.file_size_filter"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.file_size_filter.html#pyflink.multimodal.expression.ImageExpressionAccessor.file_size_filter">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">file_size_filter</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">min_bytes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_bytes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Filter image files by byte size.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_file_size_filter`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            min_bytes: Optional minimum encoded file size in bytes.</span>
+<span class="sd">            max_bytes: Optional maximum encoded file size in bytes.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces ``BOOLEAN`` filter results.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_INFO</span><span class="p">,</span>
+            <span class="s2">&quot;image_file_size_filter&quot;</span><span class="p">,</span>
+            <span class="n">min_bytes</span><span class="o">=</span><span class="n">min_bytes</span><span class="p">,</span>
+            <span class="n">max_bytes</span><span class="o">=</span><span class="n">max_bytes</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.nsfw_score"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.nsfw_score.html#pyflink.multimodal.expression.ImageExpressionAccessor.nsfw_score">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">nsfw_score</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">hf_nsfw_model</span><span class="o">=</span><span class="n">_DEFAULT_NSFW_MODEL</span><span class="p">,</span>
+        <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Score images for NSFW content.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_nsfw_score`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            hf_nsfw_model: Hugging Face model used for NSFW scoring.</span>
+<span class="sd">            model_sharing: Optional model sharing mode.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+<span class="sd">            batch_size: Optional inference batch size.</span>
+<span class="sd">            num_gpus: Optional number of GPUs requested for model inference.</span>
+<span class="sd">            gpu_type: Optional GPU type requested for model inference.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces a ``DOUBLE`` NSFW score.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_QUALITY</span><span class="p">,</span>
+            <span class="s2">&quot;image_nsfw_score&quot;</span><span class="p">,</span>
+            <span class="n">hf_nsfw_model</span><span class="o">=</span><span class="n">hf_nsfw_model</span><span class="p">,</span>
+            <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+            <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+            <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+            <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.aesthetic_score"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.aesthetic_score.html#pyflink.multimodal.expression.ImageExpressionAccessor.aesthetic_score">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">aesthetic_score</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">hf_scorer_model</span><span class="o">=</span><span class="n">_DEFAULT_AESTHETIC_SCORER_MODEL</span><span class="p">,</span>
+        <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Score images for aesthetic quality.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_aesthetic_score`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            hf_scorer_model: Hugging Face model used for aesthetic scoring.</span>
+<span class="sd">            model_sharing: Optional model sharing mode.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+<span class="sd">            batch_size: Optional inference batch size.</span>
+<span class="sd">            num_gpus: Optional number of GPUs requested for model inference.</span>
+<span class="sd">            gpu_type: Optional GPU type requested for model inference.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces a ``DOUBLE`` aesthetic score.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_QUALITY</span><span class="p">,</span>
+            <span class="s2">&quot;image_aesthetic_score&quot;</span><span class="p">,</span>
+            <span class="n">hf_scorer_model</span><span class="o">=</span><span class="n">hf_scorer_model</span><span class="p">,</span>
+            <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+            <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+            <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+            <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.quality_score"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.quality_score.html#pyflink.multimodal.expression.ImageExpressionAccessor.quality_score">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">quality_score</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Score general image quality.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_quality_score`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces a ``DOUBLE`` quality score.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_QUALITY</span><span class="p">,</span>
+            <span class="s2">&quot;image_quality_score&quot;</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.watermark_score"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.watermark_score.html#pyflink.multimodal.expression.ImageExpressionAccessor.watermark_score">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">watermark_score</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">hf_watermark_model</span><span class="o">=</span><span class="n">_DEFAULT_WATERMARK_MODEL</span><span class="p">,</span>
+        <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Score images for watermark likelihood.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_watermark_score`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            hf_watermark_model: Hugging Face model used for watermark scoring.</span>
+<span class="sd">            model_sharing: Optional model sharing mode.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+<span class="sd">            batch_size: Optional inference batch size.</span>
+<span class="sd">            num_gpus: Optional number of GPUs requested for model inference.</span>
+<span class="sd">            gpu_type: Optional GPU type requested for model inference.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces a ``DOUBLE`` watermark</span>
+<span class="sd">            likelihood score.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_QUALITY</span><span class="p">,</span>
+            <span class="s2">&quot;image_watermark_score&quot;</span><span class="p">,</span>
+            <span class="n">hf_watermark_model</span><span class="o">=</span><span class="n">hf_watermark_model</span><span class="p">,</span>
+            <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+            <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+            <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+            <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.face_detect"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.face_detect.html#pyflink.multimodal.expression.ImageExpressionAccessor.face_detect">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">face_detect</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">cv_classifier</span><span class="o">=</span><span class="s2">&quot;haarcascade_frontalface_alt.xml&quot;</span><span class="p">,</span>
+        <span class="n">min_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">scale_factor</span><span class="o">=</span><span class="mf">1.1</span><span class="p">,</span>
+        <span class="n">min_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Detect faces in image values.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_face_detect`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            cv_classifier: OpenCV cascade classifier file name.</span>
+<span class="sd">            min_neighbors: Minimum neighbor count for face detection.</span>
+<span class="sd">            scale_factor: Scale factor used by the detector pyramid.</span>
+<span class="sd">            min_size: Optional minimum face size.</span>
+<span class="sd">            max_size: Optional maximum face size.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces ``ARRAY&lt;ROW&gt;`` face</span>
+<span class="sd">            detections with ``x``, ``y``, ``w``, ``h``, and ``confidence``</span>
+<span class="sd">            fields.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_FACE</span><span class="p">,</span>
+            <span class="s2">&quot;image_face_detect&quot;</span><span class="p">,</span>
+            <span class="n">cv_classifier</span><span class="o">=</span><span class="n">cv_classifier</span><span class="p">,</span>
+            <span class="n">min_neighbors</span><span class="o">=</span><span class="n">min_neighbors</span><span class="p">,</span>
+            <span class="n">scale_factor</span><span class="o">=</span><span class="n">scale_factor</span><span class="p">,</span>
+            <span class="n">min_size</span><span class="o">=</span><span class="n">min_size</span><span class="p">,</span>
+            <span class="n">max_size</span><span class="o">=</span><span class="n">max_size</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.face_count"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.face_count.html#pyflink.multimodal.expression.ImageExpressionAccessor.face_count">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">face_count</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">cv_classifier</span><span class="o">=</span><span class="s2">&quot;haarcascade_frontalface_alt.xml&quot;</span><span class="p">,</span>
+        <span class="n">min_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">scale_factor</span><span class="o">=</span><span class="mf">1.1</span><span class="p">,</span>
+        <span class="n">min_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Count faces in image values.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_face_count`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            cv_classifier: OpenCV cascade classifier file name.</span>
+<span class="sd">            min_neighbors: Minimum neighbor count for face detection.</span>
+<span class="sd">            scale_factor: Scale factor used by the detector pyramid.</span>
+<span class="sd">            min_size: Optional minimum face size.</span>
+<span class="sd">            max_size: Optional maximum face size.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces an ``INT`` face count.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_FACE</span><span class="p">,</span>
+            <span class="s2">&quot;image_face_count&quot;</span><span class="p">,</span>
+            <span class="n">cv_classifier</span><span class="o">=</span><span class="n">cv_classifier</span><span class="p">,</span>
+            <span class="n">min_neighbors</span><span class="o">=</span><span class="n">min_neighbors</span><span class="p">,</span>
+            <span class="n">scale_factor</span><span class="o">=</span><span class="n">scale_factor</span><span class="p">,</span>
+            <span class="n">min_size</span><span class="o">=</span><span class="n">min_size</span><span class="p">,</span>
+            <span class="n">max_size</span><span class="o">=</span><span class="n">max_size</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.face_blur"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.face_blur.html#pyflink.multimodal.expression.ImageExpressionAccessor.face_blur">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">face_blur</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">cv_classifier</span><span class="o">=</span><span class="s2">&quot;haarcascade_frontalface_alt.xml&quot;</span><span class="p">,</span>
+        <span class="n">blur_type</span><span class="o">=</span><span class="s2">&quot;gaussian&quot;</span><span class="p">,</span>
+        <span class="n">radius</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">min_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">scale_factor</span><span class="o">=</span><span class="mf">1.1</span><span class="p">,</span>
+        <span class="n">min_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Blur detected faces in image values.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_face_blur`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            cv_classifier: OpenCV cascade classifier file name.</span>
+<span class="sd">            blur_type: Blur algorithm used on detected face regions.</span>
+<span class="sd">            radius: Blur radius.</span>
+<span class="sd">            min_neighbors: Minimum neighbor count for face detection.</span>
+<span class="sd">            scale_factor: Scale factor used by the detector pyramid.</span>
+<span class="sd">            min_size: Optional minimum face size.</span>
+<span class="sd">            max_size: Optional maximum face size.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces ``IMAGE`` values with</span>
+<span class="sd">            detected face regions blurred.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_FACE</span><span class="p">,</span>
+            <span class="s2">&quot;image_face_blur&quot;</span><span class="p">,</span>
+            <span class="n">cv_classifier</span><span class="o">=</span><span class="n">cv_classifier</span><span class="p">,</span>
+            <span class="n">blur_type</span><span class="o">=</span><span class="n">blur_type</span><span class="p">,</span>
+            <span class="n">radius</span><span class="o">=</span><span class="n">radius</span><span class="p">,</span>
+            <span class="n">min_neighbors</span><span class="o">=</span><span class="n">min_neighbors</span><span class="p">,</span>
+            <span class="n">scale_factor</span><span class="o">=</span><span class="n">scale_factor</span><span class="p">,</span>
+            <span class="n">min_size</span><span class="o">=</span><span class="n">min_size</span><span class="p">,</span>
+            <span class="n">max_size</span><span class="o">=</span><span class="n">max_size</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.detect_objects"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.detect_objects.html#pyflink.multimodal.expression.ImageExpressionAccessor.detect_objects">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">detect_objects</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">model</span><span class="o">=</span><span class="s2">&quot;yolov8n&quot;</span><span class="p">,</span>
+        <span class="n">confidence</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+        <span class="n">imgsz</span><span class="o">=</span><span class="mi">640</span><span class="p">,</span>
+        <span class="n">iou</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+        <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Detect objects in image values.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_detect_objects`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            model: Object detection model name or path.</span>
+<span class="sd">            confidence: Minimum detection confidence.</span>
+<span class="sd">            imgsz: Inference image size.</span>
+<span class="sd">            iou: IoU threshold used for non-maximum suppression.</span>
+<span class="sd">            model_sharing: Optional model sharing mode.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+<span class="sd">            batch_size: Optional inference batch size.</span>
+<span class="sd">            num_gpus: Optional number of GPUs requested for model inference.</span>
+<span class="sd">            gpu_type: Optional GPU type requested for model inference.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces ``ARRAY&lt;ROW&gt;`` object</span>
+<span class="sd">            detections with ``label``, ``x``, ``y``, ``w``, ``h``, and</span>
+<span class="sd">            ``confidence`` fields.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_DETECT</span><span class="p">,</span>
+            <span class="s2">&quot;image_detect_objects&quot;</span><span class="p">,</span>
+            <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+            <span class="n">confidence</span><span class="o">=</span><span class="n">confidence</span><span class="p">,</span>
+            <span class="n">imgsz</span><span class="o">=</span><span class="n">imgsz</span><span class="p">,</span>
+            <span class="n">iou</span><span class="o">=</span><span class="n">iou</span><span class="p">,</span>
+            <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+            <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+            <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+            <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.segment"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.segment.html#pyflink.multimodal.expression.ImageExpressionAccessor.segment">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">segment</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">model</span><span class="o">=</span><span class="s2">&quot;FastSAM-x.pt&quot;</span><span class="p">,</span>
+        <span class="n">confidence</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+        <span class="n">imgsz</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
+        <span class="n">iou</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+        <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Segment objects or regions in image values.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_segment`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            model: Segmentation model name or path.</span>
+<span class="sd">            confidence: Minimum segmentation confidence.</span>
+<span class="sd">            imgsz: Inference image size.</span>
+<span class="sd">            iou: IoU threshold used for mask filtering.</span>
+<span class="sd">            model_sharing: Optional model sharing mode.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+<span class="sd">            batch_size: Optional inference batch size.</span>
+<span class="sd">            num_gpus: Optional number of GPUs requested for model inference.</span>
+<span class="sd">            gpu_type: Optional GPU type requested for model inference.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces ``BINARY`` indexed PNG mask</span>
+<span class="sd">            bytes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_DETECT</span><span class="p">,</span>
+            <span class="s2">&quot;image_segment&quot;</span><span class="p">,</span>
+            <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+            <span class="n">confidence</span><span class="o">=</span><span class="n">confidence</span><span class="p">,</span>
+            <span class="n">imgsz</span><span class="o">=</span><span class="n">imgsz</span><span class="p">,</span>
+            <span class="n">iou</span><span class="o">=</span><span class="n">iou</span><span class="p">,</span>
+            <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+            <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+            <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+            <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.ocr"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.ocr.html#pyflink.multimodal.expression.ImageExpressionAccessor.ocr">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">ocr</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">lang</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Run OCR on image values.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_ocr`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            lang: Optional OCR language hint.</span>
+<span class="sd">            model_sharing: Optional model sharing mode.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+<span class="sd">            batch_size: Optional inference batch size.</span>
+<span class="sd">            num_gpus: Optional number of GPUs requested for model inference.</span>
+<span class="sd">            gpu_type: Optional GPU type requested for model inference.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces ``ARRAY&lt;ROW&gt;`` OCR results</span>
+<span class="sd">            with ``text``, ``confidence``, and ``bbox`` fields.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_DETECT</span><span class="p">,</span>
+            <span class="s2">&quot;image_ocr&quot;</span><span class="p">,</span>
+            <span class="n">lang</span><span class="o">=</span><span class="n">lang</span><span class="p">,</span>
+            <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+            <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+            <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+            <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.detect_subplot"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.detect_subplot.html#pyflink.multimodal.expression.ImageExpressionAccessor.detect_subplot">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">detect_subplot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Detect subplot regions in image values.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_detect_subplot`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            threshold: Minimum subplot detection confidence.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces a subplot metadata ``ROW``</span>
+<span class="sd">            with ``is_subplot`` and ``count`` fields.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_DETECT</span><span class="p">,</span>
+            <span class="s2">&quot;image_detect_subplot&quot;</span><span class="p">,</span>
+            <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.embedding"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.embedding.html#pyflink.multimodal.expression.ImageExpressionAccessor.embedding">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">embedding</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">model</span><span class="o">=</span><span class="s2">&quot;ViT-B/32&quot;</span><span class="p">,</span>
+        <span class="n">pretrained</span><span class="o">=</span><span class="s2">&quot;openai&quot;</span><span class="p">,</span>
+        <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute image embeddings.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_embedding`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            model: Embedding model name.</span>
+<span class="sd">            pretrained: Pretrained weights identifier.</span>
+<span class="sd">            model_sharing: Optional model sharing mode.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+<span class="sd">            batch_size: Optional inference batch size.</span>
+<span class="sd">            num_gpus: Optional number of GPUs requested for model inference.</span>
+<span class="sd">            gpu_type: Optional GPU type requested for model inference.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces ``ARRAY&lt;FLOAT&gt;`` embedding</span>
+<span class="sd">            vectors.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_EMBED</span><span class="p">,</span>
+            <span class="s2">&quot;image_embedding&quot;</span><span class="p">,</span>
+            <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+            <span class="n">pretrained</span><span class="o">=</span><span class="n">pretrained</span><span class="p">,</span>
+            <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+            <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+            <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+            <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ImageExpressionAccessor.text_similarity"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.text_similarity.html#pyflink.multimodal.expression.ImageExpressionAccessor.text_similarity">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">text_similarity</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">text_column</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">text</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">model</span><span class="o">=</span><span class="s2">&quot;ViT-B/32&quot;</span><span class="p">,</span>
+        <span class="n">pretrained</span><span class="o">=</span><span class="s2">&quot;openai&quot;</span><span class="p">,</span>
+        <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute similarity between image values and text.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.image_text_similarity`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Exactly one of ``text_column`` or ``text`` must be provided.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            text_column: Text expression compared with this image expression.</span>
+<span class="sd">            text: Constant text compared with this image expression.</span>
+<span class="sd">            model: CLIP-style model name.</span>
+<span class="sd">            pretrained: Pretrained weights identifier.</span>
+<span class="sd">            model_sharing: Optional model sharing mode.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+<span class="sd">            batch_size: Optional inference batch size.</span>
+<span class="sd">            num_gpus: Optional number of GPUs requested for model inference.</span>
+<span class="sd">            gpu_type: Optional GPU type requested for model inference.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces a ``DOUBLE`` similarity</span>
+<span class="sd">            score.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">text_column</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">text</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Either text_column or text must be provided.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">text_column</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">text</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;text_column and text must not be provided together.&quot;</span><span class="p">)</span>
+        <span class="n">columns</span> <span class="o">=</span> <span class="p">()</span> <span class="k">if</span> <span class="n">text_column</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">(</span><span class="n">text_column</span><span class="p">,)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_IMAGE_EMBED</span><span class="p">,</span>
+            <span class="s2">&quot;image_text_similarity&quot;</span><span class="p">,</span>
+            <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">,</span>
+            <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+            <span class="n">pretrained</span><span class="o">=</span><span class="n">pretrained</span><span class="p">,</span>
+            <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+            <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+            <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+            <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="AudioExpressionAccessor"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.html#pyflink.multimodal.expression.AudioExpressionAccessor">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">AudioExpressionAccessor</span><span class="p">(</span><span class="n">_ExpressionAccessor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Audio operations available on a DataFrame expression.</span>
+
+<span class="sd">    These methods use the expression on the left side as the audio input. For</span>
+<span class="sd">    example, ``col(&quot;audio_bytes&quot;).audio.decode()`` is the expression-accessor</span>
+<span class="sd">    form of ``audio_decode(col(&quot;audio_bytes&quot;))``.</span>
+
+<span class="sd">    Examples::</span>
+<span class="sd">        &gt;&gt;&gt; from pyflink.dataframe import col</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;waveform&quot;, col(&quot;audio_bytes&quot;).audio.decode())</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(</span>
+<span class="sd">        ...     &quot;speech_ready&quot;,</span>
+<span class="sd">        ...     col(&quot;waveform&quot;).audio.standardize(sample_rate=16000, channels=1))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="AudioExpressionAccessor.is_valid"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.is_valid.html#pyflink.multimodal.expression.AudioExpressionAccessor.is_valid">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">is_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">validation</span><span class="o">=</span><span class="s2">&quot;metadata&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check whether this expression contains valid audio.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.is_valid_audio`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            validation: ``&quot;metadata&quot;`` for header-level validation or</span>
+<span class="sd">                ``&quot;decode&quot;`` for full decode validation.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces ``BOOLEAN`` validity flags.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_AUDIO_INFO</span><span class="p">,</span>
+            <span class="s2">&quot;is_valid_audio&quot;</span><span class="p">,</span>
+            <span class="n">validation</span><span class="o">=</span><span class="n">validation</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="AudioExpressionAccessor.metadata"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.metadata.html#pyflink.multimodal.expression.AudioExpressionAccessor.metadata">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Probe audio metadata for this expression.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.audio_metadata`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces an audio metadata ``ROW`` with</span>
+<span class="sd">            ``sample_rate``, ``channels``, ``frames``, ``duration_ms``,</span>
+<span class="sd">            ``format``, ``codec``, ``bit_rate``, and ``size`` fields.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span><span class="n">_AUDIO_INFO</span><span class="p">,</span> <span class="s2">&quot;audio_metadata&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AudioExpressionAccessor.duration"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.duration.html#pyflink.multimodal.expression.AudioExpressionAccessor.duration">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">duration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return audio duration in seconds for this expression.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.audio_duration`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces ``DOUBLE`` seconds, or ``NULL``</span>
+<span class="sd">            when duration is unavailable.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span><span class="n">_AUDIO_INFO</span><span class="p">,</span> <span class="s2">&quot;audio_duration&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AudioExpressionAccessor.duration_filter"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.duration_filter.html#pyflink.multimodal.expression.AudioExpressionAccessor.duration_filter">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">duration_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">min_seconds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_seconds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check whether audio duration is within second bounds.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.audio_duration_filter`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            min_seconds: Optional inclusive lower duration bound.</span>
+<span class="sd">            max_seconds: Optional inclusive upper duration bound.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces ``BOOLEAN`` filter results.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_AUDIO_INFO</span><span class="p">,</span>
+            <span class="s2">&quot;audio_duration_filter&quot;</span><span class="p">,</span>
+            <span class="n">min_seconds</span><span class="o">=</span><span class="n">min_seconds</span><span class="p">,</span>
+            <span class="n">max_seconds</span><span class="o">=</span><span class="n">max_seconds</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="AudioExpressionAccessor.size_filter"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.size_filter.html#pyflink.multimodal.expression.AudioExpressionAccessor.size_filter">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">size_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">min_bytes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_bytes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check whether encoded audio size is within byte bounds.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.audio_size_filter`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            min_bytes: Optional inclusive lower encoded byte-size bound.</span>
+<span class="sd">            max_bytes: Optional inclusive upper encoded byte-size bound.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces ``BOOLEAN`` filter results.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_AUDIO_INFO</span><span class="p">,</span>
+            <span class="s2">&quot;audio_size_filter&quot;</span><span class="p">,</span>
+            <span class="n">min_bytes</span><span class="o">=</span><span class="n">min_bytes</span><span class="p">,</span>
+            <span class="n">max_bytes</span><span class="o">=</span><span class="n">max_bytes</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="AudioExpressionAccessor.silence_detection"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.silence_detection.html#pyflink.multimodal.expression.AudioExpressionAccessor.silence_detection">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">silence_detection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">threshold_db</span><span class="p">,</span> <span class="n">min_silence_ms</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Detect low-amplitude silence ranges in waveform values.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.audio_silence_detection`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            threshold_db: Silence threshold in dBFS. Must be ``&lt;= 0``.</span>
+<span class="sd">            min_silence_ms: Minimum silence range length in milliseconds.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces ``ARRAY&lt;ROW&lt;start_ms,</span>
+<span class="sd">            end_ms, duration_ms&gt;&gt;`` silence ranges.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_AUDIO_INFO</span><span class="p">,</span>
+            <span class="s2">&quot;audio_silence_detection&quot;</span><span class="p">,</span>
+            <span class="n">threshold_db</span><span class="o">=</span><span class="n">threshold_db</span><span class="p">,</span>
+            <span class="n">min_silence_ms</span><span class="o">=</span><span class="n">min_silence_ms</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="AudioExpressionAccessor.detect_speech"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.detect_speech.html#pyflink.multimodal.expression.AudioExpressionAccessor.detect_speech">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">detect_speech</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">aggressiveness</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">frame_ms</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+        <span class="n">min_speech_ms</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">merge_gap_ms</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">max_segments</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Detect speech activity ranges in waveform values.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.audio_detect_speech`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            aggressiveness: WebRTC VAD aggressiveness, from ``0`` to ``3``.</span>
+<span class="sd">            frame_ms: WebRTC frame size in milliseconds.</span>
+<span class="sd">            min_speech_ms: Drop detected speech ranges shorter than this value.</span>
+<span class="sd">            merge_gap_ms: Merge ranges separated by this gap or less.</span>
+<span class="sd">            max_segments: Maximum number of ranges to return.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces ``ARRAY&lt;ROW&lt;start_ms,</span>
+<span class="sd">            end_ms, duration_ms&gt;&gt;`` speech ranges.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_AUDIO_INFO</span><span class="p">,</span>
+            <span class="s2">&quot;audio_detect_speech&quot;</span><span class="p">,</span>
+            <span class="n">aggressiveness</span><span class="o">=</span><span class="n">aggressiveness</span><span class="p">,</span>
+            <span class="n">frame_ms</span><span class="o">=</span><span class="n">frame_ms</span><span class="p">,</span>
+            <span class="n">min_speech_ms</span><span class="o">=</span><span class="n">min_speech_ms</span><span class="p">,</span>
+            <span class="n">merge_gap_ms</span><span class="o">=</span><span class="n">merge_gap_ms</span><span class="p">,</span>
+            <span class="n">max_segments</span><span class="o">=</span><span class="n">max_segments</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="AudioExpressionAccessor.decode"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.decode.html#pyflink.multimodal.expression.AudioExpressionAccessor.decode">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">decode</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">on_error</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">,</span>
+        <span class="n">max_decoded_bytes</span><span class="o">=</span><span class="n">DEFAULT_MAX_DECODED_AUDIO_BYTES</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Decode encoded audio into waveform rows.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.audio_decode`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            on_error: ``&quot;raise&quot;`` to propagate corrupt audio failures, or</span>
+<span class="sd">                ``&quot;null&quot;`` to return null for rows that cannot be decoded.</span>
+<span class="sd">            max_decoded_bytes: Maximum decoded PCM payload allowed per row.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces decoded audio waveform ``ROW``</span>
+<span class="sd">            values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_AUDIO_TRANSFORM</span><span class="p">,</span>
+            <span class="s2">&quot;audio_decode&quot;</span><span class="p">,</span>
+            <span class="n">on_error</span><span class="o">=</span><span class="n">on_error</span><span class="p">,</span>
+            <span class="n">max_decoded_bytes</span><span class="o">=</span><span class="n">max_decoded_bytes</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="AudioExpressionAccessor.encode"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.encode.html#pyflink.multimodal.expression.AudioExpressionAccessor.encode">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">encode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;wav&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Encode waveform rows to audio bytes.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.audio_encode`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            format: Encoded output format, such as ``&quot;wav&quot;`` or ``&quot;flac&quot;``.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces encoded ``BINARY`` audio bytes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_AUDIO_TRANSFORM</span><span class="p">,</span>
+            <span class="s2">&quot;audio_encode&quot;</span><span class="p">,</span>
+            <span class="nb">format</span><span class="o">=</span><span class="nb">format</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="AudioExpressionAccessor.convert_format"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.convert_format.html#pyflink.multimodal.expression.AudioExpressionAccessor.convert_format">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">convert_format</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;wav&quot;</span><span class="p">,</span>
+        <span class="n">on_error</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">,</span>
+        <span class="n">max_decoded_bytes</span><span class="o">=</span><span class="n">DEFAULT_MAX_DECODED_AUDIO_BYTES</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert encoded audio to another encoded format.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.audio_convert_format`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            format: Encoded output format.</span>
+<span class="sd">            on_error: ``&quot;raise&quot;`` to propagate decode failures, or ``&quot;null&quot;`` to</span>
+<span class="sd">                return null for rows that cannot be decoded.</span>
+<span class="sd">            max_decoded_bytes: Maximum decoded PCM payload allowed during</span>
+<span class="sd">                conversion.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces encoded ``BINARY`` audio bytes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_AUDIO_TRANSFORM</span><span class="p">,</span>
+            <span class="s2">&quot;audio_convert_format&quot;</span><span class="p">,</span>
+            <span class="nb">format</span><span class="o">=</span><span class="nb">format</span><span class="p">,</span>
+            <span class="n">on_error</span><span class="o">=</span><span class="n">on_error</span><span class="p">,</span>
+            <span class="n">max_decoded_bytes</span><span class="o">=</span><span class="n">max_decoded_bytes</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="AudioExpressionAccessor.standardize"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.standardize.html#pyflink.multimodal.expression.AudioExpressionAccessor.standardize">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">standardize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">sample_rate</span><span class="o">=</span><span class="mi">16000</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Standardize waveform sample rate and channel count.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.audio_standardize`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            sample_rate: Target sample rate in samples per second.</span>
+<span class="sd">            channels: Target channel count.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces standardized waveform ``ROW``</span>
+<span class="sd">            values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_AUDIO_TRANSFORM</span><span class="p">,</span>
+            <span class="s2">&quot;audio_standardize&quot;</span><span class="p">,</span>
+            <span class="n">sample_rate</span><span class="o">=</span><span class="n">sample_rate</span><span class="p">,</span>
+            <span class="n">channels</span><span class="o">=</span><span class="n">channels</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="AudioExpressionAccessor.resample"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.resample.html#pyflink.multimodal.expression.AudioExpressionAccessor.resample">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">resample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">sample_rate</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Resample waveform values to a target sample rate.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.audio_resample`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            sample_rate: Target sample rate in samples per second.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces resampled waveform ``ROW``</span>
+<span class="sd">            values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_AUDIO_TRANSFORM</span><span class="p">,</span>
+            <span class="s2">&quot;audio_resample&quot;</span><span class="p">,</span>
+            <span class="n">sample_rate</span><span class="o">=</span><span class="n">sample_rate</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="AudioExpressionAccessor.split_by_duration"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.split_by_duration.html#pyflink.multimodal.expression.AudioExpressionAccessor.split_by_duration">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">split_by_duration</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">segment_duration_ms</span><span class="p">,</span>
+        <span class="n">segment_type</span><span class="o">=</span><span class="s2">&quot;audio&quot;</span><span class="p">,</span>
+        <span class="n">max_segments</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Split audio by fixed duration.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.audio_split_by_duration`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            segment_duration_ms: Segment duration in milliseconds.</span>
+<span class="sd">            segment_type: ``&quot;audio&quot;`` for waveform segments or ``&quot;ref&quot;`` for</span>
+<span class="sd">                lazy reference segments.</span>
+<span class="sd">            max_segments: Maximum allowed number of returned segments.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame UDTF call for ``join_lateral``. Alias the output as one</span>
+<span class="sd">            segment column, for example ``df.join_lateral(</span>
+<span class="sd">            col(&quot;waveform&quot;).audio.split_by_duration(</span>
+<span class="sd">            segment_duration_ms=1000).alias(&quot;segment&quot;))``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_AUDIO_TRANSFORM</span><span class="p">,</span>
+            <span class="s2">&quot;audio_split_by_duration&quot;</span><span class="p">,</span>
+            <span class="n">segment_duration_ms</span><span class="o">=</span><span class="n">segment_duration_ms</span><span class="p">,</span>
+            <span class="n">segment_type</span><span class="o">=</span><span class="n">segment_type</span><span class="p">,</span>
+            <span class="n">max_segments</span><span class="o">=</span><span class="n">max_segments</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="AudioExpressionAccessor.split_by_timestamp"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.split_by_timestamp.html#pyflink.multimodal.expression.AudioExpressionAccessor.split_by_timestamp">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">split_by_timestamp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timestamps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">segment_type</span><span class="o">=</span><span class="s2">&quot;audio&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Split audio by explicit timestamp ranges.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.audio_split_by_timestamp`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            timestamps: Timestamp ranges in milliseconds, either a Python</span>
+<span class="sd">                literal sequence or a DataFrame column expression.</span>
+<span class="sd">            segment_type: ``&quot;audio&quot;`` for waveform segments or ``&quot;ref&quot;`` for</span>
+<span class="sd">                lazy reference segments.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame UDTF call for ``join_lateral``. Alias the output as one</span>
+<span class="sd">            segment column before consuming it downstream.</span>
+
+<span class="sd">        Examples::</span>
+<span class="sd">            &gt;&gt;&gt; ranges = [{&quot;start_ms&quot;: 100, &quot;end_ms&quot;: 350}]</span>
+<span class="sd">            &gt;&gt;&gt; segments = df.join_lateral(</span>
+<span class="sd">            ...     col(&quot;waveform&quot;).audio.split_by_timestamp(</span>
+<span class="sd">            ...         timestamps=ranges,</span>
+<span class="sd">            ...     ).alias(&quot;segment&quot;)</span>
+<span class="sd">            ... )</span>
+<span class="sd">            &gt;&gt;&gt; segments = df.join_lateral(</span>
+<span class="sd">            ...     col(&quot;waveform&quot;).audio.split_by_timestamp(</span>
+<span class="sd">            ...         col(&quot;ranges&quot;),</span>
+<span class="sd">            ...     ).alias(&quot;segment&quot;)</span>
+<span class="sd">            ... )</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">timestamps</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+                <span class="n">_AUDIO_TRANSFORM</span><span class="p">,</span>
+                <span class="s2">&quot;audio_split_by_timestamp&quot;</span><span class="p">,</span>
+                <span class="n">segment_type</span><span class="o">=</span><span class="n">segment_type</span><span class="p">,</span>
+                <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">timestamps</span><span class="p">,</span> <span class="n">Expression</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+                <span class="n">_AUDIO_TRANSFORM</span><span class="p">,</span>
+                <span class="s2">&quot;audio_split_by_timestamp&quot;</span><span class="p">,</span>
+                <span class="n">timestamps</span><span class="o">=</span><span class="n">timestamps</span><span class="p">,</span>
+                <span class="n">segment_type</span><span class="o">=</span><span class="n">segment_type</span><span class="p">,</span>
+                <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_AUDIO_TRANSFORM</span><span class="p">,</span>
+            <span class="s2">&quot;audio_split_by_timestamp&quot;</span><span class="p">,</span>
+            <span class="n">timestamps</span><span class="p">,</span>
+            <span class="n">segment_type</span><span class="o">=</span><span class="n">segment_type</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="AudioExpressionAccessor.split_by_speech"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.split_by_speech.html#pyflink.multimodal.expression.AudioExpressionAccessor.split_by_speech">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">split_by_speech</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">speech_activity</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">segment_type</span><span class="o">=</span><span class="s2">&quot;audio&quot;</span><span class="p">,</span>
+        <span class="n">pre_padding_ms</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">post_padding_ms</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">merge_gap_ms</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">min_segment_ms</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">max_segment_ms</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_segments</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Split audio using caller-provided speech activity ranges.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.audio_split_by_speech`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            speech_activity: Expression containing speech ranges, such as output</span>
+<span class="sd">                from ``audio_detect_speech``.</span>
+<span class="sd">            segment_type: ``&quot;audio&quot;`` for waveform segments or ``&quot;ref&quot;`` for</span>
+<span class="sd">                lazy reference segments.</span>
+<span class="sd">            pre_padding_ms: Milliseconds to extend before each speech range.</span>
+<span class="sd">            post_padding_ms: Milliseconds to extend after each speech range.</span>
+<span class="sd">            merge_gap_ms: Merge adjacent ranges separated by this gap or less.</span>
+<span class="sd">            min_segment_ms: Drop segments shorter than this value.</span>
+<span class="sd">            max_segment_ms: Optional maximum segment length.</span>
+<span class="sd">            max_segments: Maximum allowed number of returned segments.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame UDTF call for ``join_lateral``. Alias the output as one</span>
+<span class="sd">            segment column before consuming it downstream.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_AUDIO_TRANSFORM</span><span class="p">,</span>
+            <span class="s2">&quot;audio_split_by_speech&quot;</span><span class="p">,</span>
+            <span class="n">speech_activity</span><span class="p">,</span>
+            <span class="n">segment_type</span><span class="o">=</span><span class="n">segment_type</span><span class="p">,</span>
+            <span class="n">pre_padding_ms</span><span class="o">=</span><span class="n">pre_padding_ms</span><span class="p">,</span>
+            <span class="n">post_padding_ms</span><span class="o">=</span><span class="n">post_padding_ms</span><span class="p">,</span>
+            <span class="n">merge_gap_ms</span><span class="o">=</span><span class="n">merge_gap_ms</span><span class="p">,</span>
+            <span class="n">min_segment_ms</span><span class="o">=</span><span class="n">min_segment_ms</span><span class="p">,</span>
+            <span class="n">max_segment_ms</span><span class="o">=</span><span class="n">max_segment_ms</span><span class="p">,</span>
+            <span class="n">max_segments</span><span class="o">=</span><span class="n">max_segments</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="AudioExpressionAccessor.concat"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.concat.html#pyflink.multimodal.expression.AudioExpressionAccessor.concat">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">concat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Concatenate an array of waveform rows.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.audio_concat`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces one concatenated waveform row.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span><span class="n">_AUDIO_TRANSFORM</span><span class="p">,</span> <span class="s2">&quot;audio_concat&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AudioExpressionAccessor.asr_whisper"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.asr_whisper.html#pyflink.multimodal.expression.AudioExpressionAccessor.asr_whisper">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">asr_whisper</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">language</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">task</span><span class="o">=</span><span class="s2">&quot;transcribe&quot;</span><span class="p">,</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">_DEFAULT_AUDIO_MODEL</span><span class="p">,</span>
+        <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Run Whisper ASR over waveform values.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.audio_asr_whisper`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            language: Optional source language hint.</span>
+<span class="sd">            task: ``&quot;transcribe&quot;`` or ``&quot;translate&quot;``.</span>
+<span class="sd">            model: Whisper or Whisper-compatible model id.</span>
+<span class="sd">            model_sharing: Optional model sharing mode.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+<span class="sd">            batch_size: Optional inference batch size.</span>
+<span class="sd">            num_gpus: Optional number of GPUs requested for model inference.</span>
+<span class="sd">            gpu_type: Optional GPU type requested for model inference.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces an ASR result ``ROW`` with</span>
+<span class="sd">            ``asr_result``, ``timestamps``, and ``segments`` fields.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_AUDIO_SPEECH</span><span class="p">,</span>
+            <span class="s2">&quot;audio_asr_whisper&quot;</span><span class="p">,</span>
+            <span class="n">language</span><span class="o">=</span><span class="n">language</span><span class="p">,</span>
+            <span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span>
+            <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+            <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+            <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+            <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+            <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="AudioExpressionAccessor.detect_language"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.detect_language.html#pyflink.multimodal.expression.AudioExpressionAccessor.detect_language">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">detect_language</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">top_k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">_DEFAULT_AUDIO_MODEL</span><span class="p">,</span>
+        <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Detect likely spoken language candidates for waveform values.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.audio_detect_language`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            top_k: Number of language candidates to return per row.</span>
+<span class="sd">            model: Whisper or Whisper-compatible model id.</span>
+<span class="sd">            model_sharing: Optional model sharing mode.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+<span class="sd">            batch_size: Optional inference batch size.</span>
+<span class="sd">            num_gpus: Optional number of GPUs requested for model inference.</span>
+<span class="sd">            gpu_type: GPU type requested for model inference. The DataFrame UDF</span>
+<span class="sd">                runtime requires this when ``num_gpus`` is set.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces ``ARRAY&lt;ROW&lt;language_tag,</span>
+<span class="sd">            language_name, confidence&gt;&gt;`` language candidates.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_AUDIO_SPEECH</span><span class="p">,</span>
+            <span class="s2">&quot;audio_detect_language&quot;</span><span class="p">,</span>
+            <span class="n">top_k</span><span class="o">=</span><span class="n">top_k</span><span class="p">,</span>
+            <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+            <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+            <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+            <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+            <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="VideoExpressionAccessor"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.VideoExpressionAccessor.html#pyflink.multimodal.expression.VideoExpressionAccessor">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">VideoExpressionAccessor</span><span class="p">(</span><span class="n">_ExpressionAccessor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Video operations available on a DataFrame expression.</span>
+
+<span class="sd">    These methods use the expression on the left side as the video URI input.</span>
+<span class="sd">    For example, ``col(&quot;uri&quot;).video.metadata()`` is the expression-accessor</span>
+<span class="sd">    form of ``video_metadata(col(&quot;uri&quot;))``.</span>
+
+<span class="sd">    Examples::</span>
+<span class="sd">        &gt;&gt;&gt; from pyflink.dataframe import col</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;metadata&quot;, col(&quot;uri&quot;).video.metadata())</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(</span>
+<span class="sd">        ...     &quot;frames&quot;, col(&quot;uri&quot;).video.extract_frames(max_frames=16))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="VideoExpressionAccessor.metadata"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.VideoExpressionAccessor.metadata.html#pyflink.multimodal.expression.VideoExpressionAccessor.metadata">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">metadata</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">on_error</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">,</span>
+        <span class="n">container_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">read_chunk_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_cached_blocks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">read_ahead_blocks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Probe video metadata for this expression.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.video_metadata`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            on_error: ``&quot;raise&quot;`` to propagate failures, or ``&quot;null&quot;`` to</span>
+<span class="sd">                return ``None`` for unreadable inputs.</span>
+<span class="sd">            container_options: Optional PyAV ``av.open`` options.</span>
+<span class="sd">            read_chunk_size: Optional read chunk size in bytes for video files.</span>
+<span class="sd">            max_cached_blocks: Optional number of read chunks to cache per</span>
+<span class="sd">                opened video.</span>
+<span class="sd">            read_ahead_blocks: Optional number of chunks to prefetch after a read.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces a video metadata ``ROW`` with</span>
+<span class="sd">            ``width``, ``height``, ``fps``, ``duration_ms``, ``frame_count``,</span>
+<span class="sd">            ``time_base``, ``codec_name``, and ``video_stream_index`` fields.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_VIDEO_FRAMES</span><span class="p">,</span>
+            <span class="s2">&quot;video_metadata&quot;</span><span class="p">,</span>
+            <span class="n">on_error</span><span class="o">=</span><span class="n">on_error</span><span class="p">,</span>
+            <span class="n">container_options</span><span class="o">=</span><span class="n">container_options</span><span class="p">,</span>
+            <span class="n">read_chunk_size</span><span class="o">=</span><span class="n">read_chunk_size</span><span class="p">,</span>
+            <span class="n">max_cached_blocks</span><span class="o">=</span><span class="n">max_cached_blocks</span><span class="p">,</span>
+            <span class="n">read_ahead_blocks</span><span class="o">=</span><span class="n">read_ahead_blocks</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="VideoExpressionAccessor.extract_frames"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.VideoExpressionAccessor.extract_frames.html#pyflink.multimodal.expression.VideoExpressionAccessor.extract_frames">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">extract_frames</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">frame_selector</span><span class="o">=</span><span class="s2">&quot;all_frames&quot;</span><span class="p">,</span>
+        <span class="n">sample_interval_ms</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_frames</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">image_height</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">image_width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">on_error</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">,</span>
+        <span class="n">container_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">read_chunk_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_cached_blocks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">read_ahead_blocks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extract selected frames from this expression as an array.</span>
+
+<span class="sd">        Equivalent to :func:`~pyflink.multimodal.operators.video_extract_frames`.</span>
+<span class="sd">        See that function for full parameter details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            frame_selector: Frame selection mode, ``&quot;all_frames&quot;``,</span>
+<span class="sd">                ``&quot;keyframe&quot;``, or ``&quot;sample&quot;``.</span>
+<span class="sd">            sample_interval_ms: Sampling interval for ``frame_selector`` set</span>
+<span class="sd">                to ``&quot;sample&quot;``.</span>
+<span class="sd">            max_frames: Optional safety limit for frames retained in memory.</span>
+<span class="sd">            image_height: Optional output frame height in pixels.</span>
+<span class="sd">            image_width: Optional output frame width in pixels.</span>
+<span class="sd">            on_error: ``&quot;raise&quot;`` to propagate failures, ``&quot;null&quot;`` to return</span>
+<span class="sd">                ``None`` for unreadable inputs.</span>
+<span class="sd">            container_options: Optional PyAV ``av.open`` options.</span>
+<span class="sd">            read_chunk_size: Optional read chunk size in bytes for video files.</span>
+<span class="sd">            max_cached_blocks: Optional number of read chunks to cache per</span>
+<span class="sd">                opened video.</span>
+<span class="sd">            read_ahead_blocks: Optional number of chunks to prefetch after a read.</span>
+<span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
+<span class="sd">                ``None`` uses the framework default.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A DataFrame expression that produces ``ARRAY&lt;IMAGE&gt;`` selected</span>
+<span class="sd">            video frames retained on the same output row.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span>
+            <span class="n">_VIDEO_FRAMES</span><span class="p">,</span>
+            <span class="s2">&quot;video_extract_frames&quot;</span><span class="p">,</span>
+            <span class="n">frame_selector</span><span class="o">=</span><span class="n">frame_selector</span><span class="p">,</span>
+            <span class="n">sample_interval_ms</span><span class="o">=</span><span class="n">sample_interval_ms</span><span class="p">,</span>
+            <span class="n">max_frames</span><span class="o">=</span><span class="n">max_frames</span><span class="p">,</span>
+            <span class="n">image_height</span><span class="o">=</span><span class="n">image_height</span><span class="p">,</span>
+            <span class="n">image_width</span><span class="o">=</span><span class="n">image_width</span><span class="p">,</span>
+            <span class="n">on_error</span><span class="o">=</span><span class="n">on_error</span><span class="p">,</span>
+            <span class="n">container_options</span><span class="o">=</span><span class="n">container_options</span><span class="p">,</span>
+            <span class="n">read_chunk_size</span><span class="o">=</span><span class="n">read_chunk_size</span><span class="p">,</span>
+            <span class="n">max_cached_blocks</span><span class="o">=</span><span class="n">max_cached_blocks</span><span class="p">,</span>
+            <span class="n">read_ahead_blocks</span><span class="o">=</span><span class="n">read_ahead_blocks</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+</pre></div>
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>
