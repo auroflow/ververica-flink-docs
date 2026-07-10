@@ -265,7 +265,6 @@ under the License.
 <li class="toctree-l2"><a class="reference internal" href="../image.html">Image</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../video.html">Video</a></li>
 <li class="toctree-l2 current active"><a class="reference internal" href="../audio.html">Audio</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../accessors.html">Accessors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../utilities.html">Utilities</a></li>
 </ul>
 </li>
@@ -307,11 +306,10 @@ under the License.
 <span class="sig-name descname"><span class="pre">audio_silence_detection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">columns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_db</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_silence_ms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concurrency</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/pyflink/multimodal/operators/audio_info.html#audio_silence_detection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyflink.multimodal.operators.audio_silence_detection" title="Permalink to this definition">#</a></dt>
 <dd><p>Detect low-amplitude silence ranges in an <code class="docutils literal notranslate"><span class="pre">AUDIO_WAVEFORM</span></code>.</p>
 <p>This is an energy-based silence detector, not a speech activity detector.
-It downmixes multi-channel waveform data to mono, computes frame RMS with
-<code class="docutils literal notranslate"><span class="pre">librosa.feature.rms</span></code>, converts RMS to decibels with
-<code class="docutils literal notranslate"><span class="pre">librosa.amplitude_to_db(ref=1.0)</span></code>, and returns ranges whose energy stays
-at or below <code class="docutils literal notranslate"><span class="pre">threshold_db</span></code> for at least <code class="docutils literal notranslate"><span class="pre">min_silence_ms</span></code>. No ASR or VAD
-model is used.</p>
+It downmixes multi-channel waveform data to mono, computes frame RMS,
+converts RMS to decibels relative to full-scale amplitude, and returns
+ranges whose energy stays at or below <code class="docutils literal notranslate"><span class="pre">threshold_db</span></code> for at least
+<code class="docutils literal notranslate"><span class="pre">min_silence_ms</span></code>. No ASR or VAD model is used.</p>
 <p><code class="docutils literal notranslate"><span class="pre">threshold_db</span></code> is required because silence is corpus dependent: a noisy
 call-center recording and a studio recording need different thresholds.
 <code class="docutils literal notranslate"><span class="pre">min_silence_ms</span></code> defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code> so the operator does not hide a

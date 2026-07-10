@@ -269,8 +269,11 @@ under the License.
 <li class="toctree-l2"><a class="reference internal" href="../udf.html">User Defined Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../config.html">Configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../catalog.html">Catalog</a></li>
+
+
 <li class="toctree-l2"><a class="reference internal" href="../gpu.html">GPU Support</a></li>
 <li class="toctree-l2 current active"><a class="reference internal" href="../ai.html">AI / LLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multimodal.html">Multimodal Expressions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../pyflink.multimodal/index.html">PyFlink Multimodal</a></li>
@@ -313,6 +316,11 @@ under the License.
 <dd><p>Model provider for Alibaba Cloud DashScope (dashscope).</p>
 <p>DashScope reuses the OpenAI-compatible Java provider for normal chat and
 embedding requests, and adds DashScope-specific multi-modal embedding support.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We recommend using Flink AI service. With Flink AI service, you do not
+need to configure <code class="docutils literal notranslate"><span class="pre">endpoint</span></code> or <code class="docutils literal notranslate"><span class="pre">api_key</span></code>.</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -421,9 +429,13 @@ default).</p></li>
 <span class="gp">... </span><span class="p">]})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">embeddings</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">llm</span><span class="o">.</span><span class="n">ai_embed</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="s2">&quot;image_url&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;tongyi-embedding-vision-plus&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;qwen3-vl-embedding&quot;</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">dimension</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">content_type</span><span class="o">=</span><span class="s2">&quot;IMAGE_URL&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">config</span><span class="o">=</span><span class="p">{</span>
+<span class="gp">... </span>        <span class="s2">&quot;max-concurrent-operations&quot;</span><span class="p">:</span> <span class="s2">&quot;20&quot;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">&quot;timeout&quot;</span><span class="p">:</span> <span class="s2">&quot;30s&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">},</span>
 <span class="gp">... </span><span class="p">)</span>
 </pre></div>
 </div>

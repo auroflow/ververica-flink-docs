@@ -464,8 +464,8 @@ under the License.
 <span class="sd">            An LLMAccessor with AI methods.</span>
 
 <span class="sd">        Example::</span>
-<span class="sd">            &gt;&gt;&gt; df.llm.predict(&quot;text&quot;, model=&quot;qwen-plus&quot;)</span>
-<span class="sd">            &gt;&gt;&gt; df.llm.ai_classify(&quot;text&quot;, [&quot;pos&quot;, &quot;neg&quot;], model=&quot;qwen-plus&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; df.llm.predict(&quot;text&quot;, model=&quot;qwen3.6-plus&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; df.llm.ai_classify(&quot;text&quot;, [&quot;pos&quot;, &quot;neg&quot;], model=&quot;qwen3.6-plus&quot;)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.dataframe.ai.llm</span><span class="w"> </span><span class="kn">import</span> <span class="n">LLMAccessor</span>
         <span class="k">return</span> <span class="n">LLMAccessor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -1300,7 +1300,7 @@ under the License.
 <span class="sd">            Return unique temporary names for each table function output column.</span>
 <span class="sd">            &quot;&quot;&quot;</span>
             <span class="n">existing_columns</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
-            <span class="n">temporary_columns</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">temporary_columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="n">count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">output_columns</span><span class="p">)</span>
             <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">temporary_columns</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">count</span><span class="p">:</span>
@@ -4658,7 +4658,7 @@ under the License.
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table</span><span class="w"> </span><span class="kn">import</span> <span class="n">ExplainDetail</span>
 
-        <span class="n">extra_details</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">extra_details</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="n">show_estimated_cost</span><span class="p">:</span>
             <span class="n">extra_details</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ExplainDetail</span><span class="o">.</span><span class="n">ESTIMATED_COST</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">show_physical_execution_plan</span><span class="p">:</span>
@@ -5605,7 +5605,7 @@ under the License.
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_batch_size</span> <span class="o">=</span> <span class="n">batch_size</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_batch_format</span> <span class="o">=</span> <span class="n">batch_format</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_accumulated</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_accumulated</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_accumulated_rows</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_record_batch_iterator_closed</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_batches_iterator_closed</span> <span class="o">=</span> <span class="kc">False</span>

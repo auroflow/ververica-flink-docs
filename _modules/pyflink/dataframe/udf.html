@@ -647,8 +647,9 @@ under the License.
 
     <span class="c1"># Handle class-based UDFs (class type or instance)</span>
     <span class="k">if</span> <span class="n">func</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">_is_class_udf</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">_create_class_udf</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">return_dtype</span><span class="p">,</span> <span class="n">deterministic</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">concurrency</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span>
-                                 <span class="n">num_gpus</span><span class="p">,</span> <span class="n">gpu_type</span><span class="p">,</span> <span class="n">func_type</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">_create_class_udf</span><span class="p">(</span>
+            <span class="n">func</span><span class="p">,</span> <span class="n">return_dtype</span><span class="p">,</span> <span class="n">deterministic</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">concurrency</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span>
+            <span class="n">num_gpus</span><span class="p">,</span> <span class="n">gpu_type</span><span class="p">,</span> <span class="n">func_type</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrameUDFWrapper</span><span class="p">:</span>
         <span class="c1"># Handle class-based UDFs passed through @udf(...) decorator</span>
@@ -821,7 +822,7 @@ under the License.
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_create_class_udf</span><span class="p">(</span>
-    <span class="n">func</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ScalarFunction</span><span class="p">,</span> <span class="n">AsyncScalarFunction</span><span class="p">,</span> <span class="n">Type</span><span class="p">],</span>
+    <span class="n">func</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
     <span class="n">return_dtype</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DataTypeLike</span><span class="p">],</span>
     <span class="n">deterministic</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
     <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
@@ -1470,13 +1471,13 @@ under the License.
         <span class="n">hint_func</span> <span class="o">=</span> <span class="n">_get_type_hint_function</span><span class="p">(</span><span class="n">actual_func</span><span class="p">)</span>
         <span class="n">actual_return_dtype</span><span class="p">,</span> <span class="n">has_named_fields</span> <span class="o">=</span> <span class="n">_infer_udtf_return_dtype</span><span class="p">(</span>
             <span class="n">hint_func</span><span class="p">,</span> <span class="n">return_dtype</span><span class="p">)</span>
-        <span class="n">table_func</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">_wrap_table_function_output</span><span class="p">(</span>
+        <span class="n">table_func</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">TableFunction</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">actual_func</span><span class="p">,</span> <span class="n">TableFunction</span><span class="p">):</span>
+            <span class="n">table_func</span> <span class="o">=</span> <span class="n">_wrap_table_function_output</span><span class="p">(</span>
                 <span class="n">actual_func</span><span class="p">,</span> <span class="n">actual_return_dtype</span><span class="p">,</span> <span class="n">has_named_fields</span><span class="p">)</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">actual_func</span><span class="p">,</span> <span class="n">TableFunction</span><span class="p">)</span>
-            <span class="k">else</span> <span class="n">_wrap_udtf_function_output</span><span class="p">(</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">table_func</span> <span class="o">=</span> <span class="n">_wrap_udtf_function_output</span><span class="p">(</span>
                 <span class="n">actual_func</span><span class="p">,</span> <span class="n">actual_return_dtype</span><span class="p">,</span> <span class="n">has_named_fields</span><span class="p">)</span>
-        <span class="p">)</span>
         <span class="n">table_wrapper</span> <span class="o">=</span> <span class="n">_create_table_udtf</span><span class="p">(</span>
             <span class="n">table_func</span><span class="p">,</span>
             <span class="n">result_types</span><span class="o">=</span><span class="n">_to_table_udtf_result_types</span><span class="p">(</span><span class="n">actual_return_dtype</span><span class="p">),</span>
@@ -1602,11 +1603,11 @@ under the License.
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="bp">Ellipsis</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
                 <span class="s2">&quot;Cannot infer UDTF return type from variable-length tuple.&quot;</span><span class="p">)</span>
-        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">tuple_fields</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="o">...</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span>
             <span class="p">(</span><span class="s2">&quot;f</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">),</span> <span class="n">DataType</span><span class="o">.</span><span class="n">_infer_from_type</span><span class="p">(</span><span class="n">arg</span><span class="p">))</span>
             <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">arg</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
         <span class="p">]</span>
-        <span class="k">return</span> <span class="n">DataType</span><span class="o">.</span><span class="n">struct</span><span class="p">(</span><span class="n">fields</span><span class="p">),</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="n">DataType</span><span class="o">.</span><span class="n">struct</span><span class="p">(</span><span class="n">tuple_fields</span><span class="p">),</span> <span class="kc">False</span>
 
     <span class="k">return</span> <span class="n">DataType</span><span class="o">.</span><span class="n">_infer_from_type</span><span class="p">(</span><span class="n">emitted_type</span><span class="p">),</span> <span class="kc">False</span>
 

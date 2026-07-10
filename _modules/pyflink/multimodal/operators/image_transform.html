@@ -1320,7 +1320,7 @@ under the License.
         <span class="k">return</span> <span class="n">transcode_image_bytes</span><span class="p">(</span><span class="n">image_input</span><span class="p">,</span> <span class="n">output_format</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">output_format</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="image_convert_format"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_convert_format.html#pyflink.multimodal.operators.image_convert_format">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_convert_format</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="image_convert_format"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_convert_format.html#pyflink.multimodal.operators.image_convert_format">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_convert_format</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="nb">format</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert encoded image bytes to a different encoded format.</span>
 
@@ -1987,10 +1987,9 @@ under the License.
             <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_batch</span><span class="p">:</span> <span class="s2">&quot;pd.Series&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;pd.Series&quot;</span><span class="p">:</span>
-        <span class="n">pd</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_pd&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">pd</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_pd</span> <span class="o">=</span> <span class="n">pd</span>
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_pd&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pd</span> <span class="o">=</span> <span class="n">pandas</span>
         <span class="n">pil_images</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">valid_idx</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">total_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_batch</span><span class="p">)</span>

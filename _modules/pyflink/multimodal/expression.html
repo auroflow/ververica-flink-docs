@@ -292,7 +292,19 @@ under the License.
 <span class="sd">&quot;&quot;&quot;Multimodal expression namespaces.&quot;&quot;&quot;</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">importlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">import_module</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Dict</span><span class="p">,</span>
+    <span class="n">Literal</span><span class="p">,</span>
+    <span class="n">List</span><span class="p">,</span>
+    <span class="n">Mapping</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">,</span>
+    <span class="n">Protocol</span><span class="p">,</span>
+    <span class="n">Sequence</span><span class="p">,</span>
+    <span class="n">Tuple</span><span class="p">,</span>
+    <span class="n">Union</span><span class="p">,</span>
+<span class="p">)</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.dataframe.udf</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataFrameUDTFCall</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.expression</span><span class="w"> </span><span class="kn">import</span> <span class="n">Expression</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.multimodal.codec.audio</span><span class="w"> </span><span class="kn">import</span> <span class="n">DEFAULT_MAX_DECODED_AUDIO_BYTES</span>
@@ -317,6 +329,21 @@ under the License.
 
 <span class="n">_DEFAULT_AUDIO_MODEL</span> <span class="o">=</span> <span class="s2">&quot;openai/whisper-tiny&quot;</span>
 
+<span class="n">_Color</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span>
+<span class="n">_CropBox</span> <span class="o">=</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
+<span class="n">_FloatPair</span> <span class="o">=</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span>
+<span class="n">_Languages</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]]</span>
+<span class="n">_Size</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">_TimestampRow</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="n">start_ms</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">end_ms</span><span class="p">:</span> <span class="nb">int</span>
+
+
+<span class="n">_TimestampRange</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">_TimestampRow</span><span class="p">]</span>
+<span class="n">_TimestampRanges</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">_TimestampRange</span><span class="p">],</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">_TimestampRange</span><span class="p">,</span> <span class="o">...</span><span class="p">]]</span>
+
 
 <span class="k">class</span><span class="w"> </span><span class="nc">_ExpressionAccessor</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for expression-bound scalar operator namespaces.&quot;&quot;&quot;</span>
@@ -329,7 +356,7 @@ under the License.
         <span class="k">return</span> <span class="n">function</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_expression</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="ImageExpressionAccessor"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.html#pyflink.multimodal.expression.ImageExpressionAccessor">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">ImageExpressionAccessor</span><span class="p">(</span><span class="n">_ExpressionAccessor</span><span class="p">):</span>
+<div class="viewcode-block" id="ImageExpressionAccessor"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.html#pyflink.multimodal.expression.ImageExpressionAccessor">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">ImageExpressionAccessor</span><span class="p">(</span><span class="n">_ExpressionAccessor</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Image operations available on a DataFrame expression.</span>
 
@@ -346,14 +373,14 @@ under the License.
 <span class="sd">        ...     &quot;jpeg&quot;, col(&quot;small&quot;).image.encode(format=&quot;JPEG&quot;))</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.decode"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.decode.html#pyflink.multimodal.expression.ImageExpressionAccessor.decode">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">decode</span><span class="p">(</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.decode"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.decode.html#pyflink.multimodal.expression.ImageExpressionAccessor.decode">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">decode</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">on_error</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">,</span>
-        <span class="n">mode</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">pixel_limit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="n">on_error</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;raise&quot;</span><span class="p">,</span> <span class="s2">&quot;null&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;raise&quot;</span><span class="p">,</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">pixel_limit</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Decode image bytes into image values.</span>
 
@@ -380,14 +407,14 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.encode"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.encode.html#pyflink.multimodal.expression.ImageExpressionAccessor.encode">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">encode</span><span class="p">(</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.encode"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.encode.html#pyflink.multimodal.expression.ImageExpressionAccessor.encode">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">encode</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="nb">format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">quality</span><span class="o">=</span><span class="n">_DEFAULT_IMAGE_ENCODE_QUALITY</span><span class="p">,</span>
-        <span class="n">output</span><span class="o">=</span><span class="s2">&quot;bytes&quot;</span><span class="p">,</span>
-        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="nb">format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">quality</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">_DEFAULT_IMAGE_ENCODE_QUALITY</span><span class="p">,</span>
+        <span class="n">output</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;bytes&quot;</span><span class="p">,</span> <span class="s2">&quot;data_url&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;bytes&quot;</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Encode image values into bytes or data URLs.</span>
 
@@ -416,13 +443,13 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.compress"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.compress.html#pyflink.multimodal.expression.ImageExpressionAccessor.compress">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">compress</span><span class="p">(</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.compress"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.compress.html#pyflink.multimodal.expression.ImageExpressionAccessor.compress">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">compress</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">quality</span><span class="o">=</span><span class="n">_DEFAULT_IMAGE_ENCODE_QUALITY</span><span class="p">,</span>
-        <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;JPEG&quot;</span><span class="p">,</span>
-        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="n">quality</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">_DEFAULT_IMAGE_ENCODE_QUALITY</span><span class="p">,</span>
+        <span class="nb">format</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;JPEG&quot;</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compress image values using the requested format and quality.</span>
 
@@ -446,7 +473,12 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.convert_format"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.convert_format.html#pyflink.multimodal.expression.ImageExpressionAccessor.convert_format">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">convert_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.convert_format"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.convert_format.html#pyflink.multimodal.expression.ImageExpressionAccessor.convert_format">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">convert_format</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="nb">format</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert image values to a different encoded image format.</span>
 
@@ -470,15 +502,15 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.to_tensor"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.to_tensor.html#pyflink.multimodal.expression.ImageExpressionAccessor.to_tensor">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_tensor</span><span class="p">(</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.to_tensor"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.to_tensor.html#pyflink.multimodal.expression.ImageExpressionAccessor.to_tensor">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_tensor</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">width</span><span class="p">,</span>
-        <span class="n">height</span><span class="p">,</span>
-        <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;RGB&quot;</span><span class="p">,</span>
-        <span class="n">layout</span><span class="o">=</span><span class="s2">&quot;CHW&quot;</span><span class="p">,</span>
-        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">height</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;RGB&quot;</span><span class="p">,</span>
+        <span class="n">layout</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;CHW&quot;</span><span class="p">,</span> <span class="s2">&quot;HWC&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;CHW&quot;</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert already prepared image values to fixed-shape tensors.</span>
 
@@ -510,7 +542,12 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.convert_mode"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.convert_mode.html#pyflink.multimodal.expression.ImageExpressionAccessor.convert_mode">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">convert_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.convert_mode"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.convert_mode.html#pyflink.multimodal.expression.ImageExpressionAccessor.convert_mode">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">convert_mode</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert image values to another image mode.</span>
 
@@ -533,7 +570,14 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.resize"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.resize.html#pyflink.multimodal.expression.ImageExpressionAccessor.resize">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">resize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;lanczos&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.resize"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.resize.html#pyflink.multimodal.expression.ImageExpressionAccessor.resize">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">resize</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">height</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;lanczos&quot;</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Resize image values to a fixed width and height.</span>
 
@@ -559,7 +603,13 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.rescale"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.rescale.html#pyflink.multimodal.expression.ImageExpressionAccessor.rescale">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">rescale</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;lanczos&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.rescale"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.rescale.html#pyflink.multimodal.expression.ImageExpressionAccessor.rescale">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">rescale</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">scale</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;lanczos&quot;</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Scale image values by a ratio.</span>
 
@@ -583,15 +633,15 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.crop"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.crop.html#pyflink.multimodal.expression.ImageExpressionAccessor.crop">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">crop</span><span class="p">(</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.crop"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.crop.html#pyflink.multimodal.expression.ImageExpressionAccessor.crop">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">crop</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">crop_coords</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">crop_type</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
-        <span class="n">crop_ratio</span><span class="o">=</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">),</span>
-        <span class="n">crop_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="n">crop_coords</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">_CropBox</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">crop_type</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="s2">&quot;ratio&quot;</span><span class="p">,</span> <span class="s2">&quot;coordinate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;center&quot;</span><span class="p">,</span>
+        <span class="n">crop_ratio</span><span class="p">:</span> <span class="n">_FloatPair</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">),</span>
+        <span class="n">crop_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">_Size</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Crop image values by coordinates, crop type, ratio, or size.</span>
 
@@ -619,16 +669,16 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.crop_black_border"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.crop_black_border.html#pyflink.multimodal.expression.ImageExpressionAccessor.crop_black_border">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">crop_black_border</span><span class="p">(</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.crop_black_border"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.crop_black_border.html#pyflink.multimodal.expression.ImageExpressionAccessor.crop_black_border">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">crop_black_border</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">threshold</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">detect_algorithm</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
-        <span class="n">black_threshold</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">edge_sensitivity</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
-        <span class="n">min_border_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="n">threshold</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">detect_algorithm</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="s2">&quot;threshold&quot;</span><span class="p">,</span> <span class="s2">&quot;histogram&quot;</span><span class="p">,</span> <span class="s2">&quot;edge&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+        <span class="n">black_threshold</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">edge_sensitivity</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">min_border_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Remove black borders from image values.</span>
 
@@ -659,7 +709,12 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.flip"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.flip.html#pyflink.multimodal.expression.ImageExpressionAccessor.flip">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">flip</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.flip"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.flip.html#pyflink.multimodal.expression.ImageExpressionAccessor.flip">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">flip</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="s2">&quot;vertical&quot;</span><span class="p">,</span> <span class="s2">&quot;rotate180&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;horizontal&quot;</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Flip image values horizontally or vertically.</span>
 
@@ -681,7 +736,13 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.blur"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.blur.html#pyflink.multimodal.expression.ImageExpressionAccessor.blur">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">blur</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">blur_type</span><span class="o">=</span><span class="s2">&quot;gaussian&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.blur"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.blur.html#pyflink.multimodal.expression.ImageExpressionAccessor.blur">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">blur</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">radius</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="n">blur_type</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;gaussian&quot;</span><span class="p">,</span> <span class="s2">&quot;box&quot;</span><span class="p">,</span> <span class="s2">&quot;mean&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;gaussian&quot;</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Blur image values.</span>
 
@@ -705,14 +766,14 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.adjust_color"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.adjust_color.html#pyflink.multimodal.expression.ImageExpressionAccessor.adjust_color">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">adjust_color</span><span class="p">(</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.adjust_color"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.adjust_color.html#pyflink.multimodal.expression.ImageExpressionAccessor.adjust_color">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">adjust_color</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">brightness</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
-        <span class="n">contrast</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
-        <span class="n">saturation</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
-        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="n">brightness</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">contrast</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">saturation</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Adjust image brightness, contrast, and saturation.</span>
 
@@ -739,20 +800,20 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.remove_background"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.remove_background.html#pyflink.multimodal.expression.ImageExpressionAccessor.remove_background">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">remove_background</span><span class="p">(</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.remove_background"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.remove_background.html#pyflink.multimodal.expression.ImageExpressionAccessor.remove_background">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">remove_background</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">alpha_matting</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-        <span class="n">alpha_matting_foreground_threshold</span><span class="o">=</span><span class="mi">240</span><span class="p">,</span>
-        <span class="n">alpha_matting_background_threshold</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-        <span class="n">alpha_matting_erode_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-        <span class="n">bgcolor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="n">alpha_matting</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">alpha_matting_foreground_threshold</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">240</span><span class="p">,</span>
+        <span class="n">alpha_matting_background_threshold</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="n">alpha_matting_erode_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="n">bgcolor</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">_Color</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">model_sharing</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;process&quot;</span><span class="p">,</span> <span class="s2">&quot;shared&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">num_gpus</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">gpu_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Remove image backgrounds and optionally composite a new background.</span>
 
@@ -795,7 +856,11 @@ under the License.
             <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.metadata"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.metadata.html#pyflink.multimodal.expression.ImageExpressionAccessor.metadata">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.metadata"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.metadata.html#pyflink.multimodal.expression.ImageExpressionAccessor.metadata">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">metadata</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Extract image metadata.</span>
 
@@ -812,7 +877,11 @@ under the License.
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span><span class="n">_IMAGE_INFO</span><span class="p">,</span> <span class="s2">&quot;image_metadata&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.aspect_ratio"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.aspect_ratio.html#pyflink.multimodal.expression.ImageExpressionAccessor.aspect_ratio">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">aspect_ratio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.aspect_ratio"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.aspect_ratio.html#pyflink.multimodal.expression.ImageExpressionAccessor.aspect_ratio">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">aspect_ratio</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute image aspect ratio.</span>
 
@@ -829,7 +898,13 @@ under the License.
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span><span class="n">_IMAGE_INFO</span><span class="p">,</span> <span class="s2">&quot;image_aspect_ratio&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.sharpness"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.sharpness.html#pyflink.multimodal.expression.ImageExpressionAccessor.sharpness">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">sharpness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">max_edge</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">allow_upscale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.sharpness"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.sharpness.html#pyflink.multimodal.expression.ImageExpressionAccessor.sharpness">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">sharpness</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">max_edge</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">allow_upscale</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Estimate image sharpness.</span>
 
@@ -854,7 +929,12 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.hash"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.hash.html#pyflink.multimodal.expression.ImageExpressionAccessor.hash">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">hash</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;phash&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.hash"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.hash.html#pyflink.multimodal.expression.ImageExpressionAccessor.hash">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">hash</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;phash&quot;</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute an image perceptual hash.</span>
 
@@ -876,7 +956,13 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.is_valid"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.is_valid.html#pyflink.multimodal.expression.ImageExpressionAccessor.is_valid">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">is_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pixel_limit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.is_valid"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.is_valid.html#pyflink.multimodal.expression.ImageExpressionAccessor.is_valid">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">is_valid</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">pixel_limit</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check whether image inputs can be decoded as valid images.</span>
 
@@ -900,15 +986,15 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.size_filter"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.size_filter.html#pyflink.multimodal.expression.ImageExpressionAccessor.size_filter">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">size_filter</span><span class="p">(</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.size_filter"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.size_filter.html#pyflink.multimodal.expression.ImageExpressionAccessor.size_filter">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">size_filter</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">min_w</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">min_h</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">max_w</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">max_h</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="n">min_w</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">min_h</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_w</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_h</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Filter images by width and height bounds.</span>
 
@@ -936,7 +1022,13 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.shape_filter"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.shape_filter.html#pyflink.multimodal.expression.ImageExpressionAccessor.shape_filter">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">shape_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">min_ratio</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_ratio</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.shape_filter"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.shape_filter.html#pyflink.multimodal.expression.ImageExpressionAccessor.shape_filter">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">shape_filter</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">min_ratio</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_ratio</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Filter images by aspect ratio.</span>
 
@@ -960,13 +1052,13 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.file_size_filter"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.file_size_filter.html#pyflink.multimodal.expression.ImageExpressionAccessor.file_size_filter">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">file_size_filter</span><span class="p">(</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.file_size_filter"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.file_size_filter.html#pyflink.multimodal.expression.ImageExpressionAccessor.file_size_filter">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">file_size_filter</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">min_bytes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">max_bytes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="n">min_bytes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_bytes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Filter image files by byte size.</span>
 
@@ -990,16 +1082,16 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.nsfw_score"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.nsfw_score.html#pyflink.multimodal.expression.ImageExpressionAccessor.nsfw_score">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">nsfw_score</span><span class="p">(</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.nsfw_score"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.nsfw_score.html#pyflink.multimodal.expression.ImageExpressionAccessor.nsfw_score">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">nsfw_score</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">hf_nsfw_model</span><span class="o">=</span><span class="n">_DEFAULT_NSFW_MODEL</span><span class="p">,</span>
-        <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="n">hf_nsfw_model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">_DEFAULT_NSFW_MODEL</span><span class="p">,</span>
+        <span class="n">model_sharing</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;process&quot;</span><span class="p">,</span> <span class="s2">&quot;shared&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">num_gpus</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">gpu_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Score images for NSFW content.</span>
 
@@ -1029,16 +1121,16 @@ under the License.
             <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.aesthetic_score"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.aesthetic_score.html#pyflink.multimodal.expression.ImageExpressionAccessor.aesthetic_score">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">aesthetic_score</span><span class="p">(</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.aesthetic_score"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.aesthetic_score.html#pyflink.multimodal.expression.ImageExpressionAccessor.aesthetic_score">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">aesthetic_score</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">hf_scorer_model</span><span class="o">=</span><span class="n">_DEFAULT_AESTHETIC_SCORER_MODEL</span><span class="p">,</span>
-        <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="n">hf_scorer_model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">_DEFAULT_AESTHETIC_SCORER_MODEL</span><span class="p">,</span>
+        <span class="n">model_sharing</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;process&quot;</span><span class="p">,</span> <span class="s2">&quot;shared&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">num_gpus</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">gpu_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Score images for aesthetic quality.</span>
 
@@ -1068,7 +1160,11 @@ under the License.
             <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.quality_score"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.quality_score.html#pyflink.multimodal.expression.ImageExpressionAccessor.quality_score">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">quality_score</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.quality_score"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.quality_score.html#pyflink.multimodal.expression.ImageExpressionAccessor.quality_score">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">quality_score</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Score general image quality.</span>
 
@@ -1088,16 +1184,16 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.watermark_score"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.watermark_score.html#pyflink.multimodal.expression.ImageExpressionAccessor.watermark_score">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">watermark_score</span><span class="p">(</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.watermark_score"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.watermark_score.html#pyflink.multimodal.expression.ImageExpressionAccessor.watermark_score">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">watermark_score</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">hf_watermark_model</span><span class="o">=</span><span class="n">_DEFAULT_WATERMARK_MODEL</span><span class="p">,</span>
-        <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="n">hf_watermark_model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">_DEFAULT_WATERMARK_MODEL</span><span class="p">,</span>
+        <span class="n">model_sharing</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;process&quot;</span><span class="p">,</span> <span class="s2">&quot;shared&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">num_gpus</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">gpu_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Score images for watermark likelihood.</span>
 
@@ -1128,16 +1224,16 @@ under the License.
             <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.face_detect"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.face_detect.html#pyflink.multimodal.expression.ImageExpressionAccessor.face_detect">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">face_detect</span><span class="p">(</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.face_detect"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.face_detect.html#pyflink.multimodal.expression.ImageExpressionAccessor.face_detect">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">face_detect</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">cv_classifier</span><span class="o">=</span><span class="s2">&quot;haarcascade_frontalface_alt.xml&quot;</span><span class="p">,</span>
-        <span class="n">min_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-        <span class="n">scale_factor</span><span class="o">=</span><span class="mf">1.1</span><span class="p">,</span>
-        <span class="n">min_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">max_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="n">cv_classifier</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;haarcascade_frontalface_alt.xml&quot;</span><span class="p">,</span>
+        <span class="n">min_neighbors</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="n">scale_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.1</span><span class="p">,</span>
+        <span class="n">min_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">_Size</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">_Size</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Detect faces in image values.</span>
 
@@ -1169,16 +1265,16 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.face_count"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.face_count.html#pyflink.multimodal.expression.ImageExpressionAccessor.face_count">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">face_count</span><span class="p">(</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.face_count"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.face_count.html#pyflink.multimodal.expression.ImageExpressionAccessor.face_count">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">face_count</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">cv_classifier</span><span class="o">=</span><span class="s2">&quot;haarcascade_frontalface_alt.xml&quot;</span><span class="p">,</span>
-        <span class="n">min_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-        <span class="n">scale_factor</span><span class="o">=</span><span class="mf">1.1</span><span class="p">,</span>
-        <span class="n">min_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">max_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="n">cv_classifier</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;haarcascade_frontalface_alt.xml&quot;</span><span class="p">,</span>
+        <span class="n">min_neighbors</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="n">scale_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.1</span><span class="p">,</span>
+        <span class="n">min_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">_Size</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">_Size</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Count faces in image values.</span>
 
@@ -1208,18 +1304,18 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.face_blur"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.face_blur.html#pyflink.multimodal.expression.ImageExpressionAccessor.face_blur">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">face_blur</span><span class="p">(</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.face_blur"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.face_blur.html#pyflink.multimodal.expression.ImageExpressionAccessor.face_blur">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">face_blur</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">cv_classifier</span><span class="o">=</span><span class="s2">&quot;haarcascade_frontalface_alt.xml&quot;</span><span class="p">,</span>
-        <span class="n">blur_type</span><span class="o">=</span><span class="s2">&quot;gaussian&quot;</span><span class="p">,</span>
-        <span class="n">radius</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-        <span class="n">min_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-        <span class="n">scale_factor</span><span class="o">=</span><span class="mf">1.1</span><span class="p">,</span>
-        <span class="n">min_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">max_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="n">cv_classifier</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;haarcascade_frontalface_alt.xml&quot;</span><span class="p">,</span>
+        <span class="n">blur_type</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;gaussian&quot;</span><span class="p">,</span> <span class="s2">&quot;box&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;gaussian&quot;</span><span class="p">,</span>
+        <span class="n">radius</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="n">min_neighbors</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="n">scale_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.1</span><span class="p">,</span>
+        <span class="n">min_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">_Size</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">_Size</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Blur detected faces in image values.</span>
 
@@ -1254,19 +1350,19 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.detect_objects"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.detect_objects.html#pyflink.multimodal.expression.ImageExpressionAccessor.detect_objects">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">detect_objects</span><span class="p">(</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.detect_objects"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.detect_objects.html#pyflink.multimodal.expression.ImageExpressionAccessor.detect_objects">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">detect_objects</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">model</span><span class="o">=</span><span class="s2">&quot;yolov8n&quot;</span><span class="p">,</span>
-        <span class="n">confidence</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
-        <span class="n">imgsz</span><span class="o">=</span><span class="mi">640</span><span class="p">,</span>
-        <span class="n">iou</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-        <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;yolov8n&quot;</span><span class="p">,</span>
+        <span class="n">confidence</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span>
+        <span class="n">imgsz</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">640</span><span class="p">,</span>
+        <span class="n">iou</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+        <span class="n">model_sharing</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;process&quot;</span><span class="p">,</span> <span class="s2">&quot;shared&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">num_gpus</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">gpu_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Detect objects in image values.</span>
 
@@ -1304,19 +1400,19 @@ under the License.
             <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.segment"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.segment.html#pyflink.multimodal.expression.ImageExpressionAccessor.segment">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">segment</span><span class="p">(</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.segment"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.segment.html#pyflink.multimodal.expression.ImageExpressionAccessor.segment">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">segment</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">model</span><span class="o">=</span><span class="s2">&quot;FastSAM-x.pt&quot;</span><span class="p">,</span>
-        <span class="n">confidence</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
-        <span class="n">imgsz</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
-        <span class="n">iou</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-        <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;FastSAM-x.pt&quot;</span><span class="p">,</span>
+        <span class="n">confidence</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span>
+        <span class="n">imgsz</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">,</span>
+        <span class="n">iou</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+        <span class="n">model_sharing</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;process&quot;</span><span class="p">,</span> <span class="s2">&quot;shared&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">num_gpus</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">gpu_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Segment objects or regions in image values.</span>
 
@@ -1353,16 +1449,16 @@ under the License.
             <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.ocr"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.ocr.html#pyflink.multimodal.expression.ImageExpressionAccessor.ocr">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">ocr</span><span class="p">(</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.ocr"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.ocr.html#pyflink.multimodal.expression.ImageExpressionAccessor.ocr">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">ocr</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">lang</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="n">lang</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">_Languages</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">model_sharing</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;process&quot;</span><span class="p">,</span> <span class="s2">&quot;shared&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">num_gpus</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">gpu_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Run OCR on image values.</span>
 
@@ -1370,7 +1466,7 @@ under the License.
 <span class="sd">        See that function for full parameter details.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            lang: Optional OCR language hint.</span>
+<span class="sd">            lang: Optional OCR language-code sequence.</span>
 <span class="sd">            model_sharing: Optional model sharing mode.</span>
 <span class="sd">            concurrency: Optional execution concurrency for this operation.</span>
 <span class="sd">                ``None`` uses the framework default.</span>
@@ -1393,7 +1489,12 @@ under the License.
             <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.detect_subplot"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.detect_subplot.html#pyflink.multimodal.expression.ImageExpressionAccessor.detect_subplot">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">detect_subplot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.detect_subplot"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.detect_subplot.html#pyflink.multimodal.expression.ImageExpressionAccessor.detect_subplot">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">detect_subplot</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Detect subplot regions in image values.</span>
 
@@ -1416,17 +1517,17 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.embedding"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.embedding.html#pyflink.multimodal.expression.ImageExpressionAccessor.embedding">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">embedding</span><span class="p">(</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.embedding"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.embedding.html#pyflink.multimodal.expression.ImageExpressionAccessor.embedding">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">embedding</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">model</span><span class="o">=</span><span class="s2">&quot;ViT-B/32&quot;</span><span class="p">,</span>
-        <span class="n">pretrained</span><span class="o">=</span><span class="s2">&quot;openai&quot;</span><span class="p">,</span>
-        <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;ViT-B/32&quot;</span><span class="p">,</span>
+        <span class="n">pretrained</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;openai&quot;</span><span class="p">,</span>
+        <span class="n">model_sharing</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;process&quot;</span><span class="p">,</span> <span class="s2">&quot;shared&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">num_gpus</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">gpu_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute image embeddings.</span>
 
@@ -1459,19 +1560,19 @@ under the License.
             <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ImageExpressionAccessor.text_similarity"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.ImageExpressionAccessor.text_similarity.html#pyflink.multimodal.expression.ImageExpressionAccessor.text_similarity">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">text_similarity</span><span class="p">(</span>
+<div class="viewcode-block" id="ImageExpressionAccessor.text_similarity"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.ImageExpressionAccessor.text_similarity.html#pyflink.multimodal.expression.ImageExpressionAccessor.text_similarity">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">text_similarity</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">text_column</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">text</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">model</span><span class="o">=</span><span class="s2">&quot;ViT-B/32&quot;</span><span class="p">,</span>
-        <span class="n">pretrained</span><span class="o">=</span><span class="s2">&quot;openai&quot;</span><span class="p">,</span>
-        <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="n">text_column</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Expression</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">text</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;ViT-B/32&quot;</span><span class="p">,</span>
+        <span class="n">pretrained</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;openai&quot;</span><span class="p">,</span>
+        <span class="n">model_sharing</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;process&quot;</span><span class="p">,</span> <span class="s2">&quot;shared&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">num_gpus</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">gpu_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute similarity between image values and text.</span>
 
@@ -1516,7 +1617,7 @@ under the License.
         <span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="AudioExpressionAccessor"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.html#pyflink.multimodal.expression.AudioExpressionAccessor">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">AudioExpressionAccessor</span><span class="p">(</span><span class="n">_ExpressionAccessor</span><span class="p">):</span>
+<div class="viewcode-block" id="AudioExpressionAccessor"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.AudioExpressionAccessor.html#pyflink.multimodal.expression.AudioExpressionAccessor">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">AudioExpressionAccessor</span><span class="p">(</span><span class="n">_ExpressionAccessor</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Audio operations available on a DataFrame expression.</span>
 
@@ -1532,7 +1633,12 @@ under the License.
 <span class="sd">        ...     col(&quot;waveform&quot;).audio.standardize(sample_rate=16000, channels=1))</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="AudioExpressionAccessor.is_valid"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.is_valid.html#pyflink.multimodal.expression.AudioExpressionAccessor.is_valid">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">is_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">validation</span><span class="o">=</span><span class="s2">&quot;metadata&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="AudioExpressionAccessor.is_valid"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.AudioExpressionAccessor.is_valid.html#pyflink.multimodal.expression.AudioExpressionAccessor.is_valid">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">is_valid</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">validation</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;metadata&quot;</span><span class="p">,</span> <span class="s2">&quot;decode&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;metadata&quot;</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check whether this expression contains valid audio.</span>
 
@@ -1555,7 +1661,11 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="AudioExpressionAccessor.metadata"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.metadata.html#pyflink.multimodal.expression.AudioExpressionAccessor.metadata">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="AudioExpressionAccessor.metadata"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.AudioExpressionAccessor.metadata.html#pyflink.multimodal.expression.AudioExpressionAccessor.metadata">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">metadata</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Probe audio metadata for this expression.</span>
 
@@ -1573,7 +1683,11 @@ under the License.
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span><span class="n">_AUDIO_INFO</span><span class="p">,</span> <span class="s2">&quot;audio_metadata&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="AudioExpressionAccessor.duration"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.duration.html#pyflink.multimodal.expression.AudioExpressionAccessor.duration">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">duration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="AudioExpressionAccessor.duration"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.AudioExpressionAccessor.duration.html#pyflink.multimodal.expression.AudioExpressionAccessor.duration">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">duration</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return audio duration in seconds for this expression.</span>
 
@@ -1590,7 +1704,13 @@ under the License.
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span><span class="n">_AUDIO_INFO</span><span class="p">,</span> <span class="s2">&quot;audio_duration&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="AudioExpressionAccessor.duration_filter"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.duration_filter.html#pyflink.multimodal.expression.AudioExpressionAccessor.duration_filter">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">duration_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">min_seconds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_seconds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="AudioExpressionAccessor.duration_filter"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.AudioExpressionAccessor.duration_filter.html#pyflink.multimodal.expression.AudioExpressionAccessor.duration_filter">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">duration_filter</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">min_seconds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_seconds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check whether audio duration is within second bounds.</span>
 
@@ -1614,7 +1734,13 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="AudioExpressionAccessor.size_filter"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.size_filter.html#pyflink.multimodal.expression.AudioExpressionAccessor.size_filter">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">size_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">min_bytes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_bytes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="AudioExpressionAccessor.size_filter"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.AudioExpressionAccessor.size_filter.html#pyflink.multimodal.expression.AudioExpressionAccessor.size_filter">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">size_filter</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">min_bytes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_bytes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check whether encoded audio size is within byte bounds.</span>
 
@@ -1638,7 +1764,13 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="AudioExpressionAccessor.silence_detection"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.silence_detection.html#pyflink.multimodal.expression.AudioExpressionAccessor.silence_detection">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">silence_detection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">threshold_db</span><span class="p">,</span> <span class="n">min_silence_ms</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="AudioExpressionAccessor.silence_detection"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.AudioExpressionAccessor.silence_detection.html#pyflink.multimodal.expression.AudioExpressionAccessor.silence_detection">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">silence_detection</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">threshold_db</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">min_silence_ms</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Detect low-amplitude silence ranges in waveform values.</span>
 
@@ -1663,16 +1795,16 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="AudioExpressionAccessor.detect_speech"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.detect_speech.html#pyflink.multimodal.expression.AudioExpressionAccessor.detect_speech">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">detect_speech</span><span class="p">(</span>
+<div class="viewcode-block" id="AudioExpressionAccessor.detect_speech"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.AudioExpressionAccessor.detect_speech.html#pyflink.multimodal.expression.AudioExpressionAccessor.detect_speech">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">detect_speech</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">aggressiveness</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-        <span class="n">frame_ms</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
-        <span class="n">min_speech_ms</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-        <span class="n">merge_gap_ms</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-        <span class="n">max_segments</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
-        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="n">aggressiveness</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">frame_ms</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span>
+        <span class="n">min_speech_ms</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">merge_gap_ms</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">max_segments</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Detect speech activity ranges in waveform values.</span>
 
@@ -1703,13 +1835,13 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="AudioExpressionAccessor.decode"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.decode.html#pyflink.multimodal.expression.AudioExpressionAccessor.decode">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">decode</span><span class="p">(</span>
+<div class="viewcode-block" id="AudioExpressionAccessor.decode"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.AudioExpressionAccessor.decode.html#pyflink.multimodal.expression.AudioExpressionAccessor.decode">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">decode</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">on_error</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">,</span>
-        <span class="n">max_decoded_bytes</span><span class="o">=</span><span class="n">DEFAULT_MAX_DECODED_AUDIO_BYTES</span><span class="p">,</span>
-        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="n">on_error</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;raise&quot;</span><span class="p">,</span> <span class="s2">&quot;null&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;raise&quot;</span><span class="p">,</span>
+        <span class="n">max_decoded_bytes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">DEFAULT_MAX_DECODED_AUDIO_BYTES</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Decode encoded audio into waveform rows.</span>
 
@@ -1735,7 +1867,12 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="AudioExpressionAccessor.encode"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.encode.html#pyflink.multimodal.expression.AudioExpressionAccessor.encode">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">encode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;wav&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="AudioExpressionAccessor.encode"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.AudioExpressionAccessor.encode.html#pyflink.multimodal.expression.AudioExpressionAccessor.encode">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">encode</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="nb">format</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;wav&quot;</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Encode waveform rows to audio bytes.</span>
 
@@ -1757,14 +1894,14 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="AudioExpressionAccessor.convert_format"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.convert_format.html#pyflink.multimodal.expression.AudioExpressionAccessor.convert_format">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">convert_format</span><span class="p">(</span>
+<div class="viewcode-block" id="AudioExpressionAccessor.convert_format"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.AudioExpressionAccessor.convert_format.html#pyflink.multimodal.expression.AudioExpressionAccessor.convert_format">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">convert_format</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;wav&quot;</span><span class="p">,</span>
-        <span class="n">on_error</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">,</span>
-        <span class="n">max_decoded_bytes</span><span class="o">=</span><span class="n">DEFAULT_MAX_DECODED_AUDIO_BYTES</span><span class="p">,</span>
-        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="nb">format</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;wav&quot;</span><span class="p">,</span>
+        <span class="n">on_error</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;raise&quot;</span><span class="p">,</span> <span class="s2">&quot;null&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;raise&quot;</span><span class="p">,</span>
+        <span class="n">max_decoded_bytes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">DEFAULT_MAX_DECODED_AUDIO_BYTES</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert encoded audio to another encoded format.</span>
 
@@ -1792,7 +1929,13 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="AudioExpressionAccessor.standardize"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.standardize.html#pyflink.multimodal.expression.AudioExpressionAccessor.standardize">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">standardize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">sample_rate</span><span class="o">=</span><span class="mi">16000</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="AudioExpressionAccessor.standardize"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.AudioExpressionAccessor.standardize.html#pyflink.multimodal.expression.AudioExpressionAccessor.standardize">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">standardize</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">sample_rate</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">16000</span><span class="p">,</span>
+        <span class="n">channels</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Standardize waveform sample rate and channel count.</span>
 
@@ -1817,7 +1960,12 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="AudioExpressionAccessor.resample"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.resample.html#pyflink.multimodal.expression.AudioExpressionAccessor.resample">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">resample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">sample_rate</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="AudioExpressionAccessor.resample"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.AudioExpressionAccessor.resample.html#pyflink.multimodal.expression.AudioExpressionAccessor.resample">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">resample</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">sample_rate</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Resample waveform values to a target sample rate.</span>
 
@@ -1840,14 +1988,14 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="AudioExpressionAccessor.split_by_duration"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.split_by_duration.html#pyflink.multimodal.expression.AudioExpressionAccessor.split_by_duration">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">split_by_duration</span><span class="p">(</span>
+<div class="viewcode-block" id="AudioExpressionAccessor.split_by_duration"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.AudioExpressionAccessor.split_by_duration.html#pyflink.multimodal.expression.AudioExpressionAccessor.split_by_duration">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">split_by_duration</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">segment_duration_ms</span><span class="p">,</span>
-        <span class="n">segment_type</span><span class="o">=</span><span class="s2">&quot;audio&quot;</span><span class="p">,</span>
-        <span class="n">max_segments</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
-        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="n">segment_duration_ms</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">segment_type</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;audio&quot;</span><span class="p">,</span> <span class="s2">&quot;ref&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;audio&quot;</span><span class="p">,</span>
+        <span class="n">max_segments</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrameUDTFCall</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Split audio by fixed duration.</span>
 
@@ -1877,7 +2025,13 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="AudioExpressionAccessor.split_by_timestamp"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.split_by_timestamp.html#pyflink.multimodal.expression.AudioExpressionAccessor.split_by_timestamp">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">split_by_timestamp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timestamps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">segment_type</span><span class="o">=</span><span class="s2">&quot;audio&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="AudioExpressionAccessor.split_by_timestamp"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.AudioExpressionAccessor.split_by_timestamp.html#pyflink.multimodal.expression.AudioExpressionAccessor.split_by_timestamp">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">split_by_timestamp</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">timestamps</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Expression</span><span class="p">,</span> <span class="n">_TimestampRanges</span><span class="p">],</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">segment_type</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;audio&quot;</span><span class="p">,</span> <span class="s2">&quot;ref&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;audio&quot;</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrameUDTFCall</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Split audio by explicit timestamp ranges.</span>
 
@@ -1932,19 +2086,19 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="AudioExpressionAccessor.split_by_speech"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.split_by_speech.html#pyflink.multimodal.expression.AudioExpressionAccessor.split_by_speech">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">split_by_speech</span><span class="p">(</span>
+<div class="viewcode-block" id="AudioExpressionAccessor.split_by_speech"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.AudioExpressionAccessor.split_by_speech.html#pyflink.multimodal.expression.AudioExpressionAccessor.split_by_speech">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">split_by_speech</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">speech_activity</span><span class="p">,</span>
+        <span class="n">speech_activity</span><span class="p">:</span> <span class="n">Expression</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">segment_type</span><span class="o">=</span><span class="s2">&quot;audio&quot;</span><span class="p">,</span>
-        <span class="n">pre_padding_ms</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-        <span class="n">post_padding_ms</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-        <span class="n">merge_gap_ms</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-        <span class="n">min_segment_ms</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-        <span class="n">max_segment_ms</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">max_segments</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
-        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="n">segment_type</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;audio&quot;</span><span class="p">,</span> <span class="s2">&quot;ref&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;audio&quot;</span><span class="p">,</span>
+        <span class="n">pre_padding_ms</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">post_padding_ms</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">merge_gap_ms</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">min_segment_ms</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">max_segment_ms</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_segments</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrameUDTFCall</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Split audio using caller-provided speech activity ranges.</span>
 
@@ -1983,7 +2137,11 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="AudioExpressionAccessor.concat"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.concat.html#pyflink.multimodal.expression.AudioExpressionAccessor.concat">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">concat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="AudioExpressionAccessor.concat"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.AudioExpressionAccessor.concat.html#pyflink.multimodal.expression.AudioExpressionAccessor.concat">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">concat</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Concatenate an array of waveform rows.</span>
 
@@ -1999,18 +2157,18 @@ under the License.
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span><span class="n">_AUDIO_TRANSFORM</span><span class="p">,</span> <span class="s2">&quot;audio_concat&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="AudioExpressionAccessor.asr_whisper"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.asr_whisper.html#pyflink.multimodal.expression.AudioExpressionAccessor.asr_whisper">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">asr_whisper</span><span class="p">(</span>
+<div class="viewcode-block" id="AudioExpressionAccessor.asr_whisper"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.AudioExpressionAccessor.asr_whisper.html#pyflink.multimodal.expression.AudioExpressionAccessor.asr_whisper">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">asr_whisper</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">language</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">task</span><span class="o">=</span><span class="s2">&quot;transcribe&quot;</span><span class="p">,</span>
-        <span class="n">model</span><span class="o">=</span><span class="n">_DEFAULT_AUDIO_MODEL</span><span class="p">,</span>
-        <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="n">language</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">task</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;transcribe&quot;</span><span class="p">,</span> <span class="s2">&quot;translate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;transcribe&quot;</span><span class="p">,</span>
+        <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">_DEFAULT_AUDIO_MODEL</span><span class="p">,</span>
+        <span class="n">model_sharing</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;process&quot;</span><span class="p">,</span> <span class="s2">&quot;shared&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">num_gpus</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">gpu_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Run Whisper ASR over waveform values.</span>
 
@@ -2045,17 +2203,17 @@ under the License.
             <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="AudioExpressionAccessor.detect_language"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.AudioExpressionAccessor.detect_language.html#pyflink.multimodal.expression.AudioExpressionAccessor.detect_language">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">detect_language</span><span class="p">(</span>
+<div class="viewcode-block" id="AudioExpressionAccessor.detect_language"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.AudioExpressionAccessor.detect_language.html#pyflink.multimodal.expression.AudioExpressionAccessor.detect_language">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">detect_language</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">top_k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-        <span class="n">model</span><span class="o">=</span><span class="n">_DEFAULT_AUDIO_MODEL</span><span class="p">,</span>
-        <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="n">top_k</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">_DEFAULT_AUDIO_MODEL</span><span class="p">,</span>
+        <span class="n">model_sharing</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;process&quot;</span><span class="p">,</span> <span class="s2">&quot;shared&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">num_gpus</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">gpu_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Detect likely spoken language candidates for waveform values.</span>
 
@@ -2090,7 +2248,7 @@ under the License.
         <span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="VideoExpressionAccessor"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.VideoExpressionAccessor.html#pyflink.multimodal.expression.VideoExpressionAccessor">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">VideoExpressionAccessor</span><span class="p">(</span><span class="n">_ExpressionAccessor</span><span class="p">):</span>
+<div class="viewcode-block" id="VideoExpressionAccessor"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.VideoExpressionAccessor.html#pyflink.multimodal.expression.VideoExpressionAccessor">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">VideoExpressionAccessor</span><span class="p">(</span><span class="n">_ExpressionAccessor</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Video operations available on a DataFrame expression.</span>
 
@@ -2105,16 +2263,16 @@ under the License.
 <span class="sd">        ...     &quot;frames&quot;, col(&quot;uri&quot;).video.extract_frames(max_frames=16))</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="VideoExpressionAccessor.metadata"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.VideoExpressionAccessor.metadata.html#pyflink.multimodal.expression.VideoExpressionAccessor.metadata">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">metadata</span><span class="p">(</span>
+<div class="viewcode-block" id="VideoExpressionAccessor.metadata"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.VideoExpressionAccessor.metadata.html#pyflink.multimodal.expression.VideoExpressionAccessor.metadata">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">metadata</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">on_error</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">,</span>
-        <span class="n">container_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">read_chunk_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">max_cached_blocks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">read_ahead_blocks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="n">on_error</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;raise&quot;</span><span class="p">,</span> <span class="s2">&quot;null&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;raise&quot;</span><span class="p">,</span>
+        <span class="n">container_options</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">read_chunk_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_cached_blocks</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">read_ahead_blocks</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Probe video metadata for this expression.</span>
 
@@ -2148,21 +2306,21 @@ under the License.
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="VideoExpressionAccessor.extract_frames"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.expression.VideoExpressionAccessor.extract_frames.html#pyflink.multimodal.expression.VideoExpressionAccessor.extract_frames">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">extract_frames</span><span class="p">(</span>
+<div class="viewcode-block" id="VideoExpressionAccessor.extract_frames"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.multimodal.expression.VideoExpressionAccessor.extract_frames.html#pyflink.multimodal.expression.VideoExpressionAccessor.extract_frames">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">extract_frames</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">frame_selector</span><span class="o">=</span><span class="s2">&quot;all_frames&quot;</span><span class="p">,</span>
-        <span class="n">sample_interval_ms</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">max_frames</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">image_height</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">image_width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">on_error</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">,</span>
-        <span class="n">container_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">read_chunk_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">max_cached_blocks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">read_ahead_blocks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="n">frame_selector</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;all_frames&quot;</span><span class="p">,</span> <span class="s2">&quot;keyframe&quot;</span><span class="p">,</span> <span class="s2">&quot;sample&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;all_frames&quot;</span><span class="p">,</span>
+        <span class="n">sample_interval_ms</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_frames</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">image_height</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">image_width</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">on_error</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;raise&quot;</span><span class="p">,</span> <span class="s2">&quot;null&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;raise&quot;</span><span class="p">,</span>
+        <span class="n">container_options</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">read_chunk_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_cached_blocks</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">read_ahead_blocks</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Extract selected frames from this expression as an array.</span>
 
