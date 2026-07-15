@@ -1,0 +1,1123 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyflink.multimodal.operators.image_info &#8212; PyFlink 11.8.0 documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyflink/multimodal/operators/image_info';</script>
+    <link rel="shortcut icon" href="../../../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../../../search.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="Logo image">
+    <img src="../../../../_static/navbar-brand-logo.jpg" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <h1>Source code for pyflink.multimodal.operators.image_info</h1><div class="highlight"><pre>
+<span></span><span class="c1">################################################################################</span>
+<span class="c1">#  Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="c1">#  or more contributor license agreements.  See the NOTICE file</span>
+<span class="c1">#  distributed with this work for additional information</span>
+<span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
+<span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
+<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  with the License.  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">################################################################################</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Image information extraction operators.</span>
+
+<span class="sd">Most operators in this module take decoded ``Image`` values and return numeric</span>
+<span class="sd">values, strings, or booleans - they do **not** modify the image. Lightweight</span>
+<span class="sd">metadata and filter operators may also inspect encoded bytes when documented.</span>
+
+<span class="sd">Without business params (factory function, no args)::</span>
+
+<span class="sd">    from pyflink.multimodal.operators.image_info import image_aspect_ratio</span>
+<span class="sd">    df.with_column(&quot;ratio&quot;, image_aspect_ratio()(col(&quot;img&quot;)))</span>
+
+<span class="sd">With business params (factory function)::</span>
+
+<span class="sd">    from pyflink.multimodal.operators.image_info import image_hash</span>
+<span class="sd">    phash = image_hash(method=&quot;phash&quot;)</span>
+<span class="sd">    df.with_column(&quot;hash&quot;, phash(col(&quot;img&quot;)))</span>
+
+<span class="sd">Runtime args:</span>
+<span class="sd">    ``concurrency`` is forwarded to the DataFrame UDF runtime.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">Row</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common.image</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageMode</span><span class="p">,</span> <span class="n">validate_image</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="kn">import</span> <span class="n">udf</span><span class="p">,</span> <span class="n">DataType</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.udf</span><span class="w"> </span><span class="kn">import</span> <span class="n">ScalarFunction</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.multimodal.codec</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">image_array_to_pil</span><span class="p">,</span>
+    <span class="n">image_mode_channels</span><span class="p">,</span>
+    <span class="n">image_to_ndarray</span><span class="p">,</span>
+    <span class="n">is_decodable_image_bytes</span><span class="p">,</span>
+    <span class="n">read_encoded_image_metadata</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.multimodal.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">_build_or_apply_udf</span><span class="p">,</span> <span class="n">_udf_runtime_kwargs</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.model.cache_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_dependencies</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># Metadata extraction</span>
+    <span class="s2">&quot;image_metadata&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;image_aspect_ratio&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;image_sharpness&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;image_hash&quot;</span><span class="p">,</span>
+    <span class="c1"># Filters</span>
+    <span class="s2">&quot;is_valid_image&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;image_size_filter&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;image_shape_filter&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;image_file_size_filter&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">_SUPPORTED_HASH_METHODS</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;phash&quot;</span><span class="p">,</span> <span class="s2">&quot;dhash&quot;</span><span class="p">,</span> <span class="s2">&quot;ahash&quot;</span><span class="p">)</span>
+<span class="n">_OBSERVATION_ERRORS</span> <span class="o">=</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">)</span>
+
+
+<span class="c1"># Shared metadata and dimension helpers</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_is_native_image_input</span><span class="p">(</span><span class="n">image_input</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image_input</span><span class="p">,</span> <span class="n">Image</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_metadata_from_image</span><span class="p">(</span><span class="n">image_input</span><span class="p">):</span>
+    <span class="n">validate_image</span><span class="p">(</span><span class="n">image_input</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Row</span><span class="p">(</span>
+        <span class="n">width</span><span class="o">=</span><span class="n">image_input</span><span class="o">.</span><span class="n">width</span><span class="p">,</span>
+        <span class="n">height</span><span class="o">=</span><span class="n">image_input</span><span class="o">.</span><span class="n">height</span><span class="p">,</span>
+        <span class="n">channels</span><span class="o">=</span><span class="n">image_input</span><span class="o">.</span><span class="n">channels</span><span class="p">,</span>
+        <span class="n">mode</span><span class="o">=</span><span class="n">image_input</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">canonical_name</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;UNKNOWN&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_metadata_from_encoded_bytes</span><span class="p">(</span><span class="n">image_bytes</span><span class="p">):</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="n">read_encoded_image_metadata</span><span class="p">(</span><span class="n">image_bytes</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">metadata</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">channels</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">image_format</span> <span class="o">=</span> <span class="n">metadata</span>
+    <span class="k">return</span> <span class="n">Row</span><span class="p">(</span>
+        <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
+        <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span>
+        <span class="n">channels</span><span class="o">=</span><span class="n">channels</span><span class="p">,</span>
+        <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="n">image_format</span><span class="p">,</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_metadata_from_observation_input</span><span class="p">(</span><span class="n">image_input</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image_input</span><span class="p">,</span> <span class="p">(</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bytearray</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="n">_metadata_from_encoded_bytes</span><span class="p">(</span><span class="n">image_input</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">_is_native_image_input</span><span class="p">(</span><span class="n">image_input</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">_metadata_from_image</span><span class="p">(</span><span class="n">image_input</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected Image or encoded bytes, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">image_input</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_metadata_or_default</span><span class="p">(</span><span class="n">image_input</span><span class="p">,</span> <span class="n">default</span><span class="p">):</span>
+    <span class="c1"># Metadata and filter operators are observation gates: corrupt user data</span>
+    <span class="c1"># should produce the documented default failure value here. Pixel transforms,</span>
+    <span class="c1"># model operators, and analysis operators still use decoded Image inputs and</span>
+    <span class="c1"># fail fast when the input is malformed.</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_metadata_from_observation_input</span><span class="p">(</span><span class="n">image_input</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">_OBSERVATION_ERRORS</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">default</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_dimensions_or_default</span><span class="p">(</span><span class="n">image_input</span><span class="p">,</span> <span class="n">default</span><span class="p">):</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="n">_metadata_or_default</span><span class="p">(</span><span class="n">image_input</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">metadata</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">default</span>
+    <span class="k">return</span> <span class="n">metadata</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">metadata</span><span class="o">.</span><span class="n">height</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_aspect_ratio_from_dimensions</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">h</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">h</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">w</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_within_optional_bounds</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">lower_bound</span><span class="p">,</span> <span class="n">upper_bound</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">lower_bound</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">lower_bound</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="n">upper_bound</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="n">upper_bound</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_validate_at_least_one_bound</span><span class="p">(</span><span class="n">operator_name</span><span class="p">,</span> <span class="o">*</span><span class="n">bounds</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">bound</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">bound</span> <span class="ow">in</span> <span class="n">bounds</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">operator_name</span><span class="si">}</span><span class="s2"> requires at least one bound.&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_laplacian_variance</span><span class="p">(</span><span class="n">np</span><span class="p">,</span> <span class="n">pixel_array</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">pixel_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="ow">or</span> <span class="n">pixel_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+    <span class="n">pixel_array</span> <span class="o">=</span> <span class="n">pixel_array</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">laplacian</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">pixel_array</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="o">+</span> <span class="n">pixel_array</span><span class="p">[</span><span class="mi">2</span><span class="p">:,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="o">+</span> <span class="n">pixel_array</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+        <span class="o">+</span> <span class="n">pixel_array</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:]</span>
+        <span class="o">-</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">pixel_array</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">laplacian</span><span class="o">.</span><span class="n">var</span><span class="p">())</span>
+
+
+<span class="c1"># ImageValidityFilter - lightweight image validity predicate</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_ImageValidityFilter</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check if an image input passes lightweight validity checks.</span>
+
+<span class="sd">    Returns ``True`` for encoded image bytes that Pillow can verify without</span>
+<span class="sd">    materializing pixels, or decoded ``Image`` values that pass the built-in</span>
+<span class="sd">    image validation. The encoded-bytes path is header/container oriented and</span>
+<span class="sd">    does not guarantee that the full pixel stream can later be materialized by</span>
+<span class="sd">    ``image_decode``. Returns ``False`` for null, corrupt, or oversized image</span>
+<span class="sd">    data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pixel_limit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">image_mode_channels</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span>
+            <span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span><span class="o">.</span><span class="n">canonical_name</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">ImageMode</span><span class="p">)</span> <span class="k">else</span> <span class="n">mode</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">pixel_limit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">pixel_limit</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;pixel_limit must be positive, got </span><span class="si">{</span><span class="n">pixel_limit</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pixel_limit</span> <span class="o">=</span> <span class="n">pixel_limit</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_context</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_input</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">image_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image_input</span><span class="p">,</span> <span class="p">(</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bytearray</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="n">is_decodable_image_bytes</span><span class="p">(</span>
+                <span class="n">image_input</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span> <span class="n">max_pixels</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pixel_limit</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="n">_is_native_image_input</span><span class="p">(</span><span class="n">image_input</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">validate_image</span><span class="p">(</span><span class="n">image_input</span><span class="p">)</span>
+                <span class="k">if</span> <span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">pixel_limit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+                    <span class="ow">and</span> <span class="n">image_input</span><span class="o">.</span><span class="n">width</span> <span class="o">*</span> <span class="n">image_input</span><span class="o">.</span><span class="n">height</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">pixel_limit</span>
+                <span class="p">):</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">image_input</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">canonical_name</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="kc">True</span>
+                    <span class="n">image_to_ndarray</span><span class="p">(</span><span class="n">image_input</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+
+<div class="viewcode-block" id="is_valid_image"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.is_valid_image.html#pyflink.multimodal.operators.is_valid_image">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">is_valid_image</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pixel_limit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check if an image passes lightweight validity checks.</span>
+
+<span class="sd">    For encoded bytes this uses header/container verification and does not</span>
+<span class="sd">    guarantee that the full pixel stream can be materialized. Use</span>
+<span class="sd">    ``image_decode(on_error=&quot;null&quot;)`` when corrupt bytes should become null</span>
+<span class="sd">    instead of failing.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        *columns: Optional image columns. When provided, the UDF is applied</span>
+<span class="sd">            directly (syntactic sugar).</span>
+<span class="sd">        mode: Optional target mode to validate against, e.g. ``&quot;RGB&quot;``.</span>
+<span class="sd">        pixel_limit: Maximum allowed ``width * height``. Images exceeding</span>
+<span class="sd">            this limit are treated as invalid.</span>
+<span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A UDF producing ``boolean``.</span>
+
+<span class="sd">    Example::</span>
+<span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
+<span class="sd">        &gt;&gt;&gt; valid = is_valid_image(pixel_limit=4096 * 4096)</span>
+<span class="sd">        &gt;&gt;&gt; df = df.filter(valid(col(&quot;content&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Inline</span>
+<span class="sd">        &gt;&gt;&gt; df = df.filter(is_valid_image(col(&quot;content&quot;), pixel_limit=4096 * 4096))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
+        <span class="n">_ImageValidityFilter</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span> <span class="n">pixel_limit</span><span class="o">=</span><span class="n">pixel_limit</span><span class="p">),</span>
+        <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">boolean</span><span class="p">(),</span>
+        <span class="o">**</span><span class="n">_udf_runtime_kwargs</span><span class="p">(</span><span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_build_or_apply_udf</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">)</span></div>
+
+
+<span class="c1"># ImageMetadata - extract width, height, channels, mode, format</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_ImageMetadata</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extract metadata (width, height, channels, mode) from an image.</span>
+
+<span class="sd">    Decoded images store pixels only, not the original container format, so</span>
+<span class="sd">    ``format`` is returned as ``&quot;UNKNOWN&quot;`` for decoded input. Encoded bytes are</span>
+<span class="sd">    inspected without materializing decoded pixels and corrupt bytes return</span>
+<span class="sd">    ``None``. Encoded-byte metadata is lightweight and does not guarantee that</span>
+<span class="sd">    the full pixel stream can be materialized.</span>
+
+<span class="sd">    Usage::</span>
+
+<span class="sd">        df.with_column(&quot;meta&quot;, image_metadata()(col(&quot;img&quot;)))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_context</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_input</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">image_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">_metadata_or_default</span><span class="p">(</span><span class="n">image_input</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="image_metadata"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_metadata.html#pyflink.multimodal.operators.image_metadata">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_metadata</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extract metadata (width, height, channels, mode) from an image.</span>
+
+<span class="sd">    Accepts decoded Image values and encoded image bytes. For decoded input,</span>
+<span class="sd">    ``mode`` reports the canonical Image mode and ``format`` is ``&quot;UNKNOWN&quot;``.</span>
+<span class="sd">    For encoded bytes, metadata is read from the container header; corrupt bytes</span>
+<span class="sd">    return ``None``. Encoded-byte metadata is lightweight and does not guarantee</span>
+<span class="sd">    that the full pixel stream can be materialized.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        *columns: Optional image columns. When provided, the UDF is applied</span>
+<span class="sd">            directly (syntactic sugar).</span>
+<span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A UDF producing an object with ``width``, ``height``, ``channels``,</span>
+<span class="sd">        ``mode``, and ``format`` fields.</span>
+
+<span class="sd">    Example::</span>
+<span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
+<span class="sd">        &gt;&gt;&gt; metadata = image_metadata()</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_columns(&quot;meta&quot;, metadata(col(&quot;img&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Inline</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_columns(&quot;meta&quot;, image_metadata(col(&quot;img&quot;)))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
+        <span class="n">_ImageMetadata</span><span class="p">(),</span>
+        <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">struct</span><span class="p">({</span>
+            <span class="s2">&quot;width&quot;</span><span class="p">:</span> <span class="n">DataType</span><span class="o">.</span><span class="n">int32</span><span class="p">(),</span>
+            <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="n">DataType</span><span class="o">.</span><span class="n">int32</span><span class="p">(),</span>
+            <span class="s2">&quot;channels&quot;</span><span class="p">:</span> <span class="n">DataType</span><span class="o">.</span><span class="n">int32</span><span class="p">(),</span>
+            <span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+            <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+        <span class="p">}),</span>
+        <span class="o">**</span><span class="n">_udf_runtime_kwargs</span><span class="p">(</span><span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_build_or_apply_udf</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">)</span></div>
+
+
+<span class="c1"># ImageAspectRatio - width / height ratio</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_ImageAspectRatio</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the aspect ratio (width / height) of an image.</span>
+
+<span class="sd">    Accepts decoded Image values and encoded image bytes. Invalid or corrupt</span>
+<span class="sd">    input returns ``None``.</span>
+
+<span class="sd">    Usage::</span>
+
+<span class="sd">        df.with_column(&quot;ratio&quot;, image_aspect_ratio()(col(&quot;img&quot;)))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_context</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_input</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">image_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">dimensions</span> <span class="o">=</span> <span class="n">_dimensions_or_default</span><span class="p">(</span><span class="n">image_input</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dimensions</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">dimensions</span>
+        <span class="k">return</span> <span class="n">_aspect_ratio_from_dimensions</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="image_aspect_ratio"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_aspect_ratio.html#pyflink.multimodal.operators.image_aspect_ratio">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_aspect_ratio</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the aspect ratio (width / height) of an image.</span>
+
+<span class="sd">    Accepts decoded Image values and encoded image bytes. Invalid or corrupt</span>
+<span class="sd">    input returns ``None``.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        *columns: Optional image columns. When provided, the UDF is applied</span>
+<span class="sd">            directly (syntactic sugar).</span>
+<span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A UDF producing ``float64``.</span>
+
+<span class="sd">    Example::</span>
+<span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
+<span class="sd">        &gt;&gt;&gt; aspect_ratio = image_aspect_ratio()</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_columns(&quot;ratio&quot;, aspect_ratio(col(&quot;img&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Inline</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_columns(&quot;ratio&quot;, image_aspect_ratio(col(&quot;img&quot;)))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
+        <span class="n">_ImageAspectRatio</span><span class="p">(),</span>
+        <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">(),</span>
+        <span class="o">**</span><span class="n">_udf_runtime_kwargs</span><span class="p">(</span><span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_build_or_apply_udf</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">)</span></div>
+
+
+<span class="c1"># ImageSharpness - low-cost Laplacian variance focus measure</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_ImageSharpness</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute a raw sharpness metric using Laplacian variance.</span>
+
+<span class="sd">    The returned value is a focus measure in ``[0, +inf)``: larger values</span>
+<span class="sd">    usually indicate sharper edges and stronger high-frequency detail. It is</span>
+<span class="sd">    intentionally not normalized because absolute thresholds depend on image</span>
+<span class="sd">    scale, texture, contrast, and noise. Use ``max_edge`` or an upstream resize</span>
+<span class="sd">    step when comparing images with a fixed threshold.</span>
+
+<span class="sd">    Usage::</span>
+
+<span class="sd">        df.with_column(&quot;sharpness&quot;, image_sharpness()(col(&quot;img&quot;)))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_edge</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">allow_upscale</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">max_edge</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">max_edge</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;max_edge must be positive or None, got </span><span class="si">{</span><span class="n">max_edge</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_edge</span> <span class="o">=</span> <span class="n">max_edge</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">allow_upscale</span> <span class="o">=</span> <span class="n">allow_upscale</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_context</span><span class="p">):</span>
+        <span class="n">check_dependencies</span><span class="p">(</span><span class="s2">&quot;numpy&quot;</span><span class="p">,</span> <span class="s2">&quot;PIL&quot;</span><span class="p">)</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_np</span> <span class="o">=</span> <span class="n">np</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_resample_lanczos</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">Image</span><span class="p">,</span> <span class="s2">&quot;Resampling&quot;</span><span class="p">,</span> <span class="n">Image</span><span class="p">)</span><span class="o">.</span><span class="n">LANCZOS</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_resize_to_max_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pixel_array</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_edge</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">pixel_array</span>
+        <span class="n">height</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">pixel_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">longest_edge</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">longest_edge</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">pixel_array</span>
+        <span class="n">ratio</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_edge</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">longest_edge</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ratio</span> <span class="o">==</span> <span class="mf">1.0</span> <span class="ow">or</span> <span class="p">(</span><span class="n">ratio</span> <span class="o">&gt;</span> <span class="mf">1.0</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">allow_upscale</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">pixel_array</span>
+        <span class="n">new_size</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">width</span> <span class="o">*</span> <span class="n">ratio</span><span class="p">))),</span>
+            <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">height</span> <span class="o">*</span> <span class="n">ratio</span><span class="p">))),</span>
+        <span class="p">)</span>
+        <span class="n">pil_image</span> <span class="o">=</span> <span class="n">image_array_to_pil</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">)</span>
+        <span class="n">resized</span> <span class="o">=</span> <span class="n">pil_image</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">new_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resample_lanczos</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">resized</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_input</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">image_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">pixel_array</span> <span class="o">=</span> <span class="n">image_to_ndarray</span><span class="p">(</span><span class="n">image_input</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;L&quot;</span><span class="p">)</span>
+        <span class="n">pixel_array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resize_to_max_edge</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">_laplacian_variance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_np</span><span class="p">,</span> <span class="n">pixel_array</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="image_sharpness"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_sharpness.html#pyflink.multimodal.operators.image_sharpness">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_sharpness</span><span class="p">(</span>
+    <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
+    <span class="n">max_edge</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">allow_upscale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute a raw sharpness metric using Laplacian variance.</span>
+
+<span class="sd">    The result is in ``[0, +inf)`` and larger values usually indicate sharper</span>
+<span class="sd">    images. This is a low-cost focus measure, not an absolute quality score:</span>
+<span class="sd">    thresholds depend on image scale, texture, contrast, and noise.</span>
+<span class="sd">    Input must be a decoded image; encoded bytes raise ``TypeError``. Decode</span>
+<span class="sd">    raw bytes first with ``image_decode(on_error=&quot;null&quot;)`` when invalid inputs</span>
+<span class="sd">    should become null.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        *columns: Optional image columns. When provided, the UDF is applied</span>
+<span class="sd">            directly (syntactic sugar).</span>
+<span class="sd">        max_edge: Cap the longest edge to this many pixels before computing</span>
+<span class="sd">            sharpness. ``None`` (default) preserves the original scale.</span>
+<span class="sd">        allow_upscale: When ``max_edge`` is set, allow upscaling smaller</span>
+<span class="sd">            images. Default ``False``.</span>
+<span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A UDF producing ``float64``.</span>
+
+<span class="sd">    Example::</span>
+<span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
+<span class="sd">        &gt;&gt;&gt; sharpness = image_sharpness(max_edge=512)</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_columns(&quot;sharpness&quot;, sharpness(col(&quot;img&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Inline</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_columns(&quot;sharpness&quot;, image_sharpness(col(&quot;img&quot;), max_edge=512))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
+        <span class="n">_ImageSharpness</span><span class="p">(</span>
+            <span class="n">max_edge</span><span class="o">=</span><span class="n">max_edge</span><span class="p">,</span>
+            <span class="n">allow_upscale</span><span class="o">=</span><span class="n">allow_upscale</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">(),</span>
+        <span class="o">**</span><span class="n">_udf_runtime_kwargs</span><span class="p">(</span><span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_build_or_apply_udf</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">)</span></div>
+
+
+<span class="c1"># ImageHash - perceptual / difference / average hash</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_ImageHash</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute a perceptual hash of an image.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        method: Hash algorithm - &quot;phash&quot;, &quot;dhash&quot;, or &quot;ahash&quot;. Default &quot;phash&quot;.</span>
+
+<span class="sd">    Requires: ``pip install imagehash``</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;phash&quot;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_SUPPORTED_HASH_METHODS</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Unknown hash method &#39;</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">&#39;. &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Supported: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">_SUPPORTED_HASH_METHODS</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="n">method</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_context</span><span class="p">):</span>
+        <span class="n">check_dependencies</span><span class="p">(</span><span class="s2">&quot;imagehash&quot;</span><span class="p">)</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">imagehash</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_hash_funcs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;phash&quot;</span><span class="p">:</span> <span class="n">imagehash</span><span class="o">.</span><span class="n">phash</span><span class="p">,</span>
+            <span class="s2">&quot;dhash&quot;</span><span class="p">:</span> <span class="n">imagehash</span><span class="o">.</span><span class="n">dhash</span><span class="p">,</span>
+            <span class="s2">&quot;ahash&quot;</span><span class="p">:</span> <span class="n">imagehash</span><span class="o">.</span><span class="n">average_hash</span><span class="p">,</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_input</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">image_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">pixel_array</span> <span class="o">=</span> <span class="n">image_to_ndarray</span><span class="p">(</span><span class="n">image_input</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">pil_image</span> <span class="o">=</span> <span class="n">image_array_to_pil</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="c1"># Perceptual hash libraries operate on 8-bit PIL images; high</span>
+            <span class="c1"># precision decoded image input must be normalized here.</span>
+            <span class="n">pil_image</span> <span class="o">=</span> <span class="n">image_array_to_pil</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;RGB&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_hash_funcs</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">method</span><span class="p">](</span><span class="n">pil_image</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="image_hash"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_hash.html#pyflink.multimodal.operators.image_hash">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_hash</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;phash&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute a perceptual hash of an image.</span>
+
+<span class="sd">    Input must be a decoded image; encoded bytes raise ``TypeError``. Decode</span>
+<span class="sd">    raw bytes first with ``image_decode(on_error=&quot;null&quot;)`` when invalid inputs</span>
+<span class="sd">    should become null.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        *columns: Optional image columns. When provided, the UDF is applied</span>
+<span class="sd">            directly (syntactic sugar).</span>
+<span class="sd">        method: Hash algorithm — ``&quot;phash&quot;`` (default), ``&quot;dhash&quot;``, or</span>
+<span class="sd">            ``&quot;ahash&quot;``.</span>
+<span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A UDF producing ``string``.</span>
+
+<span class="sd">    Example::</span>
+<span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
+<span class="sd">        &gt;&gt;&gt; hasher = image_hash(method=&quot;phash&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_columns(&quot;hash&quot;, hasher(col(&quot;img&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Inline</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_columns(&quot;hash&quot;, image_hash(col(&quot;img&quot;), method=&quot;phash&quot;))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
+        <span class="n">_ImageHash</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">),</span>
+        <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+        <span class="o">**</span><span class="n">_udf_runtime_kwargs</span><span class="p">(</span><span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_build_or_apply_udf</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">)</span></div>
+
+
+<span class="c1"># ImageSizeFilter - filter by pixel dimensions</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_ImageSizeFilter</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check if an image&#39;s dimensions fall within the specified bounds.</span>
+
+<span class="sd">    Returns True if the image dimensions are within the configured lower and</span>
+<span class="sd">    optional upper bounds. Encoded bytes are inspected without materializing</span>
+<span class="sd">    decoded pixels and the header check does not guarantee full pixel</span>
+<span class="sd">    materialization. Invalid input returns ``False``.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        min_w: Minimum width. Default None.</span>
+<span class="sd">        min_h: Minimum height. Default None.</span>
+<span class="sd">        max_w: Maximum width. Default None.</span>
+<span class="sd">        max_h: Maximum height. Default None.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_w</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">min_h</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_w</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_h</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">_validate_at_least_one_bound</span><span class="p">(</span>
+            <span class="s2">&quot;image_size_filter&quot;</span><span class="p">,</span> <span class="n">min_w</span><span class="p">,</span> <span class="n">min_h</span><span class="p">,</span> <span class="n">max_w</span><span class="p">,</span> <span class="n">max_h</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_w</span> <span class="o">=</span> <span class="n">min_w</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_h</span> <span class="o">=</span> <span class="n">min_h</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_w</span> <span class="o">=</span> <span class="n">max_w</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_h</span> <span class="o">=</span> <span class="n">max_h</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_context</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_input</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">image_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="n">dimensions</span> <span class="o">=</span> <span class="n">_dimensions_or_default</span><span class="p">(</span><span class="n">image_input</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dimensions</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">dimensions</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">_within_optional_bounds</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_w</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_w</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="n">_within_optional_bounds</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_h</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_h</span><span class="p">)</span>
+        <span class="p">)</span>
+
+
+<div class="viewcode-block" id="image_size_filter"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_size_filter.html#pyflink.multimodal.operators.image_size_filter">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_size_filter</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">min_w</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">min_h</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_w</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_h</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                      <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Filter images by pixel dimensions.</span>
+
+<span class="sd">    Accepts decoded Image values and encoded image bytes. Encoded bytes are</span>
+<span class="sd">    checked from lightweight metadata only and may still fail later decode.</span>
+<span class="sd">    Invalid or corrupt input evaluates to ``False``. At least one dimension</span>
+<span class="sd">    bound must be configured.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        *columns: Optional image columns. When provided, the UDF is applied</span>
+<span class="sd">            directly (syntactic sugar).</span>
+<span class="sd">        min_w: Minimum width in pixels. Default ``None`` (unbounded).</span>
+<span class="sd">        min_h: Minimum height in pixels. Default ``None`` (unbounded).</span>
+<span class="sd">        max_w: Maximum width in pixels. Default ``None`` (unbounded).</span>
+<span class="sd">        max_h: Maximum height in pixels. Default ``None`` (unbounded).</span>
+<span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A UDF producing ``boolean``.</span>
+
+<span class="sd">    Example::</span>
+<span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
+<span class="sd">        &gt;&gt;&gt; size_filter = image_size_filter(min_w=100, max_w=4096)</span>
+<span class="sd">        &gt;&gt;&gt; df = df.filter(size_filter(col(&quot;img&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Inline</span>
+<span class="sd">        &gt;&gt;&gt; df = df.filter(image_size_filter(col(&quot;img&quot;), min_w=100, max_w=4096))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
+        <span class="n">_ImageSizeFilter</span><span class="p">(</span><span class="n">min_w</span><span class="o">=</span><span class="n">min_w</span><span class="p">,</span> <span class="n">min_h</span><span class="o">=</span><span class="n">min_h</span><span class="p">,</span> <span class="n">max_w</span><span class="o">=</span><span class="n">max_w</span><span class="p">,</span> <span class="n">max_h</span><span class="o">=</span><span class="n">max_h</span><span class="p">),</span>
+        <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">boolean</span><span class="p">(),</span>
+        <span class="o">**</span><span class="n">_udf_runtime_kwargs</span><span class="p">(</span><span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_build_or_apply_udf</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">)</span></div>
+
+
+<span class="c1"># ImageShapeFilter - filter by aspect ratio range</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_ImageShapeFilter</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check if an image&#39;s aspect ratio (width/height) falls within a range.</span>
+
+<span class="sd">    Returns True if ``width / height`` is above ``min_ratio`` and below the</span>
+<span class="sd">    optional ``max_ratio``. Encoded bytes are inspected without materializing</span>
+<span class="sd">    decoded pixels and the header check does not guarantee full pixel</span>
+<span class="sd">    materialization. Invalid input returns ``False``.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        min_ratio: Minimum aspect ratio. Default None.</span>
+<span class="sd">        max_ratio: Maximum aspect ratio. Default None.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_ratio</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_ratio</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">_validate_at_least_one_bound</span><span class="p">(</span>
+            <span class="s2">&quot;image_shape_filter&quot;</span><span class="p">,</span> <span class="n">min_ratio</span><span class="p">,</span> <span class="n">max_ratio</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_ratio</span> <span class="o">=</span> <span class="n">min_ratio</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_ratio</span> <span class="o">=</span> <span class="n">max_ratio</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_context</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_input</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">image_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="n">dimensions</span> <span class="o">=</span> <span class="n">_dimensions_or_default</span><span class="p">(</span><span class="n">image_input</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dimensions</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">dimensions</span>
+        <span class="n">ratio</span> <span class="o">=</span> <span class="n">_aspect_ratio_from_dimensions</span><span class="p">(</span>
+            <span class="n">w</span><span class="p">,</span> <span class="n">h</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">ratio</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="n">_within_optional_bounds</span><span class="p">(</span><span class="n">ratio</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_ratio</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_ratio</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="image_shape_filter"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_shape_filter.html#pyflink.multimodal.operators.image_shape_filter">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_shape_filter</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">min_ratio</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_ratio</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Filter images by aspect ratio (width / height).</span>
+
+<span class="sd">    Accepts decoded Image values and encoded image bytes. Encoded bytes are</span>
+<span class="sd">    checked from lightweight metadata only and may still fail later decode.</span>
+<span class="sd">    Invalid or corrupt input evaluates to ``False``. At least one aspect-ratio</span>
+<span class="sd">    bound must be configured.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        *columns: Optional image columns. When provided, the UDF is applied</span>
+<span class="sd">            directly (syntactic sugar).</span>
+<span class="sd">        min_ratio: Minimum aspect ratio. Default ``None`` (unbounded).</span>
+<span class="sd">        max_ratio: Maximum aspect ratio. Default ``None`` (unbounded).</span>
+<span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A UDF producing ``boolean``.</span>
+
+<span class="sd">    Example::</span>
+<span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
+<span class="sd">        &gt;&gt;&gt; shape_filter = image_shape_filter(min_ratio=0.5, max_ratio=2.0)</span>
+<span class="sd">        &gt;&gt;&gt; df = df.filter(shape_filter(col(&quot;img&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Inline</span>
+<span class="sd">        &gt;&gt;&gt; df = df.filter(image_shape_filter(col(&quot;img&quot;), min_ratio=0.5, max_ratio=2.0))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
+        <span class="n">_ImageShapeFilter</span><span class="p">(</span><span class="n">min_ratio</span><span class="o">=</span><span class="n">min_ratio</span><span class="p">,</span> <span class="n">max_ratio</span><span class="o">=</span><span class="n">max_ratio</span><span class="p">),</span>
+        <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">boolean</span><span class="p">(),</span>
+        <span class="o">**</span><span class="n">_udf_runtime_kwargs</span><span class="p">(</span><span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_build_or_apply_udf</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">)</span></div>
+
+
+<span class="c1"># ImageFileSizeFilter - filter by file size in bytes</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_ImageFileSizeFilter</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check if raw encoded image bytes fall within the specified byte range.</span>
+
+<span class="sd">    Returns True if the byte length is within the configured lower and</span>
+<span class="sd">    optional upper bounds. Non-bytes input returns ``False`` because decoded</span>
+<span class="sd">    images do not retain the original encoded byte size.</span>
+
+<span class="sd">    This filter must run before ``image_decode`` because decoded ``Image``</span>
+<span class="sd">    values no longer contain the original encoded byte size.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        min_bytes: Minimum file size in bytes. Default None.</span>
+<span class="sd">        max_bytes: Maximum file size in bytes. Default None.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_bytes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_bytes</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">_validate_at_least_one_bound</span><span class="p">(</span>
+            <span class="s2">&quot;image_file_size_filter&quot;</span><span class="p">,</span> <span class="n">min_bytes</span><span class="p">,</span> <span class="n">max_bytes</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_bytes</span> <span class="o">=</span> <span class="n">min_bytes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_bytes</span> <span class="o">=</span> <span class="n">max_bytes</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_context</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_bytes</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">image_bytes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image_bytes</span><span class="p">,</span> <span class="p">(</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bytearray</span><span class="p">)):</span>
+            <span class="c1"># File size is an encoded-container property. If this filter is</span>
+            <span class="c1"># accidentally placed after image_decode(), treat it as a failed</span>
+            <span class="c1"># predicate instead of failing the whole pipeline.</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_bytes</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">_within_optional_bounds</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_bytes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_bytes</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="image_file_size_filter"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_file_size_filter.html#pyflink.multimodal.operators.image_file_size_filter">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_file_size_filter</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">min_bytes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_bytes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                           <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Filter images by encoded file size in bytes.</span>
+
+<span class="sd">    This operator filters by ``len(image_bytes)`` of the original encoded</span>
+<span class="sd">    payload. It is meaningful only for encoded image bytes and should be placed</span>
+<span class="sd">    before ``image_decode``; decoded Image input evaluates to ``False``. At</span>
+<span class="sd">    least one byte-size bound must be configured.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        *columns: Optional image columns. When provided, the UDF is applied</span>
+<span class="sd">            directly (syntactic sugar).</span>
+<span class="sd">        min_bytes: Minimum file size in bytes. Default ``None`` (unbounded).</span>
+<span class="sd">        max_bytes: Maximum file size in bytes. Default ``None`` (unbounded).</span>
+<span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A UDF producing ``boolean``.</span>
+
+<span class="sd">    Example::</span>
+<span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
+<span class="sd">        &gt;&gt;&gt; file_size_filter = image_file_size_filter(min_bytes=1024, max_bytes=5*1024*1024)</span>
+<span class="sd">        &gt;&gt;&gt; df = df.filter(file_size_filter(col(&quot;img&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Inline</span>
+<span class="sd">        &gt;&gt;&gt; df = df.filter(</span>
+<span class="sd">        ...     image_file_size_filter(col(&quot;img&quot;), min_bytes=1024, max_bytes=5*1024*1024)</span>
+<span class="sd">        ... )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
+        <span class="n">_ImageFileSizeFilter</span><span class="p">(</span><span class="n">min_bytes</span><span class="o">=</span><span class="n">min_bytes</span><span class="p">,</span> <span class="n">max_bytes</span><span class="o">=</span><span class="n">max_bytes</span><span class="p">),</span>
+        <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">boolean</span><span class="p">(),</span>
+        <span class="o">**</span><span class="n">_udf_runtime_kwargs</span><span class="p">(</span><span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_build_or_apply_udf</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">)</span></div>
+</pre></div>
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

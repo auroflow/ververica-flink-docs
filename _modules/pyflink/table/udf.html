@@ -1,0 +1,1623 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyflink.table.udf &#8212; PyFlink 11.8.0 documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyflink/table/udf';</script>
+    <link rel="shortcut icon" href="../../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../../search.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="Logo image">
+    <img src="../../../_static/navbar-brand-logo.jpg" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <h1>Source code for pyflink.table.udf</h1><div class="highlight"><pre>
+<span></span><span class="c1">################################################################################</span>
+<span class="c1">#  Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="c1">#  or more contributor license agreements.  See the NOTICE file</span>
+<span class="c1">#  distributed with this work for additional information</span>
+<span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
+<span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
+<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  with the License.  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">################################################################################</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">abc</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">functools</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Any</span><span class="p">,</span> <span class="n">Awaitable</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Generic</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span>
+    <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">overload</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.java_gateway</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_gateway</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">MetricGroup</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table</span><span class="w"> </span><span class="kn">import</span> <span class="n">Expression</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.types</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ArrayType</span><span class="p">,</span>
+    <span class="n">DataType</span><span class="p">,</span>
+    <span class="n">ListViewType</span><span class="p">,</span>
+    <span class="n">MapType</span><span class="p">,</span>
+    <span class="n">MapViewType</span><span class="p">,</span>
+    <span class="n">MultisetType</span><span class="p">,</span>
+    <span class="n">RowType</span><span class="p">,</span>
+    <span class="n">VariantType</span><span class="p">,</span>
+    <span class="n">_to_java_data_type</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">java_utils</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;FunctionContext&#39;</span><span class="p">,</span> <span class="s1">&#39;AggregateFunction&#39;</span><span class="p">,</span> <span class="s1">&#39;ScalarFunction&#39;</span><span class="p">,</span> <span class="s1">&#39;TableFunction&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;TableAggregateFunction&#39;</span><span class="p">,</span> <span class="s1">&#39;AsyncScalarFunction&#39;</span><span class="p">,</span> <span class="s1">&#39;udf&#39;</span><span class="p">,</span> <span class="s1">&#39;udtf&#39;</span><span class="p">,</span> <span class="s1">&#39;udaf&#39;</span><span class="p">,</span> <span class="s1">&#39;udtaf&#39;</span><span class="p">]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_contains_variant_type</span><span class="p">(</span><span class="n">data_type</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data_type</span><span class="p">,</span> <span class="n">VariantType</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data_type</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">data_type</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;VARIANT&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data_type</span><span class="p">,</span> <span class="n">RowType</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">_contains_variant_type</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">data_type</span><span class="p">)</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">data_type</span><span class="o">.</span><span class="n">fields</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data_type</span><span class="p">,</span> <span class="p">(</span><span class="n">ArrayType</span><span class="p">,</span> <span class="n">MultisetType</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="n">_contains_variant_type</span><span class="p">(</span><span class="n">data_type</span><span class="o">.</span><span class="n">element_type</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data_type</span><span class="p">,</span> <span class="n">MapType</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">_contains_variant_type</span><span class="p">(</span><span class="n">data_type</span><span class="o">.</span><span class="n">key_type</span><span class="p">)</span> <span class="ow">or</span>
+            <span class="n">_contains_variant_type</span><span class="p">(</span><span class="n">data_type</span><span class="o">.</span><span class="n">value_type</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data_type</span><span class="p">,</span> <span class="n">ListViewType</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">_contains_variant_type</span><span class="p">(</span><span class="n">data_type</span><span class="o">.</span><span class="n">_element_type</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data_type</span><span class="p">,</span> <span class="n">MapViewType</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">_contains_variant_type</span><span class="p">(</span><span class="n">data_type</span><span class="o">.</span><span class="n">_key_type</span><span class="p">)</span> <span class="ow">or</span>
+            <span class="n">_contains_variant_type</span><span class="p">(</span><span class="n">data_type</span><span class="o">.</span><span class="n">_value_type</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="kc">False</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_validate_no_variant_result_type</span><span class="p">(</span><span class="n">data_type</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">_contains_variant_type</span><span class="p">(</span><span class="n">data_type</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+            <span class="s2">&quot;Python aggregate functions do not support VARIANT as a result or accumulator type.&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_validate_no_variant_result_type_for_vectorized_function</span><span class="p">(</span><span class="n">data_type</span><span class="p">,</span> <span class="n">func_type</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">func_type</span> <span class="o">==</span> <span class="s2">&quot;general&quot;</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="k">if</span> <span class="n">_contains_variant_type</span><span class="p">(</span><span class="n">data_type</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+            <span class="s2">&quot;Python vectorized UDFs do not support VARIANT as a return type. &quot;</span>
+            <span class="s2">&quot;Use a general Python UDF.&quot;</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">FunctionContext</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Used to obtain global runtime information about the context in which the</span>
+<span class="sd">    user-defined function is executed. The information includes the metric group,</span>
+<span class="sd">    and global job parameters, etc.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_metric_group</span><span class="p">,</span> <span class="n">job_parameters</span><span class="p">,</span> <span class="n">runner_request_transport</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_base_metric_group</span> <span class="o">=</span> <span class="n">base_metric_group</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_job_parameters</span> <span class="o">=</span> <span class="n">job_parameters</span>
+        <span class="c1"># Keep only the execution-provided transport eagerly. The runner request client and</span>
+        <span class="c1"># Java-side FileSystem client are lazy caches layered on top of it and are only created</span>
+        <span class="c1"># when built-in functions actually need Java runner-side services.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_runner_request_transport</span> <span class="o">=</span> <span class="n">runner_request_transport</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_runner_request_client</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_file_system_bridge_client</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_metric_group</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MetricGroup</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the metric group for this parallel subtask.</span>
+
+<span class="sd">        .. versionadded:: 1.11.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_base_metric_group</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Metric has not been enabled. You can enable &quot;</span>
+                               <span class="s2">&quot;metric with the &#39;python.metric.enabled&#39; configuration.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_base_metric_group</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_job_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default_value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the global job parameter value associated with the given key as a string.</span>
+
+<span class="sd">        :param key: The key pointing to the associated value.</span>
+<span class="sd">        :param default_value: The default value which is returned in case global job parameter is</span>
+<span class="sd">                              null or there is no value associated with the given key.</span>
+
+<span class="sd">        .. versionadded:: 1.17.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_job_parameters</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_job_parameters</span> <span class="k">else</span> <span class="n">default_value</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_config_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default_value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the framework configuration value associated with the given key as a string.</span>
+
+<span class="sd">        This is separate from user-defined job parameters at the API boundary, even though</span>
+<span class="sd">        Python function execution currently transports selected configuration entries through</span>
+<span class="sd">        the same serialized parameter map.</span>
+
+<span class="sd">        :param key: The key pointing to the associated configuration value.</span>
+<span class="sd">        :param default_value: The default value returned when the key is absent.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_job_parameters</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_job_parameters</span> <span class="k">else</span> <span class="n">default_value</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_file_system_bridge_client</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the internal Java-side Flink FileSystem bridge client for built-in Python functions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_file_system_bridge_client</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.fn_execution.file_system_bridge</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+                <span class="n">FlinkFileSystemBridgeClient</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_file_system_bridge_client</span> <span class="o">=</span> <span class="n">FlinkFileSystemBridgeClient</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_get_runner_request_client</span><span class="p">())</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_file_system_bridge_client</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_runner_request_client</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the internal Java runner request client for built-in Python functions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_runner_request_client</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.fn_execution.runner_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">RunnerRequestClient</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_runner_request_client</span> <span class="o">=</span> <span class="n">RunnerRequestClient</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_runner_request_transport</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_runner_request_client</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">UserDefinedFunction</span><span class="p">(</span><span class="n">abc</span><span class="o">.</span><span class="n">ABC</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base interface for user-defined function.</span>
+
+<span class="sd">    .. versionadded:: 1.10.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_context</span><span class="p">:</span> <span class="n">FunctionContext</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialization method for the function. It is called before the actual working methods</span>
+<span class="sd">        and thus suitable for one time setup work.</span>
+
+<span class="sd">        :param function_context: the context of the function</span>
+<span class="sd">        :type function_context: FunctionContext</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Tear-down method for the user code. It is called after the last call to the main</span>
+<span class="sd">        working methods.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_deterministic</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns information about the determinism of the function&#39;s results.</span>
+<span class="sd">        It returns true if and only if a call to this function is guaranteed to</span>
+<span class="sd">        always return the same result given the same parameters. true is assumed by default.</span>
+<span class="sd">        If the function is not pure functional like random(), date(), now(),</span>
+<span class="sd">        this method must return false.</span>
+
+<span class="sd">        :return: the determinism of the function&#39;s results.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+
+<div class="viewcode-block" id="ScalarFunction"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.udf.ScalarFunction.html#pyflink.table.udf.ScalarFunction">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">ScalarFunction</span><span class="p">(</span><span class="n">UserDefinedFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base interface for user-defined scalar function. A user-defined scalar functions maps zero, one,</span>
+<span class="sd">    or multiple scalar values to a new scalar value.</span>
+
+<span class="sd">    .. versionadded:: 1.10.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+        <span class="nb">eval</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Method which defines the logic of the scalar function.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">pass</span></div>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">AsyncScalarFunction</span><span class="p">(</span><span class="n">UserDefinedFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base interface for user-defined async scalar function. A user-defined async scalar function</span>
+<span class="sd">    maps zero, one, or multiple scalar values to a new scalar value asynchronously.</span>
+
+<span class="sd">    This function is similar to ScalarFunction but is executed asynchronously. It&#39;s useful when</span>
+<span class="sd">    interacting with external systems (e.g., databases, REST APIs) where I/O operations would</span>
+<span class="sd">    otherwise block.</span>
+
+<span class="sd">    The eval method should be an async coroutine function that returns the result asynchronously.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; class AsyncLookupFunction(AsyncScalarFunction):</span>
+<span class="sd">            ...     async def eval(self, key):</span>
+<span class="sd">            ...         # Simulate async I/O operation</span>
+<span class="sd">            ...         await asyncio.sleep(0.1)</span>
+<span class="sd">            ...         return f&quot;value_for_{key}&quot;</span>
+
+<span class="sd">    .. versionadded:: 2.3.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+        <span class="nb">eval</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">Awaitable</span><span class="p">[</span><span class="n">Any</span><span class="p">]]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+        <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Async method which defines the logic of the async scalar function.</span>
+<span class="sd">            This method should be an async coroutine.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">pass</span>
+
+
+<div class="viewcode-block" id="TableFunction"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.udf.TableFunction.html#pyflink.table.udf.TableFunction">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">TableFunction</span><span class="p">(</span><span class="n">UserDefinedFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base interface for user-defined table function. A user-defined table function creates zero, one,</span>
+<span class="sd">    or multiple rows to a new row value.</span>
+
+<span class="sd">    .. versionadded:: 1.11.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+        <span class="nb">eval</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Any</span><span class="p">]]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Method which defines the logic of the table function.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">pass</span></div>
+
+
+<span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">)</span>
+<span class="n">ACC</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;ACC&#39;</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ImperativeAggregateFunction</span><span class="p">(</span><span class="n">UserDefinedFunction</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">T</span><span class="p">,</span> <span class="n">ACC</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base interface for user-defined aggregate function and table aggregate function.</span>
+
+<span class="sd">    This class is used for unified handling of imperative aggregating functions. Concrete</span>
+<span class="sd">    implementations should extend from :class:`~pyflink.table.AggregateFunction` or</span>
+<span class="sd">    :class:`~pyflink.table.TableAggregateFunction`.</span>
+
+<span class="sd">    .. versionadded:: 1.13.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_accumulator</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ACC</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates and initializes the accumulator for this AggregateFunction.</span>
+
+<span class="sd">        :return: the accumulator with the initial value</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">accumulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">accumulator</span><span class="p">:</span> <span class="n">ACC</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Processes the input values and updates the provided accumulator instance.</span>
+
+<span class="sd">        :param accumulator: the accumulator which contains the current aggregated results</span>
+<span class="sd">        :param args: the input value (usually obtained from new arrived data)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">retract</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">accumulator</span><span class="p">:</span> <span class="n">ACC</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retracts the input values from the accumulator instance.The current design assumes the</span>
+<span class="sd">        inputs are the values that have been previously accumulated.</span>
+
+<span class="sd">        :param accumulator: the accumulator which contains the current aggregated results</span>
+<span class="sd">        :param args: the input value (usually obtained from new arrived data).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Method retract is not implemented&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">merge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">accumulator</span><span class="p">:</span> <span class="n">ACC</span><span class="p">,</span> <span class="n">accumulators</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Merges a group of accumulator instances into one accumulator instance. This method must be</span>
+<span class="sd">        implemented for unbounded session window grouping aggregates and bounded grouping</span>
+<span class="sd">        aggregates.</span>
+
+<span class="sd">        :param accumulator: the accumulator which will keep the merged aggregate results. It should</span>
+<span class="sd">                            be noted that the accumulator may contain the previous aggregated</span>
+<span class="sd">                            results. Therefore user should not replace or clean this instance in the</span>
+<span class="sd">                            custom merge method.</span>
+<span class="sd">        :param accumulators: a group of accumulators that will be merged.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Method merge is not implemented&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_result_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the DataType of the AggregateFunction&#39;s result.</span>
+
+<span class="sd">        :return: The :class:`~pyflink.table.types.DataType` of the AggregateFunction&#39;s result.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Method get_result_type is not implemented&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_accumulator_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the DataType of the AggregateFunction&#39;s accumulator.</span>
+
+<span class="sd">        :return: The :class:`~pyflink.table.types.DataType` of the AggregateFunction&#39;s accumulator.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Method get_accumulator_type is not implemented&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="AggregateFunction"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.udf.AggregateFunction.html#pyflink.table.udf.AggregateFunction">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">AggregateFunction</span><span class="p">(</span><span class="n">ImperativeAggregateFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base interface for user-defined aggregate function. A user-defined aggregate function maps</span>
+<span class="sd">    scalar values of multiple rows to a new scalar value.</span>
+
+<span class="sd">    .. versionadded:: 1.12.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">accumulator</span><span class="p">:</span> <span class="n">ACC</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>  <span class="c1"># type: ignore[type-var]</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Called every time when an aggregation result should be materialized. The returned value</span>
+<span class="sd">        could be either an early and incomplete result (periodically emitted as data arrives) or</span>
+<span class="sd">        the final result of the aggregation.</span>
+
+<span class="sd">        :param accumulator: the accumulator which contains the current intermediate results</span>
+<span class="sd">        :return: the aggregation result</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="TableAggregateFunction"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.udf.TableAggregateFunction.html#pyflink.table.udf.TableAggregateFunction">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">TableAggregateFunction</span><span class="p">(</span><span class="n">ImperativeAggregateFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class for a user-defined table aggregate function. A user-defined table aggregate function</span>
+<span class="sd">    maps scalar values of multiple rows to zero, one, or multiple rows (or structured types). If an</span>
+<span class="sd">    output record consists of only one field, the structured record can be omitted, and a scalar</span>
+<span class="sd">    value can be emitted that will be implicitly wrapped into a row by the runtime.</span>
+
+<span class="sd">    .. versionadded:: 1.13.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">emit_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">accumulator</span><span class="p">:</span> <span class="n">ACC</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Called every time when an aggregation result should be materialized. The returned value</span>
+<span class="sd">        could be either an early and incomplete result (periodically emitted as data arrives) or the</span>
+<span class="sd">        final result of the aggregation.</span>
+
+<span class="sd">        :param accumulator: the accumulator which contains the current aggregated results.</span>
+<span class="sd">        :return: multiple aggregated result</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DelegatingScalarFunction</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper scalar function implementation for lambda expression and python function. It&#39;s for</span>
+<span class="sd">    internal use only.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DelegatingAsyncScalarFunction</span><span class="p">(</span><span class="n">AsyncScalarFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper async scalar function implementation for async lambda expression and python async</span>
+<span class="sd">    function. It&#39;s for internal use only.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DelegationTableFunction</span><span class="p">(</span><span class="n">TableFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper table function implementation for lambda expression and python function. It&#39;s for</span>
+<span class="sd">    internal use only.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DelegatingPandasAggregateFunction</span><span class="p">(</span><span class="n">AggregateFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper pandas aggregate function implementation for lambda expression and python function.</span>
+<span class="sd">    It&#39;s for internal use only.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">accumulator</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">accumulator</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_accumulator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">accumulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">accumulator</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="n">accumulator</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">))</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PandasAggregateFunctionWrapper</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Wrapper for Pandas Aggregate function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">AggregateFunction</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_context</span><span class="p">:</span> <span class="n">FunctionContext</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">function_context</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="n">accumulator</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="o">.</span><span class="n">create_accumulator</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="o">.</span><span class="n">accumulate</span><span class="p">(</span><span class="n">accumulator</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="n">accumulator</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">UserDefinedFunctionWrapper</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base Wrapper for Python user-defined function. It handles things like converting lambda</span>
+<span class="sd">    functions to user-defined functions, creating the Java user-defined function representation,</span>
+<span class="sd">    etc. It&#39;s for internal use only.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">input_types</span><span class="p">,</span> <span class="n">func_type</span><span class="p">,</span> <span class="n">deterministic</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">inspect</span><span class="o">.</span><span class="n">isclass</span><span class="p">(</span><span class="n">func</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span>
+                <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">UserDefinedFunction</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">callable</span><span class="p">(</span><span class="n">func</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">&quot;Invalid function: not a function or callable (__call__ is not defined): </span><span class="si">{0}</span><span class="s2">&quot;</span>
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">func</span><span class="p">)))</span>
+
+        <span class="k">if</span> <span class="n">input_types</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">RowType</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">input_types</span><span class="p">,</span> <span class="n">RowType</span><span class="p">):</span>
+                <span class="n">input_types</span> <span class="o">=</span> <span class="n">input_types</span><span class="o">.</span><span class="n">field_types</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">input_types</span><span class="p">,</span> <span class="p">(</span><span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">)):</span>
+                <span class="n">input_types</span> <span class="o">=</span> <span class="p">[</span><span class="n">input_types</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">input_types</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">input_types</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">input_type</span> <span class="ow">in</span> <span class="n">input_types</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">input_type</span><span class="p">,</span> <span class="p">(</span><span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">)):</span>
+                    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                        <span class="s2">&quot;Invalid input_type: input_type should be DataType or str but contains </span><span class="si">{}</span><span class="s2">&quot;</span>
+                        <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">input_type</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_func</span> <span class="o">=</span> <span class="n">func</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_input_types</span> <span class="o">=</span> <span class="n">input_types</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span> <span class="ow">or</span> <span class="p">(</span>
+            <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s1">&#39;__name__&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="n">func</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">deterministic</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">UserDefinedFunction</span><span class="p">)</span> <span class="ow">and</span> <span class="n">deterministic</span> \
+                <span class="o">!=</span> <span class="n">func</span><span class="o">.</span><span class="n">is_deterministic</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Inconsistent deterministic: </span><span class="si">{}</span><span class="s2"> and </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">deterministic</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="n">is_deterministic</span><span class="p">()))</span>
+
+        <span class="c1"># default deterministic is True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_deterministic</span> <span class="o">=</span> <span class="n">deterministic</span> <span class="k">if</span> <span class="n">deterministic</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">(</span>
+            <span class="n">func</span><span class="o">.</span><span class="n">is_deterministic</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">UserDefinedFunction</span><span class="p">)</span> <span class="k">else</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_func_type</span> <span class="o">=</span> <span class="n">func_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_judf_placeholder</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_takes_row_as_input</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_concurrency</span> <span class="o">=</span> <span class="n">concurrency</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_batch_size</span> <span class="o">=</span> <span class="n">batch_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span> <span class="o">=</span> <span class="n">num_gpus</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_gpu_type</span> <span class="o">=</span> <span class="n">gpu_type</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Expression</span><span class="p">:</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table</span><span class="w"> </span><span class="kn">import</span> <span class="n">expressions</span> <span class="k">as</span> <span class="n">expr</span>
+        <span class="k">return</span> <span class="n">expr</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">alias</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">alias_names</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_alias_names</span> <span class="o">=</span> <span class="n">alias_names</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_set_takes_row_as_input</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_takes_row_as_input</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_java_user_defined_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_judf_placeholder</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
+
+            <span class="k">def</span><span class="w"> </span><span class="nf">get_python_function_kind</span><span class="p">():</span>
+                <span class="n">JPythonFunctionKind</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">python</span><span class="o">.</span> \
+                    <span class="n">PythonFunctionKind</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_func_type</span> <span class="o">==</span> <span class="s2">&quot;general&quot;</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">JPythonFunctionKind</span><span class="o">.</span><span class="n">GENERAL</span>
+                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_func_type</span> <span class="o">==</span> <span class="s2">&quot;pandas&quot;</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">JPythonFunctionKind</span><span class="o">.</span><span class="n">PANDAS</span>
+                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_func_type</span> <span class="o">==</span> <span class="s2">&quot;arrow&quot;</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">JPythonFunctionKind</span><span class="o">.</span><span class="n">ARROW</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Unsupported func_type: </span><span class="si">%s</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_func_type</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_types</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_input_types</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
+                    <span class="n">j_input_types</span> <span class="o">=</span> <span class="n">java_utils</span><span class="o">.</span><span class="n">to_jarray</span><span class="p">(</span><span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">String</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_types</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">j_input_types</span> <span class="o">=</span> <span class="n">java_utils</span><span class="o">.</span><span class="n">to_jarray</span><span class="p">(</span>
+                        <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">DataType</span><span class="p">,</span> <span class="p">[</span><span class="n">_to_java_data_type</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_types</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">j_input_types</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">j_function_kind</span> <span class="o">=</span> <span class="n">get_python_function_kind</span><span class="p">()</span>
+            <span class="n">func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_func</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_func</span><span class="p">,</span> <span class="n">UserDefinedFunction</span><span class="p">):</span>
+                <span class="n">func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_delegate_function</span><span class="p">()</span>
+
+            <span class="kn">import</span><span class="w"> </span><span class="nn">cloudpickle</span>
+            <span class="n">serialized_func</span> <span class="o">=</span> <span class="n">cloudpickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_judf_placeholder</span> <span class="o">=</span> \
+                <span class="bp">self</span><span class="o">.</span><span class="n">_create_judf</span><span class="p">(</span><span class="n">serialized_func</span><span class="p">,</span> <span class="n">j_input_types</span><span class="p">,</span> <span class="n">j_function_kind</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_judf_placeholder</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_create_delegate_function</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UserDefinedFunction</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_create_judf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">serialized_func</span><span class="p">,</span> <span class="n">j_input_types</span><span class="p">,</span> <span class="n">j_function_kind</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">UserDefinedScalarFunctionWrapper</span><span class="p">(</span><span class="n">UserDefinedFunctionWrapper</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Wrapper for Python user-defined scalar function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">input_types</span><span class="p">,</span> <span class="n">result_type</span><span class="p">,</span> <span class="n">func_type</span><span class="p">,</span> <span class="n">deterministic</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span>
+                 <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">UserDefinedScalarFunctionWrapper</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">func</span><span class="p">,</span> <span class="n">input_types</span><span class="p">,</span> <span class="n">func_type</span><span class="p">,</span> <span class="n">deterministic</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">concurrency</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span>
+            <span class="n">num_gpus</span><span class="p">,</span> <span class="n">gpu_type</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result_type</span><span class="p">,</span> <span class="p">(</span><span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">&quot;Invalid returnType: returnType should be DataType or str but is </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">result_type</span><span class="p">))</span>
+        <span class="n">_validate_no_variant_result_type_for_vectorized_function</span><span class="p">(</span><span class="n">result_type</span><span class="p">,</span> <span class="n">func_type</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_result_type</span> <span class="o">=</span> <span class="n">result_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_judf_placeholder</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_create_judf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">serialized_func</span><span class="p">,</span> <span class="n">j_input_types</span><span class="p">,</span> <span class="n">j_function_kind</span><span class="p">):</span>
+        <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_result_type</span><span class="p">,</span> <span class="n">DataType</span><span class="p">):</span>
+            <span class="n">j_result_type</span> <span class="o">=</span> <span class="n">_to_java_data_type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_result_type</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">j_result_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_result_type</span>
+        <span class="n">PythonScalarFunction</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span> \
+            <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">PythonScalarFunction</span>
+        <span class="n">j_scalar_function</span> <span class="o">=</span> <span class="n">PythonScalarFunction</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span>
+            <span class="nb">bytearray</span><span class="p">(</span><span class="n">serialized_func</span><span class="p">),</span>
+            <span class="n">j_input_types</span><span class="p">,</span>
+            <span class="n">j_result_type</span><span class="p">,</span>
+            <span class="n">j_function_kind</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_deterministic</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_takes_row_as_input</span><span class="p">,</span>
+            <span class="n">_get_python_env</span><span class="p">())</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_concurrency</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">j_scalar_function</span><span class="o">.</span><span class="n">setParallelism</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_concurrency</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_batch_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">j_scalar_function</span><span class="o">.</span><span class="n">setMaxArrowBatchSize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_batch_size</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">j_scalar_function</span><span class="o">.</span><span class="n">setNumGpus</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gpu_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">j_scalar_function</span><span class="o">.</span><span class="n">setGpuType</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_gpu_type</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">j_scalar_function</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_create_delegate_function</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UserDefinedFunction</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">DelegatingScalarFunction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_func</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">UserDefinedAsyncScalarFunctionWrapper</span><span class="p">(</span><span class="n">UserDefinedFunctionWrapper</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Wrapper for Python user-defined async scalar function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">input_types</span><span class="p">,</span> <span class="n">result_type</span><span class="p">,</span> <span class="n">func_type</span><span class="p">,</span> <span class="n">deterministic</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span>
+                 <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">UserDefinedAsyncScalarFunctionWrapper</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">func</span><span class="p">,</span> <span class="n">input_types</span><span class="p">,</span> <span class="n">func_type</span><span class="p">,</span> <span class="n">deterministic</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">concurrency</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span>
+            <span class="n">num_gpus</span><span class="p">,</span> <span class="n">gpu_type</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result_type</span><span class="p">,</span> <span class="p">(</span><span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">&quot;Invalid returnType: returnType should be DataType or str but is </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">result_type</span><span class="p">))</span>
+        <span class="n">_validate_no_variant_result_type_for_vectorized_function</span><span class="p">(</span><span class="n">result_type</span><span class="p">,</span> <span class="n">func_type</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_result_type</span> <span class="o">=</span> <span class="n">result_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_judf_placeholder</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_create_judf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">serialized_func</span><span class="p">,</span> <span class="n">j_input_types</span><span class="p">,</span> <span class="n">j_function_kind</span><span class="p">):</span>
+        <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_result_type</span><span class="p">,</span> <span class="n">DataType</span><span class="p">):</span>
+            <span class="n">j_result_type</span> <span class="o">=</span> <span class="n">_to_java_data_type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_result_type</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">j_result_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_result_type</span>
+        <span class="n">PythonAsyncScalarFunction</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span> \
+            <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">PythonAsyncScalarFunction</span>
+        <span class="n">j_async_scalar_function</span> <span class="o">=</span> <span class="n">PythonAsyncScalarFunction</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span>
+            <span class="nb">bytearray</span><span class="p">(</span><span class="n">serialized_func</span><span class="p">),</span>
+            <span class="n">j_input_types</span><span class="p">,</span>
+            <span class="n">j_result_type</span><span class="p">,</span>
+            <span class="n">j_function_kind</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_deterministic</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_takes_row_as_input</span><span class="p">,</span>
+            <span class="n">_get_python_env</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_concurrency</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_concurrency</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_batch_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">j_async_scalar_function</span><span class="o">.</span><span class="n">setMaxArrowBatchSize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_batch_size</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">j_async_scalar_function</span><span class="o">.</span><span class="n">setNumGpus</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gpu_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">j_async_scalar_function</span><span class="o">.</span><span class="n">setGpuType</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_gpu_type</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">j_async_scalar_function</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_create_delegate_function</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UserDefinedFunction</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">DelegatingAsyncScalarFunction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_func</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">UserDefinedTableFunctionWrapper</span><span class="p">(</span><span class="n">UserDefinedFunctionWrapper</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Wrapper for Python user-defined table function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">input_types</span><span class="p">,</span> <span class="n">result_types</span><span class="p">,</span> <span class="n">deterministic</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">UserDefinedTableFunctionWrapper</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">func</span><span class="p">,</span> <span class="n">input_types</span><span class="p">,</span> <span class="s2">&quot;general&quot;</span><span class="p">,</span> <span class="n">deterministic</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span> <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span> <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result_types</span><span class="p">,</span> <span class="n">DataType</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result_types</span><span class="p">,</span> <span class="n">RowType</span><span class="p">):</span>
+            <span class="c1"># DataTypes.INT()</span>
+            <span class="n">normalized_result_types</span> <span class="o">=</span> <span class="p">[</span><span class="n">result_types</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result_types</span><span class="p">,</span> <span class="p">(</span><span class="n">RowType</span><span class="p">,</span> <span class="nb">str</span><span class="p">)):</span>
+            <span class="c1"># DataTypes.ROW([...]) or &quot;ROW&lt;f0 INT, f1 BIGINT&gt;&quot;</span>
+            <span class="n">normalized_result_types</span> <span class="o">=</span> <span class="n">result_types</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># [DataTypes.INT(), DataTypes.BIGINT()]</span>
+            <span class="n">normalized_result_types</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">result_types</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">normalized_result_types</span><span class="p">,</span> <span class="n">RowType</span><span class="p">):</span>
+            <span class="n">result_type_values</span> <span class="o">=</span> <span class="n">normalized_result_types</span><span class="o">.</span><span class="n">field_types</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">normalized_result_types</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">result_type_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">normalized_result_types</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result_type_values</span> <span class="o">=</span> <span class="n">normalized_result_types</span>
+
+        <span class="k">for</span> <span class="n">result_type</span> <span class="ow">in</span> <span class="n">result_type_values</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result_type</span><span class="p">,</span> <span class="p">(</span><span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">)):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                    <span class="s2">&quot;Invalid result_type: result_type should be DataType or str but contains </span><span class="si">{}</span><span class="s2">&quot;</span>
+                    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result_type</span><span class="p">))</span>
+            <span class="n">_validate_no_variant_result_type_for_vectorized_function</span><span class="p">(</span>
+                <span class="n">result_type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_func_type</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_result_types</span> <span class="o">=</span> <span class="n">normalized_result_types</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_create_judf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">serialized_func</span><span class="p">,</span> <span class="n">j_input_types</span><span class="p">,</span> <span class="n">j_function_kind</span><span class="p">):</span>
+        <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_result_types</span><span class="p">,</span> <span class="n">RowType</span><span class="p">):</span>
+            <span class="n">j_result_type</span> <span class="o">=</span> <span class="n">_to_java_data_type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_result_types</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_result_types</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">j_result_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_result_types</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_result_types</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">DataType</span><span class="p">):</span>
+            <span class="n">j_result_types</span> <span class="o">=</span> <span class="n">java_utils</span><span class="o">.</span><span class="n">to_jarray</span><span class="p">(</span>
+                <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">DataType</span><span class="p">,</span> <span class="p">[</span><span class="n">_to_java_data_type</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_result_types</span><span class="p">])</span>
+            <span class="n">j_result_type</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">DataTypes</span><span class="o">.</span><span class="n">ROW</span><span class="p">(</span><span class="n">j_result_types</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">j_result_type</span> <span class="o">=</span> <span class="s1">&#39;Row&lt;</span><span class="si">{0}</span><span class="s1">&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="p">[</span><span class="s1">&#39;f</span><span class="si">{0}</span><span class="s1"> </span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">result_type</span><span class="p">)</span>
+                 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">result_type</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_result_types</span><span class="p">)]))</span>
+        <span class="n">PythonTableFunction</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span> \
+            <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">PythonTableFunction</span>
+        <span class="n">j_table_function</span> <span class="o">=</span> <span class="n">PythonTableFunction</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span>
+            <span class="nb">bytearray</span><span class="p">(</span><span class="n">serialized_func</span><span class="p">),</span>
+            <span class="n">j_input_types</span><span class="p">,</span>
+            <span class="n">j_result_type</span><span class="p">,</span>
+            <span class="n">j_function_kind</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_deterministic</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_takes_row_as_input</span><span class="p">,</span>
+            <span class="n">_get_python_env</span><span class="p">())</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_concurrency</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">j_table_function</span><span class="o">.</span><span class="n">setParallelism</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_concurrency</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">j_table_function</span><span class="o">.</span><span class="n">setNumGpus</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gpu_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">j_table_function</span><span class="o">.</span><span class="n">setGpuType</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_gpu_type</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">j_table_function</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_create_delegate_function</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UserDefinedFunction</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">DelegationTableFunction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_func</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">UserDefinedAggregateFunctionWrapper</span><span class="p">(</span><span class="n">UserDefinedFunctionWrapper</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Wrapper for Python user-defined aggregate function or user-defined table aggregate function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">input_types</span><span class="p">,</span> <span class="n">result_type</span><span class="p">,</span> <span class="n">accumulator_type</span><span class="p">,</span> <span class="n">func_type</span><span class="p">,</span>
+                 <span class="n">deterministic</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">is_table_aggregate</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">UserDefinedAggregateFunctionWrapper</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">func</span><span class="p">,</span> <span class="n">input_types</span><span class="p">,</span> <span class="n">func_type</span><span class="p">,</span> <span class="n">deterministic</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">accumulator_type</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">func_type</span> <span class="o">==</span> <span class="s2">&quot;general&quot;</span><span class="p">:</span>
+            <span class="n">accumulator_type</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">get_accumulator_type</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">result_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">result_type</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">get_result_type</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result_type</span><span class="p">,</span> <span class="p">(</span><span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">&quot;Invalid returnType: returnType should be DataType or str but is </span><span class="si">{}</span><span class="s2">&quot;</span>
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result_type</span><span class="p">))</span>
+        <span class="n">_validate_no_variant_result_type</span><span class="p">(</span><span class="n">result_type</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">func_type</span> <span class="o">==</span> <span class="s1">&#39;pandas&#39;</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result_type</span><span class="p">,</span> <span class="n">MapType</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">&quot;Invalid returnType: Pandas UDAF doesn&#39;t support DataType type </span><span class="si">{}</span><span class="s2"> currently&quot;</span>
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result_type</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">accumulator_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">accumulator_type</span><span class="p">,</span> <span class="p">(</span><span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">&quot;Invalid accumulator_type: accumulator_type should be DataType or str but is </span><span class="si">{}</span><span class="s2">&quot;</span>
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">accumulator_type</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">accumulator_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">_validate_no_variant_result_type</span><span class="p">(</span><span class="n">accumulator_type</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">func_type</span> <span class="o">==</span> <span class="s2">&quot;general&quot;</span> <span class="ow">and</span>
+                <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">result_type</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">accumulator_type</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span>
+                     <span class="nb">isinstance</span><span class="p">(</span><span class="n">result_type</span><span class="p">,</span> <span class="n">DataType</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">accumulator_type</span><span class="p">,</span> <span class="n">DataType</span><span class="p">))):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;result_type and accumulator_type should be DataType or str &quot;</span>
+                            <span class="s2">&quot;at the same time.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_result_type</span> <span class="o">=</span> <span class="n">result_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_accumulator_type</span> <span class="o">=</span> <span class="n">accumulator_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_table_aggregate</span> <span class="o">=</span> <span class="n">is_table_aggregate</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_create_judf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">serialized_func</span><span class="p">,</span> <span class="n">j_input_types</span><span class="p">,</span> <span class="n">j_function_kind</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_func_type</span> <span class="o">==</span> <span class="s2">&quot;pandas&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_result_type</span><span class="p">,</span> <span class="n">DataType</span><span class="p">):</span>
+                <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataTypes</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_accumulator_type</span> <span class="o">=</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">ARRAY</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_result_type</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_accumulator_type</span> <span class="o">=</span> <span class="s1">&#39;ARRAY&lt;</span><span class="si">{0}</span><span class="s1">&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_result_type</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">j_input_types</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
+            <span class="n">j_input_types</span> <span class="o">=</span> <span class="n">java_utils</span><span class="o">.</span><span class="n">to_jarray</span><span class="p">(</span>
+                <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">DataType</span><span class="p">,</span> <span class="p">[</span><span class="n">_to_java_data_type</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_types</span><span class="p">])</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_result_type</span><span class="p">,</span> <span class="n">DataType</span><span class="p">):</span>
+            <span class="n">j_result_type</span> <span class="o">=</span> <span class="n">_to_java_data_type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_result_type</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">j_result_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_result_type</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_accumulator_type</span><span class="p">,</span> <span class="n">DataType</span><span class="p">):</span>
+            <span class="n">j_accumulator_type</span> <span class="o">=</span> <span class="n">_to_java_data_type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_accumulator_type</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">j_accumulator_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_accumulator_type</span>
+
+        <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_table_aggregate</span><span class="p">:</span>
+            <span class="n">PythonAggregateFunction</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span> \
+                <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">PythonTableAggregateFunction</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">PythonAggregateFunction</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span> \
+                <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">PythonAggregateFunction</span>
+        <span class="n">j_aggregate_function</span> <span class="o">=</span> <span class="n">PythonAggregateFunction</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span>
+            <span class="nb">bytearray</span><span class="p">(</span><span class="n">serialized_func</span><span class="p">),</span>
+            <span class="n">j_input_types</span><span class="p">,</span>
+            <span class="n">j_result_type</span><span class="p">,</span>
+            <span class="n">j_accumulator_type</span><span class="p">,</span>
+            <span class="n">j_function_kind</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_deterministic</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_takes_row_as_input</span><span class="p">,</span>
+            <span class="n">_get_python_env</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">j_aggregate_function</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_create_delegate_function</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UserDefinedFunction</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">_func_type</span> <span class="o">==</span> <span class="s1">&#39;pandas&#39;</span>
+        <span class="k">return</span> <span class="n">DelegatingPandasAggregateFunction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_func</span><span class="p">)</span>
+
+
+<span class="c1"># TODO: support to configure the python execution environment</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_python_env</span><span class="p">():</span>
+    <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
+    <span class="n">exec_type</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">PythonEnv</span><span class="o">.</span><span class="n">ExecType</span><span class="o">.</span><span class="n">PROCESS</span>
+    <span class="k">return</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">PythonEnv</span><span class="p">(</span><span class="n">exec_type</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_create_udf</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">input_types</span><span class="p">,</span> <span class="n">result_type</span><span class="p">,</span> <span class="n">func_type</span><span class="p">,</span> <span class="n">deterministic</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">AsyncScalarFunction</span><span class="p">)</span> <span class="ow">or</span> <span class="n">inspect</span><span class="o">.</span><span class="n">iscoroutinefunction</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">UserDefinedAsyncScalarFunctionWrapper</span><span class="p">(</span>
+            <span class="n">f</span><span class="p">,</span> <span class="n">input_types</span><span class="p">,</span> <span class="n">result_type</span><span class="p">,</span> <span class="n">func_type</span><span class="p">,</span> <span class="n">deterministic</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">concurrency</span><span class="p">,</span>
+            <span class="n">batch_size</span><span class="p">,</span> <span class="n">num_gpus</span><span class="p">,</span> <span class="n">gpu_type</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">UserDefinedScalarFunctionWrapper</span><span class="p">(</span>
+            <span class="n">f</span><span class="p">,</span> <span class="n">input_types</span><span class="p">,</span> <span class="n">result_type</span><span class="p">,</span> <span class="n">func_type</span><span class="p">,</span> <span class="n">deterministic</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">concurrency</span><span class="p">,</span>
+            <span class="n">batch_size</span><span class="p">,</span> <span class="n">num_gpus</span><span class="p">,</span> <span class="n">gpu_type</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_create_udtf</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">input_types</span><span class="p">,</span> <span class="n">result_types</span><span class="p">,</span> <span class="n">deterministic</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span>
+                 <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">UserDefinedTableFunctionWrapper</span><span class="p">(</span>
+        <span class="n">f</span><span class="p">,</span> <span class="n">input_types</span><span class="p">,</span> <span class="n">result_types</span><span class="p">,</span> <span class="n">deterministic</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span>
+        <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span> <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span> <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_create_udaf</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">input_types</span><span class="p">,</span> <span class="n">result_type</span><span class="p">,</span> <span class="n">accumulator_type</span><span class="p">,</span> <span class="n">func_type</span><span class="p">,</span> <span class="n">deterministic</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">UserDefinedAggregateFunctionWrapper</span><span class="p">(</span>
+        <span class="n">f</span><span class="p">,</span> <span class="n">input_types</span><span class="p">,</span> <span class="n">result_type</span><span class="p">,</span> <span class="n">accumulator_type</span><span class="p">,</span> <span class="n">func_type</span><span class="p">,</span> <span class="n">deterministic</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_create_udtaf</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">input_types</span><span class="p">,</span> <span class="n">result_type</span><span class="p">,</span> <span class="n">accumulator_type</span><span class="p">,</span> <span class="n">func_type</span><span class="p">,</span> <span class="n">deterministic</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">UserDefinedAggregateFunctionWrapper</span><span class="p">(</span>
+        <span class="n">f</span><span class="p">,</span> <span class="n">input_types</span><span class="p">,</span> <span class="n">result_type</span><span class="p">,</span> <span class="n">accumulator_type</span><span class="p">,</span> <span class="n">func_type</span><span class="p">,</span> <span class="n">deterministic</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+
+<span class="c1"># Overload 1: function is supplied — udf returns the wrapped UDF directly.</span>
+<span class="c1"># Covers the direct-call forms:</span>
+<span class="c1">#     udf(lambda i: i + 1, DataTypes.BIGINT(), DataTypes.BIGINT())</span>
+<span class="c1">#     udf(MyScalarFunction())</span>
+<span class="nd">@overload</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">udf</span><span class="p">(</span>
+    <span class="n">f</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">ScalarFunction</span><span class="p">,</span> <span class="n">AsyncScalarFunction</span><span class="p">,</span> <span class="n">Type</span><span class="p">],</span>
+    <span class="n">input_types</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">DataType</span><span class="p">],</span> <span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">result_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">deterministic</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">func_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">udf_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">num_gpus</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">gpu_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">UserDefinedScalarFunctionWrapper</span><span class="p">,</span> <span class="n">UserDefinedAsyncScalarFunctionWrapper</span><span class="p">]:</span>
+    <span class="o">...</span>
+
+
+<span class="c1"># Overload 2: no function supplied — udf is being used as a decorator factory</span>
+<span class="c1"># and must return a decorator that will receive the function next. Covers:</span>
+<span class="c1">#     @udf(result_type=DataTypes.BIGINT())</span>
+<span class="c1">#     def add(i, j): ...</span>
+<span class="nd">@overload</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">udf</span><span class="p">(</span>
+    <span class="n">f</span><span class="p">:</span> <span class="kc">None</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">input_types</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">DataType</span><span class="p">],</span> <span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">result_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">deterministic</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">func_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">udf_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">num_gpus</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">gpu_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[</span>
+    <span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">ScalarFunction</span><span class="p">,</span> <span class="n">AsyncScalarFunction</span><span class="p">,</span> <span class="n">Type</span><span class="p">]],</span>
+    <span class="n">Union</span><span class="p">[</span><span class="n">UserDefinedScalarFunctionWrapper</span><span class="p">,</span> <span class="n">UserDefinedAsyncScalarFunctionWrapper</span><span class="p">],</span>
+<span class="p">]:</span>
+    <span class="o">...</span>
+
+
+<div class="viewcode-block" id="udf"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.udf.udf.html#pyflink.table.udf.udf">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">udf</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">ScalarFunction</span><span class="p">,</span> <span class="n">AsyncScalarFunction</span><span class="p">,</span> <span class="n">Type</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">input_types</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">DataType</span><span class="p">],</span> <span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">result_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">deterministic</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">func_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;general&quot;</span><span class="p">,</span>
+        <span class="n">udf_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">num_gpus</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">gpu_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span>
+        <span class="n">UserDefinedScalarFunctionWrapper</span><span class="p">,</span> <span class="n">UserDefinedAsyncScalarFunctionWrapper</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper method for creating a user-defined scalar function.</span>
+
+<span class="sd">    This decorator can automatically detect whether the function is async (defined with `async def`</span>
+<span class="sd">    or is an instance of AsyncScalarFunction).</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; add_one = udf(lambda i: i + 1, DataTypes.BIGINT(), DataTypes.BIGINT())</span>
+
+<span class="sd">            &gt;&gt;&gt; # The input_types is optional.</span>
+<span class="sd">            &gt;&gt;&gt; @udf(result_type=DataTypes.BIGINT())</span>
+<span class="sd">            ... def add(i, j):</span>
+<span class="sd">            ...     return i + j</span>
+
+<span class="sd">            &gt;&gt;&gt; # Specify result_type via string.</span>
+<span class="sd">            &gt;&gt;&gt; @udf(result_type=&#39;BIGINT&#39;)</span>
+<span class="sd">            ... def add(i, j):</span>
+<span class="sd">            ...     return i + j</span>
+
+<span class="sd">            &gt;&gt;&gt; # Async function will be automatically detected</span>
+<span class="sd">            &gt;&gt;&gt; @udf(result_type=DataTypes.STRING())</span>
+<span class="sd">            ... async def async_lookup(key):</span>
+<span class="sd">            ...     await asyncio.sleep(0.1)</span>
+<span class="sd">            ...     return f&quot;value_for_{key}&quot;</span>
+
+<span class="sd">            &gt;&gt;&gt; class SubtractOne(ScalarFunction):</span>
+<span class="sd">            ...     def eval(self, i):</span>
+<span class="sd">            ...         return i - 1</span>
+<span class="sd">            &gt;&gt;&gt; subtract_one = udf(SubtractOne(), DataTypes.BIGINT(), DataTypes.BIGINT())</span>
+
+<span class="sd">            &gt;&gt;&gt; # AsyncScalarFunction will be automatically detected</span>
+<span class="sd">            &gt;&gt;&gt; class AsyncLookup(AsyncScalarFunction):</span>
+<span class="sd">            ...     async def eval(self, key):</span>
+<span class="sd">            ...         await asyncio.sleep(0.1)</span>
+<span class="sd">            ...         return f&quot;value_for_{key}&quot;</span>
+<span class="sd">            &gt;&gt;&gt; async_lookup = udf(AsyncLookup(), result_type=DataTypes.STRING())</span>
+
+<span class="sd">    :param f: lambda function, user-defined function, or async function.</span>
+<span class="sd">    :param input_types: optional, the input data types.</span>
+<span class="sd">    :param result_type: the result data type.</span>
+<span class="sd">    :param deterministic: the determinism of the function&#39;s results. True if and only if a call to</span>
+<span class="sd">                          this function is guaranteed to always return the same result given the</span>
+<span class="sd">                          same parameters. (default True)</span>
+<span class="sd">    :param name: the function name.</span>
+<span class="sd">    :param func_type: the type of the python function, available value: general, pandas, arrow,</span>
+<span class="sd">                     (default: general)</span>
+<span class="sd">    :param concurrency: optional, the concurrency (parallelism) for the UDF operator. If specified,</span>
+<span class="sd">                        the operator running this UDF will use this parallelism.</span>
+<span class="sd">    :param batch_size: optional, the maximum number of elements to buffer before processing them</span>
+<span class="sd">                       in a batch. Only valid for batch-wise UDF.</span>
+<span class="sd">    :return: UserDefinedScalarFunctionWrapper, UserDefinedAsyncScalarFunctionWrapper, or function.</span>
+
+<span class="sd">    .. versionadded:: 1.10.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">udf_type</span><span class="p">:</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;The param udf_type is deprecated in 1.12. Use func_type instead.&quot;</span><span class="p">)</span>
+        <span class="n">func_type</span> <span class="o">=</span> <span class="n">udf_type</span>
+
+    <span class="k">if</span> <span class="n">func_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;general&#39;</span><span class="p">,</span> <span class="s1">&#39;pandas&#39;</span><span class="p">,</span> <span class="s1">&#39;arrow&#39;</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The func_type must be one of &#39;general, pandas, arrow&#39;, got </span><span class="si">%s</span><span class="s2">.&quot;</span>
+                         <span class="o">%</span> <span class="n">func_type</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">func_type</span> <span class="o">==</span> <span class="s1">&#39;general&#39;</span> <span class="ow">and</span> <span class="n">batch_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;batch_size is only supported for pandas or arrow UDFs.&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">concurrency</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">concurrency</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="n">concurrency</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;concurrency must be a positive integer, got: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">concurrency</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">num_gpus</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">num_gpus</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span> <span class="ow">or</span> <span class="n">num_gpus</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;num_gpus must be a positive number, got: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">num_gpus</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">num_gpus</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">gpu_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;gpu_type must be specified when num_gpus is set&quot;</span><span class="p">)</span>
+
+    <span class="c1"># decorator</span>
+    <span class="k">if</span> <span class="n">f</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">_create_udf</span><span class="p">,</span> <span class="n">input_types</span><span class="o">=</span><span class="n">input_types</span><span class="p">,</span> <span class="n">result_type</span><span class="o">=</span><span class="n">result_type</span><span class="p">,</span>
+                                 <span class="n">func_type</span><span class="o">=</span><span class="n">func_type</span><span class="p">,</span> <span class="n">deterministic</span><span class="o">=</span><span class="n">deterministic</span><span class="p">,</span>
+                                 <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+                                 <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span> <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_create_udf</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">input_types</span><span class="p">,</span> <span class="n">result_type</span><span class="p">,</span> <span class="n">func_type</span><span class="p">,</span> <span class="n">deterministic</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span>
+                           <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+                           <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span> <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">)</span></div>
+
+
+<span class="c1"># Overload 1: function is supplied — udtf returns the wrapped UDTF directly.</span>
+<span class="nd">@overload</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">udtf</span><span class="p">(</span>
+    <span class="n">f</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">TableFunction</span><span class="p">,</span> <span class="n">Type</span><span class="p">],</span>
+    <span class="n">input_types</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">DataType</span><span class="p">],</span> <span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">result_types</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">DataType</span><span class="p">],</span> <span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">deterministic</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">num_gpus</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">gpu_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UserDefinedTableFunctionWrapper</span><span class="p">:</span>
+    <span class="o">...</span>
+
+
+<span class="c1"># Overload 2: no function supplied — udtf returns a decorator factory.</span>
+<span class="nd">@overload</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">udtf</span><span class="p">(</span>
+    <span class="n">f</span><span class="p">:</span> <span class="kc">None</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">input_types</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">DataType</span><span class="p">],</span> <span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">result_types</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">DataType</span><span class="p">],</span> <span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">deterministic</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">num_gpus</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">gpu_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">TableFunction</span><span class="p">,</span> <span class="n">Type</span><span class="p">]],</span> <span class="n">UserDefinedTableFunctionWrapper</span><span class="p">]:</span>
+    <span class="o">...</span>
+
+
+<div class="viewcode-block" id="udtf"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.udf.udtf.html#pyflink.table.udf.udtf">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">udtf</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">TableFunction</span><span class="p">,</span> <span class="n">Type</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+         <span class="n">input_types</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">DataType</span><span class="p">],</span> <span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+         <span class="n">result_types</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">DataType</span><span class="p">],</span> <span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+         <span class="n">deterministic</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+         <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+         <span class="n">concurrency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+         <span class="n">num_gpus</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+         <span class="n">gpu_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">UserDefinedTableFunctionWrapper</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper method for creating a user-defined table function.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; # The input_types is optional.</span>
+<span class="sd">            &gt;&gt;&gt; @udtf(result_types=[DataTypes.BIGINT(), DataTypes.BIGINT()])</span>
+<span class="sd">            ... def range_emit(s, e):</span>
+<span class="sd">            ...     for i in range(e):</span>
+<span class="sd">            ...         yield s, i</span>
+
+<span class="sd">            &gt;&gt;&gt; # Specify result_types via string</span>
+<span class="sd">            &gt;&gt;&gt; @udtf(result_types=[&#39;BIGINT&#39;, &#39;BIGINT&#39;])</span>
+<span class="sd">            ... def range_emit(s, e):</span>
+<span class="sd">            ...     for i in range(e):</span>
+<span class="sd">            ...         yield s, i</span>
+
+<span class="sd">            &gt;&gt;&gt; # Specify result_types via row string</span>
+<span class="sd">            &gt;&gt;&gt; @udtf(result_types=&#39;Row&lt;a BIGINT, b BIGINT&gt;&#39;)</span>
+<span class="sd">            ... def range_emit(s, e):</span>
+<span class="sd">            ...     for i in range(e):</span>
+<span class="sd">            ...         yield s, i</span>
+
+<span class="sd">            &gt;&gt;&gt; class MultiEmit(TableFunction):</span>
+<span class="sd">            ...     def eval(self, i):</span>
+<span class="sd">            ...         return range(i)</span>
+<span class="sd">            &gt;&gt;&gt; multi_emit = udtf(MultiEmit(), DataTypes.BIGINT(), DataTypes.BIGINT())</span>
+
+<span class="sd">    :param f: user-defined table function.</span>
+<span class="sd">    :param input_types: optional, the input data types.</span>
+<span class="sd">    :param result_types: the result data types.</span>
+<span class="sd">    :param name: the function name.</span>
+<span class="sd">    :param deterministic: the determinism of the function&#39;s results. True if and only if a call to</span>
+<span class="sd">                          this function is guaranteed to always return the same result given the</span>
+<span class="sd">                          same parameters. (default True)</span>
+<span class="sd">    :param concurrency: optional concurrency (parallelism) for this UDTF operator.</span>
+<span class="sd">    :param num_gpus: optional number of GPUs requested for this UDTF.</span>
+<span class="sd">    :param gpu_type: optional GPU type. Required when num_gpus is set.</span>
+<span class="sd">    :return: UserDefinedTableFunctionWrapper or function.</span>
+
+<span class="sd">    .. versionadded:: 1.11.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">concurrency</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">concurrency</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="n">concurrency</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;concurrency must be a positive integer, got: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">concurrency</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">num_gpus</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">num_gpus</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span> <span class="ow">or</span> <span class="n">num_gpus</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;num_gpus must be a positive number, got: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">num_gpus</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">num_gpus</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">gpu_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;gpu_type must be specified when num_gpus is set&quot;</span><span class="p">)</span>
+
+    <span class="c1"># decorator</span>
+    <span class="k">if</span> <span class="n">f</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">_create_udtf</span><span class="p">,</span> <span class="n">input_types</span><span class="o">=</span><span class="n">input_types</span><span class="p">,</span> <span class="n">result_types</span><span class="o">=</span><span class="n">result_types</span><span class="p">,</span>
+                                 <span class="n">deterministic</span><span class="o">=</span><span class="n">deterministic</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+                                 <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span> <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+                                 <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_create_udtf</span><span class="p">(</span>
+            <span class="n">f</span><span class="p">,</span> <span class="n">input_types</span><span class="p">,</span> <span class="n">result_types</span><span class="p">,</span> <span class="n">deterministic</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span> <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span> <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">)</span></div>
+
+
+<span class="c1"># Overload 1: function is supplied — udaf returns the wrapped UDAF directly.</span>
+<span class="nd">@overload</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">udaf</span><span class="p">(</span>
+    <span class="n">f</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">AggregateFunction</span><span class="p">,</span> <span class="n">Type</span><span class="p">],</span>
+    <span class="n">input_types</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">DataType</span><span class="p">],</span> <span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">result_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">accumulator_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">deterministic</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">func_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UserDefinedAggregateFunctionWrapper</span><span class="p">:</span>
+    <span class="o">...</span>
+
+
+<span class="c1"># Overload 2: no function supplied — udaf returns a decorator factory.</span>
+<span class="nd">@overload</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">udaf</span><span class="p">(</span>
+    <span class="n">f</span><span class="p">:</span> <span class="kc">None</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">input_types</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">DataType</span><span class="p">],</span> <span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">result_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">accumulator_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">deterministic</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">func_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">AggregateFunction</span><span class="p">,</span> <span class="n">Type</span><span class="p">]],</span> <span class="n">UserDefinedAggregateFunctionWrapper</span><span class="p">]:</span>
+    <span class="o">...</span>
+
+
+<div class="viewcode-block" id="udaf"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.udf.udaf.html#pyflink.table.udf.udaf">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">udaf</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">AggregateFunction</span><span class="p">,</span> <span class="n">Type</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+         <span class="n">input_types</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">DataType</span><span class="p">],</span> <span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+         <span class="n">result_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+         <span class="n">accumulator_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+         <span class="n">deterministic</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+         <span class="n">func_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;general&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">UserDefinedAggregateFunctionWrapper</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper method for creating a user-defined aggregate function.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; # The input_types is optional.</span>
+<span class="sd">            &gt;&gt;&gt; @udaf(result_type=DataTypes.FLOAT(), func_type=&quot;pandas&quot;)</span>
+<span class="sd">            ... def mean_udaf(v):</span>
+<span class="sd">            ...     return v.mean()</span>
+
+<span class="sd">            &gt;&gt;&gt; # Specify result_type via string</span>
+<span class="sd">            &gt;&gt;&gt; @udaf(result_type=&#39;FLOAT&#39;, func_type=&quot;pandas&quot;)</span>
+<span class="sd">            ... def mean_udaf(v):</span>
+<span class="sd">            ...     return v.mean()</span>
+
+<span class="sd">    :param f: user-defined aggregate function.</span>
+<span class="sd">    :param input_types: optional, the input data types.</span>
+<span class="sd">    :param result_type: the result data type.</span>
+<span class="sd">    :param accumulator_type: optional, the accumulator data type.</span>
+<span class="sd">    :param deterministic: the determinism of the function&#39;s results. True if and only if a call to</span>
+<span class="sd">                          this function is guaranteed to always return the same result given the</span>
+<span class="sd">                          same parameters. (default True)</span>
+<span class="sd">    :param name: the function name.</span>
+<span class="sd">    :param func_type: the type of the python function, available value: general, pandas,</span>
+<span class="sd">                     (default: general)</span>
+<span class="sd">    :return: UserDefinedAggregateFunctionWrapper or function.</span>
+
+<span class="sd">    .. versionadded:: 1.12.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">func_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;general&#39;</span><span class="p">,</span> <span class="s1">&#39;pandas&#39;</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The func_type must be one of &#39;general, pandas&#39;, got </span><span class="si">%s</span><span class="s2">.&quot;</span>
+                         <span class="o">%</span> <span class="n">func_type</span><span class="p">)</span>
+    <span class="c1"># decorator</span>
+    <span class="k">if</span> <span class="n">f</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">_create_udaf</span><span class="p">,</span> <span class="n">input_types</span><span class="o">=</span><span class="n">input_types</span><span class="p">,</span> <span class="n">result_type</span><span class="o">=</span><span class="n">result_type</span><span class="p">,</span>
+                                 <span class="n">accumulator_type</span><span class="o">=</span><span class="n">accumulator_type</span><span class="p">,</span> <span class="n">func_type</span><span class="o">=</span><span class="n">func_type</span><span class="p">,</span>
+                                 <span class="n">deterministic</span><span class="o">=</span><span class="n">deterministic</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_create_udaf</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">input_types</span><span class="p">,</span> <span class="n">result_type</span><span class="p">,</span> <span class="n">accumulator_type</span><span class="p">,</span> <span class="n">func_type</span><span class="p">,</span>
+                            <span class="n">deterministic</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span></div>
+
+
+<span class="c1"># Overload 1: function is supplied — udtaf returns the wrapped UDTAF directly.</span>
+<span class="nd">@overload</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">udtaf</span><span class="p">(</span>
+    <span class="n">f</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">TableAggregateFunction</span><span class="p">,</span> <span class="n">Type</span><span class="p">],</span>
+    <span class="n">input_types</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">DataType</span><span class="p">],</span> <span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">result_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">accumulator_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">deterministic</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">func_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UserDefinedAggregateFunctionWrapper</span><span class="p">:</span>
+    <span class="o">...</span>
+
+
+<span class="c1"># Overload 2: no function supplied — udtaf returns a decorator factory.</span>
+<span class="nd">@overload</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">udtaf</span><span class="p">(</span>
+    <span class="n">f</span><span class="p">:</span> <span class="kc">None</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">input_types</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">DataType</span><span class="p">],</span> <span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">result_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">accumulator_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">deterministic</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">func_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">TableAggregateFunction</span><span class="p">,</span> <span class="n">Type</span><span class="p">]],</span> <span class="n">UserDefinedAggregateFunctionWrapper</span><span class="p">]:</span>
+    <span class="o">...</span>
+
+
+<div class="viewcode-block" id="udtaf"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.udf.udtaf.html#pyflink.table.udf.udtaf">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">udtaf</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">TableAggregateFunction</span><span class="p">,</span> <span class="n">Type</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+          <span class="n">input_types</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">DataType</span><span class="p">],</span> <span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+          <span class="n">result_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+          <span class="n">accumulator_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">DataType</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+          <span class="n">deterministic</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+          <span class="n">func_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;general&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">UserDefinedAggregateFunctionWrapper</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper method for creating a user-defined table aggregate function.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        &gt;&gt;&gt; # The input_types is optional.</span>
+<span class="sd">        &gt;&gt;&gt; class Top2(TableAggregateFunction):</span>
+<span class="sd">        ...     def emit_value(self, accumulator):</span>
+<span class="sd">        ...         yield Row(accumulator[0])</span>
+<span class="sd">        ...         yield Row(accumulator[1])</span>
+<span class="sd">        ...</span>
+<span class="sd">        ...     def create_accumulator(self):</span>
+<span class="sd">        ...         return [None, None]</span>
+<span class="sd">        ...</span>
+<span class="sd">        ...     def accumulate(self, accumulator, *args):</span>
+<span class="sd">        ...         if args[0] is not None:</span>
+<span class="sd">        ...             if accumulator[0] is None or args[0] &gt; accumulator[0]:</span>
+<span class="sd">        ...                 accumulator[1] = accumulator[0]</span>
+<span class="sd">        ...                 accumulator[0] = args[0]</span>
+<span class="sd">        ...             elif accumulator[1] is None or args[0] &gt; accumulator[1]:</span>
+<span class="sd">        ...                 accumulator[1] = args[0]</span>
+<span class="sd">        ...</span>
+<span class="sd">        ...     def retract(self, accumulator, *args):</span>
+<span class="sd">        ...         accumulator[0] = accumulator[0] - 1</span>
+<span class="sd">        ...</span>
+<span class="sd">        ...     def merge(self, accumulator, accumulators):</span>
+<span class="sd">        ...         for other_acc in accumulators:</span>
+<span class="sd">        ...             self.accumulate(accumulator, other_acc[0])</span>
+<span class="sd">        ...             self.accumulate(accumulator, other_acc[1])</span>
+<span class="sd">        ...</span>
+<span class="sd">        ...     def get_accumulator_type(self):</span>
+<span class="sd">        ...         return &#39;ARRAY&lt;BIGINT&gt;&#39;</span>
+<span class="sd">        ...</span>
+<span class="sd">        ...     def get_result_type(self):</span>
+<span class="sd">        ...         return &#39;ROW&lt;a BIGINT&gt;&#39;</span>
+<span class="sd">        &gt;&gt;&gt; top2 = udtaf(Top2())</span>
+
+<span class="sd">    :param f: user-defined table aggregate function.</span>
+<span class="sd">    :param input_types: optional, the input data types.</span>
+<span class="sd">    :param result_type: the result data type.</span>
+<span class="sd">    :param accumulator_type: optional, the accumulator data type.</span>
+<span class="sd">    :param deterministic: the determinism of the function&#39;s results. True if and only if a call to</span>
+<span class="sd">                          this function is guaranteed to always return the same result given the</span>
+<span class="sd">                          same parameters. (default True)</span>
+<span class="sd">    :param name: the function name.</span>
+<span class="sd">    :param func_type: the type of the python function, available value: general</span>
+<span class="sd">                     (default: general)</span>
+<span class="sd">    :return: UserDefinedAggregateFunctionWrapper or function.</span>
+
+<span class="sd">    .. versionadded:: 1.13.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">func_type</span> <span class="o">!=</span> <span class="s1">&#39;general&#39;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The func_type must be &#39;general&#39;, got </span><span class="si">%s</span><span class="s2">.&quot;</span>
+                         <span class="o">%</span> <span class="n">func_type</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">f</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">_create_udtaf</span><span class="p">,</span> <span class="n">input_types</span><span class="o">=</span><span class="n">input_types</span><span class="p">,</span> <span class="n">result_type</span><span class="o">=</span><span class="n">result_type</span><span class="p">,</span>
+                                 <span class="n">accumulator_type</span><span class="o">=</span><span class="n">accumulator_type</span><span class="p">,</span> <span class="n">func_type</span><span class="o">=</span><span class="n">func_type</span><span class="p">,</span>
+                                 <span class="n">deterministic</span><span class="o">=</span><span class="n">deterministic</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_create_udtaf</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">input_types</span><span class="p">,</span> <span class="n">result_type</span><span class="p">,</span> <span class="n">accumulator_type</span><span class="p">,</span> <span class="n">func_type</span><span class="p">,</span>
+                             <span class="n">deterministic</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span></div>
+</pre></div>
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

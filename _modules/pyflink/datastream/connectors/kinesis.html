@@ -1,0 +1,890 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyflink.datastream.connectors.kinesis &#8212; PyFlink 11.8.0 documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyflink/datastream/connectors/kinesis';</script>
+    <link rel="shortcut icon" href="../../../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../../../search.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="Logo image">
+    <img src="../../../../_static/navbar-brand-logo.jpg" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <h1>Source code for pyflink.datastream.connectors.kinesis</h1><div class="highlight"><pre>
+<span></span><span class="c1">################################################################################</span>
+<span class="c1">#  Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="c1">#  or more contributor license agreements.  See the NOTICE file</span>
+<span class="c1">#  distributed with this work for additional information</span>
+<span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
+<span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
+<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  with the License.  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">################################################################################</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">SerializationSchema</span><span class="p">,</span> <span class="n">DeserializationSchema</span><span class="p">,</span> \
+    <span class="n">AssignerWithPeriodicWatermarksWrapper</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">SourceFunction</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream.connectors</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sink</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.java_gateway</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_gateway</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;KinesisShardAssigner&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;KinesisDeserializationSchema&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;WatermarkTracker&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;PartitionKeyGenerator&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;FlinkKinesisConsumer&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;KinesisStreamsSink&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;KinesisStreamsSinkBuilder&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;KinesisFirehoseSink&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;KinesisFirehoseSinkBuilder&#39;</span>
+<span class="p">]</span>
+
+
+<span class="c1"># ---- KinesisSource ----</span>
+
+
+<div class="viewcode-block" id="KinesisShardAssigner"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.kinesis.KinesisShardAssigner.html#pyflink.datastream.connectors.kinesis.KinesisShardAssigner">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">KinesisShardAssigner</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Utility to map Kinesis shards to Flink subtask indices. Users can provide a Java</span>
+<span class="sd">    KinesisShardAssigner in Python if they want to provide custom shared assigner.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_kinesis_shard_assigner</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_shard_assigner</span> <span class="o">=</span> <span class="n">j_kinesis_shard_assigner</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">default_shard_assigner</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;KinesisShardAssigner&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A Default KinesisShardAssigner that maps Kinesis shard hash-key ranges to Flink subtasks.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">KinesisShardAssigner</span><span class="p">(</span><span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">streaming</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span>
+                                    <span class="n">kinesis</span><span class="o">.</span><span class="n">internals</span><span class="o">.</span><span class="n">KinesisDataFetcher</span><span class="o">.</span><span class="n">DEFAULT_SHARD_ASSIGNER</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">uniform_shard_assigner</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;KinesisShardAssigner&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A KinesisShardAssigner that maps Kinesis shard hash-key ranges to Flink subtasks.</span>
+<span class="sd">        It creates a more uniform distribution of shards across subtasks than org.apache.flink. \</span>
+<span class="sd">        streaming.connectors.kinesis.internals.KinesisDataFetcher.DEFAULT_SHARD_ASSIGNER when the</span>
+<span class="sd">        Kinesis records in the stream have hash keys that are uniformly distributed over all</span>
+<span class="sd">        possible hash keys, which is the case if records have randomly-generated partition keys.</span>
+<span class="sd">        (This is the same assumption made if you use the Kinesis UpdateShardCount operation with</span>
+<span class="sd">        UNIFORM_SCALING.)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">KinesisShardAssigner</span><span class="p">(</span><span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">streaming</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span>
+                                    <span class="n">kinesis</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">UniformShardAssigner</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="KinesisDeserializationSchema"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.kinesis.KinesisDeserializationSchema.html#pyflink.datastream.connectors.kinesis.KinesisDeserializationSchema">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">KinesisDeserializationSchema</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This is a deserialization schema specific for the Flink Kinesis Consumer. Different from the</span>
+<span class="sd">    basic DeserializationSchema, this schema offers additional Kinesis-specific information about</span>
+<span class="sd">    the record that may be useful to the user application.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_kinesis_deserialization_schema</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_deserialization_schema</span> <span class="o">=</span> <span class="n">j_kinesis_deserialization_schema</span></div>
+
+
+<div class="viewcode-block" id="WatermarkTracker"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.kinesis.WatermarkTracker.html#pyflink.datastream.connectors.kinesis.WatermarkTracker">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">WatermarkTracker</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The watermark tracker is responsible for aggregating watermarks across distributed operators.</span>
+<span class="sd">    It can be used for sub tasks of a single Flink source as well as multiple heterogeneous sources</span>
+<span class="sd">    or other operators.The class essentially functions like a distributed hash table that enclosing</span>
+<span class="sd">    operators can use to adopt their processing / IO rates</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_watermark_tracker</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_watermark_tracker</span> <span class="o">=</span> <span class="n">j_watermark_tracker</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">job_manager_watermark_tracker</span><span class="p">(</span>
+            <span class="n">aggregate_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">log_accumulator_interval_millis</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;WatermarkTracker&#39;</span><span class="p">:</span>
+        <span class="n">j_watermark_tracker</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">streaming</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">kinesis</span><span class="o">.</span><span class="n">util</span> \
+            <span class="o">.</span><span class="n">JobManagerWatermarkTracker</span><span class="p">(</span><span class="n">aggregate_name</span><span class="p">,</span> <span class="n">log_accumulator_interval_millis</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">WatermarkTracker</span><span class="p">(</span><span class="n">j_watermark_tracker</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FlinkKinesisConsumer"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.kinesis.FlinkKinesisConsumer.html#pyflink.datastream.connectors.kinesis.FlinkKinesisConsumer">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">FlinkKinesisConsumer</span><span class="p">(</span><span class="n">SourceFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The Flink Kinesis Consumer is an exactly-once parallel streaming data source that subscribes to</span>
+<span class="sd">    multiple AWS Kinesis streams within the same AWS service region, and can handle resharding of</span>
+<span class="sd">    streams. Each subtask of the consumer is responsible for fetching data records from multiple</span>
+<span class="sd">    Kinesis shards. The number of shards fetched by each subtask will change as shards are closed</span>
+<span class="sd">    and created by Kinesis.</span>
+
+<span class="sd">    To leverage Flink&#39;s checkpointing mechanics for exactly-once streaming processing guarantees,</span>
+<span class="sd">    the Flink Kinesis consumer is implemented with the AWS Java SDK, instead of the officially</span>
+<span class="sd">    recommended AWS Kinesis Client Library, for low-level control on the management of stream state.</span>
+<span class="sd">    The Flink Kinesis Connector also supports setting the initial starting points of Kinesis</span>
+<span class="sd">    streams, namely TRIM_HORIZON and LATEST.</span>
+
+<span class="sd">    Kinesis and the Flink consumer support dynamic re-sharding and shard IDs, while sequential,</span>
+<span class="sd">    cannot be assumed to be consecutive. There is no perfect generic default assignment function.</span>
+<span class="sd">    Default shard to subtask assignment, which is based on hash code, may result in skew, with some</span>
+<span class="sd">    subtasks having many shards assigned and others none.</span>
+
+<span class="sd">    It is recommended to monitor the shard distribution and adjust assignment appropriately.</span>
+<span class="sd">    A custom assigner implementation can be set via setShardAssigner(KinesisShardAssigner) to</span>
+<span class="sd">    optimize the hash function or use static overrides to limit skew.</span>
+
+<span class="sd">    In order for the consumer to emit watermarks, a timestamp assigner needs to be set via</span>
+<span class="sd">    setPeriodicWatermarkAssigner(AssignerWithPeriodicWatermarks) and the auto watermark emit</span>
+<span class="sd">    interval configured via ExecutionConfig.setAutoWatermarkInterval(long).</span>
+
+<span class="sd">    Watermarks can only advance when all shards of a subtask continuously deliver records.</span>
+<span class="sd">    To avoid an inactive or closed shard to block the watermark progress, the idle timeout should</span>
+<span class="sd">    be configured via configuration property ConsumerConfigConstants.SHARD_IDLE_INTERVAL_MILLIS.</span>
+<span class="sd">    By default, shards won&#39;t be considered idle and watermark calculation will wait for newer</span>
+<span class="sd">    records to arrive from all shards.</span>
+
+<span class="sd">    Note that re-sharding of the Kinesis stream while an application (that relies on the Kinesis</span>
+<span class="sd">    records for watermarking) is running can lead to incorrect late events. This depends on how</span>
+<span class="sd">    shards are assigned to subtasks and applies regardless of whether watermarks are generated in</span>
+<span class="sd">    the source or a downstream operator.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">streams</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+                 <span class="n">deserializer</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">DeserializationSchema</span><span class="p">,</span> <span class="n">KinesisDeserializationSchema</span><span class="p">],</span>
+                 <span class="n">config_props</span><span class="p">:</span> <span class="n">Dict</span>
+                 <span class="p">):</span>
+        <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
+        <span class="n">j_properties</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">Properties</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">config_props</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">j_properties</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+        <span class="n">JFlinkKinesisConsumer</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">streaming</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">kinesis</span><span class="o">.</span> \
+            <span class="n">FlinkKinesisConsumer</span>
+        <span class="n">JKinesisDeserializationSchemaWrapper</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">streaming</span><span class="o">.</span> \
+            <span class="n">connectors</span><span class="o">.</span><span class="n">kinesis</span><span class="o">.</span><span class="n">serialization</span><span class="o">.</span><span class="n">KinesisDeserializationSchemaWrapper</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">streams</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">streams</span> <span class="o">=</span> <span class="p">[</span><span class="n">streams</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">deserializer</span><span class="p">,</span> <span class="n">DeserializationSchema</span><span class="p">):</span>
+            <span class="n">deserializer</span> <span class="o">=</span> <span class="n">JKinesisDeserializationSchemaWrapper</span><span class="p">(</span>
+                <span class="n">deserializer</span><span class="o">.</span><span class="n">_j_deserialization_schema</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_consumer</span> <span class="o">=</span> <span class="n">JFlinkKinesisConsumer</span><span class="p">(</span><span class="n">streams</span><span class="p">,</span> <span class="n">deserializer</span><span class="p">,</span> <span class="n">j_properties</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">FlinkKinesisConsumer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_consumer</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_shard_assigner</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shard_assigner</span><span class="p">:</span> <span class="n">KinesisShardAssigner</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;FlinkKinesisConsumer&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Provide a custom assigner to influence how shards are distributed over subtasks.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_consumer</span><span class="o">.</span><span class="n">setShardAssigner</span><span class="p">(</span><span class="n">shard_assigner</span><span class="o">.</span><span class="n">_j_kinesis_shard_assigner</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_periodic_watermark_assigner</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">periodic_watermark_assigner</span><span class="p">:</span> <span class="n">AssignerWithPeriodicWatermarksWrapper</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;FlinkKinesisConsumer&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the assigner that will extract the timestamp from T and calculate the watermark.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_consumer</span><span class="o">.</span><span class="n">setPeriodicWatermarkAssigner</span><span class="p">(</span>
+            <span class="n">periodic_watermark_assigner</span><span class="o">.</span><span class="n">_j_assigner_with_periodic_watermarks</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_watermark_tracker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">watermark_tracker</span><span class="p">:</span> <span class="n">WatermarkTracker</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;FlinkKinesisConsumer&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the global watermark tracker. When set, it will be used by the fetcher to align the</span>
+<span class="sd">        shard consumers by event time.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_consumer</span><span class="o">.</span><span class="n">setWatermarkTracker</span><span class="p">(</span><span class="n">watermark_tracker</span><span class="o">.</span><span class="n">_j_watermark_tracker</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<span class="c1"># ---- KinesisSink ----</span>
+
+<div class="viewcode-block" id="PartitionKeyGenerator"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.kinesis.PartitionKeyGenerator.html#pyflink.datastream.connectors.kinesis.PartitionKeyGenerator">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">PartitionKeyGenerator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This is a generator convert from an input element to the partition key, a string.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_partition_key_generator</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_partition_key_generator</span> <span class="o">=</span> <span class="n">j_partition_key_generator</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fixed</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;PartitionKeyGenerator&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A partitioner ensuring that each internal Flink partition ends up in the same Kinesis</span>
+<span class="sd">        partition. This is achieved by using the index of the producer task as a PartitionKey.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">PartitionKeyGenerator</span><span class="p">(</span><span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">kinesis</span><span class="o">.</span><span class="n">table</span><span class="o">.</span>
+                                     <span class="n">FixedKinesisPartitionKeyGenerator</span><span class="p">())</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">random</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;PartitionKeyGenerator&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A PartitionKeyGenerator that maps an arbitrary input element to a random partition ID.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">PartitionKeyGenerator</span><span class="p">(</span><span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">kinesis</span><span class="o">.</span><span class="n">table</span><span class="o">.</span>
+                                     <span class="n">RandomKinesisPartitionKeyGenerator</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="KinesisStreamsSink"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.kinesis.KinesisStreamsSink.html#pyflink.datastream.connectors.kinesis.KinesisStreamsSink">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">KinesisStreamsSink</span><span class="p">(</span><span class="n">Sink</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A Kinesis Data Streams (KDS) Sink that performs async requests against a destination stream</span>
+<span class="sd">    using the buffering protocol.</span>
+
+<span class="sd">    The sink internally uses a software.amazon.awssdk.services.kinesis.KinesisAsyncClient to</span>
+<span class="sd">    communicate with the AWS endpoint.</span>
+
+<span class="sd">    The behaviour of the buffering may be specified by providing configuration during the sink</span>
+<span class="sd">    build time.</span>
+
+<span class="sd">    - maxBatchSize: the maximum size of a batch of entries that may be sent to KDS</span>
+<span class="sd">    - maxInFlightRequests: the maximum number of in flight requests that may exist, if any more in</span>
+<span class="sd">        flight requests need to be initiated once the maximum has been reached, then it will be</span>
+<span class="sd">        blocked until some have completed</span>
+<span class="sd">    - maxBufferedRequests: the maximum number of elements held in the buffer, requests to add</span>
+<span class="sd">        elements will be blocked while the number of elements in the buffer is at the maximum</span>
+<span class="sd">    - maxBatchSizeInBytes: the maximum size of a batch of entries that may be sent to KDS</span>
+<span class="sd">        measured in bytes</span>
+<span class="sd">    - maxTimeInBufferMS: the maximum amount of time an entry is allowed to live in the buffer,</span>
+<span class="sd">        if any element reaches this age, the entire buffer will be flushed immediately</span>
+<span class="sd">    - maxRecordSizeInBytes: the maximum size of a record the sink will accept into the buffer,</span>
+<span class="sd">        a record of size larger than this will be rejected when passed to the sink</span>
+<span class="sd">    - failOnError: when an exception is encountered while persisting to Kinesis Data Streams,</span>
+<span class="sd">        the job will fail immediately if failOnError is set</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_kinesis_streams_sink</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">KinesisStreamsSink</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">sink</span><span class="o">=</span><span class="n">j_kinesis_streams_sink</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">builder</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;KinesisStreamsSinkBuilder&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">KinesisStreamsSinkBuilder</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="KinesisStreamsSinkBuilder"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.kinesis.KinesisStreamsSinkBuilder.html#pyflink.datastream.connectors.kinesis.KinesisStreamsSinkBuilder">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">KinesisStreamsSinkBuilder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Builder to construct KinesisStreamsSink.</span>
+
+<span class="sd">    The following example shows the minimum setup to create a KinesisStreamsSink that writes String</span>
+<span class="sd">    values to a Kinesis Data Streams stream named your_stream_here.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        &gt;&gt;&gt; from pyflink.common.serialization import SimpleStringSchema</span>
+<span class="sd">        &gt;&gt;&gt; sink_properties = {&quot;aws.region&quot;: &quot;eu-west-1&quot;}</span>
+<span class="sd">        &gt;&gt;&gt; sink = KinesisStreamsSink.builder() \\</span>
+<span class="sd">        ...     .set_kinesis_client_properties(sink_properties) \\</span>
+<span class="sd">        ...     .set_stream_name(&quot;your_stream_name&quot;) \\</span>
+<span class="sd">        ...     .set_serialization_schema(SimpleStringSchema()) \\</span>
+<span class="sd">        ...     .set_partition_key_generator(PartitionKeyGenerator.random()) \\</span>
+<span class="sd">        ...     .build()</span>
+
+<span class="sd">    If the following parameters are not set in this builder, the following defaults will be used:</span>
+
+<span class="sd">        - maxBatchSize will be 500</span>
+<span class="sd">        - maxInFlightRequests will be 50</span>
+<span class="sd">        - maxBufferedRequests will be 10000</span>
+<span class="sd">        - maxBatchSizeInBytes will be 5 MB i.e. 5 * 1024 * 1024</span>
+<span class="sd">        - maxTimeInBufferMS will be 5000ms</span>
+<span class="sd">        - maxRecordSizeInBytes will be 1 MB i.e. 1 * 1024 * 1024</span>
+<span class="sd">        - failOnError will be false</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">JKinesisStreamsSink</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">kinesis</span><span class="o">.</span><span class="n">sink</span><span class="o">.</span>\
+            <span class="n">KinesisStreamsSink</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_sink_builder</span> <span class="o">=</span> <span class="n">JKinesisStreamsSink</span><span class="o">.</span><span class="n">builder</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_stream_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream_name</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="s1">&#39;KinesisStreamsSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the name of the KDS stream that the sink will connect to. There is no default for this</span>
+<span class="sd">        parameter, therefore, this must be provided at sink creation time otherwise the build will</span>
+<span class="sd">        fail.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_sink_builder</span><span class="o">.</span><span class="n">setStreamName</span><span class="p">(</span><span class="n">stream_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_serialization_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">serialization_schema</span><span class="p">:</span> <span class="n">SerializationSchema</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;KinesisStreamsSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the SerializationSchema of the KinesisSinkBuilder.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_sink_builder</span><span class="o">.</span><span class="n">setSerializationSchema</span><span class="p">(</span>
+            <span class="n">serialization_schema</span><span class="o">.</span><span class="n">_j_serialization_schema</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_partition_key_generator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">partition_key_generator</span><span class="p">:</span> <span class="n">PartitionKeyGenerator</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;KinesisStreamsSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the PartitionKeyGenerator of the KinesisSinkBuilder.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_sink_builder</span><span class="o">.</span><span class="n">setPartitionKeyGenerator</span><span class="p">(</span>
+            <span class="n">partition_key_generator</span><span class="o">.</span><span class="n">_j_partition_key_generator</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_fail_on_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fail_on_error</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;KinesisStreamsSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the failOnError of the KinesisSinkBuilder. If failOnError is on, then a runtime</span>
+<span class="sd">        exception will be raised. Otherwise, those records will be requested in the buffer for</span>
+<span class="sd">        retry.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_sink_builder</span><span class="o">.</span><span class="n">setFailOnError</span><span class="p">(</span><span class="n">fail_on_error</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_kinesis_client_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kinesis_client_properties</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;KinesisStreamsSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the kinesisClientProperties of the KinesisSinkBuilder.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">j_properties</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">Properties</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kinesis_client_properties</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">j_properties</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_sink_builder</span><span class="o">.</span><span class="n">setKinesisClientProperties</span><span class="p">(</span><span class="n">j_properties</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_max_batch_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_batch_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;KinesisStreamsSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Maximum number of elements that may be passed in a list to be written downstream.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_sink_builder</span><span class="o">.</span><span class="n">setMaxBatchSize</span><span class="p">(</span><span class="n">max_batch_size</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_max_in_flight_requests</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_in_flight_requests</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;KinesisStreamsSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Maximum number of uncompleted calls to submitRequestEntries that the SinkWriter will allow</span>
+<span class="sd">        at any given point. Once this point has reached, writes and callbacks to add elements to</span>
+<span class="sd">        the buffer may block until one or more requests to submitRequestEntries completes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_sink_builder</span><span class="o">.</span><span class="n">setMaxInFlightRequests</span><span class="p">(</span><span class="n">max_in_flight_requests</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_max_buffered_requests</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_buffered_requests</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;KinesisStreamsSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The maximum buffer length. Callbacks to add elements to the buffer and calls to write will</span>
+<span class="sd">        block if this length has been reached and will only unblock if elements from the buffer have</span>
+<span class="sd">        been removed for flushing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_sink_builder</span><span class="o">.</span><span class="n">setMaxBufferedRequests</span><span class="p">(</span><span class="n">max_buffered_requests</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_max_batch_size_in_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_batch_size_in_bytes</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;KinesisStreamsSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The flush will be attempted if the most recent call to write introduces an element to the</span>
+<span class="sd">        buffer such that the total size of the buffer is greater than or equal to this threshold</span>
+<span class="sd">        value. If this happens, the maximum number of elements from the head of the buffer will be</span>
+<span class="sd">        selected, that is smaller than maxBatchSizeInBytes in size will be flushed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_sink_builder</span><span class="o">.</span><span class="n">setMaxBatchSizeInBytes</span><span class="p">(</span><span class="n">max_batch_size_in_bytes</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_max_time_in_buffer_ms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_time_in_buffer_ms</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;KinesisStreamsSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The maximum amount of time an element may remain in the buffer. In most cases elements are</span>
+<span class="sd">        flushed as a result of the batch size (in bytes or number) being reached or during a</span>
+<span class="sd">        snapshot. However, there are scenarios where an element may remain in the buffer forever or</span>
+<span class="sd">        a long period of time. To mitigate this, a timer is constantly active in the buffer such</span>
+<span class="sd">        that: while the buffer is not empty, it will flush every maxTimeInBufferMS milliseconds.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_sink_builder</span><span class="o">.</span><span class="n">setMaxTimeInBufferMS</span><span class="p">(</span><span class="n">max_time_in_buffer_ms</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_max_record_size_in_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_record_size_in_bytes</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;KinesisStreamsSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The maximum size of each records in bytes. If a record larger than this is passed to the</span>
+<span class="sd">        sink, it will throw an IllegalArgumentException.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_sink_builder</span><span class="o">.</span><span class="n">setMaxRecordSizeInBytes</span><span class="p">(</span><span class="n">max_record_size_in_bytes</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;KinesisStreamsSink&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Build thd KinesisStreamsSink.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">KinesisStreamsSink</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_sink_builder</span><span class="o">.</span><span class="n">build</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="KinesisFirehoseSink"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.kinesis.KinesisFirehoseSink.html#pyflink.datastream.connectors.kinesis.KinesisFirehoseSink">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">KinesisFirehoseSink</span><span class="p">(</span><span class="n">Sink</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A Kinesis Data Firehose (KDF) Sink that performs async requests against a destination delivery</span>
+<span class="sd">    stream using the buffering protocol.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_kinesis_firehose_sink</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">KinesisFirehoseSink</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">sink</span><span class="o">=</span><span class="n">j_kinesis_firehose_sink</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">builder</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;KinesisFirehoseSinkBuilder&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">KinesisFirehoseSinkBuilder</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="KinesisFirehoseSinkBuilder"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.kinesis.KinesisFirehoseSinkBuilder.html#pyflink.datastream.connectors.kinesis.KinesisFirehoseSinkBuilder">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">KinesisFirehoseSinkBuilder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Builder to construct KinesisFirehoseSink.</span>
+
+<span class="sd">    The following example shows the minimum setup to create a KinesisFirehoseSink that writes</span>
+<span class="sd">    String values to a Kinesis Data Firehose delivery stream named delivery-stream-name.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        &gt;&gt;&gt; from pyflink.common.serialization import SimpleStringSchema</span>
+<span class="sd">        &gt;&gt;&gt; sink_properties = {&quot;aws.region&quot;: &quot;eu-west-1&quot;}</span>
+<span class="sd">        &gt;&gt;&gt; sink = KinesisFirehoseSink.builder() \\</span>
+<span class="sd">        ...     .set_firehose_client_properties(sink_properties) \\</span>
+<span class="sd">        ...     .set_delivery_stream_name(&quot;delivery-stream-name&quot;) \\</span>
+<span class="sd">        ...     .set_serialization_schema(SimpleStringSchema()) \\</span>
+<span class="sd">        ...     .set_max_batch_size(20) \\</span>
+<span class="sd">        ...     .build()</span>
+
+<span class="sd">    If the following parameters are not set in this builder, the following defaults will be used:</span>
+<span class="sd">    - maxBatchSize will be 500</span>
+<span class="sd">    - maxInFlightRequests will be 50</span>
+<span class="sd">    - maxBufferedRequests will be 10000</span>
+<span class="sd">    - maxBatchSizeInBytes will be 4 MB i.e. 4 * 1024 * 1024</span>
+<span class="sd">    - maxTimeInBufferMS will be 5000ms</span>
+<span class="sd">    - maxRecordSizeInBytes will be 1000 KB i.e. 1000 * 1024</span>
+<span class="sd">    - failOnError will be false</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">JKinesisFirehoseSink</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">firehose</span><span class="o">.</span><span class="n">sink</span><span class="o">.</span> \
+            <span class="n">KinesisFirehoseSink</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_sink_builder</span> <span class="o">=</span> <span class="n">JKinesisFirehoseSink</span><span class="o">.</span><span class="n">builder</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_delivery_stream_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delivery_stream_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;KinesisFirehoseSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the name of the KDF delivery stream that the sink will connect to. There is no default</span>
+<span class="sd">        for this parameter, therefore, this must be provided at sink creation time otherwise the</span>
+<span class="sd">        build will fail.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_sink_builder</span><span class="o">.</span><span class="n">setDeliveryStreamName</span><span class="p">(</span><span class="n">delivery_stream_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_serialization_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">serialization_schema</span><span class="p">:</span> <span class="n">SerializationSchema</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;KinesisFirehoseSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Allows the user to specify a serialization schema to serialize each record to persist to</span>
+<span class="sd">        Firehose.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_sink_builder</span><span class="o">.</span><span class="n">setSerializationSchema</span><span class="p">(</span>
+            <span class="n">serialization_schema</span><span class="o">.</span><span class="n">_j_serialization_schema</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_fail_on_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fail_on_error</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;KinesisFirehoseSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        If writing to Kinesis Data Firehose results in a partial or full failure being returned,</span>
+<span class="sd">        the job will fail</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_sink_builder</span><span class="o">.</span><span class="n">setFailOnError</span><span class="p">(</span><span class="n">fail_on_error</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_firehose_client_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">firehose_client_properties</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;KinesisFirehoseSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A set of properties used by the sink to create the firehose client. This may be used to set</span>
+<span class="sd">        the aws region, credentials etc. See the docs for usage and syntax.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">j_properties</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">Properties</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">firehose_client_properties</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">j_properties</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_sink_builder</span><span class="o">.</span><span class="n">setFirehoseClientProperties</span><span class="p">(</span><span class="n">j_properties</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_max_batch_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_batch_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;KinesisFirehoseSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Maximum number of elements that may be passed in a list to be written downstream.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_sink_builder</span><span class="o">.</span><span class="n">setMaxBatchSize</span><span class="p">(</span><span class="n">max_batch_size</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_max_in_flight_requests</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_in_flight_requests</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;KinesisFirehoseSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Maximum number of uncompleted calls to submitRequestEntries that the SinkWriter will allow</span>
+<span class="sd">        at any given point. Once this point has reached, writes and callbacks to add elements to</span>
+<span class="sd">        the buffer may block until one or more requests to submitRequestEntries completes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_sink_builder</span><span class="o">.</span><span class="n">setMaxInFlightRequests</span><span class="p">(</span><span class="n">max_in_flight_requests</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_max_buffered_requests</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_buffered_requests</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;KinesisFirehoseSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The maximum buffer length. Callbacks to add elements to the buffer and calls to write will</span>
+<span class="sd">        block if this length has been reached and will only unblock if elements from the buffer have</span>
+<span class="sd">        been removed for flushing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_sink_builder</span><span class="o">.</span><span class="n">setMaxBufferedRequests</span><span class="p">(</span><span class="n">max_buffered_requests</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_max_batch_size_in_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_batch_size_in_bytes</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;KinesisFirehoseSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The flush will be attempted if the most recent call to write introduces an element to the</span>
+<span class="sd">        buffer such that the total size of the buffer is greater than or equal to this threshold</span>
+<span class="sd">        value. If this happens, the maximum number of elements from the head of the buffer will be</span>
+<span class="sd">        selected, that is smaller than maxBatchSizeInBytes in size will be flushed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_sink_builder</span><span class="o">.</span><span class="n">setMaxBatchSizeInBytes</span><span class="p">(</span><span class="n">max_batch_size_in_bytes</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_max_time_in_buffer_ms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_time_in_buffer_ms</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;KinesisFirehoseSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The maximum amount of time an element may remain in the buffer. In most cases elements are</span>
+<span class="sd">        flushed as a result of the batch size (in bytes or number) being reached or during a</span>
+<span class="sd">        snapshot. However, there are scenarios where an element may remain in the buffer forever or</span>
+<span class="sd">        a long period of time. To mitigate this, a timer is constantly active in the buffer such</span>
+<span class="sd">        that: while the buffer is not empty, it will flush every maxTimeInBufferMS milliseconds.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_sink_builder</span><span class="o">.</span><span class="n">setMaxTimeInBufferMS</span><span class="p">(</span><span class="n">max_time_in_buffer_ms</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_max_record_size_in_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_record_size_in_bytes</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;KinesisFirehoseSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The maximum size of each records in bytes. If a record larger than this is passed to the</span>
+<span class="sd">        sink, it will throw an IllegalArgumentException.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_sink_builder</span><span class="o">.</span><span class="n">setMaxRecordSizeInBytes</span><span class="p">(</span><span class="n">max_record_size_in_bytes</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;KinesisFirehoseSink&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Build thd KinesisFirehoseSink.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">KinesisFirehoseSink</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_kinesis_sink_builder</span><span class="o">.</span><span class="n">build</span><span class="p">())</span></div>
+</pre></div>
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

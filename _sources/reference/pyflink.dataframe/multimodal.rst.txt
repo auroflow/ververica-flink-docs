@@ -1,0 +1,369 @@
+.. ################################################################################
+     Licensed to the Apache Software Foundation (ASF) under one
+     or more contributor license agreements.  See the NOTICE file
+     distributed with this work for additional information
+     regarding copyright ownership.  The ASF licenses this file
+     to you under the Apache License, Version 2.0 (the
+     "License"); you may not use this file except in compliance
+     with the License.  You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+    limitations under the License.
+   ################################################################################
+
+======================
+Multimodal Expressions
+======================
+
+PyFlink DataFrame expressions provide ``image``, ``video``, and ``audio``
+namespaces for invoking multimodal operations with the expression on the left
+side.
+
+Examples::
+
+    >>> from pyflink.dataframe import col
+    >>> df = df.with_column(
+    ...     "thumbnail", col("img").image.resize(width=224, height=224))
+    >>> df = df.with_column(
+    ...     "frames", col("video_uri").video.extract_frames(max_frames=16))
+    >>> speech_ready = (
+    ...     col("audio_bytes").audio.decode().audio.standardize())
+    >>> df = df.with_column(
+    ...     "transcript", speech_ready.audio.asr_whisper())
+
+Image Accessor
+--------------
+
+Use the ``image`` namespace on DataFrame expressions to call image operations.
+
+.. currentmodule:: pyflink.multimodal.expression
+
+.. autosummary::
+    :toctree: api/
+
+    ImageExpressionAccessor
+
+Image Transform
+~~~~~~~~~~~~~~~
+
+Image transformation operations.
+
+``.image.decode()`` accepts encoded image bytes and returns a decoded image.
+Pixel transforms accept decoded images and return decoded images so chained
+operations can avoid repeated JPEG/PNG encode-decode cycles. ``.image.encode()``
+accepts decoded images and returns encoded bytes; ``.image.compress()`` and
+``.image.convert_format()`` accept encoded bytes and return encoded bytes.
+
+Typical pipeline::
+
+    >>> from pyflink.dataframe import col
+    >>> df = df.with_column(
+    ...     "jpg",
+    ...     col("image_url").fetch_content()
+    ...     .image.decode()
+    ...     .image.resize(width=512, height=512)
+    ...     .image.blur(radius=2)
+    ...     .image.encode(format="JPEG"))
+
+.. currentmodule:: pyflink.multimodal.expression
+
+.. autosummary::
+    :toctree: api/
+
+    ImageExpressionAccessor.decode
+    ImageExpressionAccessor.encode
+    ImageExpressionAccessor.compress
+    ImageExpressionAccessor.convert_format
+    ImageExpressionAccessor.to_tensor
+    ImageExpressionAccessor.convert_mode
+    ImageExpressionAccessor.resize
+    ImageExpressionAccessor.rescale
+    ImageExpressionAccessor.crop
+    ImageExpressionAccessor.crop_black_border
+    ImageExpressionAccessor.flip
+    ImageExpressionAccessor.blur
+    ImageExpressionAccessor.adjust_color
+    ImageExpressionAccessor.remove_background
+
+
+Image Information
+~~~~~~~~~~~~~~~~~
+
+Image information extraction operations.
+
+Most operations in this section take decoded ``Image`` values and return
+numeric values, strings, or booleans - they do **not** modify the image.
+Lightweight metadata and filter operations may also inspect encoded bytes when
+documented.
+
+Without business parameters::
+
+    >>> from pyflink.dataframe import col
+    >>> df = df.with_column("ratio", col("img").image.aspect_ratio())
+
+With business parameters::
+
+    >>> df = df.with_column(
+    ...     "hash", col("img").image.hash(method="phash"))
+
+The ``concurrency`` argument is forwarded to the DataFrame UDF runtime.
+
+.. currentmodule:: pyflink.multimodal.expression
+
+.. autosummary::
+    :toctree: api/
+
+    ImageExpressionAccessor.metadata
+    ImageExpressionAccessor.aspect_ratio
+    ImageExpressionAccessor.sharpness
+    ImageExpressionAccessor.hash
+    ImageExpressionAccessor.is_valid
+    ImageExpressionAccessor.size_filter
+    ImageExpressionAccessor.shape_filter
+    ImageExpressionAccessor.file_size_filter
+
+
+Image Detection
+~~~~~~~~~~~~~~~
+
+Detection and recognition operations.
+
+Operations in this section detect or recognize structured content within
+images: objects, text, segments, and subplots.
+
+Model-based operations (``detect_objects()``, ``segment()``, and ``ocr()``)
+are registered as pandas batch UDFs, so Flink batches rows automatically.
+``detect_objects()`` returns axis-aligned boxes ``x/y/w/h``; ``ocr()`` returns
+four-point text polygons; ``segment()`` returns indexed PNG mask bytes; and
+``detect_subplot()`` returns subplot metadata.
+
+Example::
+
+    >>> from pyflink.dataframe import col
+    >>> df = df.with_column(
+    ...     "objects",
+    ...     col("img").image.detect_objects(
+    ...         model="yolov8n", confidence=0.05))
+    >>> df = df.with_column(
+    ...     "text", col("img").image.ocr(lang=["en", "ch_sim"]))
+
+Model-based pandas operations forward keyword-only ``concurrency``,
+``batch_size``, ``num_gpus``, and ``gpu_type`` to the DataFrame UDF runtime.
+``detect_subplot()`` forwards ``concurrency``.
+
+.. currentmodule:: pyflink.multimodal.expression
+
+.. autosummary::
+    :toctree: api/
+
+    ImageExpressionAccessor.detect_objects
+    ImageExpressionAccessor.segment
+    ImageExpressionAccessor.ocr
+    ImageExpressionAccessor.detect_subplot
+
+
+Image Face
+~~~~~~~~~~
+
+Face processing operations.
+
+Operations in this section detect, count, or blur faces in image inputs with
+OpenCV Haar cascade classifiers.
+
+Requires: ``pip install opencv-python-headless``. ``face_blur()`` also requires
+``pip install Pillow``.
+
+The ``concurrency`` argument is forwarded to the DataFrame UDF runtime.
+
+Usage::
+
+    >>> from pyflink.dataframe import col
+    >>> df = df.with_column(
+    ...     "faces", col("img").image.face_detect(min_neighbors=3))
+    >>> df = df.with_column(
+    ...     "face_count", col("img").image.face_count(min_neighbors=3))
+    >>> df = df.with_column(
+    ...     "blurred",
+    ...     col("img").image.face_blur(radius=15, min_neighbors=3))
+
+.. currentmodule:: pyflink.multimodal.expression
+
+.. autosummary::
+    :toctree: api/
+
+    ImageExpressionAccessor.face_detect
+    ImageExpressionAccessor.face_count
+    ImageExpressionAccessor.face_blur
+
+
+Image Quality
+~~~~~~~~~~~~~
+
+Image quality and safety assessment operations.
+
+Operations in this section score images based on quality, safety, and
+watermark detection. All operations return float scores.
+
+Example::
+
+    >>> from pyflink.dataframe import col
+    >>> df = df.with_column(
+    ...     "quality", col("img").image.quality_score())
+    >>> df = df.with_column(
+    ...     "nsfw", col("img").image.nsfw_score())
+
+Pandas batch UDFs accept ``concurrency``, ``batch_size``, ``num_gpus``, and
+``gpu_type``. Row-level UDFs accept ``concurrency``.
+
+Null image inputs produce ``None`` outputs. These operations accept decoded
+images; use ``col("raw_bytes").image.decode(on_error="null")`` when processing
+untrusted raw bytes. ``col("raw_bytes").image.is_valid()`` can be used as a
+lightweight pre-filter but does not guarantee full pixel materialization.
+
+.. currentmodule:: pyflink.multimodal.expression
+
+.. autosummary::
+    :toctree: api/
+
+    ImageExpressionAccessor.nsfw_score
+    ImageExpressionAccessor.aesthetic_score
+    ImageExpressionAccessor.quality_score
+    ImageExpressionAccessor.watermark_score
+
+
+Image Embedding
+~~~~~~~~~~~~~~~
+
+Image embedding and similarity operations.
+
+Operations in this section generate vector embeddings from images or compute
+image-text similarity scores using CLIP. They use pandas batch UDFs and run
+CLIP inference once per input batch.
+
+Example::
+
+    >>> from pyflink.dataframe import col
+    >>> df = df.with_column(
+    ...     "vector", col("img").image.embedding(model="ViT-B/32"))
+    >>> # Fixed text mode - compare all images against one prompt.
+    >>> df = df.with_column(
+    ...     "score",
+    ...     col("img").image.text_similarity(text="a photo of a cat"))
+    >>> # Per-row text mode - each row has its own text.
+    >>> df = df.with_column(
+    ...     "score",
+    ...     col("img").image.text_similarity(text_column=col("text")))
+
+``concurrency``, ``batch_size``, ``num_gpus``, and ``gpu_type`` are forwarded
+to the DataFrame UDF runtime.
+
+Requires: ``pip install open_clip_torch torch pillow``.
+
+.. currentmodule:: pyflink.multimodal.expression
+
+.. autosummary::
+    :toctree: api/
+
+    ImageExpressionAccessor.embedding
+    ImageExpressionAccessor.text_similarity
+
+
+Video Accessor
+--------------
+
+Use the ``video`` namespace on DataFrame expressions to call video operations.
+These are video frame operations for extraction pipelines.
+
+.. currentmodule:: pyflink.multimodal.expression
+
+.. autosummary::
+    :toctree: api/
+
+    VideoExpressionAccessor
+    VideoExpressionAccessor.metadata
+    VideoExpressionAccessor.extract_frames
+
+
+Audio Accessor
+--------------
+
+Use the ``audio`` namespace on DataFrame expressions to call audio operations.
+
+.. currentmodule:: pyflink.multimodal.expression
+
+.. autosummary::
+    :toctree: api/
+
+    AudioExpressionAccessor
+
+Audio Information
+~~~~~~~~~~~~~~~~~
+
+Audio information, validation, and filter operations.
+
+These operations inspect audio objects and return scalar values or row values.
+They do not modify waveform content. Encoded inputs are accepted only at the
+pipeline boundary; waveform-only operations require an explicit
+``.audio.decode()`` step so that pipeline definitions stay predictable.
+
+.. currentmodule:: pyflink.multimodal.expression
+
+.. autosummary::
+    :toctree: api/
+
+    AudioExpressionAccessor.is_valid
+    AudioExpressionAccessor.metadata
+    AudioExpressionAccessor.duration
+    AudioExpressionAccessor.duration_filter
+    AudioExpressionAccessor.size_filter
+    AudioExpressionAccessor.silence_detection
+    AudioExpressionAccessor.detect_speech
+
+
+Audio Transform
+~~~~~~~~~~~~~~~
+
+Audio decode, encode, split, and waveform transform operations.
+
+The transform layer separates encoded boundary inputs from decoded waveform
+processing. Operations that modify samples accept ``AUDIO_WAVEFORM`` only, so
+a pipeline should usually call ``.audio.decode()`` once, transform waveforms,
+and then call ``.audio.encode()`` or a sink-specific writer at the boundary.
+
+.. currentmodule:: pyflink.multimodal.expression
+
+.. autosummary::
+    :toctree: api/
+
+    AudioExpressionAccessor.decode
+    AudioExpressionAccessor.encode
+    AudioExpressionAccessor.convert_format
+    AudioExpressionAccessor.standardize
+    AudioExpressionAccessor.resample
+    AudioExpressionAccessor.split_by_duration
+    AudioExpressionAccessor.split_by_timestamp
+    AudioExpressionAccessor.split_by_speech
+    AudioExpressionAccessor.concat
+
+
+Audio Speech
+~~~~~~~~~~~~
+
+Speech model operations for decoded audio waveforms.
+
+These are model-backed pandas UDFs. They accept standardized
+``AUDIO_WAVEFORM`` values only: callers should decode boundary inputs and
+normalize to 16 kHz mono before invoking Whisper-based operations.
+
+.. currentmodule:: pyflink.multimodal.expression
+
+.. autosummary::
+    :toctree: api/
+
+    AudioExpressionAccessor.asr_whisper
+    AudioExpressionAccessor.detect_language

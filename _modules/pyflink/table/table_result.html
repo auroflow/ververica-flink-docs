@@ -1,0 +1,573 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyflink.table.table_result &#8212; PyFlink 11.8.0 documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyflink/table/table_result';</script>
+    <link rel="shortcut icon" href="../../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../../search.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="Logo image">
+    <img src="../../../_static/navbar-brand-logo.jpg" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <h1>Source code for pyflink.table.table_result</h1><div class="highlight"><pre>
+<span></span><span class="c1">################################################################################</span>
+<span class="c1">#  Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="c1">#  or more contributor license agreements.  See the NOTICE file</span>
+<span class="c1">#  distributed with this work for additional information</span>
+<span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
+<span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
+<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  with the License.  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">################################################################################</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">py4j.java_gateway</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_method</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">RowKind</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">Row</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common.job_client</span><span class="w"> </span><span class="kn">import</span> <span class="n">JobClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.java_gateway</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_gateway</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.catalog</span><span class="w"> </span><span class="kn">import</span> <span class="n">ResolvedSchema</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.result_kind</span><span class="w"> </span><span class="kn">import</span> <span class="n">ResultKind</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.table_schema</span><span class="w"> </span><span class="kn">import</span> <span class="n">TableSchema</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">_from_java_data_type</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">pickled_bytes_to_python_converter</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TableResult&#39;</span><span class="p">,</span> <span class="s1">&#39;CloseableIterator&#39;</span><span class="p">]</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TableResult</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A :class:`~pyflink.table.TableResult` is the representation of the statement execution result.</span>
+
+<span class="sd">    .. versionadded:: 1.11.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_table_result</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_table_result</span> <span class="o">=</span> <span class="n">j_table_result</span>
+
+<div class="viewcode-block" id="TableResult.get_job_client"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.table_result.TableResult.get_job_client.html#pyflink.table.table_result.TableResult.get_job_client">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_job_client</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">JobClient</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        For DML and DQL statement, return the JobClient which associates the submitted Flink job.</span>
+<span class="sd">        For other statements (e.g.  DDL, DCL) return empty.</span>
+
+<span class="sd">        :return: The job client, optional.</span>
+<span class="sd">        :rtype: pyflink.common.JobClient</span>
+
+<span class="sd">        .. versionadded:: 1.11.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">job_client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_table_result</span><span class="o">.</span><span class="n">getJobClient</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">job_client</span><span class="o">.</span><span class="n">isPresent</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">JobClient</span><span class="p">(</span><span class="n">job_client</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="TableResult.wait"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.table_result.TableResult.wait.html#pyflink.table.table_result.TableResult.wait">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">wait</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout_ms</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Wait if necessary for at most the given time (milliseconds) for the data to be ready.</span>
+
+<span class="sd">        For a select operation, this method will wait until the first row can be accessed locally.</span>
+<span class="sd">        For an insert operation, this method will wait for the job to finish,</span>
+<span class="sd">        because the result contains only one row.</span>
+<span class="sd">        For other operations, this method will return immediately,</span>
+<span class="sd">        because the result is already available locally.</span>
+
+<span class="sd">        .. versionadded:: 1.12.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">timeout_ms</span><span class="p">:</span>
+            <span class="n">TimeUnit</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">concurrent</span><span class="o">.</span><span class="n">TimeUnit</span>
+            <span class="n">get_method</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table_result</span><span class="p">,</span> <span class="s2">&quot;await&quot;</span><span class="p">)(</span><span class="n">timeout_ms</span><span class="p">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="n">MILLISECONDS</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">get_method</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table_result</span><span class="p">,</span> <span class="s2">&quot;await&quot;</span><span class="p">)()</span></div>
+
+<div class="viewcode-block" id="TableResult.get_table_schema"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.table_result.TableResult.get_table_schema.html#pyflink.table.table_result.TableResult.get_table_schema">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_table_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TableSchema</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the schema of the result.</span>
+
+<span class="sd">        :return: The schema of the result.</span>
+<span class="sd">        :rtype: pyflink.table.TableSchema</span>
+
+<span class="sd">        .. versionadded:: 1.11.0</span>
+<span class="sd">        .. deprecated:: 2.1.0</span>
+<span class="sd">           This function has been deprecated as part of FLIP-164.</span>
+<span class="sd">           :class:`~pyflink.table.table_schema.TableSchema` has been replaced by two more</span>
+<span class="sd">           dedicated classes :class:`~pyflink.table.Schema` and</span>
+<span class="sd">           :class:`~pyflink.table.catalog.ResolvedSchema`. Use :class:`~pyflink.table.Schema` for</span>
+<span class="sd">           declaration in APIs. :class:`~pyflink.table.catalog.ResolvedSchema` is offered by the</span>
+<span class="sd">           framework after resolution and validation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">TableSchema</span><span class="p">(</span><span class="n">j_table_schema</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_java_table_schema</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="TableResult.get_resolved_schema"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.table_result.TableResult.get_resolved_schema.html#pyflink.table.table_result.TableResult.get_resolved_schema">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_resolved_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ResolvedSchema</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the schema of the result.</span>
+
+<span class="sd">        :return: The schema of the result.</span>
+<span class="sd">        :rtype: pyflink.table.catalog.ResolvedSchema</span>
+
+<span class="sd">        .. versionadded:: 2.1.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">ResolvedSchema</span><span class="p">(</span><span class="n">j_resolved_schema</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table_result</span><span class="o">.</span><span class="n">getResolvedSchema</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="TableResult.get_result_kind"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.table_result.TableResult.get_result_kind.html#pyflink.table.table_result.TableResult.get_result_kind">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_result_kind</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ResultKind</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the ResultKind which represents the result type.</span>
+
+<span class="sd">        For DDL operation and USE operation, the result kind is always SUCCESS.</span>
+<span class="sd">        For other operations, the result kind is always SUCCESS_WITH_CONTENT.</span>
+
+<span class="sd">        :return: The result kind.</span>
+
+<span class="sd">        .. versionadded:: 1.11.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">ResultKind</span><span class="o">.</span><span class="n">_from_j_result_kind</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table_result</span><span class="o">.</span><span class="n">getResultKind</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="TableResult.collect"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.table_result.TableResult.collect.html#pyflink.table.table_result.TableResult.collect">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">collect</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;CloseableIterator&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the result contents as a closeable row iterator.</span>
+
+<span class="sd">        Note:</span>
+
+<span class="sd">        For SELECT operation, the job will not be finished unless all result data has been</span>
+<span class="sd">        collected. So we should actively close the job to avoid resource leak through</span>
+<span class="sd">        CloseableIterator#close method. Calling CloseableIterator#close method will cancel the job</span>
+<span class="sd">        and release related resources.</span>
+
+<span class="sd">        For DML operation, Flink does not support getting the real affected row count now. So the</span>
+<span class="sd">        affected row count is always -1 (unknown) for every sink, and them will be returned until</span>
+<span class="sd">        the job is finished.</span>
+<span class="sd">        Calling CloseableIterator#close method will cancel the job.</span>
+
+<span class="sd">        For other operations, no flink job will be submitted (get_job_client() is always empty), and</span>
+<span class="sd">        the result is bounded. Do noting when calling CloseableIterator#close method.</span>
+
+<span class="sd">        Recommended code to call CloseableIterator#close method looks like:</span>
+
+<span class="sd">        &gt;&gt;&gt; table_result = t_env.execute(&quot;select ...&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; with table_result.collect() as results:</span>
+<span class="sd">        &gt;&gt;&gt;    for result in results:</span>
+<span class="sd">        &gt;&gt;&gt;        ...</span>
+
+<span class="sd">        In order to fetch result to local, you can call either collect() and print(). But, they can</span>
+<span class="sd">        not be called both on the same TableResult instance.</span>
+
+<span class="sd">        :return: A CloseableIterator.</span>
+
+<span class="sd">        .. versionadded:: 1.12.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">field_data_types</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_java_table_schema</span><span class="p">()</span><span class="o">.</span><span class="n">getFieldDataTypes</span><span class="p">()</span>
+
+        <span class="n">j_iter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_table_result</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">CloseableIterator</span><span class="p">(</span><span class="n">j_iter</span><span class="p">,</span> <span class="n">field_data_types</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TableResult.print"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.table_result.TableResult.print.html#pyflink.table.table_result.TableResult.print">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">print</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Print the result contents as tableau form to client console.</span>
+
+<span class="sd">        This method has slightly different behaviors under different checkpointing settings.</span>
+
+<span class="sd">            - For batch jobs or streaming jobs without checkpointing,</span>
+<span class="sd">              this method has neither exactly-once nor at-least-once guarantee.</span>
+<span class="sd">              Query results are immediately accessible by the clients once they&#39;re produced,</span>
+<span class="sd">              but exceptions will be thrown when the job fails and restarts.</span>
+<span class="sd">            - For streaming jobs with exactly-once checkpointing,</span>
+<span class="sd">              this method guarantees an end-to-end exactly-once record delivery.</span>
+<span class="sd">              A result will be accessible by clients only after its corresponding checkpoint</span>
+<span class="sd">              completes.</span>
+<span class="sd">            - For streaming jobs with at-least-once checkpointing,</span>
+<span class="sd">              this method guarantees an end-to-end at-least-once record delivery.</span>
+<span class="sd">              Query results are immediately accessible by the clients once they&#39;re produced,</span>
+<span class="sd">              but it is possible for the same result to be delivered multiple times.</span>
+
+<span class="sd">        .. versionadded:: 1.11.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_table_result</span><span class="o">.</span><span class="n">print</span><span class="p">()</span></div>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_java_table_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">TableSchema</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">TableSchema</span>
+        <span class="k">return</span> <span class="n">TableSchema</span><span class="o">.</span><span class="n">fromResolvedSchema</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table_result</span><span class="o">.</span><span class="n">getResolvedSchema</span><span class="p">())</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">CloseableIterator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Representing an Iterator that is also auto closeable.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_closeable_iterator</span><span class="p">,</span> <span class="n">field_data_types</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_closeable_iterator</span> <span class="o">=</span> <span class="n">j_closeable_iterator</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_field_data_types</span> <span class="o">=</span> <span class="n">field_data_types</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data_types</span> <span class="o">=</span> <span class="p">[</span><span class="n">_from_java_data_type</span><span class="p">(</span><span class="n">j_field_data_type</span><span class="p">)</span>
+                            <span class="k">for</span> <span class="n">j_field_data_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_field_data_types</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_closeable_iterator</span><span class="o">.</span><span class="n">hasNext</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">StopIteration</span><span class="p">(</span><span class="s2">&quot;No more data.&quot;</span><span class="p">)</span>
+        <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
+        <span class="n">pickle_bytes</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">PythonBridgeUtils</span><span class="o">.</span> \
+            <span class="n">getPickledBytesFromRow</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_closeable_iterator</span><span class="o">.</span><span class="n">next</span><span class="p">(),</span>
+                                   <span class="bp">self</span><span class="o">.</span><span class="n">_j_field_data_types</span><span class="p">)</span>
+        <span class="n">row_kind</span> <span class="o">=</span> <span class="n">RowKind</span><span class="p">(</span><span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">pickle_bytes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">byteorder</span><span class="o">=</span><span class="s1">&#39;big&#39;</span><span class="p">,</span> <span class="n">signed</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+        <span class="n">pickle_bytes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">pickle_bytes</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="n">field_data</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">pickle_bytes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data_types</span><span class="p">)</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">data</span><span class="p">,</span> <span class="n">field_type</span> <span class="ow">in</span> <span class="n">field_data</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pickled_bytes_to_python_converter</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">field_type</span><span class="p">))</span>
+        <span class="n">result_row</span> <span class="o">=</span> <span class="n">Row</span><span class="p">(</span><span class="o">*</span><span class="n">fields</span><span class="p">)</span>
+        <span class="n">result_row</span><span class="o">.</span><span class="n">set_row_kind</span><span class="p">(</span><span class="n">row_kind</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result_row</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_closeable_iterator</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

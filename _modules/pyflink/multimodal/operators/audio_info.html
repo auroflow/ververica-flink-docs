@@ -1,0 +1,1123 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyflink.multimodal.operators.audio_info &#8212; PyFlink 11.8.0 documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyflink/multimodal/operators/audio_info';</script>
+    <link rel="shortcut icon" href="../../../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../../../search.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="Logo image">
+    <img src="../../../../_static/navbar-brand-logo.jpg" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <h1>Source code for pyflink.multimodal.operators.audio_info</h1><div class="highlight"><pre>
+<span></span><span class="c1">################################################################################</span>
+<span class="c1">#  Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="c1">#  or more contributor license agreements.  See the NOTICE file</span>
+<span class="c1">#  distributed with this work for additional information</span>
+<span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
+<span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
+<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  with the License.  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">################################################################################</span>
+<span class="sd">&quot;&quot;&quot;Audio information, validation, and filter operators.</span>
+
+<span class="sd">These operators inspect audio objects and return scalar values or row values.</span>
+<span class="sd">They do not modify waveform content. Encoded inputs are accepted only at the</span>
+<span class="sd">pipeline boundary; waveform-only operators require an explicit ``audio_decode``</span>
+<span class="sd">step so that pipeline definitions stay predictable.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataType</span><span class="p">,</span> <span class="n">udf</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.udf</span><span class="w"> </span><span class="kn">import</span> <span class="n">ScalarFunction</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.multimodal.codec.audio</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">audio_encoded_size</span><span class="p">,</span>
+    <span class="n">decode_audio_input</span><span class="p">,</span>
+    <span class="n">detect_speech_ranges</span><span class="p">,</span>
+    <span class="n">detect_silence_ranges</span><span class="p">,</span>
+    <span class="n">ensure_supported_audio_input</span><span class="p">,</span>
+    <span class="n">is_audio_data_error</span><span class="p">,</span>
+    <span class="n">probe_audio_metadata</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.multimodal.types.audio</span><span class="w"> </span><span class="kn">import</span> <span class="n">AUDIO_METADATA_TYPE</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.multimodal.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">_build_or_apply_udf</span><span class="p">,</span> <span class="n">_udf_runtime_kwargs</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;is_valid_audio&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;audio_metadata&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;audio_duration&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;audio_duration_filter&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;audio_size_filter&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;audio_silence_detection&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;audio_detect_speech&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">_AUDIO_TIME_RANGE_LIST_TYPE</span> <span class="o">=</span> <span class="n">DataType</span><span class="o">.</span><span class="n">list</span><span class="p">(</span>
+    <span class="n">DataType</span><span class="o">.</span><span class="n">struct</span><span class="p">([</span>
+        <span class="p">(</span><span class="s2">&quot;start_ms&quot;</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">()),</span>
+        <span class="p">(</span><span class="s2">&quot;end_ms&quot;</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">()),</span>
+        <span class="p">(</span><span class="s2">&quot;duration_ms&quot;</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">()),</span>
+    <span class="p">])</span>
+<span class="p">)</span>
+<span class="n">_AUDIO_VALIDATION_MODES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;metadata&quot;</span><span class="p">,</span> <span class="s2">&quot;decode&quot;</span><span class="p">}</span>
+<span class="n">_WEBRTC_VAD_FRAME_MS</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_bridge_client_or_none</span><span class="p">(</span><span class="n">function_context</span><span class="p">):</span>
+    <span class="n">getter</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">function_context</span><span class="p">,</span> <span class="s2">&quot;_get_file_system_bridge_client&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">getter</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">getter</span><span class="p">()</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_within_optional_bounds</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">lower_bound</span><span class="p">,</span> <span class="n">upper_bound</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">lower_bound</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">lower_bound</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="n">upper_bound</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="n">upper_bound</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_validate_at_least_one_bound</span><span class="p">(</span><span class="n">operator_name</span><span class="p">,</span> <span class="o">*</span><span class="n">bounds</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">bound</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">bound</span> <span class="ow">in</span> <span class="n">bounds</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">operator_name</span><span class="si">}</span><span class="s2"> requires at least one bound.&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_optional_non_negative_float</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be a non-negative number, got </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_optional_non_negative_int</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be a non-negative integer, got </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">value</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_positive_int</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be a positive integer, got </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">value</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_non_negative_int</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be a non-negative integer, got </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">value</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_int_range</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">minimum</span><span class="p">,</span> <span class="n">maximum</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be an integer, got </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">minimum</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="n">maximum</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be between </span><span class="si">{</span><span class="n">minimum</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">maximum</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">value</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_int_choice</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">choices</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be an integer, got </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">choices</span><span class="p">:</span>
+        <span class="n">allowed</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">choice</span><span class="p">)</span> <span class="k">for</span> <span class="n">choice</span> <span class="ow">in</span> <span class="n">choices</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be one of [</span><span class="si">{</span><span class="n">allowed</span><span class="si">}</span><span class="s2">], got </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">value</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_validate_ordered_bounds</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">lower_bound</span><span class="p">,</span> <span class="n">upper_bound</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">lower_bound</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">upper_bound</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">upper_bound</span> <span class="o">&lt;</span> <span class="n">lower_bound</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> upper bound must be &gt;= lower bound, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;got lower=</span><span class="si">{</span><span class="n">lower_bound</span><span class="si">!r}</span><span class="s2">, upper=</span><span class="si">{</span><span class="n">upper_bound</span><span class="si">!r}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_normalize_audio_validation_mode</span><span class="p">(</span><span class="n">validation</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">validation</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_AUDIO_VALIDATION_MODES</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;is_valid_audio validation must be one of &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">_AUDIO_VALIDATION_MODES</span><span class="p">)</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="n">validation</span><span class="si">!r}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">validation</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">_AudioValidityFilter</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check whether BYTES, URI, or AUDIO_CLIP_REF input can be read as audio.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">validation</span><span class="o">=</span><span class="s2">&quot;metadata&quot;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validation</span> <span class="o">=</span> <span class="n">_normalize_audio_validation_mode</span><span class="p">(</span><span class="n">validation</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bridge_client</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_context</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bridge_client</span> <span class="o">=</span> <span class="n">_bridge_client_or_none</span><span class="p">(</span><span class="n">function_context</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">audio_input</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">audio_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="n">ensure_supported_audio_input</span><span class="p">(</span>
+            <span class="s2">&quot;is_valid_audio&quot;</span><span class="p">,</span>
+            <span class="p">(</span><span class="s2">&quot;BYTES&quot;</span><span class="p">,</span> <span class="s2">&quot;URI&quot;</span><span class="p">,</span> <span class="s2">&quot;AUDIO_CLIP_REF&quot;</span><span class="p">),</span>
+            <span class="n">audio_input</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validation</span> <span class="o">==</span> <span class="s2">&quot;metadata&quot;</span><span class="p">:</span>
+                <span class="n">probe_audio_metadata</span><span class="p">(</span>
+                    <span class="n">audio_input</span><span class="p">,</span>
+                    <span class="n">bridge_client</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_bridge_client</span><span class="p">,</span>
+                    <span class="n">operator_name</span><span class="o">=</span><span class="s2">&quot;is_valid_audio&quot;</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validation</span> <span class="o">==</span> <span class="s2">&quot;decode&quot;</span><span class="p">:</span>
+                <span class="n">decode_audio_input</span><span class="p">(</span>
+                    <span class="n">audio_input</span><span class="p">,</span>
+                    <span class="n">bridge_client</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_bridge_client</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">is_audio_data_error</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">raise</span>
+
+
+<div class="viewcode-block" id="is_valid_audio"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.is_valid_audio.html#pyflink.multimodal.operators.is_valid_audio">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">is_valid_audio</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">validation</span><span class="o">=</span><span class="s2">&quot;metadata&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check whether an audio input looks like valid audio.</span>
+
+<span class="sd">    The default ``validation=&quot;metadata&quot;`` only reads enough container/header</span>
+<span class="sd">    data to probe metadata. This is the cheap path for filtering large tables</span>
+<span class="sd">    before decode. ``validation=&quot;decode&quot;`` skips the metadata pre-probe and</span>
+<span class="sd">    fully decodes the stream; it is more expensive but catches truncated or</span>
+<span class="sd">    corrupt payloads that have a readable header.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        *columns: Optional audio columns. When provided, the UDF is applied</span>
+<span class="sd">            directly.</span>
+<span class="sd">        validation: ``&quot;metadata&quot;`` for header/container validation, or</span>
+<span class="sd">            ``&quot;decode&quot;`` for full decode validation.</span>
+<span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A UDF producing ``BOOLEAN``. Corrupt supported inputs return ``False``.</span>
+<span class="sd">        URI access errors still fail fast.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If ``validation`` is unsupported, or if a row value has an</span>
+<span class="sd">            unsupported input kind. Supported inputs are ``BYTES``, URI</span>
+<span class="sd">            ``STRING``, and ``AUDIO_CLIP_REF``.</span>
+
+<span class="sd">    Examples::</span>
+<span class="sd">        &gt;&gt;&gt; # Usage 1: create a reusable UDF and apply it to a column.</span>
+<span class="sd">        &gt;&gt;&gt; valid = is_valid_audio(validation=&quot;metadata&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; df = df.filter(valid(col(&quot;audio_bytes&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Usage 2: pass the column directly when building the expression.</span>
+<span class="sd">        &gt;&gt;&gt; df = df.filter(</span>
+<span class="sd">        ...     is_valid_audio(col(&quot;audio_bytes&quot;), validation=&quot;metadata&quot;)</span>
+<span class="sd">        ... )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
+        <span class="n">_AudioValidityFilter</span><span class="p">(</span><span class="n">validation</span><span class="o">=</span><span class="n">validation</span><span class="p">),</span>
+        <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">boolean</span><span class="p">(),</span>
+        <span class="o">**</span><span class="n">_udf_runtime_kwargs</span><span class="p">(</span><span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_build_or_apply_udf</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">)</span></div>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">_AudioMetadata</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extract audio metadata from encoded inputs, references, or waveform rows.</span>
+
+<span class="sd">    ``codec`` is a best-effort media codec name. For WAV/PCM inputs it follows</span>
+<span class="sd">    FFmpeg/PyAV codec short-name convention, e.g. ``pcm_s16le`` for signed</span>
+<span class="sd">    16-bit little-endian PCM.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bridge_client</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_context</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bridge_client</span> <span class="o">=</span> <span class="n">_bridge_client_or_none</span><span class="p">(</span><span class="n">function_context</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">audio_input</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">audio_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">ensure_supported_audio_input</span><span class="p">(</span>
+            <span class="s2">&quot;audio_metadata&quot;</span><span class="p">,</span>
+            <span class="p">(</span><span class="s2">&quot;BYTES&quot;</span><span class="p">,</span> <span class="s2">&quot;URI&quot;</span><span class="p">,</span> <span class="s2">&quot;AUDIO_CLIP_REF&quot;</span><span class="p">,</span> <span class="s2">&quot;AUDIO_WAVEFORM&quot;</span><span class="p">),</span>
+            <span class="n">audio_input</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">probe_audio_metadata</span><span class="p">(</span>
+                <span class="n">audio_input</span><span class="p">,</span>
+                <span class="n">bridge_client</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_bridge_client</span><span class="p">,</span>
+                <span class="n">operator_name</span><span class="o">=</span><span class="s2">&quot;audio_metadata&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">is_audio_data_error</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">None</span>
+            <span class="k">raise</span>
+
+
+<div class="viewcode-block" id="audio_metadata"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.audio_metadata.html#pyflink.multimodal.operators.audio_metadata">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">audio_metadata</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extract audio metadata.</span>
+
+<span class="sd">    The result is a row with the following fields:</span>
+
+<span class="sd">    * ``sample_rate``: samples per second, e.g. ``16000``.</span>
+<span class="sd">    * ``channels``: number of audio channels.</span>
+<span class="sd">    * ``frames``: number of frames per channel.</span>
+<span class="sd">    * ``duration_ms``: duration in milliseconds.</span>
+<span class="sd">    * ``format``: encoded container format when known, such as ``WAV``.</span>
+<span class="sd">    * ``codec``: best-effort media codec short name, such as ``pcm_s16le``.</span>
+<span class="sd">    * ``bit_rate``: encoded bit rate when available.</span>
+<span class="sd">    * ``size``: encoded object byte size when available.</span>
+
+<span class="sd">    Decoded ``AUDIO_WAVEFORM`` values do not retain original container fields,</span>
+<span class="sd">    so ``format``, ``codec``, ``bit_rate``, and ``size`` may be ``None``. This</span>
+<span class="sd">    info operator treats corrupt supported media data as row-level dirty data:</span>
+<span class="sd">    corrupt ``BYTES``/encoded inputs return ``NULL``. URI access errors,</span>
+<span class="sd">    dependency errors, unsupported input kinds, and unexpected internal errors</span>
+<span class="sd">    still fail fast.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        *columns: Optional audio columns. When provided, the UDF is applied</span>
+<span class="sd">            directly.</span>
+<span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A UDF producing ``ROW&lt;sample_rate INT, channels INT, frames BIGINT,</span>
+<span class="sd">        duration_ms BIGINT, format STRING, codec STRING, bit_rate BIGINT,</span>
+<span class="sd">        size BIGINT&gt;``, or ``NULL`` for corrupt supported boundary inputs.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If a row value is not ``BYTES``, URI ``STRING``,</span>
+<span class="sd">            ``AUDIO_CLIP_REF``, or ``AUDIO_WAVEFORM``.</span>
+
+<span class="sd">    Examples::</span>
+<span class="sd">        &gt;&gt;&gt; # Usage 1: create a reusable UDF and apply it to a column.</span>
+<span class="sd">        &gt;&gt;&gt; metadata = audio_metadata()</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;meta&quot;, metadata(col(&quot;audio_bytes&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Usage 2: pass the column directly when building the expression.</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(</span>
+<span class="sd">        ...     &quot;meta&quot;,</span>
+<span class="sd">        ...     audio_metadata(col(&quot;audio_bytes&quot;)),</span>
+<span class="sd">        ... )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
+        <span class="n">_AudioMetadata</span><span class="p">(),</span>
+        <span class="n">return_dtype</span><span class="o">=</span><span class="n">AUDIO_METADATA_TYPE</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">_udf_runtime_kwargs</span><span class="p">(</span><span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_build_or_apply_udf</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">)</span></div>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">_AudioDuration</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return audio duration in seconds.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bridge_client</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_context</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bridge_client</span> <span class="o">=</span> <span class="n">_bridge_client_or_none</span><span class="p">(</span><span class="n">function_context</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">audio_input</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">audio_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">ensure_supported_audio_input</span><span class="p">(</span>
+            <span class="s2">&quot;audio_duration&quot;</span><span class="p">,</span>
+            <span class="p">(</span><span class="s2">&quot;BYTES&quot;</span><span class="p">,</span> <span class="s2">&quot;URI&quot;</span><span class="p">,</span> <span class="s2">&quot;AUDIO_CLIP_REF&quot;</span><span class="p">,</span> <span class="s2">&quot;AUDIO_WAVEFORM&quot;</span><span class="p">),</span>
+            <span class="n">audio_input</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">metadata</span> <span class="o">=</span> <span class="n">probe_audio_metadata</span><span class="p">(</span>
+                <span class="n">audio_input</span><span class="p">,</span>
+                <span class="n">bridge_client</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_bridge_client</span><span class="p">,</span>
+                <span class="n">operator_name</span><span class="o">=</span><span class="s2">&quot;audio_duration&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">is_audio_data_error</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">None</span>
+            <span class="k">raise</span>
+        <span class="k">if</span> <span class="n">metadata</span><span class="o">.</span><span class="n">duration_ms</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">metadata</span><span class="o">.</span><span class="n">duration_ms</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1000.0</span>
+
+
+<div class="viewcode-block" id="audio_duration"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.audio_duration.html#pyflink.multimodal.operators.audio_duration">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">audio_duration</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return audio duration in seconds.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        *columns: Optional audio columns. Supported inputs are ``BYTES``, URI</span>
+<span class="sd">            ``STRING``, ``AUDIO_CLIP_REF``, and ``AUDIO_WAVEFORM``.</span>
+<span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A UDF producing ``DOUBLE`` seconds, or ``NULL`` when duration is</span>
+<span class="sd">        unavailable. Corrupt supported encoded inputs also return ``NULL`` as</span>
+<span class="sd">        row-level dirty data. URI access errors, dependency errors, unsupported</span>
+<span class="sd">        input kinds, and unexpected internal errors still fail fast.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If a row value is not ``BYTES``, URI ``STRING``,</span>
+<span class="sd">            ``AUDIO_CLIP_REF``, or ``AUDIO_WAVEFORM``.</span>
+
+<span class="sd">    Examples::</span>
+<span class="sd">        &gt;&gt;&gt; # Usage 1: create a reusable UDF and apply it to a column.</span>
+<span class="sd">        &gt;&gt;&gt; duration = audio_duration()</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;seconds&quot;, duration(col(&quot;audio&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Usage 2: pass the column directly when building the expression.</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(</span>
+<span class="sd">        ...     &quot;seconds&quot;,</span>
+<span class="sd">        ...     audio_duration(col(&quot;audio&quot;)),</span>
+<span class="sd">        ... )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
+        <span class="n">_AudioDuration</span><span class="p">(),</span>
+        <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">(),</span>
+        <span class="o">**</span><span class="n">_udf_runtime_kwargs</span><span class="p">(</span><span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_build_or_apply_udf</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">)</span></div>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">_AudioDurationFilter</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Filter audio by duration in seconds.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_seconds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_seconds</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">_validate_at_least_one_bound</span><span class="p">(</span>
+            <span class="s2">&quot;audio_duration_filter&quot;</span><span class="p">,</span> <span class="n">min_seconds</span><span class="p">,</span> <span class="n">max_seconds</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_seconds</span> <span class="o">=</span> <span class="n">_optional_non_negative_float</span><span class="p">(</span><span class="s2">&quot;min_seconds&quot;</span><span class="p">,</span> <span class="n">min_seconds</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_seconds</span> <span class="o">=</span> <span class="n">_optional_non_negative_float</span><span class="p">(</span><span class="s2">&quot;max_seconds&quot;</span><span class="p">,</span> <span class="n">max_seconds</span><span class="p">)</span>
+        <span class="n">_validate_ordered_bounds</span><span class="p">(</span>
+            <span class="s2">&quot;audio_duration_filter&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_seconds</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_seconds</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bridge_client</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_context</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bridge_client</span> <span class="o">=</span> <span class="n">_bridge_client_or_none</span><span class="p">(</span><span class="n">function_context</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">audio_input</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">audio_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="n">ensure_supported_audio_input</span><span class="p">(</span>
+            <span class="s2">&quot;audio_duration_filter&quot;</span><span class="p">,</span>
+            <span class="p">(</span><span class="s2">&quot;BYTES&quot;</span><span class="p">,</span> <span class="s2">&quot;URI&quot;</span><span class="p">,</span> <span class="s2">&quot;AUDIO_CLIP_REF&quot;</span><span class="p">,</span> <span class="s2">&quot;AUDIO_WAVEFORM&quot;</span><span class="p">),</span>
+            <span class="n">audio_input</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">metadata</span> <span class="o">=</span> <span class="n">probe_audio_metadata</span><span class="p">(</span>
+                <span class="n">audio_input</span><span class="p">,</span>
+                <span class="n">bridge_client</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_bridge_client</span><span class="p">,</span>
+                <span class="n">operator_name</span><span class="o">=</span><span class="s2">&quot;audio_duration_filter&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">is_audio_data_error</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">raise</span>
+        <span class="k">if</span> <span class="n">metadata</span><span class="o">.</span><span class="n">duration_ms</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="n">duration_seconds</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">metadata</span><span class="o">.</span><span class="n">duration_ms</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1000.0</span>
+        <span class="k">return</span> <span class="n">_within_optional_bounds</span><span class="p">(</span>
+            <span class="n">duration_seconds</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_seconds</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_seconds</span>
+        <span class="p">)</span>
+
+
+<div class="viewcode-block" id="audio_duration_filter"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.audio_duration_filter.html#pyflink.multimodal.operators.audio_duration_filter">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">audio_duration_filter</span><span class="p">(</span>
+    <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
+    <span class="n">min_seconds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">max_seconds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check whether audio duration is within optional second bounds.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        *columns: Optional audio columns. Supported inputs are ``BYTES``, URI</span>
+<span class="sd">            ``STRING``, ``AUDIO_CLIP_REF``, and ``AUDIO_WAVEFORM``.</span>
+<span class="sd">        min_seconds: Inclusive lower duration bound. ``None`` disables it.</span>
+<span class="sd">        max_seconds: Inclusive upper duration bound. ``None`` disables it.</span>
+<span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A UDF producing ``BOOLEAN``. ``NULL`` or unknown-duration rows return</span>
+<span class="sd">        ``False``. Corrupt supported encoded inputs also return ``False`` as</span>
+<span class="sd">        row-level dirty data. URI access errors, dependency errors, unsupported</span>
+<span class="sd">        input kinds, and unexpected internal errors still fail fast.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If neither bound is set, a bound is negative,</span>
+<span class="sd">            ``max_seconds &lt; min_seconds``, or if a row value has an unsupported</span>
+<span class="sd">            input kind.</span>
+
+<span class="sd">    Examples::</span>
+<span class="sd">        &gt;&gt;&gt; # Usage 1: create a reusable UDF and apply it to a column.</span>
+<span class="sd">        &gt;&gt;&gt; duration_filter = audio_duration_filter(</span>
+<span class="sd">        ...     min_seconds=0.5,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; df = df.filter(duration_filter(col(&quot;audio&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Usage 2: pass the column directly when building the expression.</span>
+<span class="sd">        &gt;&gt;&gt; df = df.filter(</span>
+<span class="sd">        ...     audio_duration_filter(</span>
+<span class="sd">        ...         col(&quot;audio&quot;),</span>
+<span class="sd">        ...         min_seconds=0.5,</span>
+<span class="sd">        ...     )</span>
+<span class="sd">        ... )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
+        <span class="n">_AudioDurationFilter</span><span class="p">(</span>
+            <span class="n">min_seconds</span><span class="o">=</span><span class="n">min_seconds</span><span class="p">,</span>
+            <span class="n">max_seconds</span><span class="o">=</span><span class="n">max_seconds</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">boolean</span><span class="p">(),</span>
+        <span class="o">**</span><span class="n">_udf_runtime_kwargs</span><span class="p">(</span><span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_build_or_apply_udf</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">)</span></div>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">_AudioSizeFilter</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Filter encoded BYTES or URI audio by byte size.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_bytes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_bytes</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">_validate_at_least_one_bound</span><span class="p">(</span><span class="s2">&quot;audio_size_filter&quot;</span><span class="p">,</span> <span class="n">min_bytes</span><span class="p">,</span> <span class="n">max_bytes</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_bytes</span> <span class="o">=</span> <span class="n">_optional_non_negative_int</span><span class="p">(</span><span class="s2">&quot;min_bytes&quot;</span><span class="p">,</span> <span class="n">min_bytes</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_bytes</span> <span class="o">=</span> <span class="n">_optional_non_negative_int</span><span class="p">(</span><span class="s2">&quot;max_bytes&quot;</span><span class="p">,</span> <span class="n">max_bytes</span><span class="p">)</span>
+        <span class="n">_validate_ordered_bounds</span><span class="p">(</span><span class="s2">&quot;audio_size_filter&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_bytes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_bytes</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bridge_client</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_context</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bridge_client</span> <span class="o">=</span> <span class="n">_bridge_client_or_none</span><span class="p">(</span><span class="n">function_context</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">audio_input</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">audio_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="n">ensure_supported_audio_input</span><span class="p">(</span><span class="s2">&quot;audio_size_filter&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;BYTES&quot;</span><span class="p">,</span> <span class="s2">&quot;URI&quot;</span><span class="p">),</span> <span class="n">audio_input</span><span class="p">)</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="n">audio_encoded_size</span><span class="p">(</span>
+            <span class="n">audio_input</span><span class="p">,</span>
+            <span class="n">bridge_client</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_bridge_client</span><span class="p">,</span>
+            <span class="n">operator_name</span><span class="o">=</span><span class="s2">&quot;audio_size_filter&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">_within_optional_bounds</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_bytes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_bytes</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="audio_size_filter"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.audio_size_filter.html#pyflink.multimodal.operators.audio_size_filter">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">audio_size_filter</span><span class="p">(</span>
+    <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
+    <span class="n">min_bytes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">max_bytes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check whether encoded audio size is within optional byte bounds.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        *columns: Optional audio columns. Supported inputs are ``BYTES`` and</span>
+<span class="sd">            URI ``STRING``.</span>
+<span class="sd">        min_bytes: Inclusive lower byte bound. ``None`` disables it.</span>
+<span class="sd">        max_bytes: Inclusive upper byte bound. ``None`` disables it.</span>
+<span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A UDF producing ``BOOLEAN``. ``NULL`` inputs return ``False``; URI</span>
+<span class="sd">        access errors still fail fast.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If neither bound is set, a bound is negative,</span>
+<span class="sd">            ``max_bytes &lt; min_bytes``, or if a row value has an unsupported</span>
+<span class="sd">            input kind.</span>
+
+<span class="sd">    Examples::</span>
+<span class="sd">        &gt;&gt;&gt; # Usage 1: create a reusable UDF and apply it to a column.</span>
+<span class="sd">        &gt;&gt;&gt; size_filter = audio_size_filter(</span>
+<span class="sd">        ...     max_bytes=10 * 1024 * 1024,</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; df = df.filter(size_filter(col(&quot;audio&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Usage 2: pass the column directly when building the expression.</span>
+<span class="sd">        &gt;&gt;&gt; df = df.filter(</span>
+<span class="sd">        ...     audio_size_filter(</span>
+<span class="sd">        ...         col(&quot;audio&quot;),</span>
+<span class="sd">        ...         max_bytes=10 * 1024 * 1024,</span>
+<span class="sd">        ...     )</span>
+<span class="sd">        ... )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
+        <span class="n">_AudioSizeFilter</span><span class="p">(</span>
+            <span class="n">min_bytes</span><span class="o">=</span><span class="n">min_bytes</span><span class="p">,</span>
+            <span class="n">max_bytes</span><span class="o">=</span><span class="n">max_bytes</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">boolean</span><span class="p">(),</span>
+        <span class="o">**</span><span class="n">_udf_runtime_kwargs</span><span class="p">(</span><span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_build_or_apply_udf</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">)</span></div>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">_AudioSilenceDetection</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Detect continuous low-amplitude ranges in a waveform row.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threshold_db</span><span class="p">,</span> <span class="n">min_silence_ms</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">threshold_db</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">threshold_db</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;threshold_db must be a number, got </span><span class="si">{</span><span class="n">threshold_db</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">threshold_db</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;threshold_db must be &lt;= 0, got </span><span class="si">{</span><span class="n">threshold_db</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">min_silence_ms</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">min_silence_ms</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;min_silence_ms must be an integer, got </span><span class="si">{</span><span class="n">min_silence_ms</span><span class="si">!r}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="n">min_silence_ms</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;min_silence_ms must be non-negative, got </span><span class="si">{</span><span class="n">min_silence_ms</span><span class="si">!r}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">threshold_db</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">threshold_db</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_silence_ms</span> <span class="o">=</span> <span class="n">min_silence_ms</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">audio_input</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">audio_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">detect_silence_ranges</span><span class="p">(</span>
+            <span class="n">audio_input</span><span class="p">,</span>
+            <span class="n">threshold_db</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">threshold_db</span><span class="p">,</span>
+            <span class="n">min_silence_ms</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">min_silence_ms</span><span class="p">,</span>
+        <span class="p">)</span>
+
+
+<div class="viewcode-block" id="audio_silence_detection"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.audio_silence_detection.html#pyflink.multimodal.operators.audio_silence_detection">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">audio_silence_detection</span><span class="p">(</span>
+    <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
+    <span class="n">threshold_db</span><span class="p">,</span>
+    <span class="n">min_silence_ms</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Detect low-amplitude silence ranges in an ``AUDIO_WAVEFORM``.</span>
+
+<span class="sd">    This is an energy-based silence detector, not a speech activity detector.</span>
+<span class="sd">    It downmixes multi-channel waveform data to mono, computes frame RMS,</span>
+<span class="sd">    converts RMS to decibels relative to full-scale amplitude, and returns</span>
+<span class="sd">    ranges whose energy stays at or below ``threshold_db`` for at least</span>
+<span class="sd">    ``min_silence_ms``. No ASR or VAD model is used.</span>
+
+<span class="sd">    ``threshold_db`` is required because silence is corpus dependent: a noisy</span>
+<span class="sd">    call-center recording and a studio recording need different thresholds.</span>
+<span class="sd">    ``min_silence_ms`` defaults to ``0`` so the operator does not hide a</span>
+<span class="sd">    second corpus-specific heuristic. Tune both values for the input domain.</span>
+<span class="sd">    Use ``audio_detect_speech`` for speech activity detection; silence ranges</span>
+<span class="sd">    are not equivalent to speech ranges.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        *columns: Optional audio columns. Supported input is</span>
+<span class="sd">            ``AUDIO_WAVEFORM`` only; call ``audio_decode`` first for encoded</span>
+<span class="sd">            inputs.</span>
+<span class="sd">        threshold_db: Required silence threshold in dB relative to full-scale float</span>
+<span class="sd">            waveform amplitude. It must be ``&lt;= 0``; for example ``-40.0`` means</span>
+<span class="sd">            frames at or below -40 dBFS are treated as silence. ``0`` means</span>
+<span class="sd">            0 dBFS/full scale, so almost all ordinary audio will be treated as</span>
+<span class="sd">            silence.</span>
+<span class="sd">        min_silence_ms: Minimum range length in milliseconds. Shorter quiet</span>
+<span class="sd">            ranges are dropped.</span>
+<span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A UDF producing ``ARRAY&lt;ROW&lt;start_ms BIGINT, end_ms BIGINT,</span>
+<span class="sd">        duration_ms BIGINT&gt;&gt;``. For waveform rows decoded from ``AUDIO_CLIP_REF``</span>
+<span class="sd">        segments, ``start_ms`` and ``end_ms`` are reported in the source audio</span>
+<span class="sd">        timeline so they can be fed into timestamp-based split operators.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If the input is not ``AUDIO_WAVEFORM`` or parameters are</span>
+<span class="sd">            invalid.</span>
+
+<span class="sd">    Examples::</span>
+<span class="sd">        &gt;&gt;&gt; # Prepare a decoded waveform before applying silence detection.</span>
+<span class="sd">        &gt;&gt;&gt; decode = audio_decode()</span>
+<span class="sd">        &gt;&gt;&gt; waveform = decode(col(&quot;audio_bytes&quot;))</span>
+<span class="sd">        &gt;&gt;&gt; # Usage 1: create a reusable UDF and apply it to a column.</span>
+<span class="sd">        &gt;&gt;&gt; silence = audio_silence_detection(threshold_db=-45.0)</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;silence_ranges&quot;, silence(waveform))</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Usage 2: pass the column directly when building the expression.</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(</span>
+<span class="sd">        ...     &quot;silence_ranges&quot;,</span>
+<span class="sd">        ...     audio_silence_detection(waveform, threshold_db=-45.0),</span>
+<span class="sd">        ... )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
+        <span class="n">_AudioSilenceDetection</span><span class="p">(</span>
+            <span class="n">threshold_db</span><span class="o">=</span><span class="n">threshold_db</span><span class="p">,</span>
+            <span class="n">min_silence_ms</span><span class="o">=</span><span class="n">min_silence_ms</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">return_dtype</span><span class="o">=</span><span class="n">_AUDIO_TIME_RANGE_LIST_TYPE</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">_udf_runtime_kwargs</span><span class="p">(</span><span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_build_or_apply_udf</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">)</span></div>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">_AudioDetectSpeech</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Detect speech activity ranges in a mono waveform row using WebRTC VAD.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">aggressiveness</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                 <span class="n">frame_ms</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+                 <span class="n">min_speech_ms</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                 <span class="n">merge_gap_ms</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                 <span class="n">max_segments</span><span class="o">=</span><span class="mi">1024</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aggressiveness</span> <span class="o">=</span> <span class="n">_int_range</span><span class="p">(</span>
+            <span class="s2">&quot;audio_detect_speech.aggressiveness&quot;</span><span class="p">,</span>
+            <span class="n">aggressiveness</span><span class="p">,</span>
+            <span class="mi">0</span><span class="p">,</span>
+            <span class="mi">3</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frame_ms</span> <span class="o">=</span> <span class="n">_int_choice</span><span class="p">(</span>
+            <span class="s2">&quot;audio_detect_speech.frame_ms&quot;</span><span class="p">,</span>
+            <span class="n">frame_ms</span><span class="p">,</span>
+            <span class="n">_WEBRTC_VAD_FRAME_MS</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_speech_ms</span> <span class="o">=</span> <span class="n">_non_negative_int</span><span class="p">(</span>
+            <span class="s2">&quot;audio_detect_speech.min_speech_ms&quot;</span><span class="p">,</span>
+            <span class="n">min_speech_ms</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">merge_gap_ms</span> <span class="o">=</span> <span class="n">_non_negative_int</span><span class="p">(</span>
+            <span class="s2">&quot;audio_detect_speech.merge_gap_ms&quot;</span><span class="p">,</span>
+            <span class="n">merge_gap_ms</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_segments</span> <span class="o">=</span> <span class="n">_positive_int</span><span class="p">(</span>
+            <span class="s2">&quot;audio_detect_speech.max_segments&quot;</span><span class="p">,</span>
+            <span class="n">max_segments</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">audio_input</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">audio_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">detect_speech_ranges</span><span class="p">(</span>
+            <span class="n">audio_input</span><span class="p">,</span>
+            <span class="n">aggressiveness</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">aggressiveness</span><span class="p">,</span>
+            <span class="n">frame_ms</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">frame_ms</span><span class="p">,</span>
+            <span class="n">min_speech_ms</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">min_speech_ms</span><span class="p">,</span>
+            <span class="n">merge_gap_ms</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">merge_gap_ms</span><span class="p">,</span>
+            <span class="n">max_segments</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_segments</span><span class="p">,</span>
+        <span class="p">)</span>
+
+
+<div class="viewcode-block" id="audio_detect_speech"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.audio_detect_speech.html#pyflink.multimodal.operators.audio_detect_speech">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">audio_detect_speech</span><span class="p">(</span>
+    <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
+    <span class="n">aggressiveness</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">frame_ms</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+    <span class="n">min_speech_ms</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">merge_gap_ms</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">max_segments</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
+    <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Detect speech activity ranges in a mono waveform with WebRTC VAD.</span>
+
+<span class="sd">    This operator is the speech-range producer for ``audio_split_by_speech``.</span>
+<span class="sd">    It uses the third-party WebRTC VAD implementation, not an energy threshold</span>
+<span class="sd">    or an ASR model. The input must be mono and have a WebRTC-supported sample</span>
+<span class="sd">    rate: 8000, 16000, 32000, or 48000 Hz. For most ASR pipelines, call</span>
+<span class="sd">    ``audio_standardize(sample_rate=16000, channels=1)`` first.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        *columns: Optional audio columns. Supported input is a row with fields</span>
+<span class="sd">            ``data TENSOR(&#39;float32&#39;), sample_rate INT, channels INT,</span>
+<span class="sd">            frames BIGINT, sample_format STRING, layout STRING,</span>
+<span class="sd">            duration_ms BIGINT, source_uri STRING, start_time_ms BIGINT,</span>
+<span class="sd">            end_time_ms BIGINT``.</span>
+<span class="sd">        aggressiveness: WebRTC VAD aggressiveness mode, from ``0`` (least</span>
+<span class="sd">            aggressive) to ``3`` (most aggressive). The default ``0`` follows</span>
+<span class="sd">            WebRTC VAD&#39;s least aggressive mode rather than a PyFlink threshold.</span>
+<span class="sd">        frame_ms: WebRTC frame size in milliseconds. Must be ``10``, ``20``,</span>
+<span class="sd">            or ``30``.</span>
+<span class="sd">        min_speech_ms: Drop detected speech ranges shorter than this duration.</span>
+<span class="sd">            The default ``0`` keeps raw WebRTC VAD ranges.</span>
+<span class="sd">        merge_gap_ms: Merge speech ranges separated by this gap or less. The</span>
+<span class="sd">            default ``0`` only merges adjacent speech frames.</span>
+<span class="sd">        max_segments: Maximum number of ranges to return.</span>
+<span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A UDF producing ``ARRAY&lt;ROW&lt;start_ms BIGINT, end_ms BIGINT,</span>
+<span class="sd">        duration_ms BIGINT&gt;&gt;`` sorted by time. Pass this array as the second</span>
+<span class="sd">        argument to ``audio_split_by_speech``. For waveform rows decoded from</span>
+<span class="sd">        ``AUDIO_CLIP_REF`` segments, ``start_ms`` and ``end_ms`` are reported in the</span>
+<span class="sd">        source audio timeline so they can be fed back into split operators.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If the input is not a supported mono waveform, the sample</span>
+<span class="sd">            rate is unsupported by WebRTC VAD, or parameters are invalid.</span>
+
+<span class="sd">    Examples::</span>
+<span class="sd">        &gt;&gt;&gt; # Prepare a mono waveform at a WebRTC-supported sample rate.</span>
+<span class="sd">        &gt;&gt;&gt; decode = audio_decode()</span>
+<span class="sd">        &gt;&gt;&gt; standardize = audio_standardize(sample_rate=16000, channels=1)</span>
+<span class="sd">        &gt;&gt;&gt; waveform = standardize(decode(col(&quot;audio_bytes&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt; # Usage 1: create a reusable UDF and apply it to a column.</span>
+<span class="sd">        &gt;&gt;&gt; detect_speech = audio_detect_speech()</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;speech_ranges&quot;, detect_speech(waveform))</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Usage 2: pass the column directly when building the expression.</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(</span>
+<span class="sd">        ...     &quot;speech_ranges&quot;,</span>
+<span class="sd">        ...     audio_detect_speech(waveform),</span>
+<span class="sd">        ... )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
+        <span class="n">_AudioDetectSpeech</span><span class="p">(</span>
+            <span class="n">aggressiveness</span><span class="o">=</span><span class="n">aggressiveness</span><span class="p">,</span>
+            <span class="n">frame_ms</span><span class="o">=</span><span class="n">frame_ms</span><span class="p">,</span>
+            <span class="n">min_speech_ms</span><span class="o">=</span><span class="n">min_speech_ms</span><span class="p">,</span>
+            <span class="n">merge_gap_ms</span><span class="o">=</span><span class="n">merge_gap_ms</span><span class="p">,</span>
+            <span class="n">max_segments</span><span class="o">=</span><span class="n">max_segments</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">return_dtype</span><span class="o">=</span><span class="n">_AUDIO_TIME_RANGE_LIST_TYPE</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">_udf_runtime_kwargs</span><span class="p">(</span><span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_build_or_apply_udf</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">)</span></div>
+</pre></div>
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

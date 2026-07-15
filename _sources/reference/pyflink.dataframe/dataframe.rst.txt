@@ -1,0 +1,244 @@
+.. ################################################################################
+     Licensed to the Apache Software Foundation (ASF) under one
+     or more contributor license agreements.  See the NOTICE file
+     distributed with this work for additional information
+     regarding copyright ownership.  The ASF licenses this file
+     to you under the Apache License, Version 2.0 (the
+     "License"); you may not use this file except in compliance
+     with the License.  You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+    limitations under the License.
+   ################################################################################
+
+=========
+DataFrame
+=========
+
+DataFrame
+---------
+
+A DataFrame is the core abstraction of the PyFlink DataFrame API. It wraps a
+PyFlink Table and provides a pandas-like interface for data transformations.
+All transformation methods return a new DataFrame.
+
+Example::
+
+    >>> import pyflink.dataframe as pf
+    >>> df = pf.from_dict({"id": [1, 2], "name": ["a", "b"]})
+    >>> result = df.select("id", "name") \
+    ...            .with_column("id_doubled", pf.col("id") * 2) \
+    ...            .filter(pf.col("id") > 0) \
+    ...            .rename({"id": "identifier"})
+
+.. currentmodule:: pyflink.dataframe
+
+.. autosummary::
+    :toctree: api/
+
+    DataFrame
+
+Projection
+~~~~~~~~~~
+
+Create, reshape, and rename DataFrame columns.
+
+.. currentmodule:: pyflink.dataframe
+
+.. autosummary::
+    :toctree: api/
+
+    DataFrame.select
+    DataFrame.with_column
+    DataFrame.with_columns
+    DataFrame.drop_columns
+    DataFrame.drop
+    DataFrame.rename_columns
+    DataFrame.rename
+
+Aggregation
+~~~~~~~~~~~
+
+Aggregate the entire DataFrame or aggregate rows after grouping.
+
+.. currentmodule:: pyflink.dataframe
+
+.. autosummary::
+    :toctree: api/
+
+    DataFrame.group_by
+    DataFrame.agg
+
+
+Joins
+~~~~~
+
+Combine DataFrames by keys or lateral table functions.
+
+.. currentmodule:: pyflink.dataframe
+
+.. autosummary::
+    :toctree: api/
+
+    DataFrame.join
+    DataFrame.join_asof
+    DataFrame.join_lateral
+
+
+Set Operations
+~~~~~~~~~~~~~~
+
+Combine DataFrames with set algebra.
+
+.. currentmodule:: pyflink.dataframe
+
+.. autosummary::
+    :toctree: api/
+
+    DataFrame.union
+    DataFrame.union_all
+    DataFrame.minus
+    DataFrame.minus_all
+    DataFrame.intersect
+    DataFrame.intersect_all
+
+
+Function Operations
+~~~~~~~~~~~~~~~~~~~
+
+Apply Python functions, batch functions, or table functions to DataFrame rows.
+
+.. currentmodule:: pyflink.dataframe
+
+.. autosummary::
+    :toctree: api/
+
+    DataFrame.explode
+    DataFrame.map
+    DataFrame.map_batches
+    DataFrame.flat_map
+    DataFrame.pipe
+
+
+Filtering
+~~~~~~~~~
+
+Filter rows and remove duplicate rows.
+
+.. currentmodule:: pyflink.dataframe
+
+.. autosummary::
+    :toctree: api/
+
+    DataFrame.filter
+    DataFrame.where
+    DataFrame.drop_duplicates
+
+
+Missing Values
+~~~~~~~~~~~~~~
+
+Handle null or NaN values.
+
+.. currentmodule:: pyflink.dataframe
+
+.. autosummary::
+    :toctree: api/
+
+    DataFrame.drop_null
+    DataFrame.drop_nan
+    DataFrame.fill_null
+    DataFrame.fill_nan
+
+
+Rebalance
+~~~~~~~~~
+
+Redistribute rows across downstream partitions.
+
+.. currentmodule:: pyflink.dataframe
+
+.. autosummary::
+    :toctree: api/
+
+    DataFrame.rebalance
+
+
+Conversion and Collection
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Convert DataFrames to other objects or collect bounded results locally.
+
+.. currentmodule:: pyflink.dataframe
+
+.. autosummary::
+    :toctree: api/
+
+    DataFrame.to_table
+    DataFrame.to_pandas
+    DataFrame.collect
+    DataFrame.limit
+    DataFrame.offset
+    DataFrame.head
+    DataFrame.iter_rows
+    DataFrame.iter_batches
+    DataFrame.explain
+
+
+Properties
+~~~~~~~~~~
+
+Inspect DataFrame metadata.
+
+.. currentmodule:: pyflink.dataframe
+
+.. autosummary::
+    :toctree: api/
+
+    DataFrame.schema
+    DataFrame.columns
+
+
+AI / LLM
+~~~~~~~~
+
+Access AI / LLM methods. See :doc:`ai` for the full API.
+
+.. currentmodule:: pyflink.dataframe
+
+.. autosummary::
+    :toctree: api/
+
+    DataFrame.llm
+
+GroupedDataFrame
+----------------
+
+A DataFrame that has been grouped on a set of grouping keys.
+
+.. currentmodule:: pyflink.dataframe
+
+.. autosummary::
+    :toctree: api/
+
+    GroupedDataFrame
+    GroupedDataFrame.agg
+
+Expressions
+-----------
+
+Helper functions to create column references, literal values, and time markers.
+
+.. currentmodule:: pyflink.dataframe
+
+.. autosummary::
+    :toctree: api/
+
+    col
+    lit
+    proctime

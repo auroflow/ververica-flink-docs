@@ -1,0 +1,811 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>DataFrame &#8212; PyFlink 11.8.0 documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/pyflink.dataframe/dataframe';</script>
+    <link rel="shortcut icon" href="../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pyflink.dataframe.DataFrame" href="api/pyflink.dataframe.DataFrame.html" />
+    <link rel="prev" title="PyFlink DataFrame" href="index.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="Logo image">
+    <img src="../../_static/navbar-brand-logo.jpg" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Section navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">
+    Section Navigation
+  </p>
+  <div class="bd-toc-item navbar-nav">
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">PyFlink DataFrame</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">DataFrame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creation.html">DataFrame Creation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html">Input / Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sql.html">SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datatype.html">Data Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="udf.html">User Defined Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="catalog.html">Catalog</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="gpu.html">GPU Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ai.html">AI / LLM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multimodal.html">Multimodal Expressions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.multimodal/index.html">PyFlink Multimodal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.table/index.html">PyFlink Table</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.datastream/index.html">PyFlink DataStream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.common/index.html">PyFlink Common</a></li>
+</ul>
+
+  </div>
+</nav>
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <section id="dataframe">
+<h1>DataFrame<a class="headerlink" href="#dataframe" title="Permalink to this headline">#</a></h1>
+<section id="id1">
+<h2>DataFrame<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<p>A DataFrame is the core abstraction of the PyFlink DataFrame API. It wraps a
+PyFlink Table and provides a pandas-like interface for data transformations.
+All transformation methods return a new DataFrame.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pf</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">from_dict</span><span class="p">({</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)</span> \
+<span class="gp">... </span>           <span class="o">.</span><span class="n">with_column</span><span class="p">(</span><span class="s2">&quot;id_doubled&quot;</span><span class="p">,</span> <span class="n">pf</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span> \
+<span class="gp">... </span>           <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pf</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> \
+<span class="gp">... </span>           <span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;identifier&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.html#pyflink.dataframe.DataFrame" title="pyflink.dataframe.DataFrame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame</span></code></a>(table)</p></td>
+<td><p>A modern DataFrame API for PyFlink.</p></td>
+</tr>
+</tbody>
+</table>
+<section id="projection">
+<h3>Projection<a class="headerlink" href="#projection" title="Permalink to this headline">#</a></h3>
+<p>Create, reshape, and rename DataFrame columns.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.select.html#pyflink.dataframe.DataFrame.select" title="pyflink.dataframe.DataFrame.select"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.select</span></code></a>(*columns, **projections)</p></td>
+<td><p>Select columns from the DataFrame.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.with_column.html#pyflink.dataframe.DataFrame.with_column" title="pyflink.dataframe.DataFrame.with_column"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.with_column</span></code></a>(name, expr)</p></td>
+<td><p>Add a new column or replace an existing column.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.with_columns.html#pyflink.dataframe.DataFrame.with_columns" title="pyflink.dataframe.DataFrame.with_columns"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.with_columns</span></code></a>(*exprs, **named_exprs)</p></td>
+<td><p>Add multiple columns or replace existing columns.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.drop_columns.html#pyflink.dataframe.DataFrame.drop_columns" title="pyflink.dataframe.DataFrame.drop_columns"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.drop_columns</span></code></a>(*columns[, strict])</p></td>
+<td><p>Drop columns from the DataFrame.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.drop.html#pyflink.dataframe.DataFrame.drop" title="pyflink.dataframe.DataFrame.drop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.drop</span></code></a>(*columns[, strict])</p></td>
+<td><p>Drop columns from the DataFrame.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.rename_columns.html#pyflink.dataframe.DataFrame.rename_columns" title="pyflink.dataframe.DataFrame.rename_columns"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.rename_columns</span></code></a>(*args[, mapping])</p></td>
+<td><p>Rename columns.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.rename.html#pyflink.dataframe.DataFrame.rename" title="pyflink.dataframe.DataFrame.rename"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.rename</span></code></a>(*args[, mapping])</p></td>
+<td><p>Rename columns.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="aggregation">
+<h3>Aggregation<a class="headerlink" href="#aggregation" title="Permalink to this headline">#</a></h3>
+<p>Aggregate the entire DataFrame or aggregate rows after grouping.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.group_by.html#pyflink.dataframe.DataFrame.group_by" title="pyflink.dataframe.DataFrame.group_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.group_by</span></code></a>(*columns)</p></td>
+<td><p>Group the DataFrame by columns.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.agg.html#pyflink.dataframe.DataFrame.agg" title="pyflink.dataframe.DataFrame.agg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.agg</span></code></a>(*aggs, **named_aggs)</p></td>
+<td><p>Apply aggregation expressions to the entire DataFrame.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="joins">
+<h3>Joins<a class="headerlink" href="#joins" title="Permalink to this headline">#</a></h3>
+<p>Combine DataFrames by keys or lateral table functions.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.join.html#pyflink.dataframe.DataFrame.join" title="pyflink.dataframe.DataFrame.join"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.join</span></code></a>(other, *[, on, how, left_on, ...])</p></td>
+<td><p>Join with another DataFrame.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.join_asof.html#pyflink.dataframe.DataFrame.join_asof" title="pyflink.dataframe.DataFrame.join_asof"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.join_asof</span></code></a>(other, *[, how, on, by, ...])</p></td>
+<td><p>ASOF join with a dimension table at a time attribute.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.join_lateral.html#pyflink.dataframe.DataFrame.join_lateral" title="pyflink.dataframe.DataFrame.join_lateral"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.join_lateral</span></code></a>(table_function_call, *)</p></td>
+<td><p>Join with an element-wise UDTF call.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="set-operations">
+<h3>Set Operations<a class="headerlink" href="#set-operations" title="Permalink to this headline">#</a></h3>
+<p>Combine DataFrames with set algebra.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.union.html#pyflink.dataframe.DataFrame.union" title="pyflink.dataframe.DataFrame.union"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.union</span></code></a>(other)</p></td>
+<td><p>Union with another DataFrame, removing duplicate rows.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.union_all.html#pyflink.dataframe.DataFrame.union_all" title="pyflink.dataframe.DataFrame.union_all"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.union_all</span></code></a>(other)</p></td>
+<td><p>Union with another DataFrame, preserving duplicate rows.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.minus.html#pyflink.dataframe.DataFrame.minus" title="pyflink.dataframe.DataFrame.minus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.minus</span></code></a>(other)</p></td>
+<td><p>Return rows from this DataFrame that do not exist in another DataFrame.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.minus_all.html#pyflink.dataframe.DataFrame.minus_all" title="pyflink.dataframe.DataFrame.minus_all"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.minus_all</span></code></a>(other)</p></td>
+<td><p>Return rows from this DataFrame that do not exist in another DataFrame.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.intersect.html#pyflink.dataframe.DataFrame.intersect" title="pyflink.dataframe.DataFrame.intersect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.intersect</span></code></a>(other)</p></td>
+<td><p>Intersect with another DataFrame, removing duplicate rows.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.intersect_all.html#pyflink.dataframe.DataFrame.intersect_all" title="pyflink.dataframe.DataFrame.intersect_all"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.intersect_all</span></code></a>(other)</p></td>
+<td><p>Intersect with another DataFrame, preserving duplicate rows.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="function-operations">
+<h3>Function Operations<a class="headerlink" href="#function-operations" title="Permalink to this headline">#</a></h3>
+<p>Apply Python functions, batch functions, or table functions to DataFrame rows.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.explode.html#pyflink.dataframe.DataFrame.explode" title="pyflink.dataframe.DataFrame.explode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.explode</span></code></a>(column[, output_column, ...])</p></td>
+<td><p>Expand one ARRAY, MAP, or MULTISET column into rows.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.map.html#pyflink.dataframe.DataFrame.map" title="pyflink.dataframe.DataFrame.map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.map</span></code></a>(func, *[, return_dtype, ...])</p></td>
+<td><p>Apply a function to each row, producing a new DataFrame.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.map_batches.html#pyflink.dataframe.DataFrame.map_batches" title="pyflink.dataframe.DataFrame.map_batches"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.map_batches</span></code></a>(func, *[, ...])</p></td>
+<td><p>Apply a function to batches of rows, producing a new DataFrame.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.flat_map.html#pyflink.dataframe.DataFrame.flat_map" title="pyflink.dataframe.DataFrame.flat_map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.flat_map</span></code></a>(func, *[, return_dtype, ...])</p></td>
+<td><p>Apply a row-based UDTF to each row, producing zero or more rows.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.pipe.html#pyflink.dataframe.DataFrame.pipe" title="pyflink.dataframe.DataFrame.pipe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.pipe</span></code></a>(func, *args, **kwargs)</p></td>
+<td><p>Apply a chainable function to the DataFrame.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="filtering">
+<h3>Filtering<a class="headerlink" href="#filtering" title="Permalink to this headline">#</a></h3>
+<p>Filter rows and remove duplicate rows.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.filter.html#pyflink.dataframe.DataFrame.filter" title="pyflink.dataframe.DataFrame.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.filter</span></code></a>(*predicate, **constraints)</p></td>
+<td><p>Filter rows based on one or more predicates.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.where.html#pyflink.dataframe.DataFrame.where" title="pyflink.dataframe.DataFrame.where"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.where</span></code></a>(*predicate, **constraints)</p></td>
+<td><p>Filter rows based on one or more predicates.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.drop_duplicates.html#pyflink.dataframe.DataFrame.drop_duplicates" title="pyflink.dataframe.DataFrame.drop_duplicates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.drop_duplicates</span></code></a>([subset, keep, ...])</p></td>
+<td><p>Drop duplicate rows, keeping one row per group of <code class="docutils literal notranslate"><span class="pre">subset</span></code> columns.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="missing-values">
+<h3>Missing Values<a class="headerlink" href="#missing-values" title="Permalink to this headline">#</a></h3>
+<p>Handle null or NaN values.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.drop_null.html#pyflink.dataframe.DataFrame.drop_null" title="pyflink.dataframe.DataFrame.drop_null"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.drop_null</span></code></a>([subset])</p></td>
+<td><p>Drop rows containing null values.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.drop_nan.html#pyflink.dataframe.DataFrame.drop_nan" title="pyflink.dataframe.DataFrame.drop_nan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.drop_nan</span></code></a>([subset])</p></td>
+<td><p>Drop rows containing NaN values in float columns.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.fill_null.html#pyflink.dataframe.DataFrame.fill_null" title="pyflink.dataframe.DataFrame.fill_null"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.fill_null</span></code></a>(value[, subset])</p></td>
+<td><p>Replace null values with a given value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.fill_nan.html#pyflink.dataframe.DataFrame.fill_nan" title="pyflink.dataframe.DataFrame.fill_nan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.fill_nan</span></code></a>(value[, subset])</p></td>
+<td><p>Replace NaN values with a given value in float columns.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="rebalance">
+<h3>Rebalance<a class="headerlink" href="#rebalance" title="Permalink to this headline">#</a></h3>
+<p>Redistribute rows across downstream partitions.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.rebalance.html#pyflink.dataframe.DataFrame.rebalance" title="pyflink.dataframe.DataFrame.rebalance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.rebalance</span></code></a>()</p></td>
+<td><p>Explicitly redistribute rows across downstream parallel subtasks in round-robin fashion.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="conversion-and-collection">
+<h3>Conversion and Collection<a class="headerlink" href="#conversion-and-collection" title="Permalink to this headline">#</a></h3>
+<p>Convert DataFrames to other objects or collect bounded results locally.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.to_table.html#pyflink.dataframe.DataFrame.to_table" title="pyflink.dataframe.DataFrame.to_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.to_table</span></code></a>()</p></td>
+<td><p>Convert to a PyFlink Table.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.to_pandas.html#pyflink.dataframe.DataFrame.to_pandas" title="pyflink.dataframe.DataFrame.to_pandas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.to_pandas</span></code></a>()</p></td>
+<td><p>Convert to a Pandas DataFrame.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.collect.html#pyflink.dataframe.DataFrame.collect" title="pyflink.dataframe.DataFrame.collect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.collect</span></code></a>()</p></td>
+<td><p>Collect the DataFrame results to a list.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.limit.html#pyflink.dataframe.DataFrame.limit" title="pyflink.dataframe.DataFrame.limit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.limit</span></code></a>(n)</p></td>
+<td><p>Limit the DataFrame to the first n rows.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.offset.html#pyflink.dataframe.DataFrame.offset" title="pyflink.dataframe.DataFrame.offset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.offset</span></code></a>(n)</p></td>
+<td><p>Skip the first n rows of the DataFrame.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.head.html#pyflink.dataframe.DataFrame.head" title="pyflink.dataframe.DataFrame.head"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.head</span></code></a>(n)</p></td>
+<td><p>Return the first n rows as a new DataFrame.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.iter_rows.html#pyflink.dataframe.DataFrame.iter_rows" title="pyflink.dataframe.DataFrame.iter_rows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.iter_rows</span></code></a>(*[, include_row_kind, ...])</p></td>
+<td><p>Return an iterator over rows of the DataFrame.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.iter_batches.html#pyflink.dataframe.DataFrame.iter_batches" title="pyflink.dataframe.DataFrame.iter_batches"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.iter_batches</span></code></a>()</p></td>
+<td><p>Return an iterator of pandas DataFrames or PyArrow Tables.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.explain.html#pyflink.dataframe.DataFrame.explain" title="pyflink.dataframe.DataFrame.explain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.explain</span></code></a>(*[, show_estimated_cost, ...])</p></td>
+<td><p>Print the AST and execution plan of this DataFrame.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="properties">
+<h3>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">#</a></h3>
+<p>Inspect DataFrame metadata.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.schema.html#pyflink.dataframe.DataFrame.schema" title="pyflink.dataframe.DataFrame.schema"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.schema</span></code></a></p></td>
+<td><p>Get the schema of the DataFrame.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.columns.html#pyflink.dataframe.DataFrame.columns" title="pyflink.dataframe.DataFrame.columns"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.columns</span></code></a></p></td>
+<td><p>Get the column names.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ai-llm">
+<h3>AI / LLM<a class="headerlink" href="#ai-llm" title="Permalink to this headline">#</a></h3>
+<p>Access AI / LLM methods. See <a class="reference internal" href="ai.html"><span class="doc">AI / LLM</span></a> for the full API.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.DataFrame.llm.html#pyflink.dataframe.DataFrame.llm" title="pyflink.dataframe.DataFrame.llm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.llm</span></code></a></p></td>
+<td><p>Access LLM / AI functions.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="groupeddataframe">
+<h2>GroupedDataFrame<a class="headerlink" href="#groupeddataframe" title="Permalink to this headline">#</a></h2>
+<p>A DataFrame that has been grouped on a set of grouping keys.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.GroupedDataFrame.html#pyflink.dataframe.GroupedDataFrame" title="pyflink.dataframe.GroupedDataFrame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GroupedDataFrame</span></code></a>(df, group_keys)</p></td>
+<td><p>A grouped DataFrame for aggregation operations.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.GroupedDataFrame.agg.html#pyflink.dataframe.GroupedDataFrame.agg" title="pyflink.dataframe.GroupedDataFrame.agg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GroupedDataFrame.agg</span></code></a>(*aggs, **named_aggs)</p></td>
+<td><p>Apply aggregation expressions.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="expressions">
+<h2>Expressions<a class="headerlink" href="#expressions" title="Permalink to this headline">#</a></h2>
+<p>Helper functions to create column references, literal values, and time markers.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.col.html#pyflink.dataframe.col" title="pyflink.dataframe.col"><code class="xref py py-obj docutils literal notranslate"><span class="pre">col</span></code></a>(name)</p></td>
+<td><p>Create a column reference expression.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.dataframe.lit.html#pyflink.dataframe.lit" title="pyflink.dataframe.lit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lit</span></code></a>(value[, data_type])</p></td>
+<td><p>Create a literal expression.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.dataframe.proctime.html#pyflink.dataframe.proctime" title="pyflink.dataframe.proctime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">proctime</span></code></a>()</p></td>
+<td><p>Return a processing-time marker for DataFrame.join_asof.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="index.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">PyFlink DataFrame</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="api/pyflink.dataframe.DataFrame.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">pyflink.dataframe.DataFrame</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   DataFrame
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#projection">
+     Projection
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#aggregation">
+     Aggregation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#joins">
+     Joins
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#set-operations">
+     Set Operations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#function-operations">
+     Function Operations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#filtering">
+     Filtering
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#missing-values">
+     Missing Values
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rebalance">
+     Rebalance
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#conversion-and-collection">
+     Conversion and Collection
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#properties">
+     Properties
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ai-llm">
+     AI / LLM
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#groupeddataframe">
+   GroupedDataFrame
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#expressions">
+   Expressions
+  </a>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+<div class="tocsection sourcelink">
+    <a href="../../_sources/reference/pyflink.dataframe/dataframe.rst.txt">
+        <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+</div>
+
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>
