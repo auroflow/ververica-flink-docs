@@ -1,0 +1,597 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Checkpoint &#8212; PyFlink 11.9.0a1 documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/pyflink.datastream/checkpoint';</script>
+    <link rel="shortcut icon" href="../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pyflink.datastream.checkpoint_config.CheckpointConfig.DEFAULT_MODE" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.DEFAULT_MODE.html" />
+    <link rel="prev" title="pyflink.datastream.window.SessionWindowTimeGapExtractor" href="api/pyflink.datastream.window.SessionWindowTimeGapExtractor.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="Logo image">
+    <img src="../../_static/navbar-brand-logo.jpg" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Section navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">
+    Section Navigation
+  </p>
+  <div class="bd-toc-item navbar-nav">
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.dataframe/index.html">PyFlink DataFrame</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.multimodal/index.html">PyFlink Multimodal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.table/index.html">PyFlink Table</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">PyFlink DataStream</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="stream_execution_environment.html">StreamExecutionEnvironment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datastream.html">DataStream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="state.html">State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timer.html">Timer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="window.html">Window</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Checkpoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sideoutput.html">Side Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asyncio.html">Asynchronous I/O</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connectors.html">Connectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html">Formats</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.common/index.html">PyFlink Common</a></li>
+</ul>
+
+  </div>
+</nav>
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <section id="checkpoint">
+<h1>Checkpoint<a class="headerlink" href="#checkpoint" title="Permalink to this headline">#</a></h1>
+<section id="checkpointconfig">
+<h2>CheckpointConfig<a class="headerlink" href="#checkpointconfig" title="Permalink to this headline">#</a></h2>
+<p>Configuration that captures all checkpointing related settings.</p>
+<p><code class="xref py py-data docutils literal notranslate"><span class="pre">DEFAULT_MODE</span></code>:</p>
+<p>The default checkpoint mode: exactly once.</p>
+<p><code class="xref py py-data docutils literal notranslate"><span class="pre">DEFAULT_TIMEOUT</span></code>:</p>
+<p>The default timeout of a checkpoint attempt: 10 minutes.</p>
+<p><code class="xref py py-data docutils literal notranslate"><span class="pre">DEFAULT_MIN_PAUSE_BETWEEN_CHECKPOINTS</span></code>:</p>
+<p>The default minimum pause to be made between checkpoints: none.</p>
+<p><code class="xref py py-data docutils literal notranslate"><span class="pre">DEFAULT_MAX_CONCURRENT_CHECKPOINTS</span></code>:</p>
+<p>The default limit of concurrently happening checkpoints: one.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.DEFAULT_MODE.html#pyflink.datastream.checkpoint_config.CheckpointConfig.DEFAULT_MODE" title="pyflink.datastream.checkpoint_config.CheckpointConfig.DEFAULT_MODE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.DEFAULT_MODE</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.DEFAULT_TIMEOUT.html#pyflink.datastream.checkpoint_config.CheckpointConfig.DEFAULT_TIMEOUT" title="pyflink.datastream.checkpoint_config.CheckpointConfig.DEFAULT_TIMEOUT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.DEFAULT_TIMEOUT</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.DEFAULT_MIN_PAUSE_BETWEEN_CHECKPOINTS.html#pyflink.datastream.checkpoint_config.CheckpointConfig.DEFAULT_MIN_PAUSE_BETWEEN_CHECKPOINTS" title="pyflink.datastream.checkpoint_config.CheckpointConfig.DEFAULT_MIN_PAUSE_BETWEEN_CHECKPOINTS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.DEFAULT_MIN_PAUSE_BETWEEN_CHECKPOINTS</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.DEFAULT_MIN_PAUSE_BETWEEN_CHECKPOINTS.html#pyflink.datastream.checkpoint_config.CheckpointConfig.DEFAULT_MIN_PAUSE_BETWEEN_CHECKPOINTS" title="pyflink.datastream.checkpoint_config.CheckpointConfig.DEFAULT_MIN_PAUSE_BETWEEN_CHECKPOINTS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.DEFAULT_MIN_PAUSE_BETWEEN_CHECKPOINTS</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.DEFAULT_MAX_CONCURRENT_CHECKPOINTS.html#pyflink.datastream.checkpoint_config.CheckpointConfig.DEFAULT_MAX_CONCURRENT_CHECKPOINTS" title="pyflink.datastream.checkpoint_config.CheckpointConfig.DEFAULT_MAX_CONCURRENT_CHECKPOINTS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.DEFAULT_MAX_CONCURRENT_CHECKPOINTS</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.is_checkpointing_enabled.html#pyflink.datastream.checkpoint_config.CheckpointConfig.is_checkpointing_enabled" title="pyflink.datastream.checkpoint_config.CheckpointConfig.is_checkpointing_enabled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.is_checkpointing_enabled</span></code></a>()</p></td>
+<td><p>Checks whether checkpointing is enabled.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.get_checkpointing_mode.html#pyflink.datastream.checkpoint_config.CheckpointConfig.get_checkpointing_mode" title="pyflink.datastream.checkpoint_config.CheckpointConfig.get_checkpointing_mode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.get_checkpointing_mode</span></code></a>()</p></td>
+<td><p>Gets the checkpointing mode (exactly-once vs.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.set_checkpointing_mode.html#pyflink.datastream.checkpoint_config.CheckpointConfig.set_checkpointing_mode" title="pyflink.datastream.checkpoint_config.CheckpointConfig.set_checkpointing_mode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.set_checkpointing_mode</span></code></a>(...)</p></td>
+<td><p>Sets the checkpointing mode (<code class="xref py py-data docutils literal notranslate"><span class="pre">CheckpointingMode.EXACTLY_ONCE</span></code> vs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.get_checkpoint_interval.html#pyflink.datastream.checkpoint_config.CheckpointConfig.get_checkpoint_interval" title="pyflink.datastream.checkpoint_config.CheckpointConfig.get_checkpoint_interval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.get_checkpoint_interval</span></code></a>()</p></td>
+<td><p>Gets the interval in which checkpoints are periodically scheduled.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.set_checkpoint_interval.html#pyflink.datastream.checkpoint_config.CheckpointConfig.set_checkpoint_interval" title="pyflink.datastream.checkpoint_config.CheckpointConfig.set_checkpoint_interval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.set_checkpoint_interval</span></code></a>(...)</p></td>
+<td><p>Sets the interval in which checkpoints are periodically scheduled.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.get_checkpoint_timeout.html#pyflink.datastream.checkpoint_config.CheckpointConfig.get_checkpoint_timeout" title="pyflink.datastream.checkpoint_config.CheckpointConfig.get_checkpoint_timeout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.get_checkpoint_timeout</span></code></a>()</p></td>
+<td><p>Gets the maximum time that a checkpoint may take before being discarded.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.set_checkpoint_timeout.html#pyflink.datastream.checkpoint_config.CheckpointConfig.set_checkpoint_timeout" title="pyflink.datastream.checkpoint_config.CheckpointConfig.set_checkpoint_timeout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.set_checkpoint_timeout</span></code></a>(...)</p></td>
+<td><p>Sets the maximum time that a checkpoint may take before being discarded.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.get_min_pause_between_checkpoints.html#pyflink.datastream.checkpoint_config.CheckpointConfig.get_min_pause_between_checkpoints" title="pyflink.datastream.checkpoint_config.CheckpointConfig.get_min_pause_between_checkpoints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.get_min_pause_between_checkpoints</span></code></a>()</p></td>
+<td><p>Gets the minimal pause between checkpointing attempts.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.set_min_pause_between_checkpoints.html#pyflink.datastream.checkpoint_config.CheckpointConfig.set_min_pause_between_checkpoints" title="pyflink.datastream.checkpoint_config.CheckpointConfig.set_min_pause_between_checkpoints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.set_min_pause_between_checkpoints</span></code></a>(...)</p></td>
+<td><p>Sets the minimal pause between checkpointing attempts.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.get_max_concurrent_checkpoints.html#pyflink.datastream.checkpoint_config.CheckpointConfig.get_max_concurrent_checkpoints" title="pyflink.datastream.checkpoint_config.CheckpointConfig.get_max_concurrent_checkpoints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.get_max_concurrent_checkpoints</span></code></a>()</p></td>
+<td><p>Gets the maximum number of checkpoint attempts that may be in progress at the same time.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.set_max_concurrent_checkpoints.html#pyflink.datastream.checkpoint_config.CheckpointConfig.set_max_concurrent_checkpoints" title="pyflink.datastream.checkpoint_config.CheckpointConfig.set_max_concurrent_checkpoints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.set_max_concurrent_checkpoints</span></code></a>(...)</p></td>
+<td><p>Sets the maximum number of checkpoint attempts that may be in progress at the same time.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.is_fail_on_checkpointing_errors.html#pyflink.datastream.checkpoint_config.CheckpointConfig.is_fail_on_checkpointing_errors" title="pyflink.datastream.checkpoint_config.CheckpointConfig.is_fail_on_checkpointing_errors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.is_fail_on_checkpointing_errors</span></code></a>()</p></td>
+<td><p>This determines the behaviour of tasks if there is an error in their local checkpointing.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.set_fail_on_checkpointing_errors.html#pyflink.datastream.checkpoint_config.CheckpointConfig.set_fail_on_checkpointing_errors" title="pyflink.datastream.checkpoint_config.CheckpointConfig.set_fail_on_checkpointing_errors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.set_fail_on_checkpointing_errors</span></code></a>(...)</p></td>
+<td><p>Sets the expected behaviour for tasks in case that they encounter an error in their checkpointing procedure.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.get_tolerable_checkpoint_failure_number.html#pyflink.datastream.checkpoint_config.CheckpointConfig.get_tolerable_checkpoint_failure_number" title="pyflink.datastream.checkpoint_config.CheckpointConfig.get_tolerable_checkpoint_failure_number"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.get_tolerable_checkpoint_failure_number</span></code></a>()</p></td>
+<td><p>Get the defined number of consecutive checkpoint failures that will be tolerated, before the whole job is failed over.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.set_tolerable_checkpoint_failure_number.html#pyflink.datastream.checkpoint_config.CheckpointConfig.set_tolerable_checkpoint_failure_number" title="pyflink.datastream.checkpoint_config.CheckpointConfig.set_tolerable_checkpoint_failure_number"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.set_tolerable_checkpoint_failure_number</span></code></a>(...)</p></td>
+<td><p>This defines how many consecutive checkpoint failures will be tolerated, before the whole job is failed over.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.enable_externalized_checkpoints.html#pyflink.datastream.checkpoint_config.CheckpointConfig.enable_externalized_checkpoints" title="pyflink.datastream.checkpoint_config.CheckpointConfig.enable_externalized_checkpoints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.enable_externalized_checkpoints</span></code></a>(...)</p></td>
+<td><p>Sets the mode for externalized checkpoint clean-up.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.set_externalized_checkpoint_cleanup.html#pyflink.datastream.checkpoint_config.CheckpointConfig.set_externalized_checkpoint_cleanup" title="pyflink.datastream.checkpoint_config.CheckpointConfig.set_externalized_checkpoint_cleanup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.set_externalized_checkpoint_cleanup</span></code></a>(...)</p></td>
+<td><p>Sets the mode for externalized checkpoint clean-up.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.is_externalized_checkpoints_enabled.html#pyflink.datastream.checkpoint_config.CheckpointConfig.is_externalized_checkpoints_enabled" title="pyflink.datastream.checkpoint_config.CheckpointConfig.is_externalized_checkpoints_enabled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.is_externalized_checkpoints_enabled</span></code></a>()</p></td>
+<td><p>Returns whether checkpoints should be persisted externally.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.get_externalized_checkpoint_cleanup.html#pyflink.datastream.checkpoint_config.CheckpointConfig.get_externalized_checkpoint_cleanup" title="pyflink.datastream.checkpoint_config.CheckpointConfig.get_externalized_checkpoint_cleanup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.get_externalized_checkpoint_cleanup</span></code></a>()</p></td>
+<td><p>Returns the cleanup behaviour for externalized checkpoints.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.is_unaligned_checkpoints_enabled.html#pyflink.datastream.checkpoint_config.CheckpointConfig.is_unaligned_checkpoints_enabled" title="pyflink.datastream.checkpoint_config.CheckpointConfig.is_unaligned_checkpoints_enabled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.is_unaligned_checkpoints_enabled</span></code></a>()</p></td>
+<td><p>Returns whether unaligned checkpoints are enabled.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.enable_unaligned_checkpoints.html#pyflink.datastream.checkpoint_config.CheckpointConfig.enable_unaligned_checkpoints" title="pyflink.datastream.checkpoint_config.CheckpointConfig.enable_unaligned_checkpoints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.enable_unaligned_checkpoints</span></code></a>([...])</p></td>
+<td><p>Enables unaligned checkpoints, which greatly reduce checkpointing times under backpressure.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.disable_unaligned_checkpoints.html#pyflink.datastream.checkpoint_config.CheckpointConfig.disable_unaligned_checkpoints" title="pyflink.datastream.checkpoint_config.CheckpointConfig.disable_unaligned_checkpoints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.disable_unaligned_checkpoints</span></code></a>()</p></td>
+<td><p>Enables unaligned checkpoints, which greatly reduce checkpointing times under backpressure (experimental).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.set_alignment_timeout.html#pyflink.datastream.checkpoint_config.CheckpointConfig.set_alignment_timeout" title="pyflink.datastream.checkpoint_config.CheckpointConfig.set_alignment_timeout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.set_alignment_timeout</span></code></a>(...)</p></td>
+<td><p>Only relevant if <code class="xref py py-func docutils literal notranslate"><span class="pre">enable_unaligned_checkpoints()</span></code> is enabled.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.get_alignment_timeout.html#pyflink.datastream.checkpoint_config.CheckpointConfig.get_alignment_timeout" title="pyflink.datastream.checkpoint_config.CheckpointConfig.get_alignment_timeout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.get_alignment_timeout</span></code></a>()</p></td>
+<td><p>Returns the alignment timeout, as configured via <code class="xref py py-func docutils literal notranslate"><span class="pre">set_alignment_timeout()</span></code> or <code class="docutils literal notranslate"><span class="pre">org.apache.flink.streaming.api.environment.ExecutionCheckpointingOptions#ALIGNMENT_TIMEOUT</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.set_force_unaligned_checkpoints.html#pyflink.datastream.checkpoint_config.CheckpointConfig.set_force_unaligned_checkpoints" title="pyflink.datastream.checkpoint_config.CheckpointConfig.set_force_unaligned_checkpoints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.set_force_unaligned_checkpoints</span></code></a>([...])</p></td>
+<td><p>Checks whether unaligned checkpoints are forced, despite currently non-checkpointable iteration feedback or custom partitioners.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.is_force_unaligned_checkpoints.html#pyflink.datastream.checkpoint_config.CheckpointConfig.is_force_unaligned_checkpoints" title="pyflink.datastream.checkpoint_config.CheckpointConfig.is_force_unaligned_checkpoints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.is_force_unaligned_checkpoints</span></code></a>()</p></td>
+<td><p>Checks whether unaligned checkpoints are forced, despite iteration feedback or custom partitioners.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.set_checkpoint_storage.html#pyflink.datastream.checkpoint_config.CheckpointConfig.set_checkpoint_storage" title="pyflink.datastream.checkpoint_config.CheckpointConfig.set_checkpoint_storage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.set_checkpoint_storage</span></code></a>(storage)</p></td>
+<td><p>Checkpoint storage defines how stat backends checkpoint their state for fault tolerance in streaming applications.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.set_checkpoint_storage_dir.html#pyflink.datastream.checkpoint_config.CheckpointConfig.set_checkpoint_storage_dir" title="pyflink.datastream.checkpoint_config.CheckpointConfig.set_checkpoint_storage_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.set_checkpoint_storage_dir</span></code></a>(...)</p></td>
+<td><p>Configures the application to write out checkpoint snapshots to the configured directory.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.get_checkpoint_storage.html#pyflink.datastream.checkpoint_config.CheckpointConfig.get_checkpoint_storage" title="pyflink.datastream.checkpoint_config.CheckpointConfig.get_checkpoint_storage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CheckpointConfig.get_checkpoint_storage</span></code></a>()</p></td>
+<td><p>The checkpoint storage that has been configured for the Job, or None if none has been set.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.ExternalizedCheckpointCleanup.html#pyflink.datastream.checkpoint_config.ExternalizedCheckpointCleanup" title="pyflink.datastream.checkpoint_config.ExternalizedCheckpointCleanup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExternalizedCheckpointCleanup</span></code></a>(value)</p></td>
+<td><p>Cleanup behaviour for externalized checkpoints when the job is cancelled.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_config.ExternalizedCheckpointRetention.html#pyflink.datastream.checkpoint_config.ExternalizedCheckpointRetention" title="pyflink.datastream.checkpoint_config.ExternalizedCheckpointRetention"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExternalizedCheckpointRetention</span></code></a>(value)</p></td>
+<td><p>Cleanup behaviour for externalized checkpoints when the job is cancelled.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="checkpointstorage">
+<h2>CheckpointStorage<a class="headerlink" href="#checkpointstorage" title="Permalink to this headline">#</a></h2>
+<p>Checkpoint storage defines how <code class="xref py py-class docutils literal notranslate"><span class="pre">StateBackend</span></code>’s store their state for fault-tolerance
+in streaming applications. Various implementations store their checkpoints in different fashions
+and have different requirements and availability guarantees.</p>
+<p>For example, <code class="xref py py-class docutils literal notranslate"><span class="pre">JobManagerCheckpointStorage</span></code> stores checkpoints in the memory of the
+<cite>JobManager</cite>. It is lightweight and without additional dependencies but is not scalable
+and only supports small state sizes. This checkpoints storage policy is convenient for local
+testing and development.</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">FileSystemCheckpointStorage</span></code> stores checkpoints in a filesystem. For systems like HDFS
+NFS drives, S3, and GCS, this storage policy supports large state size, in the magnitude of many
+terabytes while providing a highly available foundation for streaming applications. This
+checkpoint storage policy is recommended for most production deployments.</p>
+<p><strong>Raw Bytes Storage</strong></p>
+<p>The <cite>CheckpointStorage</cite> creates services for raw bytes storage.</p>
+<p>The raw bytes storage (through the CheckpointStreamFactory) is the fundamental service that
+simply stores bytes in a fault tolerant fashion. This service is used by the JobManager to
+store checkpoint and recovery metadata and is typically also used by the keyed- and operator-
+state backends to store checkpoint state.</p>
+<p><strong>Serializability</strong></p>
+<p>Implementations need to be serializable(<cite>java.io.Serializable</cite>), because they are distributed
+across parallel processes (for distributed execution) together with the streaming application
+code.</p>
+<p>Because of that <cite>CheckpointStorage</cite> implementations are meant to be like _factories_ that create
+the proper state stores that provide access to the persistent layer. That way, the storage
+policy can be very lightweight (contain only configurations) which makes it easier to be
+serializable.</p>
+<p><strong>Thread Safety</strong></p>
+<p>Checkpoint storage implementations have to be thread-safe. Multiple threads may be creating
+streams concurrently.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_storage.JobManagerCheckpointStorage.html#pyflink.datastream.checkpoint_storage.JobManagerCheckpointStorage" title="pyflink.datastream.checkpoint_storage.JobManagerCheckpointStorage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">JobManagerCheckpointStorage</span></code></a>([...])</p></td>
+<td><p>The <cite>CheckpointStorage</cite> checkpoints state directly to the JobManager's memory (hence the name), but savepoints will be persisted to a file system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_storage.FileSystemCheckpointStorage.html#pyflink.datastream.checkpoint_storage.FileSystemCheckpointStorage" title="pyflink.datastream.checkpoint_storage.FileSystemCheckpointStorage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FileSystemCheckpointStorage</span></code></a>([...])</p></td>
+<td><p><cite>FileSystemCheckpointStorage</cite> checkpoints state as files to a filesystem.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.datastream.checkpoint_storage.CustomCheckpointStorage.html#pyflink.datastream.checkpoint_storage.CustomCheckpointStorage" title="pyflink.datastream.checkpoint_storage.CustomCheckpointStorage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CustomCheckpointStorage</span></code></a>(...)</p></td>
+<td><p>A wrapper of customized java checkpoint storage.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="api/pyflink.datastream.window.SessionWindowTimeGapExtractor.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">pyflink.datastream.window.SessionWindowTimeGapExtractor</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="api/pyflink.datastream.checkpoint_config.CheckpointConfig.DEFAULT_MODE.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">pyflink.datastream.checkpoint_config.CheckpointConfig.DEFAULT_MODE</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#checkpointconfig">
+   CheckpointConfig
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#checkpointstorage">
+   CheckpointStorage
+  </a>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+<div class="tocsection sourcelink">
+    <a href="../../_sources/reference/pyflink.datastream/checkpoint.rst.txt">
+        <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+</div>
+
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

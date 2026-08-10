@@ -1,0 +1,1080 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyflink.common.execution_config &#8212; PyFlink 11.9.0a1 documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyflink/common/execution_config';</script>
+    <link rel="shortcut icon" href="../../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../../search.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="Logo image">
+    <img src="../../../_static/navbar-brand-logo.jpg" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <h1>Source code for pyflink.common.execution_config</h1><div class="highlight"><pre>
+<span></span><span class="c1">################################################################################</span>
+<span class="c1">#  Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="c1">#  or more contributor license agreements.  See the NOTICE file</span>
+<span class="c1">#  distributed with this work for additional information</span>
+<span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
+<span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
+<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  with the License.  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">################################################################################</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common.execution_mode</span><span class="w"> </span><span class="kn">import</span> <span class="n">ExecutionMode</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common.input_dependency_constraint</span><span class="w"> </span><span class="kn">import</span> <span class="n">InputDependencyConstraint</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common.restart_strategy</span><span class="w"> </span><span class="kn">import</span> <span class="n">RestartStrategies</span><span class="p">,</span> <span class="n">RestartStrategyConfiguration</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.java_gateway</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_gateway</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.util.java_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_java_class</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ExecutionConfig&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="ExecutionConfig"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.execution_config.ExecutionConfig.html#pyflink.common.execution_config.ExecutionConfig">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">ExecutionConfig</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A config to define the behavior of the program execution. It allows to define (among other</span>
+<span class="sd">    options) the following settings:</span>
+
+<span class="sd">    - The default parallelism of the program, i.e., how many parallel tasks to use for</span>
+<span class="sd">      all functions that do not define a specific value directly.</span>
+
+<span class="sd">    - The number of retries in the case of failed executions.</span>
+
+<span class="sd">    - The delay between execution retries.</span>
+
+<span class="sd">    - The :class:`ExecutionMode` of the program: Batch or Pipelined.</span>
+<span class="sd">      The default execution mode is :data:`ExecutionMode.PIPELINED`</span>
+
+<span class="sd">    - Enabling or disabling the &quot;closure cleaner&quot;. The closure cleaner pre-processes</span>
+<span class="sd">      the implementations of functions. In case they are (anonymous) inner classes,</span>
+<span class="sd">      it removes unused references to the enclosing class to fix certain serialization-related</span>
+<span class="sd">      problems and to reduce the size of the closure.</span>
+
+<span class="sd">    - The config allows to register types and serializers to increase the efficiency of</span>
+<span class="sd">      handling *generic types* and *POJOs*. This is usually only needed</span>
+<span class="sd">      when the functions return not only the types declared in their signature, but</span>
+<span class="sd">      also subclasses of those types.</span>
+
+<span class="sd">    :data:`PARALLELISM_DEFAULT`:</span>
+
+<span class="sd">    The flag value indicating use of the default parallelism. This value can</span>
+<span class="sd">    be used to reset the parallelism back to the default state.</span>
+
+<span class="sd">    :data:`PARALLELISM_UNKNOWN`:</span>
+
+<span class="sd">    The flag value indicating an unknown or unset parallelism. This value is</span>
+<span class="sd">    not a valid parallelism and indicates that the parallelism should remain</span>
+<span class="sd">    unchanged.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">PARALLELISM_DEFAULT</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="n">PARALLELISM_UNKNOWN</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_execution_config</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span> <span class="o">=</span> <span class="n">j_execution_config</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">enable_closure_cleaner</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExecutionConfig&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Enables the ClosureCleaner. This analyzes user code functions and sets fields to null</span>
+<span class="sd">        that are not used. This will in most cases make closures or anonymous inner classes</span>
+<span class="sd">        serializable that where not serializable due to some Scala or Java implementation artifact.</span>
+<span class="sd">        User code must be serializable because it needs to be sent to worker nodes.</span>
+
+<span class="sd">        :return: This object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">enableClosureCleaner</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">disable_closure_cleaner</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExecutionConfig&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Disables the ClosureCleaner.</span>
+
+<span class="sd">        .. seealso:: :func:`enable_closure_cleaner`</span>
+
+<span class="sd">        :return: This object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">disableClosureCleaner</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_closure_cleaner_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns whether the ClosureCleaner is enabled.</span>
+
+<span class="sd">        .. seealso:: :func:`enable_closure_cleaner`</span>
+
+<span class="sd">        :return: ``True`` means enable and ``False`` means disable.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">isClosureCleanerEnabled</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_auto_watermark_interval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interval</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExecutionConfig&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the interval of the automatic watermark emission. Watermarks are used throughout</span>
+<span class="sd">        the streaming system to keep track of the progress of time. They are used, for example,</span>
+<span class="sd">        for time based windowing.</span>
+
+<span class="sd">        :param interval: The integer value interval between watermarks in milliseconds.</span>
+<span class="sd">        :return: This object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">setAutoWatermarkInterval</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_auto_watermark_interval</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the interval of the automatic watermark emission.</span>
+
+<span class="sd">        .. seealso:: :func:`set_auto_watermark_interval`</span>
+
+<span class="sd">        :return: The integer value interval in milliseconds of the automatic watermark emission.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">getAutoWatermarkInterval</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_latency_tracking_interval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interval</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExecutionConfig&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Interval for sending latency tracking marks from the sources to the sinks.</span>
+
+<span class="sd">        Flink will send latency tracking marks from the sources at the specified interval.</span>
+<span class="sd">        Setting a tracking interval &lt;= 0 disables the latency tracking.</span>
+
+<span class="sd">        :param interval: Integer value interval in milliseconds.</span>
+<span class="sd">        :return: This object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">setLatencyTrackingInterval</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_latency_tracking_interval</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the latency tracking interval.</span>
+
+<span class="sd">        :return: The latency tracking interval in milliseconds.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">getLatencyTrackingInterval</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_parallelism</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the parallelism with which operation are executed by default. Operations can</span>
+<span class="sd">        individually override this value to use a specific parallelism.</span>
+
+<span class="sd">        Other operations may need to run with a different parallelism - for example calling</span>
+<span class="sd">        a reduce operation over the entire data set will involve an operation that runs</span>
+<span class="sd">        with a parallelism of one (the final reduce to the single result value).</span>
+
+<span class="sd">        :return: The parallelism used by operations, unless they override that value. This method</span>
+<span class="sd">                 returns :data:`ExecutionConfig.PARALLELISM_DEFAULT` if the environment&#39;s default</span>
+<span class="sd">                 parallelism should be used.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">getParallelism</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_parallelism</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parallelism</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExecutionConfig&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the parallelism for operations executed through this environment.</span>
+<span class="sd">        Setting a parallelism of x here will cause all operators (such as join, map, reduce) to run</span>
+<span class="sd">        with x parallel instances.</span>
+
+<span class="sd">        This method overrides the default parallelism for this environment.</span>
+<span class="sd">        The local execution environment uses by default a value equal to the number of hardware</span>
+<span class="sd">        contexts (CPU cores / threads). When executing the program via the command line client</span>
+<span class="sd">        from a JAR/Python file, the default parallelism is the one configured for that setup.</span>
+
+<span class="sd">        :param parallelism: The parallelism to use.</span>
+<span class="sd">        :return: This object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">setParallelism</span><span class="p">(</span><span class="n">parallelism</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_max_parallelism</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the maximum degree of parallelism defined for the program.</span>
+
+<span class="sd">        The maximum degree of parallelism specifies the upper limit for dynamic scaling. It also</span>
+<span class="sd">        defines the number of key groups used for partitioned state.</span>
+
+<span class="sd">        :return: Maximum degree of parallelism.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">getMaxParallelism</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_max_parallelism</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_parallelism</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExecutionConfig&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the maximum degree of parallelism defined for the program.</span>
+
+<span class="sd">        The maximum degree of parallelism specifies the upper limit for dynamic scaling. It also</span>
+<span class="sd">        defines the number of key groups used for partitioned state.</span>
+
+<span class="sd">        :param max_parallelism: Maximum degree of parallelism to be used for the program.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">setMaxParallelism</span><span class="p">(</span><span class="n">max_parallelism</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_task_cancellation_interval</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the interval (in milliseconds) between consecutive attempts to cancel a running task.</span>
+
+<span class="sd">        :return: The integer value interval in milliseconds.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">getTaskCancellationInterval</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_task_cancellation_interval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interval</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExecutionConfig&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the configuration parameter specifying the interval (in milliseconds)</span>
+<span class="sd">        between consecutive attempts to cancel a running task.</span>
+
+<span class="sd">        :param interval: The integer value interval in milliseconds.</span>
+<span class="sd">        :return: This object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">setTaskCancellationInterval</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_task_cancellation_timeout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the timeout (in milliseconds) after which an ongoing task</span>
+<span class="sd">        cancellation leads to a fatal TaskManager error.</span>
+
+<span class="sd">        The value ``0`` means that the timeout is disabled. In</span>
+<span class="sd">        this case a stuck cancellation will not lead to a fatal error.</span>
+
+<span class="sd">        :return: The timeout in milliseconds.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">getTaskCancellationTimeout</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_task_cancellation_timeout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExecutionConfig&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the timeout (in milliseconds) after which an ongoing task cancellation</span>
+<span class="sd">        is considered failed, leading to a fatal TaskManager error.</span>
+
+<span class="sd">        The cluster default is configured via ``TaskManagerOptions#TASK_CANCELLATION_TIMEOUT``.</span>
+
+<span class="sd">        The value ``0`` disables the timeout. In this case a stuck</span>
+<span class="sd">        cancellation will not lead to a fatal error.</span>
+
+<span class="sd">        :param timeout: The task cancellation timeout (in milliseconds).</span>
+<span class="sd">        :return: This object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">setTaskCancellationTimeout</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_restart_strategy</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">restart_strategy_configuration</span><span class="p">:</span> <span class="n">RestartStrategyConfiguration</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExecutionConfig&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the restart strategy to be used for recovery.</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; config = env.get_config()</span>
+<span class="sd">            &gt;&gt;&gt; config.set_restart_strategy(RestartStrategies.fixed_delay_restart(10, 1000))</span>
+
+<span class="sd">        The restart strategy configurations are all created from :class:`RestartStrategies`.</span>
+
+<span class="sd">        :param restart_strategy_configuration: Configuration defining the restart strategy to use.</span>
+
+<span class="sd">        .. note:: Deprecated since version 1.19: This method is deprecated and will be removed in</span>
+<span class="sd">                  future FLINK major version. Use `stream_execution_environment.configure` method</span>
+<span class="sd">                  instead to set the restart strategy.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Deprecated since version 1.19: This method is deprecated and will be removed&quot;</span>
+                      <span class="s2">&quot; in future FLINK major version. Use `stream_execution_environment.configure`&quot;</span>
+                      <span class="s2">&quot; method instead to set the restart strategy.&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">setRestartStrategy</span><span class="p">(</span>
+            <span class="n">restart_strategy_configuration</span><span class="o">.</span><span class="n">_j_restart_strategy_configuration</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_restart_strategy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RestartStrategyConfiguration</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the restart strategy which has been set for the current job.</span>
+
+<span class="sd">        .. seealso:: :func:`set_restart_strategy`</span>
+
+<span class="sd">        :return: The specified restart configuration.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">RestartStrategies</span><span class="o">.</span><span class="n">_from_j_restart_strategy</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">getRestartStrategy</span><span class="p">())</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_execution_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">execution_mode</span><span class="p">:</span> <span class="n">ExecutionMode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExecutionConfig&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the execution mode to execute the program. The execution mode defines whether</span>
+<span class="sd">        data exchanges are performed in a batch or on a pipelined manner.</span>
+
+<span class="sd">        The default execution mode is :data:`ExecutionMode.PIPELINED`.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; config.set_execution_mode(ExecutionMode.BATCH)</span>
+
+<span class="sd">        :param execution_mode: The execution mode to use. The execution mode could be</span>
+<span class="sd">                               :data:`ExecutionMode.PIPELINED`,</span>
+<span class="sd">                               :data:`ExecutionMode.PIPELINED_FORCED`,</span>
+<span class="sd">                               :data:`ExecutionMode.BATCH` or</span>
+<span class="sd">                               :data:`ExecutionMode.BATCH_FORCED`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">setExecutionMode</span><span class="p">(</span><span class="n">execution_mode</span><span class="o">.</span><span class="n">_to_j_execution_mode</span><span class="p">())</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_execution_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExecutionMode&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the execution mode used to execute the program. The execution mode defines whether</span>
+<span class="sd">        data exchanges are performed in a batch or on a pipelined manner.</span>
+
+<span class="sd">        The default execution mode is :data:`ExecutionMode.PIPELINED`.</span>
+
+<span class="sd">        .. seealso:: :func:`set_execution_mode`</span>
+
+<span class="sd">        :return: The execution mode for the program.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">j_execution_mode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">getExecutionMode</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">ExecutionMode</span><span class="o">.</span><span class="n">_from_j_execution_mode</span><span class="p">(</span><span class="n">j_execution_mode</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_default_input_dependency_constraint</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">input_dependency_constraint</span><span class="p">:</span> <span class="n">InputDependencyConstraint</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExecutionConfig&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the default input dependency constraint for vertex scheduling. It indicates when a</span>
+<span class="sd">        task should be scheduled considering its inputs status.</span>
+
+<span class="sd">        The default constraint is :data:`InputDependencyConstraint.ANY`.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; config.set_default_input_dependency_constraint(InputDependencyConstraint.ALL)</span>
+
+<span class="sd">        :param input_dependency_constraint: The input dependency constraint. The constraints could</span>
+<span class="sd">                                            be :data:`InputDependencyConstraint.ANY` or</span>
+<span class="sd">                                            :data:`InputDependencyConstraint.ALL`.</span>
+
+<span class="sd">        .. note:: Deprecated in 1.13. :class:`InputDependencyConstraint` is not used anymore in the</span>
+<span class="sd">                  current scheduler implementations.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Deprecated in 1.13. InputDependencyConstraint is not used anywhere. &quot;</span>
+                      <span class="s2">&quot;Therefore, the method call set_default_input_dependency_constraint is &quot;</span>
+                      <span class="s2">&quot;obsolete.&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">setDefaultInputDependencyConstraint</span><span class="p">(</span>
+            <span class="n">input_dependency_constraint</span><span class="o">.</span><span class="n">_to_j_input_dependency_constraint</span><span class="p">())</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_default_input_dependency_constraint</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;InputDependencyConstraint&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the default input dependency constraint for vertex scheduling. It indicates when a</span>
+<span class="sd">        task should be scheduled considering its inputs status.</span>
+
+<span class="sd">        The default constraint is :data:`InputDependencyConstraint.ANY`.</span>
+
+<span class="sd">        .. seealso:: :func:`set_default_input_dependency_constraint`</span>
+
+<span class="sd">        :return: The input dependency constraint of this job. The possible constraints are</span>
+<span class="sd">                 :data:`InputDependencyConstraint.ANY` and :data:`InputDependencyConstraint.ALL`.</span>
+
+<span class="sd">        .. note:: Deprecated in 1.13. :class:`InputDependencyConstraint` is not used anymore in the</span>
+<span class="sd">                  current scheduler implementations.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Deprecated in 1.13. InputDependencyConstraint is not used anywhere. &quot;</span>
+                      <span class="s2">&quot;Therefore, the method call get_default_input_dependency_constraint is &quot;</span>
+                      <span class="s2">&quot;obsolete.&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+
+        <span class="n">j_input_dependency_constraint</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span>\
+            <span class="o">.</span><span class="n">getDefaultInputDependencyConstraint</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">InputDependencyConstraint</span><span class="o">.</span><span class="n">_from_j_input_dependency_constraint</span><span class="p">(</span>
+            <span class="n">j_input_dependency_constraint</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">enable_force_kryo</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExecutionConfig&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Force TypeExtractor to use Kryo serializer for POJOS even though we could analyze as POJO.</span>
+<span class="sd">        In some cases this might be preferable. For example, when using interfaces</span>
+<span class="sd">        with subclasses that cannot be analyzed as POJO.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">enableForceKryo</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">disable_force_kryo</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExecutionConfig&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Disable use of Kryo serializer for all POJOs.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">disableForceKryo</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_force_kryo_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: Boolean value that represent whether the usage of Kryo serializer for all POJOs</span>
+<span class="sd">                 is enabled.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">isForceKryoEnabled</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">enable_generic_types</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExecutionConfig&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Enables the use generic types which are serialized via Kryo.</span>
+
+<span class="sd">        Generic types are enabled by default.</span>
+
+<span class="sd">        .. seealso:: :func:`disable_generic_types`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">enableGenericTypes</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">disable_generic_types</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExecutionConfig&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Disables the use of generic types (types that would be serialized via Kryo). If this option</span>
+<span class="sd">        is used, Flink will throw an ``UnsupportedOperationException`` whenever it encounters</span>
+<span class="sd">        a data type that would go through Kryo for serialization.</span>
+
+<span class="sd">        Disabling generic types can be helpful to eagerly find and eliminate the use of types</span>
+<span class="sd">        that would go through Kryo serialization during runtime. Rather than checking types</span>
+<span class="sd">        individually, using this option will throw exceptions eagerly in the places where generic</span>
+<span class="sd">        types are used.</span>
+
+<span class="sd">        **Important:** We recommend to use this option only during development and pre-production</span>
+<span class="sd">        phases, not during actual production use. The application program and/or the input data may</span>
+<span class="sd">        be such that new, previously unseen, types occur at some point. In that case, setting this</span>
+<span class="sd">        option would cause the program to fail.</span>
+
+<span class="sd">        .. seealso:: :func:`enable_generic_types`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">disableGenericTypes</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">has_generic_types_disabled</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks whether generic types are supported. Generic types are types that go through Kryo</span>
+<span class="sd">        during serialization.</span>
+
+<span class="sd">        Generic types are enabled by default.</span>
+
+<span class="sd">        .. seealso:: :func:`enable_generic_types`</span>
+
+<span class="sd">        .. seealso:: :func:`disable_generic_types`</span>
+
+<span class="sd">        :return: Boolean value that represent whether the generic types are supported.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">hasGenericTypesDisabled</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">enable_auto_generated_uids</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExecutionConfig&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Enables the Flink runtime to auto-generate UID&#39;s for operators.</span>
+
+<span class="sd">        .. seealso:: :func:`disable_auto_generated_uids`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">enableAutoGeneratedUIDs</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">disable_auto_generated_uids</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExecutionConfig&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Disables auto-generated UIDs. Forces users to manually specify UIDs</span>
+<span class="sd">        on DataStream applications.</span>
+
+<span class="sd">        It is highly recommended that users specify UIDs before deploying to</span>
+<span class="sd">        production since they are used to match state in savepoints to operators</span>
+<span class="sd">        in a job. Because auto-generated ID&#39;s are likely to change when modifying</span>
+<span class="sd">        a job, specifying custom IDs allow an application to evolve overtime</span>
+<span class="sd">        without discarding state.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">disableAutoGeneratedUIDs</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">has_auto_generated_uids_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks whether auto generated UIDs are supported.</span>
+
+<span class="sd">        Auto generated UIDs are enabled by default.</span>
+
+<span class="sd">        .. seealso:: :func:`enable_auto_generated_uids`</span>
+
+<span class="sd">        .. seealso:: :func:`disable_auto_generated_uids`</span>
+
+<span class="sd">        :return: Boolean value that represent whether auto generated UIDs are supported.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">hasAutoGeneratedUIDsEnabled</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">enable_force_avro</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExecutionConfig&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Forces Flink to use the Apache Avro serializer for POJOs.</span>
+
+<span class="sd">        **Important:** Make sure to include the *flink-avro* module.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">enableForceAvro</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">disable_force_avro</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExecutionConfig&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Disables the Apache Avro serializer as the forced serializer for POJOs.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">disableForceAvro</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_force_avro_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns whether the Apache Avro is the default serializer for POJOs.</span>
+
+<span class="sd">        :return: Boolean value that represent whether the Apache Avro is the default serializer</span>
+<span class="sd">                 for POJOs.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">isForceAvroEnabled</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">enable_object_reuse</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExecutionConfig&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Enables reusing objects that Flink internally uses for deserialization and passing</span>
+<span class="sd">        data to user-code functions. Keep in mind that this can lead to bugs when the</span>
+<span class="sd">        user-code function of an operation is not aware of this behaviour.</span>
+
+<span class="sd">        :return: This object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">enableObjectReuse</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">disable_object_reuse</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExecutionConfig&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Disables reusing objects that Flink internally uses for deserialization and passing</span>
+<span class="sd">        data to user-code functions.</span>
+
+<span class="sd">        .. seealso:: :func:`enable_object_reuse`</span>
+
+<span class="sd">        :return: This object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">disableObjectReuse</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_object_reuse_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns whether object reuse has been enabled or disabled.</span>
+
+<span class="sd">        .. seealso:: :func:`enable_object_reuse`</span>
+
+<span class="sd">        :return: Boolean value that represent whether object reuse has been enabled or disabled.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">isObjectReuseEnabled</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_global_job_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets current configuration dict.</span>
+
+<span class="sd">        :return: The configuration dict.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">getGlobalJobParameters</span><span class="p">()</span><span class="o">.</span><span class="n">toMap</span><span class="p">())</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_global_job_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">global_job_parameters_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExecutionConfig&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Register a custom, serializable user configuration dict.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; config.set_global_job_parameters({&quot;environment.checkpoint_interval&quot;: &quot;1000&quot;})</span>
+
+<span class="sd">        :param global_job_parameters_dict: Custom user configuration dict.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
+        <span class="n">Configuration</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">Configuration</span>
+        <span class="n">j_global_job_parameters</span> <span class="o">=</span> <span class="n">Configuration</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">global_job_parameters_dict</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">global_job_parameters_dict</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">global_job_parameters_dict</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">global_job_parameters_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="n">j_global_job_parameters</span><span class="o">.</span><span class="n">setString</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">setGlobalJobParameters</span><span class="p">(</span><span class="n">j_global_job_parameters</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_default_kryo_serializer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                    <span class="n">type_class_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                                    <span class="n">serializer_class_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExecutionConfig&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds a new Kryo default serializer to the Runtime.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; config.add_default_kryo_serializer(&quot;com.aaa.bbb.PojoClass&quot;,</span>
+<span class="sd">            ...                                    &quot;com.aaa.bbb.Serializer&quot;)</span>
+
+<span class="sd">        :param type_class_name: The full-qualified java class name of the types serialized with the</span>
+<span class="sd">                                given serializer.</span>
+<span class="sd">        :param serializer_class_name: The full-qualified java class name of the serializer to use.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">type_clz</span> <span class="o">=</span> <span class="n">load_java_class</span><span class="p">(</span><span class="n">type_class_name</span><span class="p">)</span>
+        <span class="n">j_serializer_clz</span> <span class="o">=</span> <span class="n">load_java_class</span><span class="p">(</span><span class="n">serializer_class_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">addDefaultKryoSerializer</span><span class="p">(</span><span class="n">type_clz</span><span class="p">,</span> <span class="n">j_serializer_clz</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">register_type_with_kryo_serializer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                           <span class="n">type_class_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                                           <span class="n">serializer_class_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExecutionConfig&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Registers the given Serializer via its class as a serializer for the given type at the</span>
+<span class="sd">        KryoSerializer.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; config.register_type_with_kryo_serializer(&quot;com.aaa.bbb.PojoClass&quot;,</span>
+<span class="sd">            ...                                           &quot;com.aaa.bbb.Serializer&quot;)</span>
+
+<span class="sd">        :param type_class_name: The full-qualified java class name of the types serialized with</span>
+<span class="sd">                                the given serializer.</span>
+<span class="sd">        :param serializer_class_name: The full-qualified java class name of the serializer to use.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">type_clz</span> <span class="o">=</span> <span class="n">load_java_class</span><span class="p">(</span><span class="n">type_class_name</span><span class="p">)</span>
+        <span class="n">j_serializer_clz</span> <span class="o">=</span> <span class="n">load_java_class</span><span class="p">(</span><span class="n">serializer_class_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">registerTypeWithKryoSerializer</span><span class="p">(</span><span class="n">type_clz</span><span class="p">,</span> <span class="n">j_serializer_clz</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">register_pojo_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">type_class_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExecutionConfig&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Registers the given type with the serialization stack. If the type is eventually</span>
+<span class="sd">        serialized as a POJO, then the type is registered with the POJO serializer. If the</span>
+<span class="sd">        type ends up being serialized with Kryo, then it will be registered at Kryo to make</span>
+<span class="sd">        sure that only tags are written.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; config.register_pojo_type(&quot;com.aaa.bbb.PojoClass&quot;)</span>
+
+<span class="sd">        :param type_class_name: The full-qualified java class name of the type to register.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">type_clz</span> <span class="o">=</span> <span class="n">load_java_class</span><span class="p">(</span><span class="n">type_class_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">registerPojoType</span><span class="p">(</span><span class="n">type_clz</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">register_kryo_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">type_class_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExecutionConfig&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Registers the given type with the serialization stack. If the type is eventually</span>
+<span class="sd">        serialized as a POJO, then the type is registered with the POJO serializer. If the</span>
+<span class="sd">        type ends up being serialized with Kryo, then it will be registered at Kryo to make</span>
+<span class="sd">        sure that only tags are written.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; config.register_kryo_type(&quot;com.aaa.bbb.KryoClass&quot;)</span>
+
+<span class="sd">        :param type_class_name: The full-qualified java class name of the type to register.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">type_clz</span> <span class="o">=</span> <span class="n">load_java_class</span><span class="p">(</span><span class="n">type_class_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">registerKryoType</span><span class="p">(</span><span class="n">type_clz</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_registered_types_with_kryo_serializer_classes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the registered types with their Kryo Serializer classes.</span>
+
+<span class="sd">        :return: The dict which the keys are full-qualified java class names of the registered</span>
+<span class="sd">                 types and the values are full-qualified java class names of the Kryo Serializer</span>
+<span class="sd">                 classes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">j_clz_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">getRegisteredTypesWithKryoSerializerClasses</span><span class="p">()</span>
+        <span class="n">registered_serializers</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">j_clz_map</span><span class="p">:</span>
+            <span class="n">registered_serializers</span><span class="p">[</span><span class="n">key</span><span class="o">.</span><span class="n">getName</span><span class="p">()]</span> <span class="o">=</span> <span class="n">j_clz_map</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">getName</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">registered_serializers</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_default_kryo_serializer_classes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the registered default Kryo Serializer classes.</span>
+
+<span class="sd">        :return: The dict which the keys are full-qualified java class names of the registered</span>
+<span class="sd">                 types and the values are full-qualified java class names of the Kryo default</span>
+<span class="sd">                 Serializer classes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">j_clz_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">getDefaultKryoSerializerClasses</span><span class="p">()</span>
+        <span class="n">default_kryo_serializers</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">j_clz_map</span><span class="p">:</span>
+            <span class="n">default_kryo_serializers</span><span class="p">[</span><span class="n">key</span><span class="o">.</span><span class="n">getName</span><span class="p">()]</span> <span class="o">=</span> <span class="n">j_clz_map</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">getName</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">default_kryo_serializers</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_registered_kryo_types</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the registered Kryo types.</span>
+
+<span class="sd">        :return: The list of full-qualified java class names of the registered Kryo types.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">j_clz_set</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">getRegisteredKryoTypes</span><span class="p">()</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">value</span><span class="o">.</span><span class="n">getName</span><span class="p">()</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">j_clz_set</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_registered_pojo_types</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the registered POJO types.</span>
+
+<span class="sd">        :return: The list of full-qualified java class names of the registered POJO types.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">j_clz_set</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">getRegisteredPojoTypes</span><span class="p">()</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">value</span><span class="o">.</span><span class="n">getName</span><span class="p">()</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">j_clz_set</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_auto_type_registration_disabled</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns whether Flink is automatically registering all types in the user programs with</span>
+<span class="sd">        Kryo.</span>
+
+<span class="sd">        :return: ``True`` means auto type registration is disabled and ``False`` means enabled.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">isAutoTypeRegistrationDisabled</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">disable_auto_type_registration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExecutionConfig&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Control whether Flink is automatically registering all types in the user programs with</span>
+<span class="sd">        Kryo.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">disableAutoTypeRegistration</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_use_snapshot_compression</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns whether he compression (snappy) for keyed state in full checkpoints and savepoints</span>
+<span class="sd">        is enabled.</span>
+
+<span class="sd">        :return: ``True`` means enabled and ``False`` means disabled.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">isUseSnapshotCompression</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_use_snapshot_compression</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">use_snapshot_compression</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ExecutionConfig&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Control whether the compression (snappy) for keyed state in full checkpoints and savepoints</span>
+<span class="sd">        is enabled.</span>
+
+<span class="sd">        :param use_snapshot_compression: ``True`` means enabled and ``False`` means disabled.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">setUseSnapshotCompression</span><span class="p">(</span><span class="n">use_snapshot_compression</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span> <span class="ow">and</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_j_execution_config</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_execution_config</span><span class="o">.</span><span class="n">hashCode</span><span class="p">()</span></div>
+</pre></div>
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

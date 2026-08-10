@@ -1,0 +1,951 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyflink.multimodal.operators.image_quality &#8212; PyFlink 11.9.0a1 documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyflink/multimodal/operators/image_quality';</script>
+    <link rel="shortcut icon" href="../../../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../../../search.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="Logo image">
+    <img src="../../../../_static/navbar-brand-logo.jpg" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <h1>Source code for pyflink.multimodal.operators.image_quality</h1><div class="highlight"><pre>
+<span></span><span class="c1">################################################################################</span>
+<span class="c1">#  Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="c1">#  or more contributor license agreements.  See the NOTICE file</span>
+<span class="c1">#  distributed with this work for additional information</span>
+<span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
+<span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
+<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  with the License.  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">################################################################################</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Image quality and safety assessment operators.</span>
+
+<span class="sd">Operators in this module score images based on quality, safety, and</span>
+<span class="sd">watermark detection. All operators return float scores.</span>
+
+<span class="sd">Example::</span>
+
+<span class="sd">    &gt;&gt;&gt; from pyflink.multimodal.operators.image_quality import image_quality_score</span>
+<span class="sd">    &gt;&gt;&gt; quality = image_quality_score()</span>
+<span class="sd">    &gt;&gt;&gt; df = df.with_column(&quot;quality&quot;, quality(col(&quot;img&quot;)))</span>
+
+<span class="sd">    &gt;&gt;&gt; from pyflink.multimodal.operators.image_quality import image_nsfw_score</span>
+<span class="sd">    &gt;&gt;&gt; nsfw = image_nsfw_score()</span>
+<span class="sd">    &gt;&gt;&gt; df = df.with_column(&quot;nsfw&quot;, nsfw(col(&quot;img&quot;)))</span>
+
+<span class="sd">Runtime args:</span>
+<span class="sd">    Pandas batch UDFs accept ``concurrency``, ``batch_size``, ``num_gpus``,</span>
+<span class="sd">    and ``gpu_type``. Row-level UDFs accept ``concurrency``.</span>
+
+<span class="sd">Input errors:</span>
+<span class="sd">    Null image inputs produce ``None`` outputs. These operators accept decoded</span>
+<span class="sd">    images; use ``decode_image(on_error=&quot;null&quot;)`` when processing untrusted raw</span>
+<span class="sd">    bytes. ``is_valid_image`` can be used as a lightweight pre-filter but does</span>
+<span class="sd">    not guarantee full pixel materialization.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="kn">import</span> <span class="n">udf</span><span class="p">,</span> <span class="n">DataType</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.udf</span><span class="w"> </span><span class="kn">import</span> <span class="n">ScalarFunction</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.multimodal.codec</span><span class="w"> </span><span class="kn">import</span> <span class="n">image_to_ndarray</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.model.backends.huggingface</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">AestheticScorerAdapter</span><span class="p">,</span>
+    <span class="n">DEFAULT_AESTHETIC_SCORER_MODEL</span><span class="p">,</span>
+    <span class="n">HfImageClassifierAdapter</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.model.cache_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_dependencies</span><span class="p">,</span> <span class="n">prepare_and_load_model_handle</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.multimodal.utils</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">_build_or_apply_udf</span><span class="p">,</span>
+    <span class="n">_udf_runtime_kwargs</span><span class="p">,</span>
+    <span class="n">run_image_batch_inference</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">_DEFAULT_NSFW_MODEL</span> <span class="o">=</span> <span class="s2">&quot;Falconsai/nsfw_image_detection&quot;</span>
+<span class="n">_DEFAULT_WATERMARK_MODEL</span> <span class="o">=</span> <span class="s2">&quot;amrul-hzz/watermark_detector&quot;</span>
+<span class="n">_SCORE_IMAGES_OP</span> <span class="o">=</span> <span class="s2">&quot;score_images&quot;</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;image_nsfw_score&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;image_aesthetic_score&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;image_quality_score&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;image_watermark_score&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Uncalibrated heuristic divisors that bound raw quality metrics to [0, 1].</span>
+<span class="c1"># Calibrate thresholds on the user&#39;s image distribution.</span>
+<span class="n">_SHARPNESS_NORM</span> <span class="o">=</span> <span class="mf">1000.0</span>    <span class="c1"># Laplacian variance divisor</span>
+<span class="n">_CONTRAST_NORM</span> <span class="o">=</span> <span class="mf">80.0</span>       <span class="c1"># Grayscale std divisor</span>
+<span class="n">_COLORFULNESS_NORM</span> <span class="o">=</span> <span class="mf">64.0</span>   <span class="c1"># Channel std divisor</span>
+<span class="n">_LUMA_WEIGHTS</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.299</span><span class="p">,</span> <span class="mf">0.587</span><span class="p">,</span> <span class="mf">0.114</span><span class="p">)</span>  <span class="c1"># ITU-R 601 luma coefficients</span>
+
+<span class="n">_logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">_NEGATIVE_PREFIX_TOKENS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;not&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;no&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;non&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;without&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;negative&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">_NEGATIVE_SUFFIX_TOKENS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;free&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;absent&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;safe&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sfw&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="c1"># HfImageClassifierScorer - shared base for NSFW / watermark scoring</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_HfImageClassifierScorer</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Shared HuggingFace image-classification scorer base class.&quot;&quot;&quot;</span>
+
+    <span class="n">_label_keyword</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">_missing_label_hint</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">_missing_label_article</span> <span class="o">=</span> <span class="s2">&quot;a&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_id</span><span class="p">,</span> <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_model_id</span> <span class="o">=</span> <span class="n">model_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_sharing</span> <span class="o">=</span> <span class="n">model_sharing</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span> <span class="o">=</span> <span class="n">num_gpus</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_gpu_type</span> <span class="o">=</span> <span class="n">gpu_type</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_is_negative_label</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+        <span class="n">normalized</span> <span class="o">=</span> <span class="n">label</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">token</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">normalized</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="k">if</span> <span class="n">token</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">token</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tokens</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">token</span> <span class="o">!=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_label_keyword</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="c1"># Only local negation counts. A suffix must be terminal</span>
+            <span class="c1"># (&quot;nsfw_free&quot;) so labels like &quot;nsfw_safe_level&quot; stay positive.</span>
+            <span class="n">previous_token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">index</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">None</span>
+            <span class="n">next_token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="n">previous_token</span> <span class="ow">in</span> <span class="n">_NEGATIVE_PREFIX_TOKENS</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="n">is_terminal_suffix</span> <span class="o">=</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">is_terminal_suffix</span> <span class="ow">and</span> <span class="n">next_token</span> <span class="ow">in</span> <span class="n">_NEGATIVE_SUFFIX_TOKENS</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_label_index</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">model_id</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">)</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Model &#39;</span><span class="si">{</span><span class="n">model_id</span><span class="si">}</span><span class="s2">&#39; label index </span><span class="si">{</span><span class="n">idx</span><span class="si">!r}</span><span class="s2"> for &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">&#39; must be an integer.&quot;</span>
+            <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_is_fallback_positive_label</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">normalized</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_label_keyword</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">normalized</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_is_negative_label</span><span class="p">(</span><span class="n">normalized</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_resolve_positive_label_indices</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">model_id</span><span class="p">):</span>
+        <span class="n">exact_matches</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">fallback_matches</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">labels</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">normalized</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">label</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">normalized</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_label_keyword</span><span class="p">:</span>
+                <span class="n">label_idx</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_label_index</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">model_id</span><span class="p">)</span>
+                <span class="n">exact_matches</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">label_idx</span><span class="p">,</span> <span class="n">label</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_is_fallback_positive_label</span><span class="p">(</span><span class="n">normalized</span><span class="p">):</span>
+                <span class="n">label_idx</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_label_index</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">model_id</span><span class="p">)</span>
+                <span class="n">fallback_matches</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">label_idx</span><span class="p">,</span> <span class="n">label</span><span class="p">))</span>
+        <span class="n">matches</span> <span class="o">=</span> <span class="n">exact_matches</span> <span class="ow">or</span> <span class="n">fallback_matches</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">matches</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Model &#39;</span><span class="si">{</span><span class="n">model_id</span><span class="si">}</span><span class="s2">&#39; does not have &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">cls</span><span class="o">.</span><span class="n">_missing_label_article</span><span class="si">}</span><span class="s2"> &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="bp">cls</span><span class="o">.</span><span class="n">_label_keyword</span><span class="si">}</span><span class="s2">&#39; label. &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Available labels: </span><span class="si">{</span><span class="n">labels</span><span class="si">}</span><span class="s2">. &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Please use a model with </span><span class="si">{</span><span class="bp">cls</span><span class="o">.</span><span class="n">_missing_label_hint</span><span class="si">}</span><span class="s2"> capability.&quot;</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">_logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                <span class="s2">&quot;Model </span><span class="si">%r</span><span class="s2"> has multiple labels matching </span><span class="si">%r</span><span class="s2">; aggregating labels: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="n">model_id</span><span class="p">,</span>
+                <span class="bp">cls</span><span class="o">.</span><span class="n">_label_keyword</span><span class="p">,</span>
+                <span class="p">[</span><span class="n">label</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">matches</span><span class="p">],</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">exact_matches</span><span class="p">:</span>
+            <span class="n">_logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                <span class="s2">&quot;Model </span><span class="si">%r</span><span class="s2"> does not expose an exact </span><span class="si">%r</span><span class="s2"> label; using fallback &quot;</span>
+                <span class="s2">&quot;label match: </span><span class="si">%r</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="n">model_id</span><span class="p">,</span>
+                <span class="bp">cls</span><span class="o">.</span><span class="n">_label_keyword</span><span class="p">,</span>
+                <span class="n">matches</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">idx</span> <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">matches</span><span class="p">]</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_predict_batch</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">pixel_arrays</span><span class="p">,</span> <span class="n">label_indices</span><span class="p">,</span> <span class="n">multi_label</span><span class="p">):</span>
+        <span class="n">probabilities</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_probabilities</span><span class="p">(</span><span class="n">pixel_arrays</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="n">_HfImageClassifierScorer</span><span class="o">.</span><span class="n">_score_positive_labels</span><span class="p">(</span>
+                <span class="n">prob</span><span class="p">,</span> <span class="n">label_indices</span><span class="p">,</span> <span class="n">multi_label</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">prob</span> <span class="ow">in</span> <span class="n">probabilities</span>
+        <span class="p">]</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_score_positive_labels</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">label_indices</span><span class="p">,</span> <span class="n">multi_label</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">label_indices</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+        <span class="n">prob_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">label_indices</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">idx</span> <span class="o">&gt;=</span> <span class="n">prob_len</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Positive label index </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2"> is out of range for &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prob_len</span><span class="si">}</span><span class="s2"> classifier labels.&quot;</span>
+                <span class="p">)</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">prob</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">label_indices</span><span class="p">]</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span> <span class="k">if</span> <span class="n">multi_label</span> <span class="k">else</span> <span class="nb">sum</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">score</span><span class="p">)))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_context</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span> <span class="o">=</span> <span class="n">prepare_and_load_model_handle</span><span class="p">(</span>
+            <span class="n">adapter_cls</span><span class="o">=</span><span class="n">HfImageClassifierAdapter</span><span class="p">,</span>
+            <span class="n">config</span><span class="o">=</span><span class="p">{},</span>
+            <span class="n">function_context</span><span class="o">=</span><span class="n">function_context</span><span class="p">,</span>
+            <span class="n">model_sharing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model_sharing</span><span class="p">,</span>
+            <span class="n">dependencies</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;transformers&quot;</span><span class="p">,</span> <span class="s2">&quot;torch&quot;</span><span class="p">),</span>
+            <span class="n">model_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_model_id</span><span class="p">,</span>
+            <span class="n">requested_num_gpus</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span><span class="p">,</span>
+            <span class="n">requested_gpu_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_gpu_type</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span><span class="o">.</span><span class="n">register_operation</span><span class="p">(</span>
+            <span class="n">_SCORE_IMAGES_OP</span><span class="p">,</span> <span class="n">_HfImageClassifierScorer</span><span class="o">.</span><span class="n">_predict_batch</span>
+        <span class="p">)</span>
+        <span class="n">metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span><span class="o">.</span><span class="n">metadata</span><span class="p">()</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;labels&quot;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="n">label_indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_positive_label_indices</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_label_indices</span> <span class="o">=</span> <span class="n">label_indices</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_multi_label</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;problem_type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;multi_label_classification&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_model_handle&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_series</span><span class="p">:</span> <span class="s2">&quot;pd.Series&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;pd.Series&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">run_image_batch_inference</span><span class="p">(</span>
+            <span class="n">image_series</span><span class="p">,</span>
+            <span class="k">lambda</span> <span class="n">pixel_arrays</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
+                <span class="n">_SCORE_IMAGES_OP</span><span class="p">,</span>
+                <span class="n">pixel_arrays</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_label_indices</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_multi_label</span><span class="p">,</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">_ImageNsfwScore</span><span class="p">(</span><span class="n">_HfImageClassifierScorer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;NSFW content scoring using a HuggingFace image classifier.&quot;&quot;&quot;</span>
+
+    <span class="n">_label_keyword</span> <span class="o">=</span> <span class="s2">&quot;nsfw&quot;</span>
+    <span class="n">_missing_label_hint</span> <span class="o">=</span> <span class="s2">&quot;NSFW detection&quot;</span>
+    <span class="n">_missing_label_article</span> <span class="o">=</span> <span class="s2">&quot;an&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hf_nsfw_model</span><span class="o">=</span><span class="n">_DEFAULT_NSFW_MODEL</span><span class="p">,</span>
+                 <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hf_nsfw_model</span> <span class="o">=</span> <span class="n">hf_nsfw_model</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">hf_nsfw_model</span><span class="p">,</span>
+            <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">,</span>
+            <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+            <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
+        <span class="p">)</span>
+
+
+<div class="viewcode-block" id="image_nsfw_score"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_nsfw_score.html#pyflink.multimodal.operators.image_nsfw_score">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_nsfw_score</span><span class="p">(</span>
+    <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
+    <span class="n">hf_nsfw_model</span><span class="o">=</span><span class="n">_DEFAULT_NSFW_MODEL</span><span class="p">,</span>
+    <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create an NSFW scoring UDF (HuggingFace image classification-based).</span>
+
+<span class="sd">    Requires ``pip install transformers torch``. This is a pandas batch UDF</span>
+<span class="sd">    that supports GPU acceleration via ``num_gpus`` / ``gpu_type``.</span>
+<span class="sd">    Set ``num_gpus`` to request GPU resources from the DataFrame UDF runtime.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        *columns: Optional image column(s). When provided, the UDF is</span>
+<span class="sd">            applied directly instead of returning a factory.</span>
+<span class="sd">        hf_nsfw_model: HuggingFace model ID for NSFW classification. Defaults</span>
+<span class="sd">            to the built-in NSFW classifier model.</span>
+<span class="sd">        model_sharing: Model sharing mode across parallel subtasks.</span>
+<span class="sd">            ``None`` uses per-process caching.</span>
+<span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
+<span class="sd">        batch_size: Pandas batch size. ``None`` uses the framework default.</span>
+<span class="sd">        num_gpus: Fractional GPU count per subtask, e.g. ``0.5``. ``None``</span>
+<span class="sd">            runs on CPU.</span>
+<span class="sd">        gpu_type: Required GPU type, e.g. ``&quot;A10&quot;``. ``None`` accepts any</span>
+<span class="sd">            available GPU.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A UDF that returns a float NSFW probability score in ``[0, 1]`` or</span>
+<span class="sd">        ``None`` for null inputs. Higher values indicate stronger NSFW</span>
+<span class="sd">        confidence. Use downstream filtering (e.g. ``&gt; 0.5``) to convert to a</span>
+<span class="sd">        boolean decision.</span>
+
+<span class="sd">    Example::</span>
+<span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
+<span class="sd">        &gt;&gt;&gt; nsfw = image_nsfw_score()</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;nsfw&quot;, nsfw(col(&quot;img&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt; nsfw_gpu = image_nsfw_score(num_gpus=1.0)</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;nsfw&quot;, nsfw_gpu(col(&quot;img&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Inline</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;nsfw&quot;, image_nsfw_score(col(&quot;img&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt; df = df.filter(image_nsfw_score(col(&quot;img&quot;)) &gt; 0.5)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
+        <span class="n">_ImageNsfwScore</span><span class="p">(</span>
+            <span class="n">hf_nsfw_model</span><span class="o">=</span><span class="n">hf_nsfw_model</span><span class="p">,</span>
+            <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">,</span>
+            <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+            <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">func_type</span><span class="o">=</span><span class="s2">&quot;pandas&quot;</span><span class="p">,</span>
+        <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">(),</span>
+        <span class="o">**</span><span class="n">_udf_runtime_kwargs</span><span class="p">(</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+            <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+            <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+            <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_build_or_apply_udf</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">)</span></div>
+
+
+<span class="c1"># ImageAestheticScore - LAION aesthetic predictor (pandas batch UDF)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_ImageAestheticScore</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Aesthetic quality scoring using a HuggingFace aesthetics predictor.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">hf_scorer_model</span><span class="o">=</span><span class="n">DEFAULT_AESTHETIC_SCORER_MODEL</span><span class="p">,</span>
+        <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hf_scorer_model</span> <span class="o">=</span> <span class="n">hf_scorer_model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_sharing</span> <span class="o">=</span> <span class="n">model_sharing</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span> <span class="o">=</span> <span class="n">num_gpus</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_gpu_type</span> <span class="o">=</span> <span class="n">gpu_type</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_predict_batch</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">pixel_arrays</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_scores</span><span class="p">(</span><span class="n">pixel_arrays</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_context</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span> <span class="o">=</span> <span class="n">prepare_and_load_model_handle</span><span class="p">(</span>
+            <span class="n">adapter_cls</span><span class="o">=</span><span class="n">AestheticScorerAdapter</span><span class="p">,</span>
+            <span class="n">config</span><span class="o">=</span><span class="p">{},</span>
+            <span class="n">function_context</span><span class="o">=</span><span class="n">function_context</span><span class="p">,</span>
+            <span class="n">model_sharing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model_sharing</span><span class="p">,</span>
+            <span class="n">dependencies</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;transformers&quot;</span><span class="p">,</span> <span class="s2">&quot;torch&quot;</span><span class="p">),</span>
+            <span class="n">model_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hf_scorer_model</span><span class="p">,</span>
+            <span class="n">requested_num_gpus</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span><span class="p">,</span>
+            <span class="n">requested_gpu_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_gpu_type</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span><span class="o">.</span><span class="n">register_operation</span><span class="p">(</span>
+            <span class="n">_SCORE_IMAGES_OP</span><span class="p">,</span> <span class="n">_ImageAestheticScore</span><span class="o">.</span><span class="n">_predict_batch</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_model_handle&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_series</span><span class="p">:</span> <span class="s2">&quot;pd.Series&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;pd.Series&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">run_image_batch_inference</span><span class="p">(</span>
+            <span class="n">image_series</span><span class="p">,</span>
+            <span class="k">lambda</span> <span class="n">image_arrays</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
+                <span class="n">_SCORE_IMAGES_OP</span><span class="p">,</span> <span class="n">image_arrays</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+
+
+<div class="viewcode-block" id="image_aesthetic_score"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_aesthetic_score.html#pyflink.multimodal.operators.image_aesthetic_score">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_aesthetic_score</span><span class="p">(</span>
+    <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
+    <span class="n">hf_scorer_model</span><span class="o">=</span><span class="n">DEFAULT_AESTHETIC_SCORER_MODEL</span><span class="p">,</span>
+    <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create an aesthetic quality scoring UDF (HuggingFace aesthetics predictor-based).</span>
+
+<span class="sd">    Requires ``pip install transformers torch``. This is a pandas batch UDF</span>
+<span class="sd">    that supports GPU acceleration via ``num_gpus`` / ``gpu_type``.</span>
+<span class="sd">    Set ``num_gpus`` to request GPU resources from the DataFrame UDF runtime.</span>
+
+<span class="sd">    The default scorer is a regression head, not a probability model. Its</span>
+<span class="sd">    score is divided by 10 and clamped to ``[0, 1]`` because the default LAION</span>
+<span class="sd">    aesthetic predictor is trained on AVA/SAC-style 1-10 targets. Custom scorer</span>
+<span class="sd">    outputs are expected to already use a ``[0, 1]`` scale and are clamped</span>
+<span class="sd">    defensively. Custom model IDs must provide local safetensors head weights</span>
+<span class="sd">    matching the built-in head architecture</span>
+<span class="sd">    ``projection_dim -&gt; 1024 -&gt; 128 -&gt; 64 -&gt; 16 -&gt; 1``; only the built-in</span>
+<span class="sd">    default model may fall back to ``trust_remote_code=True`` when those weights</span>
+<span class="sd">    are unavailable.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        *columns: Optional image column(s). When provided, the UDF is</span>
+<span class="sd">            applied directly instead of returning a factory.</span>
+<span class="sd">        hf_scorer_model: HuggingFace model ID for aesthetic scoring. Default</span>
+<span class="sd">            ``&quot;shunk031/aesthetics-predictor-v2-sac-logos-ava1-l14-linearMSE&quot;``.</span>
+<span class="sd">        model_sharing: Model sharing mode across parallel subtasks.</span>
+<span class="sd">            ``None`` uses per-process caching.</span>
+<span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
+<span class="sd">        batch_size: Pandas batch size. ``None`` uses the framework default.</span>
+<span class="sd">        num_gpus: Fractional GPU count per subtask, e.g. ``0.5``. ``None``</span>
+<span class="sd">            runs on CPU.</span>
+<span class="sd">        gpu_type: Required GPU type, e.g. ``&quot;A10&quot;``. ``None`` accepts any</span>
+<span class="sd">            available GPU.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A UDF that returns a normalized float aesthetic quality score in</span>
+<span class="sd">        ``[0, 1]`` or ``None`` for null inputs.</span>
+
+<span class="sd">    Example::</span>
+<span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
+<span class="sd">        &gt;&gt;&gt; aesthetic = image_aesthetic_score()</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;aesthetic&quot;, aesthetic(col(&quot;img&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt; aesthetic_gpu = image_aesthetic_score(num_gpus=1.0)</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;aesthetic&quot;, aesthetic_gpu(col(&quot;img&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Inline</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;aesthetic&quot;, image_aesthetic_score(col(&quot;img&quot;)))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
+        <span class="n">_ImageAestheticScore</span><span class="p">(</span><span class="n">hf_scorer_model</span><span class="o">=</span><span class="n">hf_scorer_model</span><span class="p">,</span>
+                             <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">,</span>
+                             <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+                             <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">),</span>
+        <span class="n">func_type</span><span class="o">=</span><span class="s2">&quot;pandas&quot;</span><span class="p">,</span>
+        <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">(),</span>
+        <span class="o">**</span><span class="n">_udf_runtime_kwargs</span><span class="p">(</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+            <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+            <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+            <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_build_or_apply_udf</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">)</span></div>
+
+
+<span class="c1"># ImageQualityScore - heuristic no-reference quality assessment</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_ImageQualityScore</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Image quality scoring using Laplacian variance, contrast, and colorfulness.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_context</span><span class="p">):</span>
+        <span class="n">check_dependencies</span><span class="p">(</span><span class="s2">&quot;numpy&quot;</span><span class="p">,</span> <span class="s2">&quot;PIL&quot;</span><span class="p">)</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_np</span> <span class="o">=</span> <span class="n">np</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_np</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image_input</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">image_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">pixel_array</span> <span class="o">=</span> <span class="n">image_to_ndarray</span><span class="p">(</span><span class="n">image_input</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;RGB&quot;</span><span class="p">)</span>
+        <span class="n">np</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_np</span>
+        <span class="n">pixel_array</span> <span class="o">=</span> <span class="n">pixel_array</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">over</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+            <span class="n">gray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:</span><span class="mi">3</span><span class="p">],</span> <span class="n">_LUMA_WEIGHTS</span><span class="p">)</span>
+            <span class="c1"># Sharpness: Laplacian variance (higher = sharper)</span>
+            <span class="k">if</span> <span class="n">gray</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">gray</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="n">laplacian</span> <span class="o">=</span> <span class="n">gray</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">gray</span><span class="p">[</span><span class="mi">2</span><span class="p">:,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">laplacian</span> <span class="o">+=</span> <span class="n">gray</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+                <span class="n">laplacian</span> <span class="o">+=</span> <span class="n">gray</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:]</span>
+                <span class="n">laplacian</span> <span class="o">-=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">gray</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">sharpness</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">laplacian</span><span class="o">.</span><span class="n">var</span><span class="p">()</span> <span class="o">/</span> <span class="n">_SHARPNESS_NORM</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">sharpness</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="c1"># Contrast: standard deviation of grayscale (higher = more contrast)</span>
+            <span class="n">contrast</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">gray</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">/</span> <span class="n">_CONTRAST_NORM</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+            <span class="c1"># Colorfulness: mean std of color channels</span>
+            <span class="n">color_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">pixel_array</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)])</span>
+            <span class="n">colorfulness</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">color_std</span> <span class="o">/</span> <span class="n">_COLORFULNESS_NORM</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+            <span class="c1"># Heuristic bounded score; tune thresholds on your dataset.</span>
+            <span class="n">score</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sharpness</span> <span class="o">+</span> <span class="mf">0.3</span> <span class="o">*</span> <span class="n">contrast</span> <span class="o">+</span> <span class="mf">0.2</span> <span class="o">*</span> <span class="n">colorfulness</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan_to_num</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">nan</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">posinf</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">neginf</span><span class="o">=</span><span class="mf">0.0</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="image_quality_score"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_quality_score.html#pyflink.multimodal.operators.image_quality_score">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_quality_score</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create an image quality scoring UDF (Laplacian + contrast + colorfulness-based).</span>
+
+<span class="sd">    Requires ``pip install numpy Pillow``. This is a scalar UDF that processes one</span>
+<span class="sd">    image at a time. It supports direct call syntax: ``image_quality_score(col(&quot;img&quot;))``.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        *columns: Optional image column(s). When provided, the UDF is</span>
+<span class="sd">            applied directly instead of returning a factory.</span>
+<span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A UDF that returns a float quality score in ``[0, 1]`` combining</span>
+<span class="sd">        sharpness, contrast, and colorfulness, or ``None`` for null inputs.</span>
+
+<span class="sd">    Example::</span>
+<span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
+<span class="sd">        &gt;&gt;&gt; quality = image_quality_score()</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;quality&quot;, quality(col(&quot;img&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Inline</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;quality&quot;, image_quality_score(col(&quot;img&quot;)))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
+        <span class="n">_ImageQualityScore</span><span class="p">(),</span>
+        <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">(),</span>
+        <span class="o">**</span><span class="n">_udf_runtime_kwargs</span><span class="p">(</span><span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_build_or_apply_udf</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">)</span></div>
+
+
+<span class="c1"># ImageWatermarkScore - watermark detection (pandas batch UDF)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_ImageWatermarkScore</span><span class="p">(</span><span class="n">_HfImageClassifierScorer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Watermark scoring using a HuggingFace image classifier.&quot;&quot;&quot;</span>
+
+    <span class="n">_label_keyword</span> <span class="o">=</span> <span class="s2">&quot;watermark&quot;</span>
+    <span class="n">_missing_label_hint</span> <span class="o">=</span> <span class="s2">&quot;watermark detection&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hf_watermark_model</span><span class="o">=</span><span class="n">_DEFAULT_WATERMARK_MODEL</span><span class="p">,</span>
+                 <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hf_watermark_model</span> <span class="o">=</span> <span class="n">hf_watermark_model</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">hf_watermark_model</span><span class="p">,</span>
+            <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">,</span>
+            <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+            <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
+        <span class="p">)</span>
+
+
+<div class="viewcode-block" id="image_watermark_score"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.image_watermark_score.html#pyflink.multimodal.operators.image_watermark_score">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">image_watermark_score</span><span class="p">(</span>
+    <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
+    <span class="n">hf_watermark_model</span><span class="o">=</span><span class="n">_DEFAULT_WATERMARK_MODEL</span><span class="p">,</span>
+    <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a watermark scoring UDF (HuggingFace image classification-based).</span>
+
+<span class="sd">    Requires ``pip install transformers torch``. This is a pandas batch UDF</span>
+<span class="sd">    that supports GPU acceleration via ``num_gpus`` / ``gpu_type``.</span>
+<span class="sd">    Set ``num_gpus`` to request GPU resources from the DataFrame UDF runtime.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        *columns: Optional image column(s). When provided, the UDF is</span>
+<span class="sd">            applied directly instead of returning a factory.</span>
+<span class="sd">        hf_watermark_model: HuggingFace model ID for watermark detection.</span>
+<span class="sd">            Defaults to the built-in watermark classifier model.</span>
+<span class="sd">        model_sharing: Model sharing mode across parallel subtasks.</span>
+<span class="sd">            ``None`` uses per-process caching.</span>
+<span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
+<span class="sd">        batch_size: Pandas batch size. ``None`` uses the framework default.</span>
+<span class="sd">        num_gpus: Fractional GPU count per subtask, e.g. ``0.5``. ``None``</span>
+<span class="sd">            runs on CPU.</span>
+<span class="sd">        gpu_type: Required GPU type, e.g. ``&quot;A10&quot;``. ``None`` accepts any</span>
+<span class="sd">            available GPU.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A UDF that returns a float watermark probability score in ``[0, 1]`` or</span>
+<span class="sd">        ``None`` for null inputs. Higher values indicate stronger watermark</span>
+<span class="sd">        confidence. Use downstream filtering (e.g. ``&gt; 0.8``) to convert to a</span>
+<span class="sd">        boolean decision.</span>
+
+<span class="sd">    Example::</span>
+<span class="sd">        &gt;&gt;&gt; # As a reusable variable</span>
+<span class="sd">        &gt;&gt;&gt; watermark = image_watermark_score()</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;wm&quot;, watermark(col(&quot;img&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt; watermark_gpu = image_watermark_score(num_gpus=1.0)</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;wm&quot;, watermark_gpu(col(&quot;img&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Inline</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;wm&quot;, image_watermark_score(col(&quot;img&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt; df = df.filter(image_watermark_score(col(&quot;img&quot;)) &gt; 0.8)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
+        <span class="n">_ImageWatermarkScore</span><span class="p">(</span>
+            <span class="n">hf_watermark_model</span><span class="o">=</span><span class="n">hf_watermark_model</span><span class="p">,</span>
+            <span class="n">model_sharing</span><span class="o">=</span><span class="n">model_sharing</span><span class="p">,</span>
+            <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+            <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">func_type</span><span class="o">=</span><span class="s2">&quot;pandas&quot;</span><span class="p">,</span>
+        <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">(),</span>
+        <span class="o">**</span><span class="n">_udf_runtime_kwargs</span><span class="p">(</span>
+            <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
+            <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+            <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
+            <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_build_or_apply_udf</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">)</span></div>
+</pre></div>
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

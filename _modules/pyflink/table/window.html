@@ -1,0 +1,796 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyflink.table.window &#8212; PyFlink 11.9.0a1 documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyflink/table/window';</script>
+    <link rel="shortcut icon" href="../../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../../search.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="Logo image">
+    <img src="../../../_static/navbar-brand-logo.jpg" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <h1>Source code for pyflink.table.window</h1><div class="highlight"><pre>
+<span></span><span class="c1">################################################################################</span>
+<span class="c1">#  Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="c1">#  or more contributor license agreements.  See the NOTICE file</span>
+<span class="c1">#  distributed with this work for additional information</span>
+<span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
+<span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
+<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  with the License.  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">################################################################################</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">py4j.java_gateway</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_method</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.java_gateway</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_gateway</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table</span><span class="w"> </span><span class="kn">import</span> <span class="n">Expression</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.expression</span><span class="w"> </span><span class="kn">import</span> <span class="n">_get_java_expression</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;Tumble&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Session&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Slide&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Over&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;GroupWindow&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;OverWindow&#39;</span>
+<span class="p">]</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">to_expression_jarray</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">GroupWindow</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A group window specification.</span>
+
+<span class="sd">    Group windows group rows based on time or row-count intervals and is therefore essentially a</span>
+<span class="sd">    special type of groupBy. Just like groupBy, group windows allow to compute aggregates</span>
+<span class="sd">    on groups of elements.</span>
+
+<span class="sd">    Infinite streaming tables can only be grouped into time or row intervals. Hence window</span>
+<span class="sd">    grouping is required to apply aggregations on streaming tables.</span>
+
+<span class="sd">    For finite batch tables, group windows provide shortcuts for time-based groupBy.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">java_window</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_java_window</span> <span class="o">=</span> <span class="n">java_window</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Tumble</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper class for creating a tumbling window. Tumbling windows are consecutive, non-overlapping</span>
+<span class="sd">    windows of a specified fixed length. For example, a tumbling window of 5 minutes size groups</span>
+<span class="sd">    elements in 5 minutes intervals.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        &gt;&gt;&gt; from pyflink.table.expressions import col, lit</span>
+<span class="sd">        &gt;&gt;&gt; Tumble.over(lit(10).minutes) \\</span>
+<span class="sd">        ...       .on(col(&quot;rowtime&quot;)) \\</span>
+<span class="sd">        ...       .alias(&quot;w&quot;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Tumble.over"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.window.Tumble.over.html#pyflink.table.window.Tumble.over">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">over</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="n">Expression</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;TumbleWithSize&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a tumbling window. Tumbling windows are fixed-size, consecutive, non-overlapping</span>
+<span class="sd">        windows of a specified fixed length. For example, a tumbling window of 5 minutes size</span>
+<span class="sd">        groups elements in 5 minutes intervals.</span>
+
+<span class="sd">        :param size: The size of the window as time or row-count interval.</span>
+<span class="sd">        :return: A partially defined tumbling window.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">TumbleWithSize</span><span class="p">(</span><span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">Tumble</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="n">_get_java_expression</span><span class="p">(</span><span class="n">size</span><span class="p">)))</span></div>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TumbleWithSize</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Tumbling window.</span>
+
+<span class="sd">    For streaming tables you can specify grouping by a event-time or processing-time attribute.</span>
+
+<span class="sd">    For batch tables you can specify grouping on a timestamp or long attribute.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">java_window</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_java_window</span> <span class="o">=</span> <span class="n">java_window</span>
+
+<div class="viewcode-block" id="TumbleWithSize.on"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.window.TumbleWithSize.on.html#pyflink.table.window.TumbleWithSize.on">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time_field</span><span class="p">:</span> <span class="n">Expression</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;TumbleWithSizeOnTime&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Specifies the time attribute on which rows are grouped.</span>
+
+<span class="sd">        For streaming tables you can specify grouping by a event-time or processing-ti</span>
+<span class="sd">        attribute.</span>
+
+<span class="sd">        For batch tables you can specify grouping on a timestamp or long attribute.</span>
+
+<span class="sd">        :param time_field: Time attribute for streaming and batch tables.</span>
+<span class="sd">        :return: A tumbling window on event-time/processing-time.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">TumbleWithSizeOnTime</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_java_window</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="n">_get_java_expression</span><span class="p">(</span><span class="n">time_field</span><span class="p">)))</span></div>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TumbleWithSizeOnTime</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Tumbling window on time. You need to assign an alias for the window.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">java_window</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_java_window</span> <span class="o">=</span> <span class="n">java_window</span>
+
+<div class="viewcode-block" id="TumbleWithSizeOnTime.alias"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.window.TumbleWithSizeOnTime.alias.html#pyflink.table.window.TumbleWithSizeOnTime.alias">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">alias</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alias</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;GroupWindow&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Assigns an alias for this window that the following</span>
+<span class="sd">        :func:`~pyflink.table.GroupWindowedTable.group_by` and</span>
+<span class="sd">        :func:`~pyflink.table.WindowGroupedTable.select` clause can refer to.</span>
+<span class="sd">        :func:`~pyflink.table.WindowGroupedTable.select` statement can access window properties</span>
+<span class="sd">        such as window start or end time.</span>
+
+<span class="sd">        :param alias: Alias for this window.</span>
+<span class="sd">        :return: This window.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">GroupWindow</span><span class="p">(</span><span class="n">get_method</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_java_window</span><span class="p">,</span> <span class="s2">&quot;as&quot;</span><span class="p">)(</span><span class="n">alias</span><span class="p">))</span></div>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Session</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper class for creating a session window. The boundary of session windows are defined by</span>
+<span class="sd">    intervals of inactivity, i.e., a session window is closes if no event appears for a defined</span>
+<span class="sd">    gap period.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        &gt;&gt;&gt; from pyflink.table.expressions import col, lit</span>
+<span class="sd">        &gt;&gt;&gt; Session.with_gap(lit(10).minutes) \\</span>
+<span class="sd">        ...        .on(col(&quot;rowtime&quot;)) \\</span>
+<span class="sd">        ...        .alias(&quot;w&quot;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Session.with_gap"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.window.Session.with_gap.html#pyflink.table.window.Session.with_gap">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">with_gap</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">gap</span><span class="p">:</span> <span class="n">Expression</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;SessionWithGap&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a session window. The boundary of session windows are defined by</span>
+<span class="sd">        intervals of inactivity, i.e., a session window is closes if no event appears for a defined</span>
+<span class="sd">        gap period.</span>
+
+<span class="sd">        :param gap: Specifies how long (as interval of milliseconds) to wait for new data before</span>
+<span class="sd">                    closing the session window.</span>
+<span class="sd">        :return: A partially defined session window.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">SessionWithGap</span><span class="p">(</span><span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">Session</span><span class="o">.</span><span class="n">withGap</span><span class="p">(</span><span class="n">_get_java_expression</span><span class="p">(</span><span class="n">gap</span><span class="p">)))</span></div>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SessionWithGap</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Session window.</span>
+
+<span class="sd">    For streaming tables you can specify grouping by a event-time or processing-time attribute.</span>
+
+<span class="sd">    For batch tables you can specify grouping on a timestamp or long attribute.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">java_window</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_java_window</span> <span class="o">=</span> <span class="n">java_window</span>
+
+<div class="viewcode-block" id="SessionWithGap.on"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.window.SessionWithGap.on.html#pyflink.table.window.SessionWithGap.on">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time_field</span><span class="p">:</span> <span class="n">Expression</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;SessionWithGapOnTime&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Specifies the time attribute on which rows are grouped.</span>
+
+<span class="sd">        For streaming tables you can specify grouping by a event-time or processing-time</span>
+<span class="sd">        attribute.</span>
+
+<span class="sd">        For batch tables you can specify grouping on a timestamp or long attribute.</span>
+
+<span class="sd">        :param time_field: Time attribute for streaming and batch tables.</span>
+<span class="sd">        :return: A tumbling window on event-time.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">SessionWithGapOnTime</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_java_window</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="n">_get_java_expression</span><span class="p">(</span><span class="n">time_field</span><span class="p">)))</span></div>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SessionWithGapOnTime</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Session window on time. You need to assign an alias for the window.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">java_window</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_java_window</span> <span class="o">=</span> <span class="n">java_window</span>
+
+<div class="viewcode-block" id="SessionWithGapOnTime.alias"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.window.SessionWithGapOnTime.alias.html#pyflink.table.window.SessionWithGapOnTime.alias">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">alias</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alias</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;GroupWindow&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Assigns an alias for this window that the following</span>
+<span class="sd">        :func:`~pyflink.table.GroupWindowedTable.group_by` and</span>
+<span class="sd">        :func:`~pyflink.table.WindowGroupedTable.select` clause can refer to.</span>
+<span class="sd">        :func:`~pyflink.table.WindowGroupedTable.select` statement can access window properties</span>
+<span class="sd">        such as window start or end time.</span>
+
+<span class="sd">        :param alias: Alias for this window.</span>
+<span class="sd">        :return: This window.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">GroupWindow</span><span class="p">(</span><span class="n">get_method</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_java_window</span><span class="p">,</span> <span class="s2">&quot;as&quot;</span><span class="p">)(</span><span class="n">alias</span><span class="p">))</span></div>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Slide</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper class for creating a sliding window. Sliding windows have a fixed size and slide by</span>
+<span class="sd">    a specified slide interval. If the slide interval is smaller than the window size, sliding</span>
+<span class="sd">    windows are overlapping. Thus, an element can be assigned to multiple windows.</span>
+
+<span class="sd">    For example, a sliding window of size 15 minutes with 5 minutes sliding interval groups</span>
+<span class="sd">    elements of 15 minutes and evaluates every five minutes. Each element is contained in three</span>
+<span class="sd">    consecutive window evaluations.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        &gt;&gt;&gt; from pyflink.table.expressions import col, lit</span>
+<span class="sd">        &gt;&gt;&gt; Slide.over(lit(10).minutes) \\</span>
+<span class="sd">        ...      .every(lit(5).minutes) \\</span>
+<span class="sd">        ...      .on(col(&quot;rowtime&quot;)) \\</span>
+<span class="sd">        ...      .alias(&quot;w&quot;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Slide.over"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.window.Slide.over.html#pyflink.table.window.Slide.over">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">over</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="n">Expression</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;SlideWithSize&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a sliding window. Sliding windows have a fixed size and slide by</span>
+<span class="sd">        a specified slide interval. If the slide interval is smaller than the window size, sliding</span>
+<span class="sd">        windows are overlapping. Thus, an element can be assigned to multiple windows.</span>
+
+<span class="sd">        For example, a sliding window of size 15 minutes with 5 minutes sliding interval groups</span>
+<span class="sd">        elements of 15 minutes and evaluates every five minutes. Each element is contained in three</span>
+<span class="sd">        consecutive window evaluations.</span>
+
+<span class="sd">        :param size: The size of the window as time or row-count interval.</span>
+<span class="sd">        :return: A partially specified sliding window.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">SlideWithSize</span><span class="p">(</span><span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">Slide</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="n">_get_java_expression</span><span class="p">(</span><span class="n">size</span><span class="p">)))</span></div>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SlideWithSize</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Partially specified sliding window. The size of the window either as time or row-count</span>
+<span class="sd">    interval.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">java_window</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_java_window</span> <span class="o">=</span> <span class="n">java_window</span>
+
+<div class="viewcode-block" id="SlideWithSize.every"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.window.SlideWithSize.every.html#pyflink.table.window.SlideWithSize.every">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">every</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slide</span><span class="p">:</span> <span class="n">Expression</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;SlideWithSizeAndSlide&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Specifies the window&#39;s slide as time or row-count interval.</span>
+
+<span class="sd">        The slide determines the interval in which windows are started. Hence, sliding windows can</span>
+<span class="sd">        overlap if the slide is smaller than the size of the window.</span>
+
+<span class="sd">        For example, you could have windows of size 15 minutes that slide by 3 minutes. With this</span>
+<span class="sd">        15 minutes worth of elements are grouped every 3 minutes and each row contributes to 5</span>
+<span class="sd">        windows.</span>
+
+<span class="sd">        :param slide: The slide of the window either as time or row-count interval.</span>
+<span class="sd">        :return: A sliding window.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">SlideWithSizeAndSlide</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_java_window</span><span class="o">.</span><span class="n">every</span><span class="p">(</span><span class="n">_get_java_expression</span><span class="p">(</span><span class="n">slide</span><span class="p">)))</span></div>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SlideWithSizeAndSlide</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sliding window. The size of the window either as time or row-count interval.</span>
+
+<span class="sd">    For streaming tables you can specify grouping by a event-time or processing-time attribute.</span>
+
+<span class="sd">    For batch tables you can specify grouping on a timestamp or long attribute.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">java_window</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_java_window</span> <span class="o">=</span> <span class="n">java_window</span>
+
+<div class="viewcode-block" id="SlideWithSizeAndSlide.on"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.window.SlideWithSizeAndSlide.on.html#pyflink.table.window.SlideWithSizeAndSlide.on">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time_field</span><span class="p">:</span> <span class="n">Expression</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;SlideWithSizeAndSlideOnTime&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Specifies the time attribute on which rows are grouped.</span>
+
+<span class="sd">        For streaming tables you can specify grouping by a event-time or processing-time</span>
+<span class="sd">        attribute.</span>
+
+<span class="sd">        For batch tables you can specify grouping on a timestamp or long attribute.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">SlideWithSizeAndSlideOnTime</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_java_window</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="n">_get_java_expression</span><span class="p">(</span><span class="n">time_field</span><span class="p">)))</span></div>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SlideWithSizeAndSlideOnTime</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sliding window on time. You need to assign an alias for the window.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">java_window</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_java_window</span> <span class="o">=</span> <span class="n">java_window</span>
+
+<div class="viewcode-block" id="SlideWithSizeAndSlideOnTime.alias"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.window.SlideWithSizeAndSlideOnTime.alias.html#pyflink.table.window.SlideWithSizeAndSlideOnTime.alias">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">alias</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alias</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;GroupWindow&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Assigns an alias for this window that the following</span>
+<span class="sd">        :func:`~pyflink.table.GroupWindowedTable.group_by` and</span>
+<span class="sd">        :func:`~pyflink.table.WindowGroupedTable.select` clause can refer to.</span>
+<span class="sd">        :func:`~pyflink.table.WindowGroupedTable.select` statement can access window properties</span>
+<span class="sd">        such as window start or end time.</span>
+
+<span class="sd">        :param alias: Alias for this window.</span>
+<span class="sd">        :return: This window.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">GroupWindow</span><span class="p">(</span><span class="n">get_method</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_java_window</span><span class="p">,</span> <span class="s2">&quot;as&quot;</span><span class="p">)(</span><span class="n">alias</span><span class="p">))</span></div>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Over</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper class for creating an over window. Similar to SQL, over window aggregates compute an</span>
+<span class="sd">    aggregate for each input row over a range of its neighboring rows.</span>
+
+<span class="sd">    Over-windows for batch tables are currently not supported.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        &gt;&gt;&gt; from pyflink.table.expressions import col, UNBOUNDED_RANGE</span>
+<span class="sd">        &gt;&gt;&gt; Over.partition_by(col(&quot;a&quot;)) \\</span>
+<span class="sd">        ...     .order_by(col(&quot;rowtime&quot;)) \\</span>
+<span class="sd">        ...     .preceding(UNBOUNDED_RANGE) \\</span>
+<span class="sd">        ...     .alias(&quot;w&quot;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Over.order_by"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.window.Over.order_by.html#pyflink.table.window.Over.order_by">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">order_by</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">order_by</span><span class="p">:</span> <span class="n">Expression</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;OverWindowPartitionedOrdered&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Specifies the time attribute on which rows are ordered.</span>
+
+<span class="sd">        For streaming tables, reference a rowtime or proctime time attribute here</span>
+<span class="sd">        to specify the time mode.</span>
+
+<span class="sd">        :param order_by: Field reference.</span>
+<span class="sd">        :return: An over window with defined order.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">OverWindowPartitionedOrdered</span><span class="p">(</span><span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">Over</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span>
+            <span class="n">_get_java_expression</span><span class="p">(</span><span class="n">order_by</span><span class="p">)))</span></div>
+
+<div class="viewcode-block" id="Over.partition_by"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.window.Over.partition_by.html#pyflink.table.window.Over.partition_by">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">partition_by</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">partition_by</span><span class="p">:</span> <span class="n">Expression</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;OverWindowPartitioned&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Partitions the elements on some partition keys.</span>
+
+<span class="sd">        Each partition is individually sorted and aggregate functions are applied to each</span>
+<span class="sd">        partition separately.</span>
+
+<span class="sd">        :param partition_by: List of field references.</span>
+<span class="sd">        :return: An over window with defined partitioning.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">OverWindowPartitioned</span><span class="p">(</span><span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">Over</span><span class="o">.</span><span class="n">partitionBy</span><span class="p">(</span>
+            <span class="n">to_expression_jarray</span><span class="p">(</span><span class="n">partition_by</span><span class="p">)))</span></div>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">OverWindowPartitionedOrdered</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Partially defined over window with (optional) partitioning and order.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">java_over_window</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_java_over_window</span> <span class="o">=</span> <span class="n">java_over_window</span>
+
+<div class="viewcode-block" id="OverWindowPartitionedOrdered.alias"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.window.OverWindowPartitionedOrdered.alias.html#pyflink.table.window.OverWindowPartitionedOrdered.alias">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">alias</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alias</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;OverWindow&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the preceding offset (based on time or row-count intervals) for over window.</span>
+
+<span class="sd">        :param alias: Preceding offset relative to the current row.</span>
+<span class="sd">        :return: An over window with defined preceding.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">OverWindow</span><span class="p">(</span><span class="n">get_method</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_java_over_window</span><span class="p">,</span> <span class="s2">&quot;as&quot;</span><span class="p">)(</span><span class="n">alias</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="OverWindowPartitionedOrdered.preceding"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.window.OverWindowPartitionedOrdered.preceding.html#pyflink.table.window.OverWindowPartitionedOrdered.preceding">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">preceding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preceding</span><span class="p">:</span> <span class="n">Expression</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;OverWindowPartitionedOrderedPreceding&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the preceding offset (based on time or row-count intervals) for over window.</span>
+
+<span class="sd">        :param preceding: Preceding offset relative to the current row.</span>
+<span class="sd">        :return: An over window with defined preceding.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">OverWindowPartitionedOrderedPreceding</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_java_over_window</span><span class="o">.</span><span class="n">preceding</span><span class="p">(</span><span class="n">_get_java_expression</span><span class="p">(</span><span class="n">preceding</span><span class="p">)))</span></div>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">OverWindowPartitionedOrderedPreceding</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Partially defined over window with (optional) partitioning, order, and preceding.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">java_over_window</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_java_over_window</span> <span class="o">=</span> <span class="n">java_over_window</span>
+
+<div class="viewcode-block" id="OverWindowPartitionedOrderedPreceding.alias"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.window.OverWindowPartitionedOrderedPreceding.alias.html#pyflink.table.window.OverWindowPartitionedOrderedPreceding.alias">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">alias</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alias</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;OverWindow&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Assigns an alias for this window that the following</span>
+<span class="sd">        :func:`~pyflink.table.OverWindowedTable.select` clause can refer to.</span>
+
+<span class="sd">        :param alias: Alias for this over window.</span>
+<span class="sd">        :return: The fully defined over window.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">OverWindow</span><span class="p">(</span><span class="n">get_method</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_java_over_window</span><span class="p">,</span> <span class="s2">&quot;as&quot;</span><span class="p">)(</span><span class="n">alias</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="OverWindowPartitionedOrderedPreceding.following"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.window.OverWindowPartitionedOrderedPreceding.following.html#pyflink.table.window.OverWindowPartitionedOrderedPreceding.following">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">following</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">following</span><span class="p">:</span> <span class="n">Expression</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;OverWindowPartitionedOrderedPreceding&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the following offset (based on time or row-count intervals) for over window.</span>
+
+<span class="sd">        :param following: Following offset that relative to the current row.</span>
+<span class="sd">        :return: An over window with defined following.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">OverWindowPartitionedOrderedPreceding</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_java_over_window</span><span class="o">.</span><span class="n">following</span><span class="p">(</span><span class="n">_get_java_expression</span><span class="p">(</span><span class="n">following</span><span class="p">)))</span></div>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">OverWindowPartitioned</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Partially defined over window with partitioning.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">java_over_window</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_java_over_window</span> <span class="o">=</span> <span class="n">java_over_window</span>
+
+<div class="viewcode-block" id="OverWindowPartitioned.order_by"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.window.OverWindowPartitioned.order_by.html#pyflink.table.window.OverWindowPartitioned.order_by">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">order_by</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order_by</span><span class="p">:</span> <span class="n">Expression</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;OverWindowPartitionedOrdered&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Specifies the time attribute on which rows are ordered.</span>
+
+<span class="sd">        For streaming tables, reference a rowtime or proctime time attribute here</span>
+<span class="sd">        to specify the time mode.</span>
+
+<span class="sd">        For batch tables, refer to a timestamp or long attribute.</span>
+
+<span class="sd">        :param order_by: Field reference.</span>
+<span class="sd">        :return: An over window with defined order.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">OverWindowPartitionedOrdered</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_java_over_window</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span>
+            <span class="n">_get_java_expression</span><span class="p">(</span><span class="n">order_by</span><span class="p">)))</span></div>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">OverWindow</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    An over window specification.</span>
+
+<span class="sd">    Similar to SQL, over window aggregates compute an aggregate for each input row over a range</span>
+<span class="sd">    of its neighboring rows.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">java_over_window</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_java_over_window</span> <span class="o">=</span> <span class="n">java_over_window</span>
+</pre></div>
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

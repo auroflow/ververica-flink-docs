@@ -1,0 +1,711 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyflink.datastream.connectors.cassandra &#8212; PyFlink 11.9.0a1 documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyflink/datastream/connectors/cassandra';</script>
+    <link rel="shortcut icon" href="../../../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../../../search.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="Logo image">
+    <img src="../../../../_static/navbar-brand-logo.jpg" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <h1>Source code for pyflink.datastream.connectors.cassandra</h1><div class="highlight"><pre>
+<span></span><span class="c1">################################################################################</span>
+<span class="c1">#  Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="c1">#  or more contributor license agreements.  See the NOTICE file</span>
+<span class="c1">#  distributed with this work for additional information</span>
+<span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
+<span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
+<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  with the License.  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">################################################################################</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">Duration</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.java_gateway</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_gateway</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;CassandraSink&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ConsistencyLevel&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;MapperOptions&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ClusterBuilder&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CassandraCommitter&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CassandraFailureHandler&#39;</span>
+<span class="p">]</span>
+
+<span class="c1"># ---- Classes introduced to construct the MapperOptions ----</span>
+
+
+<div class="viewcode-block" id="ConsistencyLevel"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.cassandra.ConsistencyLevel.html#pyflink.datastream.connectors.cassandra.ConsistencyLevel">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">ConsistencyLevel</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The consistency level</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ANY</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">ONE</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">TWO</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">THREE</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">QUORUM</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">ALL</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">LOCAL_QUORUM</span> <span class="o">=</span> <span class="mi">6</span>
+    <span class="n">EACH_QUORUM</span> <span class="o">=</span> <span class="mi">7</span>
+    <span class="n">SERIAL</span> <span class="o">=</span> <span class="mi">8</span>
+    <span class="n">LOCAL_SERIAL</span> <span class="o">=</span> <span class="mi">9</span>
+    <span class="n">LOCAL_ONE</span> <span class="o">=</span> <span class="mi">10</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_to_j_consistency_level</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">JConsistencyLevel</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">com</span><span class="o">.</span><span class="n">datastax</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">ConsistencyLevel</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">JConsistencyLevel</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MapperOptions"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.cassandra.MapperOptions.html#pyflink.datastream.connectors.cassandra.MapperOptions">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">MapperOptions</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class is used to configure a Mapper after deployment.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A simple method to construct MapperOptions.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">        &gt;&gt;&gt; mapper_option = MapperOptions() \\</span>
+<span class="sd">        ...    .ttl(1800) \\</span>
+<span class="sd">        ...    .timestamp(3600) \\</span>
+<span class="sd">        ...    .consistency_level(ConsistencyLevel.ANY) \\</span>
+<span class="sd">        ...    .tracing(True) \\</span>
+<span class="sd">        ...    .save_null_fields(True)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">JSimpleMapperOptions</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">streaming</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span> \
+            <span class="n">cassandra</span><span class="o">.</span><span class="n">SimpleMapperOptions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_mapper_options</span> <span class="o">=</span> <span class="n">JSimpleMapperOptions</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">ttl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ttl</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;MapperOptions&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a new Option object to add time-to-live to a mapper operation. This is only</span>
+<span class="sd">        valid for save operations.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_mapper_options</span><span class="o">.</span><span class="n">ttl</span><span class="p">(</span><span class="n">ttl</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">timestamp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;MapperOptions&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a new Option object to add a timestamp to a mapper operation. This is only</span>
+<span class="sd">        valid for save and delete operations.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_mapper_options</span><span class="o">.</span><span class="n">timestamp</span><span class="p">(</span><span class="n">timestamp</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">consistency_level</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cl</span><span class="p">:</span> <span class="n">ConsistencyLevel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;MapperOptions&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a new Option object to add a consistency level value to a mapper operation.</span>
+<span class="sd">        This is valid for save, delete and get operations.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_mapper_options</span><span class="o">.</span><span class="n">consistencyLevel</span><span class="p">(</span><span class="n">cl</span><span class="o">.</span><span class="n">_to_j_consistency_level</span><span class="p">())</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">tracing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enabled</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;MapperOptions&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a new Option object to enable query tracing for a mapper operation. This is</span>
+<span class="sd">        valid for save, delete and get operations.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_mapper_options</span><span class="o">.</span><span class="n">tracing</span><span class="p">(</span><span class="n">enabled</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_null_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enabled</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;MapperOptions&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a new Option object to specify whether null entity fields should be included in</span>
+<span class="sd">        insert queries. This option is valid only for save operations.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_mapper_options</span><span class="o">.</span><span class="n">saveNullFields</span><span class="p">(</span><span class="n">enabled</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">if_not_exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enabled</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;MapperOptions&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a new Option object to specify whether an IF NOT EXISTS clause should be included in</span>
+<span class="sd">        insert queries. This option is valid only for save operations.</span>
+
+<span class="sd">        If this option is not specified, it defaults to false (IF NOT EXISTS statements are not</span>
+<span class="sd">        used).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_mapper_options</span><span class="o">.</span><span class="n">ifNotExists</span><span class="p">(</span><span class="n">enabled</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="ClusterBuilder"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.cassandra.ClusterBuilder.html#pyflink.datastream.connectors.cassandra.ClusterBuilder">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">ClusterBuilder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class is used to configure a Cluster after deployment. The cluster represents the</span>
+<span class="sd">    connection that will be established to Cassandra.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_cluster_builder</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_cluster_builder</span> <span class="o">=</span> <span class="n">j_cluster_builder</span></div>
+
+
+<div class="viewcode-block" id="CassandraCommitter"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.cassandra.CassandraCommitter.html#pyflink.datastream.connectors.cassandra.CassandraCommitter">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">CassandraCommitter</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    CheckpointCommitter that saves information about completed checkpoints within a separate table</span>
+<span class="sd">    in a cassandra database.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_checkpoint_committer</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_checkpoint_committer</span> <span class="o">=</span> <span class="n">j_checkpoint_committer</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">default_checkpoint_committer</span><span class="p">(</span><span class="n">builder</span><span class="p">:</span> <span class="n">ClusterBuilder</span><span class="p">,</span> <span class="n">key_space</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="s1">&#39;CassandraCommitter&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        CheckpointCommitter that saves information about completed checkpoints within a separate</span>
+<span class="sd">        table in a cassandra database.</span>
+
+<span class="sd">        Entries are in the form: | operator_id | subtask_id | last_completed_checkpoint |</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">JCassandraCommitter</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">streaming</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span>\
+            <span class="n">cassandra</span><span class="o">.</span><span class="n">CassandraCommitter</span>
+        <span class="k">if</span> <span class="n">key_space</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">j_checkpoint_committer</span> <span class="o">=</span> <span class="n">JCassandraCommitter</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">_j_cluster_builder</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">j_checkpoint_committer</span> <span class="o">=</span> <span class="n">JCassandraCommitter</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">_j_cluster_builder</span><span class="p">,</span> <span class="n">key_space</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">CassandraCommitter</span><span class="p">(</span><span class="n">j_checkpoint_committer</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CassandraFailureHandler"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.cassandra.CassandraFailureHandler.html#pyflink.datastream.connectors.cassandra.CassandraFailureHandler">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">CassandraFailureHandler</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Handle a failed Throwable.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_cassandra_failure_handler</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_cassandra_failure_handler</span> <span class="o">=</span> <span class="n">j_cassandra_failure_handler</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">no_op</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;CassandraFailureHandler&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A CassandraFailureHandler that simply fails the sink on any failures.</span>
+<span class="sd">        This is also the default failure handler if not specified.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">CassandraFailureHandler</span><span class="p">(</span><span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">streaming</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span>
+                                       <span class="n">cassandra</span><span class="o">.</span><span class="n">NoOpCassandraFailureHandler</span><span class="p">())</span></div>
+
+
+<span class="c1"># ---- CassandraSink ----</span>
+
+
+<div class="viewcode-block" id="CassandraSink"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.cassandra.CassandraSink.html#pyflink.datastream.connectors.cassandra.CassandraSink">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">CassandraSink</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sets the ClusterBuilder for this sink. A ClusterBuilder is used to configure the connection to</span>
+<span class="sd">    cassandra.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_cassandra_sink</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_cassandra_sink</span> <span class="o">=</span> <span class="n">j_cassandra_sink</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;CassandraSink&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the name of this sink. This name is used by the visualization and logging during</span>
+<span class="sd">        runtime.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_cassandra_sink</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">uid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;CassandraSink&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets an ID for this operator. The specified ID is used to assign the same operator ID</span>
+<span class="sd">        across job submissions (for example when starting a job from a savepoint).</span>
+<span class="sd">        Note that this ID needs to be unique per transformation and job. Otherwise, job submission</span>
+<span class="sd">        will fail.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_cassandra_sink</span><span class="o">.</span><span class="n">uid</span><span class="p">(</span><span class="n">uid</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_uid_hash</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid_hash</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;CassandraSink&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets an user provided hash for this operator. This will be used AS IS the create the</span>
+<span class="sd">        JobVertexID.</span>
+
+<span class="sd">        The user provided hash is an alternative to the generated hashes, that is considered when</span>
+<span class="sd">        identifying an operator through the default hash mechanics fails (e.g. because of changes</span>
+<span class="sd">        between Flink versions).</span>
+
+<span class="sd">        Note that this should be used as a workaround or for trouble shooting. The provided hash</span>
+<span class="sd">        needs to be unique per transformation and job. Otherwise, job submission will fail.</span>
+<span class="sd">        Furthermore, you cannot assign user-specified hash to intermediate nodes in an operator</span>
+<span class="sd">        chain and trying so will let your job fail.</span>
+
+<span class="sd">        A use case for this is in migration between Flink versions or changing the jobs in a way</span>
+<span class="sd">        that changes the automatically generated hashes. In this case, providing the previous hashes</span>
+<span class="sd">        directly through this method (e.g. obtained from old logs) can help to reestablish a lost</span>
+<span class="sd">        mapping from states to their target operator.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_cassandra_sink</span><span class="o">.</span><span class="n">setUidHash</span><span class="p">(</span><span class="n">uid_hash</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_parallelism</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parallelism</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;CassandraSink&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the parallelism for this sink. The degree must be higher than zero.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_cassandra_sink</span><span class="o">.</span><span class="n">setParallelism</span><span class="p">(</span><span class="n">parallelism</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">disable_chaining</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;CassandraSink&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Turns off chaining for this operator so thread co-location will not be used as an</span>
+<span class="sd">        optimization.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_cassandra_sink</span><span class="o">.</span><span class="n">disableChaining</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">slot_sharing_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slot_sharing_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;CassandraSink&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the slot sharing group of this operation. Parallel instances of operations that are in</span>
+<span class="sd">        the same slot sharing group will be co-located in the same TaskManager slot, if possible.</span>
+
+<span class="sd">        Operations inherit the slot sharing group of input operations if all input operations are in</span>
+<span class="sd">        the same slot sharing group and no slot sharing group was explicitly specified.</span>
+
+<span class="sd">        Initially an operation is in the default slot sharing group. An operation can be put into</span>
+<span class="sd">        the default group explicitly by setting the slot sharing group to {@code &quot;default&quot;}.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_cassandra_sink</span><span class="o">.</span><span class="n">slotSharingGroup</span><span class="p">(</span><span class="n">slot_sharing_group</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_sink</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;CassandraSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes a DataStream into a Cassandra database.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">JCassandraSink</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span> \
+            <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">streaming</span><span class="o">.</span><span class="n">connectors</span><span class="o">.</span><span class="n">cassandra</span><span class="o">.</span><span class="n">CassandraSink</span>
+        <span class="n">j_cassandra_sink_builder</span> <span class="o">=</span> <span class="n">JCassandraSink</span><span class="o">.</span><span class="n">addSink</span><span class="p">(</span><span class="nb">input</span><span class="o">.</span><span class="n">_j_data_stream</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">CassandraSink</span><span class="o">.</span><span class="n">CassandraSinkBuilder</span><span class="p">(</span><span class="n">j_cassandra_sink_builder</span><span class="p">)</span>
+
+    <span class="k">class</span><span class="w"> </span><span class="nc">CassandraSinkBuilder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Builder for a CassandraSink.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_cassandra_sink_builder</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_cassandra_sink_builder</span> <span class="o">=</span> <span class="n">j_cassandra_sink_builder</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">set_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;CassandraSink.CassandraSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Sets the query that is to be executed for every record.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_cassandra_sink_builder</span><span class="o">.</span><span class="n">setQuery</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">set_host</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">9042</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;CassandraSink.CassandraSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Sets the cassandra host/port to connect to.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_cassandra_sink_builder</span><span class="o">.</span><span class="n">setHost</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">set_cluster_builder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">builder</span><span class="p">:</span> <span class="n">ClusterBuilder</span><span class="p">)</span> \
+                <span class="o">-&gt;</span> <span class="s1">&#39;CassandraSink.CassandraSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Sets the ClusterBuilder for this sink. A ClusterBuilder is used to configure the</span>
+<span class="sd">            connection to cassandra.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_cassandra_sink_builder</span><span class="o">.</span><span class="n">setClusterBuilder</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">_j_cluster_builder</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">enable_write_ahead_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">committer</span><span class="p">:</span> <span class="n">CassandraCommitter</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> \
+                <span class="o">-&gt;</span> <span class="s1">&#39;CassandraSink.CassandraSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Enables the write-ahead log, which allows exactly-once processing for non-deterministic</span>
+<span class="sd">            algorithms that use idempotent updates.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">if</span> <span class="n">committer</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_cassandra_sink_builder</span><span class="o">.</span><span class="n">enableWriteAheadLog</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_cassandra_sink_builder</span><span class="o">.</span><span class="n">enableWriteAheadLog</span><span class="p">(</span>
+                    <span class="n">committer</span><span class="o">.</span><span class="n">_j_checkpoint_committer</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">set_mapper_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">MapperOptions</span><span class="p">)</span> \
+                <span class="o">-&gt;</span> <span class="s1">&#39;CassandraSink.CassandraSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Sets the mapper options for this sink. The mapper options are used to configure the</span>
+<span class="sd">            DataStax com.datastax.driver.mapping.Mapper when writing POJOs.</span>
+<span class="sd">            This call has no effect if the input DataStream for this sink does not contain POJOs.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_cassandra_sink_builder</span><span class="o">.</span><span class="n">setMapperOptions</span><span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">_j_mapper_options</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">set_failure_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">failure_handler</span><span class="p">:</span> <span class="n">CassandraFailureHandler</span><span class="p">)</span> \
+                <span class="o">-&gt;</span> <span class="s1">&#39;CassandraSink.CassandraSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Sets the failure handler for this sink. The failure handler is used to provide custom</span>
+<span class="sd">            error handling.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_cassandra_sink_builder</span><span class="o">.</span><span class="n">setFailureHandler</span><span class="p">(</span>
+                <span class="n">failure_handler</span><span class="o">.</span><span class="n">_j_cassandra_failure_handler</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">set_max_concurrent_requests</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                        <span class="n">max_concurrent_requests</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                                        <span class="n">duration</span><span class="p">:</span> <span class="n">Duration</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> \
+                <span class="o">-&gt;</span> <span class="s1">&#39;CassandraSink.CassandraSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Sets the maximum allowed number of concurrent requests for this sink.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">if</span> <span class="n">duration</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_cassandra_sink_builder</span><span class="o">.</span><span class="n">setMaxConcurrentRequests</span><span class="p">(</span><span class="n">max_concurrent_requests</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_cassandra_sink_builder</span><span class="o">.</span><span class="n">setMaxConcurrentRequests</span><span class="p">(</span>
+                    <span class="n">max_concurrent_requests</span><span class="p">,</span> <span class="n">duration</span><span class="o">.</span><span class="n">_j_duration</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">enable_ignore_null_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;CassandraSink.CassandraSinkBuilder&#39;</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Enables ignoring null values, treats null values as unset and avoids writing null fields</span>
+<span class="sd">            and creating tombstones.</span>
+<span class="sd">            This call has no effect if CassandraSinkBuilder.enableWriteAheadLog() is called.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_cassandra_sink_builder</span><span class="o">.</span><span class="n">enableIgnoreNullFields</span><span class="p">()</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;CassandraSink&#39;</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Finalizes the configuration of this sink.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">return</span> <span class="n">CassandraSink</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_cassandra_sink_builder</span><span class="o">.</span><span class="n">build</span><span class="p">())</span></div>
+</pre></div>
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,925 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Multimodal Expressions &#8212; PyFlink 11.9.0a1 documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/pyflink.dataframe/multimodal';</script>
+    <link rel="shortcut icon" href="../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pyflink.multimodal.expression.ImageExpressionAccessor" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.html" />
+    <link rel="prev" title="pyflink.dataframe.ai.llm.LLMAccessor.ai_embed" href="api/pyflink.dataframe.ai.llm.LLMAccessor.ai_embed.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="Logo image">
+    <img src="../../_static/navbar-brand-logo.jpg" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Section navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">
+    Section Navigation
+  </p>
+  <div class="bd-toc-item navbar-nav">
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">PyFlink DataFrame</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dataframe.html">DataFrame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creation.html">DataFrame Creation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html">Input / Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sql.html">SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datatype.html">Data Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="udf.html">User Defined Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="catalog.html">Catalog</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="gpu.html">GPU Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ai.html">AI / LLM</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Multimodal Expressions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.multimodal/index.html">PyFlink Multimodal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.table/index.html">PyFlink Table</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.datastream/index.html">PyFlink DataStream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.common/index.html">PyFlink Common</a></li>
+</ul>
+
+  </div>
+</nav>
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <section id="multimodal-expressions">
+<h1>Multimodal Expressions<a class="headerlink" href="#multimodal-expressions" title="Permalink to this headline">#</a></h1>
+<p>PyFlink DataFrame expressions provide <code class="docutils literal notranslate"><span class="pre">image</span></code>, <code class="docutils literal notranslate"><span class="pre">video</span></code>, and <code class="docutils literal notranslate"><span class="pre">audio</span></code>
+namespaces for invoking multimodal operations with the expression on the left
+side.</p>
+<p>Examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="kn">import</span> <span class="n">col</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;thumbnail&quot;</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">224</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">224</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;frames&quot;</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;video_uri&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">video</span><span class="o">.</span><span class="n">extract_frames</span><span class="p">(</span><span class="n">max_frames</span><span class="o">=</span><span class="mi">16</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">speech_ready</span> <span class="o">=</span> <span class="p">(</span>
+<span class="gp">... </span>    <span class="n">col</span><span class="p">(</span><span class="s2">&quot;audio_bytes&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">audio</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">audio</span><span class="o">.</span><span class="n">standardize</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;transcript&quot;</span><span class="p">,</span> <span class="n">speech_ready</span><span class="o">.</span><span class="n">audio</span><span class="o">.</span><span class="n">asr_whisper</span><span class="p">())</span>
+</pre></div>
+</div>
+<section id="image-accessor">
+<h2>Image Accessor<a class="headerlink" href="#image-accessor" title="Permalink to this headline">#</a></h2>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">image</span></code> namespace on DataFrame expressions to call image operations.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.html#pyflink.multimodal.expression.ImageExpressionAccessor" title="pyflink.multimodal.expression.ImageExpressionAccessor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor</span></code></a>(expression)</p></td>
+<td><p>Image operations available on a DataFrame expression.</p></td>
+</tr>
+</tbody>
+</table>
+<section id="image-transform">
+<h3>Image Transform<a class="headerlink" href="#image-transform" title="Permalink to this headline">#</a></h3>
+<p>Image transformation operations.</p>
+<p><code class="docutils literal notranslate"><span class="pre">.image.decode()</span></code> accepts encoded image bytes and returns a decoded image.
+Pixel transforms accept decoded images and return decoded images so chained
+operations can avoid repeated JPEG/PNG encode-decode cycles. <code class="docutils literal notranslate"><span class="pre">.image.encode()</span></code>
+accepts decoded images and returns encoded bytes; <code class="docutils literal notranslate"><span class="pre">.image.compress()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">.image.convert_format()</span></code> accept encoded bytes and return encoded bytes.</p>
+<p>Typical pipeline:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="kn">import</span> <span class="n">col</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;jpg&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">col</span><span class="p">(</span><span class="s2">&quot;image_url&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fetch_content</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">512</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">blur</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;JPEG&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.decode.html#pyflink.multimodal.expression.ImageExpressionAccessor.decode" title="pyflink.multimodal.expression.ImageExpressionAccessor.decode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.decode</span></code></a>(*[, ...])</p></td>
+<td><p>Decode image bytes into image values.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.encode.html#pyflink.multimodal.expression.ImageExpressionAccessor.encode" title="pyflink.multimodal.expression.ImageExpressionAccessor.encode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.encode</span></code></a>(*[, format, ...])</p></td>
+<td><p>Encode image values into bytes or data URLs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.compress.html#pyflink.multimodal.expression.ImageExpressionAccessor.compress" title="pyflink.multimodal.expression.ImageExpressionAccessor.compress"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.compress</span></code></a>(*[, ...])</p></td>
+<td><p>Compress image values using the requested format and quality.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.convert_format.html#pyflink.multimodal.expression.ImageExpressionAccessor.convert_format" title="pyflink.multimodal.expression.ImageExpressionAccessor.convert_format"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.convert_format</span></code></a>(*, format)</p></td>
+<td><p>Convert image values to a different encoded image format.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.to_tensor.html#pyflink.multimodal.expression.ImageExpressionAccessor.to_tensor" title="pyflink.multimodal.expression.ImageExpressionAccessor.to_tensor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.to_tensor</span></code></a>(*, width, ...)</p></td>
+<td><p>Convert already prepared image values to fixed-shape tensors.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.convert_mode.html#pyflink.multimodal.expression.ImageExpressionAccessor.convert_mode" title="pyflink.multimodal.expression.ImageExpressionAccessor.convert_mode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.convert_mode</span></code></a>(*, mode)</p></td>
+<td><p>Convert image values to another image mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.resize.html#pyflink.multimodal.expression.ImageExpressionAccessor.resize" title="pyflink.multimodal.expression.ImageExpressionAccessor.resize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.resize</span></code></a>(*, width, height)</p></td>
+<td><p>Resize image values to a fixed width and height.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.rescale.html#pyflink.multimodal.expression.ImageExpressionAccessor.rescale" title="pyflink.multimodal.expression.ImageExpressionAccessor.rescale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.rescale</span></code></a>(*, scale[, ...])</p></td>
+<td><p>Scale image values by a ratio.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.crop.html#pyflink.multimodal.expression.ImageExpressionAccessor.crop" title="pyflink.multimodal.expression.ImageExpressionAccessor.crop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.crop</span></code></a>(*[, ...])</p></td>
+<td><p>Crop image values by coordinates, crop type, ratio, or size.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.crop_black_border.html#pyflink.multimodal.expression.ImageExpressionAccessor.crop_black_border" title="pyflink.multimodal.expression.ImageExpressionAccessor.crop_black_border"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.crop_black_border</span></code></a>(*)</p></td>
+<td><p>Remove black borders from image values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.flip.html#pyflink.multimodal.expression.ImageExpressionAccessor.flip" title="pyflink.multimodal.expression.ImageExpressionAccessor.flip"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.flip</span></code></a>(*[, mode, ...])</p></td>
+<td><p>Flip image values horizontally or vertically.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.blur.html#pyflink.multimodal.expression.ImageExpressionAccessor.blur" title="pyflink.multimodal.expression.ImageExpressionAccessor.blur"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.blur</span></code></a>(*[, radius, ...])</p></td>
+<td><p>Blur image values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.adjust_color.html#pyflink.multimodal.expression.ImageExpressionAccessor.adjust_color" title="pyflink.multimodal.expression.ImageExpressionAccessor.adjust_color"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.adjust_color</span></code></a>(*[, ...])</p></td>
+<td><p>Adjust image brightness, contrast, and saturation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.remove_background.html#pyflink.multimodal.expression.ImageExpressionAccessor.remove_background" title="pyflink.multimodal.expression.ImageExpressionAccessor.remove_background"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.remove_background</span></code></a>(*)</p></td>
+<td><p>Remove image backgrounds and optionally composite a new background.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="image-information">
+<h3>Image Information<a class="headerlink" href="#image-information" title="Permalink to this headline">#</a></h3>
+<p>Image information extraction operations.</p>
+<p>Most operations in this section take decoded <code class="docutils literal notranslate"><span class="pre">Image</span></code> values and return
+numeric values, strings, or booleans - they do <strong>not</strong> modify the image.
+Lightweight metadata and filter operations may also inspect encoded bytes when
+documented.</p>
+<p>Without business parameters:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="kn">import</span> <span class="n">col</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span><span class="s2">&quot;ratio&quot;</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">aspect_ratio</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>With business parameters:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;hash&quot;</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">hash</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;phash&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">concurrency</span></code> argument is forwarded to the DataFrame UDF runtime.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.metadata.html#pyflink.multimodal.expression.ImageExpressionAccessor.metadata" title="pyflink.multimodal.expression.ImageExpressionAccessor.metadata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.metadata</span></code></a>(*[, ...])</p></td>
+<td><p>Extract image metadata.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.aspect_ratio.html#pyflink.multimodal.expression.ImageExpressionAccessor.aspect_ratio" title="pyflink.multimodal.expression.ImageExpressionAccessor.aspect_ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.aspect_ratio</span></code></a>(*[, ...])</p></td>
+<td><p>Compute image aspect ratio.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.sharpness.html#pyflink.multimodal.expression.ImageExpressionAccessor.sharpness" title="pyflink.multimodal.expression.ImageExpressionAccessor.sharpness"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.sharpness</span></code></a>(*[, ...])</p></td>
+<td><p>Estimate image sharpness.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.hash.html#pyflink.multimodal.expression.ImageExpressionAccessor.hash" title="pyflink.multimodal.expression.ImageExpressionAccessor.hash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.hash</span></code></a>(*[, method, ...])</p></td>
+<td><p>Compute an image perceptual hash.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.is_valid.html#pyflink.multimodal.expression.ImageExpressionAccessor.is_valid" title="pyflink.multimodal.expression.ImageExpressionAccessor.is_valid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.is_valid</span></code></a>(*[, mode, ...])</p></td>
+<td><p>Check whether image inputs can be decoded as valid images.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.size_filter.html#pyflink.multimodal.expression.ImageExpressionAccessor.size_filter" title="pyflink.multimodal.expression.ImageExpressionAccessor.size_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.size_filter</span></code></a>(*[, ...])</p></td>
+<td><p>Filter images by width and height bounds.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.shape_filter.html#pyflink.multimodal.expression.ImageExpressionAccessor.shape_filter" title="pyflink.multimodal.expression.ImageExpressionAccessor.shape_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.shape_filter</span></code></a>(*[, ...])</p></td>
+<td><p>Filter images by aspect ratio.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.file_size_filter.html#pyflink.multimodal.expression.ImageExpressionAccessor.file_size_filter" title="pyflink.multimodal.expression.ImageExpressionAccessor.file_size_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.file_size_filter</span></code></a>(*)</p></td>
+<td><p>Filter image files by byte size.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="image-detection">
+<h3>Image Detection<a class="headerlink" href="#image-detection" title="Permalink to this headline">#</a></h3>
+<p>Detection and recognition operations.</p>
+<p>Operations in this section detect or recognize structured content within
+images: objects, text, segments, and subplots.</p>
+<p>Model-based operations (<code class="docutils literal notranslate"><span class="pre">detect_objects()</span></code>, <code class="docutils literal notranslate"><span class="pre">segment()</span></code>, and <code class="docutils literal notranslate"><span class="pre">ocr()</span></code>)
+are registered as pandas batch UDFs, so Flink batches rows automatically.
+<code class="docutils literal notranslate"><span class="pre">detect_objects()</span></code> returns axis-aligned boxes <code class="docutils literal notranslate"><span class="pre">x/y/w/h</span></code>; <code class="docutils literal notranslate"><span class="pre">ocr()</span></code> returns
+four-point text polygons; <code class="docutils literal notranslate"><span class="pre">segment()</span></code> returns indexed PNG mask bytes; and
+<code class="docutils literal notranslate"><span class="pre">detect_subplot()</span></code> returns subplot metadata.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="kn">import</span> <span class="n">col</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;objects&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">col</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">detect_objects</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">model</span><span class="o">=</span><span class="s2">&quot;yolov8n&quot;</span><span class="p">,</span> <span class="n">confidence</span><span class="o">=</span><span class="mf">0.05</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">ocr</span><span class="p">(</span><span class="n">lang</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;en&quot;</span><span class="p">,</span> <span class="s2">&quot;ch_sim&quot;</span><span class="p">]))</span>
+</pre></div>
+</div>
+<p>Model-based pandas operations forward keyword-only <code class="docutils literal notranslate"><span class="pre">concurrency</span></code>,
+<code class="docutils literal notranslate"><span class="pre">batch_size</span></code>, <code class="docutils literal notranslate"><span class="pre">num_gpus</span></code>, and <code class="docutils literal notranslate"><span class="pre">gpu_type</span></code> to the DataFrame UDF runtime.
+<code class="docutils literal notranslate"><span class="pre">detect_subplot()</span></code> forwards <code class="docutils literal notranslate"><span class="pre">concurrency</span></code>.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.detect_objects.html#pyflink.multimodal.expression.ImageExpressionAccessor.detect_objects" title="pyflink.multimodal.expression.ImageExpressionAccessor.detect_objects"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.detect_objects</span></code></a>(*[, ...])</p></td>
+<td><p>Detect objects in image values.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.segment.html#pyflink.multimodal.expression.ImageExpressionAccessor.segment" title="pyflink.multimodal.expression.ImageExpressionAccessor.segment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.segment</span></code></a>(*[, model, ...])</p></td>
+<td><p>Segment objects or regions in image values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.ocr.html#pyflink.multimodal.expression.ImageExpressionAccessor.ocr" title="pyflink.multimodal.expression.ImageExpressionAccessor.ocr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.ocr</span></code></a>(*[, lang, ...])</p></td>
+<td><p>Run OCR on image values.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.detect_subplot.html#pyflink.multimodal.expression.ImageExpressionAccessor.detect_subplot" title="pyflink.multimodal.expression.ImageExpressionAccessor.detect_subplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.detect_subplot</span></code></a>(*[, ...])</p></td>
+<td><p>Detect subplot regions in image values.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="image-face">
+<h3>Image Face<a class="headerlink" href="#image-face" title="Permalink to this headline">#</a></h3>
+<p>Face processing operations.</p>
+<p>Operations in this section detect, count, or blur faces in image inputs with
+OpenCV Haar cascade classifiers.</p>
+<p>Requires: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">opencv-python-headless</span></code>. <code class="docutils literal notranslate"><span class="pre">face_blur()</span></code> also requires
+<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">Pillow</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">concurrency</span></code> argument is forwarded to the DataFrame UDF runtime.</p>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="kn">import</span> <span class="n">col</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;faces&quot;</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">face_detect</span><span class="p">(</span><span class="n">min_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;face_count&quot;</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">face_count</span><span class="p">(</span><span class="n">min_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;blurred&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">col</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">face_blur</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">min_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.face_detect.html#pyflink.multimodal.expression.ImageExpressionAccessor.face_detect" title="pyflink.multimodal.expression.ImageExpressionAccessor.face_detect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.face_detect</span></code></a>(*[, ...])</p></td>
+<td><p>Detect faces in image values.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.face_count.html#pyflink.multimodal.expression.ImageExpressionAccessor.face_count" title="pyflink.multimodal.expression.ImageExpressionAccessor.face_count"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.face_count</span></code></a>(*[, ...])</p></td>
+<td><p>Count faces in image values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.face_blur.html#pyflink.multimodal.expression.ImageExpressionAccessor.face_blur" title="pyflink.multimodal.expression.ImageExpressionAccessor.face_blur"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.face_blur</span></code></a>(*[, ...])</p></td>
+<td><p>Blur detected faces in image values.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="image-quality">
+<h3>Image Quality<a class="headerlink" href="#image-quality" title="Permalink to this headline">#</a></h3>
+<p>Image quality and safety assessment operations.</p>
+<p>Operations in this section score images based on quality, safety, and
+watermark detection. All operations return float scores.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="kn">import</span> <span class="n">col</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;quality&quot;</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">quality_score</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;nsfw&quot;</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">nsfw_score</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Pandas batch UDFs accept <code class="docutils literal notranslate"><span class="pre">concurrency</span></code>, <code class="docutils literal notranslate"><span class="pre">batch_size</span></code>, <code class="docutils literal notranslate"><span class="pre">num_gpus</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">gpu_type</span></code>. Row-level UDFs accept <code class="docutils literal notranslate"><span class="pre">concurrency</span></code>.</p>
+<p>Null image inputs produce <code class="docutils literal notranslate"><span class="pre">None</span></code> outputs. These operations accept decoded
+images; use <code class="docutils literal notranslate"><span class="pre">col(&quot;raw_bytes&quot;).image.decode(on_error=&quot;null&quot;)</span></code> when processing
+untrusted raw bytes. <code class="docutils literal notranslate"><span class="pre">col(&quot;raw_bytes&quot;).image.is_valid()</span></code> can be used as a
+lightweight pre-filter but does not guarantee full pixel materialization.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.nsfw_score.html#pyflink.multimodal.expression.ImageExpressionAccessor.nsfw_score" title="pyflink.multimodal.expression.ImageExpressionAccessor.nsfw_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.nsfw_score</span></code></a>(*[, ...])</p></td>
+<td><p>Score images for NSFW content.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.aesthetic_score.html#pyflink.multimodal.expression.ImageExpressionAccessor.aesthetic_score" title="pyflink.multimodal.expression.ImageExpressionAccessor.aesthetic_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.aesthetic_score</span></code></a>(*[, ...])</p></td>
+<td><p>Score images for aesthetic quality.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.quality_score.html#pyflink.multimodal.expression.ImageExpressionAccessor.quality_score" title="pyflink.multimodal.expression.ImageExpressionAccessor.quality_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.quality_score</span></code></a>(*[, ...])</p></td>
+<td><p>Score general image quality.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.watermark_score.html#pyflink.multimodal.expression.ImageExpressionAccessor.watermark_score" title="pyflink.multimodal.expression.ImageExpressionAccessor.watermark_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.watermark_score</span></code></a>(*[, ...])</p></td>
+<td><p>Score images for watermark likelihood.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="image-embedding">
+<h3>Image Embedding<a class="headerlink" href="#image-embedding" title="Permalink to this headline">#</a></h3>
+<p>Image embedding and similarity operations.</p>
+<p>Operations in this section generate vector embeddings from images or compute
+image-text similarity scores using CLIP. They use pandas batch UDFs and run
+CLIP inference once per input batch.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="kn">import</span> <span class="n">col</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;vector&quot;</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;ViT-B/32&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Fixed text mode - compare all images against one prompt.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;score&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">col</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">text_similarity</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;a photo of a cat&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Per-row text mode - each row has its own text.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;score&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">col</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">text_similarity</span><span class="p">(</span><span class="n">text_column</span><span class="o">=</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">concurrency</span></code>, <code class="docutils literal notranslate"><span class="pre">batch_size</span></code>, <code class="docutils literal notranslate"><span class="pre">num_gpus</span></code>, and <code class="docutils literal notranslate"><span class="pre">gpu_type</span></code> are forwarded
+to the DataFrame UDF runtime.</p>
+<p>Requires: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">open_clip_torch</span> <span class="pre">torch</span> <span class="pre">pillow</span></code>.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.embedding.html#pyflink.multimodal.expression.ImageExpressionAccessor.embedding" title="pyflink.multimodal.expression.ImageExpressionAccessor.embedding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.embedding</span></code></a>(*[, ...])</p></td>
+<td><p>Compute image embeddings.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.text_similarity.html#pyflink.multimodal.expression.ImageExpressionAccessor.text_similarity" title="pyflink.multimodal.expression.ImageExpressionAccessor.text_similarity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ImageExpressionAccessor.text_similarity</span></code></a>(*[, ...])</p></td>
+<td><p>Compute similarity between image values and text.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="video-accessor">
+<h2>Video Accessor<a class="headerlink" href="#video-accessor" title="Permalink to this headline">#</a></h2>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">video</span></code> namespace on DataFrame expressions to call video operations.
+These are video frame operations for extraction pipelines.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.VideoExpressionAccessor.html#pyflink.multimodal.expression.VideoExpressionAccessor" title="pyflink.multimodal.expression.VideoExpressionAccessor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VideoExpressionAccessor</span></code></a>(expression)</p></td>
+<td><p>Video operations available on a DataFrame expression.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.VideoExpressionAccessor.metadata.html#pyflink.multimodal.expression.VideoExpressionAccessor.metadata" title="pyflink.multimodal.expression.VideoExpressionAccessor.metadata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VideoExpressionAccessor.metadata</span></code></a>(*[, ...])</p></td>
+<td><p>Probe video metadata for this expression.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.VideoExpressionAccessor.extract_frames.html#pyflink.multimodal.expression.VideoExpressionAccessor.extract_frames" title="pyflink.multimodal.expression.VideoExpressionAccessor.extract_frames"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VideoExpressionAccessor.extract_frames</span></code></a>(*[, ...])</p></td>
+<td><p>Extract selected frames from this expression as an array.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="audio-accessor">
+<h2>Audio Accessor<a class="headerlink" href="#audio-accessor" title="Permalink to this headline">#</a></h2>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">audio</span></code> namespace on DataFrame expressions to call audio operations.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.AudioExpressionAccessor.html#pyflink.multimodal.expression.AudioExpressionAccessor" title="pyflink.multimodal.expression.AudioExpressionAccessor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AudioExpressionAccessor</span></code></a>(expression)</p></td>
+<td><p>Audio operations available on a DataFrame expression.</p></td>
+</tr>
+</tbody>
+</table>
+<section id="audio-information">
+<h3>Audio Information<a class="headerlink" href="#audio-information" title="Permalink to this headline">#</a></h3>
+<p>Audio information, validation, and filter operations.</p>
+<p>These operations inspect audio objects and return scalar values or row values.
+They do not modify waveform content. Encoded inputs are accepted only at the
+pipeline boundary; waveform-only operations require an explicit
+<code class="docutils literal notranslate"><span class="pre">.audio.decode()</span></code> step so that pipeline definitions stay predictable.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.AudioExpressionAccessor.is_valid.html#pyflink.multimodal.expression.AudioExpressionAccessor.is_valid" title="pyflink.multimodal.expression.AudioExpressionAccessor.is_valid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AudioExpressionAccessor.is_valid</span></code></a>(*[, ...])</p></td>
+<td><p>Check whether this expression contains valid audio.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.AudioExpressionAccessor.metadata.html#pyflink.multimodal.expression.AudioExpressionAccessor.metadata" title="pyflink.multimodal.expression.AudioExpressionAccessor.metadata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AudioExpressionAccessor.metadata</span></code></a>(*[, ...])</p></td>
+<td><p>Probe audio metadata for this expression.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.AudioExpressionAccessor.duration.html#pyflink.multimodal.expression.AudioExpressionAccessor.duration" title="pyflink.multimodal.expression.AudioExpressionAccessor.duration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AudioExpressionAccessor.duration</span></code></a>(*[, ...])</p></td>
+<td><p>Return audio duration in seconds for this expression.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.AudioExpressionAccessor.duration_filter.html#pyflink.multimodal.expression.AudioExpressionAccessor.duration_filter" title="pyflink.multimodal.expression.AudioExpressionAccessor.duration_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AudioExpressionAccessor.duration_filter</span></code></a>(*[, ...])</p></td>
+<td><p>Check whether audio duration is within second bounds.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.AudioExpressionAccessor.size_filter.html#pyflink.multimodal.expression.AudioExpressionAccessor.size_filter" title="pyflink.multimodal.expression.AudioExpressionAccessor.size_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AudioExpressionAccessor.size_filter</span></code></a>(*[, ...])</p></td>
+<td><p>Check whether encoded audio size is within byte bounds.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.AudioExpressionAccessor.silence_detection.html#pyflink.multimodal.expression.AudioExpressionAccessor.silence_detection" title="pyflink.multimodal.expression.AudioExpressionAccessor.silence_detection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AudioExpressionAccessor.silence_detection</span></code></a>(*, ...)</p></td>
+<td><p>Detect low-amplitude silence ranges in waveform values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.AudioExpressionAccessor.detect_speech.html#pyflink.multimodal.expression.AudioExpressionAccessor.detect_speech" title="pyflink.multimodal.expression.AudioExpressionAccessor.detect_speech"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AudioExpressionAccessor.detect_speech</span></code></a>(*[, ...])</p></td>
+<td><p>Detect speech activity ranges in waveform values.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="audio-transform">
+<h3>Audio Transform<a class="headerlink" href="#audio-transform" title="Permalink to this headline">#</a></h3>
+<p>Audio decode, encode, split, and waveform transform operations.</p>
+<p>The transform layer separates encoded boundary inputs from decoded waveform
+processing. Operations that modify samples accept <code class="docutils literal notranslate"><span class="pre">AUDIO_WAVEFORM</span></code> only, so
+a pipeline should usually call <code class="docutils literal notranslate"><span class="pre">.audio.decode()</span></code> once, transform waveforms,
+and then call <code class="docutils literal notranslate"><span class="pre">.audio.encode()</span></code> or a sink-specific writer at the boundary.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.AudioExpressionAccessor.decode.html#pyflink.multimodal.expression.AudioExpressionAccessor.decode" title="pyflink.multimodal.expression.AudioExpressionAccessor.decode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AudioExpressionAccessor.decode</span></code></a>(*[, ...])</p></td>
+<td><p>Decode encoded audio into waveform rows.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.AudioExpressionAccessor.encode.html#pyflink.multimodal.expression.AudioExpressionAccessor.encode" title="pyflink.multimodal.expression.AudioExpressionAccessor.encode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AudioExpressionAccessor.encode</span></code></a>(*[, format, ...])</p></td>
+<td><p>Encode waveform rows to audio bytes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.AudioExpressionAccessor.convert_format.html#pyflink.multimodal.expression.AudioExpressionAccessor.convert_format" title="pyflink.multimodal.expression.AudioExpressionAccessor.convert_format"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AudioExpressionAccessor.convert_format</span></code></a>(*[, ...])</p></td>
+<td><p>Convert encoded audio to another encoded format.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.AudioExpressionAccessor.standardize.html#pyflink.multimodal.expression.AudioExpressionAccessor.standardize" title="pyflink.multimodal.expression.AudioExpressionAccessor.standardize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AudioExpressionAccessor.standardize</span></code></a>(*[, ...])</p></td>
+<td><p>Standardize waveform sample rate and channel count.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.AudioExpressionAccessor.resample.html#pyflink.multimodal.expression.AudioExpressionAccessor.resample" title="pyflink.multimodal.expression.AudioExpressionAccessor.resample"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AudioExpressionAccessor.resample</span></code></a>(*, sample_rate)</p></td>
+<td><p>Resample waveform values to a target sample rate.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.AudioExpressionAccessor.split_by_duration.html#pyflink.multimodal.expression.AudioExpressionAccessor.split_by_duration" title="pyflink.multimodal.expression.AudioExpressionAccessor.split_by_duration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AudioExpressionAccessor.split_by_duration</span></code></a>(*, ...)</p></td>
+<td><p>Split audio by fixed duration.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.AudioExpressionAccessor.split_by_timestamp.html#pyflink.multimodal.expression.AudioExpressionAccessor.split_by_timestamp" title="pyflink.multimodal.expression.AudioExpressionAccessor.split_by_timestamp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AudioExpressionAccessor.split_by_timestamp</span></code></a>(...)</p></td>
+<td><p>Split audio by explicit timestamp ranges.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.AudioExpressionAccessor.split_by_speech.html#pyflink.multimodal.expression.AudioExpressionAccessor.split_by_speech" title="pyflink.multimodal.expression.AudioExpressionAccessor.split_by_speech"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AudioExpressionAccessor.split_by_speech</span></code></a>(...)</p></td>
+<td><p>Split audio using caller-provided speech activity ranges.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.AudioExpressionAccessor.concat.html#pyflink.multimodal.expression.AudioExpressionAccessor.concat" title="pyflink.multimodal.expression.AudioExpressionAccessor.concat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AudioExpressionAccessor.concat</span></code></a>(*[, concurrency])</p></td>
+<td><p>Concatenate an array of waveform rows.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="audio-speech">
+<h3>Audio Speech<a class="headerlink" href="#audio-speech" title="Permalink to this headline">#</a></h3>
+<p>Speech model operations for decoded audio waveforms.</p>
+<p>These are model-backed pandas UDFs. They accept standardized
+<code class="docutils literal notranslate"><span class="pre">AUDIO_WAVEFORM</span></code> values only: callers should decode boundary inputs and
+normalize to 16 kHz mono before invoking Whisper-based operations.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.AudioExpressionAccessor.asr_whisper.html#pyflink.multimodal.expression.AudioExpressionAccessor.asr_whisper" title="pyflink.multimodal.expression.AudioExpressionAccessor.asr_whisper"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AudioExpressionAccessor.asr_whisper</span></code></a>(*[, ...])</p></td>
+<td><p>Run Whisper ASR over waveform values.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.expression.AudioExpressionAccessor.detect_language.html#pyflink.multimodal.expression.AudioExpressionAccessor.detect_language" title="pyflink.multimodal.expression.AudioExpressionAccessor.detect_language"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AudioExpressionAccessor.detect_language</span></code></a>(*[, ...])</p></td>
+<td><p>Detect likely spoken language candidates for waveform values.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="api/pyflink.dataframe.ai.llm.LLMAccessor.ai_embed.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">pyflink.dataframe.ai.llm.LLMAccessor.ai_embed</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="api/pyflink.multimodal.expression.ImageExpressionAccessor.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">pyflink.multimodal.expression.ImageExpressionAccessor</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#image-accessor">
+   Image Accessor
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#image-transform">
+     Image Transform
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#image-information">
+     Image Information
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#image-detection">
+     Image Detection
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#image-face">
+     Image Face
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#image-quality">
+     Image Quality
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#image-embedding">
+     Image Embedding
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#video-accessor">
+   Video Accessor
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#audio-accessor">
+   Audio Accessor
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#audio-information">
+     Audio Information
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#audio-transform">
+     Audio Transform
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#audio-speech">
+     Audio Speech
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+<div class="tocsection sourcelink">
+    <a href="../../_sources/reference/pyflink.dataframe/multimodal.rst.txt">
+        <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+</div>
+
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

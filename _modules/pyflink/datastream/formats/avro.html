@@ -1,0 +1,585 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyflink.datastream.formats.avro &#8212; PyFlink 11.9.0a1 documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyflink/datastream/formats/avro';</script>
+    <link rel="shortcut icon" href="../../../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../../../search.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="Logo image">
+    <img src="../../../../_static/navbar-brand-logo.jpg" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <h1>Source code for pyflink.datastream.formats.avro</h1><div class="highlight"><pre>
+<span></span><span class="c1">################################################################################</span>
+<span class="c1">#  Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="c1">#  or more contributor license agreements.  See the NOTICE file</span>
+<span class="c1">#  distributed with this work for additional information</span>
+<span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
+<span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
+<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  with the License.  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">################################################################################</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">py4j.java_gateway</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_java_class</span><span class="p">,</span> <span class="n">JavaObject</span><span class="p">,</span> <span class="n">java_import</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">InputFormat</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common.serialization</span><span class="w"> </span><span class="kn">import</span> <span class="n">BulkWriterFactory</span><span class="p">,</span> <span class="n">SerializationSchema</span><span class="p">,</span> \
+    <span class="n">DeserializationSchema</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common.typeinfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypeInformation</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">ResultTypeQueryable</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.java_gateway</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_gateway</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.util.java_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_field_value</span><span class="p">,</span> <span class="n">load_java_class</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;AvroSchema&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;GenericRecordAvroTypeInfo&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;AvroInputFormat&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;AvroBulkWriters&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;AvroRowDeserializationSchema&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;AvroRowSerializationSchema&#39;</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="AvroSchema"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.formats.avro.AvroSchema.html#pyflink.datastream.formats.avro.AvroSchema">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">AvroSchema</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Avro Schema class contains Java org.apache.avro.Schema.</span>
+
+<span class="sd">    .. versionadded:: 1.16.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_schema</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_schema</span> <span class="o">=</span> <span class="n">j_schema</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_schema_string</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema_string</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_schema_string</span> <span class="o">=</span> <span class="n">get_field_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_schema</span><span class="p">,</span> <span class="s1">&#39;schema&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">toString</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema_string</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parse_string</span><span class="p">(</span><span class="n">json_schema</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;AvroSchema&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parse JSON string as Avro Schema.</span>
+
+<span class="sd">        :param json_schema: JSON represented schema string.</span>
+<span class="sd">        :return: the Avro Schema.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">JSchema</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">avro</span><span class="o">.</span><span class="n">shaded</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">avro</span><span class="o">.</span><span class="n">Schema</span>
+        <span class="k">return</span> <span class="n">AvroSchema</span><span class="p">(</span><span class="n">JSchema</span><span class="o">.</span><span class="n">Parser</span><span class="p">()</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">json_schema</span><span class="p">))</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parse_file</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;AvroSchema&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parse a schema definition file as Avro Schema.</span>
+
+<span class="sd">        :param file_path: path to schema definition file.</span>
+<span class="sd">        :return: the Avro Schema.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">jvm</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>
+        <span class="n">j_file</span> <span class="o">=</span> <span class="n">jvm</span><span class="o">.</span><span class="n">java</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+        <span class="n">JSchema</span> <span class="o">=</span> <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">avro</span><span class="o">.</span><span class="n">shaded</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">avro</span><span class="o">.</span><span class="n">Schema</span>
+        <span class="k">return</span> <span class="n">AvroSchema</span><span class="p">(</span><span class="n">JSchema</span><span class="o">.</span><span class="n">Parser</span><span class="p">()</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">j_file</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="GenericRecordAvroTypeInfo"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.formats.avro.GenericRecordAvroTypeInfo.html#pyflink.datastream.formats.avro.GenericRecordAvroTypeInfo">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">GenericRecordAvroTypeInfo</span><span class="p">(</span><span class="n">TypeInformation</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A :class:`TypeInformation` of Avro&#39;s GenericRecord, including the schema. This is a wrapper of</span>
+<span class="sd">    Java org.apache.flink.formats.avro.typeutils.GenericRecordAvroTypeInfo.</span>
+
+<span class="sd">    Note that this type cannot be used as the type_info of data in</span>
+<span class="sd">    :meth:`StreamExecutionEnvironment.from_collection`.</span>
+
+<span class="sd">    .. versionadded::1.16.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">schema</span><span class="p">:</span> <span class="s1">&#39;AvroSchema&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GenericRecordAvroTypeInfo</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span> <span class="o">=</span> <span class="n">schema</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">avro</span><span class="o">.</span><span class="n">typeutils</span> \
+            <span class="o">.</span><span class="n">GenericRecordAvroTypeInfo</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">_j_schema</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_java_type_info</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JavaObject</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span></div>
+
+
+<div class="viewcode-block" id="AvroInputFormat"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.formats.avro.AvroInputFormat.html#pyflink.datastream.formats.avro.AvroInputFormat">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">AvroInputFormat</span><span class="p">(</span><span class="n">InputFormat</span><span class="p">,</span> <span class="n">ResultTypeQueryable</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Provides a FileInputFormat for Avro records.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">    ::</span>
+
+<span class="sd">        &gt;&gt;&gt; env = StreamExecutionEnvironment.get_execution_environment()</span>
+<span class="sd">        &gt;&gt;&gt; schema = AvroSchema.parse_string(JSON_SCHEMA)</span>
+<span class="sd">        &gt;&gt;&gt; ds = env.create_input(AvroInputFormat(FILE_PATH, schema))</span>
+
+<span class="sd">    .. versionadded:: 1.16.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">schema</span><span class="p">:</span> <span class="s1">&#39;AvroSchema&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param path: The path to Avro data file.</span>
+<span class="sd">        :param schema: The :class:`AvroSchema` of generic record.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">jvm</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>
+        <span class="n">j_avro_input_format</span> <span class="o">=</span> <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">avro</span><span class="o">.</span><span class="n">AvroInputFormat</span><span class="p">(</span>
+            <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">),</span>
+            <span class="n">get_java_class</span><span class="p">(</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">avro</span><span class="o">.</span><span class="n">shaded</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">avro</span><span class="o">.</span><span class="n">generic</span><span class="o">.</span><span class="n">GenericRecord</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">AvroInputFormat</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">j_avro_input_format</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_type_info</span> <span class="o">=</span> <span class="n">GenericRecordAvroTypeInfo</span><span class="p">(</span><span class="n">schema</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_produced_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GenericRecordAvroTypeInfo</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type_info</span></div>
+
+
+<div class="viewcode-block" id="AvroBulkWriters"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.formats.avro.AvroBulkWriters.html#pyflink.datastream.formats.avro.AvroBulkWriters">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">AvroBulkWriters</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convenience builder to create :class:`~pyflink.common.serialization.BulkWriterFactory` for</span>
+<span class="sd">    Avro types.</span>
+
+<span class="sd">    .. versionadded:: 1.16.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">for_generic_record</span><span class="p">(</span><span class="n">schema</span><span class="p">:</span> <span class="s1">&#39;AvroSchema&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;BulkWriterFactory&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates an AvroWriterFactory that accepts and writes Avro generic types. The Avro writers</span>
+<span class="sd">        will use the given schema to build and write the records.</span>
+
+<span class="sd">        Note that to make this works in PyFlink, you need to declare the output type of the</span>
+<span class="sd">        predecessor before FileSink to be :class:`~GenericRecordAvroTypeInfo`, and the predecessor</span>
+<span class="sd">        cannot be :meth:`StreamExecutionEnvironment.from_collection`, you can add a pass-through map</span>
+<span class="sd">        function before the sink, as the example shown below.</span>
+
+<span class="sd">        The Python data records should match the Avro schema, and have the same behavior with</span>
+<span class="sd">        vanilla Python data structure, e.g. an object for Avro array should behave like Python list,</span>
+<span class="sd">        an object for Avro map should behave like Python dict.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; env = StreamExecutionEnvironment.get_execution_environment()</span>
+<span class="sd">            &gt;&gt;&gt; schema = AvroSchema(JSON_SCHEMA)</span>
+<span class="sd">            &gt;&gt;&gt; avro_type_info = GenericRecordAvroTypeInfo(schema)</span>
+<span class="sd">            &gt;&gt;&gt; ds = env.from_collection([{&#39;array&#39;: [1, 2]}], type_info=Types.PICKLED_BYTE_ARRAY())</span>
+<span class="sd">            &gt;&gt;&gt; sink = FileSink.for_bulk_format(</span>
+<span class="sd">            ...     OUTPUT_DIR, AvroBulkWriters.for_generic_record(schema)).build()</span>
+<span class="sd">            &gt;&gt;&gt; # A map to indicate its Avro type info is necessary for serialization</span>
+<span class="sd">            &gt;&gt;&gt; ds.map(lambda e: e, output_type=GenericRecordAvroTypeInfo(schema)) \\</span>
+<span class="sd">            ...     .sink_to(sink)</span>
+
+<span class="sd">        :param schema: The avro schema.</span>
+<span class="sd">        :return: The BulkWriterFactory to write generic records into avro files.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">jvm</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>
+        <span class="n">j_bulk_writer_factory</span> <span class="o">=</span> <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">avro</span><span class="o">.</span><span class="n">AvroWriters</span><span class="o">.</span><span class="n">forGenericRecord</span><span class="p">(</span>
+            <span class="n">schema</span><span class="o">.</span><span class="n">_j_schema</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">BulkWriterFactory</span><span class="p">(</span><span class="n">j_bulk_writer_factory</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AvroRowDeserializationSchema"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.formats.avro.AvroRowDeserializationSchema.html#pyflink.datastream.formats.avro.AvroRowDeserializationSchema">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">AvroRowDeserializationSchema</span><span class="p">(</span><span class="n">DeserializationSchema</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Deserialization schema from Avro bytes to Row. Deserializes the byte[] messages into (nested)</span>
+<span class="sd">    Flink rows. It converts Avro types into types that are compatible with Flink&#39;s Table &amp; SQL API.</span>
+
+<span class="sd">    Projects with Avro records containing logical date/time types need to add a JodaTime dependency.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record_class</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">avro_schema_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates an Avro deserialization schema for the given specific record class or Avro schema</span>
+<span class="sd">        string. Having the concrete Avro record class might improve performance.</span>
+
+<span class="sd">        :param record_class: Avro record class used to deserialize Avro&#39;s record to Flink&#39;s row.</span>
+<span class="sd">        :param avro_schema_string: Avro schema string to deserialize Avro&#39;s record to Flink&#39;s row.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">avro_schema_string</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">record_class</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;record_class or avro_schema_string should be specified.&quot;</span><span class="p">)</span>
+        <span class="n">j_deserialization_schema</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">record_class</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
+            <span class="n">java_import</span><span class="p">(</span><span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="p">,</span> <span class="n">record_class</span><span class="p">)</span>
+            <span class="n">j_record_class</span> <span class="o">=</span> <span class="n">load_java_class</span><span class="p">(</span><span class="n">record_class</span><span class="p">)</span>
+            <span class="n">JAvroRowDeserializationSchema</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span> \
+                <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">avro</span><span class="o">.</span><span class="n">AvroRowDeserializationSchema</span>
+            <span class="n">j_deserialization_schema</span> <span class="o">=</span> <span class="n">JAvroRowDeserializationSchema</span><span class="p">(</span><span class="n">j_record_class</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">avro_schema_string</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">JAvroRowDeserializationSchema</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span> \
+                <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">avro</span><span class="o">.</span><span class="n">AvroRowDeserializationSchema</span>
+            <span class="n">j_deserialization_schema</span> <span class="o">=</span> <span class="n">JAvroRowDeserializationSchema</span><span class="p">(</span><span class="n">avro_schema_string</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">AvroRowDeserializationSchema</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">j_deserialization_schema</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AvroRowSerializationSchema"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.formats.avro.AvroRowSerializationSchema.html#pyflink.datastream.formats.avro.AvroRowSerializationSchema">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">AvroRowSerializationSchema</span><span class="p">(</span><span class="n">SerializationSchema</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Serialization schema that serializes to Avro binary format.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record_class</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">avro_schema_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates AvroSerializationSchema that serializes SpecificRecord using provided schema or</span>
+<span class="sd">        record class.</span>
+
+<span class="sd">        :param record_class: Avro record class used to serialize  Flink&#39;s row to Avro&#39;s record.</span>
+<span class="sd">        :param avro_schema_string: Avro schema string to serialize Flink&#39;s row to Avro&#39;s record.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">avro_schema_string</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">record_class</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;record_class or avro_schema_string should be specified.&quot;</span><span class="p">)</span>
+
+        <span class="n">j_serialization_schema</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">record_class</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
+            <span class="n">java_import</span><span class="p">(</span><span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="p">,</span> <span class="n">record_class</span><span class="p">)</span>
+            <span class="n">j_record_class</span> <span class="o">=</span> <span class="n">load_java_class</span><span class="p">(</span><span class="n">record_class</span><span class="p">)</span>
+            <span class="n">JAvroRowSerializationSchema</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span> \
+                <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">avro</span><span class="o">.</span><span class="n">AvroRowSerializationSchema</span>
+            <span class="n">j_serialization_schema</span> <span class="o">=</span> <span class="n">JAvroRowSerializationSchema</span><span class="p">(</span><span class="n">j_record_class</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">avro_schema_string</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">JAvroRowSerializationSchema</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span> \
+                <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">avro</span><span class="o">.</span><span class="n">AvroRowSerializationSchema</span>
+            <span class="n">j_serialization_schema</span> <span class="o">=</span> <span class="n">JAvroRowSerializationSchema</span><span class="p">(</span><span class="n">avro_schema_string</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">AvroRowSerializationSchema</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">j_serialization_schema</span><span class="p">)</span></div>
+</pre></div>
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1468 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyflink.common.typeinfo &#8212; PyFlink 11.9.0a1 documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyflink/common/typeinfo';</script>
+    <link rel="shortcut icon" href="../../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../../search.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="Logo image">
+    <img src="../../../_static/navbar-brand-logo.jpg" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../reference/index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <h1>Source code for pyflink.common.typeinfo</h1><div class="highlight"><pre>
+<span></span><span class="c1">################################################################################</span>
+<span class="c1">#  Licensed to the Apache Software Foundation (ASF) under one</span>
+<span class="c1">#  or more contributor license agreements.  See the NOTICE file</span>
+<span class="c1">#  distributed with this work for additional information</span>
+<span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
+<span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
+<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  with the License.  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">################################################################################</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">calendar</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">py4j.java_gateway</span><span class="w"> </span><span class="kn">import</span> <span class="n">JavaClass</span><span class="p">,</span> <span class="n">JavaObject</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.java_gateway</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_gateway</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TypeInformation&#39;</span><span class="p">,</span> <span class="s1">&#39;Types&#39;</span><span class="p">]</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TypeInformation</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    TypeInformation is the core class of Flink&#39;s type system. FLink requires a type information</span>
+<span class="sd">    for all types that are used as input or return type of a user function. This type information</span>
+<span class="sd">    class acts as the tool to generate serializers and comparators, and to perform semantic checks</span>
+<span class="sd">    such as whether the fields that are used as join/grouping keys actually exist.</span>
+
+<span class="sd">    The type information also bridges between the programming languages object model and a logical</span>
+<span class="sd">    flat schema. It maps fields from the types to columns (fields) in a flat schema. Not all fields</span>
+<span class="sd">    from a type are mapped to a separate fields in the flat schema and often, entire types are</span>
+<span class="sd">    mapped to one field.. It is important to notice that the schema must hold for all instances of a</span>
+<span class="sd">    type. For that reason, elements in lists and arrays are not assigned to individual fields, but</span>
+<span class="sd">    the lists and arrays are considered to be one field in total, to account for different lengths</span>
+<span class="sd">    in the arrays.</span>
+
+<span class="sd">        a) Basic types are indivisible and are considered as a single field.</span>
+<span class="sd">        b) Arrays and collections are one field.</span>
+<span class="sd">        c) Tuples represents as many fields as the class has fields.</span>
+
+<span class="sd">    To represent this properly, each type has an arity (the number of fields it contains directly),</span>
+<span class="sd">    and a total number of fields (number of fields in the entire schema of this type, including</span>
+<span class="sd">    nested types).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_java_type_info</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JavaObject</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">need_conversion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Does this type need to conversion between Python object and internal Wrapper object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_internal_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts a Python object into an internal object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">obj</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_internal_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">         Converts an internal object into a native Python object.</span>
+<span class="sd">         &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">obj</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">BasicType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">STRING</span> <span class="o">=</span> <span class="s2">&quot;String&quot;</span>
+    <span class="n">BYTE</span> <span class="o">=</span> <span class="s2">&quot;Byte&quot;</span>
+    <span class="n">BOOLEAN</span> <span class="o">=</span> <span class="s2">&quot;Boolean&quot;</span>
+    <span class="n">SHORT</span> <span class="o">=</span> <span class="s2">&quot;Short&quot;</span>
+    <span class="n">INT</span> <span class="o">=</span> <span class="s2">&quot;Integer&quot;</span>
+    <span class="n">LONG</span> <span class="o">=</span> <span class="s2">&quot;Long&quot;</span>
+    <span class="n">FLOAT</span> <span class="o">=</span> <span class="s2">&quot;Float&quot;</span>
+    <span class="n">DOUBLE</span> <span class="o">=</span> <span class="s2">&quot;Double&quot;</span>
+    <span class="n">CHAR</span> <span class="o">=</span> <span class="s2">&quot;Char&quot;</span>
+    <span class="n">BIG_INT</span> <span class="o">=</span> <span class="s2">&quot;BigInteger&quot;</span>
+    <span class="n">BIG_DEC</span> <span class="o">=</span> <span class="s2">&quot;BigDecimal&quot;</span>
+    <span class="n">INSTANT</span> <span class="o">=</span> <span class="s2">&quot;Instant&quot;</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">BasicTypeInfo</span><span class="p">(</span><span class="n">TypeInformation</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Type information for primitive types (int, long, double, byte, ...), String, BigInteger,</span>
+<span class="sd">    and BigDecimal.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">basic_type</span><span class="p">:</span> <span class="n">BasicType</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_basic_type</span> <span class="o">=</span> <span class="n">basic_type</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">BasicTypeInfo</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_java_type_info</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JavaObject</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span><span class="p">:</span>
+            <span class="n">JBasicTypeInfo</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">typeinfo</span><span class="o">.</span><span class="n">BasicTypeInfo</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_basic_type</span> <span class="o">==</span> <span class="n">BasicType</span><span class="o">.</span><span class="n">STRING</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">JBasicTypeInfo</span><span class="o">.</span><span class="n">STRING_TYPE_INFO</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_basic_type</span> <span class="o">==</span> <span class="n">BasicType</span><span class="o">.</span><span class="n">BYTE</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">JBasicTypeInfo</span><span class="o">.</span><span class="n">BYTE_TYPE_INFO</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_basic_type</span> <span class="o">==</span> <span class="n">BasicType</span><span class="o">.</span><span class="n">BOOLEAN</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">JBasicTypeInfo</span><span class="o">.</span><span class="n">BOOLEAN_TYPE_INFO</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_basic_type</span> <span class="o">==</span> <span class="n">BasicType</span><span class="o">.</span><span class="n">SHORT</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">JBasicTypeInfo</span><span class="o">.</span><span class="n">SHORT_TYPE_INFO</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_basic_type</span> <span class="o">==</span> <span class="n">BasicType</span><span class="o">.</span><span class="n">INT</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">JBasicTypeInfo</span><span class="o">.</span><span class="n">INT_TYPE_INFO</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_basic_type</span> <span class="o">==</span> <span class="n">BasicType</span><span class="o">.</span><span class="n">LONG</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">JBasicTypeInfo</span><span class="o">.</span><span class="n">LONG_TYPE_INFO</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_basic_type</span> <span class="o">==</span> <span class="n">BasicType</span><span class="o">.</span><span class="n">FLOAT</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">JBasicTypeInfo</span><span class="o">.</span><span class="n">FLOAT_TYPE_INFO</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_basic_type</span> <span class="o">==</span> <span class="n">BasicType</span><span class="o">.</span><span class="n">DOUBLE</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">JBasicTypeInfo</span><span class="o">.</span><span class="n">DOUBLE_TYPE_INFO</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_basic_type</span> <span class="o">==</span> <span class="n">BasicType</span><span class="o">.</span><span class="n">CHAR</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">JBasicTypeInfo</span><span class="o">.</span><span class="n">CHAR_TYPE_INFO</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_basic_type</span> <span class="o">==</span> <span class="n">BasicType</span><span class="o">.</span><span class="n">BIG_INT</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">JBasicTypeInfo</span><span class="o">.</span><span class="n">BIG_INT_TYPE_INFO</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_basic_type</span> <span class="o">==</span> <span class="n">BasicType</span><span class="o">.</span><span class="n">BIG_DEC</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">JBasicTypeInfo</span><span class="o">.</span><span class="n">BIG_DEC_TYPE_INFO</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_basic_type</span> <span class="o">==</span> <span class="n">BasicType</span><span class="o">.</span><span class="n">INSTANT</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">JBasicTypeInfo</span><span class="o">.</span><span class="n">INSTANT_TYPE_INFO</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Invalid BasicType </span><span class="si">%s</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_basic_type</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">BasicTypeInfo</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_basic_type</span> <span class="o">==</span> <span class="n">o</span><span class="o">.</span><span class="n">_basic_type</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_basic_type</span><span class="o">.</span><span class="n">value</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">STRING_TYPE_INFO</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">BasicTypeInfo</span><span class="p">(</span><span class="n">BasicType</span><span class="o">.</span><span class="n">STRING</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">BOOLEAN_TYPE_INFO</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">BasicTypeInfo</span><span class="p">(</span><span class="n">BasicType</span><span class="o">.</span><span class="n">BOOLEAN</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">BYTE_TYPE_INFO</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">BasicTypeInfo</span><span class="p">(</span><span class="n">BasicType</span><span class="o">.</span><span class="n">BYTE</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">SHORT_TYPE_INFO</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">BasicTypeInfo</span><span class="p">(</span><span class="n">BasicType</span><span class="o">.</span><span class="n">SHORT</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">INT_TYPE_INFO</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">BasicTypeInfo</span><span class="p">(</span><span class="n">BasicType</span><span class="o">.</span><span class="n">INT</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">LONG_TYPE_INFO</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">BasicTypeInfo</span><span class="p">(</span><span class="n">BasicType</span><span class="o">.</span><span class="n">LONG</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">FLOAT_TYPE_INFO</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">BasicTypeInfo</span><span class="p">(</span><span class="n">BasicType</span><span class="o">.</span><span class="n">FLOAT</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">DOUBLE_TYPE_INFO</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">BasicTypeInfo</span><span class="p">(</span><span class="n">BasicType</span><span class="o">.</span><span class="n">DOUBLE</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">CHAR_TYPE_INFO</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">BasicTypeInfo</span><span class="p">(</span><span class="n">BasicType</span><span class="o">.</span><span class="n">CHAR</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">BIG_INT_TYPE_INFO</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">BasicTypeInfo</span><span class="p">(</span><span class="n">BasicType</span><span class="o">.</span><span class="n">BIG_INT</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">BIG_DEC_TYPE_INFO</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">BasicTypeInfo</span><span class="p">(</span><span class="n">BasicType</span><span class="o">.</span><span class="n">BIG_DEC</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">INSTANT_TYPE_INFO</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">InstantTypeInfo</span><span class="p">(</span><span class="n">BasicType</span><span class="o">.</span><span class="n">INSTANT</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">InstantTypeInfo</span><span class="p">(</span><span class="n">BasicTypeInfo</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    InstantTypeInfo enables users to get Instant TypeInfo.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">basic_type</span><span class="p">:</span> <span class="n">BasicType</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">InstantTypeInfo</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">basic_type</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">need_conversion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_internal_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">to_epoch_milli</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_internal_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common.time</span><span class="w"> </span><span class="kn">import</span> <span class="n">Instant</span>
+        <span class="k">return</span> <span class="n">Instant</span><span class="o">.</span><span class="n">of_epoch_milli</span><span class="p">(</span><span class="n">obj</span> <span class="o">//</span> <span class="mi">1000</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SqlTimeTypeInfo</span><span class="p">(</span><span class="n">TypeInformation</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SqlTimeTypeInfo enables users to get Sql Time TypeInfo.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">DATE</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">DateTypeInfo</span><span class="p">()</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">TIME</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">TimeTypeInfo</span><span class="p">()</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">TIMESTAMP</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">TimestampTypeInfo</span><span class="p">()</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PrimitiveArrayTypeInfo</span><span class="p">(</span><span class="n">TypeInformation</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A TypeInformation for arrays of primitive types (int, long, double, ...).</span>
+<span class="sd">    Supports the creation of dedicated efficient serializers for these types.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element_type</span><span class="p">:</span> <span class="n">TypeInformation</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span> <span class="o">=</span> <span class="n">element_type</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PrimitiveArrayTypeInfo</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_java_type_info</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JavaObject</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span><span class="p">:</span>
+            <span class="n">JPrimitiveArrayTypeInfo</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">typeinfo</span> \
+                <span class="o">.</span><span class="n">PrimitiveArrayTypeInfo</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span> <span class="o">==</span> <span class="n">Types</span><span class="o">.</span><span class="n">BOOLEAN</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">JPrimitiveArrayTypeInfo</span><span class="o">.</span><span class="n">BOOLEAN_PRIMITIVE_ARRAY_TYPE_INFO</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span> <span class="o">==</span> <span class="n">Types</span><span class="o">.</span><span class="n">BYTE</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">JPrimitiveArrayTypeInfo</span><span class="o">.</span><span class="n">BYTE_PRIMITIVE_ARRAY_TYPE_INFO</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span> <span class="o">==</span> <span class="n">Types</span><span class="o">.</span><span class="n">SHORT</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">JPrimitiveArrayTypeInfo</span><span class="o">.</span><span class="n">SHORT_PRIMITIVE_ARRAY_TYPE_INFO</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span> <span class="o">==</span> <span class="n">Types</span><span class="o">.</span><span class="n">INT</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">JPrimitiveArrayTypeInfo</span><span class="o">.</span><span class="n">INT_PRIMITIVE_ARRAY_TYPE_INFO</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span> <span class="o">==</span> <span class="n">Types</span><span class="o">.</span><span class="n">LONG</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">JPrimitiveArrayTypeInfo</span><span class="o">.</span><span class="n">LONG_PRIMITIVE_ARRAY_TYPE_INFO</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span> <span class="o">==</span> <span class="n">Types</span><span class="o">.</span><span class="n">FLOAT</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">JPrimitiveArrayTypeInfo</span><span class="o">.</span><span class="n">FLOAT_PRIMITIVE_ARRAY_TYPE_INFO</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span> <span class="o">==</span> <span class="n">Types</span><span class="o">.</span><span class="n">DOUBLE</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">JPrimitiveArrayTypeInfo</span><span class="o">.</span><span class="n">DOUBLE_PRIMITIVE_ARRAY_TYPE_INFO</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span> <span class="o">==</span> <span class="n">Types</span><span class="o">.</span><span class="n">CHAR</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">JPrimitiveArrayTypeInfo</span><span class="o">.</span><span class="n">CHAR_PRIMITIVE_ARRAY_TYPE_INFO</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Invalid element type for a primitive array.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">PrimitiveArrayTypeInfo</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span> <span class="o">==</span> <span class="n">o</span><span class="o">.</span><span class="n">_element_type</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;PrimitiveArrayTypeInfo&lt;</span><span class="si">%s</span><span class="s2">&gt;&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">BasicArrayTypeInfo</span><span class="p">(</span><span class="n">TypeInformation</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A TypeInformation for arrays of boxed primitive types (Integer, Long, Double, ...).</span>
+<span class="sd">    Supports the creation of dedicated efficient serializers for these types.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element_type</span><span class="p">:</span> <span class="n">TypeInformation</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span> <span class="o">=</span> <span class="n">element_type</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">BasicArrayTypeInfo</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_java_type_info</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JavaObject</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span><span class="p">:</span>
+            <span class="n">JBasicArrayTypeInfo</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">typeinfo</span> \
+                <span class="o">.</span><span class="n">BasicArrayTypeInfo</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span> <span class="o">==</span> <span class="n">Types</span><span class="o">.</span><span class="n">BOOLEAN</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">JBasicArrayTypeInfo</span><span class="o">.</span><span class="n">BOOLEAN_ARRAY_TYPE_INFO</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span> <span class="o">==</span> <span class="n">Types</span><span class="o">.</span><span class="n">BYTE</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">JBasicArrayTypeInfo</span><span class="o">.</span><span class="n">BYTE_ARRAY_TYPE_INFO</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span> <span class="o">==</span> <span class="n">Types</span><span class="o">.</span><span class="n">SHORT</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">JBasicArrayTypeInfo</span><span class="o">.</span><span class="n">SHORT_ARRAY_TYPE_INFO</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span> <span class="o">==</span> <span class="n">Types</span><span class="o">.</span><span class="n">INT</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">JBasicArrayTypeInfo</span><span class="o">.</span><span class="n">INT_ARRAY_TYPE_INFO</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span> <span class="o">==</span> <span class="n">Types</span><span class="o">.</span><span class="n">LONG</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">JBasicArrayTypeInfo</span><span class="o">.</span><span class="n">LONG_ARRAY_TYPE_INFO</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span> <span class="o">==</span> <span class="n">Types</span><span class="o">.</span><span class="n">FLOAT</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">JBasicArrayTypeInfo</span><span class="o">.</span><span class="n">FLOAT_ARRAY_TYPE_INFO</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span> <span class="o">==</span> <span class="n">Types</span><span class="o">.</span><span class="n">DOUBLE</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">JBasicArrayTypeInfo</span><span class="o">.</span><span class="n">DOUBLE_ARRAY_TYPE_INFO</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span> <span class="o">==</span> <span class="n">Types</span><span class="o">.</span><span class="n">CHAR</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">JBasicArrayTypeInfo</span><span class="o">.</span><span class="n">CHAR_ARRAY_TYPE_INFO</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span> <span class="o">==</span> <span class="n">Types</span><span class="o">.</span><span class="n">STRING</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">JBasicArrayTypeInfo</span><span class="o">.</span><span class="n">STRING_ARRAY_TYPE_INFO</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Invalid element type for a primitive array.&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">BasicArrayTypeInfo</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span> <span class="o">==</span> <span class="n">o</span><span class="o">.</span><span class="n">_element_type</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;BasicArrayTypeInfo&lt;</span><span class="si">%s</span><span class="s2">&gt;&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ObjectArrayTypeInfo</span><span class="p">(</span><span class="n">TypeInformation</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A TypeInformation for arrays of non-primitive types.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element_type</span><span class="p">:</span> <span class="n">TypeInformation</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span> <span class="o">=</span> <span class="n">element_type</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ObjectArrayTypeInfo</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_java_type_info</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JavaObject</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span><span class="p">:</span>
+            <span class="n">JTypes</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">typeinfo</span><span class="o">.</span><span class="n">Types</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">JTypes</span><span class="o">.</span><span class="n">OBJECT_ARRAY</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span><span class="o">.</span><span class="n">get_java_type_info</span><span class="p">())</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">ObjectArrayTypeInfo</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span> <span class="o">==</span> <span class="n">o</span><span class="o">.</span><span class="n">_element_type</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;ObjectArrayTypeInfo&lt;</span><span class="si">%s</span><span class="s2">&gt;&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PickledBytesTypeInfo</span><span class="p">(</span><span class="n">TypeInformation</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A PickledBytesTypeInfo indicates the data is a primitive byte array generated by pickle</span>
+<span class="sd">    serializer.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_java_type_info</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JavaObject</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">streaming</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">typeinfo</span><span class="o">.</span><span class="n">python</span>\
+                <span class="o">.</span><span class="n">PickledByteArrayTypeInfo</span><span class="o">.</span><span class="n">PICKLED_BYTE_ARRAY_TYPE_INFO</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">PickledBytesTypeInfo</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;PickledByteArrayTypeInfo&quot;</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">RowTypeInfo</span><span class="p">(</span><span class="n">TypeInformation</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    TypeInformation for Row.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field_types</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">TypeInformation</span><span class="p">],</span> <span class="n">field_names</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_field_types</span> <span class="o">=</span> <span class="n">field_types</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_field_names</span> <span class="o">=</span> <span class="n">field_names</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_need_conversion</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">need_conversion</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">TypeInformation</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
+                                 <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_types</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_need_serialize_any_field</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_need_conversion</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">RowTypeInfo</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_field_names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_names</span><span class="p">:</span>
+            <span class="n">j_field_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_java_type_info</span><span class="p">()</span><span class="o">.</span><span class="n">getFieldNames</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_field_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">j_field_names</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_names</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_field_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_names</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">field_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_field_types</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">TypeInformation</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_types</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_java_type_info</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JavaObject</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span><span class="p">:</span>
+            <span class="n">j_types_array</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>\
+                <span class="o">.</span><span class="n">new_array</span><span class="p">(</span><span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">typeinfo</span><span class="o">.</span><span class="n">TypeInformation</span><span class="p">,</span>
+                           <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_field_types</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_field_types</span><span class="p">)):</span>
+                <span class="n">field_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_types</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field_type</span><span class="p">,</span> <span class="n">TypeInformation</span><span class="p">):</span>
+                    <span class="n">j_types_array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">field_type</span><span class="o">.</span><span class="n">get_java_type_info</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_names</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>\
+                    <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">java</span><span class="o">.</span><span class="n">typeutils</span><span class="o">.</span><span class="n">RowTypeInfo</span><span class="p">(</span><span class="n">j_types_array</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">j_names_array</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">new_array</span><span class="p">(</span><span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">java</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">String</span><span class="p">,</span>
+                                                        <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_field_names</span><span class="p">))</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_field_names</span><span class="p">)):</span>
+                    <span class="n">j_names_array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_names</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>\
+                    <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">java</span><span class="o">.</span><span class="n">typeutils</span><span class="o">.</span><span class="n">RowTypeInfo</span><span class="p">(</span><span class="n">j_types_array</span><span class="p">,</span> <span class="n">j_names_array</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">RowTypeInfo</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_types</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_field_types</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_names</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;RowTypeInfo(</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">field_name</span> <span class="o">+</span> <span class="s1">&#39;: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">field_type</span><span class="p">)</span>
+                                                  <span class="k">for</span> <span class="n">field_name</span><span class="p">,</span> <span class="n">field_type</span> <span class="ow">in</span>
+                                                  <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_field_names</span><span class="p">(),</span>
+                                                      <span class="bp">self</span><span class="o">.</span><span class="n">get_field_types</span><span class="p">())])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;RowTypeInfo(</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">field_type</span><span class="p">)</span> <span class="k">for</span> <span class="n">field_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_types</span><span class="p">])</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">need_conversion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_internal_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">Row</span><span class="p">,</span> <span class="n">RowKind</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_need_serialize_any_field</span><span class="p">:</span>
+            <span class="c1"># Only calling to_internal_type function for fields that need conversion</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">return</span> <span class="p">(</span><span class="n">RowKind</span><span class="o">.</span><span class="n">INSERT</span><span class="o">.</span><span class="n">value</span><span class="p">,)</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">(</span>
+                    <span class="n">f</span><span class="o">.</span><span class="n">to_internal_type</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="k">if</span> <span class="n">c</span> <span class="k">else</span> <span class="n">obj</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span>
+                    <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_field_names</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_types</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_need_conversion</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">Row</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;_fields&quot;</span><span class="p">):</span>
+                <span class="k">return</span> <span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">get_row_kind</span><span class="p">()</span><span class="o">.</span><span class="n">value</span><span class="p">,)</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">(</span>
+                    <span class="n">f</span><span class="o">.</span><span class="n">to_internal_type</span><span class="p">(</span><span class="n">obj</span><span class="p">[</span><span class="n">n</span><span class="p">])</span> <span class="k">if</span> <span class="n">c</span> <span class="k">else</span> <span class="n">obj</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+                    <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span>
+                    <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_field_names</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_types</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_need_conversion</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">Row</span><span class="p">):</span>
+                <span class="k">return</span> <span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">get_row_kind</span><span class="p">()</span><span class="o">.</span><span class="n">value</span><span class="p">,)</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">(</span>
+                    <span class="n">f</span><span class="o">.</span><span class="n">to_internal_type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">if</span> <span class="n">c</span> <span class="k">else</span> <span class="n">v</span>
+                    <span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_field_types</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_need_conversion</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
+                <span class="k">return</span> <span class="p">(</span><span class="n">RowKind</span><span class="o">.</span><span class="n">INSERT</span><span class="o">.</span><span class="n">value</span><span class="p">,)</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">(</span>
+                    <span class="n">f</span><span class="o">.</span><span class="n">to_internal_type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">if</span> <span class="n">c</span> <span class="k">else</span> <span class="n">v</span>
+                    <span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_field_types</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_need_conversion</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;__dict__&quot;</span><span class="p">):</span>
+                <span class="n">d</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="vm">__dict__</span>
+                <span class="k">return</span> <span class="p">(</span><span class="n">RowKind</span><span class="o">.</span><span class="n">INSERT</span><span class="o">.</span><span class="n">value</span><span class="p">,)</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">(</span>
+                    <span class="n">f</span><span class="o">.</span><span class="n">to_internal_type</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="k">if</span> <span class="n">c</span> <span class="k">else</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span>
+                    <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_field_names</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_types</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_need_conversion</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unexpected tuple </span><span class="si">%r</span><span class="s2"> with RowTypeInfo&quot;</span> <span class="o">%</span> <span class="n">obj</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">return</span> <span class="p">(</span><span class="n">RowKind</span><span class="o">.</span><span class="n">INSERT</span><span class="o">.</span><span class="n">value</span><span class="p">,)</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_field_names</span><span class="p">())</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">Row</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;_fields&quot;</span><span class="p">):</span>
+                <span class="k">return</span> <span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">get_row_kind</span><span class="p">()</span><span class="o">.</span><span class="n">value</span><span class="p">,)</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">(</span>
+                    <span class="n">obj</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_field_names</span><span class="p">())</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">Row</span><span class="p">):</span>
+                <span class="k">return</span> <span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">get_row_kind</span><span class="p">()</span><span class="o">.</span><span class="n">value</span><span class="p">,)</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+                <span class="k">return</span> <span class="p">(</span><span class="n">RowKind</span><span class="o">.</span><span class="n">INSERT</span><span class="o">.</span><span class="n">value</span><span class="p">,)</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;__dict__&quot;</span><span class="p">):</span>
+                <span class="n">d</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="vm">__dict__</span>
+                <span class="k">return</span> <span class="p">(</span><span class="n">RowKind</span><span class="o">.</span><span class="n">INSERT</span><span class="o">.</span><span class="n">value</span><span class="p">,)</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_field_names</span><span class="p">())</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unexpected tuple </span><span class="si">%r</span><span class="s2"> with RowTypeInfo&quot;</span> <span class="o">%</span> <span class="n">obj</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_internal_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
+            <span class="c1"># it&#39;s already converted by pickler</span>
+            <span class="k">return</span> <span class="n">obj</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_need_serialize_any_field</span><span class="p">:</span>
+            <span class="c1"># Only calling from_internal_type function for fields that need conversion</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">from_internal_type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">if</span> <span class="n">c</span> <span class="k">else</span> <span class="n">v</span>
+                      <span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_field_types</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_need_conversion</span><span class="p">)]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="n">obj</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TupleTypeInfo</span><span class="p">(</span><span class="n">TypeInformation</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    TypeInformation for Tuple.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field_types</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">TypeInformation</span><span class="p">]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_field_types</span> <span class="o">=</span> <span class="n">field_types</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_need_conversion</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">need_conversion</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">TypeInformation</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
+                                 <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_types</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_need_serialize_any_field</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_need_conversion</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TupleTypeInfo</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_field_types</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">TypeInformation</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_types</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_java_type_info</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JavaObject</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span><span class="p">:</span>
+            <span class="n">j_types_array</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">new_array</span><span class="p">(</span>
+                <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">typeinfo</span><span class="o">.</span><span class="n">TypeInformation</span><span class="p">,</span>
+                <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_field_types</span><span class="p">))</span>
+
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_field_types</span><span class="p">)):</span>
+                <span class="n">field_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_types</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field_type</span><span class="p">,</span> <span class="n">TypeInformation</span><span class="p">):</span>
+                    <span class="n">j_types_array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">field_type</span><span class="o">.</span><span class="n">get_java_type_info</span><span class="p">()</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span> \
+                <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">java</span><span class="o">.</span><span class="n">typeutils</span><span class="o">.</span><span class="n">TupleTypeInfo</span><span class="p">(</span><span class="n">j_types_array</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">need_conversion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_internal_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">Row</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_need_serialize_any_field</span><span class="p">:</span>
+            <span class="c1"># Only calling to_internal_type function for fields that need conversion</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">Row</span><span class="p">)):</span>
+                <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span>
+                    <span class="n">f</span><span class="o">.</span><span class="n">to_internal_type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">if</span> <span class="n">c</span> <span class="k">else</span> <span class="n">v</span>
+                    <span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_field_types</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_need_conversion</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unexpected tuple </span><span class="si">%r</span><span class="s2"> with TupleTypeInfo&quot;</span> <span class="o">%</span> <span class="n">obj</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">Row</span><span class="p">)):</span>
+                <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unexpected tuple </span><span class="si">%r</span><span class="s2"> with TupleTypeInfo&quot;</span> <span class="o">%</span> <span class="n">obj</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_internal_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
+            <span class="c1"># it&#39;s already converted by pickler</span>
+            <span class="k">return</span> <span class="n">obj</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_need_serialize_any_field</span><span class="p">:</span>
+            <span class="c1"># Only calling from_internal_type function for fields that need conversion</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">from_internal_type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">if</span> <span class="n">c</span> <span class="k">else</span> <span class="n">v</span>
+                      <span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_field_types</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_need_conversion</span><span class="p">)]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="n">obj</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">TupleTypeInfo</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_types</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_field_types</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;TupleTypeInfo(</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">field_type</span><span class="p">)</span> <span class="k">for</span> <span class="n">field_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_types</span><span class="p">])</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DateTypeInfo</span><span class="p">(</span><span class="n">TypeInformation</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    TypeInformation for Date.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DateTypeInfo</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="n">EPOCH_ORDINAL</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">1970</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">toordinal</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">need_conversion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_internal_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">d</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">d</span><span class="o">.</span><span class="n">toordinal</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">EPOCH_ORDINAL</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_internal_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">fromordinal</span><span class="p">(</span><span class="n">v</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">EPOCH_ORDINAL</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_java_type_info</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JavaObject</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>\
+                <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">typeinfo</span><span class="o">.</span><span class="n">SqlTimeTypeInfo</span><span class="o">.</span><span class="n">DATE</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">DateTypeInfo</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;DateTypeInfo&quot;</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TimeTypeInfo</span><span class="p">(</span><span class="n">TypeInformation</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    TypeInformation for Time.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">EPOCH_ORDINAL</span> <span class="o">=</span> <span class="n">calendar</span><span class="o">.</span><span class="n">timegm</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">localtime</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">6</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">need_conversion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_internal_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">tzinfo</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">offset</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">utcoffset</span><span class="p">()</span>
+                <span class="n">offset</span> <span class="o">=</span> <span class="n">offset</span> <span class="k">if</span> <span class="n">offset</span> <span class="k">else</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">()</span>
+                <span class="n">offset_microseconds</span> <span class="o">=</span>\
+                    <span class="p">(</span><span class="n">offset</span><span class="o">.</span><span class="n">days</span> <span class="o">*</span> <span class="mi">86400</span> <span class="o">+</span> <span class="n">offset</span><span class="o">.</span><span class="n">seconds</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">6</span> <span class="o">+</span> <span class="n">offset</span><span class="o">.</span><span class="n">microseconds</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">offset_microseconds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">EPOCH_ORDINAL</span>
+            <span class="n">minutes</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">hour</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="n">t</span><span class="o">.</span><span class="n">minute</span>
+            <span class="n">seconds</span> <span class="o">=</span> <span class="n">minutes</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="n">t</span><span class="o">.</span><span class="n">second</span>
+            <span class="k">return</span> <span class="n">seconds</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">6</span> <span class="o">+</span> <span class="n">t</span><span class="o">.</span><span class="n">microsecond</span> <span class="o">-</span> <span class="n">offset_microseconds</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_internal_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">seconds</span><span class="p">,</span> <span class="n">microseconds</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">EPOCH_ORDINAL</span><span class="p">,</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">6</span><span class="p">)</span>
+            <span class="n">minutes</span><span class="p">,</span> <span class="n">seconds</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">seconds</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+            <span class="n">hours</span><span class="p">,</span> <span class="n">minutes</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">minutes</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">time</span><span class="p">(</span><span class="n">hours</span><span class="p">,</span> <span class="n">minutes</span><span class="p">,</span> <span class="n">seconds</span><span class="p">,</span> <span class="n">microseconds</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_java_type_info</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JavaObject</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>\
+                <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">typeinfo</span><span class="o">.</span><span class="n">SqlTimeTypeInfo</span><span class="o">.</span><span class="n">TIME</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">TimeTypeInfo</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;TimeTypeInfo&quot;</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TimestampTypeInfo</span><span class="p">(</span><span class="n">TypeInformation</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    TypeInformation for Timestamp.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">need_conversion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_internal_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">dt</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">seconds</span> <span class="o">=</span> <span class="p">(</span><span class="n">calendar</span><span class="o">.</span><span class="n">timegm</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">utctimetuple</span><span class="p">())</span> <span class="k">if</span> <span class="n">dt</span><span class="o">.</span><span class="n">tzinfo</span>
+                       <span class="k">else</span> <span class="n">time</span><span class="o">.</span><span class="n">mktime</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">timetuple</span><span class="p">()))</span>
+            <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">seconds</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">6</span> <span class="o">+</span> <span class="n">dt</span><span class="o">.</span><span class="n">microsecond</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_internal_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ts</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">ts</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">ts</span> <span class="o">//</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">microsecond</span><span class="o">=</span><span class="n">ts</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">6</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_java_type_info</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JavaObject</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>\
+                <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">typeinfo</span><span class="o">.</span><span class="n">SqlTimeTypeInfo</span><span class="o">.</span><span class="n">TIMESTAMP</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">TimestampTypeInfo</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;TimestampTypeInfo&quot;</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ListTypeInfo</span><span class="p">(</span><span class="n">TypeInformation</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A TypeInformation for the list types.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element_type</span><span class="p">:</span> <span class="n">TypeInformation</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">elem_type</span> <span class="o">=</span> <span class="n">element_type</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ListTypeInfo</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_java_type_info</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JavaObject</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>\
+                <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">typeinfo</span><span class="o">.</span><span class="n">Types</span><span class="o">.</span><span class="n">LIST</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">elem_type</span><span class="o">.</span><span class="n">get_java_type_info</span><span class="p">())</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">ListTypeInfo</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">elem_type</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">elem_type</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;ListTypeInfo&lt;</span><span class="si">%s</span><span class="s2">&gt;&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">elem_type</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MapTypeInfo</span><span class="p">(</span><span class="n">TypeInformation</span><span class="p">):</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key_type_info</span><span class="p">:</span> <span class="n">TypeInformation</span><span class="p">,</span> <span class="n">value_type_info</span><span class="p">:</span> <span class="n">TypeInformation</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_key_type_info</span> <span class="o">=</span> <span class="n">key_type_info</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value_type_info</span> <span class="o">=</span> <span class="n">value_type_info</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MapTypeInfo</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_java_type_info</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JavaObject</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>\
+                <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">typeinfo</span><span class="o">.</span><span class="n">Types</span><span class="o">.</span><span class="n">MAP</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_key_type_info</span><span class="o">.</span><span class="n">get_java_type_info</span><span class="p">(),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_value_type_info</span><span class="o">.</span><span class="n">get_java_type_info</span><span class="p">())</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">MapTypeInfo</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_key_type_info</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_key_type_info</span> <span class="ow">and</span> \
+                <span class="bp">self</span><span class="o">.</span><span class="n">_value_type_info</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_value_type_info</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;MapTypeInfo&lt;</span><span class="si">{}</span><span class="s1">, </span><span class="si">{}</span><span class="s1">&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_key_type_info</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value_type_info</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">LocalTimeTypeInfo</span><span class="p">(</span><span class="n">TypeInformation</span><span class="p">):</span>
+
+    <span class="k">class</span><span class="w"> </span><span class="nc">TimeType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+        <span class="n">LOCAL_DATE</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">LOCAL_TIME</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">LOCAL_DATE_TIME</span> <span class="o">=</span> <span class="mi">2</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time_type</span><span class="p">:</span> <span class="n">TimeType</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">LocalTimeTypeInfo</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_time_type</span> <span class="o">=</span> <span class="n">time_type</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_java_type_info</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JavaObject</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">jvm</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_time_type</span> <span class="o">==</span> <span class="n">LocalTimeTypeInfo</span><span class="o">.</span><span class="n">TimeType</span><span class="o">.</span><span class="n">LOCAL_DATE</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> \
+                    <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">typeinfo</span><span class="o">.</span><span class="n">LocalTimeTypeInfo</span><span class="o">.</span><span class="n">LOCAL_DATE</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_time_type</span> <span class="o">==</span> <span class="n">LocalTimeTypeInfo</span><span class="o">.</span><span class="n">TimeType</span><span class="o">.</span><span class="n">LOCAL_TIME</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> \
+                    <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">typeinfo</span><span class="o">.</span><span class="n">LocalTimeTypeInfo</span><span class="o">.</span><span class="n">LOCAL_TIME</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_time_type</span> <span class="o">==</span> <span class="n">LocalTimeTypeInfo</span><span class="o">.</span><span class="n">TimeType</span><span class="o">.</span><span class="n">LOCAL_DATE_TIME</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> \
+                    <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">typeinfo</span><span class="o">.</span><span class="n">LocalTimeTypeInfo</span><span class="o">.</span><span class="n">LOCAL_DATE_TIME</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Unsupported TimeType: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_time_type</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="vm">__class__</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_time_type</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_time_type</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;LocalTimeTypeInfo&lt;</span><span class="si">{}</span><span class="s1">&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_time_type</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ExternalTypeInfo</span><span class="p">(</span><span class="n">TypeInformation</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">type_info</span><span class="p">:</span> <span class="n">TypeInformation</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ExternalTypeInfo</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_type_info</span> <span class="o">=</span> <span class="n">type_info</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_java_type_info</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JavaObject</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span><span class="p">:</span>
+            <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
+            <span class="n">TypeInfoDataTypeConverter</span> <span class="o">=</span> \
+                <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">LegacyTypeInfoDataTypeConverter</span>
+            <span class="n">JExternalTypeInfo</span> <span class="o">=</span> \
+                <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">typeutils</span><span class="o">.</span><span class="n">ExternalTypeInfo</span>
+
+            <span class="n">j_data_type</span> <span class="o">=</span> <span class="n">TypeInfoDataTypeConverter</span><span class="o">.</span><span class="n">toDataType</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_type_info</span><span class="o">.</span><span class="n">get_java_type_info</span><span class="p">())</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">JExternalTypeInfo</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="n">j_data_type</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="vm">__class__</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type_info</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_type_info</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;ExternalTypeInfo&lt;</span><span class="si">{}</span><span class="s1">&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_type_info</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Types</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class gives access to the type information of the most common types for which Flink has</span>
+<span class="sd">    built-in serializers and comparators.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Types.STRING"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.typeinfo.Types.STRING.html#pyflink.common.typeinfo.Types.STRING">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">STRING</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">TypeInformation</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns type information for string. Supports a None value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">BasicTypeInfo</span><span class="o">.</span><span class="n">STRING_TYPE_INFO</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Types.BYTE"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.typeinfo.Types.BYTE.html#pyflink.common.typeinfo.Types.BYTE">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">BYTE</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">TypeInformation</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns type information for byte. Does not support a None value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">BasicTypeInfo</span><span class="o">.</span><span class="n">BYTE_TYPE_INFO</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Types.BOOLEAN"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.typeinfo.Types.BOOLEAN.html#pyflink.common.typeinfo.Types.BOOLEAN">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">BOOLEAN</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">TypeInformation</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns type information for bool. Does not support a None value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">BasicTypeInfo</span><span class="o">.</span><span class="n">BOOLEAN_TYPE_INFO</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Types.SHORT"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.typeinfo.Types.SHORT.html#pyflink.common.typeinfo.Types.SHORT">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">SHORT</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">TypeInformation</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns type information for short. Does not support a None value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">BasicTypeInfo</span><span class="o">.</span><span class="n">SHORT_TYPE_INFO</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Types.INT"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.typeinfo.Types.INT.html#pyflink.common.typeinfo.Types.INT">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">INT</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">TypeInformation</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns type information for int. Does not support a None value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">BasicTypeInfo</span><span class="o">.</span><span class="n">INT_TYPE_INFO</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Types.LONG"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.typeinfo.Types.LONG.html#pyflink.common.typeinfo.Types.LONG">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">LONG</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">TypeInformation</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns type information for long. Does not support a None value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">BasicTypeInfo</span><span class="o">.</span><span class="n">LONG_TYPE_INFO</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Types.FLOAT"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.typeinfo.Types.FLOAT.html#pyflink.common.typeinfo.Types.FLOAT">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">FLOAT</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">TypeInformation</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns type information for float. Does not support a None value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">BasicTypeInfo</span><span class="o">.</span><span class="n">FLOAT_TYPE_INFO</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Types.DOUBLE"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.typeinfo.Types.DOUBLE.html#pyflink.common.typeinfo.Types.DOUBLE">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">DOUBLE</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">TypeInformation</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns type information for double. Does not support a None value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">BasicTypeInfo</span><span class="o">.</span><span class="n">DOUBLE_TYPE_INFO</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Types.CHAR"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.typeinfo.Types.CHAR.html#pyflink.common.typeinfo.Types.CHAR">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">CHAR</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">TypeInformation</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns type information for char. Does not support a None value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">BasicTypeInfo</span><span class="o">.</span><span class="n">CHAR_TYPE_INFO</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Types.BIG_INT"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.typeinfo.Types.BIG_INT.html#pyflink.common.typeinfo.Types.BIG_INT">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">BIG_INT</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">TypeInformation</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns type information for BigInteger. Supports a None value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">BasicTypeInfo</span><span class="o">.</span><span class="n">BIG_INT_TYPE_INFO</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Types.BIG_DEC"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.typeinfo.Types.BIG_DEC.html#pyflink.common.typeinfo.Types.BIG_DEC">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">BIG_DEC</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">TypeInformation</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns type information for BigDecimal. Supports a None value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">BasicTypeInfo</span><span class="o">.</span><span class="n">BIG_DEC_TYPE_INFO</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Types.INSTANT"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.typeinfo.Types.INSTANT.html#pyflink.common.typeinfo.Types.INSTANT">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">INSTANT</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">TypeInformation</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns type information for Instant. Supports a None value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">BasicTypeInfo</span><span class="o">.</span><span class="n">INSTANT_TYPE_INFO</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Types.SQL_DATE"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.typeinfo.Types.SQL_DATE.html#pyflink.common.typeinfo.Types.SQL_DATE">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">SQL_DATE</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">TypeInformation</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns type information for Date. Supports a None value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">SqlTimeTypeInfo</span><span class="o">.</span><span class="n">DATE</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Types.SQL_TIME"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.typeinfo.Types.SQL_TIME.html#pyflink.common.typeinfo.Types.SQL_TIME">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">SQL_TIME</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">TypeInformation</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns type information for Time. Supports a None value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">SqlTimeTypeInfo</span><span class="o">.</span><span class="n">TIME</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Types.SQL_TIMESTAMP"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.typeinfo.Types.SQL_TIMESTAMP.html#pyflink.common.typeinfo.Types.SQL_TIMESTAMP">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">SQL_TIMESTAMP</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">TypeInformation</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns type information for Timestamp. Supports a None value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">SqlTimeTypeInfo</span><span class="o">.</span><span class="n">TIMESTAMP</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Types.PICKLED_BYTE_ARRAY"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.typeinfo.Types.PICKLED_BYTE_ARRAY.html#pyflink.common.typeinfo.Types.PICKLED_BYTE_ARRAY">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">PICKLED_BYTE_ARRAY</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">TypeInformation</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns type information which uses pickle for serialization/deserialization.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">PickledBytesTypeInfo</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Types.ROW"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.typeinfo.Types.ROW.html#pyflink.common.typeinfo.Types.ROW">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ROW</span><span class="p">(</span><span class="n">field_types</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">TypeInformation</span><span class="p">]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns type information for Row with fields of the given types. A row itself must not be</span>
+<span class="sd">        null.</span>
+
+<span class="sd">        :param field_types: the types of the row fields, e.g., Types.String(), Types.INT()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">RowTypeInfo</span><span class="p">(</span><span class="n">field_types</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Types.ROW_NAMED"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.typeinfo.Types.ROW_NAMED.html#pyflink.common.typeinfo.Types.ROW_NAMED">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ROW_NAMED</span><span class="p">(</span><span class="n">field_names</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">field_types</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">TypeInformation</span><span class="p">]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns type information for Row with fields of the given types and with given names. A row</span>
+<span class="sd">        must not be null.</span>
+
+<span class="sd">        :param field_names: array of field names.</span>
+<span class="sd">        :param field_types: array of field types.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">RowTypeInfo</span><span class="p">(</span><span class="n">field_types</span><span class="p">,</span> <span class="n">field_names</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Types.TUPLE"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.typeinfo.Types.TUPLE.html#pyflink.common.typeinfo.Types.TUPLE">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">TUPLE</span><span class="p">(</span><span class="n">field_types</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">TypeInformation</span><span class="p">]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns type information for Tuple with fields of the given types. A Tuple itself must not</span>
+<span class="sd">        be null.</span>
+
+<span class="sd">        :param field_types: array of field types.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">TupleTypeInfo</span><span class="p">(</span><span class="n">field_types</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Types.PRIMITIVE_ARRAY"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.typeinfo.Types.PRIMITIVE_ARRAY.html#pyflink.common.typeinfo.Types.PRIMITIVE_ARRAY">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">PRIMITIVE_ARRAY</span><span class="p">(</span><span class="n">element_type</span><span class="p">:</span> <span class="n">TypeInformation</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns type information for arrays of primitive type (such as byte[]). The array must not</span>
+<span class="sd">        be null.</span>
+
+<span class="sd">        :param element_type: element type of the array (e.g. Types.BOOLEAN(), Types.INT(),</span>
+<span class="sd">                             Types.DOUBLE())</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">PrimitiveArrayTypeInfo</span><span class="p">(</span><span class="n">element_type</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Types.BASIC_ARRAY"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.typeinfo.Types.BASIC_ARRAY.html#pyflink.common.typeinfo.Types.BASIC_ARRAY">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">BASIC_ARRAY</span><span class="p">(</span><span class="n">element_type</span><span class="p">:</span> <span class="n">TypeInformation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeInformation</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns type information for arrays of boxed primitive type (such as Integer[]).</span>
+
+<span class="sd">        :param element_type: element type of the array (e.g. Types.BOOLEAN(), Types.INT(),</span>
+<span class="sd">                             Types.DOUBLE())</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">BasicArrayTypeInfo</span><span class="p">(</span><span class="n">element_type</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Types.OBJECT_ARRAY"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.typeinfo.Types.OBJECT_ARRAY.html#pyflink.common.typeinfo.Types.OBJECT_ARRAY">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">OBJECT_ARRAY</span><span class="p">(</span><span class="n">element_type</span><span class="p">:</span> <span class="n">TypeInformation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeInformation</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns type information for arrays of non-primitive types. The array itself must not be</span>
+<span class="sd">        None. None values for elements are supported.</span>
+
+<span class="sd">        :param element_type: element type of the array</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">ObjectArrayTypeInfo</span><span class="p">(</span><span class="n">element_type</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Types.MAP"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.typeinfo.Types.MAP.html#pyflink.common.typeinfo.Types.MAP">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">MAP</span><span class="p">(</span><span class="n">key_type_info</span><span class="p">:</span> <span class="n">TypeInformation</span><span class="p">,</span> <span class="n">value_type_info</span><span class="p">:</span> <span class="n">TypeInformation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeInformation</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Special TypeInformation used by MapStateDescriptor</span>
+
+<span class="sd">        :param key_type_info: Element type of key (e.g. Types.BOOLEAN(), Types.INT(),</span>
+<span class="sd">                              Types.DOUBLE())</span>
+<span class="sd">        :param value_type_info: Element type of value (e.g. Types.BOOLEAN(), Types.INT(),</span>
+<span class="sd">                                Types.DOUBLE())</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">MapTypeInfo</span><span class="p">(</span><span class="n">key_type_info</span><span class="p">,</span> <span class="n">value_type_info</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Types.LIST"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.typeinfo.Types.LIST.html#pyflink.common.typeinfo.Types.LIST">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">LIST</span><span class="p">(</span><span class="n">element_type_info</span><span class="p">:</span> <span class="n">TypeInformation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeInformation</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A TypeInformation for the list type.</span>
+
+<span class="sd">        :param element_type_info: The type of the elements in the list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">ListTypeInfo</span><span class="p">(</span><span class="n">element_type_info</span><span class="p">)</span></div>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_from_java_type</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">:</span> <span class="n">JavaObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeInformation</span><span class="p">:</span>
+    <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
+    <span class="n">JBasicTypeInfo</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">typeinfo</span><span class="o">.</span><span class="n">BasicTypeInfo</span>
+
+    <span class="k">if</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JBasicTypeInfo</span><span class="o">.</span><span class="n">STRING_TYPE_INFO</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">STRING</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JBasicTypeInfo</span><span class="o">.</span><span class="n">BOOLEAN_TYPE_INFO</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">BOOLEAN</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JBasicTypeInfo</span><span class="o">.</span><span class="n">BYTE_TYPE_INFO</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">BYTE</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JBasicTypeInfo</span><span class="o">.</span><span class="n">SHORT_TYPE_INFO</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">SHORT</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JBasicTypeInfo</span><span class="o">.</span><span class="n">INT_TYPE_INFO</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">INT</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JBasicTypeInfo</span><span class="o">.</span><span class="n">LONG_TYPE_INFO</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">LONG</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JBasicTypeInfo</span><span class="o">.</span><span class="n">FLOAT_TYPE_INFO</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">FLOAT</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JBasicTypeInfo</span><span class="o">.</span><span class="n">DOUBLE_TYPE_INFO</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">DOUBLE</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JBasicTypeInfo</span><span class="o">.</span><span class="n">CHAR_TYPE_INFO</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">CHAR</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JBasicTypeInfo</span><span class="o">.</span><span class="n">BIG_INT_TYPE_INFO</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">BIG_INT</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JBasicTypeInfo</span><span class="o">.</span><span class="n">BIG_DEC_TYPE_INFO</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">BIG_DEC</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JBasicTypeInfo</span><span class="o">.</span><span class="n">INSTANT_TYPE_INFO</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">INSTANT</span><span class="p">()</span>
+
+    <span class="n">JSqlTimeTypeInfo</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">typeinfo</span><span class="o">.</span><span class="n">SqlTimeTypeInfo</span>
+    <span class="k">if</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JSqlTimeTypeInfo</span><span class="o">.</span><span class="n">DATE</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">SQL_DATE</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JSqlTimeTypeInfo</span><span class="o">.</span><span class="n">TIME</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">SQL_TIME</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JSqlTimeTypeInfo</span><span class="o">.</span><span class="n">TIMESTAMP</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">SQL_TIMESTAMP</span><span class="p">()</span>
+
+    <span class="n">JPrimitiveArrayTypeInfo</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">typeinfo</span> \
+        <span class="o">.</span><span class="n">PrimitiveArrayTypeInfo</span>
+
+    <span class="k">if</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JPrimitiveArrayTypeInfo</span><span class="o">.</span><span class="n">BOOLEAN_PRIMITIVE_ARRAY_TYPE_INFO</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">PRIMITIVE_ARRAY</span><span class="p">(</span><span class="n">Types</span><span class="o">.</span><span class="n">BOOLEAN</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JPrimitiveArrayTypeInfo</span><span class="o">.</span><span class="n">BYTE_PRIMITIVE_ARRAY_TYPE_INFO</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">PRIMITIVE_ARRAY</span><span class="p">(</span><span class="n">Types</span><span class="o">.</span><span class="n">BYTE</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JPrimitiveArrayTypeInfo</span><span class="o">.</span><span class="n">SHORT_PRIMITIVE_ARRAY_TYPE_INFO</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">PRIMITIVE_ARRAY</span><span class="p">(</span><span class="n">Types</span><span class="o">.</span><span class="n">SHORT</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JPrimitiveArrayTypeInfo</span><span class="o">.</span><span class="n">INT_PRIMITIVE_ARRAY_TYPE_INFO</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">PRIMITIVE_ARRAY</span><span class="p">(</span><span class="n">Types</span><span class="o">.</span><span class="n">INT</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JPrimitiveArrayTypeInfo</span><span class="o">.</span><span class="n">LONG_PRIMITIVE_ARRAY_TYPE_INFO</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">PRIMITIVE_ARRAY</span><span class="p">(</span><span class="n">Types</span><span class="o">.</span><span class="n">LONG</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JPrimitiveArrayTypeInfo</span><span class="o">.</span><span class="n">FLOAT_PRIMITIVE_ARRAY_TYPE_INFO</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">PRIMITIVE_ARRAY</span><span class="p">(</span><span class="n">Types</span><span class="o">.</span><span class="n">FLOAT</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JPrimitiveArrayTypeInfo</span><span class="o">.</span><span class="n">DOUBLE_PRIMITIVE_ARRAY_TYPE_INFO</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">PRIMITIVE_ARRAY</span><span class="p">(</span><span class="n">Types</span><span class="o">.</span><span class="n">DOUBLE</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JPrimitiveArrayTypeInfo</span><span class="o">.</span><span class="n">CHAR_PRIMITIVE_ARRAY_TYPE_INFO</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">PRIMITIVE_ARRAY</span><span class="p">(</span><span class="n">Types</span><span class="o">.</span><span class="n">CHAR</span><span class="p">())</span>
+
+    <span class="n">JBasicArrayTypeInfo</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">typeinfo</span><span class="o">.</span><span class="n">BasicArrayTypeInfo</span>
+
+    <span class="k">if</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JBasicArrayTypeInfo</span><span class="o">.</span><span class="n">BOOLEAN_ARRAY_TYPE_INFO</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">BASIC_ARRAY</span><span class="p">(</span><span class="n">Types</span><span class="o">.</span><span class="n">BOOLEAN</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JBasicArrayTypeInfo</span><span class="o">.</span><span class="n">BYTE_ARRAY_TYPE_INFO</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">BASIC_ARRAY</span><span class="p">(</span><span class="n">Types</span><span class="o">.</span><span class="n">BYTE</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JBasicArrayTypeInfo</span><span class="o">.</span><span class="n">SHORT_ARRAY_TYPE_INFO</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">BASIC_ARRAY</span><span class="p">(</span><span class="n">Types</span><span class="o">.</span><span class="n">SHORT</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JBasicArrayTypeInfo</span><span class="o">.</span><span class="n">INT_ARRAY_TYPE_INFO</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">BASIC_ARRAY</span><span class="p">(</span><span class="n">Types</span><span class="o">.</span><span class="n">INT</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JBasicArrayTypeInfo</span><span class="o">.</span><span class="n">LONG_ARRAY_TYPE_INFO</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">BASIC_ARRAY</span><span class="p">(</span><span class="n">Types</span><span class="o">.</span><span class="n">LONG</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JBasicArrayTypeInfo</span><span class="o">.</span><span class="n">FLOAT_ARRAY_TYPE_INFO</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">BASIC_ARRAY</span><span class="p">(</span><span class="n">Types</span><span class="o">.</span><span class="n">FLOAT</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JBasicArrayTypeInfo</span><span class="o">.</span><span class="n">DOUBLE_ARRAY_TYPE_INFO</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">BASIC_ARRAY</span><span class="p">(</span><span class="n">Types</span><span class="o">.</span><span class="n">DOUBLE</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JBasicArrayTypeInfo</span><span class="o">.</span><span class="n">CHAR_ARRAY_TYPE_INFO</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">BASIC_ARRAY</span><span class="p">(</span><span class="n">Types</span><span class="o">.</span><span class="n">CHAR</span><span class="p">())</span>
+    <span class="k">elif</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JBasicArrayTypeInfo</span><span class="o">.</span><span class="n">STRING_ARRAY_TYPE_INFO</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">BASIC_ARRAY</span><span class="p">(</span><span class="n">Types</span><span class="o">.</span><span class="n">STRING</span><span class="p">())</span>
+
+    <span class="n">JObjectArrayTypeInfo</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">java</span><span class="o">.</span><span class="n">typeutils</span><span class="o">.</span><span class="n">ObjectArrayTypeInfo</span>
+    <span class="k">if</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JObjectArrayTypeInfo</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">OBJECT_ARRAY</span><span class="p">(</span><span class="n">_from_java_type</span><span class="p">(</span><span class="n">j_type_info</span><span class="o">.</span><span class="n">getComponentInfo</span><span class="p">()))</span>
+
+    <span class="n">JPickledBytesTypeInfo</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span> \
+        <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">streaming</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">typeinfo</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">PickledByteArrayTypeInfo</span>\
+        <span class="o">.</span><span class="n">PICKLED_BYTE_ARRAY_TYPE_INFO</span>
+    <span class="k">if</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JPickledBytesTypeInfo</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">PICKLED_BYTE_ARRAY</span><span class="p">()</span>
+
+    <span class="n">JRowTypeInfo</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">java</span><span class="o">.</span><span class="n">typeutils</span><span class="o">.</span><span class="n">RowTypeInfo</span>
+    <span class="k">if</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JRowTypeInfo</span><span class="p">):</span>
+        <span class="n">j_row_field_names</span> <span class="o">=</span> <span class="n">j_type_info</span><span class="o">.</span><span class="n">getFieldNames</span><span class="p">()</span>
+        <span class="n">j_row_field_types</span> <span class="o">=</span> <span class="n">j_type_info</span><span class="o">.</span><span class="n">getFieldTypes</span><span class="p">()</span>
+        <span class="n">row_field_types</span> <span class="o">=</span> <span class="p">[</span><span class="n">_from_java_type</span><span class="p">(</span><span class="n">j_row_field_type</span><span class="p">)</span> <span class="k">for</span> <span class="n">j_row_field_type</span> <span class="ow">in</span>
+                           <span class="n">j_row_field_types</span><span class="p">]</span>
+        <span class="n">row_field_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">field_name</span> <span class="k">for</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="n">j_row_field_names</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">Types</span><span class="o">.</span><span class="n">ROW_NAMED</span><span class="p">(</span><span class="n">row_field_names</span><span class="p">,</span> <span class="n">row_field_types</span><span class="p">)</span>
+
+    <span class="n">JTupleTypeInfo</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">java</span><span class="o">.</span><span class="n">typeutils</span><span class="o">.</span><span class="n">TupleTypeInfo</span>
+    <span class="k">if</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JTupleTypeInfo</span><span class="p">):</span>
+        <span class="n">j_field_types</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j_type_info</span><span class="o">.</span><span class="n">getArity</span><span class="p">()):</span>
+            <span class="n">j_field_types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j_type_info</span><span class="o">.</span><span class="n">getTypeAt</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+        <span class="n">field_types</span> <span class="o">=</span> <span class="p">[</span><span class="n">_from_java_type</span><span class="p">(</span><span class="n">j_field_type</span><span class="p">)</span> <span class="k">for</span> <span class="n">j_field_type</span> <span class="ow">in</span> <span class="n">j_field_types</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">TupleTypeInfo</span><span class="p">(</span><span class="n">field_types</span><span class="p">)</span>
+
+    <span class="n">JMapTypeInfo</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">java</span><span class="o">.</span><span class="n">typeutils</span><span class="o">.</span><span class="n">MapTypeInfo</span>
+    <span class="k">if</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JMapTypeInfo</span><span class="p">):</span>
+        <span class="n">j_key_type_info</span> <span class="o">=</span> <span class="n">j_type_info</span><span class="o">.</span><span class="n">getKeyTypeInfo</span><span class="p">()</span>
+        <span class="n">j_value_type_info</span> <span class="o">=</span> <span class="n">j_type_info</span><span class="o">.</span><span class="n">getValueTypeInfo</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">MapTypeInfo</span><span class="p">(</span><span class="n">_from_java_type</span><span class="p">(</span><span class="n">j_key_type_info</span><span class="p">),</span> <span class="n">_from_java_type</span><span class="p">(</span><span class="n">j_value_type_info</span><span class="p">))</span>
+
+    <span class="n">JListTypeInfo</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">java</span><span class="o">.</span><span class="n">typeutils</span><span class="o">.</span><span class="n">ListTypeInfo</span>
+    <span class="k">if</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JListTypeInfo</span><span class="p">):</span>
+        <span class="n">j_element_type_info</span> <span class="o">=</span> <span class="n">j_type_info</span><span class="o">.</span><span class="n">getElementTypeInfo</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">ListTypeInfo</span><span class="p">(</span><span class="n">_from_java_type</span><span class="p">(</span><span class="n">j_element_type_info</span><span class="p">))</span>
+
+    <span class="n">JLocalTimeTypeInfo</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">typeinfo</span><span class="o">.</span><span class="n">LocalTimeTypeInfo</span>
+    <span class="k">if</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JLocalTimeTypeInfo</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">j_type_info</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">JLocalTimeTypeInfo</span><span class="o">.</span><span class="n">LOCAL_DATE</span><span class="p">):</span>
+            <span class="n">time_type</span> <span class="o">=</span> <span class="n">LocalTimeTypeInfo</span><span class="o">.</span><span class="n">TimeType</span><span class="o">.</span><span class="n">LOCAL_DATE</span>
+        <span class="k">elif</span> <span class="n">j_type_info</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">JLocalTimeTypeInfo</span><span class="o">.</span><span class="n">LOCAL_TIME</span><span class="p">):</span>
+            <span class="n">time_type</span> <span class="o">=</span> <span class="n">LocalTimeTypeInfo</span><span class="o">.</span><span class="n">TimeType</span><span class="o">.</span><span class="n">LOCAL_TIME</span>
+        <span class="k">elif</span> <span class="n">j_type_info</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">JLocalTimeTypeInfo</span><span class="o">.</span><span class="n">LOCAL_DATE_TIME</span><span class="p">):</span>
+            <span class="n">time_type</span> <span class="o">=</span> <span class="n">LocalTimeTypeInfo</span><span class="o">.</span><span class="n">TimeType</span><span class="o">.</span><span class="n">LOCAL_DATE_TIME</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Unsupported LocalTimeTypeInfo: </span><span class="si">%s</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="n">j_type_info</span><span class="o">.</span><span class="n">toString</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">LocalTimeTypeInfo</span><span class="p">(</span><span class="n">time_type</span><span class="p">)</span>
+
+    <span class="n">JExternalTypeInfo</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">typeutils</span><span class="o">.</span><span class="n">ExternalTypeInfo</span>
+    <span class="k">if</span> <span class="n">_is_instance_of</span><span class="p">(</span><span class="n">j_type_info</span><span class="p">,</span> <span class="n">JExternalTypeInfo</span><span class="p">):</span>
+        <span class="n">TypeInfoDataTypeConverter</span> <span class="o">=</span> \
+            <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">LegacyTypeInfoDataTypeConverter</span>
+        <span class="k">return</span> <span class="n">ExternalTypeInfo</span><span class="p">(</span><span class="n">_from_java_type</span><span class="p">(</span>
+            <span class="n">TypeInfoDataTypeConverter</span><span class="o">.</span><span class="n">toLegacyTypeInfo</span><span class="p">(</span><span class="n">j_type_info</span><span class="o">.</span><span class="n">getDataType</span><span class="p">())))</span>
+
+    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The java type info: </span><span class="si">%s</span><span class="s2"> is not supported in PyFlink currently.&quot;</span> <span class="o">%</span> <span class="n">j_type_info</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_is_instance_of</span><span class="p">(</span><span class="n">java_object</span><span class="p">:</span> <span class="n">JavaObject</span><span class="p">,</span> <span class="n">java_type</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">JavaObject</span><span class="p">,</span> <span class="n">JavaClass</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">java_type</span><span class="p">,</span> <span class="n">JavaObject</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">java_object</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">java_type</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">java_type</span><span class="p">,</span> <span class="n">JavaClass</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">java_object</span><span class="o">.</span><span class="n">getClass</span><span class="p">()</span><span class="o">.</span><span class="n">isAssignableFrom</span><span class="p">(</span><span class="n">java_type</span><span class="o">.</span><span class="n">_java_lang_class</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">False</span>
+</pre></div>
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

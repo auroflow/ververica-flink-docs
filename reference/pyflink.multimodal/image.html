@@ -1,0 +1,809 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Image &#8212; PyFlink 11.9.0a1 documentation</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+
+  
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/pyflink.multimodal/image';</script>
+    <link rel="shortcut icon" href="../../_static/navbar-brand-logo.jpg"/>
+
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pyflink.multimodal.operators.image_decode" href="api/pyflink.multimodal.operators.image_decode.html" />
+    <link rel="prev" title="PyFlink Multimodal" href="index.html" />
+<script src="_static/pyflink.js" ></script>
+<link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../_static/navbar-brand-logo.jpg" class="logo__image only-light" alt="Logo image">
+    <img src="../../_static/navbar-brand-logo.jpg" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item current active">
+                    <a class="nav-link" href="../index.html">
+                        API Reference
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../../examples/index.html">
+                        Examples
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Section navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">
+    Section Navigation
+  </p>
+  <div class="bd-toc-item navbar-nav">
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.dataframe/index.html">PyFlink DataFrame</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">PyFlink Multimodal</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="video.html">Video</a></li>
+<li class="toctree-l2"><a class="reference internal" href="audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilities.html">Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.table/index.html">PyFlink Table</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.datastream/index.html">PyFlink DataStream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyflink.common/index.html">PyFlink Common</a></li>
+</ul>
+
+  </div>
+</nav>
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <section id="image">
+<h1>Image<a class="headerlink" href="#image" title="Permalink to this headline">#</a></h1>
+<section id="image-operations">
+<h2>Image Operations<a class="headerlink" href="#image-operations" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#transform">Transform</a></p></li>
+<li><p><a class="reference internal" href="#information">Information</a></p></li>
+<li><p><a class="reference internal" href="#detection">Detection</a></p></li>
+<li><p><a class="reference internal" href="#face">Face</a></p></li>
+<li><p><a class="reference internal" href="#quality">Quality</a></p></li>
+<li><p><a class="reference internal" href="#embedding">Embedding</a></p></li>
+</ul>
+<section id="transform">
+<h3>Transform<a class="headerlink" href="#transform" title="Permalink to this headline">#</a></h3>
+<p>Image transformation operators.</p>
+<p><code class="docutils literal notranslate"><span class="pre">image_decode()</span></code> accepts encoded image bytes and returns a decoded image.
+Pixel transforms accept decoded images and return decoded images so chained
+operators can avoid repeated JPEG/PNG encode-decode cycles. <code class="docutils literal notranslate"><span class="pre">image_encode()</span></code>
+accepts decoded images and returns encoded bytes; <code class="docutils literal notranslate"><span class="pre">image_compress()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">image_convert_format()</span></code> accept encoded bytes and return encoded bytes.</p>
+<p>Typical pipeline:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.multimodal.operators.image_transform</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">image_decode</span><span class="p">,</span> <span class="n">image_encode</span><span class="p">,</span> <span class="n">image_resize</span><span class="p">,</span> <span class="n">image_blur</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">decode</span> <span class="o">=</span> <span class="n">image_decode</span><span class="p">()</span>
+<span class="n">resize</span> <span class="o">=</span> <span class="n">image_resize</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">512</span><span class="p">)</span>
+<span class="n">blur</span> <span class="o">=</span> <span class="n">image_blur</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">encode</span> <span class="o">=</span> <span class="n">image_encode</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;JPEG&quot;</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">,</span> <span class="n">decode</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;raw_bytes&quot;</span><span class="p">)))</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">,</span> <span class="n">resize</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">)))</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">,</span> <span class="n">blur</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">)))</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span><span class="s2">&quot;jpg&quot;</span><span class="p">,</span> <span class="n">encode</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">)))</span>
+</pre></div>
+</div>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_decode.html#pyflink.multimodal.operators.image_decode" title="pyflink.multimodal.operators.image_decode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_decode</span></code></a>(*columns[, on_error, mode, ...])</p></td>
+<td><p>Decode encoded image bytes into a decoded image.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_encode.html#pyflink.multimodal.operators.image_encode" title="pyflink.multimodal.operators.image_encode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_encode</span></code></a>(*columns[, format, quality, ...])</p></td>
+<td><p>Encode a decoded image into compressed bytes or a base64 data URL.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_compress.html#pyflink.multimodal.operators.image_compress" title="pyflink.multimodal.operators.image_compress"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_compress</span></code></a>(*columns[, quality, format, ...])</p></td>
+<td><p>Compress encoded image bytes with the specified format and quality.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_convert_format.html#pyflink.multimodal.operators.image_convert_format" title="pyflink.multimodal.operators.image_convert_format"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_convert_format</span></code></a>(*columns, format[, ...])</p></td>
+<td><p>Convert encoded image bytes to a different encoded format.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_to_tensor.html#pyflink.multimodal.operators.image_to_tensor" title="pyflink.multimodal.operators.image_to_tensor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_to_tensor</span></code></a>(*columns, width, height[, ...])</p></td>
+<td><p>Convert an image to a fixed-shape float32 tensor.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_convert_mode.html#pyflink.multimodal.operators.image_convert_mode" title="pyflink.multimodal.operators.image_convert_mode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_convert_mode</span></code></a>(*columns, mode[, concurrency])</p></td>
+<td><p>Convert an image to a target mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_resize.html#pyflink.multimodal.operators.image_resize" title="pyflink.multimodal.operators.image_resize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_resize</span></code></a>(*columns, width, height[, ...])</p></td>
+<td><p>Resize an image to fixed output dimensions.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_rescale.html#pyflink.multimodal.operators.image_rescale" title="pyflink.multimodal.operators.image_rescale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_rescale</span></code></a>(*columns, scale[, method, ...])</p></td>
+<td><p>Rescale an image by a multiplicative factor, preserving aspect ratio.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_crop.html#pyflink.multimodal.operators.image_crop" title="pyflink.multimodal.operators.image_crop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_crop</span></code></a>(*columns[, crop_coords, ...])</p></td>
+<td><p>Crop an image by coordinates, center ratio, or center size.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_crop_black_border.html#pyflink.multimodal.operators.image_crop_black_border" title="pyflink.multimodal.operators.image_crop_black_border"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_crop_black_border</span></code></a>(*columns[, ...])</p></td>
+<td><p>Detect and remove black borders from an image.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_flip.html#pyflink.multimodal.operators.image_flip" title="pyflink.multimodal.operators.image_flip"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_flip</span></code></a>(*columns[, mode, concurrency])</p></td>
+<td><p>Flip an image horizontally, vertically, or rotate 180 degrees.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_blur.html#pyflink.multimodal.operators.image_blur" title="pyflink.multimodal.operators.image_blur"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_blur</span></code></a>(*columns[, radius, blur_type, ...])</p></td>
+<td><p>Apply blur to an image.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_adjust_color.html#pyflink.multimodal.operators.image_adjust_color" title="pyflink.multimodal.operators.image_adjust_color"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_adjust_color</span></code></a>(*columns[, brightness, ...])</p></td>
+<td><p>Adjust image brightness, contrast, and saturation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_remove_background.html#pyflink.multimodal.operators.image_remove_background" title="pyflink.multimodal.operators.image_remove_background"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_remove_background</span></code></a>(*columns[, ...])</p></td>
+<td><p>Remove the background from an image using rembg (U2-Net based).</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="information">
+<h3>Information<a class="headerlink" href="#information" title="Permalink to this headline">#</a></h3>
+<p>Image information extraction operators.</p>
+<p>Most operators in this module take decoded <code class="docutils literal notranslate"><span class="pre">Image</span></code> values and return numeric
+values, strings, or booleans - they do <strong>not</strong> modify the image. Lightweight
+metadata and filter operators may also inspect encoded bytes when documented.</p>
+<p>Without business params (factory function, no args):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.multimodal.operators.image_info</span><span class="w"> </span><span class="kn">import</span> <span class="n">image_aspect_ratio</span>
+<span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span><span class="s2">&quot;ratio&quot;</span><span class="p">,</span> <span class="n">image_aspect_ratio</span><span class="p">()(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>With business params (factory function):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.multimodal.operators.image_info</span><span class="w"> </span><span class="kn">import</span> <span class="n">image_hash</span>
+<span class="n">phash</span> <span class="o">=</span> <span class="n">image_hash</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;phash&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span><span class="s2">&quot;hash&quot;</span><span class="p">,</span> <span class="n">phash</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">)))</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Runtime args:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">concurrency</span></code> is forwarded to the DataFrame UDF runtime.</p>
+</dd>
+</dl>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_metadata.html#pyflink.multimodal.operators.image_metadata" title="pyflink.multimodal.operators.image_metadata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_metadata</span></code></a>(*columns[, concurrency])</p></td>
+<td><p>Extract metadata (width, height, channels, mode) from an image.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_aspect_ratio.html#pyflink.multimodal.operators.image_aspect_ratio" title="pyflink.multimodal.operators.image_aspect_ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_aspect_ratio</span></code></a>(*columns[, concurrency])</p></td>
+<td><p>Compute the aspect ratio (width / height) of an image.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_sharpness.html#pyflink.multimodal.operators.image_sharpness" title="pyflink.multimodal.operators.image_sharpness"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_sharpness</span></code></a>(*columns[, max_edge, ...])</p></td>
+<td><p>Compute a raw sharpness metric using Laplacian variance.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_hash.html#pyflink.multimodal.operators.image_hash" title="pyflink.multimodal.operators.image_hash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_hash</span></code></a>(*columns[, method, concurrency])</p></td>
+<td><p>Compute a perceptual hash of an image.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.is_valid_image.html#pyflink.multimodal.operators.is_valid_image" title="pyflink.multimodal.operators.is_valid_image"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_valid_image</span></code></a>(*columns[, mode, ...])</p></td>
+<td><p>Check if an image passes lightweight validity checks.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_size_filter.html#pyflink.multimodal.operators.image_size_filter" title="pyflink.multimodal.operators.image_size_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_size_filter</span></code></a>(*columns[, min_w, min_h, ...])</p></td>
+<td><p>Filter images by pixel dimensions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_shape_filter.html#pyflink.multimodal.operators.image_shape_filter" title="pyflink.multimodal.operators.image_shape_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_shape_filter</span></code></a>(*columns[, min_ratio, ...])</p></td>
+<td><p>Filter images by aspect ratio (width / height).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_file_size_filter.html#pyflink.multimodal.operators.image_file_size_filter" title="pyflink.multimodal.operators.image_file_size_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_file_size_filter</span></code></a>(*columns[, ...])</p></td>
+<td><p>Filter images by encoded file size in bytes.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="detection">
+<h3>Detection<a class="headerlink" href="#detection" title="Permalink to this headline">#</a></h3>
+<p>Detection and recognition operators.</p>
+<p>Operators in this module detect or recognize structured content within
+images: objects, text, segments, and subplots.</p>
+<p>Model-based operators (<code class="docutils literal notranslate"><span class="pre">ImageDetection</span></code>, <code class="docutils literal notranslate"><span class="pre">ImageSegment</span></code>, <code class="docutils literal notranslate"><span class="pre">ImageOCR</span></code>)
+are registered as pandas batch UDFs, so Flink batches rows automatically.
+<code class="docutils literal notranslate"><span class="pre">image_detect_objects</span></code> returns axis-aligned boxes <code class="docutils literal notranslate"><span class="pre">x/y/w/h</span></code>;
+<code class="docutils literal notranslate"><span class="pre">image_ocr</span></code> returns four-point text polygons; <code class="docutils literal notranslate"><span class="pre">image_segment</span></code> returns
+indexed PNG mask bytes; <code class="docutils literal notranslate"><span class="pre">image_detect_subplot</span></code> returns subplot metadata.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.multimodal.operators.image_detect</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="gp">... </span>    <span class="n">image_detect_objects</span><span class="p">,</span> <span class="n">image_ocr</span><span class="p">,</span> <span class="n">image_segment</span><span class="p">,</span> <span class="n">image_detect_subplot</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="kn">import</span> <span class="n">col</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">detect</span> <span class="o">=</span> <span class="n">image_detect_objects</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;yolov8n&quot;</span><span class="p">,</span> <span class="n">confidence</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span><span class="s2">&quot;objects&quot;</span><span class="p">,</span> <span class="n">detect</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">)))</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ocr</span> <span class="o">=</span> <span class="n">image_ocr</span><span class="p">(</span><span class="n">lang</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;en&quot;</span><span class="p">,</span> <span class="s2">&quot;ch_sim&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">ocr</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">)))</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Runtime args:</dt><dd><p>Model-based pandas factories forward keyword-only <code class="docutils literal notranslate"><span class="pre">concurrency</span></code>,
+<code class="docutils literal notranslate"><span class="pre">batch_size</span></code>, <code class="docutils literal notranslate"><span class="pre">num_gpus</span></code>, and <code class="docutils literal notranslate"><span class="pre">gpu_type</span></code> to the DataFrame UDF
+runtime. <code class="docutils literal notranslate"><span class="pre">image_detect_subplot</span></code> forwards <code class="docutils literal notranslate"><span class="pre">concurrency</span></code>.</p>
+</dd>
+</dl>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_detect_objects.html#pyflink.multimodal.operators.image_detect_objects" title="pyflink.multimodal.operators.image_detect_objects"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_detect_objects</span></code></a>(*columns[, model, ...])</p></td>
+<td><p>Create an object detection UDF (YOLO-based).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_segment.html#pyflink.multimodal.operators.image_segment" title="pyflink.multimodal.operators.image_segment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_segment</span></code></a>(*columns[, model, confidence, ...])</p></td>
+<td><p>Create a semantic segmentation UDF (FastSAM-based).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_ocr.html#pyflink.multimodal.operators.image_ocr" title="pyflink.multimodal.operators.image_ocr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_ocr</span></code></a>(*columns[, lang, model_sharing, ...])</p></td>
+<td><p>Create an OCR text extraction UDF (EasyOCR-based).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_detect_subplot.html#pyflink.multimodal.operators.image_detect_subplot" title="pyflink.multimodal.operators.image_detect_subplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_detect_subplot</span></code></a>(*columns[, threshold, ...])</p></td>
+<td><p>Create a subplot / mosaic detection UDF (OpenCV Hough-based).</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="face">
+<h3>Face<a class="headerlink" href="#face" title="Permalink to this headline">#</a></h3>
+<p>Face processing operators.</p>
+<p>Operators in this module detect, count, or blur faces in image inputs with
+OpenCV Haar cascade classifiers.</p>
+<p>Requires: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">opencv-python-headless</span></code>. <code class="docutils literal notranslate"><span class="pre">image_face_blur</span></code> also
+requires <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">Pillow</span></code>.</p>
+<dl class="simple">
+<dt>Runtime args:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">concurrency</span></code> is forwarded to the DataFrame UDF runtime.</p>
+</dd>
+</dl>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.multimodal.operators.image_face</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="gp">... </span>    <span class="n">image_face_detect</span><span class="p">,</span> <span class="n">image_face_count</span><span class="p">,</span> <span class="n">image_face_blur</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="kn">import</span> <span class="n">col</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">detect</span> <span class="o">=</span> <span class="n">image_face_detect</span><span class="p">(</span><span class="n">min_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span><span class="s2">&quot;faces&quot;</span><span class="p">,</span> <span class="n">detect</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">count</span> <span class="o">=</span> <span class="n">image_face_count</span><span class="p">(</span><span class="n">min_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span><span class="s2">&quot;face_count&quot;</span><span class="p">,</span> <span class="n">count</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blur</span> <span class="o">=</span> <span class="n">image_face_blur</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">min_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span><span class="s2">&quot;blurred&quot;</span><span class="p">,</span> <span class="n">blur</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">)))</span>
+</pre></div>
+</div>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_face_detect.html#pyflink.multimodal.operators.image_face_detect" title="pyflink.multimodal.operators.image_face_detect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_face_detect</span></code></a>(*columns[, cv_classifier, ...])</p></td>
+<td><p>Create a face detection UDF (OpenCV Haar Cascade-based).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_face_count.html#pyflink.multimodal.operators.image_face_count" title="pyflink.multimodal.operators.image_face_count"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_face_count</span></code></a>(*columns[, cv_classifier, ...])</p></td>
+<td><p>Create a face count UDF (OpenCV Haar Cascade-based).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_face_blur.html#pyflink.multimodal.operators.image_face_blur" title="pyflink.multimodal.operators.image_face_blur"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_face_blur</span></code></a>(*columns[, cv_classifier, ...])</p></td>
+<td><p>Create a face blurring UDF (OpenCV Haar Cascade + PIL-based).</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="quality">
+<h3>Quality<a class="headerlink" href="#quality" title="Permalink to this headline">#</a></h3>
+<p>Image quality and safety assessment operators.</p>
+<p>Operators in this module score images based on quality, safety, and
+watermark detection. All operators return float scores.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.multimodal.operators.image_quality</span><span class="w"> </span><span class="kn">import</span> <span class="n">image_quality_score</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">quality</span> <span class="o">=</span> <span class="n">image_quality_score</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span><span class="s2">&quot;quality&quot;</span><span class="p">,</span> <span class="n">quality</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">)))</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.multimodal.operators.image_quality</span><span class="w"> </span><span class="kn">import</span> <span class="n">image_nsfw_score</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nsfw</span> <span class="o">=</span> <span class="n">image_nsfw_score</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span><span class="s2">&quot;nsfw&quot;</span><span class="p">,</span> <span class="n">nsfw</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">)))</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Runtime args:</dt><dd><p>Pandas batch UDFs accept <code class="docutils literal notranslate"><span class="pre">concurrency</span></code>, <code class="docutils literal notranslate"><span class="pre">batch_size</span></code>, <code class="docutils literal notranslate"><span class="pre">num_gpus</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">gpu_type</span></code>. Row-level UDFs accept <code class="docutils literal notranslate"><span class="pre">concurrency</span></code>.</p>
+</dd>
+<dt>Input errors:</dt><dd><p>Null image inputs produce <code class="docutils literal notranslate"><span class="pre">None</span></code> outputs. These operators accept decoded
+images; use <code class="docutils literal notranslate"><span class="pre">decode_image(on_error=&quot;null&quot;)</span></code> when processing untrusted raw
+bytes. <code class="docutils literal notranslate"><span class="pre">is_valid_image</span></code> can be used as a lightweight pre-filter but does
+not guarantee full pixel materialization.</p>
+</dd>
+</dl>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_nsfw_score.html#pyflink.multimodal.operators.image_nsfw_score" title="pyflink.multimodal.operators.image_nsfw_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_nsfw_score</span></code></a>(*columns[, hf_nsfw_model, ...])</p></td>
+<td><p>Create an NSFW scoring UDF (HuggingFace image classification-based).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_aesthetic_score.html#pyflink.multimodal.operators.image_aesthetic_score" title="pyflink.multimodal.operators.image_aesthetic_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_aesthetic_score</span></code></a>(*columns[, ...])</p></td>
+<td><p>Create an aesthetic quality scoring UDF (HuggingFace aesthetics predictor-based).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_quality_score.html#pyflink.multimodal.operators.image_quality_score" title="pyflink.multimodal.operators.image_quality_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_quality_score</span></code></a>(*columns[, concurrency])</p></td>
+<td><p>Create an image quality scoring UDF (Laplacian + contrast + colorfulness-based).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_watermark_score.html#pyflink.multimodal.operators.image_watermark_score" title="pyflink.multimodal.operators.image_watermark_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_watermark_score</span></code></a>(*columns[, ...])</p></td>
+<td><p>Create a watermark scoring UDF (HuggingFace image classification-based).</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="embedding">
+<h3>Embedding<a class="headerlink" href="#embedding" title="Permalink to this headline">#</a></h3>
+<p>Image embedding and similarity operators.</p>
+<p>Operators in this module generate vector embeddings from images or
+compute image-text similarity scores using CLIP.</p>
+<p>All operators in this module use pandas batch UDFs and run CLIP inference
+once per input batch.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.multimodal.operators.image_embed</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="gp">... </span>    <span class="n">image_embedding</span><span class="p">,</span> <span class="n">image_text_similarity</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embed</span> <span class="o">=</span> <span class="n">image_embedding</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;ViT-B/32&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span><span class="s2">&quot;vector&quot;</span><span class="p">,</span> <span class="n">embed</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">)))</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Fixed text mode — compare all images against one prompt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sim</span> <span class="o">=</span> <span class="n">image_text_similarity</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;a photo of a cat&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span><span class="s2">&quot;score&quot;</span><span class="p">,</span> <span class="n">sim</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">)))</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Per-row text mode — each row has its own text</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sim</span> <span class="o">=</span> <span class="n">image_text_similarity</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span><span class="s2">&quot;score&quot;</span><span class="p">,</span> <span class="n">sim</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">),</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">)))</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Runtime args:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">concurrency</span></code>, <code class="docutils literal notranslate"><span class="pre">batch_size</span></code>, <code class="docutils literal notranslate"><span class="pre">num_gpus</span></code>, and <code class="docutils literal notranslate"><span class="pre">gpu_type</span></code> are
+forwarded to the DataFrame UDF runtime.</p>
+</dd>
+</dl>
+<p>Requires: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">open_clip_torch</span> <span class="pre">torch</span> <span class="pre">pillow</span></code></p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_embedding.html#pyflink.multimodal.operators.image_embedding" title="pyflink.multimodal.operators.image_embedding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_embedding</span></code></a>(*columns[, model, ...])</p></td>
+<td><p>Create an image embedding UDF (CLIP / open_clip-based).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.operators.image_text_similarity.html#pyflink.multimodal.operators.image_text_similarity" title="pyflink.multimodal.operators.image_text_similarity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_text_similarity</span></code></a>(*columns[, text, ...])</p></td>
+<td><p>Create an image-text similarity scoring UDF (CLIP / open_clip-based).</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="image-codec">
+<h2>Image Codec<a class="headerlink" href="#image-codec" title="Permalink to this headline">#</a></h2>
+<p>Codec and format conversion helpers for multimodal data.</p>
+<p>Decoded Image encode/decode conversion helpers for multimodal operators.</p>
+<table class="autosummary longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.codec.image_mode_channels.html#pyflink.multimodal.codec.image_mode_channels" title="pyflink.multimodal.codec.image_mode_channels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_mode_channels</span></code></a>(mode)</p></td>
+<td><p>Return the channel count used by a decoded Image mode.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.codec.image_to_ndarray.html#pyflink.multimodal.codec.image_to_ndarray" title="pyflink.multimodal.codec.image_to_ndarray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_to_ndarray</span></code></a>(image[, mode])</p></td>
+<td><p>Return decoded <code class="xref py py-class docutils literal notranslate"><span class="pre">Image</span></code> pixels as an ndarray for operator internals.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.codec.ndarray_to_image.html#pyflink.multimodal.codec.ndarray_to_image" title="pyflink.multimodal.codec.ndarray_to_image"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ndarray_to_image</span></code></a>(pixel_array[, mode])</p></td>
+<td><p>Convert an ndarray to a decoded <code class="xref py py-class docutils literal notranslate"><span class="pre">Image</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.codec.pil_to_image.html#pyflink.multimodal.codec.pil_to_image" title="pyflink.multimodal.codec.pil_to_image"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pil_to_image</span></code></a>(pil_image[, mode])</p></td>
+<td><p>Convert a PIL image to a decoded <code class="xref py py-class docutils literal notranslate"><span class="pre">Image</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.codec.convert_image_array_to_mode.html#pyflink.multimodal.codec.convert_image_array_to_mode" title="pyflink.multimodal.codec.convert_image_array_to_mode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convert_image_array_to_mode</span></code></a>(pixel_array, mode)</p></td>
+<td><p>Convert an image ndarray to one of the built-in image modes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.codec.image_array_to_pil.html#pyflink.multimodal.codec.image_array_to_pil" title="pyflink.multimodal.codec.image_array_to_pil"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_array_to_pil</span></code></a>(pixel_array[, mode])</p></td>
+<td><p>Convert ndarray pixels to a PIL Image, converting mode only when requested.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.codec.image_array_to_pil_compatible.html#pyflink.multimodal.codec.image_array_to_pil_compatible" title="pyflink.multimodal.codec.image_array_to_pil_compatible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_array_to_pil_compatible</span></code></a>(pixel_array)</p></td>
+<td><p>Convert ndarray pixels to a PIL Image, normalizing only when required.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pyflink.multimodal.codec.decode_image.html#pyflink.multimodal.codec.decode_image" title="pyflink.multimodal.codec.decode_image"><code class="xref py py-obj docutils literal notranslate"><span class="pre">decode_image</span></code></a>(image_bytes[, mode, max_pixels])</p></td>
+<td><p>Decode encoded image bytes into a decoded <code class="xref py py-class docutils literal notranslate"><span class="pre">Image</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pyflink.multimodal.codec.encode_image_input.html#pyflink.multimodal.codec.encode_image_input" title="pyflink.multimodal.codec.encode_image_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">encode_image_input</span></code></a>(image_input[, ...])</p></td>
+<td><p>Encode a decoded <code class="docutils literal notranslate"><span class="pre">Image</span></code> input to compressed image bytes.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="index.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">PyFlink Multimodal</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="api/pyflink.multimodal.operators.image_decode.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">pyflink.multimodal.operators.image_decode</p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#image-operations">
+   Image Operations
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transform">
+     Transform
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#information">
+     Information
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#detection">
+     Detection
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#face">
+     Face
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quality">
+     Quality
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#embedding">
+     Embedding
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#image-codec">
+   Image Codec
+  </a>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+<div class="tocsection sourcelink">
+    <a href="../../_sources/reference/pyflink.multimodal/image.rst.txt">
+        <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+</div>
+
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>
