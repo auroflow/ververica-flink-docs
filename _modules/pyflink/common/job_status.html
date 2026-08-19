@@ -278,13 +278,13 @@ under the License.
 <span class="c1">#  distributed with this work for additional information</span>
 <span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
 <span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
-<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  "License"); you may not use this file except in compliance</span>
 <span class="c1">#  with the License.  You may obtain a copy of the License at</span>
 <span class="c1">#</span>
 <span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="c1">#</span>
 <span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  distributed under the License is distributed on an "AS IS" BASIS,</span>
 <span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1">#  See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
@@ -293,11 +293,11 @@ under the License.
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.java_gateway</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_gateway</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;JobStatus&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'JobStatus'</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="JobStatus"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.job_status.JobStatus.html#pyflink.common.job_status.JobStatus">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">JobStatus</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Possible states of a job once it has been accepted by the job manager.</span>
 
 <span class="sd">    :data:`CREATED`:</span>
@@ -326,7 +326,7 @@ under the License.
 
 <span class="sd">    :data:`FINISHED`:</span>
 
-<span class="sd">    All of the job&#39;s tasks have successfully finished.</span>
+<span class="sd">    All of the job's tasks have successfully finished.</span>
 
 <span class="sd">    :data:`RESTARTING`:</span>
 
@@ -342,7 +342,7 @@ under the License.
 <span class="sd">    The job is currently reconciling and waits for task execution report to recover state.</span>
 
 <span class="sd">    .. versionadded:: 1.11.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">CREATED</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">RUNNING</span> <span class="o">=</span> <span class="mi">1</span>
@@ -356,7 +356,7 @@ under the License.
     <span class="n">RECONCILING</span> <span class="o">=</span> <span class="mi">9</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">is_globally_terminal_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Checks whether this state is &lt;i&gt;globally terminal&lt;/i&gt;. A globally terminal job</span>
 <span class="sd">        is complete and cannot fail any more and will not be restarted or recovered by another</span>
 <span class="sd">        standby master node.</span>
@@ -367,13 +367,13 @@ under the License.
 <span class="sd">        :return: ``True`` if this job status is globally terminal, ``False`` otherwise.</span>
 
 <span class="sd">        .. versionadded:: 1.11.0</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_j_job_status</span><span class="p">()</span><span class="o">.</span><span class="n">isGloballyTerminalState</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">is_terminal_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Checks whether this state is locally terminal. Locally terminal refers to the</span>
-<span class="sd">        state of a job&#39;s execution graph within an executing JobManager. If the execution graph</span>
+<span class="sd">        state of a job's execution graph within an executing JobManager. If the execution graph</span>
 <span class="sd">        is locally terminal, the JobManager will not continue executing or recovering the job.</span>
 
 <span class="sd">        The only state that is locally terminal, but not globally terminal is SUSPENDED,</span>
@@ -382,11 +382,11 @@ under the License.
 <span class="sd">        :return: ``True`` if this job status is terminal, ``False`` otherwise.</span>
 
 <span class="sd">        .. versionadded:: 1.11.0</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_j_job_status</span><span class="p">()</span><span class="o">.</span><span class="n">isTerminalState</span><span class="p">()</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_from_j_job_status</span><span class="p">(</span><span class="n">j_job_status</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;JobStatus&#39;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_from_j_job_status</span><span class="p">(</span><span class="n">j_job_status</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'JobStatus'</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">JobStatus</span><span class="p">[</span><span class="n">j_job_status</span><span class="o">.</span><span class="n">name</span><span class="p">()]</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_to_j_job_status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

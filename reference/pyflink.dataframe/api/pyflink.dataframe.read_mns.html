@@ -371,82 +371,82 @@ supplied.</p></li>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pf</span>
 
 <span class="c1"># MNS reads require checkpointing.</span>
-<span class="n">pf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;execution.checkpointing.interval&quot;</span><span class="p">,</span> <span class="s2">&quot;30s&quot;</span><span class="p">)</span>
+<span class="n">pf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"execution.checkpointing.interval"</span><span class="p">,</span> <span class="s2">"30s"</span><span class="p">)</span>
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_mns</span><span class="p">(</span>
-    <span class="s2">&quot;https://1234567890.mns.cn-hangzhou.aliyuncs.com&quot;</span><span class="p">,</span>
-    <span class="n">region</span><span class="o">=</span><span class="s2">&quot;cn-hangzhou&quot;</span><span class="p">,</span>
-    <span class="n">queue_name</span><span class="o">=</span><span class="s2">&quot;orders&quot;</span><span class="p">,</span>
+    <span class="s2">"https://1234567890.mns.cn-hangzhou.aliyuncs.com"</span><span class="p">,</span>
+    <span class="n">region</span><span class="o">=</span><span class="s2">"cn-hangzhou"</span><span class="p">,</span>
+    <span class="n">queue_name</span><span class="o">=</span><span class="s2">"orders"</span><span class="p">,</span>
     <span class="n">access_key_id</span><span class="o">=</span><span class="n">ALIYUN_AK_ID</span><span class="p">,</span>
     <span class="n">access_key_secret</span><span class="o">=</span><span class="n">ALIYUN_AK_SECRET</span><span class="p">,</span>
     <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">&quot;order_id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
-        <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">(),</span>
-        <span class="s2">&quot;ts_ms&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+        <span class="s2">"order_id"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+        <span class="s2">"amount"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">(),</span>
+        <span class="s2">"ts_ms"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
     <span class="p">},</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <p>OSS message references:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_mns</span><span class="p">(</span>
-    <span class="s2">&quot;https://1234567890.mns.cn-hangzhou.aliyuncs.com&quot;</span><span class="p">,</span>
-    <span class="n">region</span><span class="o">=</span><span class="s2">&quot;cn-hangzhou&quot;</span><span class="p">,</span>
-    <span class="n">queue_name</span><span class="o">=</span><span class="s2">&quot;oss-events&quot;</span><span class="p">,</span>
+    <span class="s2">"https://1234567890.mns.cn-hangzhou.aliyuncs.com"</span><span class="p">,</span>
+    <span class="n">region</span><span class="o">=</span><span class="s2">"cn-hangzhou"</span><span class="p">,</span>
+    <span class="n">queue_name</span><span class="o">=</span><span class="s2">"oss-events"</span><span class="p">,</span>
     <span class="n">access_key_id</span><span class="o">=</span><span class="n">ALIYUN_AK_ID</span><span class="p">,</span>
     <span class="n">access_key_secret</span><span class="o">=</span><span class="n">ALIYUN_AK_SECRET</span><span class="p">,</span>
     <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">&quot;eventTime&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
-        <span class="s2">&quot;region&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
-        <span class="s2">&quot;ossBucketName&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
-        <span class="s2">&quot;ossObjectKey&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
-        <span class="s2">&quot;ossObjectSize&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+        <span class="s2">"eventTime"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+        <span class="s2">"region"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+        <span class="s2">"ossBucketName"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+        <span class="s2">"ossObjectKey"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+        <span class="s2">"ossObjectSize"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
     <span class="p">},</span>
-    <span class="n">message_type</span><span class="o">=</span><span class="s2">&quot;OSS&quot;</span><span class="p">,</span>
-    <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;json&quot;</span><span class="p">,</span>
+    <span class="n">message_type</span><span class="o">=</span><span class="s2">"OSS"</span><span class="p">,</span>
+    <span class="nb">format</span><span class="o">=</span><span class="s2">"json"</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <p>JSON parser options:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_mns</span><span class="p">(</span>
-    <span class="s2">&quot;https://1234567890.mns.cn-hangzhou.aliyuncs.com&quot;</span><span class="p">,</span>
-    <span class="n">region</span><span class="o">=</span><span class="s2">&quot;cn-hangzhou&quot;</span><span class="p">,</span>
-    <span class="n">queue_name</span><span class="o">=</span><span class="s2">&quot;orders&quot;</span><span class="p">,</span>
+    <span class="s2">"https://1234567890.mns.cn-hangzhou.aliyuncs.com"</span><span class="p">,</span>
+    <span class="n">region</span><span class="o">=</span><span class="s2">"cn-hangzhou"</span><span class="p">,</span>
+    <span class="n">queue_name</span><span class="o">=</span><span class="s2">"orders"</span><span class="p">,</span>
     <span class="n">access_key_id</span><span class="o">=</span><span class="n">ALIYUN_AK_ID</span><span class="p">,</span>
     <span class="n">access_key_secret</span><span class="o">=</span><span class="n">ALIYUN_AK_SECRET</span><span class="p">,</span>
-    <span class="n">schema</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;payload&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">()},</span>
+    <span class="n">schema</span><span class="o">=</span><span class="p">{</span><span class="s2">"payload"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">()},</span>
     <span class="n">format_options</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">&quot;ignore-parse-errors&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-        <span class="s2">&quot;timestamp-format.standard&quot;</span><span class="p">:</span> <span class="s2">&quot;ISO-8601&quot;</span><span class="p">,</span>
+        <span class="s2">"ignore-parse-errors"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s2">"timestamp-format.standard"</span><span class="p">:</span> <span class="s2">"ISO-8601"</span><span class="p">,</span>
     <span class="p">},</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <p>Computed event time and watermark:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">events</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_mns</span><span class="p">(</span>
-    <span class="s2">&quot;https://1234567890.mns.cn-hangzhou.aliyuncs.com&quot;</span><span class="p">,</span>
-    <span class="n">region</span><span class="o">=</span><span class="s2">&quot;cn-hangzhou&quot;</span><span class="p">,</span>
-    <span class="n">queue_name</span><span class="o">=</span><span class="s2">&quot;orders&quot;</span><span class="p">,</span>
+    <span class="s2">"https://1234567890.mns.cn-hangzhou.aliyuncs.com"</span><span class="p">,</span>
+    <span class="n">region</span><span class="o">=</span><span class="s2">"cn-hangzhou"</span><span class="p">,</span>
+    <span class="n">queue_name</span><span class="o">=</span><span class="s2">"orders"</span><span class="p">,</span>
     <span class="n">access_key_id</span><span class="o">=</span><span class="n">ALIYUN_AK_ID</span><span class="p">,</span>
     <span class="n">access_key_secret</span><span class="o">=</span><span class="n">ALIYUN_AK_SECRET</span><span class="p">,</span>
     <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">&quot;order_id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
-        <span class="s2">&quot;ts_ms&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+        <span class="s2">"order_id"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+        <span class="s2">"ts_ms"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
     <span class="p">},</span>
     <span class="n">computed_columns</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">&quot;event_time&quot;</span><span class="p">:</span> <span class="s2">&quot;TO_TIMESTAMP_LTZ(ts_ms, 3)&quot;</span><span class="p">,</span>
+        <span class="s2">"event_time"</span><span class="p">:</span> <span class="s2">"TO_TIMESTAMP_LTZ(ts_ms, 3)"</span><span class="p">,</span>
     <span class="p">},</span>
-    <span class="n">watermark</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;event_time&quot;</span><span class="p">,</span> <span class="s2">&quot;event_time - INTERVAL &#39;5&#39; SECOND&quot;</span><span class="p">),</span>
+    <span class="n">watermark</span><span class="o">=</span><span class="p">(</span><span class="s2">"event_time"</span><span class="p">,</span> <span class="s2">"event_time - INTERVAL '5' SECOND"</span><span class="p">),</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <p>Replay with source throttling:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">replay</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_mns</span><span class="p">(</span>
-    <span class="s2">&quot;https://1234567890.mns.cn-hangzhou.aliyuncs.com&quot;</span><span class="p">,</span>
-    <span class="n">region</span><span class="o">=</span><span class="s2">&quot;cn-hangzhou&quot;</span><span class="p">,</span>
-    <span class="n">queue_name</span><span class="o">=</span><span class="s2">&quot;orders&quot;</span><span class="p">,</span>
+    <span class="s2">"https://1234567890.mns.cn-hangzhou.aliyuncs.com"</span><span class="p">,</span>
+    <span class="n">region</span><span class="o">=</span><span class="s2">"cn-hangzhou"</span><span class="p">,</span>
+    <span class="n">queue_name</span><span class="o">=</span><span class="s2">"orders"</span><span class="p">,</span>
     <span class="n">access_key_id</span><span class="o">=</span><span class="n">ALIYUN_AK_ID</span><span class="p">,</span>
     <span class="n">access_key_secret</span><span class="o">=</span><span class="n">ALIYUN_AK_SECRET</span><span class="p">,</span>
-    <span class="n">schema</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;order_id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">()},</span>
+    <span class="n">schema</span><span class="o">=</span><span class="p">{</span><span class="s2">"order_id"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">()},</span>
     <span class="n">start_time_ms</span><span class="o">=</span><span class="mi">1767225600000</span><span class="p">,</span>
     <span class="n">rate_limit_records_per_second</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
 <span class="p">)</span>

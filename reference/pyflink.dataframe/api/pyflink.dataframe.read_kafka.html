@@ -482,168 +482,168 @@ Same format as <code class="docutils literal notranslate"><span class="pre">star
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Simple JSON consumption from a single topic</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_kafka</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;localhost:9092&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;user_events&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"localhost:9092"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">"user_events"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
-<span class="gp">... </span>        <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
-<span class="gp">... </span>        <span class="s2">&quot;event&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
-<span class="gp">... </span>        <span class="s2">&quot;ts&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">timestamp</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+<span class="gp">... </span>        <span class="s2">"user_id"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"event"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"ts"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">timestamp</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
 <span class="gp">... </span>    <span class="p">},</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Add a computed event-time column and watermark</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">events</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_kafka</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;localhost:9092&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;user_events&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"localhost:9092"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">"user_events"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
-<span class="gp">... </span>        <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
-<span class="gp">... </span>        <span class="s2">&quot;event&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
-<span class="gp">... </span>        <span class="s2">&quot;ts_millis&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"user_id"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"event"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"ts_millis"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
 <span class="gp">... </span>    <span class="p">},</span>
 <span class="gp">... </span>    <span class="n">computed_columns</span><span class="o">=</span><span class="p">{</span>
-<span class="gp">... </span>        <span class="s2">&quot;event_time&quot;</span><span class="p">:</span> <span class="s2">&quot;TO_TIMESTAMP_LTZ(ts_millis, 3)&quot;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">"event_time"</span><span class="p">:</span> <span class="s2">"TO_TIMESTAMP_LTZ(ts_millis, 3)"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="p">},</span>
-<span class="gp">... </span>    <span class="n">watermark</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;event_time&quot;</span><span class="p">,</span> <span class="s2">&quot;event_time - INTERVAL &#39;5&#39; SECOND&quot;</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">watermark</span><span class="o">=</span><span class="p">(</span><span class="s2">"event_time"</span><span class="p">,</span> <span class="s2">"event_time - INTERVAL '5' SECOND"</span><span class="p">),</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Read from earliest offset with explicit consumer group</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_kafka</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;broker1:9092,broker2:9092&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;orders&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"broker1:9092,broker2:9092"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">"orders"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
-<span class="gp">... </span>        <span class="s2">&quot;order_id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
-<span class="gp">... </span>        <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"order_id"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"amount"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">(),</span>
 <span class="gp">... </span>    <span class="p">},</span>
-<span class="gp">... </span>    <span class="n">group_id</span><span class="o">=</span><span class="s2">&quot;my-consumer-group&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">startup_mode</span><span class="o">=</span><span class="s2">&quot;earliest-offset&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">group_id</span><span class="o">=</span><span class="s2">"my-consumer-group"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">startup_mode</span><span class="o">=</span><span class="s2">"earliest-offset"</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Read multiple topics</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_kafka</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;localhost:9092&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;topic_a&quot;</span><span class="p">,</span> <span class="s2">&quot;topic_b&quot;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="s2">"localhost:9092"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="p">[</span><span class="s2">"topic_a"</span><span class="p">,</span> <span class="s2">"topic_b"</span><span class="p">],</span>
 <span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
-<span class="gp">... </span>        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
-<span class="gp">... </span>        <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"id"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"data"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
 <span class="gp">... </span>    <span class="p">},</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Subscribe to topics by pattern</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_kafka</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;localhost:9092&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">topic_pattern</span><span class="o">=</span><span class="s2">&quot;events-.*&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"localhost:9092"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topic_pattern</span><span class="o">=</span><span class="s2">"events-.*"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
-<span class="gp">... </span>        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
-<span class="gp">... </span>        <span class="s2">&quot;payload&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"id"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"payload"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
 <span class="gp">... </span>    <span class="p">},</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Bounded read (batch mode) — read up to the latest offset</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_kafka</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;localhost:9092&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;orders&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"localhost:9092"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">"orders"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
-<span class="gp">... </span>        <span class="s2">&quot;order_id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
-<span class="gp">... </span>        <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"order_id"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"amount"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">(),</span>
 <span class="gp">... </span>    <span class="p">},</span>
-<span class="gp">... </span>    <span class="n">startup_mode</span><span class="o">=</span><span class="s2">&quot;earliest-offset&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">bounded_mode</span><span class="o">=</span><span class="s2">&quot;latest-offset&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">startup_mode</span><span class="o">=</span><span class="s2">"earliest-offset"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">bounded_mode</span><span class="o">=</span><span class="s2">"latest-offset"</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Read with key+value formats and Avro</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_kafka</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;localhost:9092&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;keyed_events&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"localhost:9092"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">"keyed_events"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
-<span class="gp">... </span>        <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
-<span class="gp">... </span>        <span class="s2">&quot;event&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"user_id"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"event"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
 <span class="gp">... </span>    <span class="p">},</span>
-<span class="gp">... </span>    <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;avro&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">key_format</span><span class="o">=</span><span class="s2">&quot;json&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">key_fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;user_id&quot;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="nb">format</span><span class="o">=</span><span class="s2">"avro"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">key_format</span><span class="o">=</span><span class="s2">"json"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">key_fields</span><span class="o">=</span><span class="p">[</span><span class="s2">"user_id"</span><span class="p">],</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Start from a specific timestamp</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_kafka</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;localhost:9092&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;events&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"localhost:9092"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">"events"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
-<span class="gp">... </span>        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
-<span class="gp">... </span>        <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"id"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"data"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
 <span class="gp">... </span>    <span class="p">},</span>
-<span class="gp">... </span>    <span class="n">startup_mode</span><span class="o">=</span><span class="s2">&quot;timestamp&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">startup_mode</span><span class="o">=</span><span class="s2">"timestamp"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">startup_timestamp_millis</span><span class="o">=</span><span class="mi">1700000000000</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Start from specific offsets per partition</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_kafka</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;localhost:9092&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;events&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"localhost:9092"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">"events"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
-<span class="gp">... </span>        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
-<span class="gp">... </span>        <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"id"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"data"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
 <span class="gp">... </span>    <span class="p">},</span>
-<span class="gp">... </span>    <span class="n">startup_mode</span><span class="o">=</span><span class="s2">&quot;specific-offsets&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">startup_mode</span><span class="o">=</span><span class="s2">"specific-offsets"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">startup_specific_offsets</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">300</span><span class="p">},</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># JSON format with custom parse options</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_kafka</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;localhost:9092&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;events&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"localhost:9092"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">"events"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
-<span class="gp">... </span>        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
-<span class="gp">... </span>        <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"id"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"data"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
 <span class="gp">... </span>    <span class="p">},</span>
-<span class="gp">... </span>    <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;json&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">format_options</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;ignore-parse-errors&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">},</span>
+<span class="gp">... </span>    <span class="nb">format</span><span class="o">=</span><span class="s2">"json"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">format_options</span><span class="o">=</span><span class="p">{</span><span class="s2">"ignore-parse-errors"</span><span class="p">:</span> <span class="s2">"true"</span><span class="p">},</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># With Kafka security (SASL/SSL)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># When using Aliyun Kafka, download the truststore file from the Kafka</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># console and upload it as an additional dependency file.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_kafka</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;localhost:9092&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;secure_events&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"localhost:9092"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">"secure_events"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
-<span class="gp">... </span>        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
-<span class="gp">... </span>        <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"id"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"data"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
 <span class="gp">... </span>    <span class="p">},</span>
 <span class="gp">... </span>    <span class="n">properties</span><span class="o">=</span><span class="p">{</span>
-<span class="gp">... </span>        <span class="s2">&quot;ssl.truststore.location&quot;</span><span class="p">:</span> <span class="s2">&quot;/flink/usrlib/only.4096.client.truststore.jks&quot;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s2">&quot;ssl.truststore.password&quot;</span><span class="p">:</span> <span class="s2">&quot;KafkaOnsClient&quot;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s2">&quot;ssl.endpoint.identification.algorithm&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s2">&quot;sasl.jaas.config&quot;</span><span class="p">:</span> <span class="p">(</span>
-<span class="gp">... </span>            <span class="s2">&quot;org.apache.flink.kafka.shaded.org.apache.kafka.common.security&quot;</span>
-<span class="gp">... </span>            <span class="s2">&quot;.plain.PlainLoginModule required &quot;</span>
-<span class="gp">... </span>            <span class="sa">f</span><span class="s1">&#39;username=&quot;&lt;username&gt;&quot; &#39;</span>
-<span class="gp">... </span>            <span class="sa">f</span><span class="s1">&#39;password=&quot;&lt;password&gt;&quot;;&#39;</span>
+<span class="gp">... </span>        <span class="s2">"ssl.truststore.location"</span><span class="p">:</span> <span class="s2">"/flink/usrlib/only.4096.client.truststore.jks"</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">"ssl.truststore.password"</span><span class="p">:</span> <span class="s2">"KafkaOnsClient"</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">"ssl.endpoint.identification.algorithm"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">"sasl.jaas.config"</span><span class="p">:</span> <span class="p">(</span>
+<span class="gp">... </span>            <span class="s2">"org.apache.flink.kafka.shaded.org.apache.kafka.common.security"</span>
+<span class="gp">... </span>            <span class="s2">".plain.PlainLoginModule required "</span>
+<span class="gp">... </span>            <span class="sa">f</span><span class="s1">'username="&lt;username&gt;" '</span>
+<span class="gp">... </span>            <span class="sa">f</span><span class="s1">'password="&lt;password&gt;";'</span>
 <span class="gp">... </span>        <span class="p">),</span>
-<span class="gp">... </span>        <span class="s2">&quot;sasl.mechanism&quot;</span><span class="p">:</span> <span class="s2">&quot;PLAIN&quot;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s2">&quot;security.protocol&quot;</span><span class="p">:</span> <span class="s2">&quot;SASL_SSL&quot;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">"sasl.mechanism"</span><span class="p">:</span> <span class="s2">"PLAIN"</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">"security.protocol"</span><span class="p">:</span> <span class="s2">"SASL_SSL"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="p">},</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Read and project columns</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_kafka</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;localhost:9092&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;events&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"localhost:9092"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">"events"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
-<span class="gp">... </span>        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
-<span class="gp">... </span>        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
-<span class="gp">... </span>        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"id"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"name"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"value"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">(),</span>
 <span class="gp">... </span>    <span class="p">},</span>
-<span class="gp">... </span><span class="p">)[[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">]]</span>
+<span class="gp">... </span><span class="p">)[[</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># CDC with Debezium format</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_kafka</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;localhost:9092&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;cdc_events&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"localhost:9092"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">"cdc_events"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
-<span class="gp">... </span>        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
-<span class="gp">... </span>        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"id"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"name"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
 <span class="gp">... </span>    <span class="p">},</span>
-<span class="gp">... </span>    <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;debezium-json&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="nb">format</span><span class="o">=</span><span class="s2">"debezium-json"</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">)</span>
 </pre></div>
 </div>

@@ -278,24 +278,24 @@ under the License.
 <span class="c1">#  distributed with this work for additional information</span>
 <span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
 <span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
-<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  "License"); you may not use this file except in compliance</span>
 <span class="c1">#  with the License.  You may obtain a copy of the License at</span>
 <span class="c1">#</span>
 <span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="c1">#</span>
 <span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  distributed under the License is distributed on an "AS IS" BASIS,</span>
 <span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1">#  See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 <span class="c1">################################################################################</span>
-<span class="sd">&quot;&quot;&quot;Audio information, validation, and filter operators.</span>
+<span class="sd">"""Audio information, validation, and filter operators.</span>
 
 <span class="sd">These operators inspect audio objects and return scalar values or row values.</span>
 <span class="sd">They do not modify waveform content. Encoded inputs are accepted only at the</span>
 <span class="sd">pipeline boundary; waveform-only operators require an explicit ``audio_decode``</span>
 <span class="sd">step so that pipeline definitions stay predictable.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataType</span><span class="p">,</span> <span class="n">udf</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.udf</span><span class="w"> </span><span class="kn">import</span> <span class="n">ScalarFunction</span>
@@ -313,28 +313,28 @@ under the License.
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.multimodal.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">_build_or_apply_udf</span><span class="p">,</span> <span class="n">_udf_runtime_kwargs</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;is_valid_audio&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;audio_metadata&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;audio_duration&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;audio_duration_filter&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;audio_size_filter&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;audio_silence_detection&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;audio_detect_speech&quot;</span><span class="p">,</span>
+    <span class="s2">"is_valid_audio"</span><span class="p">,</span>
+    <span class="s2">"audio_metadata"</span><span class="p">,</span>
+    <span class="s2">"audio_duration"</span><span class="p">,</span>
+    <span class="s2">"audio_duration_filter"</span><span class="p">,</span>
+    <span class="s2">"audio_size_filter"</span><span class="p">,</span>
+    <span class="s2">"audio_silence_detection"</span><span class="p">,</span>
+    <span class="s2">"audio_detect_speech"</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="n">_AUDIO_TIME_RANGE_LIST_TYPE</span> <span class="o">=</span> <span class="n">DataType</span><span class="o">.</span><span class="n">list</span><span class="p">(</span>
     <span class="n">DataType</span><span class="o">.</span><span class="n">struct</span><span class="p">([</span>
-        <span class="p">(</span><span class="s2">&quot;start_ms&quot;</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">()),</span>
-        <span class="p">(</span><span class="s2">&quot;end_ms&quot;</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">()),</span>
-        <span class="p">(</span><span class="s2">&quot;duration_ms&quot;</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">()),</span>
+        <span class="p">(</span><span class="s2">"start_ms"</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">()),</span>
+        <span class="p">(</span><span class="s2">"end_ms"</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">()),</span>
+        <span class="p">(</span><span class="s2">"duration_ms"</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">()),</span>
     <span class="p">])</span>
 <span class="p">)</span>
-<span class="n">_AUDIO_VALIDATION_MODES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;metadata&quot;</span><span class="p">,</span> <span class="s2">&quot;decode&quot;</span><span class="p">}</span>
+<span class="n">_AUDIO_VALIDATION_MODES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"metadata"</span><span class="p">,</span> <span class="s2">"decode"</span><span class="p">}</span>
 <span class="n">_WEBRTC_VAD_FRAME_MS</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_bridge_client_or_none</span><span class="p">(</span><span class="n">function_context</span><span class="p">):</span>
-    <span class="n">getter</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">function_context</span><span class="p">,</span> <span class="s2">&quot;_get_file_system_bridge_client&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">getter</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">function_context</span><span class="p">,</span> <span class="s2">"_get_file_system_bridge_client"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">getter</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
     <span class="k">return</span> <span class="n">getter</span><span class="p">()</span>
@@ -348,14 +348,14 @@ under the License.
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_validate_at_least_one_bound</span><span class="p">(</span><span class="n">operator_name</span><span class="p">,</span> <span class="o">*</span><span class="n">bounds</span><span class="p">):</span>
     <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">bound</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">bound</span> <span class="ow">in</span> <span class="n">bounds</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">operator_name</span><span class="si">}</span><span class="s2"> requires at least one bound.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">operator_name</span><span class="si">}</span><span class="s2"> requires at least one bound."</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_optional_non_negative_float</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be a non-negative number, got </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be a non-negative number, got </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
 
@@ -363,60 +363,60 @@ under the License.
     <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be a non-negative integer, got </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be a non-negative integer, got </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">value</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_positive_int</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be a positive integer, got </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be a positive integer, got </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">value</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_non_negative_int</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be a non-negative integer, got </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be a non-negative integer, got </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">value</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_int_range</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">minimum</span><span class="p">,</span> <span class="n">maximum</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be an integer, got </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be an integer, got </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">minimum</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="n">maximum</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be between </span><span class="si">{</span><span class="n">minimum</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">maximum</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be between </span><span class="si">{</span><span class="n">minimum</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">maximum</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">value</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_int_choice</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">choices</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be an integer, got </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be an integer, got </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">choices</span><span class="p">:</span>
-        <span class="n">allowed</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">choice</span><span class="p">)</span> <span class="k">for</span> <span class="n">choice</span> <span class="ow">in</span> <span class="n">choices</span><span class="p">)</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be one of [</span><span class="si">{</span><span class="n">allowed</span><span class="si">}</span><span class="s2">], got </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">allowed</span> <span class="o">=</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">choice</span><span class="p">)</span> <span class="k">for</span> <span class="n">choice</span> <span class="ow">in</span> <span class="n">choices</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be one of [</span><span class="si">{</span><span class="n">allowed</span><span class="si">}</span><span class="s2">], got </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">value</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_validate_ordered_bounds</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">lower_bound</span><span class="p">,</span> <span class="n">upper_bound</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">lower_bound</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">upper_bound</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">upper_bound</span> <span class="o">&lt;</span> <span class="n">lower_bound</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> upper bound must be &gt;= lower bound, &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;got lower=</span><span class="si">{</span><span class="n">lower_bound</span><span class="si">!r}</span><span class="s2">, upper=</span><span class="si">{</span><span class="n">upper_bound</span><span class="si">!r}</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> upper bound must be &gt;= lower bound, "</span>
+            <span class="sa">f</span><span class="s2">"got lower=</span><span class="si">{</span><span class="n">lower_bound</span><span class="si">!r}</span><span class="s2">, upper=</span><span class="si">{</span><span class="n">upper_bound</span><span class="si">!r}</span><span class="s2">"</span>
         <span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_normalize_audio_validation_mode</span><span class="p">(</span><span class="n">validation</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">validation</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_AUDIO_VALIDATION_MODES</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;is_valid_audio validation must be one of &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">_AUDIO_VALIDATION_MODES</span><span class="p">)</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="n">validation</span><span class="si">!r}</span><span class="s2">&quot;</span>
+            <span class="s2">"is_valid_audio validation must be one of "</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">_AUDIO_VALIDATION_MODES</span><span class="p">)</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="n">validation</span><span class="si">!r}</span><span class="s2">"</span>
         <span class="p">)</span>
     <span class="k">return</span> <span class="n">validation</span>
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">_AudioValidityFilter</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check whether BYTES, URI, or AUDIO_CLIP_REF input can be read as audio.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Check whether BYTES, URI, or AUDIO_CLIP_REF input can be read as audio."""</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">validation</span><span class="o">=</span><span class="s2">&quot;metadata&quot;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">validation</span><span class="o">=</span><span class="s2">"metadata"</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">validation</span> <span class="o">=</span> <span class="n">_normalize_audio_validation_mode</span><span class="p">(</span><span class="n">validation</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_bridge_client</span> <span class="o">=</span> <span class="kc">None</span>
@@ -428,19 +428,19 @@ under the License.
         <span class="k">if</span> <span class="n">audio_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="n">ensure_supported_audio_input</span><span class="p">(</span>
-            <span class="s2">&quot;is_valid_audio&quot;</span><span class="p">,</span>
-            <span class="p">(</span><span class="s2">&quot;BYTES&quot;</span><span class="p">,</span> <span class="s2">&quot;URI&quot;</span><span class="p">,</span> <span class="s2">&quot;AUDIO_CLIP_REF&quot;</span><span class="p">),</span>
+            <span class="s2">"is_valid_audio"</span><span class="p">,</span>
+            <span class="p">(</span><span class="s2">"BYTES"</span><span class="p">,</span> <span class="s2">"URI"</span><span class="p">,</span> <span class="s2">"AUDIO_CLIP_REF"</span><span class="p">),</span>
             <span class="n">audio_input</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validation</span> <span class="o">==</span> <span class="s2">&quot;metadata&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validation</span> <span class="o">==</span> <span class="s2">"metadata"</span><span class="p">:</span>
                 <span class="n">probe_audio_metadata</span><span class="p">(</span>
                     <span class="n">audio_input</span><span class="p">,</span>
                     <span class="n">bridge_client</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_bridge_client</span><span class="p">,</span>
-                    <span class="n">operator_name</span><span class="o">=</span><span class="s2">&quot;is_valid_audio&quot;</span><span class="p">,</span>
+                    <span class="n">operator_name</span><span class="o">=</span><span class="s2">"is_valid_audio"</span><span class="p">,</span>
                 <span class="p">)</span>
                 <span class="k">return</span> <span class="kc">True</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validation</span> <span class="o">==</span> <span class="s2">&quot;decode&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validation</span> <span class="o">==</span> <span class="s2">"decode"</span><span class="p">:</span>
                 <span class="n">decode_audio_input</span><span class="p">(</span>
                     <span class="n">audio_input</span><span class="p">,</span>
                     <span class="n">bridge_client</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_bridge_client</span><span class="p">,</span>
@@ -452,21 +452,21 @@ under the License.
             <span class="k">raise</span>
 
 
-<div class="viewcode-block" id="is_valid_audio"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.is_valid_audio.html#pyflink.multimodal.operators.is_valid_audio">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">is_valid_audio</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">validation</span><span class="o">=</span><span class="s2">&quot;metadata&quot;</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="is_valid_audio"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.is_valid_audio.html#pyflink.multimodal.operators.is_valid_audio">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">is_valid_audio</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">validation</span><span class="o">=</span><span class="s2">"metadata"</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Check whether an audio input looks like valid audio.</span>
 
-<span class="sd">    The default ``validation=&quot;metadata&quot;`` only reads enough container/header</span>
+<span class="sd">    The default ``validation="metadata"`` only reads enough container/header</span>
 <span class="sd">    data to probe metadata. This is the cheap path for filtering large tables</span>
-<span class="sd">    before decode. ``validation=&quot;decode&quot;`` skips the metadata pre-probe and</span>
+<span class="sd">    before decode. ``validation="decode"`` skips the metadata pre-probe and</span>
 <span class="sd">    fully decodes the stream; it is more expensive but catches truncated or</span>
 <span class="sd">    corrupt payloads that have a readable header.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        *columns: Optional audio columns. When provided, the UDF is applied</span>
 <span class="sd">            directly.</span>
-<span class="sd">        validation: ``&quot;metadata&quot;`` for header/container validation, or</span>
-<span class="sd">            ``&quot;decode&quot;`` for full decode validation.</span>
+<span class="sd">        validation: ``"metadata"`` for header/container validation, or</span>
+<span class="sd">            ``"decode"`` for full decode validation.</span>
 <span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
 
 <span class="sd">    Returns:</span>
@@ -480,14 +480,14 @@ under the License.
 
 <span class="sd">    Examples::</span>
 <span class="sd">        &gt;&gt;&gt; # Usage 1: create a reusable UDF and apply it to a column.</span>
-<span class="sd">        &gt;&gt;&gt; valid = is_valid_audio(validation=&quot;metadata&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; df = df.filter(valid(col(&quot;audio_bytes&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt; valid = is_valid_audio(validation="metadata")</span>
+<span class="sd">        &gt;&gt;&gt; df = df.filter(valid(col("audio_bytes")))</span>
 <span class="sd">        &gt;&gt;&gt;</span>
 <span class="sd">        &gt;&gt;&gt; # Usage 2: pass the column directly when building the expression.</span>
 <span class="sd">        &gt;&gt;&gt; df = df.filter(</span>
-<span class="sd">        ...     is_valid_audio(col(&quot;audio_bytes&quot;), validation=&quot;metadata&quot;)</span>
+<span class="sd">        ...     is_valid_audio(col("audio_bytes"), validation="metadata")</span>
 <span class="sd">        ... )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
         <span class="n">_AudioValidityFilter</span><span class="p">(</span><span class="n">validation</span><span class="o">=</span><span class="n">validation</span><span class="p">),</span>
         <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">boolean</span><span class="p">(),</span>
@@ -497,13 +497,13 @@ under the License.
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">_AudioMetadata</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Extract audio metadata from encoded inputs, references, or waveform rows.</span>
 
 <span class="sd">    ``codec`` is a best-effort media codec name. For WAV/PCM inputs it follows</span>
 <span class="sd">    FFmpeg/PyAV codec short-name convention, e.g. ``pcm_s16le`` for signed</span>
 <span class="sd">    16-bit little-endian PCM.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
@@ -516,15 +516,15 @@ under the License.
         <span class="k">if</span> <span class="n">audio_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
         <span class="n">ensure_supported_audio_input</span><span class="p">(</span>
-            <span class="s2">&quot;audio_metadata&quot;</span><span class="p">,</span>
-            <span class="p">(</span><span class="s2">&quot;BYTES&quot;</span><span class="p">,</span> <span class="s2">&quot;URI&quot;</span><span class="p">,</span> <span class="s2">&quot;AUDIO_CLIP_REF&quot;</span><span class="p">,</span> <span class="s2">&quot;AUDIO_WAVEFORM&quot;</span><span class="p">),</span>
+            <span class="s2">"audio_metadata"</span><span class="p">,</span>
+            <span class="p">(</span><span class="s2">"BYTES"</span><span class="p">,</span> <span class="s2">"URI"</span><span class="p">,</span> <span class="s2">"AUDIO_CLIP_REF"</span><span class="p">,</span> <span class="s2">"AUDIO_WAVEFORM"</span><span class="p">),</span>
             <span class="n">audio_input</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">probe_audio_metadata</span><span class="p">(</span>
                 <span class="n">audio_input</span><span class="p">,</span>
                 <span class="n">bridge_client</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_bridge_client</span><span class="p">,</span>
-                <span class="n">operator_name</span><span class="o">=</span><span class="s2">&quot;audio_metadata&quot;</span><span class="p">,</span>
+                <span class="n">operator_name</span><span class="o">=</span><span class="s2">"audio_metadata"</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">is_audio_data_error</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
@@ -533,7 +533,7 @@ under the License.
 
 
 <div class="viewcode-block" id="audio_metadata"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.audio_metadata.html#pyflink.multimodal.operators.audio_metadata">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">audio_metadata</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Extract audio metadata.</span>
 
 <span class="sd">    The result is a row with the following fields:</span>
@@ -571,14 +571,14 @@ under the License.
 <span class="sd">    Examples::</span>
 <span class="sd">        &gt;&gt;&gt; # Usage 1: create a reusable UDF and apply it to a column.</span>
 <span class="sd">        &gt;&gt;&gt; metadata = audio_metadata()</span>
-<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;meta&quot;, metadata(col(&quot;audio_bytes&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column("meta", metadata(col("audio_bytes")))</span>
 <span class="sd">        &gt;&gt;&gt;</span>
 <span class="sd">        &gt;&gt;&gt; # Usage 2: pass the column directly when building the expression.</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_column(</span>
-<span class="sd">        ...     &quot;meta&quot;,</span>
-<span class="sd">        ...     audio_metadata(col(&quot;audio_bytes&quot;)),</span>
+<span class="sd">        ...     "meta",</span>
+<span class="sd">        ...     audio_metadata(col("audio_bytes")),</span>
 <span class="sd">        ... )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
         <span class="n">_AudioMetadata</span><span class="p">(),</span>
         <span class="n">return_dtype</span><span class="o">=</span><span class="n">AUDIO_METADATA_TYPE</span><span class="p">,</span>
@@ -588,7 +588,7 @@ under the License.
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">_AudioDuration</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return audio duration in seconds.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Return audio duration in seconds."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
@@ -601,15 +601,15 @@ under the License.
         <span class="k">if</span> <span class="n">audio_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
         <span class="n">ensure_supported_audio_input</span><span class="p">(</span>
-            <span class="s2">&quot;audio_duration&quot;</span><span class="p">,</span>
-            <span class="p">(</span><span class="s2">&quot;BYTES&quot;</span><span class="p">,</span> <span class="s2">&quot;URI&quot;</span><span class="p">,</span> <span class="s2">&quot;AUDIO_CLIP_REF&quot;</span><span class="p">,</span> <span class="s2">&quot;AUDIO_WAVEFORM&quot;</span><span class="p">),</span>
+            <span class="s2">"audio_duration"</span><span class="p">,</span>
+            <span class="p">(</span><span class="s2">"BYTES"</span><span class="p">,</span> <span class="s2">"URI"</span><span class="p">,</span> <span class="s2">"AUDIO_CLIP_REF"</span><span class="p">,</span> <span class="s2">"AUDIO_WAVEFORM"</span><span class="p">),</span>
             <span class="n">audio_input</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">metadata</span> <span class="o">=</span> <span class="n">probe_audio_metadata</span><span class="p">(</span>
                 <span class="n">audio_input</span><span class="p">,</span>
                 <span class="n">bridge_client</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_bridge_client</span><span class="p">,</span>
-                <span class="n">operator_name</span><span class="o">=</span><span class="s2">&quot;audio_duration&quot;</span><span class="p">,</span>
+                <span class="n">operator_name</span><span class="o">=</span><span class="s2">"audio_duration"</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">is_audio_data_error</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
@@ -621,7 +621,7 @@ under the License.
 
 
 <div class="viewcode-block" id="audio_duration"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.audio_duration.html#pyflink.multimodal.operators.audio_duration">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">audio_duration</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">,</span> <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Return audio duration in seconds.</span>
 
 <span class="sd">    Args:</span>
@@ -642,14 +642,14 @@ under the License.
 <span class="sd">    Examples::</span>
 <span class="sd">        &gt;&gt;&gt; # Usage 1: create a reusable UDF and apply it to a column.</span>
 <span class="sd">        &gt;&gt;&gt; duration = audio_duration()</span>
-<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;seconds&quot;, duration(col(&quot;audio&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column("seconds", duration(col("audio")))</span>
 <span class="sd">        &gt;&gt;&gt;</span>
 <span class="sd">        &gt;&gt;&gt; # Usage 2: pass the column directly when building the expression.</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_column(</span>
-<span class="sd">        ...     &quot;seconds&quot;,</span>
-<span class="sd">        ...     audio_duration(col(&quot;audio&quot;)),</span>
+<span class="sd">        ...     "seconds",</span>
+<span class="sd">        ...     audio_duration(col("audio")),</span>
 <span class="sd">        ... )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
         <span class="n">_AudioDuration</span><span class="p">(),</span>
         <span class="n">return_dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">(),</span>
@@ -659,17 +659,17 @@ under the License.
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">_AudioDurationFilter</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Filter audio by duration in seconds.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Filter audio by duration in seconds."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_seconds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_seconds</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="n">_validate_at_least_one_bound</span><span class="p">(</span>
-            <span class="s2">&quot;audio_duration_filter&quot;</span><span class="p">,</span> <span class="n">min_seconds</span><span class="p">,</span> <span class="n">max_seconds</span>
+            <span class="s2">"audio_duration_filter"</span><span class="p">,</span> <span class="n">min_seconds</span><span class="p">,</span> <span class="n">max_seconds</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">min_seconds</span> <span class="o">=</span> <span class="n">_optional_non_negative_float</span><span class="p">(</span><span class="s2">&quot;min_seconds&quot;</span><span class="p">,</span> <span class="n">min_seconds</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">max_seconds</span> <span class="o">=</span> <span class="n">_optional_non_negative_float</span><span class="p">(</span><span class="s2">&quot;max_seconds&quot;</span><span class="p">,</span> <span class="n">max_seconds</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_seconds</span> <span class="o">=</span> <span class="n">_optional_non_negative_float</span><span class="p">(</span><span class="s2">"min_seconds"</span><span class="p">,</span> <span class="n">min_seconds</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_seconds</span> <span class="o">=</span> <span class="n">_optional_non_negative_float</span><span class="p">(</span><span class="s2">"max_seconds"</span><span class="p">,</span> <span class="n">max_seconds</span><span class="p">)</span>
         <span class="n">_validate_ordered_bounds</span><span class="p">(</span>
-            <span class="s2">&quot;audio_duration_filter&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_seconds</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_seconds</span>
+            <span class="s2">"audio_duration_filter"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_seconds</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_seconds</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_bridge_client</span> <span class="o">=</span> <span class="kc">None</span>
 
@@ -680,15 +680,15 @@ under the License.
         <span class="k">if</span> <span class="n">audio_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="n">ensure_supported_audio_input</span><span class="p">(</span>
-            <span class="s2">&quot;audio_duration_filter&quot;</span><span class="p">,</span>
-            <span class="p">(</span><span class="s2">&quot;BYTES&quot;</span><span class="p">,</span> <span class="s2">&quot;URI&quot;</span><span class="p">,</span> <span class="s2">&quot;AUDIO_CLIP_REF&quot;</span><span class="p">,</span> <span class="s2">&quot;AUDIO_WAVEFORM&quot;</span><span class="p">),</span>
+            <span class="s2">"audio_duration_filter"</span><span class="p">,</span>
+            <span class="p">(</span><span class="s2">"BYTES"</span><span class="p">,</span> <span class="s2">"URI"</span><span class="p">,</span> <span class="s2">"AUDIO_CLIP_REF"</span><span class="p">,</span> <span class="s2">"AUDIO_WAVEFORM"</span><span class="p">),</span>
             <span class="n">audio_input</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">metadata</span> <span class="o">=</span> <span class="n">probe_audio_metadata</span><span class="p">(</span>
                 <span class="n">audio_input</span><span class="p">,</span>
                 <span class="n">bridge_client</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_bridge_client</span><span class="p">,</span>
-                <span class="n">operator_name</span><span class="o">=</span><span class="s2">&quot;audio_duration_filter&quot;</span><span class="p">,</span>
+                <span class="n">operator_name</span><span class="o">=</span><span class="s2">"audio_duration_filter"</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">is_audio_data_error</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
@@ -708,7 +708,7 @@ under the License.
     <span class="n">max_seconds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Check whether audio duration is within optional second bounds.</span>
 
 <span class="sd">    Args:</span>
@@ -734,16 +734,16 @@ under the License.
 <span class="sd">        &gt;&gt;&gt; duration_filter = audio_duration_filter(</span>
 <span class="sd">        ...     min_seconds=0.5,</span>
 <span class="sd">        ... )</span>
-<span class="sd">        &gt;&gt;&gt; df = df.filter(duration_filter(col(&quot;audio&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt; df = df.filter(duration_filter(col("audio")))</span>
 <span class="sd">        &gt;&gt;&gt;</span>
 <span class="sd">        &gt;&gt;&gt; # Usage 2: pass the column directly when building the expression.</span>
 <span class="sd">        &gt;&gt;&gt; df = df.filter(</span>
 <span class="sd">        ...     audio_duration_filter(</span>
-<span class="sd">        ...         col(&quot;audio&quot;),</span>
+<span class="sd">        ...         col("audio"),</span>
 <span class="sd">        ...         min_seconds=0.5,</span>
 <span class="sd">        ...     )</span>
 <span class="sd">        ... )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
         <span class="n">_AudioDurationFilter</span><span class="p">(</span>
             <span class="n">min_seconds</span><span class="o">=</span><span class="n">min_seconds</span><span class="p">,</span>
@@ -756,14 +756,14 @@ under the License.
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">_AudioSizeFilter</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Filter encoded BYTES or URI audio by byte size.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Filter encoded BYTES or URI audio by byte size."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_bytes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_bytes</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="n">_validate_at_least_one_bound</span><span class="p">(</span><span class="s2">&quot;audio_size_filter&quot;</span><span class="p">,</span> <span class="n">min_bytes</span><span class="p">,</span> <span class="n">max_bytes</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">min_bytes</span> <span class="o">=</span> <span class="n">_optional_non_negative_int</span><span class="p">(</span><span class="s2">&quot;min_bytes&quot;</span><span class="p">,</span> <span class="n">min_bytes</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">max_bytes</span> <span class="o">=</span> <span class="n">_optional_non_negative_int</span><span class="p">(</span><span class="s2">&quot;max_bytes&quot;</span><span class="p">,</span> <span class="n">max_bytes</span><span class="p">)</span>
-        <span class="n">_validate_ordered_bounds</span><span class="p">(</span><span class="s2">&quot;audio_size_filter&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_bytes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_bytes</span><span class="p">)</span>
+        <span class="n">_validate_at_least_one_bound</span><span class="p">(</span><span class="s2">"audio_size_filter"</span><span class="p">,</span> <span class="n">min_bytes</span><span class="p">,</span> <span class="n">max_bytes</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_bytes</span> <span class="o">=</span> <span class="n">_optional_non_negative_int</span><span class="p">(</span><span class="s2">"min_bytes"</span><span class="p">,</span> <span class="n">min_bytes</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_bytes</span> <span class="o">=</span> <span class="n">_optional_non_negative_int</span><span class="p">(</span><span class="s2">"max_bytes"</span><span class="p">,</span> <span class="n">max_bytes</span><span class="p">)</span>
+        <span class="n">_validate_ordered_bounds</span><span class="p">(</span><span class="s2">"audio_size_filter"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_bytes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_bytes</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_bridge_client</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_context</span><span class="p">):</span>
@@ -772,11 +772,11 @@ under the License.
     <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">audio_input</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">audio_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
-        <span class="n">ensure_supported_audio_input</span><span class="p">(</span><span class="s2">&quot;audio_size_filter&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;BYTES&quot;</span><span class="p">,</span> <span class="s2">&quot;URI&quot;</span><span class="p">),</span> <span class="n">audio_input</span><span class="p">)</span>
+        <span class="n">ensure_supported_audio_input</span><span class="p">(</span><span class="s2">"audio_size_filter"</span><span class="p">,</span> <span class="p">(</span><span class="s2">"BYTES"</span><span class="p">,</span> <span class="s2">"URI"</span><span class="p">),</span> <span class="n">audio_input</span><span class="p">)</span>
         <span class="n">size</span> <span class="o">=</span> <span class="n">audio_encoded_size</span><span class="p">(</span>
             <span class="n">audio_input</span><span class="p">,</span>
             <span class="n">bridge_client</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_bridge_client</span><span class="p">,</span>
-            <span class="n">operator_name</span><span class="o">=</span><span class="s2">&quot;audio_size_filter&quot;</span><span class="p">,</span>
+            <span class="n">operator_name</span><span class="o">=</span><span class="s2">"audio_size_filter"</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">_within_optional_bounds</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_bytes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_bytes</span><span class="p">)</span>
 
@@ -787,7 +787,7 @@ under the License.
     <span class="n">max_bytes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Check whether encoded audio size is within optional byte bounds.</span>
 
 <span class="sd">    Args:</span>
@@ -811,16 +811,16 @@ under the License.
 <span class="sd">        &gt;&gt;&gt; size_filter = audio_size_filter(</span>
 <span class="sd">        ...     max_bytes=10 * 1024 * 1024,</span>
 <span class="sd">        ... )</span>
-<span class="sd">        &gt;&gt;&gt; df = df.filter(size_filter(col(&quot;audio&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt; df = df.filter(size_filter(col("audio")))</span>
 <span class="sd">        &gt;&gt;&gt;</span>
 <span class="sd">        &gt;&gt;&gt; # Usage 2: pass the column directly when building the expression.</span>
 <span class="sd">        &gt;&gt;&gt; df = df.filter(</span>
 <span class="sd">        ...     audio_size_filter(</span>
-<span class="sd">        ...         col(&quot;audio&quot;),</span>
+<span class="sd">        ...         col("audio"),</span>
 <span class="sd">        ...         max_bytes=10 * 1024 * 1024,</span>
 <span class="sd">        ...     )</span>
 <span class="sd">        ... )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
         <span class="n">_AudioSizeFilter</span><span class="p">(</span>
             <span class="n">min_bytes</span><span class="o">=</span><span class="n">min_bytes</span><span class="p">,</span>
@@ -833,21 +833,21 @@ under the License.
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">_AudioSilenceDetection</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Detect continuous low-amplitude ranges in a waveform row.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Detect continuous low-amplitude ranges in a waveform row."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threshold_db</span><span class="p">,</span> <span class="n">min_silence_ms</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">threshold_db</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">threshold_db</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;threshold_db must be a number, got </span><span class="si">{</span><span class="n">threshold_db</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"threshold_db must be a number, got </span><span class="si">{</span><span class="n">threshold_db</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">threshold_db</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;threshold_db must be &lt;= 0, got </span><span class="si">{</span><span class="n">threshold_db</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"threshold_db must be &lt;= 0, got </span><span class="si">{</span><span class="n">threshold_db</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">min_silence_ms</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">min_silence_ms</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;min_silence_ms must be an integer, got </span><span class="si">{</span><span class="n">min_silence_ms</span><span class="si">!r}</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">"min_silence_ms must be an integer, got </span><span class="si">{</span><span class="n">min_silence_ms</span><span class="si">!r}</span><span class="s2">"</span>
             <span class="p">)</span>
         <span class="k">if</span> <span class="n">min_silence_ms</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;min_silence_ms must be non-negative, got </span><span class="si">{</span><span class="n">min_silence_ms</span><span class="si">!r}</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">"min_silence_ms must be non-negative, got </span><span class="si">{</span><span class="n">min_silence_ms</span><span class="si">!r}</span><span class="s2">"</span>
             <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">threshold_db</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">threshold_db</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">min_silence_ms</span> <span class="o">=</span> <span class="n">min_silence_ms</span>
@@ -868,7 +868,7 @@ under the License.
     <span class="n">min_silence_ms</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
     <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Detect low-amplitude silence ranges in an ``AUDIO_WAVEFORM``.</span>
 
 <span class="sd">    This is an energy-based silence detector, not a speech activity detector.</span>
@@ -910,17 +910,17 @@ under the License.
 <span class="sd">    Examples::</span>
 <span class="sd">        &gt;&gt;&gt; # Prepare a decoded waveform before applying silence detection.</span>
 <span class="sd">        &gt;&gt;&gt; decode = audio_decode()</span>
-<span class="sd">        &gt;&gt;&gt; waveform = decode(col(&quot;audio_bytes&quot;))</span>
+<span class="sd">        &gt;&gt;&gt; waveform = decode(col("audio_bytes"))</span>
 <span class="sd">        &gt;&gt;&gt; # Usage 1: create a reusable UDF and apply it to a column.</span>
 <span class="sd">        &gt;&gt;&gt; silence = audio_silence_detection(threshold_db=-45.0)</span>
-<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;silence_ranges&quot;, silence(waveform))</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column("silence_ranges", silence(waveform))</span>
 <span class="sd">        &gt;&gt;&gt;</span>
 <span class="sd">        &gt;&gt;&gt; # Usage 2: pass the column directly when building the expression.</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_column(</span>
-<span class="sd">        ...     &quot;silence_ranges&quot;,</span>
+<span class="sd">        ...     "silence_ranges",</span>
 <span class="sd">        ...     audio_silence_detection(waveform, threshold_db=-45.0),</span>
 <span class="sd">        ... )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
         <span class="n">_AudioSilenceDetection</span><span class="p">(</span>
             <span class="n">threshold_db</span><span class="o">=</span><span class="n">threshold_db</span><span class="p">,</span>
@@ -933,7 +933,7 @@ under the License.
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">_AudioDetectSpeech</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Detect speech activity ranges in a mono waveform row using WebRTC VAD.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Detect speech activity ranges in a mono waveform row using WebRTC VAD."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">aggressiveness</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
@@ -943,26 +943,26 @@ under the License.
                  <span class="n">max_segments</span><span class="o">=</span><span class="mi">1024</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">aggressiveness</span> <span class="o">=</span> <span class="n">_int_range</span><span class="p">(</span>
-            <span class="s2">&quot;audio_detect_speech.aggressiveness&quot;</span><span class="p">,</span>
+            <span class="s2">"audio_detect_speech.aggressiveness"</span><span class="p">,</span>
             <span class="n">aggressiveness</span><span class="p">,</span>
             <span class="mi">0</span><span class="p">,</span>
             <span class="mi">3</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">frame_ms</span> <span class="o">=</span> <span class="n">_int_choice</span><span class="p">(</span>
-            <span class="s2">&quot;audio_detect_speech.frame_ms&quot;</span><span class="p">,</span>
+            <span class="s2">"audio_detect_speech.frame_ms"</span><span class="p">,</span>
             <span class="n">frame_ms</span><span class="p">,</span>
             <span class="n">_WEBRTC_VAD_FRAME_MS</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">min_speech_ms</span> <span class="o">=</span> <span class="n">_non_negative_int</span><span class="p">(</span>
-            <span class="s2">&quot;audio_detect_speech.min_speech_ms&quot;</span><span class="p">,</span>
+            <span class="s2">"audio_detect_speech.min_speech_ms"</span><span class="p">,</span>
             <span class="n">min_speech_ms</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">merge_gap_ms</span> <span class="o">=</span> <span class="n">_non_negative_int</span><span class="p">(</span>
-            <span class="s2">&quot;audio_detect_speech.merge_gap_ms&quot;</span><span class="p">,</span>
+            <span class="s2">"audio_detect_speech.merge_gap_ms"</span><span class="p">,</span>
             <span class="n">merge_gap_ms</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_segments</span> <span class="o">=</span> <span class="n">_positive_int</span><span class="p">(</span>
-            <span class="s2">&quot;audio_detect_speech.max_segments&quot;</span><span class="p">,</span>
+            <span class="s2">"audio_detect_speech.max_segments"</span><span class="p">,</span>
             <span class="n">max_segments</span><span class="p">,</span>
         <span class="p">)</span>
 
@@ -988,7 +988,7 @@ under the License.
     <span class="n">max_segments</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
     <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Detect speech activity ranges in a mono waveform with WebRTC VAD.</span>
 
 <span class="sd">    This operator is the speech-range producer for ``audio_split_by_speech``.</span>
@@ -999,13 +999,13 @@ under the License.
 
 <span class="sd">    Args:</span>
 <span class="sd">        *columns: Optional audio columns. Supported input is a row with fields</span>
-<span class="sd">            ``data TENSOR(&#39;float32&#39;), sample_rate INT, channels INT,</span>
+<span class="sd">            ``data TENSOR('float32'), sample_rate INT, channels INT,</span>
 <span class="sd">            frames BIGINT, sample_format STRING, layout STRING,</span>
 <span class="sd">            duration_ms BIGINT, source_uri STRING, start_time_ms BIGINT,</span>
 <span class="sd">            end_time_ms BIGINT``.</span>
 <span class="sd">        aggressiveness: WebRTC VAD aggressiveness mode, from ``0`` (least</span>
 <span class="sd">            aggressive) to ``3`` (most aggressive). The default ``0`` follows</span>
-<span class="sd">            WebRTC VAD&#39;s least aggressive mode rather than a PyFlink threshold.</span>
+<span class="sd">            WebRTC VAD's least aggressive mode rather than a PyFlink threshold.</span>
 <span class="sd">        frame_ms: WebRTC frame size in milliseconds. Must be ``10``, ``20``,</span>
 <span class="sd">            or ``30``.</span>
 <span class="sd">        min_speech_ms: Drop detected speech ranges shorter than this duration.</span>
@@ -1030,17 +1030,17 @@ under the License.
 <span class="sd">        &gt;&gt;&gt; # Prepare a mono waveform at a WebRTC-supported sample rate.</span>
 <span class="sd">        &gt;&gt;&gt; decode = audio_decode()</span>
 <span class="sd">        &gt;&gt;&gt; standardize = audio_standardize(sample_rate=16000, channels=1)</span>
-<span class="sd">        &gt;&gt;&gt; waveform = standardize(decode(col(&quot;audio_bytes&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt; waveform = standardize(decode(col("audio_bytes")))</span>
 <span class="sd">        &gt;&gt;&gt; # Usage 1: create a reusable UDF and apply it to a column.</span>
 <span class="sd">        &gt;&gt;&gt; detect_speech = audio_detect_speech()</span>
-<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;speech_ranges&quot;, detect_speech(waveform))</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column("speech_ranges", detect_speech(waveform))</span>
 <span class="sd">        &gt;&gt;&gt;</span>
 <span class="sd">        &gt;&gt;&gt; # Usage 2: pass the column directly when building the expression.</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_column(</span>
-<span class="sd">        ...     &quot;speech_ranges&quot;,</span>
+<span class="sd">        ...     "speech_ranges",</span>
 <span class="sd">        ...     audio_detect_speech(waveform),</span>
 <span class="sd">        ... )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
         <span class="n">_AudioDetectSpeech</span><span class="p">(</span>
             <span class="n">aggressiveness</span><span class="o">=</span><span class="n">aggressiveness</span><span class="p">,</span>

@@ -278,21 +278,21 @@ under the License.
 <span class="c1">#  distributed with this work for additional information</span>
 <span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
 <span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
-<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  "License"); you may not use this file except in compliance</span>
 <span class="c1">#  with the License.  You may obtain a copy of the License at</span>
 <span class="c1">#</span>
 <span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="c1">#</span>
 <span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  distributed under the License is distributed on an "AS IS" BASIS,</span>
 <span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1">#  See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 <span class="c1">################################################################################</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">Conversion utilities for creating DataFrame from Python objects.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">builtins</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">TYPE_CHECKING</span>
@@ -316,14 +316,14 @@ under the License.
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table</span><span class="w"> </span><span class="kn">import</span> <span class="n">Table</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;from_dict&quot;</span><span class="p">,</span> <span class="s2">&quot;from_records&quot;</span><span class="p">,</span> <span class="s2">&quot;from_table&quot;</span><span class="p">,</span> <span class="s2">&quot;from_pandas&quot;</span><span class="p">,</span> <span class="s2">&quot;from_arrow&quot;</span><span class="p">,</span> <span class="s2">&quot;range&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"from_dict"</span><span class="p">,</span> <span class="s2">"from_records"</span><span class="p">,</span> <span class="s2">"from_table"</span><span class="p">,</span> <span class="s2">"from_pandas"</span><span class="p">,</span> <span class="s2">"from_arrow"</span><span class="p">,</span> <span class="s2">"range"</span><span class="p">]</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_validate_watermark</span><span class="p">(</span><span class="n">watermark</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
     <span class="k">if</span> <span class="n">watermark</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">watermark</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">watermark</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;watermark must be a tuple of (column, expression)&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"watermark must be a tuple of (column, expression)"</span><span class="p">)</span>
 
     <span class="n">column_name</span><span class="p">,</span> <span class="n">watermark_expr</span> <span class="o">=</span> <span class="n">watermark</span>
     <span class="k">if</span> <span class="p">(</span>
@@ -332,7 +332,7 @@ under the License.
         <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">watermark_expr</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
         <span class="ow">or</span> <span class="ow">not</span> <span class="n">watermark_expr</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
     <span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;watermark column and expression must be non-empty strings&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"watermark column and expression must be non-empty strings"</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">watermark</span>
 
@@ -384,8 +384,8 @@ under the License.
                 <span class="k">return</span> <span class="n">obj</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">schema</span><span class="p">,</span> <span class="n">DataType</span><span class="p">):</span>
             <span class="n">data_type</span> <span class="o">=</span> <span class="n">schema</span>
-            <span class="n">row_type</span> <span class="o">=</span> <span class="n">RowType</span><span class="p">()</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
-            <span class="n">verify_func</span> <span class="o">=</span> <span class="n">_create_type_verifier</span><span class="p">(</span><span class="n">data_type</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;field value&quot;</span><span class="p">)</span>
+            <span class="n">row_type</span> <span class="o">=</span> <span class="n">RowType</span><span class="p">()</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"value"</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
+            <span class="n">verify_func</span> <span class="o">=</span> <span class="n">_create_type_verifier</span><span class="p">(</span><span class="n">data_type</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"field value"</span><span class="p">)</span>
 
             <span class="k">def</span><span class="w"> </span><span class="nf">verify_obj</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
                 <span class="n">verify_func</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
@@ -400,7 +400,7 @@ under the License.
             <span class="n">rows</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">converter</span><span class="p">,</span> <span class="n">rows</span><span class="p">))</span>
         <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">row_type</span><span class="p">,</span> <span class="n">RowType</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-                <span class="s2">&quot;schema should be RowType, list, tuple or None, but got: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">schema</span><span class="p">)</span>
+                <span class="s2">"schema should be RowType, list, tuple or None, but got: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">schema</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">verify_func</span> <span class="o">=</span> <span class="n">_create_type_verifier</span><span class="p">(</span><span class="n">row_type</span><span class="p">)</span>
 
@@ -432,8 +432,8 @@ under the License.
                 <span class="p">[</span><span class="n">RowField</span><span class="p">(</span><span class="n">field_name</span><span class="p">,</span> <span class="n">field_type</span><span class="p">)</span> <span class="k">for</span> <span class="n">field_name</span><span class="p">,</span> <span class="n">field_type</span>
                  <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">arrow_schema</span><span class="o">.</span><span class="n">names</span><span class="p">,</span> <span class="n">schema</span><span class="p">)])</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Unsupported schema type, it could only be of RowType, a &quot;</span>
-                            <span class="s2">&quot;list of str or a list of DataType, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">schema</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"Unsupported schema type, it could only be of RowType, a "</span>
+                            <span class="s2">"list of str or a list of DataType, got </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">schema</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">RowType</span><span class="p">([</span><span class="n">RowField</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">from_arrow_type</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">field</span><span class="o">.</span><span class="n">nullable</span><span class="p">))</span>
                     <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">arrow_schema</span><span class="p">])</span>
@@ -450,15 +450,15 @@ under the License.
     <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
         <span class="k">pass</span>
 
-    <span class="n">to_pydatetime</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s2">&quot;to_pydatetime&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">to_pydatetime</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s2">"to_pydatetime"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">to_pydatetime</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">to_pydatetime</span><span class="p">()</span>
 
-    <span class="n">to_pytimedelta</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s2">&quot;to_pytimedelta&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">to_pytimedelta</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s2">"to_pytimedelta"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">to_pytimedelta</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">to_pytimedelta</span><span class="p">()</span>
 
-    <span class="n">item</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s2">&quot;item&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">item</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s2">"item"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">item</span><span class="p">()</span>
@@ -475,8 +475,8 @@ under the License.
     <span class="p">]</span>
 
 
-<div class="viewcode-block" id="from_table"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.dataframe.from_table.html#pyflink.dataframe.from_table">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">from_table</span><span class="p">(</span><span class="n">table</span><span class="p">:</span> <span class="s2">&quot;Table&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="from_table"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.dataframe.from_table.html#pyflink.dataframe.from_table">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">from_table</span><span class="p">(</span><span class="n">table</span><span class="p">:</span> <span class="s2">"Table"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Create a DataFrame from a PyFlink Table.</span>
 
 <span class="sd">    Args:</span>
@@ -487,9 +487,9 @@ under the License.
 
 <span class="sd">    Example::</span>
 <span class="sd">        &gt;&gt;&gt; import pyflink.dataframe as pf</span>
-<span class="sd">        &gt;&gt;&gt; table = t_env.from_elements([(1, &#39;a&#39;)], [&#39;id&#39;, &#39;name&#39;])</span>
+<span class="sd">        &gt;&gt;&gt; table = t_env.from_elements([(1, 'a')], ['id', 'name'])</span>
 <span class="sd">        &gt;&gt;&gt; df = pf.from_table(table)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">table</span><span class="p">)</span></div>
 
 
@@ -498,7 +498,7 @@ under the License.
     <span class="n">schema</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">watermark</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Create a DataFrame from a Pandas DataFrame.</span>
 
 <span class="sd">    Args:</span>
@@ -512,9 +512,9 @@ under the License.
 <span class="sd">    Example::</span>
 <span class="sd">        &gt;&gt;&gt; import pandas as pd</span>
 <span class="sd">        &gt;&gt;&gt; import pyflink.dataframe as pf</span>
-<span class="sd">        &gt;&gt;&gt; pdf = pd.DataFrame({&quot;a&quot;: [1, 2, 3], &quot;b&quot;: [&quot;x&quot;, &quot;y&quot;, &quot;z&quot;]})</span>
+<span class="sd">        &gt;&gt;&gt; pdf = pd.DataFrame({"a": [1, 2, 3], "b": ["x", "y", "z"]})</span>
 <span class="sd">        &gt;&gt;&gt; df = pf.from_pandas(pdf)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">t_env</span> <span class="o">=</span> <span class="n">get_or_create_table_environment</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">watermark</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">table</span> <span class="o">=</span> <span class="n">t_env</span><span class="o">.</span><span class="n">from_pandas</span><span class="p">(</span><span class="n">pdf</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
@@ -524,7 +524,7 @@ under the License.
 
     <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pdf</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Unsupported type, expected pandas.DataFrame, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="n">pdf</span><span class="p">))</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"Unsupported type, expected pandas.DataFrame, got </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="n">pdf</span><span class="p">))</span>
 
     <span class="n">row_type</span> <span class="o">=</span> <span class="n">_row_type_from_pandas</span><span class="p">(</span><span class="n">pdf</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
     <span class="n">rows</span> <span class="o">=</span> <span class="n">_pandas_rows_to_python</span><span class="p">(</span><span class="n">pdf</span><span class="p">)</span>
@@ -536,7 +536,7 @@ under the License.
     <span class="n">schema</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">watermark</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Create a DataFrame from a PyArrow Table.</span>
 
 <span class="sd">    Args:</span>
@@ -546,12 +546,12 @@ under the License.
 
 <span class="sd">    Returns:</span>
 <span class="sd">        A new DataFrame instance.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">pyarrow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pa</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">pyarrow_hotfix</span>  <span class="c1"># noqa # pylint: disable=unused-import</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">pa</span><span class="o">.</span><span class="n">Table</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Unsupported type, expected pyarrow.Table, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="n">table</span><span class="p">))</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"Unsupported type, expected pyarrow.Table, got </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="n">table</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="n">from_pandas</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">(),</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">,</span> <span class="n">watermark</span><span class="o">=</span><span class="n">watermark</span><span class="p">)</span></div>
 
@@ -561,7 +561,7 @@ under the License.
     <span class="n">schema</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">watermark</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Create a DataFrame from a dictionary of sequences.</span>
 
 <span class="sd">    Args:</span>
@@ -576,19 +576,19 @@ under the License.
 
 <span class="sd">    Example::</span>
 <span class="sd">        &gt;&gt;&gt; import pyflink.dataframe as pf</span>
-<span class="sd">        &gt;&gt;&gt; df = pf.from_dict({&quot;a&quot;: [1, 2, 3], &quot;b&quot;: [&quot;x&quot;, &quot;y&quot;, &quot;z&quot;]})</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; df = pf.from_dict({"a": [1, 2, 3], "b": ["x", "y", "z"]})</span>
+<span class="sd">    """</span>
     <span class="n">t_env</span> <span class="o">=</span> <span class="n">get_or_create_table_environment</span><span class="p">()</span>
     <span class="n">_validate_watermark</span><span class="p">(</span><span class="n">watermark</span><span class="p">)</span>
 
     <span class="c1"># Validate that all columns have the same length</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;data dictionary cannot be empty&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"data dictionary cannot be empty"</span><span class="p">)</span>
 
     <span class="n">lengths</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">lengths</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;All columns must have the same length. Got lengths: </span><span class="si">{</span><span class="n">lengths</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">"All columns must have the same length. Got lengths: </span><span class="si">{</span><span class="n">lengths</span><span class="si">}</span><span class="s2">"</span>
         <span class="p">)</span>
 
     <span class="c1"># Convert to list of rows for from_elements</span>
@@ -598,7 +598,7 @@ under the License.
     <span class="c1"># Validate schema columns exist in data</span>
     <span class="k">for</span> <span class="n">col_name</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">col_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Column &#39;</span><span class="si">{</span><span class="n">col_name</span><span class="si">}</span><span class="s2">&#39; not found in data&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Column '</span><span class="si">{</span><span class="n">col_name</span><span class="si">}</span><span class="s2">' not found in data"</span><span class="p">)</span>
 
     <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">builtins</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="n">num_rows</span><span class="p">):</span>
@@ -617,7 +617,7 @@ under the License.
     <span class="n">schema</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">watermark</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Create a DataFrame from a sequence of records.</span>
 
 <span class="sd">    Args:</span>
@@ -634,13 +634,13 @@ under the License.
 <span class="sd">    Example::</span>
 <span class="sd">        &gt;&gt;&gt; import pyflink.dataframe as pf</span>
 <span class="sd">        &gt;&gt;&gt; # From list of dicts</span>
-<span class="sd">        &gt;&gt;&gt; df = pf.from_records([{&quot;a&quot;: 1, &quot;b&quot;: &quot;x&quot;}, {&quot;a&quot;: 2, &quot;b&quot;: &quot;y&quot;}])</span>
+<span class="sd">        &gt;&gt;&gt; df = pf.from_records([{"a": 1, "b": "x"}, {"a": 2, "b": "y"}])</span>
 
 <span class="sd">        &gt;&gt;&gt; # From list of tuples with schema</span>
-<span class="sd">        &gt;&gt;&gt; df = pf.from_records([(1, &quot;x&quot;), (2, &quot;y&quot;)], schema=[&quot;a&quot;, &quot;b&quot;])</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; df = pf.from_records([(1, "x"), (2, "y")], schema=["a", "b"])</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;data cannot be empty&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"data cannot be empty"</span><span class="p">)</span>
 
     <span class="n">t_env</span> <span class="o">=</span> <span class="n">get_or_create_table_environment</span><span class="p">()</span>
     <span class="n">_validate_watermark</span><span class="p">(</span><span class="n">watermark</span><span class="p">)</span>
@@ -671,8 +671,8 @@ under the License.
         <span class="c1"># Data is list of sequences</span>
         <span class="k">if</span> <span class="n">schema</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;schema is required when data contains sequences (list/tuple). &quot;</span>
-                <span class="s2">&quot;Please provide column names via schema parameter.&quot;</span>
+                <span class="s2">"schema is required when data contains sequences (list/tuple). "</span>
+                <span class="s2">"Please provide column names via schema parameter."</span>
             <span class="p">)</span>
 
         <span class="c1"># Validate each row has the same length as schema</span>
@@ -680,8 +680,8 @@ under the License.
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">record</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">record</span><span class="p">)</span> <span class="o">!=</span> <span class="n">expected_len</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;Record at index </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> has </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">record</span><span class="p">)</span><span class="si">}</span><span class="s2"> elements, &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;expected </span><span class="si">{</span><span class="n">expected_len</span><span class="si">}</span><span class="s2"> (length of schema)&quot;</span>
+                    <span class="sa">f</span><span class="s2">"Record at index </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> has </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">record</span><span class="p">)</span><span class="si">}</span><span class="s2"> elements, "</span>
+                    <span class="sa">f</span><span class="s2">"expected </span><span class="si">{</span><span class="n">expected_len</span><span class="si">}</span><span class="s2"> (length of schema)"</span>
                 <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">watermark</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -692,23 +692,23 @@ under the License.
 
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Unsupported record type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">first_record</span><span class="p">)</span><span class="si">}</span><span class="s2">. &quot;</span>
-            <span class="s2">&quot;Expected dict, list, or tuple.&quot;</span>
+            <span class="sa">f</span><span class="s2">"Unsupported record type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">first_record</span><span class="p">)</span><span class="si">}</span><span class="s2">. "</span>
+            <span class="s2">"Expected dict, list, or tuple."</span>
         <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="range"><a class="viewcode-back" href="../../../reference/pyflink.dataframe/api/pyflink.dataframe.range.html#pyflink.dataframe.range">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">range</span><span class="p">(</span><span class="n">start_or_end</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">step</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Create a DataFrame containing a single ``id`` column over an integer range.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">start_or_end</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;start_or_end must be an integer&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"start_or_end must be an integer"</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">end</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;end must be an integer&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"end must be an integer"</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;step must be an integer&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"step must be an integer"</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">step</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;step must not be zero&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"step must not be zero"</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
@@ -719,9 +719,9 @@ under the License.
 
     <span class="n">rows</span> <span class="o">=</span> <span class="p">[(</span><span class="n">value</span><span class="p">,)</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">builtins</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">)]</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">rows</span><span class="p">:</span>
-        <span class="n">row_type</span> <span class="o">=</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">ROW</span><span class="p">([</span><span class="n">DataTypes</span><span class="o">.</span><span class="n">FIELD</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">BIGINT</span><span class="p">())])</span>
+        <span class="n">row_type</span> <span class="o">=</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">ROW</span><span class="p">([</span><span class="n">DataTypes</span><span class="o">.</span><span class="n">FIELD</span><span class="p">(</span><span class="s2">"id"</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">BIGINT</span><span class="p">())])</span>
         <span class="k">return</span> <span class="n">_from_rows</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">row_type</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">row_type</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">from_records</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">])</span></div>
+    <span class="k">return</span> <span class="n">from_records</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="p">[</span><span class="s2">"id"</span><span class="p">])</span></div>
 </pre></div>
 
             </article>

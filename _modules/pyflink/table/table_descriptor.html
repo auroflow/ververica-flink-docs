@@ -278,13 +278,13 @@ under the License.
 <span class="c1">#  distributed with this work for additional information</span>
 <span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
 <span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
-<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  "License"); you may not use this file except in compliance</span>
 <span class="c1">#  with the License.  You may obtain a copy of the License at</span>
 <span class="c1">#</span>
 <span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="c1">#</span>
 <span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  distributed under the License is distributed on an "AS IS" BASIS,</span>
 <span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1">#  See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
@@ -296,33 +296,33 @@ under the License.
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.schema</span><span class="w"> </span><span class="kn">import</span> <span class="n">Schema</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.util.java_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">to_jarray</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TableDescriptor&#39;</span><span class="p">,</span> <span class="s1">&#39;FormatDescriptor&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'TableDescriptor'</span><span class="p">,</span> <span class="s1">'FormatDescriptor'</span><span class="p">]</span>
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">TableDescriptor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Describes a CatalogTable representing a source or sink.</span>
 
 <span class="sd">    TableDescriptor is a template for creating a CatalogTable instance. It closely resembles the</span>
-<span class="sd">    &quot;CREATE TABLE&quot; SQL DDL statement, containing schema, connector options, and other</span>
+<span class="sd">    "CREATE TABLE" SQL DDL statement, containing schema, connector options, and other</span>
 <span class="sd">    characteristics. Since tables in Flink are typically backed by external systems, the</span>
 <span class="sd">    descriptor describes how a connector (and possibly its format) are configured.</span>
 
 <span class="sd">    This can be used to register a table in the Table API, see :func:`create_temporary_table` in</span>
 <span class="sd">    TableEnvironment.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_table_descriptor</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_table_descriptor</span> <span class="o">=</span> <span class="n">j_table_descriptor</span>
 
 <div class="viewcode-block" id="TableDescriptor.for_connector"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.table_descriptor.TableDescriptor.for_connector.html#pyflink.table.table_descriptor.TableDescriptor.for_connector">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">for_connector</span><span class="p">(</span><span class="n">connector</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;TableDescriptor.Builder&#39;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">for_connector</span><span class="p">(</span><span class="n">connector</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'TableDescriptor.Builder'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates a new :class:`~pyflink.table.TableDescriptor.Builder` for a table using the given</span>
 <span class="sd">        connector.</span>
 
 <span class="sd">        :param connector: The factory identifier for the connector.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
         <span class="n">j_builder</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">TableDescriptor</span><span class="o">.</span><span class="n">forConnector</span><span class="p">(</span><span class="n">connector</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">TableDescriptor</span><span class="o">.</span><span class="n">Builder</span><span class="p">(</span><span class="n">j_builder</span><span class="p">)</span></div>
@@ -358,22 +358,22 @@ under the License.
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_table_descriptor</span><span class="o">.</span><span class="n">hashCode</span><span class="p">()</span>
 
     <span class="k">class</span><span class="w"> </span><span class="nc">Builder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Builder for TableDescriptor.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_builder</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span> <span class="o">=</span> <span class="n">j_builder</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">schema</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">schema</span><span class="p">:</span> <span class="n">Schema</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;TableDescriptor.Builder&#39;</span><span class="p">:</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">schema</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">schema</span><span class="p">:</span> <span class="n">Schema</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'TableDescriptor.Builder'</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">"""</span>
 <span class="sd">            Define the schema of the TableDescriptor.</span>
-<span class="sd">            &quot;&quot;&quot;</span>
+<span class="sd">            """</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">schema</span><span class="o">.</span><span class="n">_j_schema</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ConfigOption</span><span class="p">],</span> <span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;TableDescriptor.Builder&#39;</span><span class="p">:</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ConfigOption</span><span class="p">],</span> <span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'TableDescriptor.Builder'</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">"""</span>
 <span class="sd">            Sets the given option on the table.</span>
 
 <span class="sd">            Option keys must be fully specified. When defining options for a Format, use</span>
@@ -382,11 +382,11 @@ under the License.
 <span class="sd">            Example:</span>
 <span class="sd">            ::</span>
 
-<span class="sd">                &gt;&gt;&gt; TableDescriptor.for_connector(&quot;kafka&quot;) \</span>
-<span class="sd">                ...     .option(&quot;scan.startup.mode&quot;, &quot;latest-offset&quot;) \</span>
+<span class="sd">                &gt;&gt;&gt; TableDescriptor.for_connector("kafka") \</span>
+<span class="sd">                ...     .option("scan.startup.mode", "latest-offset") \</span>
 <span class="sd">                ...     .build()</span>
 
-<span class="sd">            &quot;&quot;&quot;</span>
+<span class="sd">            """</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
@@ -394,9 +394,9 @@ under the License.
             <span class="k">return</span> <span class="bp">self</span>
 
         <span class="k">def</span><span class="w"> </span><span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                   <span class="nb">format</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;FormatDescriptor&#39;</span><span class="p">],</span>
-                   <span class="n">format_option</span><span class="p">:</span> <span class="n">ConfigOption</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;TableDescriptor.Builder&#39;</span><span class="p">:</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+                   <span class="nb">format</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s1">'FormatDescriptor'</span><span class="p">],</span>
+                   <span class="n">format_option</span><span class="p">:</span> <span class="n">ConfigOption</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'TableDescriptor.Builder'</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">"""</span>
 <span class="sd">            Defines the format to be used for this table.</span>
 
 <span class="sd">            Note that not every connector requires a format to be specified, while others may use</span>
@@ -405,17 +405,17 @@ under the License.
 <span class="sd">            Example:</span>
 <span class="sd">            ::</span>
 
-<span class="sd">                &gt;&gt;&gt; TableDescriptor.for_connector(&quot;kafka&quot;) \</span>
-<span class="sd">                ...     .format(FormatDescriptor.for_format(&quot;json&quot;)</span>
-<span class="sd">                ...                 .option(&quot;ignore-parse-errors&quot;, &quot;true&quot;)</span>
+<span class="sd">                &gt;&gt;&gt; TableDescriptor.for_connector("kafka") \</span>
+<span class="sd">                ...     .format(FormatDescriptor.for_format("json")</span>
+<span class="sd">                ...                 .option("ignore-parse-errors", "true")</span>
 <span class="sd">                ...                 .build())</span>
 
 <span class="sd">                will result in the options:</span>
 
-<span class="sd">                    &#39;format&#39; = &#39;json&#39;</span>
-<span class="sd">                    &#39;json.ignore-parse-errors&#39; = &#39;true&#39;</span>
+<span class="sd">                    'format' = 'json'</span>
+<span class="sd">                    'json.ignore-parse-errors' = 'true'</span>
 
-<span class="sd">            &quot;&quot;&quot;</span>
+<span class="sd">            """</span>
             <span class="k">if</span> <span class="n">format_option</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">format</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">format</span><span class="p">)</span>
@@ -429,48 +429,48 @@ under the License.
                         <span class="n">format_option</span><span class="o">.</span><span class="n">_j_config_option</span><span class="p">,</span> <span class="nb">format</span><span class="o">.</span><span class="n">_j_format_descriptor</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">partitioned_by</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">partition_keys</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;TableDescriptor.Builder&#39;</span><span class="p">:</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">partitioned_by</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">partition_keys</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'TableDescriptor.Builder'</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">"""</span>
 <span class="sd">            Define which columns this table is partitioned by.</span>
-<span class="sd">            &quot;&quot;&quot;</span>
+<span class="sd">            """</span>
             <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">partitionedBy</span><span class="p">(</span><span class="n">to_jarray</span><span class="p">(</span><span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">java</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">String</span><span class="p">,</span> <span class="n">partition_keys</span><span class="p">))</span>
             <span class="k">return</span> <span class="bp">self</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">comment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comment</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;TableDescriptor.Builder&#39;</span><span class="p">:</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">comment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">comment</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'TableDescriptor.Builder'</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">"""</span>
 <span class="sd">            Define the comment for this table.</span>
-<span class="sd">            &quot;&quot;&quot;</span>
+<span class="sd">            """</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">comment</span><span class="p">(</span><span class="n">comment</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;TableDescriptor&#39;</span><span class="p">:</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'TableDescriptor'</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">"""</span>
 <span class="sd">            Returns an immutable instance of :class:`~pyflink.table.TableDescriptor`.</span>
-<span class="sd">            &quot;&quot;&quot;</span>
+<span class="sd">            """</span>
             <span class="k">return</span> <span class="n">TableDescriptor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">build</span><span class="p">())</span>
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">FormatDescriptor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Describes a Format and its options for use with :class:`~pyflink.table.TableDescriptor`.</span>
 
 <span class="sd">    Formats are responsible for encoding and decoding data in table connectors. Note that not</span>
 <span class="sd">    every connector has a format, while others may have multiple formats (e.g. the Kafka connector</span>
-<span class="sd">    has separate formats for keys and values). Common formats are &quot;json&quot;, &quot;csv&quot;, &quot;avro&quot;, etc.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    has separate formats for keys and values). Common formats are "json", "csv", "avro", etc.</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_format_descriptor</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_format_descriptor</span> <span class="o">=</span> <span class="n">j_format_descriptor</span>
 
 <div class="viewcode-block" id="FormatDescriptor.for_format"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.table_descriptor.FormatDescriptor.for_format.html#pyflink.table.table_descriptor.FormatDescriptor.for_format">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">for_format</span><span class="p">(</span><span class="nb">format</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;FormatDescriptor.Builder&#39;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">for_format</span><span class="p">(</span><span class="nb">format</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'FormatDescriptor.Builder'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates a new :class:`~pyflink.table.FormatDescriptor.Builder` describing a format with the</span>
 <span class="sd">        given format identifier.</span>
 
 <span class="sd">        :param format: The factory identifier for the format.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
         <span class="n">j_builder</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">FormatDescriptor</span><span class="o">.</span><span class="n">forFormat</span><span class="p">(</span><span class="nb">format</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">FormatDescriptor</span><span class="o">.</span><span class="n">Builder</span><span class="p">(</span><span class="n">j_builder</span><span class="p">)</span></div>
@@ -492,15 +492,15 @@ under the License.
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_format_descriptor</span><span class="o">.</span><span class="n">hashCode</span><span class="p">()</span>
 
     <span class="k">class</span><span class="w"> </span><span class="nc">Builder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Builder for FormatDescriptor.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_builder</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span> <span class="o">=</span> <span class="n">j_builder</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ConfigOption</span><span class="p">],</span> <span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;FormatDescriptor.Builder&#39;</span><span class="p">:</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ConfigOption</span><span class="p">],</span> <span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'FormatDescriptor.Builder'</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">"""</span>
 <span class="sd">            Sets the given option on the format.</span>
 
 <span class="sd">            Note that format options must not be prefixed with the format identifier itself here.</span>
@@ -508,26 +508,26 @@ under the License.
 <span class="sd">            Example:</span>
 <span class="sd">            ::</span>
 
-<span class="sd">                &gt;&gt;&gt; FormatDescriptor.for_format(&quot;json&quot;) \</span>
-<span class="sd">                ...     .option(&quot;ignore-parse-errors&quot;, &quot;true&quot;) \</span>
+<span class="sd">                &gt;&gt;&gt; FormatDescriptor.for_format("json") \</span>
+<span class="sd">                ...     .option("ignore-parse-errors", "true") \</span>
 <span class="sd">                ...     .build()</span>
 
 <span class="sd">                will automatically be converted into its prefixed form:</span>
 
-<span class="sd">                    &#39;format&#39; = &#39;json&#39;</span>
-<span class="sd">                    &#39;json.ignore-parse-errors&#39; = &#39;true&#39;</span>
+<span class="sd">                    'format' = 'json'</span>
+<span class="sd">                    'json.ignore-parse-errors' = 'true'</span>
 
-<span class="sd">            &quot;&quot;&quot;</span>
+<span class="sd">            """</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">_j_config_option</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;FormatDescriptor&#39;</span><span class="p">:</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'FormatDescriptor'</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">"""</span>
 <span class="sd">            Returns an immutable instance of :class:`~pyflink.table.FormatDescriptor`.</span>
-<span class="sd">            &quot;&quot;&quot;</span>
+<span class="sd">            """</span>
             <span class="k">return</span> <span class="n">FormatDescriptor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">build</span><span class="p">())</span>
 </pre></div>
 

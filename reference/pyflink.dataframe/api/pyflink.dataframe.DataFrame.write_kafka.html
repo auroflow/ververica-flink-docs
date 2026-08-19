@@ -410,65 +410,65 @@ By default, inherits parallelism from the upstream operator.</p></li>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pf</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">from_records</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;alice&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;bob&quot;</span><span class="p">)],</span>
-<span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;user_id&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"alice"</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">"bob"</span><span class="p">)],</span>
+<span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">[</span><span class="s2">"user_id"</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">],</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Simple write with JSON format</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">write_kafka</span><span class="p">(</span><span class="s2">&quot;localhost:9092&quot;</span><span class="p">,</span> <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;user_events&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">write_kafka</span><span class="p">(</span><span class="s2">"localhost:9092"</span><span class="p">,</span> <span class="n">topic</span><span class="o">=</span><span class="s2">"user_events"</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Write with Avro format</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">write_kafka</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;localhost:9092&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;user_events&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;avro&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"localhost:9092"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">"user_events"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="nb">format</span><span class="o">=</span><span class="s2">"avro"</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Write with key fields</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">write_kafka</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;localhost:9092&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;user_events&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">key_format</span><span class="o">=</span><span class="s2">&quot;json&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">key_fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;user_id&quot;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="s2">"localhost:9092"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">"user_events"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">key_format</span><span class="o">=</span><span class="s2">"json"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">key_fields</span><span class="o">=</span><span class="p">[</span><span class="s2">"user_id"</span><span class="p">],</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Write with exactly-once delivery guarantee</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">write_kafka</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;localhost:9092&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;user_events&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">delivery_guarantee</span><span class="o">=</span><span class="s2">&quot;exactly-once&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">transactional_id_prefix</span><span class="o">=</span><span class="s2">&quot;my-app-sink&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"localhost:9092"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">"user_events"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">delivery_guarantee</span><span class="o">=</span><span class="s2">"exactly-once"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">transactional_id_prefix</span><span class="o">=</span><span class="s2">"my-app-sink"</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Write with fixed partitioning and parallelism</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">write_kafka</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;localhost:9092&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;user_events&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">partitioner</span><span class="o">=</span><span class="s2">&quot;fixed&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"localhost:9092"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">"user_events"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">partitioner</span><span class="o">=</span><span class="s2">"fixed"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">parallelism</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Write with JSON format options</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">write_kafka</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;localhost:9092&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;user_events&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;json&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"localhost:9092"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">"user_events"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="nb">format</span><span class="o">=</span><span class="s2">"json"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">format_options</span><span class="o">=</span><span class="p">{</span>
-<span class="gp">... </span>        <span class="s2">&quot;timestamp-format.standard&quot;</span><span class="p">:</span> <span class="s2">&quot;ISO-8601&quot;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">"timestamp-format.standard"</span><span class="p">:</span> <span class="s2">"ISO-8601"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="p">},</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Write with Kafka security (SASL/SSL)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">write_kafka</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;localhost:9092&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;secure_events&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"localhost:9092"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">topic</span><span class="o">=</span><span class="s2">"secure_events"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">properties</span><span class="o">=</span><span class="p">{</span>
-<span class="gp">... </span>        <span class="s2">&quot;security.protocol&quot;</span><span class="p">:</span> <span class="s2">&quot;SASL_SSL&quot;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s2">&quot;sasl.mechanism&quot;</span><span class="p">:</span> <span class="s2">&quot;PLAIN&quot;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s2">&quot;sasl.jaas.config&quot;</span><span class="p">:</span> <span class="p">(</span>
-<span class="gp">... </span>            <span class="s2">&quot;org.apache.kafka.common.security.plain&quot;</span>
-<span class="gp">... </span>            <span class="s2">&quot;.PlainLoginModule required&quot;</span>
-<span class="gp">... </span>            <span class="s1">&#39; username=&quot;user&quot; password=&quot;pass&quot;;&#39;</span>
+<span class="gp">... </span>        <span class="s2">"security.protocol"</span><span class="p">:</span> <span class="s2">"SASL_SSL"</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">"sasl.mechanism"</span><span class="p">:</span> <span class="s2">"PLAIN"</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">"sasl.jaas.config"</span><span class="p">:</span> <span class="p">(</span>
+<span class="gp">... </span>            <span class="s2">"org.apache.kafka.common.security.plain"</span>
+<span class="gp">... </span>            <span class="s2">".PlainLoginModule required"</span>
+<span class="gp">... </span>            <span class="s1">' username="user" password="pass";'</span>
 <span class="gp">... </span>        <span class="p">),</span>
 <span class="gp">... </span>    <span class="p">},</span>
 <span class="gp">... </span><span class="p">)</span>

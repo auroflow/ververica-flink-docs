@@ -278,13 +278,13 @@ under the License.
 <span class="c1">#  distributed with this work for additional information</span>
 <span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
 <span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
-<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  "License"); you may not use this file except in compliance</span>
 <span class="c1">#  with the License.  You may obtain a copy of the License at</span>
 <span class="c1">#</span>
 <span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="c1">#</span>
 <span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  distributed under the License is distributed on an "AS IS" BASIS,</span>
 <span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1">#  See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
@@ -298,10 +298,10 @@ under the License.
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.java_gateway</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_gateway</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;CheckpointStorage&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;JobManagerCheckpointStorage&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;FileSystemCheckpointStorage&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;CustomCheckpointStorage&#39;</span><span class="p">]</span>
+    <span class="s1">'CheckpointStorage'</span><span class="p">,</span>
+    <span class="s1">'JobManagerCheckpointStorage'</span><span class="p">,</span>
+    <span class="s1">'FileSystemCheckpointStorage'</span><span class="p">,</span>
+    <span class="s1">'CustomCheckpointStorage'</span><span class="p">]</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_from_j_checkpoint_storage</span><span class="p">(</span><span class="n">j_checkpoint_storage</span><span class="p">):</span>
@@ -317,7 +317,7 @@ under the License.
     <span class="n">j_clz</span> <span class="o">=</span> <span class="n">j_checkpoint_storage</span><span class="o">.</span><span class="n">getClass</span><span class="p">()</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">get_java_class</span><span class="p">(</span><span class="n">JCheckpointStorage</span><span class="p">)</span><span class="o">.</span><span class="n">isAssignableFrom</span><span class="p">(</span><span class="n">j_clz</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> is not an instance of CheckpointStorage.&quot;</span> <span class="o">%</span> <span class="n">j_checkpoint_storage</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"</span><span class="si">%s</span><span class="s2"> is not an instance of CheckpointStorage."</span> <span class="o">%</span> <span class="n">j_checkpoint_storage</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">get_java_class</span><span class="p">(</span><span class="n">JJobManagerCheckpointStorage</span><span class="p">)</span><span class="o">.</span><span class="n">isAssignableFrom</span><span class="p">(</span><span class="n">j_clz</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">JobManagerCheckpointStorage</span><span class="p">(</span><span class="n">j_jobmanager_checkpoint_storage</span><span class="o">=</span><span class="n">j_checkpoint_storage</span><span class="p">)</span>
@@ -328,8 +328,8 @@ under the License.
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">CheckpointStorage</span><span class="p">(</span><span class="nb">object</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Checkpoint storage defines how :class:`StateBackend`&#39;s store their state for fault-tolerance</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Checkpoint storage defines how :class:`StateBackend`'s store their state for fault-tolerance</span>
 <span class="sd">    in streaming applications. Various implementations store their checkpoints in different fashions</span>
 <span class="sd">    and have different requirements and availability guarantees.</span>
 
@@ -367,23 +367,23 @@ under the License.
 
 <span class="sd">    Checkpoint storage implementations have to be thread-safe. Multiple threads may be creating</span>
 <span class="sd">    streams concurrently.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_checkpoint_storage</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_checkpoint_storage</span> <span class="o">=</span> <span class="n">j_checkpoint_storage</span>
 
 
 <div class="viewcode-block" id="JobManagerCheckpointStorage"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.checkpoint_storage.JobManagerCheckpointStorage.html#pyflink.datastream.checkpoint_storage.JobManagerCheckpointStorage">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">JobManagerCheckpointStorage</span><span class="p">(</span><span class="n">CheckpointStorage</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    The `CheckpointStorage` checkpoints state directly to the JobManager&#39;s memory (hence the</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    The `CheckpointStorage` checkpoints state directly to the JobManager's memory (hence the</span>
 <span class="sd">    name), but savepoints will be persisted to a file system.</span>
 
 <span class="sd">    This checkpoint storage is primarily for experimentation, quick local setups, or for streaming</span>
 <span class="sd">    applications that have very small state: Because it requires checkpoints to go through the</span>
-<span class="sd">    JobManager&#39;s memory, larger state will occupy larger portions of the JobManager&#39;s main memory,</span>
+<span class="sd">    JobManager's memory, larger state will occupy larger portions of the JobManager's main memory,</span>
 <span class="sd">    reducing operational stability. For any other setup, the `FileSystemCheckpointStorage`</span>
 <span class="sd">    should be used. The `FileSystemCheckpointStorage` but checkpoints state directly to files</span>
-<span class="sd">    rather than to the JobManager&#39;s memory, thus supporting larger state sizes and more highly</span>
+<span class="sd">    rather than to the JobManager's memory, thus supporting larger state sizes and more highly</span>
 <span class="sd">    available recovery.</span>
 
 <span class="sd">    **State Size Considerations**</span>
@@ -398,7 +398,7 @@ under the License.
 <span class="sd">      be default &lt; 10 MB. That limit can be configured up, but that is typically not advised.</span>
 
 <span class="sd">    - The sum of all states in the application times all retained checkpoints must comfortably</span>
-<span class="sd">      fit into the JobManager&#39;s JVM heap space.</span>
+<span class="sd">      fit into the JobManager's JVM heap space.</span>
 
 <span class="sd">    **Persistence Guarantees**</span>
 
@@ -417,7 +417,7 @@ under the License.
 <span class="sd">    application without a default savepoint directory, it will pick up a default savepoint</span>
 <span class="sd">    directory specified in the Flink configuration of the running job/cluster. That behavior is</span>
 <span class="sd">    implemented via the :func:`configure` method.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># The default maximal size that the snapshotted memory state may have (5 MiBytes).</span>
     <span class="n">DEFAULT_MAX_STATE_SIZE</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span>
@@ -426,7 +426,7 @@ under the License.
                  <span class="n">checkpoint_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">max_state_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">j_jobmanager_checkpoint_storage</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates a new JobManagerCheckpointStorage, setting optionally the paths to persist</span>
 <span class="sd">        checkpoint metadata to, as well as configuring state thresholds.</span>
 
@@ -444,7 +444,7 @@ under the License.
 <span class="sd">        :param max_state_size: The maximal size of the serialized state. If none, the</span>
 <span class="sd">                               :data:`DEFAULT_MAX_STATE_SIZE` will be used.</span>
 <span class="sd">        :param j_jobmanager_checkpoint_storage: For internal use, please keep none.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">j_jobmanager_checkpoint_storage</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
             <span class="n">JJobManagerCheckpointStorage</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">storage</span>\
@@ -461,12 +461,12 @@ under the License.
         <span class="nb">super</span><span class="p">(</span><span class="n">JobManagerCheckpointStorage</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">j_jobmanager_checkpoint_storage</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_checkpoint_path</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the base directory where all the checkpoints are stored.</span>
 <span class="sd">        The job-specific checkpoint directory is created inside this directory.</span>
 
 <span class="sd">        :return: The base directory for checkpoints.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">j_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_checkpoint_storage</span><span class="o">.</span><span class="n">getCheckpointPath</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">j_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
@@ -474,19 +474,19 @@ under the License.
             <span class="k">return</span> <span class="n">j_path</span><span class="o">.</span><span class="n">toString</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_max_state_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the maximum size that an individual state can have, as configured in the</span>
 <span class="sd">        constructor. By default :data:`DEFAULT_MAX_STATE_SIZE` will be used.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_checkpoint_storage</span><span class="o">.</span><span class="n">getMaxStateSize</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_savepoint_path</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the base directory where all the savepoints are stored.</span>
 <span class="sd">        The job-specific savepoint directory is created inside this directory.</span>
 
 <span class="sd">        :return: The base directory for savepoints.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="n">j_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_checkpoint_storage</span><span class="o">.</span><span class="n">getSavepointPath</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">j_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -499,7 +499,7 @@ under the License.
 
 
 <div class="viewcode-block" id="FileSystemCheckpointStorage"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.checkpoint_storage.FileSystemCheckpointStorage.html#pyflink.datastream.checkpoint_storage.FileSystemCheckpointStorage">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">FileSystemCheckpointStorage</span><span class="p">(</span><span class="n">CheckpointStorage</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    `FileSystemCheckpointStorage` checkpoints state as files to a filesystem.</span>
 
 <span class="sd">    Each checkpoint will store all its files in a subdirectory that includes the</span>
@@ -510,7 +510,7 @@ under the License.
 <span class="sd">    This checkpoint storage stores small state chunks directly with the metadata, to avoid creating</span>
 <span class="sd">    many small files. The threshold for that is configurable. When increasing this threshold, the</span>
 <span class="sd">    size of the checkpoint metadata increases. The checkpoint metadata of all retained completed</span>
-<span class="sd">    checkpoints needs to fit into the JobManager&#39;s heap memory. This is typically not a problem,</span>
+<span class="sd">    checkpoints needs to fit into the JobManager's heap memory. This is typically not a problem,</span>
 <span class="sd">    unless the threashold `get_min_file_size_threshold` is increased significantly.</span>
 
 <span class="sd">    **Persistence Guarantees**</span>
@@ -530,7 +530,7 @@ under the License.
 <span class="sd">    configuration parameters from the Flink configuration. For example, if the storage is configured</span>
 <span class="sd">    in the application without a default savepoint directory, it will pick up a default savepoint</span>
 <span class="sd">    directory specified in the Flink configuration of the running job/cluster.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># Maximum size of state that is stored with the metadata, rather than in files (1 MiByte).</span>
     <span class="n">MAX_FILE_STATE_THRESHOLD</span> <span class="o">=</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span>
@@ -540,7 +540,7 @@ under the License.
                  <span class="n">file_state_size_threshold</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">write_buffer_size</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
                  <span class="n">j_filesystem_checkpoint_storage</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates a new FileSystemCheckpointStorage, setting the paths for the checkpoint data</span>
 <span class="sd">        in a file system.</span>
 
@@ -553,7 +553,7 @@ under the License.
 
 <span class="sd">        Example:</span>
 <span class="sd">        ::</span>
-<span class="sd">            &gt;&gt;&gt; checkpoint_storage = FileSystemCheckpointStorage(&quot;hdfs://checkpoints&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; checkpoint_storage = FileSystemCheckpointStorage("hdfs://checkpoints")</span>
 
 <span class="sd">        :param checkpoint_path: The path to write checkpoint metadata to. If none, the value from</span>
 <span class="sd">                                the runtime configuration will be used.</span>
@@ -565,7 +565,7 @@ under the License.
 <span class="sd">                                    configured in the runtime configuration will be used, or the</span>
 <span class="sd">                                    default value (4KB) if nothing is configured.</span>
 <span class="sd">        :param j_filesystem_checkpoint_storage: For internal use, please keep none.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">j_filesystem_checkpoint_storage</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
             <span class="n">JFileSystemCheckpointStorage</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">storage</span>\
@@ -573,7 +573,7 @@ under the License.
             <span class="n">JPath</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">Path</span>
 
             <span class="k">if</span> <span class="n">checkpoint_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;checkpoint_path must not be None&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"checkpoint_path must not be None"</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">checkpoint_path</span> <span class="o">=</span> <span class="n">JPath</span><span class="p">(</span><span class="n">checkpoint_path</span><span class="p">)</span>
 
@@ -588,21 +588,21 @@ under the License.
         <span class="nb">super</span><span class="p">(</span><span class="n">FileSystemCheckpointStorage</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">j_filesystem_checkpoint_storage</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_checkpoint_path</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the base directory where all the checkpoints are stored.</span>
 <span class="sd">        The job-specific checkpoint directory is created inside this directory.</span>
 
 <span class="sd">        :return: The base directory for checkpoints.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_checkpoint_storage</span><span class="o">.</span><span class="n">getCheckpointPath</span><span class="p">()</span><span class="o">.</span><span class="n">toString</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_savepoint_path</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the base directory where all the savepoints are stored.</span>
 <span class="sd">        The job-specific savepoint directory is created inside this directory.</span>
 
 <span class="sd">        :return: The base directory for savepoints.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="n">j_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_checkpoint_storage</span><span class="o">.</span><span class="n">getSavepointPath</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">j_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -611,17 +611,17 @@ under the License.
             <span class="k">return</span> <span class="n">j_path</span><span class="o">.</span><span class="n">toString</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_min_file_size_threshold</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the threshold below which state is stored as part of the metadata, rather than in</span>
 <span class="sd">        file. This threshold ensures the backend does not create a large amount of small files,</span>
 <span class="sd">        where potentially the file pointers are larget than the state itself.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_checkpoint_storage</span><span class="o">.</span><span class="n">getMinFileSizeThreshold</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_write_buffer_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the write buffer size for created checkpoint streams.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_checkpoint_storage</span><span class="o">.</span><span class="n">getWriteBufferSize</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -629,9 +629,9 @@ under the License.
 
 
 <div class="viewcode-block" id="CustomCheckpointStorage"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.checkpoint_storage.CustomCheckpointStorage.html#pyflink.datastream.checkpoint_storage.CustomCheckpointStorage">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">CustomCheckpointStorage</span><span class="p">(</span><span class="n">CheckpointStorage</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A wrapper of customized java checkpoint storage.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_custom_checkpoint_storage</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">CustomCheckpointStorage</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">j_custom_checkpoint_storage</span><span class="p">)</span></div>

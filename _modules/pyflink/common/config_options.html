@@ -278,13 +278,13 @@ under the License.
 <span class="c1">#  distributed with this work for additional information</span>
 <span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
 <span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
-<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  "License"); you may not use this file except in compliance</span>
 <span class="c1">#  with the License.  You may obtain a copy of the License at</span>
 <span class="c1">#</span>
 <span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="c1">#</span>
 <span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  distributed under the License is distributed on an "AS IS" BASIS,</span>
 <span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1">#  See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
@@ -293,13 +293,13 @@ under the License.
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.java_gateway</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_gateway</span>
 
-<span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">)</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">'T'</span><span class="p">)</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ConfigOptions&#39;</span><span class="p">,</span> <span class="s1">&#39;ConfigOption&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'ConfigOptions'</span><span class="p">,</span> <span class="s1">'ConfigOption'</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="ConfigOptions"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.config_options.ConfigOptions.html#pyflink.common.config_options.ConfigOptions">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">ConfigOptions</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    {@code ConfigOptions} are used to build a :class:`~pyflink.common.ConfigOption`. The option is</span>
 <span class="sd">    typically built in one of the following patterns:</span>
 
@@ -307,24 +307,24 @@ under the License.
 <span class="sd">    ::</span>
 
 <span class="sd">        # simple string-valued option with a default value</span>
-<span class="sd">        &gt;&gt;&gt; ConfigOptions.key(&quot;tmp.dir&quot;).string_type().default_value(&quot;/tmp&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; ConfigOptions.key("tmp.dir").string_type().default_value("/tmp")</span>
 <span class="sd">        # simple integer-valued option with a default value</span>
-<span class="sd">        &gt;&gt;&gt; ConfigOptions.key(&quot;application.parallelism&quot;).int_type().default_value(100)</span>
+<span class="sd">        &gt;&gt;&gt; ConfigOptions.key("application.parallelism").int_type().default_value(100)</span>
 <span class="sd">        # option with no default value</span>
-<span class="sd">        &gt;&gt;&gt; ConfigOptions.key(&quot;user.name&quot;).string_type().no_default_value()</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; ConfigOptions.key("user.name").string_type().no_default_value()</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_config_options</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_config_options</span> <span class="o">=</span> <span class="n">j_config_options</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">key</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Starts building a new ConfigOption.</span>
 
 <span class="sd">        :param key: The key for the config option.</span>
 <span class="sd">        :return: The builder for the config option with the given key.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
         <span class="n">j_option_builder</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">ConfigOptions</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ConfigOptions</span><span class="o">.</span><span class="n">OptionBuilder</span><span class="p">(</span><span class="n">j_option_builder</span><span class="p">)</span>
@@ -333,66 +333,66 @@ under the License.
         <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_option_builder</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_option_builder</span> <span class="o">=</span> <span class="n">j_option_builder</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">boolean_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ConfigOptions.TypedConfigOptionBuilder[bool]&#39;</span><span class="p">:</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">boolean_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'ConfigOptions.TypedConfigOptionBuilder[bool]'</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">"""</span>
 <span class="sd">            Defines that the value of the option should be of bool type.</span>
-<span class="sd">            &quot;&quot;&quot;</span>
+<span class="sd">            """</span>
             <span class="k">return</span> <span class="n">ConfigOptions</span><span class="o">.</span><span class="n">TypedConfigOptionBuilder</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_option_builder</span><span class="o">.</span><span class="n">booleanType</span><span class="p">())</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">int_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ConfigOptions.TypedConfigOptionBuilder[int]&#39;</span><span class="p">:</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">int_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'ConfigOptions.TypedConfigOptionBuilder[int]'</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">"""</span>
 <span class="sd">            Defines that the value of the option should be of int type</span>
 <span class="sd">            (from -2,147,483,648 to 2,147,483,647).</span>
-<span class="sd">            &quot;&quot;&quot;</span>
+<span class="sd">            """</span>
             <span class="k">return</span> <span class="n">ConfigOptions</span><span class="o">.</span><span class="n">TypedConfigOptionBuilder</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_option_builder</span><span class="o">.</span><span class="n">intType</span><span class="p">())</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">long_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ConfigOptions.TypedConfigOptionBuilder[int]&#39;</span><span class="p">:</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">long_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'ConfigOptions.TypedConfigOptionBuilder[int]'</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">"""</span>
 <span class="sd">            Defines that the value of the option should be of int type</span>
 <span class="sd">            (from -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807).</span>
-<span class="sd">            &quot;&quot;&quot;</span>
+<span class="sd">            """</span>
             <span class="k">return</span> <span class="n">ConfigOptions</span><span class="o">.</span><span class="n">TypedConfigOptionBuilder</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_option_builder</span><span class="o">.</span><span class="n">longType</span><span class="p">())</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">float_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ConfigOptions.TypedConfigOptionBuilder[float]&#39;</span><span class="p">:</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">float_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'ConfigOptions.TypedConfigOptionBuilder[float]'</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">"""</span>
 <span class="sd">            Defines that the value of the option should be of float type</span>
 <span class="sd">            (4-byte single precision floating point number).</span>
-<span class="sd">            &quot;&quot;&quot;</span>
+<span class="sd">            """</span>
             <span class="k">return</span> <span class="n">ConfigOptions</span><span class="o">.</span><span class="n">TypedConfigOptionBuilder</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_option_builder</span><span class="o">.</span><span class="n">floatType</span><span class="p">())</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">double_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ConfigOptions.TypedConfigOptionBuilder[float]&#39;</span><span class="p">:</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">double_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'ConfigOptions.TypedConfigOptionBuilder[float]'</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">"""</span>
 <span class="sd">            Defines that the value of the option should be of float Double} type</span>
 <span class="sd">            (8-byte double precision floating point number).</span>
-<span class="sd">            &quot;&quot;&quot;</span>
+<span class="sd">            """</span>
             <span class="k">return</span> <span class="n">ConfigOptions</span><span class="o">.</span><span class="n">TypedConfigOptionBuilder</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_option_builder</span><span class="o">.</span><span class="n">doubleType</span><span class="p">())</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">string_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ConfigOptions.TypedConfigOptionBuilder[str]&#39;</span><span class="p">:</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">string_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'ConfigOptions.TypedConfigOptionBuilder[str]'</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">"""</span>
 <span class="sd">            Defines that the value of the option should be of str type.</span>
-<span class="sd">            &quot;&quot;&quot;</span>
+<span class="sd">            """</span>
             <span class="k">return</span> <span class="n">ConfigOptions</span><span class="o">.</span><span class="n">TypedConfigOptionBuilder</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_option_builder</span><span class="o">.</span><span class="n">stringType</span><span class="p">())</span>
 
     <span class="k">class</span><span class="w"> </span><span class="nc">TypedConfigOptionBuilder</span><span class="p">(</span><span class="n">Generic</span><span class="p">[</span><span class="n">T</span><span class="p">]):</span>
         <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_typed_config_option_builder</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_typed_config_option_builder</span> <span class="o">=</span> <span class="n">j_typed_config_option_builder</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">default_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ConfigOption[T]&#39;</span><span class="p">:</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">default_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'ConfigOption[T]'</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">ConfigOption</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_typed_config_option_builder</span><span class="o">.</span><span class="n">defaultValue</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">no_default_value</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ConfigOption[str]&#39;</span><span class="p">:</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">no_default_value</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'ConfigOption[str]'</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">ConfigOption</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_typed_config_option_builder</span><span class="o">.</span><span class="n">noDefaultValue</span><span class="p">())</span></div>
 
 
 <div class="viewcode-block" id="ConfigOption"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.config_options.ConfigOption.html#pyflink.common.config_options.ConfigOption">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">ConfigOption</span><span class="p">(</span><span class="n">Generic</span><span class="p">[</span><span class="n">T</span><span class="p">]):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A {@code ConfigOption} describes a configuration parameter. It encapsulates the configuration</span>
 <span class="sd">    key, deprecated older versions of the key, and an optional default value for the configuration</span>
 <span class="sd">    parameter.</span>
 
 <span class="sd">    {@code ConfigOptions} are built via the ConfigOptions class. Once created, a config</span>
 <span class="sd">    option is immutable.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_config_option</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_config_option</span> <span class="o">=</span> <span class="n">j_config_option</span></div>

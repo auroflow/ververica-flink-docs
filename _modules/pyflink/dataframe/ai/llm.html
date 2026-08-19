@@ -278,19 +278,19 @@ under the License.
 <span class="c1">#  distributed with this work for additional information</span>
 <span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
 <span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
-<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  "License"); you may not use this file except in compliance</span>
 <span class="c1">#  with the License.  You may obtain a copy of the License at</span>
 <span class="c1">#</span>
 <span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="c1">#</span>
 <span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  distributed under the License is distributed on an "AS IS" BASIS,</span>
 <span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1">#  See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 <span class="c1">################################################################################</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">The AI module provides integration with large language models (LLMs) for tasks</span>
 <span class="sd">such as classification, sentiment analysis, text extraction, translation,</span>
 <span class="sd">summarization, PII masking, embedding generation, and vector search. Access</span>
@@ -300,10 +300,10 @@ under the License.
 
 <span class="sd">    import pyflink.dataframe as pf</span>
 
-<span class="sd">    pf.set_model_provider(pf.OpenAICompatProvider(task=&quot;chat/completions&quot;))</span>
-<span class="sd">    df = pf.from_dict({&quot;text&quot;: [&quot;Hello world&quot;, &quot;Bonjour le monde&quot;]})</span>
+<span class="sd">    pf.set_model_provider(pf.OpenAICompatProvider(task="chat/completions"))</span>
+<span class="sd">    df = pf.from_dict({"text": ["Hello world", "Bonjour le monde"]})</span>
 <span class="sd">    df.llm.ai_translate(</span>
-<span class="sd">        &quot;text&quot;, source_lang=&quot;auto&quot;, target_lang=&quot;en&quot;, model=&quot;qwen3.6-plus&quot;).collect()</span>
+<span class="sd">        "text", source_lang="auto", target_lang="en", model="qwen3.6-plus").collect()</span>
 
 <span class="sd">Caching:</span>
 <span class="sd">    LLM functions accept cache_table and cache_key arguments. cache_table must</span>
@@ -335,8 +335,8 @@ under the License.
 <span class="sd">        # | detected_language | STRING | ai_translate output         |</span>
 <span class="sd">        # +-------------------+--------+-----------------------------+</span>
 <span class="sd">        df.llm.ai_translate(</span>
-<span class="sd">            &quot;text&quot;, source_lang=&quot;auto&quot;, target_lang=&quot;en&quot;,</span>
-<span class="sd">            cache_table=&quot;fluss_catalog.default_database.translate_cache&quot;)</span>
+<span class="sd">            "text", source_lang="auto", target_lang="en",</span>
+<span class="sd">            cache_table="fluss_catalog.default_database.translate_cache")</span>
 
 <span class="sd">    Explicit cache key example::</span>
 
@@ -357,11 +357,11 @@ under the License.
 <span class="sd">        # | detected_language | STRING | ai_translate output         |</span>
 <span class="sd">        # +-------------------+--------+-----------------------------+</span>
 <span class="sd">        df.llm.ai_translate(</span>
-<span class="sd">            &quot;text&quot;, source_lang=&quot;auto&quot;, target_lang=&quot;en&quot;,</span>
+<span class="sd">            "text", source_lang="auto", target_lang="en",</span>
 <span class="sd">            cache_table=(</span>
-<span class="sd">                &quot;fluss_catalog.default_database.translate_cache_by_text&quot;),</span>
-<span class="sd">            cache_key=[&quot;tenant_id&quot;, &quot;text&quot;])</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                "fluss_catalog.default_database.translate_cache_by_text"),</span>
+<span class="sd">            cache_key=["tenant_id", "text"])</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">lru_cache</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
@@ -388,7 +388,7 @@ under the License.
 <div class="viewcode-block" id="set_model_provider"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.set_model_provider.html#pyflink.dataframe.ai.llm.set_model_provider">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">set_model_provider</span><span class="p">(</span><span class="n">name_or_provider</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ModelProvider</span><span class="p">],</span>
                        <span class="n">provider</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ModelProvider</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                        <span class="o">**</span><span class="n">options</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Register a global model provider configuration.</span>
 
 <span class="sd">    The registered provider name is the Python-side lookup key accepted by</span>
@@ -405,10 +405,10 @@ under the License.
 
 <span class="sd">    1. ``set_model_provider(model_provider)`` — use</span>
 <span class="sd">       ``model_provider.provider_identifier()`` as the lookup name.</span>
-<span class="sd">    2. ``set_model_provider(&quot;name&quot;, model_provider)`` — register under a</span>
+<span class="sd">    2. ``set_model_provider("name", model_provider)`` — register under a</span>
 <span class="sd">       custom lookup name. This allows registering multiple instances of the</span>
 <span class="sd">       same provider type (e.g. one for chat, one for embeddings).</span>
-<span class="sd">    3. ``set_model_provider(&quot;name&quot;, **options)`` — create a built-in provider</span>
+<span class="sd">    3. ``set_model_provider("name", **options)`` — create a built-in provider</span>
 <span class="sd">       when ``name`` matches a built-in provider identifier, otherwise create</span>
 <span class="sd">       a :class:`GenericProvider` with the given options.</span>
 
@@ -424,39 +424,39 @@ under the License.
 <span class="sd">    Example::</span>
 
 <span class="sd">        &gt;&gt;&gt; import pyflink.dataframe as pf</span>
-<span class="sd">        &gt;&gt;&gt; # Form 1: ModelProvider instance (registered as &quot;openai-compat&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; # Form 1: ModelProvider instance (registered as "openai-compat")</span>
 <span class="sd">        &gt;&gt;&gt; pf.set_model_provider(pf.OpenAICompatProvider(</span>
-<span class="sd">        ...     task=&quot;chat/completions&quot;))</span>
+<span class="sd">        ...     task="chat/completions"))</span>
 <span class="sd">        &gt;&gt;&gt; # Form 2: Custom name + ModelProvider instance</span>
-<span class="sd">        &gt;&gt;&gt; pf.set_model_provider(&quot;chat&quot;, pf.OpenAICompatProvider(</span>
-<span class="sd">        ...     task=&quot;chat/completions&quot;))</span>
-<span class="sd">        &gt;&gt;&gt; pf.set_model_provider(&quot;embedding&quot;, pf.OpenAICompatProvider(</span>
-<span class="sd">        ...     task=&quot;embeddings&quot;))</span>
+<span class="sd">        &gt;&gt;&gt; pf.set_model_provider("chat", pf.OpenAICompatProvider(</span>
+<span class="sd">        ...     task="chat/completions"))</span>
+<span class="sd">        &gt;&gt;&gt; pf.set_model_provider("embedding", pf.OpenAICompatProvider(</span>
+<span class="sd">        ...     task="embeddings"))</span>
 <span class="sd">        &gt;&gt;&gt; # Form 3: Generic string API</span>
 <span class="sd">        &gt;&gt;&gt; pf.set_model_provider(</span>
-<span class="sd">        ...     &quot;openai-compat&quot;,</span>
-<span class="sd">        ...     task=&quot;chat/completions&quot;)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        ...     "openai-compat",</span>
+<span class="sd">        ...     task="chat/completions")</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name_or_provider</span><span class="p">,</span> <span class="n">ModelProvider</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">provider</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;When passing a ModelProvider as the first argument, &quot;</span>
-                <span class="s2">&quot;the second argument must not be a ModelProvider.&quot;</span><span class="p">)</span>
+                <span class="s2">"When passing a ModelProvider as the first argument, "</span>
+                <span class="s2">"the second argument must not be a ModelProvider."</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">options</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;When passing a ModelProvider as the first argument, &quot;</span>
-                <span class="s2">&quot;**options must not be provided.&quot;</span><span class="p">)</span>
+                <span class="s2">"When passing a ModelProvider as the first argument, "</span>
+                <span class="s2">"**options must not be provided."</span><span class="p">)</span>
         <span class="n">p</span> <span class="o">=</span> <span class="n">name_or_provider</span>
         <span class="n">_register_model_provider</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">provider_identifier</span><span class="p">(),</span> <span class="n">p</span><span class="p">)</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name_or_provider</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">provider</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">provider</span><span class="p">,</span> <span class="n">ModelProvider</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;The second argument must be a ModelProvider instance, &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">provider</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+                    <span class="sa">f</span><span class="s2">"The second argument must be a ModelProvider instance, "</span>
+                    <span class="sa">f</span><span class="s2">"got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">provider</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">options</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                    <span class="s2">&quot;Cannot pass both a ModelProvider instance and **options.&quot;</span><span class="p">)</span>
+                    <span class="s2">"Cannot pass both a ModelProvider instance and **options."</span><span class="p">)</span>
             <span class="n">_register_model_provider</span><span class="p">(</span><span class="n">name_or_provider</span><span class="p">,</span> <span class="n">provider</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">_ensure_model_provider_name_available</span><span class="p">(</span><span class="n">name_or_provider</span><span class="p">)</span>
@@ -464,8 +464,8 @@ under the License.
                 <span class="n">name_or_provider</span><span class="p">,</span> <span class="n">create_provider</span><span class="p">(</span><span class="n">name_or_provider</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;First argument must be a str or ModelProvider, got &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">name_or_provider</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span></div>
+            <span class="sa">f</span><span class="s2">"First argument must be a str or ModelProvider, got "</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">name_or_provider</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span></div>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_register_model_provider</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">provider</span><span class="p">:</span> <span class="n">ModelProvider</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -475,11 +475,11 @@ under the License.
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_ensure_model_provider_name_available</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">_provider_registry</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Model provider name </span><span class="si">{</span><span class="n">name</span><span class="si">!r}</span><span class="s2"> is already registered.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Model provider name </span><span class="si">{</span><span class="n">name</span><span class="si">!r}</span><span class="s2"> is already registered."</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="set_default_model_provider"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.set_default_model_provider.html#pyflink.dataframe.ai.llm.set_default_model_provider">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">set_default_model_provider</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Set the default provider lookup name for AI functions.</span>
 
 <span class="sd">    When multiple providers are registered, this determines which one</span>
@@ -492,22 +492,22 @@ under the License.
 <span class="sd">    Example::</span>
 
 <span class="sd">        &gt;&gt;&gt; import pyflink.dataframe as pf</span>
-<span class="sd">        &gt;&gt;&gt; pf.set_model_provider(&quot;chat&quot;, pf.OpenAICompatProvider(</span>
-<span class="sd">        ...     task=&quot;chat/completions&quot;))</span>
-<span class="sd">        &gt;&gt;&gt; pf.set_model_provider(&quot;embedding&quot;, pf.OpenAICompatProvider(</span>
-<span class="sd">        ...     task=&quot;embeddings&quot;))</span>
-<span class="sd">        &gt;&gt;&gt; pf.set_default_model_provider(&quot;chat&quot;)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; pf.set_model_provider("chat", pf.OpenAICompatProvider(</span>
+<span class="sd">        ...     task="chat/completions"))</span>
+<span class="sd">        &gt;&gt;&gt; pf.set_model_provider("embedding", pf.OpenAICompatProvider(</span>
+<span class="sd">        ...     task="embeddings"))</span>
+<span class="sd">        &gt;&gt;&gt; pf.set_default_model_provider("chat")</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_provider_registry</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;ModelProvider </span><span class="si">{</span><span class="n">name</span><span class="si">!r}</span><span class="s2"> is not registered. &quot;</span>
-            <span class="s2">&quot;Call pf.set_model_provider(...) first.&quot;</span><span class="p">)</span>
+            <span class="sa">f</span><span class="s2">"ModelProvider </span><span class="si">{</span><span class="n">name</span><span class="si">!r}</span><span class="s2"> is not registered. "</span>
+            <span class="s2">"Call pf.set_model_provider(...) first."</span><span class="p">)</span>
     <span class="k">global</span> <span class="n">_default_provider</span>
     <span class="n">_default_provider</span> <span class="o">=</span> <span class="n">name</span></div>
 
 
 <div class="viewcode-block" id="list_model_providers"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.list_model_providers.html#pyflink.dataframe.ai.llm.list_model_providers">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">list_model_providers</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    List all registered provider lookup names.</span>
 
 <span class="sd">    Returns:</span>
@@ -517,25 +517,25 @@ under the License.
 <span class="sd">    Example::</span>
 
 <span class="sd">        &gt;&gt;&gt; import pyflink.dataframe as pf</span>
-<span class="sd">        &gt;&gt;&gt; pf.set_model_provider(&quot;chat&quot;, pf.OpenAICompatProvider(</span>
-<span class="sd">        ...     task=&quot;chat/completions&quot;))</span>
-<span class="sd">        &gt;&gt;&gt; pf.set_model_provider(&quot;embedding&quot;, pf.OpenAICompatProvider(</span>
-<span class="sd">        ...     task=&quot;embeddings&quot;))</span>
+<span class="sd">        &gt;&gt;&gt; pf.set_model_provider("chat", pf.OpenAICompatProvider(</span>
+<span class="sd">        ...     task="chat/completions"))</span>
+<span class="sd">        &gt;&gt;&gt; pf.set_model_provider("embedding", pf.OpenAICompatProvider(</span>
+<span class="sd">        ...     task="embeddings"))</span>
 <span class="sd">        &gt;&gt;&gt; pf.list_model_providers()</span>
-<span class="sd">        [&#39;chat&#39;, &#39;embedding&#39;]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        ['chat', 'embedding']</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">_provider_registry</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_resolve_provider</span><span class="p">(</span><span class="n">explicit</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Resolve the registered provider lookup name, or None if no provider exists.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Resolve the registered provider lookup name, or None if no provider exists."""</span>
     <span class="k">if</span> <span class="n">explicit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">explicit</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Model provider name cannot be empty.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Model provider name cannot be empty."</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">explicit</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_provider_registry</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;ModelProvider </span><span class="si">{</span><span class="n">explicit</span><span class="si">!r}</span><span class="s2"> is not registered. &quot;</span>
-                <span class="s2">&quot;Call pf.set_model_provider(...) first.&quot;</span><span class="p">)</span>
+                <span class="sa">f</span><span class="s2">"ModelProvider </span><span class="si">{</span><span class="n">explicit</span><span class="si">!r}</span><span class="s2"> is not registered. "</span>
+                <span class="s2">"Call pf.set_model_provider(...) first."</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">explicit</span>
     <span class="k">if</span> <span class="n">_default_provider</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">_default_provider</span>
@@ -544,8 +544,8 @@ under the License.
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_provider_registry</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-        <span class="s2">&quot;Multiple providers registered. Either call &quot;</span>
-        <span class="s2">&quot;pf.set_default_model_provider(...) or pass provider=&#39;...&#39; explicitly.&quot;</span><span class="p">)</span>
+        <span class="s2">"Multiple providers registered. Either call "</span>
+        <span class="s2">"pf.set_default_model_provider(...) or pass provider='...' explicitly."</span><span class="p">)</span>
 
 
 <span class="c1"># ---------------------------------------------------------------------------</span>
@@ -554,31 +554,31 @@ under the License.
 
 <span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">_ai_function_schemas</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Schema specs for AI functions: {func_name: (input_cols, output_cols)}.</span>
+<span class="w">    </span><span class="sd">"""Schema specs for AI functions: {func_name: (input_cols, output_cols)}.</span>
 
 <span class="sd">    Each col is (name, DataType). Built lazily because DataTypes requires JVM.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataTypes</span>
     <span class="k">return</span> <span class="p">{</span>
-        <span class="s2">&quot;ai_classify&quot;</span><span class="p">:</span>   <span class="p">([(</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">())],</span>
-                          <span class="p">[(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">VARIANT</span><span class="p">())]),</span>
-        <span class="s2">&quot;ai_sentiment&quot;</span><span class="p">:</span>  <span class="p">([(</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">())],</span>
-                          <span class="p">[(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">VARIANT</span><span class="p">())]),</span>
-        <span class="s2">&quot;ai_extract&quot;</span><span class="p">:</span>    <span class="p">([(</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">())],</span>
-                          <span class="p">[(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">VARIANT</span><span class="p">())]),</span>
-        <span class="s2">&quot;ai_translate&quot;</span><span class="p">:</span>  <span class="p">([(</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">())],</span>
-                          <span class="p">[(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">VARIANT</span><span class="p">())]),</span>
-        <span class="s2">&quot;ai_summarize&quot;</span><span class="p">:</span>  <span class="p">([(</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">())],</span>
-                          <span class="p">[(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">VARIANT</span><span class="p">())]),</span>
-        <span class="s2">&quot;ai_mask&quot;</span><span class="p">:</span>       <span class="p">([(</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">())],</span>
-                          <span class="p">[(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">VARIANT</span><span class="p">())]),</span>
-        <span class="s2">&quot;ai_embed&quot;</span><span class="p">:</span>      <span class="p">([(</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">())],</span>
-                          <span class="p">[(</span><span class="s2">&quot;embedding&quot;</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">ARRAY</span><span class="p">(</span><span class="n">DataTypes</span><span class="o">.</span><span class="n">FLOAT</span><span class="p">()))]),</span>
+        <span class="s2">"ai_classify"</span><span class="p">:</span>   <span class="p">([(</span><span class="s2">"input"</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">())],</span>
+                          <span class="p">[(</span><span class="s2">"content"</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">VARIANT</span><span class="p">())]),</span>
+        <span class="s2">"ai_sentiment"</span><span class="p">:</span>  <span class="p">([(</span><span class="s2">"input"</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">())],</span>
+                          <span class="p">[(</span><span class="s2">"content"</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">VARIANT</span><span class="p">())]),</span>
+        <span class="s2">"ai_extract"</span><span class="p">:</span>    <span class="p">([(</span><span class="s2">"input"</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">())],</span>
+                          <span class="p">[(</span><span class="s2">"content"</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">VARIANT</span><span class="p">())]),</span>
+        <span class="s2">"ai_translate"</span><span class="p">:</span>  <span class="p">([(</span><span class="s2">"input"</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">())],</span>
+                          <span class="p">[(</span><span class="s2">"content"</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">VARIANT</span><span class="p">())]),</span>
+        <span class="s2">"ai_summarize"</span><span class="p">:</span>  <span class="p">([(</span><span class="s2">"input"</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">())],</span>
+                          <span class="p">[(</span><span class="s2">"content"</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">VARIANT</span><span class="p">())]),</span>
+        <span class="s2">"ai_mask"</span><span class="p">:</span>       <span class="p">([(</span><span class="s2">"input"</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">())],</span>
+                          <span class="p">[(</span><span class="s2">"content"</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">VARIANT</span><span class="p">())]),</span>
+        <span class="s2">"ai_embed"</span><span class="p">:</span>      <span class="p">([(</span><span class="s2">"input"</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">STRING</span><span class="p">())],</span>
+                          <span class="p">[(</span><span class="s2">"embedding"</span><span class="p">,</span> <span class="n">DataTypes</span><span class="o">.</span><span class="n">ARRAY</span><span class="p">(</span><span class="n">DataTypes</span><span class="o">.</span><span class="n">FLOAT</span><span class="p">()))]),</span>
     <span class="p">}</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_build_schema</span><span class="p">(</span><span class="n">columns</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build a Schema from a list of (name, DataType) tuples.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Build a Schema from a list of (name, DataType) tuples."""</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table</span><span class="w"> </span><span class="kn">import</span> <span class="n">Schema</span>
     <span class="n">builder</span> <span class="o">=</span> <span class="n">Schema</span><span class="o">.</span><span class="n">new_builder</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">col_name</span><span class="p">,</span> <span class="n">data_type</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
@@ -588,7 +588,7 @@ under the License.
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_canonicalize_model_columns</span><span class="p">(</span><span class="n">columns</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">[</span>
-        <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">col_name</span><span class="p">),</span> <span class="s2">&quot;data_type&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">data_type</span><span class="p">)}</span>
+        <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">col_name</span><span class="p">),</span> <span class="s2">"data_type"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">data_type</span><span class="p">)}</span>
         <span class="k">for</span> <span class="n">col_name</span><span class="p">,</span> <span class="n">data_type</span> <span class="ow">in</span> <span class="p">(</span><span class="n">columns</span> <span class="ow">or</span> <span class="p">[])</span>
     <span class="p">]</span>
 
@@ -596,7 +596,7 @@ under the License.
 <span class="k">def</span><span class="w"> </span><span class="nf">_model_descriptor_digest</span><span class="p">(</span><span class="n">java_provider_identifier</span><span class="p">,</span> <span class="n">descriptor_options</span><span class="p">,</span>
                              <span class="n">model_option_key</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">input_columns</span><span class="p">,</span>
                              <span class="n">output_columns</span><span class="p">):</span>
-    <span class="n">effective_options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;provider&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">java_provider_identifier</span><span class="p">)}</span>
+    <span class="n">effective_options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"provider"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">java_provider_identifier</span><span class="p">)}</span>
     <span class="n">effective_options</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
         <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">):</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">descriptor_options</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
     <span class="p">})</span>
@@ -604,14 +604,14 @@ under the License.
         <span class="n">effective_options</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">model_option_key</span><span class="p">)]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
 
     <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="s2">&quot;input_schema&quot;</span><span class="p">:</span> <span class="n">_canonicalize_model_columns</span><span class="p">(</span><span class="n">input_columns</span><span class="p">),</span>
-        <span class="s2">&quot;options&quot;</span><span class="p">:</span> <span class="n">effective_options</span><span class="p">,</span>
-        <span class="s2">&quot;output_schema&quot;</span><span class="p">:</span> <span class="n">_canonicalize_model_columns</span><span class="p">(</span><span class="n">output_columns</span><span class="p">),</span>
+        <span class="s2">"comment"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">"input_schema"</span><span class="p">:</span> <span class="n">_canonicalize_model_columns</span><span class="p">(</span><span class="n">input_columns</span><span class="p">),</span>
+        <span class="s2">"options"</span><span class="p">:</span> <span class="n">effective_options</span><span class="p">,</span>
+        <span class="s2">"output_schema"</span><span class="p">:</span> <span class="n">_canonicalize_model_columns</span><span class="p">(</span><span class="n">output_columns</span><span class="p">),</span>
     <span class="p">}</span>
     <span class="n">canonical_payload</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span>
-        <span class="n">payload</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">separators</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="s2">&quot;:&quot;</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">canonical_payload</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()[:</span><span class="mi">16</span><span class="p">]</span>
+        <span class="n">payload</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">separators</span><span class="o">=</span><span class="p">(</span><span class="s2">","</span><span class="p">,</span> <span class="s2">":"</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">canonical_payload</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">))</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()[:</span><span class="mi">16</span><span class="p">]</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_create_model_descriptor_and_digest</span><span class="p">(</span><span class="n">t_env</span><span class="p">,</span> <span class="n">provider_name</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span>
@@ -623,8 +623,8 @@ under the License.
     <span class="n">provider</span> <span class="o">=</span> <span class="n">_provider_registry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">provider_name</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">provider</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;ModelProvider </span><span class="si">{</span><span class="n">provider_name</span><span class="si">!r}</span><span class="s2"> is not registered. &quot;</span>
-            <span class="s2">&quot;Call pf.set_model_provider(...) first.&quot;</span><span class="p">)</span>
+            <span class="sa">f</span><span class="s2">"ModelProvider </span><span class="si">{</span><span class="n">provider_name</span><span class="si">!r}</span><span class="s2"> is not registered. "</span>
+            <span class="s2">"Call pf.set_model_provider(...) first."</span><span class="p">)</span>
     <span class="n">descriptor_options</span> <span class="o">=</span> <span class="n">provider</span><span class="o">.</span><span class="n">to_options</span><span class="p">(</span>
         <span class="n">input_columns</span><span class="p">,</span> <span class="n">overrides</span><span class="o">=</span><span class="n">provider_options</span><span class="p">)</span>
 
@@ -650,7 +650,7 @@ under the License.
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_create_model</span><span class="p">(</span><span class="n">t_env</span><span class="p">,</span> <span class="n">provider_name</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">input_columns</span><span class="p">,</span>
                   <span class="n">output_columns</span><span class="p">,</span> <span class="n">provider_options</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a temporary model and return the Model object.</span>
+<span class="w">    </span><span class="sd">"""Create a temporary model and return the Model object.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        t_env: The TableEnvironment.</span>
@@ -659,21 +659,21 @@ under the License.
 <span class="sd">        input_columns: List of (name, DataType) tuples for input schema.</span>
 <span class="sd">        output_columns: List of (name, DataType) tuples for output schema.</span>
 <span class="sd">        provider_options: Optional per-call provider option overrides.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">descriptor</span><span class="p">,</span> <span class="n">descriptor_digest</span> <span class="o">=</span> <span class="n">_create_model_descriptor_and_digest</span><span class="p">(</span>
         <span class="n">t_env</span><span class="p">,</span> <span class="n">provider_name</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">input_columns</span><span class="p">,</span> <span class="n">output_columns</span><span class="p">,</span>
         <span class="n">provider_options</span><span class="p">)</span>
-    <span class="c1"># AI function cache&#39;s default synthetic cache key includes the model name,</span>
+    <span class="c1"># AI function cache's default synthetic cache key includes the model name,</span>
     <span class="c1"># so derive the temporary model name from canonical descriptor components</span>
     <span class="c1"># instead of a random UUID.</span>
-    <span class="n">temp_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;_pf_llm_</span><span class="si">{</span><span class="n">descriptor_digest</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">temp_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"_pf_llm_</span><span class="si">{</span><span class="n">descriptor_digest</span><span class="si">}</span><span class="s2">"</span>
     <span class="n">t_env</span><span class="o">.</span><span class="n">create_temporary_model</span><span class="p">(</span><span class="n">temp_name</span><span class="p">,</span> <span class="n">descriptor</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">t_env</span><span class="o">.</span><span class="n">from_model</span><span class="p">(</span><span class="n">temp_name</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_resolve_model</span><span class="p">(</span><span class="n">t_env</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">input_columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                    <span class="n">output_columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">provider_options</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Resolve a Model, either from provider registry or catalog.</span>
+<span class="w">    </span><span class="sd">"""Resolve a Model, either from provider registry or catalog.</span>
 
 <span class="sd">    If a registered provider is available (explicitly given or resolved from</span>
 <span class="sd">    registry), creates a temporary model. Otherwise, treats ``model`` as a</span>
@@ -681,8 +681,8 @@ under the License.
 
 <span class="sd">    Args:</span>
 <span class="sd">        t_env: The TableEnvironment.</span>
-<span class="sd">        model: Model name — either a provider model id (e.g. &quot;qwen3.6-plus&quot;)</span>
-<span class="sd">               or a catalog model name (e.g. &quot;my_catalog_model&quot;).</span>
+<span class="sd">        model: Model name — either a provider model id (e.g. "qwen3.6-plus")</span>
+<span class="sd">               or a catalog model name (e.g. "my_catalog_model").</span>
 <span class="sd">        provider: Explicit registered provider lookup name, or None to</span>
 <span class="sd">            auto-resolve.</span>
 <span class="sd">        input_columns: List of (name, DataType) tuples for input schema.</span>
@@ -691,7 +691,7 @@ under the License.
 
 <span class="sd">    Returns:</span>
 <span class="sd">        A Model object.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">provider_name</span> <span class="o">=</span> <span class="n">_resolve_provider</span><span class="p">(</span><span class="n">provider</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">provider_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># Provider path: lazily create a temporary model descriptor from the</span>
@@ -703,11 +703,11 @@ under the License.
     <span class="k">if</span> <span class="p">(</span><span class="n">provider_options</span>
             <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">provider_options</span><span class="o">.</span><span class="n">values</span><span class="p">())):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;Provider option overrides require a configured model provider.&quot;</span><span class="p">)</span>
+            <span class="s2">"Provider option overrides require a configured model provider."</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">model</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;Either configure a provider via pf.set_model_provider(...) &quot;</span>
-            <span class="s2">&quot;or pass a catalog model name via model=&#39;...&#39;.&quot;</span><span class="p">)</span>
+            <span class="s2">"Either configure a provider via pf.set_model_provider(...) "</span>
+            <span class="s2">"or pass a catalog model name via model='...'."</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">t_env</span><span class="o">.</span><span class="n">from_model</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
 
 
@@ -717,25 +717,25 @@ under the License.
     <span class="k">if</span> <span class="n">cache_key</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cache_key</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">_validate_cache_key_list</span><span class="p">(</span><span class="s2">&quot;cache_key&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">cache_key</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">_validate_cache_key_list</span><span class="p">(</span><span class="s2">"cache_key"</span><span class="p">,</span> <span class="p">[</span><span class="n">cache_key</span><span class="p">])</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cache_key</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">cache_key</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;cache_key must not be empty&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">_validate_cache_key_list</span><span class="p">(</span><span class="s2">&quot;cache_key&quot;</span><span class="p">,</span> <span class="n">cache_key</span><span class="p">)</span>
-    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;cache_key must be a string, a list of strings, or None&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"cache_key must not be empty"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">_validate_cache_key_list</span><span class="p">(</span><span class="s2">"cache_key"</span><span class="p">,</span> <span class="n">cache_key</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"cache_key must be a string, a list of strings, or None"</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_validate_cache_args</span><span class="p">(</span><span class="n">cache_table</span><span class="p">,</span> <span class="n">cache_key</span><span class="p">):</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.ai_functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">_validate_cache_table</span>
 
     <span class="k">if</span> <span class="n">cache_key</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">cache_table</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;cache_key requires cache_table to be specified&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"cache_key requires cache_table to be specified"</span><span class="p">)</span>
     <span class="n">_validate_cache_table</span><span class="p">(</span><span class="n">cache_table</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">_normalize_cache_key</span><span class="p">(</span><span class="n">cache_key</span><span class="p">)</span>
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">LLMAccessor</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Accessor for LLM / AI functions on a DataFrame.</span>
 
 <span class="sd">    Accessed via ``df.llm``. Groups all AI-related operations together.</span>
@@ -744,47 +744,47 @@ under the License.
 
 <span class="sd">        &gt;&gt;&gt; import pyflink.dataframe as pf</span>
 <span class="sd">        &gt;&gt;&gt; pf.set_model_provider(pf.OpenAICompatProvider(</span>
-<span class="sd">        ...     task=&quot;chat/completions&quot;))</span>
+<span class="sd">        ...     task="chat/completions"))</span>
 <span class="sd">        &gt;&gt;&gt;</span>
-<span class="sd">        &gt;&gt;&gt; df = pf.from_dict({&quot;text&quot;: [&quot;hello&quot;, &quot;world&quot;]})</span>
-<span class="sd">        &gt;&gt;&gt; df = df.llm.predict(&quot;text&quot;, model=&quot;qwen3.6-plus&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; df = df.llm.ai_classify(&quot;text&quot;, [&quot;pos&quot;, &quot;neg&quot;], model=&quot;qwen3.6-plus&quot;)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; df = pf.from_dict({"text": ["hello", "world"]})</span>
+<span class="sd">        &gt;&gt;&gt; df = df.llm.predict("text", model="qwen3.6-plus")</span>
+<span class="sd">        &gt;&gt;&gt; df = df.llm.ai_classify("text", ["pos", "neg"], model="qwen3.6-plus")</span>
+<span class="sd">    """</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="s2">&quot;DataFrame&quot;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="s2">"DataFrame"</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_df</span> <span class="o">=</span> <span class="n">df</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_to_col_expr</span><span class="p">(</span><span class="n">input_col</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Expression&quot;</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;Expression&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert a column name string to an Expression if needed.&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_to_col_expr</span><span class="p">(</span><span class="n">input_col</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">"Expression"</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">"Expression"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Convert a column name string to an Expression if needed."""</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">input_col</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.dataframe.dataframe</span><span class="w"> </span><span class="kn">import</span> <span class="n">col</span>
             <span class="k">return</span> <span class="n">col</span><span class="p">(</span><span class="n">input_col</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">input_col</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_get_column_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">col_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the DataType of a column from the DataFrame&#39;s schema.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Get the DataType of a column from the DataFrame's schema."""</span>
         <span class="n">schema</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="o">.</span><span class="n">_table</span><span class="o">.</span><span class="n">get_resolved_schema</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">schema</span><span class="o">.</span><span class="n">get_columns</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">column</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span> <span class="o">==</span> <span class="n">col_name</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">column</span><span class="o">.</span><span class="n">get_data_type</span><span class="p">()</span>
         <span class="n">available</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">schema</span><span class="o">.</span><span class="n">get_columns</span><span class="p">()]</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Column </span><span class="si">{</span><span class="n">col_name</span><span class="si">!r}</span><span class="s2"> not found. Available columns: </span><span class="si">{</span><span class="n">available</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="sa">f</span><span class="s2">"Column </span><span class="si">{</span><span class="n">col_name</span><span class="si">!r}</span><span class="s2"> not found. Available columns: </span><span class="si">{</span><span class="n">available</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <div class="viewcode-block" id="LLMAccessor.vector_search"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.ai.llm.LLMAccessor.vector_search.html#pyflink.dataframe.ai.llm.LLMAccessor.vector_search">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">vector_search</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">search_source</span><span class="p">:</span> <span class="s2">&quot;DataFrame&quot;</span><span class="p">,</span>
+        <span class="n">search_source</span><span class="p">:</span> <span class="s2">"DataFrame"</span><span class="p">,</span>
         <span class="n">column_to_search</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">column_to_query</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Expression&quot;</span><span class="p">],</span>
+        <span class="n">column_to_query</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">"Expression"</span><span class="p">],</span>
         <span class="n">top_k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
         <span class="n">agg</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">output_columns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">ignore_empty</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;DataFrame&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"DataFrame"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Join this DataFrame with vector search results from another source.</span>
 
 <span class="sd">        Args:</span>
@@ -826,34 +826,34 @@ under the License.
 <span class="sd">            &gt;&gt;&gt; from pyflink.table import DataTypes</span>
 <span class="sd">            &gt;&gt;&gt; queries = pf.from_records(</span>
 <span class="sd">            ...     [(1, [0.1, 0.2]), (2, [0.3, 0.4])],</span>
-<span class="sd">            ...     schema=[&quot;query_id&quot;, &quot;query_embedding&quot;],</span>
+<span class="sd">            ...     schema=["query_id", "query_embedding"],</span>
 <span class="sd">            ... )</span>
 <span class="sd">            &gt;&gt;&gt; documents = pf.read_milvus(</span>
-<span class="sd">            ...     endpoint=&quot;http://milvus.example.com&quot;,</span>
-<span class="sd">            ...     username=&quot;${secret_values.milvus_user}&quot;,</span>
-<span class="sd">            ...     password=&quot;${secret_values.milvus_password}&quot;,</span>
-<span class="sd">            ...     database_name=&quot;my_db&quot;,</span>
-<span class="sd">            ...     collection_name=&quot;documents&quot;,</span>
+<span class="sd">            ...     endpoint="http://milvus.example.com",</span>
+<span class="sd">            ...     username="${secret_values.milvus_user}",</span>
+<span class="sd">            ...     password="${secret_values.milvus_password}",</span>
+<span class="sd">            ...     database_name="my_db",</span>
+<span class="sd">            ...     collection_name="documents",</span>
 <span class="sd">            ...     schema={</span>
-<span class="sd">            ...         &quot;doc_id&quot;: DataTypes.BIGINT(),</span>
-<span class="sd">            ...         &quot;embedding&quot;: DataTypes.ARRAY(DataTypes.FLOAT()),</span>
-<span class="sd">            ...         &quot;title&quot;: DataTypes.STRING(),</span>
+<span class="sd">            ...         "doc_id": DataTypes.BIGINT(),</span>
+<span class="sd">            ...         "embedding": DataTypes.ARRAY(DataTypes.FLOAT()),</span>
+<span class="sd">            ...         "title": DataTypes.STRING(),</span>
 <span class="sd">            ...     },</span>
-<span class="sd">            ...     columns=[&quot;doc_id&quot;, &quot;embedding&quot;, &quot;title&quot;],</span>
+<span class="sd">            ...     columns=["doc_id", "embedding", "title"],</span>
 <span class="sd">            ... )</span>
 <span class="sd">            &gt;&gt;&gt; result = queries.llm.vector_search(</span>
 <span class="sd">            ...     documents,</span>
-<span class="sd">            ...     column_to_search=&quot;embedding&quot;,</span>
-<span class="sd">            ...     column_to_query=&quot;query_embedding&quot;,</span>
+<span class="sd">            ...     column_to_search="embedding",</span>
+<span class="sd">            ...     column_to_query="query_embedding",</span>
 <span class="sd">            ...     top_k=5,</span>
 <span class="sd">            ...     output_columns=[</span>
-<span class="sd">            ...         &quot;match_doc_id&quot;,</span>
-<span class="sd">            ...         &quot;match_embedding&quot;,</span>
-<span class="sd">            ...         &quot;match_title&quot;,</span>
-<span class="sd">            ...         &quot;score&quot;,</span>
+<span class="sd">            ...         "match_doc_id",</span>
+<span class="sd">            ...         "match_embedding",</span>
+<span class="sd">            ...         "match_title",</span>
+<span class="sd">            ...         "score",</span>
 <span class="sd">            ...     ],</span>
 <span class="sd">            ... )</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.dataframe.dataframe</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataFrame</span> <span class="k">as</span> <span class="n">DF</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.expressions</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
             <span class="n">col</span> <span class="k">as</span> <span class="n">table_col</span><span class="p">,</span>
@@ -861,35 +861,35 @@ under the License.
             <span class="n">vector_search_agg</span> <span class="k">as</span> <span class="n">table_vector_search_agg</span><span class="p">,</span>
         <span class="p">)</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">resolve_search_source</span><span class="p">(</span><span class="n">source</span><span class="p">:</span> <span class="s2">&quot;DataFrame&quot;</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">resolve_search_source</span><span class="p">(</span><span class="n">source</span><span class="p">:</span> <span class="s2">"DataFrame"</span><span class="p">):</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">DF</span><span class="p">):</span>
                 <span class="k">return</span> <span class="n">source</span><span class="o">.</span><span class="n">to_table</span><span class="p">(),</span> <span class="nb">list</span><span class="p">(</span><span class="n">source</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;search_source must be a DataFrame, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">source</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">"search_source must be a DataFrame, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">source</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">"</span>
             <span class="p">)</span>
 
         <span class="k">def</span><span class="w"> </span><span class="nf">make_unique_score_name</span><span class="p">(</span><span class="n">search_columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
             <span class="n">existing_columns</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">search_columns</span><span class="p">)</span>
-            <span class="n">output_name</span> <span class="o">=</span> <span class="s2">&quot;score&quot;</span>
+            <span class="n">output_name</span> <span class="o">=</span> <span class="s2">"score"</span>
             <span class="n">candidate</span> <span class="o">=</span> <span class="n">output_name</span>
             <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="k">while</span> <span class="n">candidate</span> <span class="ow">in</span> <span class="n">existing_columns</span><span class="p">:</span>
-                <span class="n">candidate</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">output_name</span><span class="si">}{</span><span class="n">count</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="n">candidate</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">output_name</span><span class="si">}{</span><span class="n">count</span><span class="si">}</span><span class="s2">"</span>
                 <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">return</span> <span class="n">candidate</span>
 
         <span class="k">def</span><span class="w"> </span><span class="nf">resolve_default_outputs</span><span class="p">(</span><span class="n">search_columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
             <span class="k">if</span> <span class="n">agg</span><span class="p">:</span>
-                <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;search_results&quot;</span><span class="p">]</span>
+                <span class="k">return</span> <span class="p">[</span><span class="s2">"search_results"</span><span class="p">]</span>
             <span class="k">return</span> <span class="n">search_columns</span> <span class="o">+</span> <span class="p">[</span><span class="n">make_unique_score_name</span><span class="p">(</span><span class="n">search_columns</span><span class="p">)]</span>
 
         <span class="k">def</span><span class="w"> </span><span class="nf">validate_no_output_conflicts</span><span class="p">(</span><span class="n">resolved_outputs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">conflicting_columns</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">resolved_outputs</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">conflicting_columns</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                    <span class="s2">&quot;output_columns conflicts with existing DataFrame columns; &quot;</span>
-                    <span class="s2">&quot;use unique output_columns: &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">conflicting_columns</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="s2">"output_columns conflicts with existing DataFrame columns; "</span>
+                    <span class="s2">"use unique output_columns: "</span>
+                    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">conflicting_columns</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
                 <span class="p">)</span>
 
         <span class="k">def</span><span class="w"> </span><span class="nf">resolve_output_columns</span><span class="p">(</span><span class="n">default_outputs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
@@ -899,51 +899,51 @@ under the License.
                 <span class="n">resolved_outputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">output_columns</span><span class="p">]</span>
             <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">output_columns</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">output_columns</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;output_columns must not be empty&quot;</span><span class="p">)</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"output_columns must not be empty"</span><span class="p">)</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">output_columns</span><span class="p">):</span>
                     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-                        <span class="s2">&quot;output_columns list must contain only strings&quot;</span><span class="p">)</span>
+                        <span class="s2">"output_columns list must contain only strings"</span><span class="p">)</span>
                 <span class="n">resolved_outputs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">output_columns</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-                    <span class="s2">&quot;output_columns must be a string, a list of strings, &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;or None, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">output_columns</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="s2">"output_columns must be a string, a list of strings, "</span>
+                    <span class="sa">f</span><span class="s2">"or None, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">output_columns</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">"</span>
                 <span class="p">)</span>
 
             <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="ow">not</span> <span class="n">name</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">resolved_outputs</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                    <span class="s2">&quot;output_columns must contain only non-empty strings&quot;</span><span class="p">)</span>
+                    <span class="s2">"output_columns must contain only non-empty strings"</span><span class="p">)</span>
 
             <span class="n">expected_count</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">agg</span> <span class="k">else</span> <span class="nb">len</span><span class="p">(</span><span class="n">default_outputs</span><span class="p">)</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">resolved_outputs</span><span class="p">)</span> <span class="o">!=</span> <span class="n">expected_count</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                    <span class="s2">&quot;output_columns count must match vector_search output &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;column count: expected </span><span class="si">{</span><span class="n">expected_count</span><span class="si">}</span><span class="s2">, &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;got </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">resolved_outputs</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="s2">"output_columns count must match vector_search output "</span>
+                    <span class="sa">f</span><span class="s2">"column count: expected </span><span class="si">{</span><span class="n">expected_count</span><span class="si">}</span><span class="s2">, "</span>
+                    <span class="sa">f</span><span class="s2">"got </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">resolved_outputs</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
                 <span class="p">)</span>
 
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">resolved_outputs</span><span class="p">))</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">resolved_outputs</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                    <span class="s2">&quot;output_columns contains duplicate column names&quot;</span><span class="p">)</span>
+                    <span class="s2">"output_columns contains duplicate column names"</span><span class="p">)</span>
 
             <span class="n">validate_no_output_conflicts</span><span class="p">(</span><span class="n">resolved_outputs</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">resolved_outputs</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">column_to_search</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-                <span class="s2">&quot;column_to_search must be a string, &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">column_to_search</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="s2">"column_to_search must be a string, "</span>
+                <span class="sa">f</span><span class="s2">"got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">column_to_search</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">"</span>
             <span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">column_to_search</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;column_to_search must not be empty&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"column_to_search must not be empty"</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">top_k</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">top_k</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;top_k must be an integer&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"top_k must be an integer"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">top_k</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;top_k must be greater than 0&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"top_k must be greater than 0"</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">agg</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;agg must be a boolean&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"agg must be a boolean"</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ignore_empty</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;ignore_empty must be a boolean&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"ignore_empty must be a boolean"</span><span class="p">)</span>
 
         <span class="n">search_table</span><span class="p">,</span> <span class="n">search_columns</span> <span class="o">=</span> <span class="n">resolve_search_source</span><span class="p">(</span><span class="n">search_source</span><span class="p">)</span>
         <span class="n">default_outputs</span> <span class="o">=</span> <span class="n">resolve_default_outputs</span><span class="p">(</span><span class="n">search_columns</span><span class="p">)</span>
@@ -971,19 +971,19 @@ under the License.
 
 <div class="viewcode-block" id="LLMAccessor.predict"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.ai.llm.LLMAccessor.predict.html#pyflink.dataframe.ai.llm.LLMAccessor.predict">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">input_cols</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">provider</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                 <span class="n">model</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                <span class="n">output_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;DataType&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">output_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">"DataType"</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                 <span class="n">cache_table</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                 <span class="n">cache_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CacheKey</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                 <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;DataFrame&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+                <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"DataFrame"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Perform prediction using a model.</span>
 
 <span class="sd">        This is the general-purpose prediction method.</span>
 
 <span class="sd">        When a provider is configured, a temporary model is created with</span>
 <span class="sd">        the given input/output schema. When using a catalog model</span>
-<span class="sd">        (no provider), the model&#39;s registered schema is used and</span>
+<span class="sd">        (no provider), the model's registered schema is used and</span>
 <span class="sd">        ``output_type`` is ignored.</span>
 
 <span class="sd">        Args:</span>
@@ -991,11 +991,11 @@ under the License.
 <span class="sd">            provider: Registered model provider lookup name. Uses default if</span>
 <span class="sd">                not specified. If no provider is configured, ``model`` is</span>
 <span class="sd">                treated as a catalog model name.</span>
-<span class="sd">            model: Model name (e.g. &quot;qwen3.6-plus&quot;) or catalog model</span>
+<span class="sd">            model: Model name (e.g. "qwen3.6-plus") or catalog model</span>
 <span class="sd">                name.</span>
 <span class="sd">            output_type: Output type declaration. ``None`` defaults to a</span>
 <span class="sd">                single ``STRING`` column named ``output``. A SQL type string</span>
-<span class="sd">                such as ``&quot;VARIANT&quot;`` appends a single column named</span>
+<span class="sd">                such as ``"VARIANT"`` appends a single column named</span>
 <span class="sd">                ``output`` with that parsed type. A scalar or container</span>
 <span class="sd">                ``DataType`` also appends a single column named ``output``.</span>
 <span class="sd">                A ``DataType.struct(...)`` appends one column per top-level</span>
@@ -1004,7 +1004,7 @@ under the License.
 <span class="sd">            cache_key: Optional cache key column name or list of column names.</span>
 <span class="sd">            config: Optional dict of runtime prediction options.</span>
 <span class="sd">            **kwargs: Per-call overrides for the selected DataFrame model</span>
-<span class="sd">                provider&#39;s constructor parameters. Overrides are applied only</span>
+<span class="sd">                provider's constructor parameters. Overrides are applied only</span>
 <span class="sd">                when the call uses a configured provider.</span>
 
 <span class="sd">        Returns:</span>
@@ -1018,17 +1018,17 @@ under the License.
 <span class="sd">        ::</span>
 <span class="sd">            &gt;&gt;&gt; import pyflink.dataframe as pf</span>
 <span class="sd">            &gt;&gt;&gt; pf.set_model_provider(pf.OpenAICompatProvider(</span>
-<span class="sd">            ...     task=&quot;chat/completions&quot;))</span>
+<span class="sd">            ...     task="chat/completions"))</span>
 <span class="sd">            &gt;&gt;&gt; df = pf.from_dict({</span>
-<span class="sd">            ...     &quot;tenant_id&quot;: [&quot;tenant-a&quot;],</span>
-<span class="sd">            ...     &quot;question&quot;: [&quot;Which products need review?&quot;],</span>
-<span class="sd">            ...     &quot;image_url&quot;: [&quot;https://example.com/product.jpg&quot;],</span>
+<span class="sd">            ...     "tenant_id": ["tenant-a"],</span>
+<span class="sd">            ...     "question": ["Which products need review?"],</span>
+<span class="sd">            ...     "image_url": ["https://example.com/product.jpg"],</span>
 <span class="sd">            ... })</span>
 
 <span class="sd">        Default output: appends one ``output`` column:</span>
 
 <span class="sd">        ::</span>
-<span class="sd">            &gt;&gt;&gt; df.llm.predict(&quot;question&quot;, model=&quot;qwen3.6-plus&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; df.llm.predict("question", model="qwen3.6-plus")</span>
 
 <span class="sd">        Multiple input columns with per-column content types. ``content_type``</span>
 <span class="sd">        is passed through to</span>
@@ -1036,17 +1036,17 @@ under the License.
 <span class="sd">        option:</span>
 
 <span class="sd">        ::</span>
-<span class="sd">            &gt;&gt;&gt; df.llm.predict(&quot;question&quot;, &quot;image_url&quot;,</span>
-<span class="sd">            ...                model=&quot;qwen3.6-plus&quot;,</span>
-<span class="sd">            ...                content_type=[&quot;TEXT&quot;, &quot;IMAGE_URL&quot;])</span>
+<span class="sd">            &gt;&gt;&gt; df.llm.predict("question", "image_url",</span>
+<span class="sd">            ...                model="qwen3.6-plus",</span>
+<span class="sd">            ...                content_type=["TEXT", "IMAGE_URL"])</span>
 
 <span class="sd">        Audio bytes. The connector infers the audio format from the content:</span>
 
 <span class="sd">        ::</span>
-<span class="sd">            &gt;&gt;&gt; audio_df = pf.from_dict({&quot;audio_input&quot;: [bytearray(b&quot;...&quot;)]})</span>
+<span class="sd">            &gt;&gt;&gt; audio_df = pf.from_dict({"audio_input": [bytearray(b"...")]})</span>
 <span class="sd">            &gt;&gt;&gt; audio_df.llm.predict(</span>
-<span class="sd">            ...     &quot;audio_input&quot;, model=&quot;qwen3-asr-flash&quot;,</span>
-<span class="sd">            ...     content_type=&quot;AUDIO_BYTES&quot;)</span>
+<span class="sd">            ...     "audio_input", model="qwen3-asr-flash",</span>
+<span class="sd">            ...     content_type="AUDIO_BYTES")</span>
 
 <span class="sd">        Free-form JSON in one VARIANT column named ``output``.</span>
 <span class="sd">        ``response_format`` is passed through to</span>
@@ -1054,34 +1054,34 @@ under the License.
 <span class="sd">        option:</span>
 
 <span class="sd">        ::</span>
-<span class="sd">            &gt;&gt;&gt; df.llm.predict(&quot;question&quot;, model=&quot;qwen3.6-plus&quot;,</span>
-<span class="sd">            ...                output_type=&quot;VARIANT&quot;,</span>
-<span class="sd">            ...                response_format=&quot;json_object&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; df.llm.predict("question", model="qwen3.6-plus",</span>
+<span class="sd">            ...                output_type="VARIANT",</span>
+<span class="sd">            ...                response_format="json_object")</span>
 
 <span class="sd">        Named output column:</span>
 
 <span class="sd">        ::</span>
-<span class="sd">            &gt;&gt;&gt; df.llm.predict(&quot;question&quot;, model=&quot;qwen3.6-plus&quot;,</span>
+<span class="sd">            &gt;&gt;&gt; df.llm.predict("question", model="qwen3.6-plus",</span>
 <span class="sd">            ...     output_type=pf.DataType.struct({</span>
-<span class="sd">            ...         &quot;answer&quot;: pf.DataType.string()</span>
+<span class="sd">            ...         "answer": pf.DataType.string()</span>
 <span class="sd">            ...     }))</span>
 
 <span class="sd">        Caching prediction results:</span>
 
 <span class="sd">        ::</span>
 <span class="sd">            &gt;&gt;&gt; df.llm.predict(</span>
-<span class="sd">            ...     &quot;question&quot;, model=&quot;qwen3.6-plus&quot;,</span>
-<span class="sd">            ...     cache_table=&quot;`fluss-catalog`.default_database.predict_cache&quot;,</span>
-<span class="sd">            ...     cache_key=[&quot;tenant_id&quot;, &quot;question&quot;])</span>
+<span class="sd">            ...     "question", model="qwen3.6-plus",</span>
+<span class="sd">            ...     cache_table="`fluss-catalog`.default_database.predict_cache",</span>
+<span class="sd">            ...     cache_key=["tenant_id", "question"])</span>
 
 <span class="sd">        Using runtime config supported by</span>
 <span class="sd">        :class:`pyflink.dataframe.OpenAICompatProvider`:</span>
 
 <span class="sd">        ::</span>
 <span class="sd">            &gt;&gt;&gt; df.llm.predict(</span>
-<span class="sd">            ...     &quot;question&quot;, model=&quot;qwen3.6-plus&quot;,</span>
-<span class="sd">            ...     config={&quot;max-concurrent-operations&quot;: &quot;20&quot;})</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">            ...     "question", model="qwen3.6-plus",</span>
+<span class="sd">            ...     config={"max-concurrent-operations": "20"})</span>
+<span class="sd">        """</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.dataframe.dataframe</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataFrame</span> <span class="k">as</span> <span class="n">DF</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.dataframe.datatype</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataType</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">RowType</span>
@@ -1091,24 +1091,24 @@ under the License.
             <span class="n">conflicting_columns</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">existing_columns</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">output_names</span><span class="p">))</span>
             <span class="k">if</span> <span class="n">conflicting_columns</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                    <span class="s2">&quot;predict output columns conflicts with existing DataFrame &quot;</span>
-                    <span class="s2">&quot;columns; use unique output field names: &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">conflicting_columns</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="s2">"predict output columns conflicts with existing DataFrame "</span>
+                    <span class="s2">"columns; use unique output field names: "</span>
+                    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">conflicting_columns</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
         <span class="k">def</span><span class="w"> </span><span class="nf">resolve_output_columns</span><span class="p">(</span>
-                <span class="n">output_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;DataType&quot;</span><span class="p">]]):</span>
+                <span class="n">output_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">"DataType"</span><span class="p">]]):</span>
             <span class="k">if</span> <span class="n">output_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">dtype</span> <span class="o">=</span> <span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">()</span>
-                <span class="n">output_columns</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">.</span><span class="n">_table_type</span><span class="p">)]</span>
+                <span class="n">output_columns</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">"output"</span><span class="p">,</span> <span class="n">dtype</span><span class="o">.</span><span class="n">_table_type</span><span class="p">)]</span>
             <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">output_type</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
                 <span class="n">dtype</span> <span class="o">=</span> <span class="n">DataType</span><span class="o">.</span><span class="n">_from_sql</span><span class="p">(</span><span class="n">output_type</span><span class="p">)</span>
-                <span class="n">output_columns</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">.</span><span class="n">_table_type</span><span class="p">)]</span>
+                <span class="n">output_columns</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">"output"</span><span class="p">,</span> <span class="n">dtype</span><span class="o">.</span><span class="n">_table_type</span><span class="p">)]</span>
             <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">output_type</span><span class="p">,</span> <span class="n">DataType</span><span class="p">):</span>
                 <span class="n">table_type</span> <span class="o">=</span> <span class="n">output_type</span><span class="o">.</span><span class="n">_table_type</span>
                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">table_type</span><span class="p">,</span> <span class="n">RowType</span><span class="p">):</span>
                     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">table_type</span><span class="o">.</span><span class="n">fields</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                            <span class="s2">&quot;Struct output_type must contain at least one field.&quot;</span><span class="p">)</span>
+                            <span class="s2">"Struct output_type must contain at least one field."</span><span class="p">)</span>
                     <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
                     <span class="n">duplicate_names</span> <span class="o">=</span> <span class="p">[]</span>
                     <span class="k">for</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="n">table_type</span><span class="o">.</span><span class="n">field_names</span><span class="p">():</span>
@@ -1117,21 +1117,21 @@ under the License.
                         <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">field_name</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">duplicate_names</span><span class="p">:</span>
                         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                            <span class="s2">&quot;Struct output_type contains duplicate field names: &quot;</span>
-                            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">duplicate_names</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                            <span class="s2">"Struct output_type contains duplicate field names: "</span>
+                            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">duplicate_names</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
                     <span class="n">output_columns</span> <span class="o">=</span> <span class="p">[</span>
                         <span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">field</span><span class="o">.</span><span class="n">data_type</span><span class="p">)</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">table_type</span><span class="o">.</span><span class="n">fields</span><span class="p">]</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">output_columns</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="n">table_type</span><span class="p">)]</span>
+                    <span class="n">output_columns</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">"output"</span><span class="p">,</span> <span class="n">table_type</span><span class="p">)]</span>
             <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">output_type</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-                    <span class="s2">&quot;output_type mapping form is no longer supported; use a SQL &quot;</span>
-                    <span class="s2">&quot;type string or DataType for a single &#39;output&#39; column, or &quot;</span>
-                    <span class="s2">&quot;DataType.struct({...}) for named output columns.&quot;</span><span class="p">)</span>
+                    <span class="s2">"output_type mapping form is no longer supported; use a SQL "</span>
+                    <span class="s2">"type string or DataType for a single 'output' column, or "</span>
+                    <span class="s2">"DataType.struct({...}) for named output columns."</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-                    <span class="s2">&quot;output_type must be None, a SQL type string, or a DataType; &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">output_type</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+                    <span class="s2">"output_type must be None, a SQL type string, or a DataType; "</span>
+                    <span class="sa">f</span><span class="s2">"got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">output_type</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
 
             <span class="n">validate_output_column_names</span><span class="p">([</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">output_columns</span><span class="p">])</span>
             <span class="k">return</span> <span class="n">output_columns</span>
@@ -1157,7 +1157,7 @@ under the License.
     <span class="k">def</span><span class="w"> </span><span class="nf">_ai_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">input_col</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">provider</span><span class="p">,</span>
                  <span class="n">cache_table</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">cache_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CacheKey</span><span class="p">],</span>
                  <span class="n">config</span><span class="p">,</span> <span class="n">ai_func</span><span class="p">,</span> <span class="o">*</span><span class="n">extra_args</span><span class="p">,</span> <span class="n">provider_options</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Common logic for ai_* functions.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Common logic for ai_* functions."""</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.dataframe.dataframe</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataFrame</span> <span class="k">as</span> <span class="n">DF</span>
 
         <span class="n">cache_keys</span> <span class="o">=</span> <span class="n">_validate_cache_args</span><span class="p">(</span><span class="n">cache_table</span><span class="p">,</span> <span class="n">cache_key</span><span class="p">)</span>
@@ -1170,15 +1170,15 @@ under the License.
             <span class="n">cache_table</span><span class="o">=</span><span class="n">cache_table</span><span class="p">,</span> <span class="n">cache_keys</span><span class="o">=</span><span class="n">cache_keys</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">DF</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="o">.</span><span class="n">_table</span><span class="o">.</span><span class="n">join_lateral</span><span class="p">(</span><span class="n">expr</span><span class="p">))</span>
 
-<div class="viewcode-block" id="LLMAccessor.ai_classify"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.ai.llm.LLMAccessor.ai_classify.html#pyflink.dataframe.ai.llm.LLMAccessor.ai_classify">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">ai_classify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_col</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Expression&quot;</span><span class="p">],</span>
+<div class="viewcode-block" id="LLMAccessor.ai_classify"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.ai.llm.LLMAccessor.ai_classify.html#pyflink.dataframe.ai.llm.LLMAccessor.ai_classify">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">ai_classify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_col</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">"Expression"</span><span class="p">],</span>
                     <span class="n">labels</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="o">*</span><span class="p">,</span>
                     <span class="n">provider</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                     <span class="n">model</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                     <span class="n">cache_table</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                     <span class="n">cache_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CacheKey</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                     <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                    <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;DataFrame&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+                    <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"DataFrame"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Classify text into one of the provided labels.</span>
 
 <span class="sd">        Args:</span>
@@ -1192,7 +1192,7 @@ under the License.
 <span class="sd">            cache_key: Optional cache key column name or list of column names.</span>
 <span class="sd">            config: Optional dict of runtime prediction options.</span>
 <span class="sd">            **kwargs: Per-call overrides for the selected DataFrame model</span>
-<span class="sd">                provider&#39;s constructor parameters. Overrides are applied only</span>
+<span class="sd">                provider's constructor parameters. Overrides are applied only</span>
 <span class="sd">                when the call uses a configured provider.</span>
 
 <span class="sd">                Note: This function uses its own task-specific prompt.</span>
@@ -1212,40 +1212,40 @@ under the License.
 <span class="sd">        ::</span>
 <span class="sd">            &gt;&gt;&gt; import pyflink.dataframe as pf</span>
 <span class="sd">            &gt;&gt;&gt; pf.set_model_provider(pf.OpenAICompatProvider(</span>
-<span class="sd">            ...     task=&quot;chat/completions&quot;))</span>
-<span class="sd">            &gt;&gt;&gt; df = pf.from_dict({&quot;text&quot;: [&quot;The delivery was fast.&quot;]})</span>
-<span class="sd">            &gt;&gt;&gt; df.llm.ai_classify(&quot;text&quot;, [&quot;positive&quot;, &quot;negative&quot;],</span>
-<span class="sd">            ...                    model=&quot;qwen3.6-plus&quot;)</span>
+<span class="sd">            ...     task="chat/completions"))</span>
+<span class="sd">            &gt;&gt;&gt; df = pf.from_dict({"text": ["The delivery was fast."]})</span>
+<span class="sd">            &gt;&gt;&gt; df.llm.ai_classify("text", ["positive", "negative"],</span>
+<span class="sd">            ...                    model="qwen3.6-plus")</span>
 
 <span class="sd">        With cache:</span>
 
 <span class="sd">        ::</span>
 <span class="sd">            &gt;&gt;&gt; df.llm.ai_classify(</span>
-<span class="sd">            ...     &quot;text&quot;, [&quot;positive&quot;, &quot;negative&quot;], model=&quot;qwen3.6-plus&quot;,</span>
-<span class="sd">            ...     cache_table=&quot;`fluss-catalog`.default_database.classify_cache&quot;,</span>
-<span class="sd">            ...     cache_key=&quot;text&quot;)</span>
+<span class="sd">            ...     "text", ["positive", "negative"], model="qwen3.6-plus",</span>
+<span class="sd">            ...     cache_table="`fluss-catalog`.default_database.classify_cache",</span>
+<span class="sd">            ...     cache_key="text")</span>
 
 <span class="sd">        Using runtime config supported by</span>
 <span class="sd">        :class:`pyflink.dataframe.OpenAICompatProvider`:</span>
 
 <span class="sd">        ::</span>
 <span class="sd">            &gt;&gt;&gt; df.llm.ai_classify(</span>
-<span class="sd">            ...     &quot;text&quot;, [&quot;positive&quot;, &quot;negative&quot;], model=&quot;qwen3.6-plus&quot;,</span>
-<span class="sd">            ...     config={&quot;max-concurrent-operations&quot;: &quot;20&quot;})</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">            ...     "text", ["positive", "negative"], model="qwen3.6-plus",</span>
+<span class="sd">            ...     config={"max-concurrent-operations": "20"})</span>
+<span class="sd">        """</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.ai_functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ai_classify</span> <span class="k">as</span> <span class="n">_ai_classify</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ai_func</span><span class="p">(</span><span class="s2">&quot;ai_classify&quot;</span><span class="p">,</span> <span class="n">input_col</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">provider</span><span class="p">,</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ai_func</span><span class="p">(</span><span class="s2">"ai_classify"</span><span class="p">,</span> <span class="n">input_col</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">provider</span><span class="p">,</span>
                              <span class="n">cache_table</span><span class="p">,</span> <span class="n">cache_key</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">_ai_classify</span><span class="p">,</span>
                              <span class="n">labels</span><span class="p">,</span> <span class="n">provider_options</span><span class="o">=</span><span class="n">kwargs</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="LLMAccessor.ai_sentiment"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.ai.llm.LLMAccessor.ai_sentiment.html#pyflink.dataframe.ai.llm.LLMAccessor.ai_sentiment">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">ai_sentiment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_col</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Expression&quot;</span><span class="p">],</span> <span class="o">*</span><span class="p">,</span>
+<div class="viewcode-block" id="LLMAccessor.ai_sentiment"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.ai.llm.LLMAccessor.ai_sentiment.html#pyflink.dataframe.ai.llm.LLMAccessor.ai_sentiment">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">ai_sentiment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_col</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">"Expression"</span><span class="p">],</span> <span class="o">*</span><span class="p">,</span>
                      <span class="n">provider</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                      <span class="n">model</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                      <span class="n">cache_table</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                      <span class="n">cache_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CacheKey</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                      <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                     <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;DataFrame&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+                     <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"DataFrame"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Analyze the sentiment of input text.</span>
 
 <span class="sd">        Args:</span>
@@ -1258,7 +1258,7 @@ under the License.
 <span class="sd">            cache_key: Optional cache key column name or list of column names.</span>
 <span class="sd">            config: Optional dict of runtime prediction options.</span>
 <span class="sd">            **kwargs: Per-call overrides for the selected DataFrame model</span>
-<span class="sd">                provider&#39;s constructor parameters. Overrides are applied only</span>
+<span class="sd">                provider's constructor parameters. Overrides are applied only</span>
 <span class="sd">                when the call uses a configured provider.</span>
 
 <span class="sd">                Note: This function uses its own task-specific prompt.</span>
@@ -1270,7 +1270,7 @@ under the License.
 <span class="sd">            A new DataFrame with columns appended:</span>
 
 <span class="sd">            - ``score`` (DOUBLE): sentiment score from -1.0 to 1.0.</span>
-<span class="sd">            - ``label`` (STRING): one of &quot;positive&quot;, &quot;negative&quot;, &quot;neutral&quot;.</span>
+<span class="sd">            - ``label`` (STRING): one of "positive", "negative", "neutral".</span>
 <span class="sd">            - ``confidence`` (DOUBLE): confidence score.</span>
 
 <span class="sd">        Examples:</span>
@@ -1279,45 +1279,45 @@ under the License.
 <span class="sd">        ::</span>
 <span class="sd">            &gt;&gt;&gt; import pyflink.dataframe as pf</span>
 <span class="sd">            &gt;&gt;&gt; pf.set_model_provider(pf.OpenAICompatProvider(</span>
-<span class="sd">            ...     task=&quot;chat/completions&quot;))</span>
-<span class="sd">            &gt;&gt;&gt; df = pf.from_dict({&quot;review&quot;: [&quot;The food was excellent.&quot;]})</span>
-<span class="sd">            &gt;&gt;&gt; df.llm.ai_sentiment(&quot;review&quot;, model=&quot;qwen3.6-plus&quot;)</span>
+<span class="sd">            ...     task="chat/completions"))</span>
+<span class="sd">            &gt;&gt;&gt; df = pf.from_dict({"review": ["The food was excellent."]})</span>
+<span class="sd">            &gt;&gt;&gt; df.llm.ai_sentiment("review", model="qwen3.6-plus")</span>
 
 <span class="sd">        With cache:</span>
 
 <span class="sd">        ::</span>
 <span class="sd">            &gt;&gt;&gt; df.llm.ai_sentiment(</span>
-<span class="sd">            ...     &quot;review&quot;, model=&quot;qwen3.6-plus&quot;,</span>
-<span class="sd">            ...     cache_table=&quot;`fluss-catalog`.default_database.sentiment_cache&quot;,</span>
-<span class="sd">            ...     cache_key=&quot;review&quot;)</span>
+<span class="sd">            ...     "review", model="qwen3.6-plus",</span>
+<span class="sd">            ...     cache_table="`fluss-catalog`.default_database.sentiment_cache",</span>
+<span class="sd">            ...     cache_key="review")</span>
 
 <span class="sd">        Using runtime config supported by</span>
 <span class="sd">        :class:`pyflink.dataframe.OpenAICompatProvider`:</span>
 
 <span class="sd">        ::</span>
 <span class="sd">            &gt;&gt;&gt; df.llm.ai_sentiment(</span>
-<span class="sd">            ...     &quot;review&quot;, model=&quot;qwen3.6-plus&quot;,</span>
-<span class="sd">            ...     config={&quot;max-concurrent-operations&quot;: &quot;20&quot;})</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">            ...     "review", model="qwen3.6-plus",</span>
+<span class="sd">            ...     config={"max-concurrent-operations": "20"})</span>
+<span class="sd">        """</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.ai_functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ai_sentiment</span> <span class="k">as</span> <span class="n">_ai_sentiment</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ai_func</span><span class="p">(</span><span class="s2">&quot;ai_sentiment&quot;</span><span class="p">,</span> <span class="n">input_col</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">provider</span><span class="p">,</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ai_func</span><span class="p">(</span><span class="s2">"ai_sentiment"</span><span class="p">,</span> <span class="n">input_col</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">provider</span><span class="p">,</span>
                              <span class="n">cache_table</span><span class="p">,</span> <span class="n">cache_key</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">_ai_sentiment</span><span class="p">,</span>
                              <span class="n">provider_options</span><span class="o">=</span><span class="n">kwargs</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="LLMAccessor.ai_extract"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.ai.llm.LLMAccessor.ai_extract.html#pyflink.dataframe.ai.llm.LLMAccessor.ai_extract">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">ai_extract</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_col</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Expression&quot;</span><span class="p">],</span> <span class="n">schema</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span>
+<div class="viewcode-block" id="LLMAccessor.ai_extract"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.ai.llm.LLMAccessor.ai_extract.html#pyflink.dataframe.ai.llm.LLMAccessor.ai_extract">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">ai_extract</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_col</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">"Expression"</span><span class="p">],</span> <span class="n">schema</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span>
                    <span class="n">provider</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                    <span class="n">model</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                    <span class="n">cache_table</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                    <span class="n">cache_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CacheKey</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                    <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                   <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;DataFrame&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+                   <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"DataFrame"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Extract structured information from text.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            input_col: Column name (str) or Expression for the input text.</span>
 <span class="sd">            schema: JSON schema string describing the fields to extract,</span>
-<span class="sd">                e.g. ``&#39;{&quot;name&quot;:&quot;STRING&quot;, &quot;phone&quot;:&quot;STRING&quot;}&#39;``.</span>
+<span class="sd">                e.g. ``'{"name":"STRING", "phone":"STRING"}'``.</span>
 <span class="sd">            provider: Registered model provider lookup name. Uses default if</span>
 <span class="sd">                not specified. If no provider is configured, ``model`` is</span>
 <span class="sd">                treated as a catalog model name.</span>
@@ -1326,7 +1326,7 @@ under the License.
 <span class="sd">            cache_key: Optional cache key column name or list of column names.</span>
 <span class="sd">            config: Optional dict of runtime prediction options.</span>
 <span class="sd">            **kwargs: Per-call overrides for the selected DataFrame model</span>
-<span class="sd">                provider&#39;s constructor parameters. Overrides are applied only</span>
+<span class="sd">                provider's constructor parameters. Overrides are applied only</span>
 <span class="sd">                when the call uses a configured provider.</span>
 
 <span class="sd">                Note: This function uses its own task-specific prompt.</span>
@@ -1345,52 +1345,52 @@ under the License.
 <span class="sd">        ::</span>
 <span class="sd">            &gt;&gt;&gt; import pyflink.dataframe as pf</span>
 <span class="sd">            &gt;&gt;&gt; pf.set_model_provider(pf.OpenAICompatProvider(</span>
-<span class="sd">            ...     task=&quot;chat/completions&quot;))</span>
-<span class="sd">            &gt;&gt;&gt; df = pf.from_dict({&quot;text&quot;: [&quot;Alice called 555-0100.&quot;]})</span>
-<span class="sd">            &gt;&gt;&gt; df.llm.ai_extract(&quot;text&quot;,</span>
-<span class="sd">            ...     &#39;{&quot;name&quot;:&quot;STRING&quot;, &quot;phone&quot;:&quot;STRING&quot;}&#39;, model=&quot;qwen3.6-plus&quot;)</span>
+<span class="sd">            ...     task="chat/completions"))</span>
+<span class="sd">            &gt;&gt;&gt; df = pf.from_dict({"text": ["Alice called 555-0100."]})</span>
+<span class="sd">            &gt;&gt;&gt; df.llm.ai_extract("text",</span>
+<span class="sd">            ...     '{"name":"STRING", "phone":"STRING"}', model="qwen3.6-plus")</span>
 
 <span class="sd">        With cache:</span>
 
 <span class="sd">        ::</span>
 <span class="sd">            &gt;&gt;&gt; df.llm.ai_extract(</span>
-<span class="sd">            ...     &quot;text&quot;, &#39;{&quot;name&quot;:&quot;STRING&quot;, &quot;phone&quot;:&quot;STRING&quot;}&#39;,</span>
-<span class="sd">            ...     model=&quot;qwen3.6-plus&quot;,</span>
-<span class="sd">            ...     cache_table=&quot;`fluss-catalog`.default_database.extract_cache&quot;,</span>
-<span class="sd">            ...     cache_key=&quot;text&quot;)</span>
+<span class="sd">            ...     "text", '{"name":"STRING", "phone":"STRING"}',</span>
+<span class="sd">            ...     model="qwen3.6-plus",</span>
+<span class="sd">            ...     cache_table="`fluss-catalog`.default_database.extract_cache",</span>
+<span class="sd">            ...     cache_key="text")</span>
 
 <span class="sd">        Using runtime config supported by</span>
 <span class="sd">        :class:`pyflink.dataframe.OpenAICompatProvider`:</span>
 
 <span class="sd">        ::</span>
 <span class="sd">            &gt;&gt;&gt; df.llm.ai_extract(</span>
-<span class="sd">            ...     &quot;text&quot;, &#39;{&quot;name&quot;:&quot;STRING&quot;, &quot;phone&quot;:&quot;STRING&quot;}&#39;,</span>
-<span class="sd">            ...     model=&quot;qwen3.6-plus&quot;,</span>
-<span class="sd">            ...     config={&quot;max-concurrent-operations&quot;: &quot;20&quot;})</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">            ...     "text", '{"name":"STRING", "phone":"STRING"}',</span>
+<span class="sd">            ...     model="qwen3.6-plus",</span>
+<span class="sd">            ...     config={"max-concurrent-operations": "20"})</span>
+<span class="sd">        """</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.ai_functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ai_extract</span> <span class="k">as</span> <span class="n">_ai_extract</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ai_func</span><span class="p">(</span><span class="s2">&quot;ai_extract&quot;</span><span class="p">,</span> <span class="n">input_col</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">provider</span><span class="p">,</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ai_func</span><span class="p">(</span><span class="s2">"ai_extract"</span><span class="p">,</span> <span class="n">input_col</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">provider</span><span class="p">,</span>
                              <span class="n">cache_table</span><span class="p">,</span> <span class="n">cache_key</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">_ai_extract</span><span class="p">,</span>
                              <span class="n">schema</span><span class="p">,</span> <span class="n">provider_options</span><span class="o">=</span><span class="n">kwargs</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="LLMAccessor.ai_translate"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.ai.llm.LLMAccessor.ai_translate.html#pyflink.dataframe.ai.llm.LLMAccessor.ai_translate">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">ai_translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_col</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Expression&quot;</span><span class="p">],</span>
+<div class="viewcode-block" id="LLMAccessor.ai_translate"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.ai.llm.LLMAccessor.ai_translate.html#pyflink.dataframe.ai.llm.LLMAccessor.ai_translate">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">ai_translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_col</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">"Expression"</span><span class="p">],</span>
                      <span class="n">source_lang</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">target_lang</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span>
                      <span class="n">provider</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                      <span class="n">model</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                      <span class="n">cache_table</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                      <span class="n">cache_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CacheKey</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                      <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                     <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;DataFrame&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+                     <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"DataFrame"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Translate text from one language to another.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            input_col: Column name (str) or Expression for the input text.</span>
-<span class="sd">            source_lang: Source language code (e.g. ``&quot;zh&quot;``, ``&quot;en&quot;``,</span>
-<span class="sd">                ``&quot;auto&quot;`` for auto-detection). Supported: ``auto``, ``zh``,</span>
+<span class="sd">            source_lang: Source language code (e.g. ``"zh"``, ``"en"``,</span>
+<span class="sd">                ``"auto"`` for auto-detection). Supported: ``auto``, ``zh``,</span>
 <span class="sd">                ``en``, ``ja``, ``ko``, ``fr``, ``de``, ``es``, ``ru``,</span>
 <span class="sd">                ``ar``, ``pt``.</span>
-<span class="sd">            target_lang: Target language code (cannot be ``&quot;auto&quot;``).</span>
+<span class="sd">            target_lang: Target language code (cannot be ``"auto"``).</span>
 <span class="sd">            provider: Registered model provider lookup name. Uses default if</span>
 <span class="sd">                not specified. If no provider is configured, ``model`` is</span>
 <span class="sd">                treated as a catalog model name.</span>
@@ -1399,7 +1399,7 @@ under the License.
 <span class="sd">            cache_key: Optional cache key column name or list of column names.</span>
 <span class="sd">            config: Optional dict of runtime prediction options.</span>
 <span class="sd">            **kwargs: Per-call overrides for the selected DataFrame model</span>
-<span class="sd">                provider&#39;s constructor parameters. Overrides are applied only</span>
+<span class="sd">                provider's constructor parameters. Overrides are applied only</span>
 <span class="sd">                when the call uses a configured provider.</span>
 
 <span class="sd">                Note: This function uses its own task-specific prompt.</span>
@@ -1419,39 +1419,39 @@ under the License.
 <span class="sd">        ::</span>
 <span class="sd">            &gt;&gt;&gt; import pyflink.dataframe as pf</span>
 <span class="sd">            &gt;&gt;&gt; pf.set_model_provider(pf.OpenAICompatProvider(</span>
-<span class="sd">            ...     task=&quot;chat/completions&quot;))</span>
-<span class="sd">            &gt;&gt;&gt; df = pf.from_dict({&quot;text&quot;: [&quot;你好&quot;]})</span>
-<span class="sd">            &gt;&gt;&gt; df.llm.ai_translate(&quot;text&quot;, &quot;zh&quot;, &quot;en&quot;, model=&quot;qwen3.6-plus&quot;)</span>
+<span class="sd">            ...     task="chat/completions"))</span>
+<span class="sd">            &gt;&gt;&gt; df = pf.from_dict({"text": ["你好"]})</span>
+<span class="sd">            &gt;&gt;&gt; df.llm.ai_translate("text", "zh", "en", model="qwen3.6-plus")</span>
 
 <span class="sd">        With cache:</span>
 
 <span class="sd">        ::</span>
 <span class="sd">            &gt;&gt;&gt; df.llm.ai_translate(</span>
-<span class="sd">            ...     &quot;text&quot;, &quot;zh&quot;, &quot;en&quot;, model=&quot;qwen3.6-plus&quot;,</span>
-<span class="sd">            ...     cache_table=&quot;`fluss-catalog`.default_database.translate_cache&quot;,</span>
-<span class="sd">            ...     cache_key=&quot;text&quot;)</span>
+<span class="sd">            ...     "text", "zh", "en", model="qwen3.6-plus",</span>
+<span class="sd">            ...     cache_table="`fluss-catalog`.default_database.translate_cache",</span>
+<span class="sd">            ...     cache_key="text")</span>
 
 <span class="sd">        Using runtime config supported by</span>
 <span class="sd">        :class:`pyflink.dataframe.OpenAICompatProvider`:</span>
 
 <span class="sd">        ::</span>
 <span class="sd">            &gt;&gt;&gt; df.llm.ai_translate(</span>
-<span class="sd">            ...     &quot;text&quot;, &quot;zh&quot;, &quot;en&quot;, model=&quot;qwen3.6-plus&quot;,</span>
-<span class="sd">            ...     config={&quot;max-concurrent-operations&quot;: &quot;20&quot;})</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">            ...     "text", "zh", "en", model="qwen3.6-plus",</span>
+<span class="sd">            ...     config={"max-concurrent-operations": "20"})</span>
+<span class="sd">        """</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.ai_functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ai_translate</span> <span class="k">as</span> <span class="n">_ai_translate</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ai_func</span><span class="p">(</span><span class="s2">&quot;ai_translate&quot;</span><span class="p">,</span> <span class="n">input_col</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">provider</span><span class="p">,</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ai_func</span><span class="p">(</span><span class="s2">"ai_translate"</span><span class="p">,</span> <span class="n">input_col</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">provider</span><span class="p">,</span>
                              <span class="n">cache_table</span><span class="p">,</span> <span class="n">cache_key</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">_ai_translate</span><span class="p">,</span>
                              <span class="n">source_lang</span><span class="p">,</span> <span class="n">target_lang</span><span class="p">,</span> <span class="n">provider_options</span><span class="o">=</span><span class="n">kwargs</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="LLMAccessor.ai_summarize"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.ai.llm.LLMAccessor.ai_summarize.html#pyflink.dataframe.ai.llm.LLMAccessor.ai_summarize">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">ai_summarize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_col</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Expression&quot;</span><span class="p">],</span>
+<div class="viewcode-block" id="LLMAccessor.ai_summarize"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.ai.llm.LLMAccessor.ai_summarize.html#pyflink.dataframe.ai.llm.LLMAccessor.ai_summarize">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">ai_summarize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_col</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">"Expression"</span><span class="p">],</span>
                      <span class="n">max_length</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">provider</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                      <span class="n">model</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                      <span class="n">cache_table</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                      <span class="n">cache_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CacheKey</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                      <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                     <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;DataFrame&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+                     <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"DataFrame"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Summarize text to a maximum length.</span>
 
 <span class="sd">        Args:</span>
@@ -1466,7 +1466,7 @@ under the License.
 <span class="sd">            cache_key: Optional cache key column name or list of column names.</span>
 <span class="sd">            config: Optional dict of runtime prediction options.</span>
 <span class="sd">            **kwargs: Per-call overrides for the selected DataFrame model</span>
-<span class="sd">                provider&#39;s constructor parameters. Overrides are applied only</span>
+<span class="sd">                provider's constructor parameters. Overrides are applied only</span>
 <span class="sd">                when the call uses a configured provider.</span>
 
 <span class="sd">                Note: This function uses its own task-specific prompt.</span>
@@ -1485,44 +1485,44 @@ under the License.
 <span class="sd">        ::</span>
 <span class="sd">            &gt;&gt;&gt; import pyflink.dataframe as pf</span>
 <span class="sd">            &gt;&gt;&gt; pf.set_model_provider(pf.OpenAICompatProvider(</span>
-<span class="sd">            ...     task=&quot;chat/completions&quot;))</span>
-<span class="sd">            &gt;&gt;&gt; df = pf.from_dict({&quot;article&quot;: [&quot;Long article text...&quot;]})</span>
-<span class="sd">            &gt;&gt;&gt; df.llm.ai_summarize(&quot;article&quot;, 200, model=&quot;qwen3.6-plus&quot;)</span>
+<span class="sd">            ...     task="chat/completions"))</span>
+<span class="sd">            &gt;&gt;&gt; df = pf.from_dict({"article": ["Long article text..."]})</span>
+<span class="sd">            &gt;&gt;&gt; df.llm.ai_summarize("article", 200, model="qwen3.6-plus")</span>
 
 <span class="sd">        With cache:</span>
 
 <span class="sd">        ::</span>
 <span class="sd">            &gt;&gt;&gt; df.llm.ai_summarize(</span>
-<span class="sd">            ...     &quot;article&quot;, 200, model=&quot;qwen3.6-plus&quot;,</span>
-<span class="sd">            ...     cache_table=&quot;`fluss-catalog`.default_database.summarize_cache&quot;,</span>
-<span class="sd">            ...     cache_key=&quot;article&quot;)</span>
+<span class="sd">            ...     "article", 200, model="qwen3.6-plus",</span>
+<span class="sd">            ...     cache_table="`fluss-catalog`.default_database.summarize_cache",</span>
+<span class="sd">            ...     cache_key="article")</span>
 
 <span class="sd">        Using runtime config supported by</span>
 <span class="sd">        :class:`pyflink.dataframe.OpenAICompatProvider`:</span>
 
 <span class="sd">        ::</span>
 <span class="sd">            &gt;&gt;&gt; df.llm.ai_summarize(</span>
-<span class="sd">            ...     &quot;article&quot;, 200, model=&quot;qwen3.6-plus&quot;,</span>
-<span class="sd">            ...     config={&quot;max-concurrent-operations&quot;: &quot;20&quot;})</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">            ...     "article", 200, model="qwen3.6-plus",</span>
+<span class="sd">            ...     config={"max-concurrent-operations": "20"})</span>
+<span class="sd">        """</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.ai_functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ai_summarize</span> <span class="k">as</span> <span class="n">_ai_summarize</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ai_func</span><span class="p">(</span><span class="s2">&quot;ai_summarize&quot;</span><span class="p">,</span> <span class="n">input_col</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">provider</span><span class="p">,</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ai_func</span><span class="p">(</span><span class="s2">"ai_summarize"</span><span class="p">,</span> <span class="n">input_col</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">provider</span><span class="p">,</span>
                              <span class="n">cache_table</span><span class="p">,</span> <span class="n">cache_key</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">_ai_summarize</span><span class="p">,</span>
                              <span class="n">max_length</span><span class="p">,</span> <span class="n">provider_options</span><span class="o">=</span><span class="n">kwargs</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="LLMAccessor.ai_mask"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.ai.llm.LLMAccessor.ai_mask.html#pyflink.dataframe.ai.llm.LLMAccessor.ai_mask">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">ai_mask</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_col</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Expression&quot;</span><span class="p">],</span>
+<div class="viewcode-block" id="LLMAccessor.ai_mask"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.ai.llm.LLMAccessor.ai_mask.html#pyflink.dataframe.ai.llm.LLMAccessor.ai_mask">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">ai_mask</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_col</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">"Expression"</span><span class="p">],</span>
                 <span class="n">entities</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="o">*</span><span class="p">,</span> <span class="n">provider</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                 <span class="n">model</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                 <span class="n">cache_table</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                 <span class="n">cache_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CacheKey</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                 <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;DataFrame&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+                <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"DataFrame"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Mask sensitive information in text.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            input_col: Column name (str) or Expression for the input text.</span>
-<span class="sd">            entities: List of entity types to mask (e.g. ``[&quot;name&quot;, &quot;phone&quot;]``).</span>
+<span class="sd">            entities: List of entity types to mask (e.g. ``["name", "phone"]``).</span>
 <span class="sd">            provider: Registered model provider lookup name. Uses default if</span>
 <span class="sd">                not specified. If no provider is configured, ``model`` is</span>
 <span class="sd">                treated as a catalog model name.</span>
@@ -1531,7 +1531,7 @@ under the License.
 <span class="sd">            cache_key: Optional cache key column name or list of column names.</span>
 <span class="sd">            config: Optional dict of runtime prediction options.</span>
 <span class="sd">            **kwargs: Per-call overrides for the selected DataFrame model</span>
-<span class="sd">                provider&#39;s constructor parameters. Overrides are applied only</span>
+<span class="sd">                provider's constructor parameters. Overrides are applied only</span>
 <span class="sd">                when the call uses a configured provider.</span>
 
 <span class="sd">                Note: This function uses its own task-specific prompt.</span>
@@ -1552,39 +1552,39 @@ under the License.
 <span class="sd">        ::</span>
 <span class="sd">            &gt;&gt;&gt; import pyflink.dataframe as pf</span>
 <span class="sd">            &gt;&gt;&gt; pf.set_model_provider(pf.OpenAICompatProvider(</span>
-<span class="sd">            ...     task=&quot;chat/completions&quot;))</span>
-<span class="sd">            &gt;&gt;&gt; df = pf.from_dict({&quot;text&quot;: [&quot;Alice called 555-0100.&quot;]})</span>
-<span class="sd">            &gt;&gt;&gt; df.llm.ai_mask(&quot;text&quot;, [&quot;name&quot;, &quot;phone&quot;], model=&quot;qwen3.6-plus&quot;)</span>
+<span class="sd">            ...     task="chat/completions"))</span>
+<span class="sd">            &gt;&gt;&gt; df = pf.from_dict({"text": ["Alice called 555-0100."]})</span>
+<span class="sd">            &gt;&gt;&gt; df.llm.ai_mask("text", ["name", "phone"], model="qwen3.6-plus")</span>
 
 <span class="sd">        With cache:</span>
 
 <span class="sd">        ::</span>
 <span class="sd">            &gt;&gt;&gt; df.llm.ai_mask(</span>
-<span class="sd">            ...     &quot;text&quot;, [&quot;name&quot;, &quot;phone&quot;], model=&quot;qwen3.6-plus&quot;,</span>
-<span class="sd">            ...     cache_table=&quot;`fluss-catalog`.default_database.mask_cache&quot;,</span>
-<span class="sd">            ...     cache_key=&quot;text&quot;)</span>
+<span class="sd">            ...     "text", ["name", "phone"], model="qwen3.6-plus",</span>
+<span class="sd">            ...     cache_table="`fluss-catalog`.default_database.mask_cache",</span>
+<span class="sd">            ...     cache_key="text")</span>
 
 <span class="sd">        Using runtime config supported by</span>
 <span class="sd">        :class:`pyflink.dataframe.OpenAICompatProvider`:</span>
 
 <span class="sd">        ::</span>
 <span class="sd">            &gt;&gt;&gt; df.llm.ai_mask(</span>
-<span class="sd">            ...     &quot;text&quot;, [&quot;name&quot;, &quot;phone&quot;], model=&quot;qwen3.6-plus&quot;,</span>
-<span class="sd">            ...     config={&quot;max-concurrent-operations&quot;: &quot;20&quot;})</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">            ...     "text", ["name", "phone"], model="qwen3.6-plus",</span>
+<span class="sd">            ...     config={"max-concurrent-operations": "20"})</span>
+<span class="sd">        """</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.ai_functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ai_mask</span> <span class="k">as</span> <span class="n">_ai_mask</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ai_func</span><span class="p">(</span><span class="s2">&quot;ai_mask&quot;</span><span class="p">,</span> <span class="n">input_col</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">provider</span><span class="p">,</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ai_func</span><span class="p">(</span><span class="s2">"ai_mask"</span><span class="p">,</span> <span class="n">input_col</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">provider</span><span class="p">,</span>
                              <span class="n">cache_table</span><span class="p">,</span> <span class="n">cache_key</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">_ai_mask</span><span class="p">,</span>
                              <span class="n">entities</span><span class="p">,</span> <span class="n">provider_options</span><span class="o">=</span><span class="n">kwargs</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="LLMAccessor.ai_embed"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.ai.llm.LLMAccessor.ai_embed.html#pyflink.dataframe.ai.llm.LLMAccessor.ai_embed">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">ai_embed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_col</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Expression&quot;</span><span class="p">],</span>
+<div class="viewcode-block" id="LLMAccessor.ai_embed"><a class="viewcode-back" href="../../../../reference/pyflink.dataframe/api/pyflink.dataframe.ai.llm.LLMAccessor.ai_embed.html#pyflink.dataframe.ai.llm.LLMAccessor.ai_embed">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">ai_embed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_col</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">"Expression"</span><span class="p">],</span>
                  <span class="n">dimension</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">provider</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">model</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">cache_table</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">cache_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CacheKey</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;DataFrame&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+                 <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"DataFrame"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Generate embedding vectors for text.</span>
 
 <span class="sd">        Args:</span>
@@ -1599,7 +1599,7 @@ under the License.
 <span class="sd">            cache_key: Optional cache key column name or list of column names.</span>
 <span class="sd">            config: Optional dict of runtime prediction options.</span>
 <span class="sd">            **kwargs: Per-call overrides for the selected DataFrame model</span>
-<span class="sd">                provider&#39;s constructor parameters. Overrides are applied only</span>
+<span class="sd">                provider's constructor parameters. Overrides are applied only</span>
 <span class="sd">                when the call uses a configured provider.</span>
 
 <span class="sd">        Returns:</span>
@@ -1613,35 +1613,35 @@ under the License.
 <span class="sd">        ::</span>
 <span class="sd">            &gt;&gt;&gt; import pyflink.dataframe as pf</span>
 <span class="sd">            &gt;&gt;&gt; pf.set_model_provider(pf.OpenAICompatProvider(</span>
-<span class="sd">            ...     task=&quot;embeddings&quot;))</span>
+<span class="sd">            ...     task="embeddings"))</span>
 <span class="sd">            &gt;&gt;&gt; df = pf.from_dict({</span>
-<span class="sd">            ...     &quot;tenant_id&quot;: [&quot;tenant-a&quot;],</span>
-<span class="sd">            ...     &quot;text&quot;: [&quot;Hello world&quot;],</span>
+<span class="sd">            ...     "tenant_id": ["tenant-a"],</span>
+<span class="sd">            ...     "text": ["Hello world"],</span>
 <span class="sd">            ... })</span>
-<span class="sd">            &gt;&gt;&gt; df.llm.ai_embed(&quot;text&quot;, 512, model=&quot;text-embedding-v4&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; df.llm.ai_embed("text", 512, model="text-embedding-v4")</span>
 
 <span class="sd">        With cache:</span>
 
 <span class="sd">        ::</span>
 <span class="sd">            &gt;&gt;&gt; df.llm.ai_embed(</span>
-<span class="sd">            ...     &quot;text&quot;, 512, model=&quot;text-embedding-v4&quot;,</span>
-<span class="sd">            ...     cache_table=&quot;`fluss-catalog`.default_database.embed_cache&quot;,</span>
-<span class="sd">            ...     cache_key=&quot;text&quot;)</span>
+<span class="sd">            ...     "text", 512, model="text-embedding-v4",</span>
+<span class="sd">            ...     cache_table="`fluss-catalog`.default_database.embed_cache",</span>
+<span class="sd">            ...     cache_key="text")</span>
 
 <span class="sd">        Using runtime config supported by</span>
 <span class="sd">        :class:`pyflink.dataframe.OpenAICompatProvider`:</span>
 
 <span class="sd">        ::</span>
 <span class="sd">            &gt;&gt;&gt; df.llm.ai_embed(</span>
-<span class="sd">            ...     &quot;text&quot;, 512, model=&quot;text-embedding-v4&quot;,</span>
-<span class="sd">            ...     config={&quot;max-concurrent-operations&quot;: &quot;20&quot;})</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">            ...     "text", 512, model="text-embedding-v4",</span>
+<span class="sd">            ...     config={"max-concurrent-operations": "20"})</span>
+<span class="sd">        """</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.dataframe.dataframe</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataFrame</span> <span class="k">as</span> <span class="n">DF</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.ai_functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ai_embed</span> <span class="k">as</span> <span class="n">_ai_embed</span>
 
         <span class="n">cache_keys</span> <span class="o">=</span> <span class="n">_validate_cache_args</span><span class="p">(</span><span class="n">cache_table</span><span class="p">,</span> <span class="n">cache_key</span><span class="p">)</span>
 
-        <span class="n">input_cols</span><span class="p">,</span> <span class="n">output_cols</span> <span class="o">=</span> <span class="n">_ai_function_schemas</span><span class="p">()[</span><span class="s2">&quot;ai_embed&quot;</span><span class="p">]</span>
+        <span class="n">input_cols</span><span class="p">,</span> <span class="n">output_cols</span> <span class="o">=</span> <span class="n">_ai_function_schemas</span><span class="p">()[</span><span class="s2">"ai_embed"</span><span class="p">]</span>
         <span class="n">flink_model</span> <span class="o">=</span> <span class="n">_resolve_model</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="o">.</span><span class="n">_table</span><span class="o">.</span><span class="n">_t_env</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">provider</span><span class="p">,</span> <span class="n">input_cols</span><span class="p">,</span> <span class="n">output_cols</span><span class="p">,</span>
             <span class="n">provider_options</span><span class="o">=</span><span class="n">kwargs</span><span class="p">)</span>

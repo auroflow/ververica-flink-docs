@@ -278,13 +278,13 @@ under the License.
 <span class="c1">#  distributed with this work for additional information</span>
 <span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
 <span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
-<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  "License"); you may not use this file except in compliance</span>
 <span class="c1">#  with the License.  You may obtain a copy of the License at</span>
 <span class="c1">#</span>
 <span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="c1">#</span>
 <span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  distributed under the License is distributed on an "AS IS" BASIS,</span>
 <span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1">#  See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
@@ -300,14 +300,14 @@ under the License.
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.util.java_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_java_class</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;StateBackend&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;HashMapStateBackend&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;EmbeddedRocksDBStateBackend&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;MemoryStateBackend&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;FsStateBackend&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;RocksDBStateBackend&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;CustomStateBackend&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;PredefinedOptions&#39;</span><span class="p">]</span>
+    <span class="s1">'StateBackend'</span><span class="p">,</span>
+    <span class="s1">'HashMapStateBackend'</span><span class="p">,</span>
+    <span class="s1">'EmbeddedRocksDBStateBackend'</span><span class="p">,</span>
+    <span class="s1">'MemoryStateBackend'</span><span class="p">,</span>
+    <span class="s1">'FsStateBackend'</span><span class="p">,</span>
+    <span class="s1">'RocksDBStateBackend'</span><span class="p">,</span>
+    <span class="s1">'CustomStateBackend'</span><span class="p">,</span>
+    <span class="s1">'PredefinedOptions'</span><span class="p">]</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_from_j_state_backend</span><span class="p">(</span><span class="n">j_state_backend</span><span class="p">):</span>
@@ -324,7 +324,7 @@ under the License.
     <span class="n">j_clz</span> <span class="o">=</span> <span class="n">j_state_backend</span><span class="o">.</span><span class="n">getClass</span><span class="p">()</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">get_java_class</span><span class="p">(</span><span class="n">JStateBackend</span><span class="p">)</span><span class="o">.</span><span class="n">isAssignableFrom</span><span class="p">(</span><span class="n">j_clz</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The input </span><span class="si">%s</span><span class="s2"> is not an instance of StateBackend.&quot;</span> <span class="o">%</span> <span class="n">j_state_backend</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"The input </span><span class="si">%s</span><span class="s2"> is not an instance of StateBackend."</span> <span class="o">%</span> <span class="n">j_state_backend</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">get_java_class</span><span class="p">(</span><span class="n">JHashMapStateBackend</span><span class="p">)</span><span class="o">.</span><span class="n">isAssignableFrom</span><span class="p">(</span><span class="n">j_state_backend</span><span class="o">.</span><span class="n">getClass</span><span class="p">()):</span>
         <span class="k">return</span> <span class="n">HashMapStateBackend</span><span class="p">(</span><span class="n">j_hashmap_state_backend</span><span class="o">=</span><span class="n">j_state_backend</span><span class="o">.</span><span class="n">getClass</span><span class="p">())</span>
@@ -337,11 +337,11 @@ under the License.
     <span class="k">elif</span> <span class="n">get_java_class</span><span class="p">(</span><span class="n">JRocksDBStateBackend</span><span class="p">)</span><span class="o">.</span><span class="n">isAssignableFrom</span><span class="p">(</span><span class="n">j_state_backend</span><span class="o">.</span><span class="n">getClass</span><span class="p">()):</span>
         <span class="k">return</span> <span class="n">RocksDBStateBackend</span><span class="p">(</span><span class="n">j_rocks_db_state_backend</span><span class="o">=</span><span class="n">j_state_backend</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">CustomStateBackend</span><span class="p">(</span><span class="n">j_state_backend</span><span class="p">)</span>  <span class="c1"># users&#39; customized state backend</span>
+        <span class="k">return</span> <span class="n">CustomStateBackend</span><span class="p">(</span><span class="n">j_state_backend</span><span class="p">)</span>  <span class="c1"># users' customized state backend</span>
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">StateBackend</span><span class="p">(</span><span class="nb">object</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A **State Backend** defines how the state of a streaming application is stored locally within</span>
 <span class="sd">    the cluster. Different state backends store their state in different fashions, and use different</span>
 <span class="sd">    data structures to hold the state of running applications.</span>
@@ -387,14 +387,14 @@ under the License.
 
 <span class="sd">    State backend implementations have to be thread-safe. Multiple threads may be creating</span>
 <span class="sd">    streams and keyed-/operator state backends concurrently.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_state_backend</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_state_backend</span> <span class="o">=</span> <span class="n">j_state_backend</span>
 
 
 <div class="viewcode-block" id="HashMapStateBackend"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.state_backend.HashMapStateBackend.html#pyflink.datastream.state_backend.HashMapStateBackend">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">HashMapStateBackend</span><span class="p">(</span><span class="n">StateBackend</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    This state backend holds the working state in the memory (JVM heap) of the TaskManagers</span>
 <span class="sd">    and checkpoints based on the configured CheckpointStorage.</span>
 
@@ -402,7 +402,7 @@ under the License.
 
 <span class="sd">    Working state is kept on the TaskManager heap. If a TaskManager executes multiple</span>
 <span class="sd">    tasks concurrently (if the TaskManager has multiple slots, or if slot-sharing is used)</span>
-<span class="sd">    then the aggregate state of all tasks needs to fit into that TaskManager&#39;s memory.</span>
+<span class="sd">    then the aggregate state of all tasks needs to fit into that TaskManager's memory.</span>
 
 <span class="sd">    **Configuration**</span>
 
@@ -415,10 +415,10 @@ under the License.
 <span class="sd">    application without a default savepoint directory, it will pick up a default savepoint</span>
 <span class="sd">    directory specified in the Flink configuration of the running job/cluster. That behavior is</span>
 <span class="sd">    implemented via the :func:`configure` method.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_hashmap_state_backend</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates a new MemoryStateBackend, setting optionally the paths to persist checkpoint</span>
 <span class="sd">        metadata and savepoints to, as well as configuring state thresholds and asynchronous</span>
 <span class="sd">        operations.</span>
@@ -433,7 +433,7 @@ under the License.
 <span class="sd">            &gt;&gt;&gt; state_backend = HashMapStateBackend()</span>
 
 <span class="sd">        :param j_hashmap_state_backend: For internal use, please keep none.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">j_hashmap_state_backend</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
             <span class="n">JHashMapStateBackend</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">hashmap</span>\
@@ -448,7 +448,7 @@ under the License.
 
 
 <div class="viewcode-block" id="EmbeddedRocksDBStateBackend"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.state_backend.EmbeddedRocksDBStateBackend.html#pyflink.datastream.state_backend.EmbeddedRocksDBStateBackend">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">EmbeddedRocksDBStateBackend</span><span class="p">(</span><span class="n">StateBackend</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A State Backend that stores its state in an embedded ``RocksDB`` instance. This state backend</span>
 <span class="sd">    can store very large state that exceeds memory and spills to local disk.</span>
 
@@ -458,12 +458,12 @@ under the License.
 
 <span class="sd">    The behavior of the RocksDB instances can be parametrized by setting RocksDB Options</span>
 <span class="sd">    using the methods :func:`set_predefined_options` and :func:`set_options`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">enable_incremental_checkpointing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">j_embedded_rocks_db_state_backend</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates a new :class:`EmbeddedRocksDBStateBackend` for storing local state.</span>
 
 <span class="sd">        Example:</span>
@@ -473,7 +473,7 @@ under the License.
 
 <span class="sd">        :param enable_incremental_checkpointing: True if incremental checkpointing is enabled.</span>
 <span class="sd">        :param j_embedded_rocks_db_state_backend: For internal use, please keep none.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">j_embedded_rocks_db_state_backend</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
             <span class="n">JTernaryBoolean</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">TernaryBoolean</span>
@@ -481,9 +481,9 @@ under the License.
                 <span class="o">.</span><span class="n">EmbeddedRocksDBStateBackend</span>
 
             <span class="k">if</span> <span class="n">enable_incremental_checkpointing</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Unsupported input for &#39;enable_incremental_checkpointing&#39;: </span><span class="si">%s</span><span class="s2">, &quot;</span>
-                                <span class="s2">&quot;the value of the parameter should be None or&quot;</span>
-                                <span class="s2">&quot;True or False.&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"Unsupported input for 'enable_incremental_checkpointing': </span><span class="si">%s</span><span class="s2">, "</span>
+                                <span class="s2">"the value of the parameter should be None or"</span>
+                                <span class="s2">"True or False."</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="n">enable_incremental_checkpointing</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">j_enable_incremental_checkpointing</span> <span class="o">=</span> <span class="n">JTernaryBoolean</span><span class="o">.</span><span class="n">UNDEFINED</span>
@@ -498,13 +498,13 @@ under the License.
         <span class="nb">super</span><span class="p">(</span><span class="n">EmbeddedRocksDBStateBackend</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">j_embedded_rocks_db_state_backend</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">set_db_storage_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">paths</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Sets the directories in which the local RocksDB database puts its files (like SST and</span>
 <span class="sd">        metadata files). These directories do not need to be persistent, they can be ephemeral,</span>
 <span class="sd">        meaning that they are lost on a machine failure, because state in RocksDB is persisted</span>
 <span class="sd">        in checkpoints.</span>
 
-<span class="sd">        If nothing is configured, these directories default to the TaskManager&#39;s local</span>
+<span class="sd">        If nothing is configured, these directories default to the TaskManager's local</span>
 <span class="sd">        temporary file directories.</span>
 
 <span class="sd">        Each distinct state will be stored in one path, but when the state backend creates</span>
@@ -515,7 +515,7 @@ under the License.
 
 <span class="sd">        :param paths: The paths across which the local RocksDB database files will be spread. this</span>
 <span class="sd">                      parameter is optional.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">paths</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_state_backend</span><span class="o">.</span><span class="n">setDbStoragePath</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -526,7 +526,7 @@ under the License.
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_state_backend</span><span class="o">.</span><span class="n">setDbStoragePaths</span><span class="p">(</span><span class="n">j_path_array</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_db_storage_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the configured local DB storage paths, or null, if none were configured.</span>
 
 <span class="sd">        Under these directories on the TaskManager, RocksDB stores its SST files and</span>
@@ -534,23 +534,23 @@ under the License.
 <span class="sd">        meaning that they are lost on a machine failure, because state in RocksDB is persisted</span>
 <span class="sd">        in checkpoints.</span>
 
-<span class="sd">        If nothing is configured, these directories default to the TaskManager&#39;s local</span>
+<span class="sd">        If nothing is configured, these directories default to the TaskManager's local</span>
 <span class="sd">        temporary file directories.</span>
 
 <span class="sd">        :return: The list of configured local DB storage paths.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_state_backend</span><span class="o">.</span><span class="n">getDbStoragePaths</span><span class="p">())</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">is_incremental_checkpoints_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets whether incremental checkpoints are enabled for this state backend.</span>
 
 <span class="sd">        :return: True if incremental checkpoints are enabled, false otherwise.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_state_backend</span><span class="o">.</span><span class="n">isIncrementalCheckpointsEnabled</span><span class="p">()</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">set_predefined_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="s1">&#39;PredefinedOptions&#39;</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_predefined_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="s1">'PredefinedOptions'</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Sets the predefined options for RocksDB.</span>
 
 <span class="sd">        If user-configured options within ``RocksDBConfigurableOptions`` is set (through</span>
@@ -564,12 +564,12 @@ under the License.
 <span class="sd">            &gt;&gt;&gt; state_backend.set_predefined_options(PredefinedOptions.SPINNING_DISK_OPTIMIZED)</span>
 
 <span class="sd">        :param options: The options to set (must not be null), see :class:`PredefinedOptions`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_state_backend</span>\
             <span class="o">.</span><span class="n">setPredefinedOptions</span><span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">_to_j_predefined_options</span><span class="p">())</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_predefined_options</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;PredefinedOptions&#39;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_predefined_options</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'PredefinedOptions'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the current predefined options for RocksDB.</span>
 <span class="sd">        The default options (if nothing was set via :func:`setPredefinedOptions`)</span>
 <span class="sd">        are :data:`PredefinedOptions.DEFAULT`.</span>
@@ -582,12 +582,12 @@ under the License.
 <span class="sd">        .. seealso:: :func:`set_predefined_options`</span>
 
 <span class="sd">        :return: Current predefined options.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">j_predefined_options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_state_backend</span><span class="o">.</span><span class="n">getPredefinedOptions</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">PredefinedOptions</span><span class="o">.</span><span class="n">_from_j_predefined_options</span><span class="p">(</span><span class="n">j_predefined_options</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">set_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options_factory_class_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Sets ``org.rocksdb.Options`` for the RocksDB instances.</span>
 <span class="sd">        Because the options are not serializable and hold native code references,</span>
 <span class="sd">        they must be specified through a factory.</span>
@@ -600,22 +600,22 @@ under the License.
 <span class="sd">        :param options_factory_class_name: The fully-qualified class name of the options</span>
 <span class="sd">                                           factory in Java that lazily creates the RocksDB options.</span>
 <span class="sd">                                           The options factory must have a default constructor.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
         <span class="n">JOptionsFactory</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">streaming</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">RocksDBOptionsFactory</span>
         <span class="n">j_options_factory_clz</span> <span class="o">=</span> <span class="n">load_java_class</span><span class="p">(</span><span class="n">options_factory_class_name</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">get_java_class</span><span class="p">(</span><span class="n">JOptionsFactory</span><span class="p">)</span><span class="o">.</span><span class="n">isAssignableFrom</span><span class="p">(</span><span class="n">j_options_factory_clz</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The input class does not implement RocksDBOptionsFactory.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"The input class does not implement RocksDBOptionsFactory."</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_state_backend</span>\
             <span class="o">.</span><span class="n">setRocksDBOptions</span><span class="p">(</span><span class="n">j_options_factory_clz</span><span class="o">.</span><span class="n">newInstance</span><span class="p">())</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_options</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the fully-qualified class name of the options factory in Java that lazily creates</span>
 <span class="sd">        the RocksDB options.</span>
 
 <span class="sd">        :return: The fully-qualified class name of the options factory in Java.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">j_options_factory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_state_backend</span><span class="o">.</span><span class="n">getRocksDBOptions</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">j_options_factory</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">j_options_factory</span><span class="o">.</span><span class="n">getClass</span><span class="p">()</span><span class="o">.</span><span class="n">getName</span><span class="p">()</span>
@@ -623,20 +623,20 @@ under the License.
             <span class="k">return</span> <span class="kc">None</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_number_of_transfer_threads</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the number of threads used to transfer files while snapshotting/restoring.</span>
 
 <span class="sd">        :return: The number of threads used to transfer files while snapshotting/restoring.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_state_backend</span><span class="o">.</span><span class="n">getNumberOfTransferThreads</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">set_number_of_transfer_threads</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_of_transfering_threads</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Sets the number of threads used to transfer files while snapshotting/restoring.</span>
 
 <span class="sd">        :param number_of_transfering_threads: The number of threads used to transfer files while</span>
 <span class="sd">                                              snapshotting/restoring.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_state_backend</span>\
             <span class="o">.</span><span class="n">setNumberOfTransferThreads</span><span class="p">(</span><span class="n">number_of_transfering_threads</span><span class="p">)</span>
 
@@ -645,7 +645,7 @@ under the License.
 
 
 <div class="viewcode-block" id="MemoryStateBackend"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.state_backend.MemoryStateBackend.html#pyflink.datastream.state_backend.MemoryStateBackend">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">MemoryStateBackend</span><span class="p">(</span><span class="n">StateBackend</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    **IMPORTANT** `MemoryStateBackend` is deprecated in favor of `HashMapStateBackend` and</span>
 <span class="sd">    `JobManagerCheckpointStorage`. This change does not affect the runtime characteristics of your</span>
 <span class="sd">    Jobs and is simply an API change to help better communicate the ways Flink separates local state</span>
@@ -666,18 +666,18 @@ under the License.
 <span class="sd">    ```</span>
 
 <span class="sd">    This state backend holds the working state in the memory (JVM heap) of the TaskManagers.</span>
-<span class="sd">    The state backend checkpoints state directly to the JobManager&#39;s memory (hence the backend&#39;s</span>
+<span class="sd">    The state backend checkpoints state directly to the JobManager's memory (hence the backend's</span>
 <span class="sd">    name), but the checkpoints will be persisted to a file system for high-availability setups and</span>
 <span class="sd">    savepoints. The MemoryStateBackend is consequently a FileSystem-based backend that can work</span>
 <span class="sd">    without a file system dependency in simple setups.</span>
 
 <span class="sd">    This state backend should be used only for experimentation, quick local setups,</span>
 <span class="sd">    or for streaming applications that have very small state: Because it requires checkpoints to</span>
-<span class="sd">    go through the JobManager&#39;s memory, larger state will occupy larger portions of the</span>
-<span class="sd">    JobManager&#39;s main memory, reducing operational stability.</span>
+<span class="sd">    go through the JobManager's memory, larger state will occupy larger portions of the</span>
+<span class="sd">    JobManager's main memory, reducing operational stability.</span>
 <span class="sd">    For any other setup, the :class:`FsStateBackend` should be used. The :class:`FsStateBackend`</span>
 <span class="sd">    holds the working state on the TaskManagers in the same way, but checkpoints state directly to</span>
-<span class="sd">    files rather then to the JobManager&#39;s memory, thus supporting large state sizes.</span>
+<span class="sd">    files rather then to the JobManager's memory, thus supporting large state sizes.</span>
 
 <span class="sd">    **State Size Considerations**</span>
 
@@ -691,7 +691,7 @@ under the License.
 <span class="sd">      be default &lt; 10 MB. That limit can be configured up, but that is typically not advised.</span>
 
 <span class="sd">    - The sum of all states in the application times all retained checkpoints must comfortably</span>
-<span class="sd">      fit into the JobManager&#39;s JVM heap space.</span>
+<span class="sd">      fit into the JobManager's JVM heap space.</span>
 
 <span class="sd">    **Persistence Guarantees**</span>
 
@@ -710,7 +710,7 @@ under the License.
 <span class="sd">    application without a default savepoint directory, it will pick up a default savepoint</span>
 <span class="sd">    directory specified in the Flink configuration of the running job/cluster. That behavior is</span>
 <span class="sd">    implemented via the :func:`configure` method.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># The default maximal size that the snapshotted memory state may have (5 MiBytes).</span>
     <span class="n">DEFAULT_MAX_STATE_SIZE</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span>
@@ -721,7 +721,7 @@ under the License.
                  <span class="n">max_state_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">using_asynchronous_snapshots</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">j_memory_state_backend</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates a new MemoryStateBackend, setting optionally the paths to persist checkpoint</span>
 <span class="sd">        metadata and savepoints to, as well as configuring state thresholds and asynchronous</span>
 <span class="sd">        operations.</span>
@@ -744,7 +744,7 @@ under the License.
 <span class="sd">        :param using_asynchronous_snapshots: Snapshots are now always asynchronous. This flag</span>
 <span class="sd">                                             has no effect anymore in this version.</span>
 <span class="sd">        :param j_memory_state_backend: For internal use, please keep none.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">j_memory_state_backend</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
             <span class="n">JTernaryBoolean</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">TernaryBoolean</span>
@@ -757,9 +757,9 @@ under the License.
             <span class="k">elif</span> <span class="n">using_asynchronous_snapshots</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
                 <span class="n">j_asynchronous_snapshots</span> <span class="o">=</span> <span class="n">JTernaryBoolean</span><span class="o">.</span><span class="n">FALSE</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Unsupported input for &#39;using_asynchronous_snapshots&#39;: </span><span class="si">%s</span><span class="s2">, &quot;</span>
-                                <span class="s2">&quot;the value of the parameter should be None or&quot;</span>
-                                <span class="s2">&quot;True or False.&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"Unsupported input for 'using_asynchronous_snapshots': </span><span class="si">%s</span><span class="s2">, "</span>
+                                <span class="s2">"the value of the parameter should be None or"</span>
+                                <span class="s2">"True or False."</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">max_state_size</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">max_state_size</span> <span class="o">=</span> <span class="n">JMemoryStateBackend</span><span class="o">.</span><span class="n">DEFAULT_MAX_STATE_SIZE</span>
             <span class="n">j_memory_state_backend</span> <span class="o">=</span> <span class="n">JMemoryStateBackend</span><span class="p">(</span><span class="n">checkpoint_path</span><span class="p">,</span>
@@ -771,16 +771,16 @@ under the License.
         <span class="nb">super</span><span class="p">(</span><span class="n">MemoryStateBackend</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">j_memory_state_backend</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_max_state_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the maximum size that an individual state can have, as configured in the</span>
 <span class="sd">        constructor (by default :data:`DEFAULT_MAX_STATE_SIZE`).</span>
 
 <span class="sd">        :return: The maximum size that an individual state can have.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_memory_state_backend</span><span class="o">.</span><span class="n">getMaxStateSize</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">is_using_asynchronous_snapshots</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets whether the key/value data structures are asynchronously snapshotted.</span>
 
 <span class="sd">        If not explicitly configured, this is the default value of</span>
@@ -788,7 +788,7 @@ under the License.
 
 <span class="sd">        :return: True if the key/value data structures are asynchronously snapshotted,</span>
 <span class="sd">                 false otherwise.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_memory_state_backend</span><span class="o">.</span><span class="n">isUsingAsynchronousSnapshots</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -796,7 +796,7 @@ under the License.
 
 
 <div class="viewcode-block" id="FsStateBackend"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.state_backend.FsStateBackend.html#pyflink.datastream.state_backend.FsStateBackend">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">FsStateBackend</span><span class="p">(</span><span class="n">StateBackend</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    **IMPORTANT** `FsStateBackend is deprecated in favor of `HashMapStateBackend` and</span>
 <span class="sd">    `FileSystemCheckpointStorage`. This change does not affect the runtime characteristics</span>
 <span class="sd">    of your Jobs and is simply an API change to help better communicate the ways Flink separates</span>
@@ -807,13 +807,13 @@ under the License.
 <span class="sd">    ::</span>
 
 <span class="sd">        &gt;&gt; env.set_state_backend(HashMapStateBackend())</span>
-<span class="sd">        &gt;&gt; env.get_checkpoint_config().set_checkpoint_storage(&quot;hdfs://checkpoints&quot;)</span>
+<span class="sd">        &gt;&gt; env.get_checkpoint_config().set_checkpoint_storage("hdfs://checkpoints")</span>
 
 <span class="sd">    If you are configuring your state backend via the `config.yaml` please set your state</span>
 <span class="sd">    backend type to `hashmap`.</span>
 
 <span class="sd">    This state backend holds the working state in the memory (JVM heap) of the TaskManagers.</span>
-<span class="sd">    The state backend checkpoints state as files to a file system (hence the backend&#39;s name).</span>
+<span class="sd">    The state backend checkpoints state as files to a file system (hence the backend's name).</span>
 
 <span class="sd">    Each checkpoint individually will store all its files in a subdirectory that includes the</span>
 <span class="sd">    checkpoint number, such as ``hdfs://namenode:port/flink-checkpoints/chk-17/``.</span>
@@ -822,12 +822,12 @@ under the License.
 
 <span class="sd">    Working state is kept on the TaskManager heap. If a TaskManager executes multiple</span>
 <span class="sd">    tasks concurrently (if the TaskManager has multiple slots, or if slot-sharing is used)</span>
-<span class="sd">    then the aggregate state of all tasks needs to fit into that TaskManager&#39;s memory.</span>
+<span class="sd">    then the aggregate state of all tasks needs to fit into that TaskManager's memory.</span>
 
 <span class="sd">    This state backend stores small state chunks directly with the metadata, to avoid creating</span>
 <span class="sd">    many small files. The threshold for that is configurable. When increasing this threshold, the</span>
 <span class="sd">    size of the checkpoint metadata increases. The checkpoint metadata of all retained completed</span>
-<span class="sd">    checkpoints needs to fit into the JobManager&#39;s heap memory. This is typically not a problem,</span>
+<span class="sd">    checkpoints needs to fit into the JobManager's heap memory. This is typically not a problem,</span>
 <span class="sd">    unless the threshold :func:`get_min_file_size_threshold` is increased significantly.</span>
 
 <span class="sd">    **Persistence Guarantees**</span>
@@ -848,7 +848,7 @@ under the License.
 <span class="sd">    application without a default savepoint directory, it will pick up a default savepoint</span>
 <span class="sd">    directory specified in the Flink configuration of the running job/cluster. That behavior is</span>
 <span class="sd">    implemented via the :func:`configure` method.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">checkpoint_directory_uri</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -857,12 +857,12 @@ under the License.
                  <span class="n">write_buffer_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">using_asynchronous_snapshots</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">j_fs_state_backend</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates a new state backend that stores its checkpoint data in the file system and location</span>
 <span class="sd">        defined by the given URI.</span>
 
-<span class="sd">        A file system for the file system scheme in the URI (e.g., &#39;file://&#39;, &#39;hdfs://&#39;, or</span>
-<span class="sd">        &#39;S3://&#39;) must be accessible via ``org.apache.flink.core.fs.FileSystem.get(URI)``.</span>
+<span class="sd">        A file system for the file system scheme in the URI (e.g., 'file://', 'hdfs://', or</span>
+<span class="sd">        'S3://') must be accessible via ``org.apache.flink.core.fs.FileSystem.get(URI)``.</span>
 
 <span class="sd">        For a state backend targeting HDFS, this means that the URI must either specify the</span>
 <span class="sd">        authority (host and port), or that the Hadoop configuration that describes that information</span>
@@ -871,7 +871,7 @@ under the License.
 <span class="sd">        Example:</span>
 <span class="sd">        ::</span>
 
-<span class="sd">            &gt;&gt;&gt; state_backend = FsStateBackend(&quot;file://var/checkpoints/&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; state_backend = FsStateBackend("file://var/checkpoints/")</span>
 
 
 <span class="sd">        :param checkpoint_directory_uri: The path to write checkpoint metadata to, required.</span>
@@ -889,7 +889,7 @@ under the License.
 <span class="sd">        :param using_asynchronous_snapshots: Snapshots are now always asynchronous. This flag</span>
 <span class="sd">                                             has no effect anymore in this version.</span>
 <span class="sd">        :param j_fs_state_backend: For internal use, please keep none.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">j_fs_state_backend</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
             <span class="n">JTernaryBoolean</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">TernaryBoolean</span>
@@ -897,7 +897,7 @@ under the License.
                 <span class="o">.</span><span class="n">FsStateBackend</span>
             <span class="n">JPath</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">Path</span>
             <span class="k">if</span> <span class="n">checkpoint_directory_uri</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The parameter &#39;checkpoint_directory_uri&#39; is required!&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"The parameter 'checkpoint_directory_uri' is required!"</span><span class="p">)</span>
             <span class="n">j_checkpoint_directory_uri</span> <span class="o">=</span> <span class="n">JPath</span><span class="p">(</span><span class="n">checkpoint_directory_uri</span><span class="p">)</span><span class="o">.</span><span class="n">toUri</span><span class="p">()</span>
 
             <span class="k">if</span> <span class="n">default_savepoint_directory_uri</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -918,9 +918,9 @@ under the License.
             <span class="k">elif</span> <span class="n">using_asynchronous_snapshots</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
                 <span class="n">j_asynchronous_snapshots</span> <span class="o">=</span> <span class="n">JTernaryBoolean</span><span class="o">.</span><span class="n">FALSE</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Unsupported input for &#39;using_asynchronous_snapshots&#39;: </span><span class="si">%s</span><span class="s2">, &quot;</span>
-                                <span class="s2">&quot;the value of the parameter should be None or&quot;</span>
-                                <span class="s2">&quot;True or False.&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"Unsupported input for 'using_asynchronous_snapshots': </span><span class="si">%s</span><span class="s2">, "</span>
+                                <span class="s2">"the value of the parameter should be None or"</span>
+                                <span class="s2">"True or False."</span><span class="p">)</span>
 
             <span class="n">j_fs_state_backend</span> <span class="o">=</span> <span class="n">JFsStateBackend</span><span class="p">(</span><span class="n">j_checkpoint_directory_uri</span><span class="p">,</span>
                                                  <span class="n">j_default_savepoint_directory_uri</span><span class="p">,</span>
@@ -932,16 +932,16 @@ under the License.
         <span class="nb">super</span><span class="p">(</span><span class="n">FsStateBackend</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">j_fs_state_backend</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_checkpoint_path</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the base directory where all the checkpoints are stored.</span>
 <span class="sd">        The job-specific checkpoint directory is created inside this directory.</span>
 
 <span class="sd">        :return: The base directory for checkpoints.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_fs_state_backend</span><span class="o">.</span><span class="n">getCheckpointPath</span><span class="p">()</span><span class="o">.</span><span class="n">toString</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_min_file_size_threshold</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the threshold below which state is stored as part of the metadata, rather than in</span>
 <span class="sd">        files. This threshold ensures that the backend does not create a large amount of very</span>
 <span class="sd">        small files, where potentially the file pointers are larger than the state itself.</span>
@@ -950,11 +950,11 @@ under the License.
 <span class="sd">        ``org.apache.flink.configuration.CheckpointingOptions.FS_SMALL_FILE_THRESHOLD``.</span>
 
 <span class="sd">        :return: The file size threshold, in bytes.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_fs_state_backend</span><span class="o">.</span><span class="n">getMinFileSizeThreshold</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">is_using_asynchronous_snapshots</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets whether the key/value data structures are asynchronously snapshotted.</span>
 
 <span class="sd">        If not explicitly configured, this is the default value of</span>
@@ -962,23 +962,23 @@ under the License.
 
 <span class="sd">        :return: True if the key/value data structures are asynchronously snapshotted,</span>
 <span class="sd">                 false otherwise.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_fs_state_backend</span><span class="o">.</span><span class="n">isUsingAsynchronousSnapshots</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_write_buffer_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the write buffer size for created checkpoint stream.</span>
 
 <span class="sd">        If not explicitly configured, this is the default value of</span>
 <span class="sd">        ``org.apache.flink.configuration.CheckpointingOptions.FS_WRITE_BUFFER_SIZE``.</span>
 
 <span class="sd">        :return: The write buffer size, in bytes.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_fs_state_backend</span><span class="o">.</span><span class="n">getWriteBufferSize</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="RocksDBStateBackend"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.state_backend.RocksDBStateBackend.html#pyflink.datastream.state_backend.RocksDBStateBackend">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">RocksDBStateBackend</span><span class="p">(</span><span class="n">StateBackend</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    **IMPORTANT** `RocksDBStateBackend` is deprecated in favor of `EmbeddedRocksDBStateBackend`</span>
 <span class="sd">    and `FileSystemCheckpointStorage`. This change does not affect the runtime characteristics of</span>
 <span class="sd">    your Jobs and is simply an API change to help better communicate the ways Flink separates</span>
@@ -989,7 +989,7 @@ under the License.
 <span class="sd">    ::</span>
 
 <span class="sd">        &gt;&gt; env.set_state_backend(EmbeddedRocksDBStateBackend())</span>
-<span class="sd">        &gt;&gt; env.get_checkpoint_config().set_checkpoint_storage(&quot;hdfs://checkpoints&quot;)</span>
+<span class="sd">        &gt;&gt; env.get_checkpoint_config().set_checkpoint_storage("hdfs://checkpoints")</span>
 
 <span class="sd">    If you are configuring your state backend via the `config.yaml` no changes are required.</span>
 
@@ -1003,14 +1003,14 @@ under the License.
 
 <span class="sd">    The behavior of the RocksDB instances can be parametrized by setting RocksDB Options</span>
 <span class="sd">    using the methods :func:`set_predefined_options` and :func:`set_options`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">checkpoint_data_uri</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">enable_incremental_checkpointing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">checkpoint_stream_backend</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">j_rocks_db_state_backend</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates a new :class:`RocksDBStateBackend` that stores its checkpoint data in the given</span>
 <span class="sd">        state backend or the location of given URI.</span>
 
@@ -1025,14 +1025,14 @@ under the License.
 <span class="sd">        Example:</span>
 <span class="sd">        ::</span>
 
-<span class="sd">            &gt;&gt;&gt; state_backend = RocksDBStateBackend(&quot;file://var/checkpoints/&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; state_backend = RocksDBStateBackend("file://var/checkpoints/")</span>
 
 <span class="sd">        :param checkpoint_data_uri: The URI describing the filesystem and path to the checkpoint</span>
 <span class="sd">                                    data directory.</span>
 <span class="sd">        :param enable_incremental_checkpointing: True if incremental checkpointing is enabled.</span>
 <span class="sd">        :param checkpoint_stream_backend: The backend write the checkpoint streams to.</span>
 <span class="sd">        :param j_rocks_db_state_backend: For internal use, please keep none.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">j_rocks_db_state_backend</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
             <span class="n">JTernaryBoolean</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">TernaryBoolean</span>
@@ -1040,9 +1040,9 @@ under the License.
                 <span class="o">.</span><span class="n">RocksDBStateBackend</span>
 
             <span class="k">if</span> <span class="n">enable_incremental_checkpointing</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Unsupported input for &#39;enable_incremental_checkpointing&#39;: </span><span class="si">%s</span><span class="s2">, &quot;</span>
-                                <span class="s2">&quot;the value of the parameter should be None or&quot;</span>
-                                <span class="s2">&quot;True or False.&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"Unsupported input for 'enable_incremental_checkpointing': </span><span class="si">%s</span><span class="s2">, "</span>
+                                <span class="s2">"the value of the parameter should be None or"</span>
+                                <span class="s2">"True or False."</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="n">checkpoint_data_uri</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">enable_incremental_checkpointing</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -1066,27 +1066,27 @@ under the License.
         <span class="nb">super</span><span class="p">(</span><span class="n">RocksDBStateBackend</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">j_rocks_db_state_backend</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_checkpoint_backend</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the state backend that this RocksDB state backend uses to persist</span>
 <span class="sd">        its bytes to.</span>
 
 <span class="sd">        This RocksDB state backend only implements the RocksDB specific parts, it</span>
-<span class="sd">        relies on the &#39;CheckpointBackend&#39; to persist the checkpoint and savepoint bytes</span>
+<span class="sd">        relies on the 'CheckpointBackend' to persist the checkpoint and savepoint bytes</span>
 <span class="sd">        streams.</span>
 
 <span class="sd">        :return: The state backend to persist the checkpoint and savepoint bytes streams.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">j_state_backend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_rocks_db_state_backend</span><span class="o">.</span><span class="n">getCheckpointBackend</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">_from_j_state_backend</span><span class="p">(</span><span class="n">j_state_backend</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">set_db_storage_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">paths</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Sets the directories in which the local RocksDB database puts its files (like SST and</span>
 <span class="sd">        metadata files). These directories do not need to be persistent, they can be ephemeral,</span>
 <span class="sd">        meaning that they are lost on a machine failure, because state in RocksDB is persisted</span>
 <span class="sd">        in checkpoints.</span>
 
-<span class="sd">        If nothing is configured, these directories default to the TaskManager&#39;s local</span>
+<span class="sd">        If nothing is configured, these directories default to the TaskManager's local</span>
 <span class="sd">        temporary file directories.</span>
 
 <span class="sd">        Each distinct state will be stored in one path, but when the state backend creates</span>
@@ -1097,7 +1097,7 @@ under the License.
 
 <span class="sd">        :param paths: The paths across which the local RocksDB database files will be spread. this</span>
 <span class="sd">                      parameter is optional.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">paths</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_rocks_db_state_backend</span><span class="o">.</span><span class="n">setDbStoragePath</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -1108,7 +1108,7 @@ under the License.
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_rocks_db_state_backend</span><span class="o">.</span><span class="n">setDbStoragePaths</span><span class="p">(</span><span class="n">j_path_array</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_db_storage_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the configured local DB storage paths, or null, if none were configured.</span>
 
 <span class="sd">        Under these directories on the TaskManager, RocksDB stores its SST files and</span>
@@ -1116,23 +1116,23 @@ under the License.
 <span class="sd">        meaning that they are lost on a machine failure, because state in RocksDB is persisted</span>
 <span class="sd">        in checkpoints.</span>
 
-<span class="sd">        If nothing is configured, these directories default to the TaskManager&#39;s local</span>
+<span class="sd">        If nothing is configured, these directories default to the TaskManager's local</span>
 <span class="sd">        temporary file directories.</span>
 
 <span class="sd">        :return: The list of configured local DB storage paths.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_rocks_db_state_backend</span><span class="o">.</span><span class="n">getDbStoragePaths</span><span class="p">())</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">is_incremental_checkpoints_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets whether incremental checkpoints are enabled for this state backend.</span>
 
 <span class="sd">        :return: True if incremental checkpoints are enabled, false otherwise.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_rocks_db_state_backend</span><span class="o">.</span><span class="n">isIncrementalCheckpointsEnabled</span><span class="p">()</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">set_predefined_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="s1">&#39;PredefinedOptions&#39;</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_predefined_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="s1">'PredefinedOptions'</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Sets the predefined options for RocksDB.</span>
 
 <span class="sd">        If user-configured options within ``RocksDBConfigurableOptions`` is set (through</span>
@@ -1146,11 +1146,11 @@ under the License.
 <span class="sd">            &gt;&gt;&gt; state_backend.set_predefined_options(PredefinedOptions.SPINNING_DISK_OPTIMIZED)</span>
 
 <span class="sd">        :param options: The options to set (must not be null), see :class:`PredefinedOptions`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_rocks_db_state_backend</span><span class="o">.</span><span class="n">setPredefinedOptions</span><span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">_to_j_predefined_options</span><span class="p">())</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_predefined_options</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;PredefinedOptions&#39;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_predefined_options</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'PredefinedOptions'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the current predefined options for RocksDB.</span>
 <span class="sd">        The default options (if nothing was set via :func:`setPredefinedOptions`)</span>
 <span class="sd">        are :data:`PredefinedOptions.DEFAULT`.</span>
@@ -1163,12 +1163,12 @@ under the License.
 <span class="sd">        .. seealso:: :func:`set_predefined_options`</span>
 
 <span class="sd">        :return: Current predefined options.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">j_predefined_options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_rocks_db_state_backend</span><span class="o">.</span><span class="n">getPredefinedOptions</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">PredefinedOptions</span><span class="o">.</span><span class="n">_from_j_predefined_options</span><span class="p">(</span><span class="n">j_predefined_options</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">set_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options_factory_class_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Sets ``org.rocksdb.Options`` for the RocksDB instances.</span>
 <span class="sd">        Because the options are not serializable and hold native code references,</span>
 <span class="sd">        they must be specified through a factory.</span>
@@ -1181,21 +1181,21 @@ under the License.
 <span class="sd">        :param options_factory_class_name: The fully-qualified class name of the options</span>
 <span class="sd">                                           factory in Java that lazily creates the RocksDB options.</span>
 <span class="sd">                                           The options factory must have a default constructor.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
         <span class="n">JOptionsFactory</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">streaming</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">RocksDBOptionsFactory</span>
         <span class="n">j_options_factory_clz</span> <span class="o">=</span> <span class="n">load_java_class</span><span class="p">(</span><span class="n">options_factory_class_name</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">get_java_class</span><span class="p">(</span><span class="n">JOptionsFactory</span><span class="p">)</span><span class="o">.</span><span class="n">isAssignableFrom</span><span class="p">(</span><span class="n">j_options_factory_clz</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The input class does not implement RocksDBOptionsFactory.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"The input class does not implement RocksDBOptionsFactory."</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_rocks_db_state_backend</span><span class="o">.</span><span class="n">setRocksDBOptions</span><span class="p">(</span><span class="n">j_options_factory_clz</span><span class="o">.</span><span class="n">newInstance</span><span class="p">())</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_options</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the fully-qualified class name of the options factory in Java that lazily creates</span>
 <span class="sd">        the RocksDB options.</span>
 
 <span class="sd">        :return: The fully-qualified class name of the options factory in Java.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">j_options_factory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_rocks_db_state_backend</span><span class="o">.</span><span class="n">getRocksDBOptions</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">j_options_factory</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">j_options_factory</span><span class="o">.</span><span class="n">getClass</span><span class="p">()</span><span class="o">.</span><span class="n">getName</span><span class="p">()</span>
@@ -1203,20 +1203,20 @@ under the License.
             <span class="k">return</span> <span class="kc">None</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_number_of_transfering_threads</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the number of threads used to transfer files while snapshotting/restoring.</span>
 
 <span class="sd">        :return: The number of threads used to transfer files while snapshotting/restoring.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_rocks_db_state_backend</span><span class="o">.</span><span class="n">getNumberOfTransferingThreads</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">set_number_of_transfering_threads</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_of_transfering_threads</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Sets the number of threads used to transfer files while snapshotting/restoring.</span>
 
 <span class="sd">        :param number_of_transfering_threads: The number of threads used to transfer files while</span>
 <span class="sd">                                              snapshotting/restoring.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_rocks_db_state_backend</span><span class="o">.</span><span class="n">setNumberOfTransferingThreads</span><span class="p">(</span><span class="n">number_of_transfering_threads</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1224,7 +1224,7 @@ under the License.
 
 
 <div class="viewcode-block" id="PredefinedOptions"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.state_backend.PredefinedOptions.html#pyflink.datastream.state_backend.PredefinedOptions">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">PredefinedOptions</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    The :class:`PredefinedOptions` are configuration settings for the :class:`RocksDBStateBackend`.</span>
 <span class="sd">    The various pre-defined choices are configurations that have been empirically</span>
 <span class="sd">    determined to be beneficial for performance under different settings.</span>
@@ -1301,14 +1301,14 @@ under the License.
 <span class="sd">    - setMaxBackgroundJobs(4)</span>
 <span class="sd">    - setMaxOpenFiles(-1)</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">DEFAULT</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">SPINNING_DISK_OPTIMIZED</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">SPINNING_DISK_OPTIMIZED_HIGH_MEM</span> <span class="o">=</span> <span class="mi">2</span>
     <span class="n">FLASH_SSD_OPTIMIZED</span> <span class="o">=</span> <span class="mi">3</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_from_j_predefined_options</span><span class="p">(</span><span class="n">j_predefined_options</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;PredefinedOptions&#39;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_from_j_predefined_options</span><span class="p">(</span><span class="n">j_predefined_options</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'PredefinedOptions'</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">PredefinedOptions</span><span class="p">[</span><span class="n">j_predefined_options</span><span class="o">.</span><span class="n">name</span><span class="p">()]</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_to_j_predefined_options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1318,9 +1318,9 @@ under the License.
 
 
 <div class="viewcode-block" id="CustomStateBackend"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.state_backend.CustomStateBackend.html#pyflink.datastream.state_backend.CustomStateBackend">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">CustomStateBackend</span><span class="p">(</span><span class="n">StateBackend</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A wrapper of customized java state backend.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_custom_state_backend</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">CustomStateBackend</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">j_custom_state_backend</span><span class="p">)</span></div>

@@ -424,28 +424,28 @@ default).</p></li>
 </ul>
 </div>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">provider</span> <span class="o">=</span> <span class="n">OpenAICompatProvider</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="s2">&quot;chat/completions&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">provider</span> <span class="o">=</span> <span class="n">OpenAICompatProvider</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="s2">"chat/completions"</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pf</span><span class="o">.</span><span class="n">set_model_provider</span><span class="p">(</span><span class="n">provider</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">from_dict</span><span class="p">({</span>
-<span class="gp">... </span>    <span class="s2">&quot;review_text&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;The shoes fit well but the sole arrived scratched.&quot;</span><span class="p">],</span>
-<span class="gp">... </span>    <span class="s2">&quot;product_image_url&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;https://example.com/product.jpg&quot;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="s2">"review_text"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"The shoes fit well but the sole arrived scratched."</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="s2">"product_image_url"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"https://example.com/product.jpg"</span><span class="p">],</span>
 <span class="gp">... </span><span class="p">})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">predictions</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">llm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;review_text&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="s2">&quot;product_image_url&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;qwen3.6-plus&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">content_type</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;TEXT&quot;</span><span class="p">,</span> <span class="s2">&quot;IMAGE_URL&quot;</span><span class="p">],</span>
-<span class="gp">... </span>    <span class="n">system_prompt</span><span class="o">=</span><span class="s2">&quot;Respond to the product review and image together.&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"review_text"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"product_image_url"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">model</span><span class="o">=</span><span class="s2">"qwen3.6-plus"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">content_type</span><span class="o">=</span><span class="p">[</span><span class="s2">"TEXT"</span><span class="p">,</span> <span class="s2">"IMAGE_URL"</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">system_prompt</span><span class="o">=</span><span class="s2">"Respond to the product review and image together."</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">temperature</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">config</span><span class="o">=</span><span class="p">{</span>
-<span class="gp">... </span>        <span class="s2">&quot;max-concurrent-operations&quot;</span><span class="p">:</span> <span class="s2">&quot;20&quot;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s2">&quot;timeout&quot;</span><span class="p">:</span> <span class="s2">&quot;30s&quot;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">"max-concurrent-operations"</span><span class="p">:</span> <span class="s2">"20"</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">"timeout"</span><span class="p">:</span> <span class="s2">"30s"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="p">},</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">classified</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">llm</span><span class="o">.</span><span class="n">ai_classify</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;review_text&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="p">[</span><span class="s2">&quot;positive&quot;</span><span class="p">,</span> <span class="s2">&quot;negative&quot;</span><span class="p">],</span>
-<span class="gp">... </span>    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;qwen3.6-plus&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"review_text"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="s2">"positive"</span><span class="p">,</span> <span class="s2">"negative"</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">model</span><span class="o">=</span><span class="s2">"qwen3.6-plus"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">temperature</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">)</span>
 </pre></div>

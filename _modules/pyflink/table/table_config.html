@@ -278,13 +278,13 @@ under the License.
 <span class="c1">#  distributed with this work for additional information</span>
 <span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
 <span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
-<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  "License"); you may not use this file except in compliance</span>
 <span class="c1">#  with the License.  You may obtain a copy of the License at</span>
 <span class="c1">#</span>
 <span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="c1">#</span>
 <span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  distributed under the License is distributed on an "AS IS" BASIS,</span>
 <span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1">#  See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
@@ -297,13 +297,13 @@ under the License.
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.java_gateway</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_gateway</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.sql_dialect</span><span class="w"> </span><span class="kn">import</span> <span class="n">SqlDialect</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TableConfig&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'TableConfig'</span><span class="p">]</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.util.java_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">add_jars_to_context_class_loader</span>
 
 
 <div class="viewcode-block" id="TableConfig"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.table_config.TableConfig.html#pyflink.table.table_config.TableConfig">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">TableConfig</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Configuration for the current :class:`TableEnvironment` session to adjust Table &amp; SQL API</span>
 <span class="sd">    programs.</span>
 
@@ -336,16 +336,16 @@ under the License.
 
 <span class="sd">        &gt;&gt;&gt; table_config = t_env.get_config()</span>
 <span class="sd">        &gt;&gt;&gt; config = Configuration()</span>
-<span class="sd">        &gt;&gt;&gt; config.set_string(&quot;parallelism.default&quot;, &quot;128&quot;) \\</span>
-<span class="sd">        ...       .set_string(&quot;pipeline.auto-watermark-interval&quot;, &quot;800ms&quot;) \\</span>
-<span class="sd">        ...       .set_string(&quot;execution.checkpointing.interval&quot;, &quot;30s&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; config.set_string("parallelism.default", "128") \\</span>
+<span class="sd">        ...       .set_string("pipeline.auto-watermark-interval", "800ms") \\</span>
+<span class="sd">        ...       .set_string("execution.checkpointing.interval", "30s")</span>
 <span class="sd">        &gt;&gt;&gt; table_config.add_configuration(config)</span>
 
 <span class="sd">    .. note::</span>
 
 <span class="sd">        Because options are read at different point in time when performing operations, it is</span>
 <span class="sd">        recommended to set configuration options early after instantiating a table environment.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_table_config</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
@@ -355,25 +355,25 @@ under the License.
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_table_config</span> <span class="o">=</span> <span class="n">j_table_config</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default_value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Returns the value associated with the given key as a string.</span>
 
 <span class="sd">        :param key: The key pointing to the associated value.</span>
 <span class="sd">        :param default_value: The default value which is returned in case there is no value</span>
 <span class="sd">                              associated with the given key.</span>
 <span class="sd">        :return: The (default) value associated with the given key.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_configuration</span><span class="p">()</span><span class="o">.</span><span class="n">contains_key</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_configuration</span><span class="p">()</span><span class="o">.</span><span class="n">get_string</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">default_value</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_table_config</span><span class="o">.</span><span class="n">getRootConfiguration</span><span class="p">()</span><span class="o">.</span><span class="n">getString</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">default_value</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;TableConfig&#39;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'TableConfig'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Sets a string-based value for the given string-based key.</span>
 
 <span class="sd">        The value will be parsed by the framework on access.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_table_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
         <span class="n">jvm</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>
@@ -388,50 +388,50 @@ under the License.
         <span class="k">return</span> <span class="bp">self</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_local_timezone</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Returns the local timezone id for timestamp with local time zone, either an abbreviation</span>
-<span class="sd">        such as &quot;PST&quot;, a full name such as &quot;America/Los_Angeles&quot;, or a custom timezone_id such</span>
-<span class="sd">        as &quot;GMT-08:00&quot;.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        such as "PST", a full name such as "America/Los_Angeles", or a custom timezone_id such</span>
+<span class="sd">        as "GMT-08:00".</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_table_config</span><span class="o">.</span><span class="n">getLocalTimeZone</span><span class="p">()</span><span class="o">.</span><span class="n">getId</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">set_local_timezone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timezone_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Sets the local timezone id for timestamp with local time zone.</span>
 
-<span class="sd">        :param timezone_id: The timezone id, either an abbreviation such as &quot;PST&quot;, a full name</span>
-<span class="sd">                            such as &quot;America/Los_Angeles&quot;, or a custom timezone_id such as</span>
-<span class="sd">                            &quot;GMT-08:00&quot;.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        :param timezone_id: The timezone id, either an abbreviation such as "PST", a full name</span>
+<span class="sd">                            such as "America/Los_Angeles", or a custom timezone_id such as</span>
+<span class="sd">                            "GMT-08:00".</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">timezone_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">timezone_id</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">j_timezone</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">java</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">ZoneId</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="n">timezone_id</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_table_config</span><span class="o">.</span><span class="n">setLocalTimeZone</span><span class="p">(</span><span class="n">j_timezone</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;TableConfig.timezone should be a string!&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">"TableConfig.timezone should be a string!"</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_max_generated_code_length</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        The current threshold where generated code will be split into sub-function calls. Java has</span>
 <span class="sd">        a maximum method length of 64 KB. This setting allows for finer granularity if necessary.</span>
 <span class="sd">        Default is 64000.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_table_config</span><span class="o">.</span><span class="n">getMaxGeneratedCodeLength</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">set_max_generated_code_length</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_generated_code_length</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Returns the current threshold where generated code will be split into sub-function calls.</span>
 <span class="sd">        Java has a maximum method length of 64 KB. This setting allows for finer granularity if</span>
 <span class="sd">        necessary. Default is 64000.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">max_generated_code_length</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">max_generated_code_length</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_table_config</span><span class="o">.</span><span class="n">setMaxGeneratedCodeLength</span><span class="p">(</span><span class="n">max_generated_code_length</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;TableConfig.max_generated_code_length should be a int value!&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">"TableConfig.max_generated_code_length should be a int value!"</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">set_idle_state_retention_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                                       <span class="n">min_time</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">,</span>
                                       <span class="n">max_time</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Specifies a minimum and a maximum time interval for how long idle state, i.e., state which</span>
 <span class="sd">        was not updated, will be retained.</span>
 
@@ -466,14 +466,14 @@ under the License.
 <span class="sd">        :param max_time: The maximum time interval for which idle state is retained. Must be at</span>
 <span class="sd">                         least 5 minutes greater than minTime. Set to</span>
 <span class="sd">                         0 (zero) to never clean-up the state.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">j_time_class</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">Time</span>
         <span class="n">j_min_time</span> <span class="o">=</span> <span class="n">j_time_class</span><span class="o">.</span><span class="n">milliseconds</span><span class="p">(</span><span class="n">long</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">min_time</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)))</span>
         <span class="n">j_max_time</span> <span class="o">=</span> <span class="n">j_time_class</span><span class="o">.</span><span class="n">milliseconds</span><span class="p">(</span><span class="n">long</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">max_time</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_table_config</span><span class="o">.</span><span class="n">setIdleStateRetentionTime</span><span class="p">(</span><span class="n">j_min_time</span><span class="p">,</span> <span class="n">j_max_time</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">set_idle_state_retention</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">duration</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Specifies a retention time interval for how long idle state, i.e., state which</span>
 <span class="sd">        was not updated, will be retained.</span>
 
@@ -498,13 +498,13 @@ under the License.
 
 <span class="sd">        :param duration: The retention time interval for which idle state is retained. Set to</span>
 <span class="sd">                         0 (zero) to never clean-up the state.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">j_duration_class</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">java</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">Duration</span>
         <span class="n">j_duration</span> <span class="o">=</span> <span class="n">j_duration_class</span><span class="o">.</span><span class="n">ofMillis</span><span class="p">(</span><span class="n">long</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">duration</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_table_config</span><span class="o">.</span><span class="n">setIdleStateRetention</span><span class="p">(</span><span class="n">j_duration</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_min_idle_state_retention_time</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        State might be cleared and removed if it was not updated for the defined period of time.</span>
 
 <span class="sd">        .. note::</span>
@@ -515,11 +515,11 @@ under the License.
 <span class="sd">            retention as 1.5 x idle state retention.</span>
 
 <span class="sd">        :return: The minimum time until state which was not updated will be retained.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_table_config</span><span class="o">.</span><span class="n">getMinIdleStateRetentionTime</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_max_idle_state_retention_time</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        State will be cleared and removed if it was not updated for the defined period of time.</span>
 
 <span class="sd">        .. note::</span>
@@ -530,61 +530,61 @@ under the License.
 <span class="sd">            retention as 1.5 x idle state retention.</span>
 
 <span class="sd">        :return: The maximum time until state which was not updated will be retained.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_table_config</span><span class="o">.</span><span class="n">getMaxIdleStateRetentionTime</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_idle_state_retention</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 
 <span class="sd">        :return: The duration until state which was not updated will be retained.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span>
             <span class="n">milliseconds</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table_config</span><span class="o">.</span><span class="n">getIdleStateRetention</span><span class="p">()</span><span class="o">.</span><span class="n">toMillis</span><span class="p">())</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Configuration</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gives direct access to the underlying key-value map for advanced configuration.</span>
 
 <span class="sd">        :return: Entire key-value configuration.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">Configuration</span><span class="p">(</span><span class="n">j_configuration</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table_config</span><span class="o">.</span><span class="n">getConfiguration</span><span class="p">())</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">add_configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configuration</span><span class="p">:</span> <span class="n">Configuration</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Adds the given key-value configuration to the underlying configuration. It overwrites</span>
 <span class="sd">        existing keys.</span>
 
 <span class="sd">        :param configuration: Key-value configuration to be added.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_table_config</span><span class="o">.</span><span class="n">addConfiguration</span><span class="p">(</span><span class="n">configuration</span><span class="o">.</span><span class="n">_j_configuration</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">to_map</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Calls the toMap method of the underlying Java TableConfig to get the configuration map.</span>
 <span class="sd">        :return: A Python dictionary containing the configuration key value pairs.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table_config</span><span class="o">.</span><span class="n">toMap</span><span class="p">())</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_sql_dialect</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SqlDialect</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Returns the current SQL dialect.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">SqlDialect</span><span class="o">.</span><span class="n">_from_j_sql_dialect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_table_config</span><span class="o">.</span><span class="n">getSqlDialect</span><span class="p">())</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">set_sql_dialect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sql_dialect</span><span class="p">:</span> <span class="n">SqlDialect</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Sets the current SQL dialect to parse a SQL query. Flink&#39;s SQL behavior by default.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Sets the current SQL dialect to parse a SQL query. Flink's SQL behavior by default.</span>
 
 <span class="sd">        :param sql_dialect: The given SQL dialect.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_table_config</span><span class="o">.</span><span class="n">setSqlDialect</span><span class="p">(</span><span class="n">SqlDialect</span><span class="o">.</span><span class="n">_to_j_sql_dialect</span><span class="p">(</span><span class="n">sql_dialect</span><span class="p">))</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">set_python_executable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">python_exec</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Sets the path of the python interpreter which is used to execute the python udf workers.</span>
 
-<span class="sd">        e.g. &quot;/usr/local/bin/python3&quot;.</span>
+<span class="sd">        e.g. "/usr/local/bin/python3".</span>
 
 <span class="sd">        If python UDF depends on a specific python version which does not exist in the cluster,</span>
 <span class="sd">        the method :func:`pyflink.table.TableEnvironment.add_python_archive` can be used to upload</span>
@@ -599,8 +599,8 @@ under the License.
 <span class="sd">            $ zip -r py_env.zip py_env</span>
 
 <span class="sd">            # python code</span>
-<span class="sd">            &gt;&gt;&gt; table_env.add_python_archive(&quot;py_env.zip&quot;)</span>
-<span class="sd">            &gt;&gt;&gt; table_env.get_config().set_python_executable(&quot;py_env.zip/py_env/bin/python&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; table_env.add_python_archive("py_env.zip")</span>
+<span class="sd">            &gt;&gt;&gt; table_env.get_config().set_python_executable("py_env.zip/py_env/bin/python")</span>
 
 <span class="sd">        .. note::</span>
 
@@ -615,27 +615,27 @@ under the License.
 <span class="sd">        :param python_exec: The path of python interpreter.</span>
 
 <span class="sd">        .. versionadded:: 1.10.0</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">jvm</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">jvm</span><span class="o">.</span><span class="n">PythonOptions</span><span class="o">.</span><span class="n">PYTHON_EXECUTABLE</span><span class="o">.</span><span class="n">key</span><span class="p">(),</span> <span class="n">python_exec</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_python_executable</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the path of the python interpreter which is used to execute the python udf workers.</span>
 <span class="sd">        If no path is specified before, it will return a None value.</span>
 
 <span class="sd">        :return: The path of the python interpreter which is used to execute the python udf workers.</span>
 
 <span class="sd">        .. versionadded:: 1.10.0</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">jvm</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_configuration</span><span class="p">()</span><span class="o">.</span><span class="n">get_string</span><span class="p">(</span><span class="n">jvm</span><span class="o">.</span><span class="n">PythonOptions</span><span class="o">.</span><span class="n">PYTHON_EXECUTABLE</span><span class="o">.</span><span class="n">key</span><span class="p">(),</span> <span class="kc">None</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_default</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;TableConfig&#39;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_default</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">'TableConfig'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        :return: A TableConfig object with default settings.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">TableConfig</span><span class="p">(</span><span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">TableConfig</span><span class="o">.</span><span class="n">getDefault</span><span class="p">())</span></div>
 </pre></div>
 

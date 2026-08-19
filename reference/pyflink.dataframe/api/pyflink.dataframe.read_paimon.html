@@ -411,48 +411,48 @@ supplied.</p></li>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pf</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">order_schema</span> <span class="o">=</span> <span class="p">{</span>
-<span class="gp">... </span>    <span class="s2">&quot;order_id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
-<span class="gp">... </span>    <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
-<span class="gp">... </span>    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
-<span class="gp">... </span>    <span class="s2">&quot;event_ts&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">timestamp</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="s2">"order_id"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="s2">"user_id"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="s2">"status"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="s2">"event_ts"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">timestamp</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
 <span class="gp">... </span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Add a computed event-time column and watermark</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">events</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_paimon</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;oss://bucket/warehouse/db.db/events&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"oss://bucket/warehouse/db.db/events"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
-<span class="gp">... </span>        <span class="s2">&quot;event_id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
-<span class="gp">... </span>        <span class="s2">&quot;ts_millis&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"event_id"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"ts_millis"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
 <span class="gp">... </span>    <span class="p">},</span>
 <span class="gp">... </span>    <span class="n">computed_columns</span><span class="o">=</span><span class="p">{</span>
-<span class="gp">... </span>        <span class="s2">&quot;event_time&quot;</span><span class="p">:</span> <span class="s2">&quot;TO_TIMESTAMP_LTZ(ts_millis, 3)&quot;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">"event_time"</span><span class="p">:</span> <span class="s2">"TO_TIMESTAMP_LTZ(ts_millis, 3)"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="p">},</span>
-<span class="gp">... </span>    <span class="n">watermark</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;event_time&quot;</span><span class="p">,</span> <span class="s2">&quot;event_time - INTERVAL &#39;5&#39; SECOND&quot;</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">watermark</span><span class="o">=</span><span class="p">(</span><span class="s2">"event_time"</span><span class="p">,</span> <span class="s2">"event_time - INTERVAL '5' SECOND"</span><span class="p">),</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Read the latest snapshot with a primary key and projection</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">orders</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_paimon</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;oss://bucket/warehouse/db.db/orders&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"oss://bucket/warehouse/db.db/orders"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="n">order_schema</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">primary_key</span><span class="o">=</span><span class="s2">&quot;order_id&quot;</span><span class="p">,</span>
-<span class="gp">... </span><span class="p">)[[</span><span class="s2">&quot;order_id&quot;</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">,</span> <span class="s2">&quot;event_ts&quot;</span><span class="p">]]</span>
+<span class="gp">... </span>    <span class="n">primary_key</span><span class="o">=</span><span class="s2">"order_id"</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)[[</span><span class="s2">"order_id"</span><span class="p">,</span> <span class="s2">"status"</span><span class="p">,</span> <span class="s2">"event_ts"</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Stream changes from a specific snapshot</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">changes</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_paimon</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;oss://bucket/warehouse/db.db/orders&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"oss://bucket/warehouse/db.db/orders"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="n">order_schema</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">primary_key</span><span class="o">=</span><span class="s2">&quot;order_id&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">changelog_producer</span><span class="o">=</span><span class="s2">&quot;lookup&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;from-snapshot&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">primary_key</span><span class="o">=</span><span class="s2">"order_id"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">changelog_producer</span><span class="o">=</span><span class="s2">"lookup"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">mode</span><span class="o">=</span><span class="s2">"from-snapshot"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">snapshot_id</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Stream from a timestamp in milliseconds with explicit parallelism</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">changes</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_paimon</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;oss://bucket/warehouse/db.db/orders&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"oss://bucket/warehouse/db.db/orders"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="n">order_schema</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">primary_key</span><span class="o">=</span><span class="s2">&quot;order_id&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;from-timestamp&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">primary_key</span><span class="o">=</span><span class="s2">"order_id"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">mode</span><span class="o">=</span><span class="s2">"from-timestamp"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">timestamp_millis</span><span class="o">=</span><span class="mi">1710000000000</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">bounded_watermark</span><span class="o">=</span><span class="mi">1710003600000</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">infer_parallelism</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -461,16 +461,16 @@ supplied.</p></li>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Read a table with bucket distribution</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">events</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_paimon</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;oss://bucket/warehouse/db.db/events&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"oss://bucket/warehouse/db.db/events"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
-<span class="gp">... </span>        <span class="s2">&quot;dt&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
-<span class="gp">... </span>        <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
-<span class="gp">... </span>        <span class="s2">&quot;payload&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"dt"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"user_id"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"payload"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
 <span class="gp">... </span>    <span class="p">},</span>
 <span class="gp">... </span>    <span class="n">bucket</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">bucket_key</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;dt&quot;</span><span class="p">,</span> <span class="s2">&quot;user_id&quot;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">bucket_key</span><span class="o">=</span><span class="p">[</span><span class="s2">"dt"</span><span class="p">,</span> <span class="s2">"user_id"</span><span class="p">],</span>
 <span class="gp">... </span>    <span class="n">extra_options</span><span class="o">=</span><span class="p">{</span>
-<span class="gp">... </span>        <span class="s2">&quot;sequence.field&quot;</span><span class="p">:</span> <span class="s2">&quot;ts_millis&quot;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">"sequence.field"</span><span class="p">:</span> <span class="s2">"ts_millis"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="p">},</span>
 <span class="gp">... </span><span class="p">)</span>
 </pre></div>

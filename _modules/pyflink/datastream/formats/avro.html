@@ -278,13 +278,13 @@ under the License.
 <span class="c1">#  distributed with this work for additional information</span>
 <span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
 <span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
-<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  "License"); you may not use this file except in compliance</span>
 <span class="c1">#  with the License.  You may obtain a copy of the License at</span>
 <span class="c1">#</span>
 <span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="c1">#</span>
 <span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  distributed under the License is distributed on an "AS IS" BASIS,</span>
 <span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1">#  See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
@@ -301,21 +301,21 @@ under the License.
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.util.java_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_field_value</span><span class="p">,</span> <span class="n">load_java_class</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;AvroSchema&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;GenericRecordAvroTypeInfo&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;AvroInputFormat&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;AvroBulkWriters&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;AvroRowDeserializationSchema&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;AvroRowSerializationSchema&#39;</span>
+    <span class="s1">'AvroSchema'</span><span class="p">,</span>
+    <span class="s1">'GenericRecordAvroTypeInfo'</span><span class="p">,</span>
+    <span class="s1">'AvroInputFormat'</span><span class="p">,</span>
+    <span class="s1">'AvroBulkWriters'</span><span class="p">,</span>
+    <span class="s1">'AvroRowDeserializationSchema'</span><span class="p">,</span>
+    <span class="s1">'AvroRowSerializationSchema'</span>
 <span class="p">]</span>
 
 
 <div class="viewcode-block" id="AvroSchema"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.formats.avro.AvroSchema.html#pyflink.datastream.formats.avro.AvroSchema">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">AvroSchema</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Avro Schema class contains Java org.apache.avro.Schema.</span>
 
 <span class="sd">    .. versionadded:: 1.16.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_schema</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_schema</span> <span class="o">=</span> <span class="n">j_schema</span>
@@ -323,28 +323,28 @@ under the License.
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema_string</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_schema_string</span> <span class="o">=</span> <span class="n">get_field_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_schema</span><span class="p">,</span> <span class="s1">&#39;schema&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">toString</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_schema_string</span> <span class="o">=</span> <span class="n">get_field_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_schema</span><span class="p">,</span> <span class="s1">'schema'</span><span class="p">)</span><span class="o">.</span><span class="n">toString</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_schema_string</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">parse_string</span><span class="p">(</span><span class="n">json_schema</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;AvroSchema&#39;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parse_string</span><span class="p">(</span><span class="n">json_schema</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'AvroSchema'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Parse JSON string as Avro Schema.</span>
 
 <span class="sd">        :param json_schema: JSON represented schema string.</span>
 <span class="sd">        :return: the Avro Schema.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">JSchema</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">avro</span><span class="o">.</span><span class="n">shaded</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">avro</span><span class="o">.</span><span class="n">Schema</span>
         <span class="k">return</span> <span class="n">AvroSchema</span><span class="p">(</span><span class="n">JSchema</span><span class="o">.</span><span class="n">Parser</span><span class="p">()</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">json_schema</span><span class="p">))</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">parse_file</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;AvroSchema&#39;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parse_file</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'AvroSchema'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Parse a schema definition file as Avro Schema.</span>
 
 <span class="sd">        :param file_path: path to schema definition file.</span>
 <span class="sd">        :return: the Avro Schema.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">jvm</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>
         <span class="n">j_file</span> <span class="o">=</span> <span class="n">jvm</span><span class="o">.</span><span class="n">java</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
         <span class="n">JSchema</span> <span class="o">=</span> <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">avro</span><span class="o">.</span><span class="n">shaded</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">avro</span><span class="o">.</span><span class="n">Schema</span>
@@ -352,17 +352,17 @@ under the License.
 
 
 <div class="viewcode-block" id="GenericRecordAvroTypeInfo"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.formats.avro.GenericRecordAvroTypeInfo.html#pyflink.datastream.formats.avro.GenericRecordAvroTypeInfo">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">GenericRecordAvroTypeInfo</span><span class="p">(</span><span class="n">TypeInformation</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    A :class:`TypeInformation` of Avro&#39;s GenericRecord, including the schema. This is a wrapper of</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    A :class:`TypeInformation` of Avro's GenericRecord, including the schema. This is a wrapper of</span>
 <span class="sd">    Java org.apache.flink.formats.avro.typeutils.GenericRecordAvroTypeInfo.</span>
 
 <span class="sd">    Note that this type cannot be used as the type_info of data in</span>
 <span class="sd">    :meth:`StreamExecutionEnvironment.from_collection`.</span>
 
 <span class="sd">    .. versionadded::1.16.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">schema</span><span class="p">:</span> <span class="s1">&#39;AvroSchema&#39;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">schema</span><span class="p">:</span> <span class="s1">'AvroSchema'</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">GenericRecordAvroTypeInfo</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_schema</span> <span class="o">=</span> <span class="n">schema</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_typeinfo</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">avro</span><span class="o">.</span><span class="n">typeutils</span> \
@@ -373,7 +373,7 @@ under the License.
 
 
 <div class="viewcode-block" id="AvroInputFormat"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.formats.avro.AvroInputFormat.html#pyflink.datastream.formats.avro.AvroInputFormat">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">AvroInputFormat</span><span class="p">(</span><span class="n">InputFormat</span><span class="p">,</span> <span class="n">ResultTypeQueryable</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Provides a FileInputFormat for Avro records.</span>
 
 <span class="sd">    Example:</span>
@@ -384,13 +384,13 @@ under the License.
 <span class="sd">        &gt;&gt;&gt; ds = env.create_input(AvroInputFormat(FILE_PATH, schema))</span>
 
 <span class="sd">    .. versionadded:: 1.16.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">schema</span><span class="p">:</span> <span class="s1">&#39;AvroSchema&#39;</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">schema</span><span class="p">:</span> <span class="s1">'AvroSchema'</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        :param path: The path to Avro data file.</span>
 <span class="sd">        :param schema: The :class:`AvroSchema` of generic record.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">jvm</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>
         <span class="n">j_avro_input_format</span> <span class="o">=</span> <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">avro</span><span class="o">.</span><span class="n">AvroInputFormat</span><span class="p">(</span>
             <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">),</span>
@@ -404,16 +404,16 @@ under the License.
 
 
 <div class="viewcode-block" id="AvroBulkWriters"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.formats.avro.AvroBulkWriters.html#pyflink.datastream.formats.avro.AvroBulkWriters">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">AvroBulkWriters</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Convenience builder to create :class:`~pyflink.common.serialization.BulkWriterFactory` for</span>
 <span class="sd">    Avro types.</span>
 
 <span class="sd">    .. versionadded:: 1.16.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">for_generic_record</span><span class="p">(</span><span class="n">schema</span><span class="p">:</span> <span class="s1">&#39;AvroSchema&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;BulkWriterFactory&#39;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">for_generic_record</span><span class="p">(</span><span class="n">schema</span><span class="p">:</span> <span class="s1">'AvroSchema'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'BulkWriterFactory'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates an AvroWriterFactory that accepts and writes Avro generic types. The Avro writers</span>
 <span class="sd">        will use the given schema to build and write the records.</span>
 
@@ -432,7 +432,7 @@ under the License.
 <span class="sd">            &gt;&gt;&gt; env = StreamExecutionEnvironment.get_execution_environment()</span>
 <span class="sd">            &gt;&gt;&gt; schema = AvroSchema(JSON_SCHEMA)</span>
 <span class="sd">            &gt;&gt;&gt; avro_type_info = GenericRecordAvroTypeInfo(schema)</span>
-<span class="sd">            &gt;&gt;&gt; ds = env.from_collection([{&#39;array&#39;: [1, 2]}], type_info=Types.PICKLED_BYTE_ARRAY())</span>
+<span class="sd">            &gt;&gt;&gt; ds = env.from_collection([{'array': [1, 2]}], type_info=Types.PICKLED_BYTE_ARRAY())</span>
 <span class="sd">            &gt;&gt;&gt; sink = FileSink.for_bulk_format(</span>
 <span class="sd">            ...     OUTPUT_DIR, AvroBulkWriters.for_generic_record(schema)).build()</span>
 <span class="sd">            &gt;&gt;&gt; # A map to indicate its Avro type info is necessary for serialization</span>
@@ -441,7 +441,7 @@ under the License.
 
 <span class="sd">        :param schema: The avro schema.</span>
 <span class="sd">        :return: The BulkWriterFactory to write generic records into avro files.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">jvm</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>
         <span class="n">j_bulk_writer_factory</span> <span class="o">=</span> <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">avro</span><span class="o">.</span><span class="n">AvroWriters</span><span class="o">.</span><span class="n">forGenericRecord</span><span class="p">(</span>
             <span class="n">schema</span><span class="o">.</span><span class="n">_j_schema</span>
@@ -450,23 +450,23 @@ under the License.
 
 
 <div class="viewcode-block" id="AvroRowDeserializationSchema"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.formats.avro.AvroRowDeserializationSchema.html#pyflink.datastream.formats.avro.AvroRowDeserializationSchema">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">AvroRowDeserializationSchema</span><span class="p">(</span><span class="n">DeserializationSchema</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Deserialization schema from Avro bytes to Row. Deserializes the byte[] messages into (nested)</span>
-<span class="sd">    Flink rows. It converts Avro types into types that are compatible with Flink&#39;s Table &amp; SQL API.</span>
+<span class="sd">    Flink rows. It converts Avro types into types that are compatible with Flink's Table &amp; SQL API.</span>
 
 <span class="sd">    Projects with Avro records containing logical date/time types need to add a JodaTime dependency.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record_class</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">avro_schema_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates an Avro deserialization schema for the given specific record class or Avro schema</span>
 <span class="sd">        string. Having the concrete Avro record class might improve performance.</span>
 
-<span class="sd">        :param record_class: Avro record class used to deserialize Avro&#39;s record to Flink&#39;s row.</span>
-<span class="sd">        :param avro_schema_string: Avro schema string to deserialize Avro&#39;s record to Flink&#39;s row.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        :param record_class: Avro record class used to deserialize Avro's record to Flink's row.</span>
+<span class="sd">        :param avro_schema_string: Avro schema string to deserialize Avro's record to Flink's row.</span>
+<span class="sd">        """</span>
 
         <span class="k">if</span> <span class="n">avro_schema_string</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">record_class</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;record_class or avro_schema_string should be specified.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"record_class or avro_schema_string should be specified."</span><span class="p">)</span>
         <span class="n">j_deserialization_schema</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">record_class</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
@@ -485,20 +485,20 @@ under the License.
 
 
 <div class="viewcode-block" id="AvroRowSerializationSchema"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.formats.avro.AvroRowSerializationSchema.html#pyflink.datastream.formats.avro.AvroRowSerializationSchema">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">AvroRowSerializationSchema</span><span class="p">(</span><span class="n">SerializationSchema</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Serialization schema that serializes to Avro binary format.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record_class</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">avro_schema_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates AvroSerializationSchema that serializes SpecificRecord using provided schema or</span>
 <span class="sd">        record class.</span>
 
-<span class="sd">        :param record_class: Avro record class used to serialize  Flink&#39;s row to Avro&#39;s record.</span>
-<span class="sd">        :param avro_schema_string: Avro schema string to serialize Flink&#39;s row to Avro&#39;s record.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        :param record_class: Avro record class used to serialize  Flink's row to Avro's record.</span>
+<span class="sd">        :param avro_schema_string: Avro schema string to serialize Flink's row to Avro's record.</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">avro_schema_string</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">record_class</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;record_class or avro_schema_string should be specified.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"record_class or avro_schema_string should be specified."</span><span class="p">)</span>
 
         <span class="n">j_serialization_schema</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">record_class</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>

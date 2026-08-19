@@ -346,14 +346,14 @@ timeline so they can be fed into timestamp-based split operators.</p>
 <dl>
 <dt>Examples::</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Prepare a decoded waveform before applying silence detection.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">decode</span> <span class="o">=</span> <span class="n">audio_decode</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">waveform</span> <span class="o">=</span> <span class="n">decode</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;audio_bytes&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">waveform</span> <span class="o">=</span> <span class="n">decode</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"audio_bytes"</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Usage 1: create a reusable UDF and apply it to a column.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">silence</span> <span class="o">=</span> <span class="n">audio_silence_detection</span><span class="p">(</span><span class="n">threshold_db</span><span class="o">=-</span><span class="mf">45.0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span><span class="s2">&quot;silence_ranges&quot;</span><span class="p">,</span> <span class="n">silence</span><span class="p">(</span><span class="n">waveform</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span><span class="s2">"silence_ranges"</span><span class="p">,</span> <span class="n">silence</span><span class="p">(</span><span class="n">waveform</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Usage 2: pass the column directly when building the expression.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;silence_ranges&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"silence_ranges"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">audio_silence_detection</span><span class="p">(</span><span class="n">waveform</span><span class="p">,</span> <span class="n">threshold_db</span><span class="o">=-</span><span class="mf">45.0</span><span class="p">),</span>
 <span class="gp">... </span><span class="p">)</span>
 </pre></div>

@@ -278,13 +278,13 @@ under the License.
 <span class="c1">#  distributed with this work for additional information</span>
 <span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
 <span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
-<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  "License"); you may not use this file except in compliance</span>
 <span class="c1">#  with the License.  You may obtain a copy of the License at</span>
 <span class="c1">#</span>
 <span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="c1">#</span>
 <span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  distributed under the License is distributed on an "AS IS" BASIS,</span>
 <span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1">#  See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
@@ -294,53 +294,53 @@ under the License.
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common.job_id</span><span class="w"> </span><span class="kn">import</span> <span class="n">JobID</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.common.job_status</span><span class="w"> </span><span class="kn">import</span> <span class="n">JobStatus</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;JobClient&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'JobClient'</span><span class="p">]</span>
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">JobClient</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A client that is scoped to a specific job.</span>
 
 <span class="sd">    .. versionadded:: 1.11.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_job_client</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_job_client</span> <span class="o">=</span> <span class="n">j_job_client</span>
 
 <div class="viewcode-block" id="JobClient.get_job_id"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.job_client.JobClient.get_job_id.html#pyflink.common.job_client.JobClient.get_job_id">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_job_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JobID</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Returns the JobID that uniquely identifies the job this client is scoped to.</span>
 
 <span class="sd">        :return: JobID, or null if the job has been executed on a runtime without JobIDs</span>
 <span class="sd">                 or if the execution failed.</span>
 
 <span class="sd">        .. versionadded:: 1.11.0</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">JobID</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_job_client</span><span class="o">.</span><span class="n">getJobID</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="JobClient.get_job_status"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.job_client.JobClient.get_job_status.html#pyflink.common.job_client.JobClient.get_job_status">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_job_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CompletableFuture</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Requests the JobStatus of the associated job.</span>
 
 <span class="sd">        :return: A CompletableFuture containing the JobStatus of the associated job.</span>
 
 <span class="sd">        .. versionadded:: 1.11.0</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">CompletableFuture</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_job_client</span><span class="o">.</span><span class="n">getJobStatus</span><span class="p">(),</span> <span class="n">JobStatus</span><span class="o">.</span><span class="n">_from_j_job_status</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="JobClient.cancel"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.job_client.JobClient.cancel.html#pyflink.common.job_client.JobClient.cancel">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CompletableFuture</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Cancels the associated job.</span>
 
 <span class="sd">        :return: A CompletableFuture for canceling the associated job.</span>
 
 <span class="sd">        .. versionadded:: 1.11.0</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">CompletableFuture</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_job_client</span><span class="o">.</span><span class="n">cancel</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="JobClient.stop_with_savepoint"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.job_client.JobClient.stop_with_savepoint.html#pyflink.common.job_client.JobClient.stop_with_savepoint">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">stop_with_savepoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">advance_to_end_of_event_time</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
                             <span class="n">savepoint_directory</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CompletableFuture</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Stops the associated job on Flink cluster.</span>
 
 <span class="sd">        Stopping works only for streaming programs. Be aware, that the job might continue to run</span>
@@ -353,13 +353,13 @@ under the License.
 <span class="sd">        :return: A CompletableFuture containing the path where the savepoint is located.</span>
 
 <span class="sd">        .. versionadded:: 1.11.0</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">CompletableFuture</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_job_client</span><span class="o">.</span><span class="n">stopWithSavepoint</span><span class="p">(</span><span class="n">advance_to_end_of_event_time</span><span class="p">,</span> <span class="n">savepoint_directory</span><span class="p">),</span>
             <span class="nb">str</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="JobClient.trigger_savepoint"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.job_client.JobClient.trigger_savepoint.html#pyflink.common.job_client.JobClient.trigger_savepoint">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">trigger_savepoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">savepoint_directory</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CompletableFuture</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Triggers a savepoint for the associated job. The savepoint will be written to the given</span>
 <span class="sd">        savepoint directory.</span>
 
@@ -367,11 +367,11 @@ under the License.
 <span class="sd">        :return: A CompletableFuture containing the path where the savepoint is located.</span>
 
 <span class="sd">        .. versionadded:: 1.11.0</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">CompletableFuture</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_job_client</span><span class="o">.</span><span class="n">triggerSavepoint</span><span class="p">(</span><span class="n">savepoint_directory</span><span class="p">),</span> <span class="nb">str</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="JobClient.get_accumulators"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.job_client.JobClient.get_accumulators.html#pyflink.common.job_client.JobClient.get_accumulators">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_accumulators</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CompletableFuture</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Requests the accumulators of the associated job. Accumulators can be requested while it</span>
 <span class="sd">        is running or after it has finished. The class loader is used to deserialize the incoming</span>
 <span class="sd">        accumulator results.</span>
@@ -380,17 +380,17 @@ under the License.
 <span class="sd">        :return: A CompletableFuture containing the accumulators of the associated job.</span>
 
 <span class="sd">        .. versionadded:: 1.11.0</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">CompletableFuture</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_job_client</span><span class="o">.</span><span class="n">getAccumulators</span><span class="p">(),</span> <span class="nb">dict</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="JobClient.get_job_execution_result"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.job_client.JobClient.get_job_execution_result.html#pyflink.common.job_client.JobClient.get_job_execution_result">[docs]</a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_job_execution_result</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CompletableFuture</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Returns the JobExecutionResult result of the job execution of the submitted job.</span>
 
 <span class="sd">        :return: A CompletableFuture containing the JobExecutionResult result of the job execution.</span>
 
 <span class="sd">        .. versionadded:: 1.11.0</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">CompletableFuture</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_job_client</span><span class="o">.</span><span class="n">getJobExecutionResult</span><span class="p">(),</span>
                                  <span class="n">JobExecutionResult</span><span class="p">)</span></div>
 </pre></div>

@@ -330,10 +330,10 @@ transforms such as standardize and resample.</p></li>
 
 <span class="c1"># Curried — configure first, apply later</span>
 <span class="n">resizer</span> <span class="o">=</span> <span class="n">image_resize</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">512</span><span class="p">)</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span><span class="n">resized</span><span class="o">=</span><span class="n">resizer</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;img&quot;</span><span class="p">)))</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span><span class="n">resized</span><span class="o">=</span><span class="n">resizer</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"img"</span><span class="p">)))</span>
 
 <span class="c1"># Direct — configure and apply in one step</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span><span class="n">out</span><span class="o">=</span><span class="n">image_encode</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;resized&quot;</span><span class="p">),</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;JPEG&quot;</span><span class="p">))</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span><span class="n">out</span><span class="o">=</span><span class="n">image_encode</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"resized"</span><span class="p">),</span> <span class="nb">format</span><span class="o">=</span><span class="s2">"JPEG"</span><span class="p">))</span>
 </pre></div>
 </div>
 <section id="dependencies">
@@ -348,7 +348,7 @@ package versions into job code:</p>
 </pre></div>
 </div>
 <p>Or for Flink runtime:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">env</span><span class="o">.</span><span class="n">set_python_requirements</span><span class="p">(</span><span class="s2">&quot;path/to/requirements.txt&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">env</span><span class="o">.</span><span class="n">set_python_requirements</span><span class="p">(</span><span class="s2">"path/to/requirements.txt"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>When a job overrides a built-in package through Python requirements or Python
@@ -357,10 +357,127 @@ archives, keep the override inside the supported range reported by
 </section>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="image.html">Image</a></li>
-<li class="toctree-l1"><a class="reference internal" href="video.html">Video</a></li>
-<li class="toctree-l1"><a class="reference internal" href="audio.html">Audio</a></li>
-<li class="toctree-l1"><a class="reference internal" href="utilities.html">Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="image.html">Image</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="image.html#image-operations">Image Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="image.html#transform">Transform</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_decode.html">pyflink.multimodal.operators.image_decode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_encode.html">pyflink.multimodal.operators.image_encode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_compress.html">pyflink.multimodal.operators.image_compress</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_convert_format.html">pyflink.multimodal.operators.image_convert_format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_to_tensor.html">pyflink.multimodal.operators.image_to_tensor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_convert_mode.html">pyflink.multimodal.operators.image_convert_mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_resize.html">pyflink.multimodal.operators.image_resize</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_rescale.html">pyflink.multimodal.operators.image_rescale</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_crop.html">pyflink.multimodal.operators.image_crop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_crop_black_border.html">pyflink.multimodal.operators.image_crop_black_border</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_flip.html">pyflink.multimodal.operators.image_flip</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_blur.html">pyflink.multimodal.operators.image_blur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_adjust_color.html">pyflink.multimodal.operators.image_adjust_color</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_remove_background.html">pyflink.multimodal.operators.image_remove_background</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="image.html#information">Information</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_metadata.html">pyflink.multimodal.operators.image_metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_aspect_ratio.html">pyflink.multimodal.operators.image_aspect_ratio</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_sharpness.html">pyflink.multimodal.operators.image_sharpness</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_hash.html">pyflink.multimodal.operators.image_hash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.is_valid_image.html">pyflink.multimodal.operators.is_valid_image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_size_filter.html">pyflink.multimodal.operators.image_size_filter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_shape_filter.html">pyflink.multimodal.operators.image_shape_filter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_file_size_filter.html">pyflink.multimodal.operators.image_file_size_filter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="image.html#detection">Detection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_detect_objects.html">pyflink.multimodal.operators.image_detect_objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_segment.html">pyflink.multimodal.operators.image_segment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_ocr.html">pyflink.multimodal.operators.image_ocr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_detect_subplot.html">pyflink.multimodal.operators.image_detect_subplot</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="image.html#face">Face</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_face_detect.html">pyflink.multimodal.operators.image_face_detect</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_face_count.html">pyflink.multimodal.operators.image_face_count</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_face_blur.html">pyflink.multimodal.operators.image_face_blur</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="image.html#quality">Quality</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_nsfw_score.html">pyflink.multimodal.operators.image_nsfw_score</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_aesthetic_score.html">pyflink.multimodal.operators.image_aesthetic_score</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_quality_score.html">pyflink.multimodal.operators.image_quality_score</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_watermark_score.html">pyflink.multimodal.operators.image_watermark_score</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="image.html#embedding">Embedding</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_embedding.html">pyflink.multimodal.operators.image_embedding</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.image_text_similarity.html">pyflink.multimodal.operators.image_text_similarity</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="image.html#image-codec">Image Codec</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/pyflink.multimodal.codec.image_mode_channels.html">pyflink.multimodal.codec.image_mode_channels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyflink.multimodal.codec.image_to_ndarray.html">pyflink.multimodal.codec.image_to_ndarray</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyflink.multimodal.codec.ndarray_to_image.html">pyflink.multimodal.codec.ndarray_to_image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyflink.multimodal.codec.pil_to_image.html">pyflink.multimodal.codec.pil_to_image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyflink.multimodal.codec.convert_image_array_to_mode.html">pyflink.multimodal.codec.convert_image_array_to_mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyflink.multimodal.codec.image_array_to_pil.html">pyflink.multimodal.codec.image_array_to_pil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyflink.multimodal.codec.image_array_to_pil_compatible.html">pyflink.multimodal.codec.image_array_to_pil_compatible</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyflink.multimodal.codec.decode_image.html">pyflink.multimodal.codec.decode_image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyflink.multimodal.codec.encode_image_input.html">pyflink.multimodal.codec.encode_image_input</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="video.html">Video</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="video.html#video-operations">Video Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/pyflink.multimodal.operators.video_metadata.html">pyflink.multimodal.operators.video_metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyflink.multimodal.operators.video_split.html">pyflink.multimodal.operators.video_split</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyflink.multimodal.operators.video_explode_frames.html">pyflink.multimodal.operators.video_explode_frames</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/pyflink.multimodal.operators.video_extract_frames.html">pyflink.multimodal.operators.video_extract_frames</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="audio.html">Audio</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="audio.html#audio-operations">Audio Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="audio.html#information">Information</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.is_valid_audio.html">pyflink.multimodal.operators.is_valid_audio</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.audio_metadata.html">pyflink.multimodal.operators.audio_metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.audio_duration.html">pyflink.multimodal.operators.audio_duration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.audio_duration_filter.html">pyflink.multimodal.operators.audio_duration_filter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.audio_size_filter.html">pyflink.multimodal.operators.audio_size_filter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.audio_silence_detection.html">pyflink.multimodal.operators.audio_silence_detection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.audio_detect_speech.html">pyflink.multimodal.operators.audio_detect_speech</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="audio.html#transform">Transform</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.audio_decode.html">pyflink.multimodal.operators.audio_decode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.audio_encode.html">pyflink.multimodal.operators.audio_encode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.audio_convert_format.html">pyflink.multimodal.operators.audio_convert_format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.audio_standardize.html">pyflink.multimodal.operators.audio_standardize</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.audio_resample.html">pyflink.multimodal.operators.audio_resample</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.audio_split_by_duration.html">pyflink.multimodal.operators.audio_split_by_duration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.audio_split_by_timestamp.html">pyflink.multimodal.operators.audio_split_by_timestamp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.audio_split_by_speech.html">pyflink.multimodal.operators.audio_split_by_speech</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.audio_concat.html">pyflink.multimodal.operators.audio_concat</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="audio.html#speech">Speech</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/pyflink.multimodal.operators.audio_detect_language.html">pyflink.multimodal.operators.audio_detect_language</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utilities.html">Utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.utils.scatter_results.html">pyflink.multimodal.utils.scatter_results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.utils.run_image_batch_inference.html">pyflink.multimodal.utils.run_image_batch_inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.utils.resize_batch.html">pyflink.multimodal.utils.resize_batch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.utils.normalize_batch.html">pyflink.multimodal.utils.normalize_batch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pyflink.multimodal.utils.batch_to_tensor.html">pyflink.multimodal.utils.batch_to_tensor</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>

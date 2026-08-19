@@ -278,13 +278,13 @@ under the License.
 <span class="c1">#  distributed with this work for additional information</span>
 <span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
 <span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
-<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  "License"); you may not use this file except in compliance</span>
 <span class="c1">#  with the License.  You may obtain a copy of the License at</span>
 <span class="c1">#</span>
 <span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="c1">#</span>
 <span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  distributed under the License is distributed on an "AS IS" BASIS,</span>
 <span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1">#  See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
@@ -308,79 +308,79 @@ under the License.
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.util.java_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">to_jarray</span><span class="p">,</span> <span class="n">is_instance_of</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;FileCompactor&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;FileCompactStrategy&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;OutputFileConfig&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;FileSource&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;FileSourceBuilder&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;FileSink&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;StreamingFileSink&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;StreamFormat&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;BulkFormat&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;FileEnumeratorProvider&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;FileSplitAssignerProvider&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;RollingPolicy&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;BucketAssigner&#39;</span>
+    <span class="s1">'FileCompactor'</span><span class="p">,</span>
+    <span class="s1">'FileCompactStrategy'</span><span class="p">,</span>
+    <span class="s1">'OutputFileConfig'</span><span class="p">,</span>
+    <span class="s1">'FileSource'</span><span class="p">,</span>
+    <span class="s1">'FileSourceBuilder'</span><span class="p">,</span>
+    <span class="s1">'FileSink'</span><span class="p">,</span>
+    <span class="s1">'StreamingFileSink'</span><span class="p">,</span>
+    <span class="s1">'StreamFormat'</span><span class="p">,</span>
+    <span class="s1">'BulkFormat'</span><span class="p">,</span>
+    <span class="s1">'FileEnumeratorProvider'</span><span class="p">,</span>
+    <span class="s1">'FileSplitAssignerProvider'</span><span class="p">,</span>
+    <span class="s1">'RollingPolicy'</span><span class="p">,</span>
+    <span class="s1">'BucketAssigner'</span>
 <span class="p">]</span>
 
 
 <span class="c1"># ---- FileSource ----</span>
 
 <div class="viewcode-block" id="FileEnumeratorProvider"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.file_system.FileEnumeratorProvider.html#pyflink.datastream.connectors.file_system.FileEnumeratorProvider">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">FileEnumeratorProvider</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Factory for FileEnumerator which task is to discover all files to be read and to split them</span>
 <span class="sd">    into a set of file source splits. This includes possibly, path traversals, file filtering</span>
 <span class="sd">    (by name or other patterns) and deciding whether to split files into multiple splits, and</span>
 <span class="sd">    how to split them.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_file_enumerator_provider</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_file_enumerator_provider</span> <span class="o">=</span> <span class="n">j_file_enumerator_provider</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">default_splittable_file_enumerator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;FileEnumeratorProvider&#39;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">default_splittable_file_enumerator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">'FileEnumeratorProvider'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        The default file enumerator used for splittable formats. The enumerator recursively</span>
 <span class="sd">        enumerates files, split files that consist of multiple distributed storage blocks into</span>
-<span class="sd">        multiple splits, and filters hidden files (files starting with &#39;.&#39; or &#39;_&#39;). Files with</span>
-<span class="sd">        suffixes of common compression formats (for example &#39;.gzip&#39;, &#39;.bz2&#39;, &#39;.xy&#39;, &#39;.zip&#39;, ...)</span>
+<span class="sd">        multiple splits, and filters hidden files (files starting with '.' or '_'). Files with</span>
+<span class="sd">        suffixes of common compression formats (for example '.gzip', '.bz2', '.xy', '.zip', ...)</span>
 <span class="sd">        will not be split.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">JFileSource</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">src</span><span class="o">.</span><span class="n">FileSource</span>
         <span class="k">return</span> <span class="n">FileEnumeratorProvider</span><span class="p">(</span><span class="n">JFileSource</span><span class="o">.</span><span class="n">DEFAULT_SPLITTABLE_FILE_ENUMERATOR</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">default_non_splittable_file_enumerator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;FileEnumeratorProvider&#39;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">default_non_splittable_file_enumerator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">'FileEnumeratorProvider'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        The default file enumerator used for non-splittable formats. The enumerator recursively</span>
 <span class="sd">        enumerates files, creates one split for the file, and filters hidden files</span>
-<span class="sd">        (files starting with &#39;.&#39; or &#39;_&#39;).</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        (files starting with '.' or '_').</span>
+<span class="sd">        """</span>
         <span class="n">JFileSource</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">src</span><span class="o">.</span><span class="n">FileSource</span>
         <span class="k">return</span> <span class="n">FileEnumeratorProvider</span><span class="p">(</span><span class="n">JFileSource</span><span class="o">.</span><span class="n">DEFAULT_NON_SPLITTABLE_FILE_ENUMERATOR</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="FileSplitAssignerProvider"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.file_system.FileSplitAssignerProvider.html#pyflink.datastream.connectors.file_system.FileSplitAssignerProvider">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">FileSplitAssignerProvider</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Factory for FileSplitAssigner which is responsible for deciding what split should be</span>
 <span class="sd">    processed next by which node. It determines split processing order and locality.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_file_split_assigner</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_file_split_assigner</span> <span class="o">=</span> <span class="n">j_file_split_assigner</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">locality_aware_split_assigner</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;FileSplitAssignerProvider&#39;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">locality_aware_split_assigner</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">'FileSplitAssignerProvider'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        A FileSplitAssigner that assigns to each host preferably splits that are local, before</span>
 <span class="sd">        assigning splits that are not local.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">JFileSource</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">src</span><span class="o">.</span><span class="n">FileSource</span>
         <span class="k">return</span> <span class="n">FileSplitAssignerProvider</span><span class="p">(</span><span class="n">JFileSource</span><span class="o">.</span><span class="n">DEFAULT_SPLIT_ASSIGNER</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="StreamFormat"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.file_system.StreamFormat.html#pyflink.datastream.connectors.file_system.StreamFormat">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">StreamFormat</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A reader format that reads individual records from a stream.</span>
 
 <span class="sd">    Compared to the :class:`~BulkFormat`, the stream format handles a few things out-of-the-box,</span>
@@ -394,17 +394,17 @@ under the License.
 <span class="sd">    This batching is by default based on I/O fetch size for the StreamFormat, meaning the</span>
 <span class="sd">    set of records derived from one I/O buffer will be handed over as one. See config option</span>
 <span class="sd">    `source.file.stream.io-fetch-size` to configure that fetch size.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_stream_format</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_stream_format</span> <span class="o">=</span> <span class="n">j_stream_format</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">text_line_format</span><span class="p">(</span><span class="n">charset_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;UTF-8&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StreamFormat&#39;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">text_line_format</span><span class="p">(</span><span class="n">charset_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"UTF-8"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'StreamFormat'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates a reader format that text lines from a file.</span>
 
-<span class="sd">        The reader uses Java&#39;s built-in java.io.InputStreamReader to decode the byte stream</span>
+<span class="sd">        The reader uses Java's built-in java.io.InputStreamReader to decode the byte stream</span>
 <span class="sd">        using various supported charset encodings.</span>
 
 <span class="sd">        This format does not support optimized recovery from checkpoints. On recovery, it will</span>
@@ -414,14 +414,14 @@ under the License.
 <span class="sd">        state.</span>
 
 <span class="sd">        :param charset_name: The charset to decode the byte stream.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">j_stream_format</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">src</span><span class="o">.</span><span class="n">reader</span><span class="o">.</span> \
             <span class="n">TextLineInputFormat</span><span class="p">(</span><span class="n">charset_name</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">StreamFormat</span><span class="p">(</span><span class="n">j_stream_format</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="BulkFormat"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.file_system.BulkFormat.html#pyflink.datastream.connectors.file_system.BulkFormat">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">BulkFormat</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    The BulkFormat reads and decodes batches of records at a time. Examples of bulk formats are</span>
 <span class="sd">    formats like ORC or Parquet.</span>
 
@@ -433,91 +433,91 @@ under the License.
 <span class="sd">    For the BulkFormat, one batch is handed over as one.</span>
 
 <span class="sd">    .. versionadded:: 1.16.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_bulk_format</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_bulk_format</span> <span class="o">=</span> <span class="n">j_bulk_format</span></div>
 
 
 <div class="viewcode-block" id="FileSourceBuilder"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.file_system.FileSourceBuilder.html#pyflink.datastream.connectors.file_system.FileSourceBuilder">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">FileSourceBuilder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    The builder for the :class:`~FileSource`, to configure the various behaviors.</span>
 
 <span class="sd">    Start building the source via one of the following methods:</span>
 
 <span class="sd">        - :func:`~FileSource.for_record_stream_format`</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_file_source_builder</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_file_source_builder</span> <span class="o">=</span> <span class="n">j_file_source_builder</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">monitor_continuously</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
-            <span class="n">discovery_interval</span><span class="p">:</span> <span class="n">Duration</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;FileSourceBuilder&#39;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Sets this source to streaming (&quot;continuous monitoring&quot;) mode.</span>
+            <span class="n">discovery_interval</span><span class="p">:</span> <span class="n">Duration</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'FileSourceBuilder'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Sets this source to streaming ("continuous monitoring") mode.</span>
 
-<span class="sd">        This makes the source a &quot;continuous streaming&quot; source that keeps running, monitoring</span>
+<span class="sd">        This makes the source a "continuous streaming" source that keeps running, monitoring</span>
 <span class="sd">        for new files, and reads these files when they appear and are discovered by the</span>
 <span class="sd">        monitoring.</span>
 
 <span class="sd">        The interval in which the source checks for new files is the discovery_interval. Shorter</span>
 <span class="sd">        intervals mean that files are discovered more quickly, but also imply more frequent</span>
 <span class="sd">        listing or directory traversal of the file system / object store.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_file_source_builder</span><span class="o">.</span><span class="n">monitorContinuously</span><span class="p">(</span><span class="n">discovery_interval</span><span class="o">.</span><span class="n">_j_duration</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">process_static_file_set</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;FileSourceBuilder&#39;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_static_file_set</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'FileSourceBuilder'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Sets this source to bounded (batch) mode.</span>
 
 <span class="sd">        In this mode, the source processes the files that are under the given paths when the</span>
 <span class="sd">        application is started. Once all files are processed, the source will finish.</span>
 
-<span class="sd">        This setting is also the default behavior. This method is mainly here to &quot;switch back&quot;</span>
+<span class="sd">        This setting is also the default behavior. This method is mainly here to "switch back"</span>
 <span class="sd">        to bounded (batch) mode, or to make it explicit in the source construction.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_file_source_builder</span><span class="o">.</span><span class="n">processStaticFileSet</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">set_file_enumerator</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
-            <span class="n">file_enumerator</span><span class="p">:</span> <span class="s1">&#39;FileEnumeratorProvider&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;FileSourceBuilder&#39;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+            <span class="n">file_enumerator</span><span class="p">:</span> <span class="s1">'FileEnumeratorProvider'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'FileSourceBuilder'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Configures the FileEnumerator for the source. The File Enumerator is responsible</span>
 <span class="sd">        for selecting from the input path the set of files that should be processed (and which</span>
 <span class="sd">        to filter out). Furthermore, the File Enumerator may split the files further into</span>
 <span class="sd">        sub-regions, to enable parallelization beyond the number of files.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_file_source_builder</span><span class="o">.</span><span class="n">setFileEnumerator</span><span class="p">(</span>
             <span class="n">file_enumerator</span><span class="o">.</span><span class="n">_j_file_enumerator_provider</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">set_split_assigner</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
-            <span class="n">split_assigner</span><span class="p">:</span> <span class="s1">&#39;FileSplitAssignerProvider&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;FileSourceBuilder&#39;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+            <span class="n">split_assigner</span><span class="p">:</span> <span class="s1">'FileSplitAssignerProvider'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'FileSourceBuilder'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Configures the FileSplitAssigner for the source. The File Split Assigner</span>
 <span class="sd">        determines which parallel reader instance gets which {@link FileSourceSplit}, and in</span>
 <span class="sd">        which order these splits are assigned.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_file_source_builder</span><span class="o">.</span><span class="n">setSplitAssigner</span><span class="p">(</span><span class="n">split_assigner</span><span class="o">.</span><span class="n">_j_file_split_assigner</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;FileSource&#39;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'FileSource'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates the file source with the settings applied to this builder.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">FileSource</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_file_source_builder</span><span class="o">.</span><span class="n">build</span><span class="p">())</span></div>
 
 
 <div class="viewcode-block" id="FileSource"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.file_system.FileSource.html#pyflink.datastream.connectors.file_system.FileSource">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">FileSource</span><span class="p">(</span><span class="n">Source</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A unified data source that reads files - both in batch and in streaming mode.</span>
 
 <span class="sd">    This source supports all (distributed) file systems and object stores that can be accessed via</span>
-<span class="sd">    the Flink&#39;s FileSystem class.</span>
+<span class="sd">    the Flink's FileSystem class.</span>
 
 <span class="sd">    Start building a file source via one of the following calls:</span>
 
@@ -557,14 +557,14 @@ under the License.
 <span class="sd">    :class:`~FileSource.FileEnumeratorProvider`. The FileEnumeratorProvider is responsible to</span>
 <span class="sd">    select the relevant files (for example filter out hidden files) and to optionally splits files</span>
 <span class="sd">    into multiple regions (= file source splits) that can be read in parallel).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_file_source</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">FileSource</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">j_file_source</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">for_record_stream_format</span><span class="p">(</span><span class="n">stream_format</span><span class="p">:</span> <span class="n">StreamFormat</span><span class="p">,</span> <span class="o">*</span><span class="n">paths</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FileSourceBuilder</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Builds a new FileSource using a :class:`~FileSource.StreamFormat` to read record-by-record</span>
 <span class="sd">        from a file stream.</span>
 
@@ -573,9 +573,9 @@ under the License.
 <span class="sd">        tracking (checkpoints).</span>
 
 <span class="sd">        Stream formats also automatically de-compress files based on the file extension. This</span>
-<span class="sd">        supports files ending in &quot;.deflate&quot; (Deflate), &quot;.xz&quot; (XZ), &quot;.bz2&quot; (BZip2), &quot;.gz&quot;, &quot;.gzip&quot;</span>
+<span class="sd">        supports files ending in ".deflate" (Deflate), ".xz" (XZ), ".bz2" (BZip2), ".gz", ".gzip"</span>
 <span class="sd">        (GZip).</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">JPath</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">Path</span>
         <span class="n">JFileSource</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">src</span><span class="o">.</span><span class="n">FileSource</span>
         <span class="n">j_paths</span> <span class="o">=</span> <span class="n">to_jarray</span><span class="p">(</span><span class="n">JPath</span><span class="p">,</span> <span class="p">[</span><span class="n">JPath</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">paths</span><span class="p">])</span>
@@ -595,7 +595,7 @@ under the License.
 
 
 <div class="viewcode-block" id="BucketAssigner"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.file_system.BucketAssigner.html#pyflink.datastream.connectors.file_system.BucketAssigner">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">BucketAssigner</span><span class="p">(</span><span class="n">JavaObjectWrapper</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A BucketAssigner is used with a file sink to determine the bucket each incoming element should</span>
 <span class="sd">    be put into.</span>
 
@@ -603,23 +603,23 @@ under the License.
 <span class="sd">    for managing a set of active buckets. Whenever a new element arrives it will ask the</span>
 <span class="sd">    BucketAssigner for the bucket the element should fall in. The BucketAssigner can, for</span>
 <span class="sd">    example, determine buckets based on system time.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_bucket_assigner</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">j_bucket_assigner</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">base_path_bucket_assigner</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;BucketAssigner&#39;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">base_path_bucket_assigner</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">'BucketAssigner'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates a BucketAssigner that does not perform any bucketing of files. All files are</span>
 <span class="sd">        written to the base path.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">BucketAssigner</span><span class="p">(</span><span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">streaming</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">sink</span><span class="o">.</span>
                               <span class="n">filesystem</span><span class="o">.</span><span class="n">bucketassigners</span><span class="o">.</span><span class="n">BasePathBucketAssigner</span><span class="p">())</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">date_time_bucket_assigner</span><span class="p">(</span><span class="n">format_str</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;yyyy-MM-dd--HH&quot;</span><span class="p">,</span> <span class="n">timezone_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">date_time_bucket_assigner</span><span class="p">(</span><span class="n">format_str</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"yyyy-MM-dd--HH"</span><span class="p">,</span> <span class="n">timezone_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates a BucketAssigner that assigns to buckets based on current system time.</span>
 
 <span class="sd">        It will create directories of the following form: /{basePath}/{dateTimePath}/}.</span>
@@ -628,14 +628,14 @@ under the License.
 <span class="sd">        string.</span>
 
 <span class="sd">        The Java DateTimeFormatter is used to derive a date string from the current system time and</span>
-<span class="sd">        the date format string. The default format string is &quot;yyyy-MM-dd--HH&quot; so the rolling files</span>
+<span class="sd">        the date format string. The default format string is "yyyy-MM-dd--HH" so the rolling files</span>
 <span class="sd">        will have a granularity of hours.</span>
 
 <span class="sd">        :param format_str: The format string used to determine the bucket id.</span>
-<span class="sd">        :param timezone_id: The timezone id, either an abbreviation such as &quot;PST&quot;, a full name</span>
-<span class="sd">                            such as &quot;America/Los_Angeles&quot;, or a custom timezone_id such as</span>
-<span class="sd">                            &quot;GMT-08:00&quot;. Th e default time zone will b used if it&#39;s None.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        :param timezone_id: The timezone id, either an abbreviation such as "PST", a full name</span>
+<span class="sd">                            such as "America/Los_Angeles", or a custom timezone_id such as</span>
+<span class="sd">                            "GMT-08:00". Th e default time zone will b used if it's None.</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">timezone_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">timezone_id</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">j_timezone</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">java</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">ZoneId</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="n">timezone_id</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -646,10 +646,10 @@ under the License.
 
 
 <div class="viewcode-block" id="RollingPolicy"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.file_system.RollingPolicy.html#pyflink.datastream.connectors.file_system.RollingPolicy">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">RollingPolicy</span><span class="p">(</span><span class="n">JavaObjectWrapper</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    The policy based on which a Bucket in the FileSink rolls its currently</span>
 <span class="sd">    open part file and opens a new one.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_rolling_policy</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">j_rolling_policy</span><span class="p">)</span>
@@ -658,8 +658,8 @@ under the License.
     <span class="k">def</span><span class="w"> </span><span class="nf">default_rolling_policy</span><span class="p">(</span>
             <span class="n">part_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">128</span><span class="p">,</span>
             <span class="n">rollover_interval</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span>
-            <span class="n">inactivity_interval</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;DefaultRollingPolicy&#39;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+            <span class="n">inactivity_interval</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'DefaultRollingPolicy'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Returns the default implementation of the RollingPolicy.</span>
 
 <span class="sd">        This policy rolls a part file if:</span>
@@ -675,7 +675,7 @@ under the License.
 <span class="sd">                                  rolling.</span>
 <span class="sd">        :param inactivity_interval: The time duration of allowed inactivity after which a part file</span>
 <span class="sd">                                    will have to roll.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">JDefaultRollingPolicy</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">streaming</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span>\
             <span class="n">sink</span><span class="o">.</span><span class="n">filesystem</span><span class="o">.</span><span class="n">rollingpolicies</span><span class="o">.</span><span class="n">DefaultRollingPolicy</span>
         <span class="n">j_rolling_policy</span> <span class="o">=</span> <span class="n">JDefaultRollingPolicy</span><span class="o">.</span><span class="n">builder</span><span class="p">()</span>\
@@ -686,17 +686,17 @@ under the License.
         <span class="k">return</span> <span class="n">DefaultRollingPolicy</span><span class="p">(</span><span class="n">j_rolling_policy</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">on_checkpoint_rolling_policy</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;OnCheckpointRollingPolicy&#39;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_checkpoint_rolling_policy</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">'OnCheckpointRollingPolicy'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Returns a RollingPolicy which rolls (ONLY) on every checkpoint.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">JOnCheckpointRollingPolicy</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">streaming</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span> \
             <span class="n">sink</span><span class="o">.</span><span class="n">filesystem</span><span class="o">.</span><span class="n">rollingpolicies</span><span class="o">.</span><span class="n">OnCheckpointRollingPolicy</span>
         <span class="k">return</span> <span class="n">OnCheckpointRollingPolicy</span><span class="p">(</span><span class="n">JOnCheckpointRollingPolicy</span><span class="o">.</span><span class="n">build</span><span class="p">())</span></div>
 
 
 <div class="viewcode-block" id="DefaultRollingPolicy"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.file_system.DefaultRollingPolicy.html#pyflink.datastream.connectors.file_system.DefaultRollingPolicy">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">DefaultRollingPolicy</span><span class="p">(</span><span class="n">RollingPolicy</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    The default implementation of the RollingPolicy.</span>
 
 <span class="sd">    This policy rolls a part file if:</span>
@@ -706,26 +706,26 @@ under the License.
 <span class="sd">        - the current file is older than the roll over interval (by default 60 sec), or</span>
 <span class="sd">        - the current file has not been written to for more than the allowed inactivityTime (by</span>
 <span class="sd">          default 60 sec).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_rolling_policy</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">j_rolling_policy</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="OnCheckpointRollingPolicy"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.file_system.OnCheckpointRollingPolicy.html#pyflink.datastream.connectors.file_system.OnCheckpointRollingPolicy">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">OnCheckpointRollingPolicy</span><span class="p">(</span><span class="n">RollingPolicy</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A RollingPolicy which rolls (ONLY) on every checkpoint.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_rolling_policy</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">j_rolling_policy</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="OutputFileConfig"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.file_system.OutputFileConfig.html#pyflink.datastream.connectors.file_system.OutputFileConfig">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">OutputFileConfig</span><span class="p">(</span><span class="n">JavaObjectWrapper</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Part file name configuration.</span>
 <span class="sd">    This allow to define a prefix and a suffix to the part file name.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">builder</span><span class="p">():</span>
@@ -737,50 +737,50 @@ under the License.
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_output_file_config</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_part_prefix</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        The prefix for the part name.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_output_file_config</span><span class="o">.</span><span class="n">getPartPrefix</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_part_suffix</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        The suffix for the part name.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_output_file_config</span><span class="o">.</span><span class="n">getPartSuffix</span><span class="p">()</span>
 
     <span class="k">class</span><span class="w"> </span><span class="nc">OutputFileConfigBuilder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        A builder to create the part file configuration.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">part_prefix</span> <span class="o">=</span> <span class="s2">&quot;part&quot;</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">part_suffix</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">part_prefix</span> <span class="o">=</span> <span class="s2">"part"</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">part_suffix</span> <span class="o">=</span> <span class="s2">""</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">with_part_prefix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;OutputFileConfig.OutputFileConfigBuilder&#39;</span><span class="p">:</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">with_part_prefix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'OutputFileConfig.OutputFileConfigBuilder'</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">part_prefix</span> <span class="o">=</span> <span class="n">prefix</span>
             <span class="k">return</span> <span class="bp">self</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">with_part_suffix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">suffix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;OutputFileConfig.OutputFileConfigBuilder&#39;</span><span class="p">:</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">with_part_suffix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">suffix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'OutputFileConfig.OutputFileConfigBuilder'</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">part_suffix</span> <span class="o">=</span> <span class="n">suffix</span>
             <span class="k">return</span> <span class="bp">self</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;OutputFileConfig&#39;</span><span class="p">:</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'OutputFileConfig'</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">OutputFileConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">part_prefix</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">part_suffix</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="FileCompactStrategy"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.file_system.FileCompactStrategy.html#pyflink.datastream.connectors.file_system.FileCompactStrategy">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">FileCompactStrategy</span><span class="p">(</span><span class="n">JavaObjectWrapper</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Strategy for compacting the files written in {@link FileSink} before committing.</span>
 
 <span class="sd">    .. versionadded:: 1.16.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_file_compact_strategy</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">j_file_compact_strategy</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">builder</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;FileCompactStrategy.Builder&#39;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">builder</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">'FileCompactStrategy.Builder'</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">FileCompactStrategy</span><span class="o">.</span><span class="n">Builder</span><span class="p">()</span>
 
     <span class="k">class</span><span class="w"> </span><span class="nc">Builder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -790,51 +790,51 @@ under the License.
                 <span class="n">compactor</span><span class="o">.</span><span class="n">FileCompactStrategy</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span> <span class="o">=</span> <span class="n">JFileCompactStrategy</span><span class="o">.</span><span class="n">Builder</span><span class="o">.</span><span class="n">newBuilder</span><span class="p">()</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;FileCompactStrategy&#39;</span><span class="p">:</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'FileCompactStrategy'</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">FileCompactStrategy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">build</span><span class="p">())</span>
 
         <span class="k">def</span><span class="w"> </span><span class="nf">enable_compaction_on_checkpoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_checkpoints_before_compaction</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> \
-                <span class="o">-&gt;</span> <span class="s1">&#39;FileCompactStrategy.Builder&#39;</span><span class="p">:</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+                <span class="o">-&gt;</span> <span class="s1">'FileCompactStrategy.Builder'</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">"""</span>
 <span class="sd">            Optional, compaction will be triggered when N checkpoints passed since the last</span>
 <span class="sd">            triggering, -1 by default indicating no compaction on checkpoint.</span>
-<span class="sd">            &quot;&quot;&quot;</span>
+<span class="sd">            """</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">enableCompactionOnCheckpoint</span><span class="p">(</span><span class="n">num_checkpoints_before_compaction</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">set_size_threshold</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size_threshold</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;FileCompactStrategy.Builder&#39;</span><span class="p">:</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">set_size_threshold</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size_threshold</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'FileCompactStrategy.Builder'</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">"""</span>
 <span class="sd">            Optional, compaction will be triggered when the total size of compacting files reaches</span>
 <span class="sd">            the threshold. -1 by default, indicating the size is unlimited.</span>
-<span class="sd">            &quot;&quot;&quot;</span>
+<span class="sd">            """</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setSizeThreshold</span><span class="p">(</span><span class="n">size_threshold</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span>
 
         <span class="k">def</span><span class="w"> </span><span class="nf">set_num_compact_threads</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_compact_threads</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> \
-                <span class="o">-&gt;</span> <span class="s1">&#39;FileCompactStrategy.Builder&#39;</span><span class="p">:</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+                <span class="o">-&gt;</span> <span class="s1">'FileCompactStrategy.Builder'</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">"""</span>
 <span class="sd">            Optional, the count of compacting threads in a compactor operator, 1 by default.</span>
-<span class="sd">            &quot;&quot;&quot;</span>
+<span class="sd">            """</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setNumCompactThreads</span><span class="p">(</span><span class="n">num_compact_threads</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span></div>
 
 
 <div class="viewcode-block" id="FileCompactor"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.file_system.FileCompactor.html#pyflink.datastream.connectors.file_system.FileCompactor">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">FileCompactor</span><span class="p">(</span><span class="n">JavaObjectWrapper</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    The FileCompactor is responsible for compacting files into one file.</span>
 
 <span class="sd">    .. versionadded:: 1.16.0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_file_compactor</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">j_file_compactor</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">concat_file_compactor</span><span class="p">(</span><span class="n">file_delimiter</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Returns a file compactor that simply concat the compacting files. The file_delimiter will be</span>
 <span class="sd">        added between neighbouring files if provided.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">JConcatFileCompactor</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">sink</span><span class="o">.</span><span class="n">compactor</span><span class="o">.</span>\
             <span class="n">ConcatFileCompactor</span>
         <span class="k">if</span> <span class="n">file_delimiter</span><span class="p">:</span>
@@ -844,17 +844,17 @@ under the License.
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">identical_file_compactor</span><span class="p">():</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Returns a file compactor that directly copy the content of the only input file to the</span>
 <span class="sd">        output.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">JIdenticalFileCompactor</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">sink</span><span class="o">.</span><span class="n">compactor</span><span class="o">.</span>\
             <span class="n">IdenticalFileCompactor</span>
         <span class="k">return</span> <span class="n">FileCompactor</span><span class="p">(</span><span class="n">JIdenticalFileCompactor</span><span class="p">())</span></div>
 
 
 <div class="viewcode-block" id="FileSink"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.file_system.FileSink.html#pyflink.datastream.connectors.file_system.FileSink">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">FileSink</span><span class="p">(</span><span class="n">Sink</span><span class="p">,</span> <span class="n">SupportsPreprocessing</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A unified sink that emits its input elements to FileSystem files within buckets. This</span>
 <span class="sd">    sink achieves exactly-once semantics for both BATCH and STREAMING.</span>
 
@@ -874,8 +874,8 @@ under the License.
 <span class="sd">    The names of the part files could be defined using OutputFileConfig. This</span>
 <span class="sd">    configuration contains a part prefix and a part suffix that will be used with a random uid</span>
 <span class="sd">    assigned to each subtask of the sink and a rolling counter to determine the file names. For</span>
-<span class="sd">    example with a prefix &quot;prefix&quot; and a suffix &quot;.ext&quot;, a file named {@code</span>
-<span class="sd">    &quot;prefix-81fc4980-a6af-41c8-9937-9939408a734b-17.ext&quot;} contains the data from subtask with uid</span>
+<span class="sd">    example with a prefix "prefix" and a suffix ".ext", a file named {@code</span>
+<span class="sd">    "prefix-81fc4980-a6af-41c8-9937-9939408a734b-17.ext"} contains the data from subtask with uid</span>
 <span class="sd">    {@code 81fc4980-a6af-41c8-9937-9939408a734b} of the sink and is the {@code 17th} part-file</span>
 <span class="sd">    created by that subtask.</span>
 
@@ -898,7 +898,7 @@ under the License.
 <span class="sd">    end, when restoring, the restored files in pending state are transferred into the finished state</span>
 <span class="sd">    while any in-progress files are rolled back, so that they do not contain data that arrived after</span>
 <span class="sd">    the checkpoint from which we restore.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_file_sink</span><span class="p">,</span> <span class="n">transformer</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">StreamTransformer</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">FileSink</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">sink</span><span class="o">=</span><span class="n">j_file_sink</span><span class="p">)</span>
@@ -913,9 +913,9 @@ under the License.
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span> <span class="o">=</span> <span class="n">j_builder</span>
 
         <span class="k">def</span><span class="w"> </span><span class="nf">with_bucket_check_interval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interval</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">            </span><span class="sd">"""</span>
 <span class="sd">            :param interval: The check interval in milliseconds.</span>
-<span class="sd">            &quot;&quot;&quot;</span>
+<span class="sd">            """</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">withBucketCheckInterval</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span>
 
@@ -943,12 +943,12 @@ under the License.
             <span class="k">return</span> <span class="n">FileSink</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">build</span><span class="p">())</span>
 
     <span class="k">class</span><span class="w"> </span><span class="nc">RowFormatBuilder</span><span class="p">(</span><span class="n">BaseBuilder</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Builder for the vanilla FileSink using a row format.</span>
 
 <span class="sd">        .. versionchanged:: 1.16.0</span>
 <span class="sd">           Support compaction.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_row_format_builder</span><span class="p">):</span>
             <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">j_row_format_builder</span><span class="p">)</span>
@@ -958,7 +958,7 @@ under the License.
             <span class="k">return</span> <span class="bp">self</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">for_row_format</span><span class="p">(</span><span class="n">base_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">encoder</span><span class="p">:</span> <span class="n">Encoder</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;FileSink.RowFormatBuilder&#39;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">for_row_format</span><span class="p">(</span><span class="n">base_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">encoder</span><span class="p">:</span> <span class="n">Encoder</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'FileSink.RowFormatBuilder'</span><span class="p">:</span>
         <span class="n">JPath</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">Path</span>
         <span class="n">JFileSink</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">sink</span><span class="o">.</span><span class="n">FileSink</span>
 
@@ -966,11 +966,11 @@ under the License.
             <span class="n">JFileSink</span><span class="o">.</span><span class="n">forRowFormat</span><span class="p">(</span><span class="n">JPath</span><span class="p">(</span><span class="n">base_path</span><span class="p">),</span> <span class="n">encoder</span><span class="o">.</span><span class="n">_j_encoder</span><span class="p">))</span>
 
     <span class="k">class</span><span class="w"> </span><span class="nc">BulkFormatBuilder</span><span class="p">(</span><span class="n">BaseBuilder</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Builder for the vanilla FileSink using a bulk format.</span>
 
 <span class="sd">        .. versionadded:: 1.16.0</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_bulk_format_builder</span><span class="p">):</span>
             <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">j_bulk_format_builder</span><span class="p">)</span>
@@ -978,10 +978,10 @@ under the License.
 
         <span class="k">def</span><span class="w"> </span><span class="nf">with_rolling_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rolling_policy</span><span class="p">:</span> <span class="n">OnCheckpointRollingPolicy</span><span class="p">):</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rolling_policy</span><span class="p">,</span> <span class="n">OnCheckpointRollingPolicy</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;rolling_policy must be OnCheckpointRollingPolicy for bulk format&#39;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">'rolling_policy must be OnCheckpointRollingPolicy for bulk format'</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">_with_row_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row_type</span><span class="p">:</span> <span class="s1">&#39;RowType&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;FileSink.BulkFormatBuilder&#39;</span><span class="p">:</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">_with_row_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row_type</span><span class="p">:</span> <span class="s1">'RowType'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'FileSink.BulkFormatBuilder'</span><span class="p">:</span>
             <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream.data_stream</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataStream</span>
             <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">_to_java_data_type</span>
 
@@ -989,12 +989,12 @@ under the License.
                 <span class="n">j_type_info</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">_j_data_stream</span><span class="o">.</span><span class="n">getType</span><span class="p">()</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">is_instance_of</span><span class="p">(</span>
                     <span class="n">j_type_info</span><span class="p">,</span>
-                    <span class="s1">&#39;org.apache.flink.table.runtime.typeutils.InternalTypeInfo&#39;</span>
+                    <span class="s1">'org.apache.flink.table.runtime.typeutils.InternalTypeInfo'</span>
                 <span class="p">):</span>
                     <span class="k">return</span> <span class="kc">False</span>
                 <span class="k">return</span> <span class="n">is_instance_of</span><span class="p">(</span>
                     <span class="n">j_type_info</span><span class="o">.</span><span class="n">toLogicalType</span><span class="p">(),</span>
-                    <span class="s1">&#39;org.apache.flink.table.types.logical.RowType&#39;</span>
+                    <span class="s1">'org.apache.flink.table.types.logical.RowType'</span>
                 <span class="p">)</span>
 
             <span class="k">class</span><span class="w"> </span><span class="nc">RowRowTransformer</span><span class="p">(</span><span class="n">StreamTransformer</span><span class="p">):</span>
@@ -1012,12 +1012,12 @@ under the License.
             <span class="bp">self</span><span class="o">.</span><span class="n">_transformer</span> <span class="o">=</span> <span class="n">RowRowTransformer</span><span class="p">()</span>
             <span class="k">return</span> <span class="bp">self</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;FileSink&#39;</span><span class="p">:</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'FileSink'</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">FileSink</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">build</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transformer</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">for_bulk_format</span><span class="p">(</span><span class="n">base_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">writer_factory</span><span class="p">:</span> <span class="n">BulkWriterFactory</span><span class="p">)</span> \
-            <span class="o">-&gt;</span> <span class="s1">&#39;FileSink.BulkFormatBuilder&#39;</span><span class="p">:</span>
+            <span class="o">-&gt;</span> <span class="s1">'FileSink.BulkFormatBuilder'</span><span class="p">:</span>
         <span class="n">jvm</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>
         <span class="n">j_path</span> <span class="o">=</span> <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">base_path</span><span class="p">)</span>
         <span class="n">JFileSink</span> <span class="o">=</span> <span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">sink</span><span class="o">.</span><span class="n">FileSink</span>
@@ -1035,7 +1035,7 @@ under the License.
 
 
 <div class="viewcode-block" id="StreamingFileSink"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.file_system.StreamingFileSink.html#pyflink.datastream.connectors.file_system.StreamingFileSink">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">StreamingFileSink</span><span class="p">(</span><span class="n">SinkFunction</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Sink that emits its input elements to `FileSystem` files within buckets. This is</span>
 <span class="sd">    integrated with the checkpointing mechanism to provide exactly once semantics.</span>
 
@@ -1044,10 +1044,10 @@ under the License.
 <span class="sd">    one directory for every bucket. The bucket directories themselves contain several part files,</span>
 <span class="sd">    with at least one for each parallel subtask of the sink which is writing data to that bucket.</span>
 <span class="sd">    These part files contain the actual output data.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_obj</span><span class="p">):</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Deprecated in 1.15. Use FileSink instead.&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">"Deprecated in 1.15. Use FileSink instead."</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">StreamingFileSink</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">j_obj</span><span class="p">)</span>
 
     <span class="k">class</span><span class="w"> </span><span class="nc">BaseBuilder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -1071,14 +1071,14 @@ under the License.
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">withOutputFileConfig</span><span class="p">(</span><span class="n">output_file_config</span><span class="o">.</span><span class="n">get_java_object</span><span class="p">())</span>
             <span class="k">return</span> <span class="bp">self</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;StreamingFileSink&#39;</span><span class="p">:</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'StreamingFileSink'</span><span class="p">:</span>
             <span class="n">j_stream_file_sink</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
             <span class="k">return</span> <span class="n">StreamingFileSink</span><span class="p">(</span><span class="n">j_stream_file_sink</span><span class="p">)</span>
 
     <span class="k">class</span><span class="w"> </span><span class="nc">DefaultRowFormatBuilder</span><span class="p">(</span><span class="n">BaseBuilder</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Builder for the vanilla `StreamingFileSink` using a row format.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_default_row_format_builder</span><span class="p">):</span>
             <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">j_default_row_format_builder</span><span class="p">)</span>
@@ -1088,7 +1088,7 @@ under the License.
             <span class="k">return</span> <span class="bp">self</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">for_row_format</span><span class="p">(</span><span class="n">base_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">encoder</span><span class="p">:</span> <span class="n">Encoder</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;DefaultRowFormatBuilder&#39;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">for_row_format</span><span class="p">(</span><span class="n">base_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">encoder</span><span class="p">:</span> <span class="n">Encoder</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'DefaultRowFormatBuilder'</span><span class="p">:</span>
         <span class="n">j_path</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">base_path</span><span class="p">)</span>
         <span class="n">j_default_row_format_builder</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">streaming</span><span class="o">.</span><span class="n">api</span><span class="o">.</span>\
             <span class="n">functions</span><span class="o">.</span><span class="n">sink</span><span class="o">.</span><span class="n">filesystem</span><span class="o">.</span><span class="n">StreamingFileSink</span><span class="o">.</span><span class="n">forRowFormat</span><span class="p">(</span><span class="n">j_path</span><span class="p">,</span> <span class="n">encoder</span><span class="o">.</span><span class="n">_j_encoder</span><span class="p">)</span>

@@ -310,13 +310,13 @@ under the License.
 <span class="c1">#  distributed with this work for additional information</span>
 <span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
 <span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
-<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  "License"); you may not use this file except in compliance</span>
 <span class="c1">#  with the License.  You may obtain a copy of the License at</span>
 <span class="c1">#</span>
 <span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="c1">#</span>
 <span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  distributed under the License is distributed on an "AS IS" BASIS,</span>
 <span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1">#  See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
@@ -330,19 +330,19 @@ under the License.
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream.formats.csv</span><span class="w"> </span><span class="kn">import</span> <span class="n">CsvRowSerializationSchema</span><span class="p">,</span> <span class="n">CsvRowDeserializationSchema</span>
 
 
-<span class="c1"># Make sure that the Kafka cluster is started and the topic &#39;test_csv_topic&#39; is</span>
+<span class="c1"># Make sure that the Kafka cluster is started and the topic 'test_csv_topic' is</span>
 <span class="c1"># created before executing this job.</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">write_to_kafka</span><span class="p">(</span><span class="n">env</span><span class="p">):</span>
     <span class="n">type_info</span> <span class="o">=</span> <span class="n">Types</span><span class="o">.</span><span class="n">ROW</span><span class="p">([</span><span class="n">Types</span><span class="o">.</span><span class="n">INT</span><span class="p">(),</span> <span class="n">Types</span><span class="o">.</span><span class="n">STRING</span><span class="p">()])</span>
     <span class="n">ds</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">from_collection</span><span class="p">([</span>
-        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;hi&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;hello&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;hi&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;hello&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;hi&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;hello&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;hello&#39;</span><span class="p">)],</span>
+        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'hi'</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">'hello'</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">'hi'</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">'hello'</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s1">'hi'</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="s1">'hello'</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="s1">'hello'</span><span class="p">)],</span>
         <span class="n">type_info</span><span class="o">=</span><span class="n">type_info</span><span class="p">)</span>
 
     <span class="n">serialization_schema</span> <span class="o">=</span> <span class="n">CsvRowSerializationSchema</span><span class="o">.</span><span class="n">Builder</span><span class="p">(</span><span class="n">type_info</span><span class="p">)</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
     <span class="n">kafka_producer</span> <span class="o">=</span> <span class="n">FlinkKafkaProducer</span><span class="p">(</span>
-        <span class="n">topic</span><span class="o">=</span><span class="s1">&#39;test_csv_topic&#39;</span><span class="p">,</span>
+        <span class="n">topic</span><span class="o">=</span><span class="s1">'test_csv_topic'</span><span class="p">,</span>
         <span class="n">serialization_schema</span><span class="o">=</span><span class="n">serialization_schema</span><span class="p">,</span>
-        <span class="n">producer_config</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;bootstrap.servers&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost:9092&#39;</span><span class="p">,</span> <span class="s1">&#39;group.id&#39;</span><span class="p">:</span> <span class="s1">&#39;test_group&#39;</span><span class="p">}</span>
+        <span class="n">producer_config</span><span class="o">=</span><span class="p">{</span><span class="s1">'bootstrap.servers'</span><span class="p">:</span> <span class="s1">'localhost:9092'</span><span class="p">,</span> <span class="s1">'group.id'</span><span class="p">:</span> <span class="s1">'test_group'</span><span class="p">}</span>
     <span class="p">)</span>
 
     <span class="c1"># note that the output type of ds must be RowTypeInfo</span>
@@ -355,9 +355,9 @@ under the License.
     <span class="n">deserialization_schema</span> <span class="o">=</span> <span class="n">CsvRowDeserializationSchema</span><span class="o">.</span><span class="n">Builder</span><span class="p">(</span><span class="n">type_info</span><span class="p">)</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
 
     <span class="n">kafka_consumer</span> <span class="o">=</span> <span class="n">FlinkKafkaConsumer</span><span class="p">(</span>
-        <span class="n">topics</span><span class="o">=</span><span class="s1">&#39;test_csv_topic&#39;</span><span class="p">,</span>
+        <span class="n">topics</span><span class="o">=</span><span class="s1">'test_csv_topic'</span><span class="p">,</span>
         <span class="n">deserialization_schema</span><span class="o">=</span><span class="n">deserialization_schema</span><span class="p">,</span>
-        <span class="n">properties</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;bootstrap.servers&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost:9092&#39;</span><span class="p">,</span> <span class="s1">&#39;group.id&#39;</span><span class="p">:</span> <span class="s1">&#39;test_group_1&#39;</span><span class="p">}</span>
+        <span class="n">properties</span><span class="o">=</span><span class="p">{</span><span class="s1">'bootstrap.servers'</span><span class="p">:</span> <span class="s1">'localhost:9092'</span><span class="p">,</span> <span class="s1">'group.id'</span><span class="p">:</span> <span class="s1">'test_group_1'</span><span class="p">}</span>
     <span class="p">)</span>
     <span class="n">kafka_consumer</span><span class="o">.</span><span class="n">set_start_from_earliest</span><span class="p">()</span>
 
@@ -365,16 +365,16 @@ under the License.
     <span class="n">env</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">stream</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">stream</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">"</span><span class="si">%(message)s</span><span class="s2">"</span><span class="p">)</span>
 
     <span class="n">env</span> <span class="o">=</span> <span class="n">StreamExecutionEnvironment</span><span class="o">.</span><span class="n">get_execution_environment</span><span class="p">()</span>
-    <span class="n">env</span><span class="o">.</span><span class="n">add_jars</span><span class="p">(</span><span class="s2">&quot;file:///path/to/flink-sql-connector-kafka-1.15.0.jar&quot;</span><span class="p">)</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">add_jars</span><span class="p">(</span><span class="s2">"file:///path/to/flink-sql-connector-kafka-1.15.0.jar"</span><span class="p">)</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;start writing data to kafka&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"start writing data to kafka"</span><span class="p">)</span>
     <span class="n">write_to_kafka</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;start reading data from kafka&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"start reading data from kafka"</span><span class="p">)</span>
     <span class="n">read_from_kafka</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -387,13 +387,13 @@ under the License.
 <span class="c1">#  distributed with this work for additional information</span>
 <span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
 <span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
-<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  "License"); you may not use this file except in compliance</span>
 <span class="c1">#  with the License.  You may obtain a copy of the License at</span>
 <span class="c1">#</span>
 <span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="c1">#</span>
 <span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  distributed under the License is distributed on an "AS IS" BASIS,</span>
 <span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1">#  See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
@@ -407,21 +407,21 @@ under the License.
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream.formats.json</span><span class="w"> </span><span class="kn">import</span> <span class="n">JsonRowSerializationSchema</span><span class="p">,</span> <span class="n">JsonRowDeserializationSchema</span>
 
 
-<span class="c1"># Make sure that the Kafka cluster is started and the topic &#39;test_json_topic&#39; is</span>
+<span class="c1"># Make sure that the Kafka cluster is started and the topic 'test_json_topic' is</span>
 <span class="c1"># created before executing this job.</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">write_to_kafka</span><span class="p">(</span><span class="n">env</span><span class="p">):</span>
     <span class="n">type_info</span> <span class="o">=</span> <span class="n">Types</span><span class="o">.</span><span class="n">ROW</span><span class="p">([</span><span class="n">Types</span><span class="o">.</span><span class="n">INT</span><span class="p">(),</span> <span class="n">Types</span><span class="o">.</span><span class="n">STRING</span><span class="p">()])</span>
     <span class="n">ds</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">from_collection</span><span class="p">(</span>
-        <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;hi&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;hello&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;hi&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;hello&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;hi&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;hello&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;hello&#39;</span><span class="p">)],</span>
+        <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'hi'</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">'hello'</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">'hi'</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">'hello'</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s1">'hi'</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="s1">'hello'</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="s1">'hello'</span><span class="p">)],</span>
         <span class="n">type_info</span><span class="o">=</span><span class="n">type_info</span><span class="p">)</span>
 
     <span class="n">serialization_schema</span> <span class="o">=</span> <span class="n">JsonRowSerializationSchema</span><span class="o">.</span><span class="n">Builder</span><span class="p">()</span> \
         <span class="o">.</span><span class="n">with_type_info</span><span class="p">(</span><span class="n">type_info</span><span class="p">)</span> \
         <span class="o">.</span><span class="n">build</span><span class="p">()</span>
     <span class="n">kafka_producer</span> <span class="o">=</span> <span class="n">FlinkKafkaProducer</span><span class="p">(</span>
-        <span class="n">topic</span><span class="o">=</span><span class="s1">&#39;test_json_topic&#39;</span><span class="p">,</span>
+        <span class="n">topic</span><span class="o">=</span><span class="s1">'test_json_topic'</span><span class="p">,</span>
         <span class="n">serialization_schema</span><span class="o">=</span><span class="n">serialization_schema</span><span class="p">,</span>
-        <span class="n">producer_config</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;bootstrap.servers&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost:9092&#39;</span><span class="p">,</span> <span class="s1">&#39;group.id&#39;</span><span class="p">:</span> <span class="s1">&#39;test_group&#39;</span><span class="p">}</span>
+        <span class="n">producer_config</span><span class="o">=</span><span class="p">{</span><span class="s1">'bootstrap.servers'</span><span class="p">:</span> <span class="s1">'localhost:9092'</span><span class="p">,</span> <span class="s1">'group.id'</span><span class="p">:</span> <span class="s1">'test_group'</span><span class="p">}</span>
     <span class="p">)</span>
 
     <span class="c1"># note that the output type of ds must be RowTypeInfo</span>
@@ -434,9 +434,9 @@ under the License.
         <span class="o">.</span><span class="n">type_info</span><span class="p">(</span><span class="n">Types</span><span class="o">.</span><span class="n">ROW</span><span class="p">([</span><span class="n">Types</span><span class="o">.</span><span class="n">INT</span><span class="p">(),</span> <span class="n">Types</span><span class="o">.</span><span class="n">STRING</span><span class="p">()]))</span> \
         <span class="o">.</span><span class="n">build</span><span class="p">()</span>
     <span class="n">kafka_consumer</span> <span class="o">=</span> <span class="n">FlinkKafkaConsumer</span><span class="p">(</span>
-        <span class="n">topics</span><span class="o">=</span><span class="s1">&#39;test_json_topic&#39;</span><span class="p">,</span>
+        <span class="n">topics</span><span class="o">=</span><span class="s1">'test_json_topic'</span><span class="p">,</span>
         <span class="n">deserialization_schema</span><span class="o">=</span><span class="n">deserialization_schema</span><span class="p">,</span>
-        <span class="n">properties</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;bootstrap.servers&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost:9092&#39;</span><span class="p">,</span> <span class="s1">&#39;group.id&#39;</span><span class="p">:</span> <span class="s1">&#39;test_group_1&#39;</span><span class="p">}</span>
+        <span class="n">properties</span><span class="o">=</span><span class="p">{</span><span class="s1">'bootstrap.servers'</span><span class="p">:</span> <span class="s1">'localhost:9092'</span><span class="p">,</span> <span class="s1">'group.id'</span><span class="p">:</span> <span class="s1">'test_group_1'</span><span class="p">}</span>
     <span class="p">)</span>
     <span class="n">kafka_consumer</span><span class="o">.</span><span class="n">set_start_from_earliest</span><span class="p">()</span>
 
@@ -444,16 +444,16 @@ under the License.
     <span class="n">env</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">stream</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">stream</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">"</span><span class="si">%(message)s</span><span class="s2">"</span><span class="p">)</span>
 
     <span class="n">env</span> <span class="o">=</span> <span class="n">StreamExecutionEnvironment</span><span class="o">.</span><span class="n">get_execution_environment</span><span class="p">()</span>
-    <span class="n">env</span><span class="o">.</span><span class="n">add_jars</span><span class="p">(</span><span class="s2">&quot;file:///path/to/flink-sql-connector-kafka-1.15.0.jar&quot;</span><span class="p">)</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">add_jars</span><span class="p">(</span><span class="s2">"file:///path/to/flink-sql-connector-kafka-1.15.0.jar"</span><span class="p">)</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;start writing data to kafka&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"start writing data to kafka"</span><span class="p">)</span>
     <span class="n">write_to_kafka</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;start reading data from kafka&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"start reading data from kafka"</span><span class="p">)</span>
     <span class="n">read_from_kafka</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -466,13 +466,13 @@ under the License.
 <span class="c1">#  distributed with this work for additional information</span>
 <span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
 <span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
-<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  "License"); you may not use this file except in compliance</span>
 <span class="c1">#  with the License.  You may obtain a copy of the License at</span>
 <span class="c1">#</span>
 <span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="c1">#</span>
 <span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  distributed under the License is distributed on an "AS IS" BASIS,</span>
 <span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1">#  See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
@@ -486,29 +486,29 @@ under the License.
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream.formats.avro</span><span class="w"> </span><span class="kn">import</span> <span class="n">AvroRowSerializationSchema</span><span class="p">,</span> <span class="n">AvroRowDeserializationSchema</span>
 
 
-<span class="c1"># Make sure that the Kafka cluster is started and the topic &#39;test_avro_topic&#39; is</span>
+<span class="c1"># Make sure that the Kafka cluster is started and the topic 'test_avro_topic' is</span>
 <span class="c1"># created before executing this job.</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">write_to_kafka</span><span class="p">(</span><span class="n">env</span><span class="p">):</span>
     <span class="n">ds</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">from_collection</span><span class="p">([</span>
-        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;hi&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;hello&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;hi&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;hello&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;hi&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;hello&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;hello&#39;</span><span class="p">)],</span>
+        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'hi'</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">'hello'</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">'hi'</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">'hello'</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s1">'hi'</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="s1">'hello'</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="s1">'hello'</span><span class="p">)],</span>
         <span class="n">type_info</span><span class="o">=</span><span class="n">Types</span><span class="o">.</span><span class="n">ROW</span><span class="p">([</span><span class="n">Types</span><span class="o">.</span><span class="n">INT</span><span class="p">(),</span> <span class="n">Types</span><span class="o">.</span><span class="n">STRING</span><span class="p">()]))</span>
 
     <span class="n">serialization_schema</span> <span class="o">=</span> <span class="n">AvroRowSerializationSchema</span><span class="p">(</span>
-        <span class="n">avro_schema_string</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
+        <span class="n">avro_schema_string</span><span class="o">=</span><span class="s2">"""</span>
 <span class="s2">            {</span>
-<span class="s2">                &quot;type&quot;: &quot;record&quot;,</span>
-<span class="s2">                &quot;name&quot;: &quot;TestRecord&quot;,</span>
-<span class="s2">                &quot;fields&quot;: [</span>
-<span class="s2">                    {&quot;name&quot;: &quot;id&quot;, &quot;type&quot;: &quot;int&quot;},</span>
-<span class="s2">                    {&quot;name&quot;: &quot;name&quot;, &quot;type&quot;: &quot;string&quot;}</span>
+<span class="s2">                "type": "record",</span>
+<span class="s2">                "name": "TestRecord",</span>
+<span class="s2">                "fields": [</span>
+<span class="s2">                    {"name": "id", "type": "int"},</span>
+<span class="s2">                    {"name": "name", "type": "string"}</span>
 <span class="s2">                ]</span>
-<span class="s2">            }&quot;&quot;&quot;</span>
+<span class="s2">            }"""</span>
     <span class="p">)</span>
 
     <span class="n">kafka_producer</span> <span class="o">=</span> <span class="n">FlinkKafkaProducer</span><span class="p">(</span>
-        <span class="n">topic</span><span class="o">=</span><span class="s1">&#39;test_avro_topic&#39;</span><span class="p">,</span>
+        <span class="n">topic</span><span class="o">=</span><span class="s1">'test_avro_topic'</span><span class="p">,</span>
         <span class="n">serialization_schema</span><span class="o">=</span><span class="n">serialization_schema</span><span class="p">,</span>
-        <span class="n">producer_config</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;bootstrap.servers&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost:9092&#39;</span><span class="p">,</span> <span class="s1">&#39;group.id&#39;</span><span class="p">:</span> <span class="s1">&#39;test_group&#39;</span><span class="p">}</span>
+        <span class="n">producer_config</span><span class="o">=</span><span class="p">{</span><span class="s1">'bootstrap.servers'</span><span class="p">:</span> <span class="s1">'localhost:9092'</span><span class="p">,</span> <span class="s1">'group.id'</span><span class="p">:</span> <span class="s1">'test_group'</span><span class="p">}</span>
     <span class="p">)</span>
 
     <span class="c1"># note that the output type of ds must be RowTypeInfo</span>
@@ -518,21 +518,21 @@ under the License.
 
 <span class="k">def</span><span class="w"> </span><span class="nf">read_from_kafka</span><span class="p">(</span><span class="n">env</span><span class="p">):</span>
     <span class="n">deserialization_schema</span> <span class="o">=</span> <span class="n">AvroRowDeserializationSchema</span><span class="p">(</span>
-        <span class="n">avro_schema_string</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
+        <span class="n">avro_schema_string</span><span class="o">=</span><span class="s2">"""</span>
 <span class="s2">            {</span>
-<span class="s2">                &quot;type&quot;: &quot;record&quot;,</span>
-<span class="s2">                &quot;name&quot;: &quot;TestRecord&quot;,</span>
-<span class="s2">                &quot;fields&quot;: [</span>
-<span class="s2">                    {&quot;name&quot;: &quot;id&quot;, &quot;type&quot;: &quot;int&quot;},</span>
-<span class="s2">                    {&quot;name&quot;: &quot;name&quot;, &quot;type&quot;: &quot;string&quot;}</span>
+<span class="s2">                "type": "record",</span>
+<span class="s2">                "name": "TestRecord",</span>
+<span class="s2">                "fields": [</span>
+<span class="s2">                    {"name": "id", "type": "int"},</span>
+<span class="s2">                    {"name": "name", "type": "string"}</span>
 <span class="s2">                ]</span>
-<span class="s2">            }&quot;&quot;&quot;</span>
+<span class="s2">            }"""</span>
     <span class="p">)</span>
 
     <span class="n">kafka_consumer</span> <span class="o">=</span> <span class="n">FlinkKafkaConsumer</span><span class="p">(</span>
-        <span class="n">topics</span><span class="o">=</span><span class="s1">&#39;test_avro_topic&#39;</span><span class="p">,</span>
+        <span class="n">topics</span><span class="o">=</span><span class="s1">'test_avro_topic'</span><span class="p">,</span>
         <span class="n">deserialization_schema</span><span class="o">=</span><span class="n">deserialization_schema</span><span class="p">,</span>
-        <span class="n">properties</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;bootstrap.servers&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost:9092&#39;</span><span class="p">,</span> <span class="s1">&#39;group.id&#39;</span><span class="p">:</span> <span class="s1">&#39;test_group_1&#39;</span><span class="p">}</span>
+        <span class="n">properties</span><span class="o">=</span><span class="p">{</span><span class="s1">'bootstrap.servers'</span><span class="p">:</span> <span class="s1">'localhost:9092'</span><span class="p">,</span> <span class="s1">'group.id'</span><span class="p">:</span> <span class="s1">'test_group_1'</span><span class="p">}</span>
     <span class="p">)</span>
     <span class="n">kafka_consumer</span><span class="o">.</span><span class="n">set_start_from_earliest</span><span class="p">()</span>
 
@@ -540,17 +540,17 @@ under the License.
     <span class="n">env</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">stream</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">stream</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">"</span><span class="si">%(message)s</span><span class="s2">"</span><span class="p">)</span>
 
     <span class="n">env</span> <span class="o">=</span> <span class="n">StreamExecutionEnvironment</span><span class="o">.</span><span class="n">get_execution_environment</span><span class="p">()</span>
-    <span class="n">env</span><span class="o">.</span><span class="n">add_jars</span><span class="p">(</span><span class="s2">&quot;file:///path/to/flink-sql-avro-1.15.0.jar&quot;</span><span class="p">,</span>
-                 <span class="s2">&quot;file:///path/to/flink-sql-connector-kafka-1.15.0.jar&quot;</span><span class="p">)</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">add_jars</span><span class="p">(</span><span class="s2">"file:///path/to/flink-sql-avro-1.15.0.jar"</span><span class="p">,</span>
+                 <span class="s2">"file:///path/to/flink-sql-connector-kafka-1.15.0.jar"</span><span class="p">)</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;start writing data to kafka&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"start writing data to kafka"</span><span class="p">)</span>
     <span class="n">write_to_kafka</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;start reading data from kafka&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"start reading data from kafka"</span><span class="p">)</span>
     <span class="n">read_from_kafka</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -564,13 +564,13 @@ under the License.
 <span class="c1">#  distributed with this work for additional information</span>
 <span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
 <span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
-<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  "License"); you may not use this file except in compliance</span>
 <span class="c1">#  with the License.  You may obtain a copy of the License at</span>
 <span class="c1">#</span>
 <span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="c1">#</span>
 <span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  distributed under the License is distributed on an "AS IS" BASIS,</span>
 <span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1">#  See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
@@ -584,12 +584,12 @@ under the License.
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.datastream.connectors.pulsar</span><span class="w"> </span><span class="kn">import</span> <span class="n">PulsarSource</span><span class="p">,</span> <span class="n">PulsarSink</span><span class="p">,</span> <span class="n">StartCursor</span><span class="p">,</span> \
     <span class="n">StopCursor</span><span class="p">,</span> <span class="n">DeliveryGuarantee</span><span class="p">,</span> <span class="n">TopicRoutingMode</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">stream</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">stream</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">"</span><span class="si">%(message)s</span><span class="s2">"</span><span class="p">)</span>
 
-    <span class="n">PULSAR_SQL_CONNECTOR_PATH</span> <span class="o">=</span> <span class="s1">&#39;file:///path/to/flink-sql-connector-pulsar-1.16.0.jar&#39;</span>
-    <span class="n">SERVICE_URL</span> <span class="o">=</span> <span class="s1">&#39;pulsar://localhost:6650&#39;</span>
-    <span class="n">ADMIN_URL</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:8080&#39;</span>
+    <span class="n">PULSAR_SQL_CONNECTOR_PATH</span> <span class="o">=</span> <span class="s1">'file:///path/to/flink-sql-connector-pulsar-1.16.0.jar'</span>
+    <span class="n">SERVICE_URL</span> <span class="o">=</span> <span class="s1">'pulsar://localhost:6650'</span>
+    <span class="n">ADMIN_URL</span> <span class="o">=</span> <span class="s1">'http://localhost:8080'</span>
 
     <span class="n">env</span> <span class="o">=</span> <span class="n">StreamExecutionEnvironment</span><span class="o">.</span><span class="n">get_execution_environment</span><span class="p">()</span>
     <span class="n">env</span><span class="o">.</span><span class="n">set_parallelism</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -598,32 +598,32 @@ under the License.
     <span class="n">pulsar_source</span> <span class="o">=</span> <span class="n">PulsarSource</span><span class="o">.</span><span class="n">builder</span><span class="p">()</span> \
         <span class="o">.</span><span class="n">set_service_url</span><span class="p">(</span><span class="n">SERVICE_URL</span><span class="p">)</span> \
         <span class="o">.</span><span class="n">set_admin_url</span><span class="p">(</span><span class="n">ADMIN_URL</span><span class="p">)</span> \
-        <span class="o">.</span><span class="n">set_topics</span><span class="p">(</span><span class="s1">&#39;ada&#39;</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">set_topics</span><span class="p">(</span><span class="s1">'ada'</span><span class="p">)</span> \
         <span class="o">.</span><span class="n">set_start_cursor</span><span class="p">(</span><span class="n">StartCursor</span><span class="o">.</span><span class="n">latest</span><span class="p">())</span> \
         <span class="o">.</span><span class="n">set_unbounded_stop_cursor</span><span class="p">(</span><span class="n">StopCursor</span><span class="o">.</span><span class="n">never</span><span class="p">())</span> \
-        <span class="o">.</span><span class="n">set_subscription_name</span><span class="p">(</span><span class="s1">&#39;pyflink_subscription&#39;</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">set_subscription_name</span><span class="p">(</span><span class="s1">'pyflink_subscription'</span><span class="p">)</span> \
         <span class="o">.</span><span class="n">set_deserialization_schema</span><span class="p">(</span><span class="n">SimpleStringSchema</span><span class="p">())</span> \
-        <span class="o">.</span><span class="n">set_config</span><span class="p">(</span><span class="s1">&#39;pulsar.source.enableAutoAcknowledgeMessage&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span> \
-        <span class="o">.</span><span class="n">set_properties</span><span class="p">({</span><span class="s1">&#39;pulsar.source.autoCommitCursorInterval&#39;</span><span class="p">:</span> <span class="s1">&#39;1000&#39;</span><span class="p">})</span> \
+        <span class="o">.</span><span class="n">set_config</span><span class="p">(</span><span class="s1">'pulsar.source.enableAutoAcknowledgeMessage'</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">set_properties</span><span class="p">({</span><span class="s1">'pulsar.source.autoCommitCursorInterval'</span><span class="p">:</span> <span class="s1">'1000'</span><span class="p">})</span> \
         <span class="o">.</span><span class="n">build</span><span class="p">()</span>
 
     <span class="n">ds</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">from_source</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">pulsar_source</span><span class="p">,</span>
                          <span class="n">watermark_strategy</span><span class="o">=</span><span class="n">WatermarkStrategy</span><span class="o">.</span><span class="n">for_monotonous_timestamps</span><span class="p">(),</span>
-                         <span class="n">source_name</span><span class="o">=</span><span class="s2">&quot;pulsar source&quot;</span><span class="p">)</span>
+                         <span class="n">source_name</span><span class="o">=</span><span class="s2">"pulsar source"</span><span class="p">)</span>
 
     <span class="n">pulsar_sink</span> <span class="o">=</span> <span class="n">PulsarSink</span><span class="o">.</span><span class="n">builder</span><span class="p">()</span> \
         <span class="o">.</span><span class="n">set_service_url</span><span class="p">(</span><span class="n">SERVICE_URL</span><span class="p">)</span> \
         <span class="o">.</span><span class="n">set_admin_url</span><span class="p">(</span><span class="n">ADMIN_URL</span><span class="p">)</span> \
-        <span class="o">.</span><span class="n">set_producer_name</span><span class="p">(</span><span class="s1">&#39;pyflink_producer&#39;</span><span class="p">)</span> \
-        <span class="o">.</span><span class="n">set_topics</span><span class="p">(</span><span class="s1">&#39;beta&#39;</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">set_producer_name</span><span class="p">(</span><span class="s1">'pyflink_producer'</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">set_topics</span><span class="p">(</span><span class="s1">'beta'</span><span class="p">)</span> \
         <span class="o">.</span><span class="n">set_serialization_schema</span><span class="p">(</span><span class="n">SimpleStringSchema</span><span class="p">())</span> \
         <span class="o">.</span><span class="n">set_delivery_guarantee</span><span class="p">(</span><span class="n">DeliveryGuarantee</span><span class="o">.</span><span class="n">AT_LEAST_ONCE</span><span class="p">)</span> \
         <span class="o">.</span><span class="n">set_topic_routing_mode</span><span class="p">(</span><span class="n">TopicRoutingMode</span><span class="o">.</span><span class="n">ROUND_ROBIN</span><span class="p">)</span> \
-        <span class="o">.</span><span class="n">set_config</span><span class="p">(</span><span class="s1">&#39;pulsar.producer.maxPendingMessages&#39;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span> \
-        <span class="o">.</span><span class="n">set_properties</span><span class="p">({</span><span class="s1">&#39;pulsar.producer.batchingMaxMessages&#39;</span><span class="p">:</span> <span class="s1">&#39;100&#39;</span><span class="p">})</span> \
+        <span class="o">.</span><span class="n">set_config</span><span class="p">(</span><span class="s1">'pulsar.producer.maxPendingMessages'</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">set_properties</span><span class="p">({</span><span class="s1">'pulsar.producer.batchingMaxMessages'</span><span class="p">:</span> <span class="s1">'100'</span><span class="p">})</span> \
         <span class="o">.</span><span class="n">build</span><span class="p">()</span>
 
-    <span class="n">ds</span><span class="o">.</span><span class="n">sink_to</span><span class="p">(</span><span class="n">pulsar_sink</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;pulsar sink&#39;</span><span class="p">)</span>
+    <span class="n">ds</span><span class="o">.</span><span class="n">sink_to</span><span class="p">(</span><span class="n">pulsar_sink</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="s1">'pulsar sink'</span><span class="p">)</span>
 
     <span class="n">env</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
 </pre></div>
@@ -637,13 +637,13 @@ under the License.
 <span class="c1">#  distributed with this work for additional information</span>
 <span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
 <span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
-<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  "License"); you may not use this file except in compliance</span>
 <span class="c1">#  with the License.  You may obtain a copy of the License at</span>
 <span class="c1">#</span>
 <span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="c1">#</span>
 <span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  distributed under the License is distributed on an "AS IS" BASIS,</span>
 <span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1">#  See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
@@ -662,113 +662,113 @@ under the License.
 
 <span class="k">def</span><span class="w"> </span><span class="nf">write_to_es6</span><span class="p">(</span><span class="n">env</span><span class="p">):</span>
     <span class="n">ELASTICSEARCH_SQL_CONNECTOR_PATH</span> <span class="o">=</span> \
-        <span class="s1">&#39;file:///path/to/flink-sql-connector-elasticsearch6-1.16.0.jar&#39;</span>
+        <span class="s1">'file:///path/to/flink-sql-connector-elasticsearch6-1.16.0.jar'</span>
     <span class="n">env</span><span class="o">.</span><span class="n">add_jars</span><span class="p">(</span><span class="n">ELASTICSEARCH_SQL_CONNECTOR_PATH</span><span class="p">)</span>
 
     <span class="n">ds</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">from_collection</span><span class="p">(</span>
-        <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;ada&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;luna&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">}],</span>
+        <span class="p">[{</span><span class="s1">'name'</span><span class="p">:</span> <span class="s1">'ada'</span><span class="p">,</span> <span class="s1">'id'</span><span class="p">:</span> <span class="s1">'1'</span><span class="p">},</span> <span class="p">{</span><span class="s1">'name'</span><span class="p">:</span> <span class="s1">'luna'</span><span class="p">,</span> <span class="s1">'id'</span><span class="p">:</span> <span class="s1">'2'</span><span class="p">}],</span>
         <span class="n">type_info</span><span class="o">=</span><span class="n">Types</span><span class="o">.</span><span class="n">MAP</span><span class="p">(</span><span class="n">Types</span><span class="o">.</span><span class="n">STRING</span><span class="p">(),</span> <span class="n">Types</span><span class="o">.</span><span class="n">STRING</span><span class="p">()))</span>
 
     <span class="n">es_sink</span> <span class="o">=</span> <span class="n">Elasticsearch6SinkBuilder</span><span class="p">()</span> \
-        <span class="o">.</span><span class="n">set_emitter</span><span class="p">(</span><span class="n">ElasticsearchEmitter</span><span class="o">.</span><span class="n">static_index</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">))</span> \
-        <span class="o">.</span><span class="n">set_hosts</span><span class="p">([</span><span class="s1">&#39;localhost:9200&#39;</span><span class="p">])</span> \
+        <span class="o">.</span><span class="n">set_emitter</span><span class="p">(</span><span class="n">ElasticsearchEmitter</span><span class="o">.</span><span class="n">static_index</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">,</span> <span class="s1">'id'</span><span class="p">,</span> <span class="s1">'bar'</span><span class="p">))</span> \
+        <span class="o">.</span><span class="n">set_hosts</span><span class="p">([</span><span class="s1">'localhost:9200'</span><span class="p">])</span> \
         <span class="o">.</span><span class="n">set_delivery_guarantee</span><span class="p">(</span><span class="n">DeliveryGuarantee</span><span class="o">.</span><span class="n">AT_LEAST_ONCE</span><span class="p">)</span> \
         <span class="o">.</span><span class="n">set_bulk_flush_max_actions</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> \
         <span class="o">.</span><span class="n">set_bulk_flush_max_size_mb</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> \
         <span class="o">.</span><span class="n">set_bulk_flush_interval</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> \
         <span class="o">.</span><span class="n">set_bulk_flush_backoff_strategy</span><span class="p">(</span><span class="n">FlushBackoffType</span><span class="o">.</span><span class="n">CONSTANT</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3000</span><span class="p">)</span> \
-        <span class="o">.</span><span class="n">set_connection_username</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span> \
-        <span class="o">.</span><span class="n">set_connection_password</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span> \
-        <span class="o">.</span><span class="n">set_connection_path_prefix</span><span class="p">(</span><span class="s1">&#39;foo-bar&#39;</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">set_connection_username</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">set_connection_password</span><span class="p">(</span><span class="s1">'bar'</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">set_connection_path_prefix</span><span class="p">(</span><span class="s1">'foo-bar'</span><span class="p">)</span> \
         <span class="o">.</span><span class="n">set_connection_request_timeout</span><span class="p">(</span><span class="mi">30000</span><span class="p">)</span> \
         <span class="o">.</span><span class="n">set_connection_timeout</span><span class="p">(</span><span class="mi">31000</span><span class="p">)</span> \
         <span class="o">.</span><span class="n">set_socket_timeout</span><span class="p">(</span><span class="mi">32000</span><span class="p">)</span> \
         <span class="o">.</span><span class="n">build</span><span class="p">()</span>
 
-    <span class="n">ds</span><span class="o">.</span><span class="n">sink_to</span><span class="p">(</span><span class="n">es_sink</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;es6 sink&#39;</span><span class="p">)</span>
+    <span class="n">ds</span><span class="o">.</span><span class="n">sink_to</span><span class="p">(</span><span class="n">es_sink</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="s1">'es6 sink'</span><span class="p">)</span>
 
     <span class="n">env</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">write_to_es6_dynamic_index</span><span class="p">(</span><span class="n">env</span><span class="p">):</span>
     <span class="n">ELASTICSEARCH_SQL_CONNECTOR_PATH</span> <span class="o">=</span> \
-        <span class="s1">&#39;file:///path/to/flink-sql-connector-elasticsearch6-1.16.0.jar&#39;</span>
+        <span class="s1">'file:///path/to/flink-sql-connector-elasticsearch6-1.16.0.jar'</span>
     <span class="n">env</span><span class="o">.</span><span class="n">add_jars</span><span class="p">(</span><span class="n">ELASTICSEARCH_SQL_CONNECTOR_PATH</span><span class="p">)</span>
 
     <span class="n">ds</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">from_collection</span><span class="p">(</span>
-        <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;ada&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;luna&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">}],</span>
+        <span class="p">[{</span><span class="s1">'name'</span><span class="p">:</span> <span class="s1">'ada'</span><span class="p">,</span> <span class="s1">'id'</span><span class="p">:</span> <span class="s1">'1'</span><span class="p">},</span> <span class="p">{</span><span class="s1">'name'</span><span class="p">:</span> <span class="s1">'luna'</span><span class="p">,</span> <span class="s1">'id'</span><span class="p">:</span> <span class="s1">'2'</span><span class="p">}],</span>
         <span class="n">type_info</span><span class="o">=</span><span class="n">Types</span><span class="o">.</span><span class="n">MAP</span><span class="p">(</span><span class="n">Types</span><span class="o">.</span><span class="n">STRING</span><span class="p">(),</span> <span class="n">Types</span><span class="o">.</span><span class="n">STRING</span><span class="p">()))</span>
 
     <span class="n">es_sink</span> <span class="o">=</span> <span class="n">Elasticsearch6SinkBuilder</span><span class="p">()</span> \
-        <span class="o">.</span><span class="n">set_emitter</span><span class="p">(</span><span class="n">ElasticsearchEmitter</span><span class="o">.</span><span class="n">dynamic_index</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">))</span> \
-        <span class="o">.</span><span class="n">set_hosts</span><span class="p">([</span><span class="s1">&#39;localhost:9200&#39;</span><span class="p">])</span> \
+        <span class="o">.</span><span class="n">set_emitter</span><span class="p">(</span><span class="n">ElasticsearchEmitter</span><span class="o">.</span><span class="n">dynamic_index</span><span class="p">(</span><span class="s1">'name'</span><span class="p">,</span> <span class="s1">'id'</span><span class="p">,</span> <span class="s1">'bar'</span><span class="p">))</span> \
+        <span class="o">.</span><span class="n">set_hosts</span><span class="p">([</span><span class="s1">'localhost:9200'</span><span class="p">])</span> \
         <span class="o">.</span><span class="n">build</span><span class="p">()</span>
 
-    <span class="n">ds</span><span class="o">.</span><span class="n">sink_to</span><span class="p">(</span><span class="n">es_sink</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;es6 dynamic index sink&#39;</span><span class="p">)</span>
+    <span class="n">ds</span><span class="o">.</span><span class="n">sink_to</span><span class="p">(</span><span class="n">es_sink</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="s1">'es6 dynamic index sink'</span><span class="p">)</span>
 
     <span class="n">env</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">write_to_es7</span><span class="p">(</span><span class="n">env</span><span class="p">):</span>
     <span class="n">ELASTICSEARCH_SQL_CONNECTOR_PATH</span> <span class="o">=</span> \
-        <span class="s1">&#39;file:///path/to/flink-sql-connector-elasticsearch7-1.16.0.jar&#39;</span>
+        <span class="s1">'file:///path/to/flink-sql-connector-elasticsearch7-1.16.0.jar'</span>
     <span class="n">env</span><span class="o">.</span><span class="n">add_jars</span><span class="p">(</span><span class="n">ELASTICSEARCH_SQL_CONNECTOR_PATH</span><span class="p">)</span>
 
     <span class="n">ds</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">from_collection</span><span class="p">(</span>
-        <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;ada&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;luna&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">}],</span>
+        <span class="p">[{</span><span class="s1">'name'</span><span class="p">:</span> <span class="s1">'ada'</span><span class="p">,</span> <span class="s1">'id'</span><span class="p">:</span> <span class="s1">'1'</span><span class="p">},</span> <span class="p">{</span><span class="s1">'name'</span><span class="p">:</span> <span class="s1">'luna'</span><span class="p">,</span> <span class="s1">'id'</span><span class="p">:</span> <span class="s1">'2'</span><span class="p">}],</span>
         <span class="n">type_info</span><span class="o">=</span><span class="n">Types</span><span class="o">.</span><span class="n">MAP</span><span class="p">(</span><span class="n">Types</span><span class="o">.</span><span class="n">STRING</span><span class="p">(),</span> <span class="n">Types</span><span class="o">.</span><span class="n">STRING</span><span class="p">()))</span>
 
     <span class="n">es7_sink</span> <span class="o">=</span> <span class="n">Elasticsearch7SinkBuilder</span><span class="p">()</span> \
-        <span class="o">.</span><span class="n">set_emitter</span><span class="p">(</span><span class="n">ElasticsearchEmitter</span><span class="o">.</span><span class="n">static_index</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">))</span> \
-        <span class="o">.</span><span class="n">set_hosts</span><span class="p">([</span><span class="s1">&#39;localhost:9200&#39;</span><span class="p">])</span> \
+        <span class="o">.</span><span class="n">set_emitter</span><span class="p">(</span><span class="n">ElasticsearchEmitter</span><span class="o">.</span><span class="n">static_index</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">,</span> <span class="s1">'id'</span><span class="p">))</span> \
+        <span class="o">.</span><span class="n">set_hosts</span><span class="p">([</span><span class="s1">'localhost:9200'</span><span class="p">])</span> \
         <span class="o">.</span><span class="n">set_delivery_guarantee</span><span class="p">(</span><span class="n">DeliveryGuarantee</span><span class="o">.</span><span class="n">AT_LEAST_ONCE</span><span class="p">)</span> \
         <span class="o">.</span><span class="n">set_bulk_flush_max_actions</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> \
         <span class="o">.</span><span class="n">set_bulk_flush_max_size_mb</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> \
         <span class="o">.</span><span class="n">set_bulk_flush_interval</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> \
         <span class="o">.</span><span class="n">set_bulk_flush_backoff_strategy</span><span class="p">(</span><span class="n">FlushBackoffType</span><span class="o">.</span><span class="n">CONSTANT</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3000</span><span class="p">)</span> \
-        <span class="o">.</span><span class="n">set_connection_username</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span> \
-        <span class="o">.</span><span class="n">set_connection_password</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span> \
-        <span class="o">.</span><span class="n">set_connection_path_prefix</span><span class="p">(</span><span class="s1">&#39;foo-bar&#39;</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">set_connection_username</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">set_connection_password</span><span class="p">(</span><span class="s1">'bar'</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">set_connection_path_prefix</span><span class="p">(</span><span class="s1">'foo-bar'</span><span class="p">)</span> \
         <span class="o">.</span><span class="n">set_connection_request_timeout</span><span class="p">(</span><span class="mi">30000</span><span class="p">)</span> \
         <span class="o">.</span><span class="n">set_connection_timeout</span><span class="p">(</span><span class="mi">31000</span><span class="p">)</span> \
         <span class="o">.</span><span class="n">set_socket_timeout</span><span class="p">(</span><span class="mi">32000</span><span class="p">)</span> \
         <span class="o">.</span><span class="n">build</span><span class="p">()</span>
 
-    <span class="n">ds</span><span class="o">.</span><span class="n">sink_to</span><span class="p">(</span><span class="n">es7_sink</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;es7 sink&#39;</span><span class="p">)</span>
+    <span class="n">ds</span><span class="o">.</span><span class="n">sink_to</span><span class="p">(</span><span class="n">es7_sink</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="s1">'es7 sink'</span><span class="p">)</span>
 
     <span class="n">env</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">write_to_es7_dynamic_index</span><span class="p">(</span><span class="n">env</span><span class="p">):</span>
     <span class="n">ELASTICSEARCH_SQL_CONNECTOR_PATH</span> <span class="o">=</span> \
-        <span class="s1">&#39;file:///path/to/flink-sql-connector-elasticsearch7-1.16.0.jar&#39;</span>
+        <span class="s1">'file:///path/to/flink-sql-connector-elasticsearch7-1.16.0.jar'</span>
     <span class="n">env</span><span class="o">.</span><span class="n">add_jars</span><span class="p">(</span><span class="n">ELASTICSEARCH_SQL_CONNECTOR_PATH</span><span class="p">)</span>
 
     <span class="n">ds</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">from_collection</span><span class="p">(</span>
-        <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;ada&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;luna&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">}],</span>
+        <span class="p">[{</span><span class="s1">'name'</span><span class="p">:</span> <span class="s1">'ada'</span><span class="p">,</span> <span class="s1">'id'</span><span class="p">:</span> <span class="s1">'1'</span><span class="p">},</span> <span class="p">{</span><span class="s1">'name'</span><span class="p">:</span> <span class="s1">'luna'</span><span class="p">,</span> <span class="s1">'id'</span><span class="p">:</span> <span class="s1">'2'</span><span class="p">}],</span>
         <span class="n">type_info</span><span class="o">=</span><span class="n">Types</span><span class="o">.</span><span class="n">MAP</span><span class="p">(</span><span class="n">Types</span><span class="o">.</span><span class="n">STRING</span><span class="p">(),</span> <span class="n">Types</span><span class="o">.</span><span class="n">STRING</span><span class="p">()))</span>
 
     <span class="n">es7_sink</span> <span class="o">=</span> <span class="n">Elasticsearch7SinkBuilder</span><span class="p">()</span> \
-        <span class="o">.</span><span class="n">set_emitter</span><span class="p">(</span><span class="n">ElasticsearchEmitter</span><span class="o">.</span><span class="n">dynamic_index</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">))</span> \
-        <span class="o">.</span><span class="n">set_hosts</span><span class="p">([</span><span class="s1">&#39;localhost:9200&#39;</span><span class="p">])</span> \
+        <span class="o">.</span><span class="n">set_emitter</span><span class="p">(</span><span class="n">ElasticsearchEmitter</span><span class="o">.</span><span class="n">dynamic_index</span><span class="p">(</span><span class="s1">'name'</span><span class="p">,</span> <span class="s1">'id'</span><span class="p">))</span> \
+        <span class="o">.</span><span class="n">set_hosts</span><span class="p">([</span><span class="s1">'localhost:9200'</span><span class="p">])</span> \
         <span class="o">.</span><span class="n">build</span><span class="p">()</span>
 
-    <span class="n">ds</span><span class="o">.</span><span class="n">sink_to</span><span class="p">(</span><span class="n">es7_sink</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;es7 dynamic index sink&#39;</span><span class="p">)</span>
+    <span class="n">ds</span><span class="o">.</span><span class="n">sink_to</span><span class="p">(</span><span class="n">es7_sink</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="s1">'es7 dynamic index sink'</span><span class="p">)</span>
 
     <span class="n">env</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">stream</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">stream</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">"</span><span class="si">%(message)s</span><span class="s2">"</span><span class="p">)</span>
 
     <span class="n">env</span> <span class="o">=</span> <span class="n">StreamExecutionEnvironment</span><span class="o">.</span><span class="n">get_execution_environment</span><span class="p">()</span>
     <span class="n">env</span><span class="o">.</span><span class="n">set_parallelism</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;start writing data to elasticsearch6&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"start writing data to elasticsearch6"</span><span class="p">)</span>
     <span class="n">write_to_es6</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
     <span class="n">write_to_es6_dynamic_index</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;start writing data to elasticsearch7&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"start writing data to elasticsearch7"</span><span class="p">)</span>
     <span class="n">write_to_es7</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
     <span class="n">write_to_es7_dynamic_index</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
 </pre></div>

@@ -412,55 +412,55 @@ constructor option.</p></li>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Classifier with ARRAY&lt;FLOAT&gt; features and BIGINT class output.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">provider</span> <span class="o">=</span> <span class="n">TritonProvider</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;&lt;Your Triton endpoint&gt;&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">auth_token</span><span class="o">=</span><span class="s2">&quot;&lt;Your authentication token&gt;&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;classifier&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">compression</span><span class="o">=</span><span class="s2">&quot;gzip&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">endpoint</span><span class="o">=</span><span class="s2">"&lt;Your Triton endpoint&gt;"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">auth_token</span><span class="o">=</span><span class="s2">"&lt;Your authentication token&gt;"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">model_name</span><span class="o">=</span><span class="s2">"classifier"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">compression</span><span class="o">=</span><span class="s2">"gzip"</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pf</span><span class="o">.</span><span class="n">set_model_provider</span><span class="p">(</span><span class="n">provider</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">from_records</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="p">[([</span><span class="mf">5.1</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],),</span> <span class="o">...</span><span class="p">],</span>
-<span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">])</span>
+<span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">[</span><span class="s2">"features"</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">llm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;features&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"features"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">output_type</span><span class="o">=</span><span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">struct</span><span class="p">({</span>
-<span class="gp">... </span>        <span class="s2">&quot;class_id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"class_id"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
 <span class="gp">... </span>    <span class="p">}))</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Stateful conversation model with a fixed Triton sequence.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">provider</span> <span class="o">=</span> <span class="n">TritonProvider</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;&lt;Your Triton endpoint&gt;&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">auth_token</span><span class="o">=</span><span class="s2">&quot;&lt;Your authentication token&gt;&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;chatbot_lstm&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">sequence_id</span><span class="o">=</span><span class="s2">&quot;conv-001&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">endpoint</span><span class="o">=</span><span class="s2">"&lt;Your Triton endpoint&gt;"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">auth_token</span><span class="o">=</span><span class="s2">"&lt;Your authentication token&gt;"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">model_name</span><span class="o">=</span><span class="s2">"chatbot_lstm"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">sequence_id</span><span class="o">=</span><span class="s2">"conv-001"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">sequence_start</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">sequence_end</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pf</span><span class="o">.</span><span class="n">set_model_provider</span><span class="p">(</span><span class="n">provider</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">chat_messages</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">from_records</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="p">[(</span><span class="s2">&quot;hello&quot;</span><span class="p">,),</span> <span class="o">...</span><span class="p">],</span>
-<span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;message_text&quot;</span><span class="p">])</span>
+<span class="gp">... </span>    <span class="p">[(</span><span class="s2">"hello"</span><span class="p">,),</span> <span class="o">...</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">[</span><span class="s2">"message_text"</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">chat_messages</span><span class="o">.</span><span class="n">llm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;message_text&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"message_text"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">output_type</span><span class="o">=</span><span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">struct</span><span class="p">({</span>
-<span class="gp">... </span>        <span class="s2">&quot;bot_response&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"bot_response"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
 <span class="gp">... </span>    <span class="p">}))</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Vector transform model with ARRAY&lt;FLOAT&gt; input and output.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">provider</span> <span class="o">=</span> <span class="n">TritonProvider</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;&lt;Your Triton endpoint&gt;&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">auth_token</span><span class="o">=</span><span class="s2">&quot;&lt;Your authentication token&gt;&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;vector-transform&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">endpoint</span><span class="o">=</span><span class="s2">"&lt;Your Triton endpoint&gt;"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">auth_token</span><span class="o">=</span><span class="s2">"&lt;Your authentication token&gt;"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">model_name</span><span class="o">=</span><span class="s2">"vector-transform"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">flatten_batch_dim</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># Used when Triton model expects one-dimensional input</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pf</span><span class="o">.</span><span class="n">set_model_provider</span><span class="p">(</span><span class="n">provider</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vector_input</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">from_records</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="p">[([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="o">...</span><span class="p">],),</span> <span class="o">...</span><span class="p">],</span>
-<span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">])</span>
+<span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">[</span><span class="s2">"features"</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">vector_input</span><span class="o">.</span><span class="n">llm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;features&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"features"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">output_type</span><span class="o">=</span><span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">struct</span><span class="p">({</span>
-<span class="gp">... </span>        <span class="s2">&quot;output_vector&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">float32</span><span class="p">()),</span>
+<span class="gp">... </span>        <span class="s2">"output_vector"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">float32</span><span class="p">()),</span>
 <span class="gp">... </span>    <span class="p">}))</span>
 </pre></div>
 </div>

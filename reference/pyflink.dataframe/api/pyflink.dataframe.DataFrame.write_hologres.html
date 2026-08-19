@@ -455,36 +455,36 @@ connector picks INSERT for streaming jobs and COPY paths for
 batch/Holo 3.1+):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pf</span>
 <span class="n">events</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_hologres</span><span class="p">(</span>
-    <span class="s2">&quot;hgprecn-cn-xxx-cn-hangzhou-internal.hologres.aliyuncs.com:80&quot;</span><span class="p">,</span>
-    <span class="n">db_name</span><span class="o">=</span><span class="s2">&quot;my_db&quot;</span><span class="p">,</span>
-    <span class="n">table_name</span><span class="o">=</span><span class="s2">&quot;public.events&quot;</span><span class="p">,</span>
+    <span class="s2">"hgprecn-cn-xxx-cn-hangzhou-internal.hologres.aliyuncs.com:80"</span><span class="p">,</span>
+    <span class="n">db_name</span><span class="o">=</span><span class="s2">"my_db"</span><span class="p">,</span>
+    <span class="n">table_name</span><span class="o">=</span><span class="s2">"public.events"</span><span class="p">,</span>
     <span class="n">username</span><span class="o">=</span><span class="n">ALIYUN_AK_ID</span><span class="p">,</span>
     <span class="n">password</span><span class="o">=</span><span class="n">ALIYUN_AK_SECRET</span><span class="p">,</span>
     <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">&quot;event_id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">bigint</span><span class="p">(),</span>
-        <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+        <span class="s2">"event_id"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">bigint</span><span class="p">(),</span>
+        <span class="s2">"user"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
     <span class="p">},</span>
-    <span class="n">primary_key</span><span class="o">=</span><span class="s2">&quot;event_id&quot;</span><span class="p">,</span>
+    <span class="n">primary_key</span><span class="o">=</span><span class="s2">"event_id"</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">events</span><span class="o">.</span><span class="n">write_hologres</span><span class="p">(</span>
-    <span class="s2">&quot;hgprecn-cn-xxx-cn-hangzhou-internal.hologres.aliyuncs.com:80&quot;</span><span class="p">,</span>
-    <span class="n">db_name</span><span class="o">=</span><span class="s2">&quot;my_db&quot;</span><span class="p">,</span>
-    <span class="n">table_name</span><span class="o">=</span><span class="s2">&quot;public.events_processed&quot;</span><span class="p">,</span>
+    <span class="s2">"hgprecn-cn-xxx-cn-hangzhou-internal.hologres.aliyuncs.com:80"</span><span class="p">,</span>
+    <span class="n">db_name</span><span class="o">=</span><span class="s2">"my_db"</span><span class="p">,</span>
+    <span class="n">table_name</span><span class="o">=</span><span class="s2">"public.events_processed"</span><span class="p">,</span>
     <span class="n">username</span><span class="o">=</span><span class="n">ALIYUN_AK_ID</span><span class="p">,</span>
     <span class="n">password</span><span class="o">=</span><span class="n">ALIYUN_AK_SECRET</span><span class="p">,</span>
-    <span class="n">primary_key</span><span class="o">=</span><span class="s2">&quot;event_id&quot;</span><span class="p">,</span>
+    <span class="n">primary_key</span><span class="o">=</span><span class="s2">"event_id"</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <p>High-throughput bulk load (COPY_BULK_LOAD on append-only data):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">write_hologres</span><span class="p">(</span>
-    <span class="s2">&quot;hgprecn-cn-xxx-cn-hangzhou-internal.hologres.aliyuncs.com:80&quot;</span><span class="p">,</span>
-    <span class="n">db_name</span><span class="o">=</span><span class="s2">&quot;my_db&quot;</span><span class="p">,</span>
-    <span class="n">table_name</span><span class="o">=</span><span class="s2">&quot;public.daily_summary&quot;</span><span class="p">,</span>
+    <span class="s2">"hgprecn-cn-xxx-cn-hangzhou-internal.hologres.aliyuncs.com:80"</span><span class="p">,</span>
+    <span class="n">db_name</span><span class="o">=</span><span class="s2">"my_db"</span><span class="p">,</span>
+    <span class="n">table_name</span><span class="o">=</span><span class="s2">"public.daily_summary"</span><span class="p">,</span>
     <span class="n">username</span><span class="o">=</span><span class="n">ALIYUN_AK_ID</span><span class="p">,</span>
     <span class="n">password</span><span class="o">=</span><span class="n">ALIYUN_AK_SECRET</span><span class="p">,</span>
-    <span class="n">write_mode</span><span class="o">=</span><span class="s2">&quot;COPY_BULK_LOAD&quot;</span><span class="p">,</span>
-    <span class="n">copy_format</span><span class="o">=</span><span class="s2">&quot;text&quot;</span><span class="p">,</span>
+    <span class="n">write_mode</span><span class="o">=</span><span class="s2">"COPY_BULK_LOAD"</span><span class="p">,</span>
+    <span class="n">copy_format</span><span class="o">=</span><span class="s2">"text"</span><span class="p">,</span>
     <span class="n">insert_batch_size</span><span class="o">=</span><span class="mi">4096</span><span class="p">,</span>
     <span class="n">insert_batch_byte_size</span><span class="o">=</span><span class="mi">8</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">,</span>
 <span class="p">)</span>
@@ -493,27 +493,27 @@ batch/Holo 3.1+):</p>
 <p>Conditional update with check-and-put (only overwrite when the
 new <code class="docutils literal notranslate"><span class="pre">version</span></code> is greater):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">write_hologres</span><span class="p">(</span>
-    <span class="s2">&quot;hgprecn-cn-xxx-cn-hangzhou-internal.hologres.aliyuncs.com:80&quot;</span><span class="p">,</span>
-    <span class="n">db_name</span><span class="o">=</span><span class="s2">&quot;my_db&quot;</span><span class="p">,</span>
-    <span class="n">table_name</span><span class="o">=</span><span class="s2">&quot;public.profiles&quot;</span><span class="p">,</span>
+    <span class="s2">"hgprecn-cn-xxx-cn-hangzhou-internal.hologres.aliyuncs.com:80"</span><span class="p">,</span>
+    <span class="n">db_name</span><span class="o">=</span><span class="s2">"my_db"</span><span class="p">,</span>
+    <span class="n">table_name</span><span class="o">=</span><span class="s2">"public.profiles"</span><span class="p">,</span>
     <span class="n">username</span><span class="o">=</span><span class="n">ALIYUN_AK_ID</span><span class="p">,</span>
     <span class="n">password</span><span class="o">=</span><span class="n">ALIYUN_AK_SECRET</span><span class="p">,</span>
-    <span class="n">primary_key</span><span class="o">=</span><span class="s2">&quot;user_id&quot;</span><span class="p">,</span>
-    <span class="n">on_conflict_action</span><span class="o">=</span><span class="s2">&quot;INSERT_OR_UPDATE&quot;</span><span class="p">,</span>
-    <span class="n">check_and_put_column</span><span class="o">=</span><span class="s2">&quot;version&quot;</span><span class="p">,</span>
-    <span class="n">check_and_put_operator</span><span class="o">=</span><span class="s2">&quot;GREATER&quot;</span><span class="p">,</span>
-    <span class="n">check_and_put_null_as</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="n">primary_key</span><span class="o">=</span><span class="s2">"user_id"</span><span class="p">,</span>
+    <span class="n">on_conflict_action</span><span class="o">=</span><span class="s2">"INSERT_OR_UPDATE"</span><span class="p">,</span>
+    <span class="n">check_and_put_column</span><span class="o">=</span><span class="s2">"version"</span><span class="p">,</span>
+    <span class="n">check_and_put_operator</span><span class="o">=</span><span class="s2">"GREATER"</span><span class="p">,</span>
+    <span class="n">check_and_put_null_as</span><span class="o">=</span><span class="s2">"0"</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <p>Partial update (write only listed columns), tuned batch size:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">write_hologres</span><span class="p">(</span>
-    <span class="s2">&quot;hgprecn-cn-xxx-cn-hangzhou-internal.hologres.aliyuncs.com:80&quot;</span><span class="p">,</span>
-    <span class="n">db_name</span><span class="o">=</span><span class="s2">&quot;my_db&quot;</span><span class="p">,</span>
-    <span class="n">table_name</span><span class="o">=</span><span class="s2">&quot;public.user_state&quot;</span><span class="p">,</span>
+    <span class="s2">"hgprecn-cn-xxx-cn-hangzhou-internal.hologres.aliyuncs.com:80"</span><span class="p">,</span>
+    <span class="n">db_name</span><span class="o">=</span><span class="s2">"my_db"</span><span class="p">,</span>
+    <span class="n">table_name</span><span class="o">=</span><span class="s2">"public.user_state"</span><span class="p">,</span>
     <span class="n">username</span><span class="o">=</span><span class="n">ALIYUN_AK_ID</span><span class="p">,</span>
     <span class="n">password</span><span class="o">=</span><span class="n">ALIYUN_AK_SECRET</span><span class="p">,</span>
-    <span class="n">primary_key</span><span class="o">=</span><span class="s2">&quot;user_id&quot;</span><span class="p">,</span>
+    <span class="n">primary_key</span><span class="o">=</span><span class="s2">"user_id"</span><span class="p">,</span>
     <span class="n">partial_insert</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">insert_batch_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
     <span class="n">insert_flush_interval_ms</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
@@ -523,13 +523,13 @@ new <code class="docutils literal notranslate"><span class="pre">version</span><
 </div>
 <p>Forward-compat: tune a non-named option via <code class="docutils literal notranslate"><span class="pre">extra_options</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">write_hologres</span><span class="p">(</span>
-    <span class="s2">&quot;hgprecn-cn-xxx-cn-hangzhou-internal.hologres.aliyuncs.com:80&quot;</span><span class="p">,</span>
-    <span class="n">db_name</span><span class="o">=</span><span class="s2">&quot;my_db&quot;</span><span class="p">,</span>
-    <span class="n">table_name</span><span class="o">=</span><span class="s2">&quot;public.events&quot;</span><span class="p">,</span>
+    <span class="s2">"hgprecn-cn-xxx-cn-hangzhou-internal.hologres.aliyuncs.com:80"</span><span class="p">,</span>
+    <span class="n">db_name</span><span class="o">=</span><span class="s2">"my_db"</span><span class="p">,</span>
+    <span class="n">table_name</span><span class="o">=</span><span class="s2">"public.events"</span><span class="p">,</span>
     <span class="n">username</span><span class="o">=</span><span class="n">ALIYUN_AK_ID</span><span class="p">,</span>
     <span class="n">password</span><span class="o">=</span><span class="n">ALIYUN_AK_SECRET</span><span class="p">,</span>
     <span class="n">extra_options</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">&quot;hologres.server.version&quot;</span><span class="p">:</span> <span class="s2">&quot;3.1&quot;</span><span class="p">,</span>
+        <span class="s2">"hologres.server.version"</span><span class="p">:</span> <span class="s2">"3.1"</span><span class="p">,</span>
     <span class="p">},</span>
 <span class="p">)</span>
 </pre></div>

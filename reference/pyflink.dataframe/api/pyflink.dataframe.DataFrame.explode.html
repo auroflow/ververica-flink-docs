@@ -345,36 +345,36 @@ column.</p>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pf</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">from_dict</span><span class="p">({</span>
-<span class="gp">... </span>    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
-<span class="gp">... </span>    <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">],</span> <span class="p">[]],</span>
+<span class="gp">... </span>    <span class="s2">"id"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[[</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">],</span> <span class="p">[]],</span>
 <span class="gp">... </span><span class="p">})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">explode</span><span class="p">(</span><span class="s2">&quot;tags&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">explode</span><span class="p">(</span><span class="s2">"tags"</span><span class="p">)</span>
 <span class="go"># Produces:</span>
-<span class="go"># (1, &quot;a&quot;)</span>
-<span class="go"># (1, &quot;b&quot;)</span>
+<span class="go"># (1, "a")</span>
+<span class="go"># (1, "b")</span>
 <span class="go"># (2, NULL)</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">explode</span><span class="p">(</span><span class="s2">&quot;tags&quot;</span><span class="p">,</span> <span class="s2">&quot;tag&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">explode</span><span class="p">(</span><span class="s2">"tags"</span><span class="p">,</span> <span class="s2">"tag"</span><span class="p">)</span>
 <span class="go"># Produces:</span>
-<span class="go"># (1, &quot;a&quot;)</span>
-<span class="go"># (1, &quot;b&quot;)</span>
+<span class="go"># (1, "a")</span>
+<span class="go"># (1, "b")</span>
 <span class="go"># (2, NULL)</span>
 <span class="go"># with columns: id, tag</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">attrs</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">from_dict</span><span class="p">({</span>
-<span class="gp">... </span>    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span>
-<span class="gp">... </span>    <span class="s2">&quot;props&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="s2">&quot;M&quot;</span><span class="p">}],</span>
+<span class="gp">... </span>    <span class="s2">"id"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="s2">"props"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"color"</span><span class="p">:</span> <span class="s2">"red"</span><span class="p">,</span> <span class="s2">"size"</span><span class="p">:</span> <span class="s2">"M"</span><span class="p">}],</span>
 <span class="gp">... </span><span class="p">})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">attrs</span><span class="o">.</span><span class="n">explode</span><span class="p">(</span><span class="s2">&quot;props&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;prop_key&quot;</span><span class="p">,</span> <span class="s2">&quot;prop_value&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">attrs</span><span class="o">.</span><span class="n">explode</span><span class="p">(</span><span class="s2">"props"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"prop_key"</span><span class="p">,</span> <span class="s2">"prop_value"</span><span class="p">])</span>
 <span class="go"># Produces one row per map entry with key and value columns,</span>
 <span class="go"># for example:</span>
-<span class="go"># (1, &quot;color&quot;, &quot;red&quot;)</span>
-<span class="go"># (1, &quot;size&quot;, &quot;M&quot;)</span>
+<span class="go"># (1, "color", "red")</span>
+<span class="go"># (1, "size", "M")</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">explode</span><span class="p">(</span><span class="s2">&quot;tags&quot;</span><span class="p">,</span> <span class="s2">&quot;tag&quot;</span><span class="p">,</span> <span class="n">ignore_empty_and_null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">explode</span><span class="p">(</span><span class="s2">"tags"</span><span class="p">,</span> <span class="s2">"tag"</span><span class="p">,</span> <span class="n">ignore_empty_and_null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go"># Produces:</span>
-<span class="go"># (1, &quot;a&quot;)</span>
-<span class="go"># (1, &quot;b&quot;)</span>
+<span class="go"># (1, "a")</span>
+<span class="go"># (1, "b")</span>
 <span class="go"># The row with id 2 is dropped because tags is empty.</span>
 </pre></div>
 </div>

@@ -278,23 +278,23 @@ under the License.
 <span class="c1">#  distributed with this work for additional information</span>
 <span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
 <span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
-<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  "License"); you may not use this file except in compliance</span>
 <span class="c1">#  with the License.  You may obtain a copy of the License at</span>
 <span class="c1">#</span>
 <span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="c1">#</span>
 <span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  distributed under the License is distributed on an "AS IS" BASIS,</span>
 <span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1">#  See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 <span class="c1">################################################################################</span>
-<span class="sd">&quot;&quot;&quot;Speech model operators for decoded audio waveforms.</span>
+<span class="sd">"""Speech model operators for decoded audio waveforms.</span>
 
 <span class="sd">These operators are model-backed pandas UDFs. They accept standardized</span>
 <span class="sd">``AUDIO_WAVEFORM`` values only: callers should decode boundary inputs and</span>
 <span class="sd">normalize to 16 kHz mono before invoking Whisper-based operators.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
 
@@ -317,38 +317,38 @@ under the License.
     <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;audio_asr_whisper&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;audio_detect_language&quot;</span><span class="p">,</span>
+    <span class="s2">"audio_asr_whisper"</span><span class="p">,</span>
+    <span class="s2">"audio_detect_language"</span><span class="p">,</span>
 <span class="p">]</span>
 
-<span class="n">_MODEL_DEPENDENCIES</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;transformers&quot;</span><span class="p">,</span> <span class="s2">&quot;torch&quot;</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
+<span class="n">_MODEL_DEPENDENCIES</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"transformers"</span><span class="p">,</span> <span class="s2">"torch"</span><span class="p">,</span> <span class="s2">"numpy"</span><span class="p">)</span>
 <span class="n">_WHISPER_SAMPLE_RATE</span> <span class="o">=</span> <span class="mi">16000</span>
 <span class="n">_WHISPER_CHANNELS</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">_DEFAULT_WHISPER_MODEL</span> <span class="o">=</span> <span class="s2">&quot;openai/whisper-tiny&quot;</span>
+<span class="n">_DEFAULT_WHISPER_MODEL</span> <span class="o">=</span> <span class="s2">"openai/whisper-tiny"</span>
 
 <span class="n">_TIMESTAMP_TYPE</span> <span class="o">=</span> <span class="n">DataType</span><span class="o">.</span><span class="n">struct</span><span class="p">([</span>
-    <span class="p">(</span><span class="s2">&quot;start_ms&quot;</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">()),</span>
-    <span class="p">(</span><span class="s2">&quot;end_ms&quot;</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s2">"start_ms"</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s2">"end_ms"</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">()),</span>
 <span class="p">])</span>
 <span class="n">_ASR_SEGMENT_TYPE</span> <span class="o">=</span> <span class="n">DataType</span><span class="o">.</span><span class="n">struct</span><span class="p">([</span>
-    <span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">()),</span>
-    <span class="p">(</span><span class="s2">&quot;start_ms&quot;</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">()),</span>
-    <span class="p">(</span><span class="s2">&quot;end_ms&quot;</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s2">"text"</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s2">"start_ms"</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s2">"end_ms"</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">()),</span>
 <span class="p">])</span>
 <span class="n">_ASR_RESULT_TYPE</span> <span class="o">=</span> <span class="n">DataType</span><span class="o">.</span><span class="n">struct</span><span class="p">([</span>
-    <span class="p">(</span><span class="s2">&quot;asr_result&quot;</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">()),</span>
-    <span class="p">(</span><span class="s2">&quot;timestamps&quot;</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">_TIMESTAMP_TYPE</span><span class="p">)),</span>
-    <span class="p">(</span><span class="s2">&quot;segments&quot;</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">_ASR_SEGMENT_TYPE</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s2">"asr_result"</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s2">"timestamps"</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">_TIMESTAMP_TYPE</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s2">"segments"</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">_ASR_SEGMENT_TYPE</span><span class="p">)),</span>
 <span class="p">])</span>
 <span class="n">_DETECTED_LANGUAGE_TYPE</span> <span class="o">=</span> <span class="n">DataType</span><span class="o">.</span><span class="n">struct</span><span class="p">([</span>
-    <span class="p">(</span><span class="s2">&quot;language_tag&quot;</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">()),</span>
-    <span class="p">(</span><span class="s2">&quot;language_name&quot;</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">()),</span>
-    <span class="p">(</span><span class="s2">&quot;confidence&quot;</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s2">"language_tag"</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s2">"language_name"</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s2">"confidence"</span><span class="p">,</span> <span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">()),</span>
 <span class="p">])</span>
 <span class="n">_DETECTED_LANGUAGE_LIST_TYPE</span> <span class="o">=</span> <span class="n">DataType</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">_DETECTED_LANGUAGE_TYPE</span><span class="p">)</span>
 <span class="n">_AUDIO_WAVEFORM_INT_FIELDS</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">(</span>
-    <span class="p">(</span><span class="s2">&quot;sample_rate&quot;</span><span class="p">,</span> <span class="s2">&quot;channels&quot;</span><span class="p">,</span> <span class="s2">&quot;frames&quot;</span><span class="p">,</span> <span class="s2">&quot;duration_ms&quot;</span><span class="p">,</span>
-     <span class="s2">&quot;start_time_ms&quot;</span><span class="p">,</span> <span class="s2">&quot;end_time_ms&quot;</span><span class="p">)</span>
+    <span class="p">(</span><span class="s2">"sample_rate"</span><span class="p">,</span> <span class="s2">"channels"</span><span class="p">,</span> <span class="s2">"frames"</span><span class="p">,</span> <span class="s2">"duration_ms"</span><span class="p">,</span>
+     <span class="s2">"start_time_ms"</span><span class="p">,</span> <span class="s2">"end_time_ms"</span><span class="p">)</span>
 <span class="p">)</span>
 
 
@@ -360,7 +360,7 @@ under the License.
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_validate_whisper_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">operator_name</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">model</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">operator_name</span><span class="si">}</span><span class="s2">.model must be a string, got </span><span class="si">{</span><span class="n">model</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">operator_name</span><span class="si">}</span><span class="s2">.model must be a string, got </span><span class="si">{</span><span class="n">model</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">model</span>
 
 
@@ -372,7 +372,7 @@ under the License.
             <span class="k">continue</span>
         <span class="n">ensure_supported_audio_input</span><span class="p">(</span>
             <span class="n">operator_name</span><span class="p">,</span>
-            <span class="p">(</span><span class="s2">&quot;AUDIO_WAVEFORM&quot;</span><span class="p">,),</span>
+            <span class="p">(</span><span class="s2">"AUDIO_WAVEFORM"</span><span class="p">,),</span>
             <span class="n">audio_input</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">payloads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_waveform_payload</span><span class="p">(</span><span class="n">audio_input</span><span class="p">,</span> <span class="n">operator_name</span><span class="p">))</span>
@@ -381,13 +381,13 @@ under the License.
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_iter_audio_inputs</span><span class="p">(</span><span class="n">audio_batch</span><span class="p">,</span> <span class="n">operator_name</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Yield AUDIO_WAVEFORM rows from a pandas UDF input batch.</span>
+<span class="w">    </span><span class="sd">"""Yield AUDIO_WAVEFORM rows from a pandas UDF input batch.</span>
 
 <span class="sd">    PyFlink flattens a ROW argument for pandas UDFs into a pandas.DataFrame:</span>
 <span class="sd">    each ROW field is one column, and each DataFrame row is one input row.</span>
 <span class="sd">    Reconstruct the audio waveform row before applying the normal codec layer</span>
 <span class="sd">    validation.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">audio_batch</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
@@ -422,15 +422,15 @@ under the License.
             <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">field</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">AUDIO_WAVEFORM_FIELDS</span><span class="p">)</span>
         <span class="p">]</span>
     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">operator_name</span><span class="si">}</span><span class="s2"> expects flattened AUDIO_WAVEFORM DataFrame columns &quot;</span>
-        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">AUDIO_WAVEFORM_FIELDS</span><span class="p">)</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="n">columns</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">operator_name</span><span class="si">}</span><span class="s2"> expects flattened AUDIO_WAVEFORM DataFrame columns "</span>
+        <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">AUDIO_WAVEFORM_FIELDS</span><span class="p">)</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="n">columns</span><span class="si">}</span><span class="s2">"</span>
     <span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_audio_waveform_field_value</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">pd</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
-    <span class="k">if</span> <span class="n">field</span> <span class="o">!=</span> <span class="s2">&quot;data&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">field</span> <span class="o">!=</span> <span class="s2">"data"</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
                 <span class="k">return</span> <span class="kc">None</span>
@@ -454,14 +454,14 @@ under the License.
     <span class="n">channels</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">waveform</span><span class="o">.</span><span class="n">channels</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">sample_rate</span> <span class="o">!=</span> <span class="n">_WHISPER_SAMPLE_RATE</span> <span class="ow">or</span> <span class="n">channels</span> <span class="o">!=</span> <span class="n">_WHISPER_CHANNELS</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">operator_name</span><span class="si">}</span><span class="s2"> requires 16 kHz mono AUDIO_WAVEFORM; call &quot;</span>
-            <span class="s2">&quot;audio_standardize(sample_rate=16000, channels=1) first, got &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;sample_rate=</span><span class="si">{</span><span class="n">sample_rate</span><span class="si">}</span><span class="s2">, channels=</span><span class="si">{</span><span class="n">channels</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">operator_name</span><span class="si">}</span><span class="s2"> requires 16 kHz mono AUDIO_WAVEFORM; call "</span>
+            <span class="s2">"audio_standardize(sample_rate=16000, channels=1) first, got "</span>
+            <span class="sa">f</span><span class="s2">"sample_rate=</span><span class="si">{</span><span class="n">sample_rate</span><span class="si">}</span><span class="s2">, channels=</span><span class="si">{</span><span class="n">channels</span><span class="si">}</span><span class="s2">"</span>
         <span class="p">)</span>
     <span class="n">samples</span> <span class="o">=</span> <span class="n">waveform_to_ndarray</span><span class="p">(</span><span class="n">waveform</span><span class="p">)</span>
     <span class="k">return</span> <span class="p">{</span>
-        <span class="s2">&quot;samples&quot;</span><span class="p">:</span> <span class="n">samples</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="s2">&quot;sample_rate&quot;</span><span class="p">:</span> <span class="n">sample_rate</span><span class="p">,</span>
+        <span class="s2">"samples"</span><span class="p">:</span> <span class="n">samples</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="s2">"sample_rate"</span><span class="p">:</span> <span class="n">sample_rate</span><span class="p">,</span>
     <span class="p">}</span>
 
 
@@ -472,17 +472,17 @@ under the License.
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">_AudioAsrWhisper</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run Whisper ASR over AUDIO_WAVEFORM batches.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Run Whisper ASR over AUDIO_WAVEFORM batches."""</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="s2">&quot;transcribe&quot;</span><span class="p">,</span>
-                 <span class="n">model</span><span class="o">=</span><span class="s2">&quot;openai/whisper-tiny&quot;</span><span class="p">,</span> <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="s2">"transcribe"</span><span class="p">,</span>
+                 <span class="n">model</span><span class="o">=</span><span class="s2">"openai/whisper-tiny"</span><span class="p">,</span> <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">language</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">language</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;language must be a string or None, got </span><span class="si">{</span><span class="n">language</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">task</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;transcribe&quot;</span><span class="p">,</span> <span class="s2">&quot;translate&quot;</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;task must be &#39;transcribe&#39; or &#39;translate&#39;&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">_validate_whisper_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;audio_asr_whisper&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"language must be a string or None, got </span><span class="si">{</span><span class="n">language</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">task</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"transcribe"</span><span class="p">,</span> <span class="s2">"translate"</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"task must be 'transcribe' or 'translate'"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">_validate_whisper_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">"audio_asr_whisper"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">language</span> <span class="o">=</span> <span class="n">language</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">=</span> <span class="n">task</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model_sharing</span> <span class="o">=</span> <span class="n">model_sharing</span>
@@ -505,24 +505,24 @@ under the License.
             <span class="n">requested_gpu_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_gpu_type</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span><span class="o">.</span><span class="n">register_operation</span><span class="p">(</span>
-            <span class="s2">&quot;audio_asr_whisper&quot;</span><span class="p">,</span> <span class="n">_AudioAsrWhisper</span><span class="o">.</span><span class="n">_predict_batch</span>
+            <span class="s2">"audio_asr_whisper"</span><span class="p">,</span> <span class="n">_AudioAsrWhisper</span><span class="o">.</span><span class="n">_predict_batch</span>
         <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_model_handle&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"_model_handle"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">audio_series</span><span class="p">:</span> <span class="s2">&quot;pd.Series&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;pd.Series&quot;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">audio_series</span><span class="p">:</span> <span class="s2">"pd.Series"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"pd.Series"</span><span class="p">:</span>
         <span class="n">total_len</span> <span class="o">=</span> <span class="n">_audio_batch_length</span><span class="p">(</span><span class="n">audio_series</span><span class="p">)</span>
         <span class="n">payloads</span><span class="p">,</span> <span class="n">valid_indices</span> <span class="o">=</span> <span class="n">_valid_audio_payloads</span><span class="p">(</span>
             <span class="n">audio_series</span><span class="p">,</span>
-            <span class="s2">&quot;audio_asr_whisper&quot;</span><span class="p">,</span>
+            <span class="s2">"audio_asr_whisper"</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">payloads</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">_scatter_series</span><span class="p">([],</span> <span class="p">[],</span> <span class="n">total_len</span><span class="p">)</span>
         <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
-            <span class="s2">&quot;audio_asr_whisper&quot;</span><span class="p">,</span>
+            <span class="s2">"audio_asr_whisper"</span><span class="p">,</span>
             <span class="n">payloads</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">language</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="p">,</span>
@@ -534,18 +534,18 @@ under the License.
         <span class="p">)</span>
 
 
-<div class="viewcode-block" id="audio_asr_whisper"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.audio_asr_whisper.html#pyflink.multimodal.operators.audio_asr_whisper">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">audio_asr_whisper</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">audio_asr_whisper</span><span class="p">(</span>
     <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
     <span class="n">language</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">task</span><span class="o">=</span><span class="s2">&quot;transcribe&quot;</span><span class="p">,</span>
-    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;openai/whisper-tiny&quot;</span><span class="p">,</span>
+    <span class="n">task</span><span class="o">=</span><span class="s2">"transcribe"</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">"openai/whisper-tiny"</span><span class="p">,</span>
     <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Run Whisper automatic speech recognition over audio waveforms.</span>
 
 <span class="sd">    The input contract is intentionally narrow: each row must be a waveform row</span>
@@ -570,9 +570,9 @@ under the License.
 <span class="sd">            waveform row.</span>
 <span class="sd">        language: Optional source language hint passed to Whisper. ``None``</span>
 <span class="sd">            lets the model infer the language.</span>
-<span class="sd">        task: ``&quot;transcribe&quot;`` or ``&quot;translate&quot;``.</span>
+<span class="sd">        task: ``"transcribe"`` or ``"translate"``.</span>
 <span class="sd">        model: HuggingFace Whisper or Whisper-compatible model id. The default</span>
-<span class="sd">            is ``&quot;openai/whisper-tiny&quot;``. Other checkpoints can be used when</span>
+<span class="sd">            is ``"openai/whisper-tiny"``. Other checkpoints can be used when</span>
 <span class="sd">            they are available in the Python worker environment or model cache.</span>
 <span class="sd">        model_sharing: Model handle sharing mode understood by the PyFlink</span>
 <span class="sd">            model runtime.</span>
@@ -602,20 +602,20 @@ under the License.
 <span class="sd">    Examples::</span>
 <span class="sd">        &gt;&gt;&gt; decode = audio_decode()</span>
 <span class="sd">        &gt;&gt;&gt; standardize = audio_standardize(sample_rate=16000, channels=1)</span>
-<span class="sd">        &gt;&gt;&gt; speech_ready = standardize(decode(col(&quot;audio_bytes&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt; speech_ready = standardize(decode(col("audio_bytes")))</span>
 <span class="sd">        &gt;&gt;&gt; # Usage 1: create a reusable UDF and apply it to a column.</span>
 <span class="sd">        &gt;&gt;&gt; asr = audio_asr_whisper()</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_column(</span>
-<span class="sd">        ...     &quot;asr&quot;,</span>
+<span class="sd">        ...     "asr",</span>
 <span class="sd">        ...     asr(speech_ready),</span>
 <span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt;</span>
 <span class="sd">        &gt;&gt;&gt; # Usage 2: pass the column directly when building the expression.</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_column(</span>
-<span class="sd">        ...     &quot;asr&quot;,</span>
+<span class="sd">        ...     "asr",</span>
 <span class="sd">        ...     audio_asr_whisper(speech_ready),</span>
 <span class="sd">        ... )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
         <span class="n">_AudioAsrWhisper</span><span class="p">(</span>
             <span class="n">language</span><span class="o">=</span><span class="n">language</span><span class="p">,</span>
@@ -625,7 +625,7 @@ under the License.
             <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
             <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
         <span class="p">),</span>
-        <span class="n">func_type</span><span class="o">=</span><span class="s2">&quot;pandas&quot;</span><span class="p">,</span>
+        <span class="n">func_type</span><span class="o">=</span><span class="s2">"pandas"</span><span class="p">,</span>
         <span class="n">return_dtype</span><span class="o">=</span><span class="n">_ASR_RESULT_TYPE</span><span class="p">,</span>
         <span class="o">**</span><span class="n">_udf_runtime_kwargs</span><span class="p">(</span>
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
@@ -634,18 +634,18 @@ under the License.
             <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">)</span>
-    <span class="k">return</span> <span class="n">_build_or_apply_udf</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">_build_or_apply_udf</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">)</span>
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">_AudioDetectLanguage</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Detect spoken language over AUDIO_WAVEFORM batches.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Detect spoken language over AUDIO_WAVEFORM batches."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">top_k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">_DEFAULT_WHISPER_MODEL</span><span class="p">,</span>
                  <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">top_k</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">top_k</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">or</span> <span class="n">top_k</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;top_k must be a positive integer, got </span><span class="si">{</span><span class="n">top_k</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">_validate_whisper_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;audio_detect_language&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"top_k must be a positive integer, got </span><span class="si">{</span><span class="n">top_k</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">_validate_whisper_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">"audio_detect_language"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model_sharing</span> <span class="o">=</span> <span class="n">model_sharing</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">top_k</span> <span class="o">=</span> <span class="n">top_k</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_num_gpus</span> <span class="o">=</span> <span class="n">num_gpus</span>
@@ -667,24 +667,24 @@ under the License.
             <span class="n">requested_gpu_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_gpu_type</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span><span class="o">.</span><span class="n">register_operation</span><span class="p">(</span>
-            <span class="s2">&quot;audio_detect_language&quot;</span><span class="p">,</span> <span class="n">_AudioDetectLanguage</span><span class="o">.</span><span class="n">_predict_batch</span>
+            <span class="s2">"audio_detect_language"</span><span class="p">,</span> <span class="n">_AudioDetectLanguage</span><span class="o">.</span><span class="n">_predict_batch</span>
         <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_model_handle&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"_model_handle"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">audio_series</span><span class="p">:</span> <span class="s2">&quot;pd.Series&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;pd.Series&quot;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">audio_series</span><span class="p">:</span> <span class="s2">"pd.Series"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"pd.Series"</span><span class="p">:</span>
         <span class="n">total_len</span> <span class="o">=</span> <span class="n">_audio_batch_length</span><span class="p">(</span><span class="n">audio_series</span><span class="p">)</span>
         <span class="n">payloads</span><span class="p">,</span> <span class="n">valid_indices</span> <span class="o">=</span> <span class="n">_valid_audio_payloads</span><span class="p">(</span>
             <span class="n">audio_series</span><span class="p">,</span>
-            <span class="s2">&quot;audio_detect_language&quot;</span><span class="p">,</span>
+            <span class="s2">"audio_detect_language"</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">payloads</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">_scatter_series</span><span class="p">([],</span> <span class="p">[],</span> <span class="n">total_len</span><span class="p">)</span>
         <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model_handle</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
-            <span class="s2">&quot;audio_detect_language&quot;</span><span class="p">,</span>
+            <span class="s2">"audio_detect_language"</span><span class="p">,</span>
             <span class="n">payloads</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">top_k</span><span class="p">,</span>
         <span class="p">)</span>
@@ -698,14 +698,14 @@ under the License.
 <div class="viewcode-block" id="audio_detect_language"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.audio_detect_language.html#pyflink.multimodal.operators.audio_detect_language">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">audio_detect_language</span><span class="p">(</span>
     <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
     <span class="n">top_k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;openai/whisper-tiny&quot;</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">"openai/whisper-tiny"</span><span class="p">,</span>
     <span class="n">model_sharing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">num_gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">gpu_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Detect likely spoken languages in an audio waveform.</span>
 
 <span class="sd">    The operator uses the selected Whisper-compatible checkpoint to rank likely</span>
@@ -729,7 +729,7 @@ under the License.
 <span class="sd">            waveform row.</span>
 <span class="sd">        top_k: Number of language candidates to return per audio row.</span>
 <span class="sd">        model: HuggingFace Whisper or Whisper-compatible model id. The default</span>
-<span class="sd">            is ``&quot;openai/whisper-tiny&quot;``.</span>
+<span class="sd">            is ``"openai/whisper-tiny"``.</span>
 <span class="sd">        model_sharing: Model handle sharing mode understood by the PyFlink</span>
 <span class="sd">            model runtime.</span>
 <span class="sd">        concurrency: UDF concurrency. ``None`` uses the framework default.</span>
@@ -753,20 +753,20 @@ under the License.
 <span class="sd">    Examples::</span>
 <span class="sd">        &gt;&gt;&gt; decode = audio_decode()</span>
 <span class="sd">        &gt;&gt;&gt; standardize = audio_standardize(sample_rate=16000, channels=1)</span>
-<span class="sd">        &gt;&gt;&gt; speech_ready = standardize(decode(col(&quot;audio_bytes&quot;)))</span>
+<span class="sd">        &gt;&gt;&gt; speech_ready = standardize(decode(col("audio_bytes")))</span>
 <span class="sd">        &gt;&gt;&gt; # Usage 1: create a reusable UDF and apply it to a column.</span>
 <span class="sd">        &gt;&gt;&gt; detect_language = audio_detect_language(top_k=3)</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_column(</span>
-<span class="sd">        ...     &quot;language&quot;,</span>
+<span class="sd">        ...     "language",</span>
 <span class="sd">        ...     detect_language(speech_ready),</span>
 <span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt;</span>
 <span class="sd">        &gt;&gt;&gt; # Usage 2: pass the column directly when building the expression.</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_column(</span>
-<span class="sd">        ...     &quot;language&quot;,</span>
+<span class="sd">        ...     "language",</span>
 <span class="sd">        ...     audio_detect_language(speech_ready, top_k=3),</span>
 <span class="sd">        ... )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
         <span class="n">_AudioDetectLanguage</span><span class="p">(</span>
             <span class="n">top_k</span><span class="o">=</span><span class="n">top_k</span><span class="p">,</span>
@@ -775,7 +775,7 @@ under the License.
             <span class="n">num_gpus</span><span class="o">=</span><span class="n">num_gpus</span><span class="p">,</span>
             <span class="n">gpu_type</span><span class="o">=</span><span class="n">gpu_type</span><span class="p">,</span>
         <span class="p">),</span>
-        <span class="n">func_type</span><span class="o">=</span><span class="s2">&quot;pandas&quot;</span><span class="p">,</span>
+        <span class="n">func_type</span><span class="o">=</span><span class="s2">"pandas"</span><span class="p">,</span>
         <span class="n">return_dtype</span><span class="o">=</span><span class="n">_DETECTED_LANGUAGE_LIST_TYPE</span><span class="p">,</span>
         <span class="o">**</span><span class="n">_udf_runtime_kwargs</span><span class="p">(</span>
             <span class="n">concurrency</span><span class="o">=</span><span class="n">concurrency</span><span class="p">,</span>
@@ -791,46 +791,46 @@ under the License.
     <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
     <span class="n">asr_result</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">_optional_str</span><span class="p">(</span><span class="n">_get_value</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;asr_result&quot;</span><span class="p">))</span>
-        <span class="ow">or</span> <span class="n">_optional_str</span><span class="p">(</span><span class="n">_get_value</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">))</span>
-        <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">_optional_str</span><span class="p">(</span><span class="n">_get_value</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">"asr_result"</span><span class="p">))</span>
+        <span class="ow">or</span> <span class="n">_optional_str</span><span class="p">(</span><span class="n">_get_value</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">"text"</span><span class="p">))</span>
+        <span class="ow">or</span> <span class="s2">""</span>
     <span class="p">)</span>
     <span class="n">raw_segments</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">_get_value</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;segments&quot;</span><span class="p">)</span>
-        <span class="ow">or</span> <span class="n">_get_value</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;chunks&quot;</span><span class="p">)</span>
+        <span class="n">_get_value</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">"segments"</span><span class="p">)</span>
+        <span class="ow">or</span> <span class="n">_get_value</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">"chunks"</span><span class="p">)</span>
         <span class="ow">or</span> <span class="p">[]</span>
     <span class="p">)</span>
     <span class="n">segments</span> <span class="o">=</span> <span class="p">[</span><span class="n">_normalize_asr_segment</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span> <span class="k">for</span> <span class="n">segment</span> <span class="ow">in</span> <span class="n">raw_segments</span><span class="p">]</span>
     <span class="n">timestamps</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="p">{</span><span class="s2">&quot;start_ms&quot;</span><span class="p">:</span> <span class="n">segment</span><span class="p">[</span><span class="s2">&quot;start_ms&quot;</span><span class="p">],</span> <span class="s2">&quot;end_ms&quot;</span><span class="p">:</span> <span class="n">segment</span><span class="p">[</span><span class="s2">&quot;end_ms&quot;</span><span class="p">]}</span>
+        <span class="p">{</span><span class="s2">"start_ms"</span><span class="p">:</span> <span class="n">segment</span><span class="p">[</span><span class="s2">"start_ms"</span><span class="p">],</span> <span class="s2">"end_ms"</span><span class="p">:</span> <span class="n">segment</span><span class="p">[</span><span class="s2">"end_ms"</span><span class="p">]}</span>
         <span class="k">for</span> <span class="n">segment</span> <span class="ow">in</span> <span class="n">segments</span>
     <span class="p">]</span>
     <span class="k">return</span> <span class="p">{</span>
-        <span class="s2">&quot;asr_result&quot;</span><span class="p">:</span> <span class="n">asr_result</span><span class="p">,</span>
-        <span class="s2">&quot;timestamps&quot;</span><span class="p">:</span> <span class="n">timestamps</span><span class="p">,</span>
-        <span class="s2">&quot;segments&quot;</span><span class="p">:</span> <span class="n">segments</span><span class="p">,</span>
+        <span class="s2">"asr_result"</span><span class="p">:</span> <span class="n">asr_result</span><span class="p">,</span>
+        <span class="s2">"timestamps"</span><span class="p">:</span> <span class="n">timestamps</span><span class="p">,</span>
+        <span class="s2">"segments"</span><span class="p">:</span> <span class="n">segments</span><span class="p">,</span>
     <span class="p">}</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_normalize_asr_segment</span><span class="p">(</span><span class="n">segment</span><span class="p">):</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">_optional_str</span><span class="p">(</span><span class="n">_get_value</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">))</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">_optional_str</span><span class="p">(</span><span class="n">_get_value</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="s2">"text"</span><span class="p">))</span> <span class="ow">or</span> <span class="s2">""</span>
     <span class="n">start_ms</span><span class="p">,</span> <span class="n">end_ms</span> <span class="o">=</span> <span class="n">_segment_bounds_ms</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span> <span class="s2">&quot;start_ms&quot;</span><span class="p">:</span> <span class="n">start_ms</span><span class="p">,</span> <span class="s2">&quot;end_ms&quot;</span><span class="p">:</span> <span class="n">end_ms</span><span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">"text"</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span> <span class="s2">"start_ms"</span><span class="p">:</span> <span class="n">start_ms</span><span class="p">,</span> <span class="s2">"end_ms"</span><span class="p">:</span> <span class="n">end_ms</span><span class="p">}</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_segment_bounds_ms</span><span class="p">(</span><span class="n">segment</span><span class="p">):</span>
-    <span class="n">start_ms</span> <span class="o">=</span> <span class="n">_get_value</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="s2">&quot;start_ms&quot;</span><span class="p">)</span>
-    <span class="n">end_ms</span> <span class="o">=</span> <span class="n">_get_value</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="s2">&quot;end_ms&quot;</span><span class="p">)</span>
+    <span class="n">start_ms</span> <span class="o">=</span> <span class="n">_get_value</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="s2">"start_ms"</span><span class="p">)</span>
+    <span class="n">end_ms</span> <span class="o">=</span> <span class="n">_get_value</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="s2">"end_ms"</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">start_ms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">end_ms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">_time_value_ms</span><span class="p">(</span><span class="n">start_ms</span><span class="p">),</span> <span class="n">_time_value_ms</span><span class="p">(</span><span class="n">end_ms</span><span class="p">)</span>
 
-    <span class="n">timestamp</span> <span class="o">=</span> <span class="n">_get_value</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="s2">&quot;timestamp&quot;</span><span class="p">)</span>
+    <span class="n">timestamp</span> <span class="o">=</span> <span class="n">_get_value</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="s2">"timestamp"</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">timestamp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">_time_value_ms</span><span class="p">(</span><span class="n">timestamp</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">_time_value_ms</span><span class="p">(</span><span class="n">timestamp</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
     <span class="k">return</span> <span class="p">(</span>
-        <span class="n">_seconds_to_ms</span><span class="p">(</span><span class="n">_get_value</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">)),</span>
-        <span class="n">_seconds_to_ms</span><span class="p">(</span><span class="n">_get_value</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">)),</span>
+        <span class="n">_seconds_to_ms</span><span class="p">(</span><span class="n">_get_value</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="s2">"start"</span><span class="p">)),</span>
+        <span class="n">_seconds_to_ms</span><span class="p">(</span><span class="n">_get_value</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="s2">"end"</span><span class="p">)),</span>
     <span class="p">)</span>
 
 
@@ -838,24 +838,24 @@ under the License.
     <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
     <span class="n">language_tag</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">_optional_str</span><span class="p">(</span><span class="n">_get_value</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;language_tag&quot;</span><span class="p">))</span>
-        <span class="ow">or</span> <span class="n">_optional_str</span><span class="p">(</span><span class="n">_get_value</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;language_code&quot;</span><span class="p">))</span>
-        <span class="ow">or</span> <span class="n">_optional_str</span><span class="p">(</span><span class="n">_get_value</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;language&quot;</span><span class="p">))</span>
-        <span class="ow">or</span> <span class="n">_optional_str</span><span class="p">(</span><span class="n">_get_value</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">))</span>
-        <span class="ow">or</span> <span class="s2">&quot;unknown&quot;</span>
+        <span class="n">_optional_str</span><span class="p">(</span><span class="n">_get_value</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">"language_tag"</span><span class="p">))</span>
+        <span class="ow">or</span> <span class="n">_optional_str</span><span class="p">(</span><span class="n">_get_value</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">"language_code"</span><span class="p">))</span>
+        <span class="ow">or</span> <span class="n">_optional_str</span><span class="p">(</span><span class="n">_get_value</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">"language"</span><span class="p">))</span>
+        <span class="ow">or</span> <span class="n">_optional_str</span><span class="p">(</span><span class="n">_get_value</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">"label"</span><span class="p">))</span>
+        <span class="ow">or</span> <span class="s2">"unknown"</span>
     <span class="p">)</span>
     <span class="n">language_name</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">_optional_str</span><span class="p">(</span><span class="n">_get_value</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;language_name&quot;</span><span class="p">))</span>
-        <span class="ow">or</span> <span class="n">_optional_str</span><span class="p">(</span><span class="n">_get_value</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">))</span>
+        <span class="n">_optional_str</span><span class="p">(</span><span class="n">_get_value</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">"language_name"</span><span class="p">))</span>
+        <span class="ow">or</span> <span class="n">_optional_str</span><span class="p">(</span><span class="n">_get_value</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">))</span>
         <span class="ow">or</span> <span class="n">language_tag</span>
     <span class="p">)</span>
-    <span class="n">confidence</span> <span class="o">=</span> <span class="n">_get_value</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;confidence&quot;</span><span class="p">)</span>
+    <span class="n">confidence</span> <span class="o">=</span> <span class="n">_get_value</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">"confidence"</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">confidence</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">confidence</span> <span class="o">=</span> <span class="n">_get_value</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="p">)</span>
+        <span class="n">confidence</span> <span class="o">=</span> <span class="n">_get_value</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">"score"</span><span class="p">)</span>
     <span class="k">return</span> <span class="p">{</span>
-        <span class="s2">&quot;language_tag&quot;</span><span class="p">:</span> <span class="n">language_tag</span><span class="p">,</span>
-        <span class="s2">&quot;language_name&quot;</span><span class="p">:</span> <span class="n">language_name</span><span class="p">,</span>
-        <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">confidence</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="n">confidence</span><span class="p">),</span>
+        <span class="s2">"language_tag"</span><span class="p">:</span> <span class="n">language_tag</span><span class="p">,</span>
+        <span class="s2">"language_name"</span><span class="p">:</span> <span class="n">language_name</span><span class="p">,</span>
+        <span class="s2">"confidence"</span><span class="p">:</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">confidence</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="n">confidence</span><span class="p">),</span>
     <span class="p">}</span>
 
 
@@ -865,8 +865,8 @@ under the License.
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">_normalize_detected_language</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">result</span><span class="p">]</span>
     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-        <span class="s2">&quot;audio_detect_language backend must return a list of language &quot;</span>
-        <span class="sa">f</span><span class="s2">&quot;candidates per input row, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="s2">"audio_detect_language backend must return a list of language "</span>
+        <span class="sa">f</span><span class="s2">"candidates per input row, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">"</span>
     <span class="p">)</span>
 
 

@@ -307,13 +307,13 @@ under the License.
 <span class="c1">#  distributed with this work for additional information</span>
 <span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
 <span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
-<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  "License"); you may not use this file except in compliance</span>
 <span class="c1">#  with the License.  You may obtain a copy of the License at</span>
 <span class="c1">#</span>
 <span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="c1">#</span>
 <span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  distributed under the License is distributed on an "AS IS" BASIS,</span>
 <span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1">#  See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
@@ -331,7 +331,7 @@ under the License.
         <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">runtime_context</span><span class="p">:</span> <span class="n">RuntimeContext</span><span class="p">):</span>
-        <span class="n">state_descriptor</span> <span class="o">=</span> <span class="n">ValueStateDescriptor</span><span class="p">(</span><span class="s2">&quot;state&quot;</span><span class="p">,</span> <span class="n">Types</span><span class="o">.</span><span class="n">FLOAT</span><span class="p">())</span>
+        <span class="n">state_descriptor</span> <span class="o">=</span> <span class="n">ValueStateDescriptor</span><span class="p">(</span><span class="s2">"state"</span><span class="p">,</span> <span class="n">Types</span><span class="o">.</span><span class="n">FLOAT</span><span class="p">())</span>
         <span class="n">state_ttl_config</span> <span class="o">=</span> <span class="n">StateTtlConfig</span> \
             <span class="o">.</span><span class="n">new_builder</span><span class="p">(</span><span class="n">Time</span><span class="o">.</span><span class="n">seconds</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> \
             <span class="o">.</span><span class="n">set_update_type</span><span class="p">(</span><span class="n">StateTtlConfig</span><span class="o">.</span><span class="n">UpdateType</span><span class="o">.</span><span class="n">OnReadAndWrite</span><span class="p">)</span> \
@@ -340,13 +340,13 @@ under the License.
         <span class="n">state_descriptor</span><span class="o">.</span><span class="n">enable_time_to_live</span><span class="p">(</span><span class="n">state_ttl_config</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">runtime_context</span><span class="o">.</span><span class="n">get_state</span><span class="p">(</span><span class="n">state_descriptor</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">process_element</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">ctx</span><span class="p">:</span> <span class="s1">&#39;KeyedProcessFunction.Context&#39;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_element</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">ctx</span><span class="p">:</span> <span class="s1">'KeyedProcessFunction.Context'</span><span class="p">):</span>
         <span class="c1"># retrieve the current count</span>
         <span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">current</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">current</span> <span class="o">=</span> <span class="mi">0</span>
 
-        <span class="c1"># update the state&#39;s count</span>
+        <span class="c1"># update the state's count</span>
         <span class="n">current</span> <span class="o">+=</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
 
@@ -358,14 +358,14 @@ under the License.
 
     <span class="n">ds</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">from_collection</span><span class="p">(</span>
         <span class="n">collection</span><span class="o">=</span><span class="p">[</span>
-            <span class="p">(</span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="mf">110.1</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="mf">30.2</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="mf">53.1</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="mf">13.1</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="mf">3.1</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="mf">16.1</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="mf">20.1</span><span class="p">)</span>
+            <span class="p">(</span><span class="s1">'Alice'</span><span class="p">,</span> <span class="mf">110.1</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">'Bob'</span><span class="p">,</span> <span class="mf">30.2</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">'Alice'</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">'Bob'</span><span class="p">,</span> <span class="mf">53.1</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">'Alice'</span><span class="p">,</span> <span class="mf">13.1</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">'Bob'</span><span class="p">,</span> <span class="mf">3.1</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">'Bob'</span><span class="p">,</span> <span class="mf">16.1</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">'Alice'</span><span class="p">,</span> <span class="mf">20.1</span><span class="p">)</span>
         <span class="p">],</span>
         <span class="n">type_info</span><span class="o">=</span><span class="n">Types</span><span class="o">.</span><span class="n">TUPLE</span><span class="p">([</span><span class="n">Types</span><span class="o">.</span><span class="n">STRING</span><span class="p">(),</span> <span class="n">Types</span><span class="o">.</span><span class="n">FLOAT</span><span class="p">()]))</span>
 
@@ -378,7 +378,7 @@ under the License.
     <span class="n">env</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
     <span class="n">state_access_demo</span><span class="p">()</span>
 </pre></div>
 </div>

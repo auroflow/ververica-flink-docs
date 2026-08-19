@@ -278,19 +278,19 @@ under the License.
 <span class="c1">#  distributed with this work for additional information</span>
 <span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
 <span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
-<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  "License"); you may not use this file except in compliance</span>
 <span class="c1">#  with the License.  You may obtain a copy of the License at</span>
 <span class="c1">#</span>
 <span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="c1">#</span>
 <span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  distributed under the License is distributed on an "AS IS" BASIS,</span>
 <span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1">#  See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 <span class="c1">################################################################################</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;MemorySize&#39;</span><span class="p">,</span> <span class="s1">&#39;SlotSharingGroup&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'MemorySize'</span><span class="p">,</span> <span class="s1">'SlotSharingGroup'</span><span class="p">]</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 
@@ -298,9 +298,9 @@ under the License.
 
 
 <div class="viewcode-block" id="MemorySize"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.slot_sharing_group.MemorySize.html#pyflink.datastream.slot_sharing_group.MemorySize">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">MemorySize</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    MemorySize is a representation of a number of bytes, viewable in different units.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_memory_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bytes_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_memory_size</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span> \
@@ -308,56 +308,56 @@ under the License.
             <span class="k">if</span> <span class="n">j_memory_size</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">j_memory_size</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">of_mebi_bytes</span><span class="p">(</span><span class="n">mebi_bytes</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;MemorySize&#39;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">of_mebi_bytes</span><span class="p">(</span><span class="n">mebi_bytes</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'MemorySize'</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">MemorySize</span><span class="p">(</span>
             <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">MemorySize</span><span class="o">.</span><span class="n">ofMebiBytes</span><span class="p">(</span><span class="n">mebi_bytes</span><span class="p">))</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the memory size in bytes.</span>
 
 <span class="sd">        :return: The memory size in bytes.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_memory_size</span><span class="o">.</span><span class="n">getBytes</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_kibi_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the memory size in Kibibytes (= 1024 bytes).</span>
 
 <span class="sd">        :return: The memory size in Kibibytes.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_memory_size</span><span class="o">.</span><span class="n">getKibiBytes</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_mebi_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the memory size in Mebibytes (= 1024 Kibibytes).</span>
 
 <span class="sd">        :return: The memory size in Mebibytes.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_memory_size</span><span class="o">.</span><span class="n">getMebiBytes</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_gibi_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the memory size in Gibibytes (= 1024 Mebibytes).</span>
 
 <span class="sd">        :return: The memory size in Gibibytes.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_memory_size</span><span class="o">.</span><span class="n">getGibiBytes</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_tebi_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the memory size in Tebibytes (= 1024 Gibibytes).</span>
 
 <span class="sd">        :return: The memory size in Tebibytes.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_memory_size</span><span class="o">.</span><span class="n">getTebiBytes</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_java_memory_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the Java MemorySize object.</span>
 
 <span class="sd">        :return: The Java MemorySize object.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_memory_size</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
@@ -366,13 +366,13 @@ under the License.
     <span class="k">def</span><span class="w"> </span><span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_memory_size</span><span class="o">.</span><span class="n">hashCode</span><span class="p">()</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s1">&#39;MemorySize&#39;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s1">'MemorySize'</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">MemorySize</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Does not support comparison with non-MemorySize </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">other</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">"Does not support comparison with non-MemorySize </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">other</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_memory_size</span><span class="o">.</span><span class="n">compareTo</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">_j_memory_size</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s1">&#39;MemorySize&#39;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s1">'MemorySize'</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__lt__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -380,81 +380,81 @@ under the License.
 
 
 <div class="viewcode-block" id="SlotSharingGroup"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.slot_sharing_group.SlotSharingGroup.html#pyflink.datastream.slot_sharing_group.SlotSharingGroup">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">SlotSharingGroup</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Describe the name and the different resource components of a slot sharing group.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_slot_sharing_group</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_slot_sharing_group</span> <span class="o">=</span> <span class="n">j_slot_sharing_group</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the name of this SlotSharingGroup.</span>
 
 <span class="sd">        :return: The name of the SlotSharingGroup.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_slot_sharing_group</span><span class="o">.</span><span class="n">getName</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_managed_memory</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MemorySize</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the task managed memory for this SlotSharingGroup.</span>
 
 <span class="sd">        :return: The task managed memory of the SlotSharingGroup.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">managed_memory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_slot_sharing_group</span><span class="o">.</span><span class="n">getManagedMemory</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">MemorySize</span><span class="p">(</span><span class="n">managed_memory</span><span class="o">.</span><span class="n">get</span><span class="p">())</span> <span class="k">if</span> <span class="n">managed_memory</span><span class="o">.</span><span class="n">isPresent</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_task_heap_memory</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MemorySize</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the task heap memory for this SlotSharingGroup.</span>
 
 <span class="sd">        :return: The task heap memory of the SlotSharingGroup.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">task_heap_memory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_slot_sharing_group</span><span class="o">.</span><span class="n">getTaskHeapMemory</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">MemorySize</span><span class="p">(</span><span class="n">task_heap_memory</span><span class="o">.</span><span class="n">get</span><span class="p">())</span> <span class="k">if</span> <span class="n">task_heap_memory</span><span class="o">.</span><span class="n">isPresent</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_task_off_heap_memory</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MemorySize</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the task off-heap memory for this SlotSharingGroup.</span>
 
 <span class="sd">        :return: The task off-heap memory of the SlotSharingGroup.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">task_off_heap_memory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_slot_sharing_group</span><span class="o">.</span><span class="n">getTaskOffHeapMemory</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">MemorySize</span><span class="p">(</span><span class="n">task_off_heap_memory</span><span class="o">.</span><span class="n">get</span><span class="p">())</span> <span class="k">if</span> <span class="n">task_off_heap_memory</span><span class="o">.</span><span class="n">isPresent</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_cpu_cores</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">       Gets the CPU cores for this SlotSharingGroup.</span>
 
 <span class="sd">        :return: The CPU cores of the SlotSharingGroup.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">cpu_cores</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_slot_sharing_group</span><span class="o">.</span><span class="n">getCpuCores</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">cpu_cores</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="k">if</span> <span class="n">cpu_cores</span><span class="o">.</span><span class="n">isPresent</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_external_resources</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the external resource from this SlotSharingGroup.</span>
 
 <span class="sd">        :return: User specified resources of the SlotSharingGroup.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_slot_sharing_group</span><span class="o">.</span><span class="n">getExternalResources</span><span class="p">())</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_java_slot_sharing_group</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the Java SlotSharingGroup object.</span>
 
 <span class="sd">        :return: The Java SlotSharingGroup object.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_slot_sharing_group</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">builder</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Builder&#39;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">builder</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'Builder'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Gets the Builder with the given name for this SlotSharingGroup.</span>
 
 <span class="sd">        :param name: The name of the SlotSharingGroup.</span>
 <span class="sd">        :return: The builder for the SlotSharingGroup.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">SlotSharingGroup</span><span class="o">.</span><span class="n">Builder</span><span class="p">(</span>
             <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">SlotSharingGroup</span><span class="o">.</span><span class="n">newBuilder</span><span class="p">(</span>
                 <span class="n">name</span><span class="p">))</span>
@@ -467,103 +467,103 @@ under the License.
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_slot_sharing_group</span><span class="o">.</span><span class="n">hashCode</span><span class="p">()</span>
 
     <span class="k">class</span><span class="w"> </span><span class="nc">Builder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Builder for the SlotSharingGroup.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_builder</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span> <span class="o">=</span> <span class="n">j_builder</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">set_cpu_cores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cpu_cores</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;SlotSharingGroup.Builder&#39;</span><span class="p">:</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">set_cpu_cores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cpu_cores</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'SlotSharingGroup.Builder'</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">"""</span>
 <span class="sd">            Sets the CPU cores for this SlotSharingGroup.</span>
 
 <span class="sd">            :param cpu_cores: The CPU cores of the SlotSharingGroup.</span>
 <span class="sd">            :return: This object.</span>
-<span class="sd">            &quot;&quot;&quot;</span>
+<span class="sd">            """</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setCpuCores</span><span class="p">(</span><span class="n">cpu_cores</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">set_task_heap_memory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_heap_memory</span><span class="p">:</span> <span class="n">MemorySize</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;SlotSharingGroup.Builder&#39;</span><span class="p">:</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">set_task_heap_memory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_heap_memory</span><span class="p">:</span> <span class="n">MemorySize</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'SlotSharingGroup.Builder'</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">"""</span>
 <span class="sd">            Sets the task heap memory for this SlotSharingGroup.</span>
 
 <span class="sd">            :param task_heap_memory: The task heap memory of the SlotSharingGroup.</span>
 <span class="sd">            :return: This object.</span>
-<span class="sd">            &quot;&quot;&quot;</span>
+<span class="sd">            """</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setTaskHeapMemory</span><span class="p">(</span><span class="n">task_heap_memory</span><span class="o">.</span><span class="n">get_java_memory_size</span><span class="p">())</span>
             <span class="k">return</span> <span class="bp">self</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">set_task_heap_memory_mb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_heap_memory_mb</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;SlotSharingGroup.Builder&#39;</span><span class="p">:</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">set_task_heap_memory_mb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_heap_memory_mb</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'SlotSharingGroup.Builder'</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">"""</span>
 <span class="sd">            Sets the task heap memory for this SlotSharingGroup in MB.</span>
 
 <span class="sd">            :param task_heap_memory_mb: The task heap memory of the SlotSharingGroup in MB.</span>
 <span class="sd">            :return: This object.</span>
-<span class="sd">            &quot;&quot;&quot;</span>
+<span class="sd">            """</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setTaskHeapMemoryMB</span><span class="p">(</span><span class="n">task_heap_memory_mb</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span>
 
         <span class="k">def</span><span class="w"> </span><span class="nf">set_task_off_heap_memory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_off_heap_memory</span><span class="p">:</span> <span class="n">MemorySize</span><span class="p">)</span> \
-                <span class="o">-&gt;</span> <span class="s1">&#39;SlotSharingGroup.Builder&#39;</span><span class="p">:</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+                <span class="o">-&gt;</span> <span class="s1">'SlotSharingGroup.Builder'</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">"""</span>
 <span class="sd">            Sets the task off-heap memory for this SlotSharingGroup.</span>
 
 <span class="sd">            :param task_off_heap_memory: The task off-heap memory of the SlotSharingGroup.</span>
 <span class="sd">            :return: This object.</span>
-<span class="sd">            &quot;&quot;&quot;</span>
+<span class="sd">            """</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setTaskOffHeapMemory</span><span class="p">(</span><span class="n">task_off_heap_memory</span><span class="o">.</span><span class="n">get_java_memory_size</span><span class="p">())</span>
             <span class="k">return</span> <span class="bp">self</span>
 
         <span class="k">def</span><span class="w"> </span><span class="nf">set_task_off_heap_memory_mb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_off_heap_memory_mb</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> \
-                <span class="o">-&gt;</span> <span class="s1">&#39;SlotSharingGroup.Builder&#39;</span><span class="p">:</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+                <span class="o">-&gt;</span> <span class="s1">'SlotSharingGroup.Builder'</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">"""</span>
 <span class="sd">            Sets the task off-heap memory for this SlotSharingGroup in MB.</span>
 
 <span class="sd">            :param task_off_heap_memory_mb: The task off-heap memory of the SlotSharingGroup in MB.</span>
 <span class="sd">            :return: This object.</span>
-<span class="sd">            &quot;&quot;&quot;</span>
+<span class="sd">            """</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setTaskOffHeapMemoryMB</span><span class="p">(</span><span class="n">task_off_heap_memory_mb</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">set_managed_memory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">managed_memory</span><span class="p">:</span> <span class="n">MemorySize</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;SlotSharingGroup.Builder&#39;</span><span class="p">:</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">set_managed_memory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">managed_memory</span><span class="p">:</span> <span class="n">MemorySize</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'SlotSharingGroup.Builder'</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">"""</span>
 <span class="sd">            Sets the task managed memory for this SlotSharingGroup.</span>
 
 <span class="sd">            :param managed_memory: The task managed memory of the SlotSharingGroup.</span>
 <span class="sd">            :return: This object.</span>
-<span class="sd">            &quot;&quot;&quot;</span>
+<span class="sd">            """</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setManagedMemory</span><span class="p">(</span><span class="n">managed_memory</span><span class="o">.</span><span class="n">get_java_memory_size</span><span class="p">())</span>
             <span class="k">return</span> <span class="bp">self</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">set_managed_memory_mb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">managed_memory_mb</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;SlotSharingGroup.Builder&#39;</span><span class="p">:</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">set_managed_memory_mb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">managed_memory_mb</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'SlotSharingGroup.Builder'</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">"""</span>
 <span class="sd">            Sets the task managed memory for this SlotSharingGroup in MB.</span>
 
 <span class="sd">            :param managed_memory_mb: The task managed memory of the SlotSharingGroup in MB.</span>
 <span class="sd">            :return: This object.</span>
-<span class="sd">            &quot;&quot;&quot;</span>
+<span class="sd">            """</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setManagedMemoryMB</span><span class="p">(</span><span class="n">managed_memory_mb</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">set_external_resource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;SlotSharingGroup.Builder&#39;</span><span class="p">:</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">set_external_resource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'SlotSharingGroup.Builder'</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">"""</span>
 <span class="sd">            Adds the given external resource. The old value with the same resource name will be</span>
 <span class="sd">            replaced if present.</span>
 
 <span class="sd">            :param name: The resource name of the given external resource.</span>
 <span class="sd">            :param value: The value of the given external resource.</span>
 <span class="sd">            :return: This object.</span>
-<span class="sd">            &quot;&quot;&quot;</span>
+<span class="sd">            """</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">setExternalResource</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;SlotSharingGroup&#39;</span><span class="p">:</span>
-<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'SlotSharingGroup'</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">"""</span>
 <span class="sd">            Builds the SlotSharingGroup.</span>
 
 <span class="sd">            :return: The SlotSharingGroup object.</span>
-<span class="sd">            &quot;&quot;&quot;</span>
+<span class="sd">            """</span>
             <span class="k">return</span> <span class="n">SlotSharingGroup</span><span class="p">(</span><span class="n">j_slot_sharing_group</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">build</span><span class="p">())</span></div>
 </pre></div>
 

@@ -278,13 +278,13 @@ under the License.
 <span class="c1">#  distributed with this work for additional information</span>
 <span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
 <span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
-<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  "License"); you may not use this file except in compliance</span>
 <span class="c1">#  with the License.  You may obtain a copy of the License at</span>
 <span class="c1">#</span>
 <span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="c1">#</span>
 <span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  distributed under the License is distributed on an "AS IS" BASIS,</span>
 <span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1">#  See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
@@ -293,11 +293,11 @@ under the License.
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">TensorType</span><span class="p">,</span> <span class="n">to_arrow_type</span>
 
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;variable_tensors_to_arrow&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"variable_tensors_to_arrow"</span><span class="p">]</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_build_normalized_tensor_payload</span><span class="p">(</span><span class="n">tensors</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build an ndarray exposing contiguous tensor payload bytes.</span>
+<span class="w">    </span><span class="sd">"""Build an ndarray exposing contiguous tensor payload bytes.</span>
 
 <span class="sd">    The zero-copy path is intentionally narrow. It targets callers that split one</span>
 <span class="sd">    dense, C-contiguous buffer into adjacent variable-shaped tensor views,</span>
@@ -307,7 +307,7 @@ under the License.
 
 <span class="sd">    Independently allocated tensors and gapped or reordered views fall back to</span>
 <span class="sd">    ``numpy.concatenate()``.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
     <span class="c1"># Single tensor: reuse its normalized payload directly.</span>
@@ -315,11 +315,11 @@ under the License.
         <span class="k">return</span> <span class="n">tensors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="n">first</span> <span class="o">=</span> <span class="n">tensors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">start_address</span> <span class="o">=</span> <span class="n">first</span><span class="o">.</span><span class="n">__array_interface__</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">start_address</span> <span class="o">=</span> <span class="n">first</span><span class="o">.</span><span class="n">__array_interface__</span><span class="p">[</span><span class="s2">"data"</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">end_address</span> <span class="o">=</span> <span class="n">start_address</span> <span class="o">+</span> <span class="n">first</span><span class="o">.</span><span class="n">nbytes</span>
     <span class="c1"># Common case: concatenate the disjoint tensors.</span>
     <span class="k">for</span> <span class="n">tensor</span> <span class="ow">in</span> <span class="n">tensors</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
-        <span class="n">address</span> <span class="o">=</span> <span class="n">tensor</span><span class="o">.</span><span class="n">__array_interface__</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">address</span> <span class="o">=</span> <span class="n">tensor</span><span class="o">.</span><span class="n">__array_interface__</span><span class="p">[</span><span class="s2">"data"</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">address</span> <span class="o">!=</span> <span class="n">end_address</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
         <span class="n">end_address</span> <span class="o">+=</span> <span class="n">tensor</span><span class="o">.</span><span class="n">nbytes</span>
@@ -330,7 +330,7 @@ under the License.
     <span class="k">while</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">base</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
         <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">base</span>
 
-    <span class="n">root_address</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">__array_interface__</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">root_address</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">__array_interface__</span><span class="p">[</span><span class="s2">"data"</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">start_byte</span> <span class="o">=</span> <span class="n">start_address</span> <span class="o">-</span> <span class="n">root_address</span>
     <span class="n">end_byte</span> <span class="o">=</span> <span class="n">end_address</span> <span class="o">-</span> <span class="n">root_address</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">root</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">c_contiguous</span> <span class="ow">or</span> <span class="n">start_byte</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">end_byte</span> <span class="o">&gt;</span> <span class="n">root</span><span class="o">.</span><span class="n">nbytes</span><span class="p">:</span>
@@ -341,7 +341,7 @@ under the License.
 
 
 <div class="viewcode-block" id="variable_tensors_to_arrow"><a class="viewcode-back" href="../../../reference/pyflink.table/api/pyflink.table.tensor.variable_tensors_to_arrow.html#pyflink.dataframe.tensor.variable_tensors_to_arrow">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">variable_tensors_to_arrow</span><span class="p">(</span><span class="n">tensors</span><span class="p">,</span> <span class="n">dtype</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert variable-shaped NumPy tensors to a PyArrow ExtensionArray.</span>
+<span class="w">    </span><span class="sd">"""Convert variable-shaped NumPy tensors to a PyArrow ExtensionArray.</span>
 
 <span class="sd">    Use this helper to construct a variable-shaped ``TensorType`` output</span>
 <span class="sd">    column in a Table API Arrow UDF or DataFrame API Arrow ``map_batches``</span>
@@ -371,8 +371,8 @@ under the License.
 <span class="sd">        ...         None if tensor is None else tensor.T</span>
 <span class="sd">        ...         for tensor in tensor_column.to_pylist()</span>
 <span class="sd">        ...     ]</span>
-<span class="sd">        ...     return variable_tensors_to_arrow(tensors, dtype=&quot;float32&quot;)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        ...     return variable_tensors_to_arrow(tensors, dtype="float32")</span>
+<span class="sd">    """</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">pyarrow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pa</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">pyarrow_hotfix</span>  <span class="c1"># noqa # pylint: disable=unused-import</span>
@@ -383,7 +383,7 @@ under the License.
     <span class="p">)</span>
 
     <span class="n">tensor_type</span> <span class="o">=</span> <span class="n">TensorType</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span>
-    <span class="n">numpy_dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">tensor_type</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span><span class="o">.</span><span class="n">newbyteorder</span><span class="p">(</span><span class="s2">&quot;&lt;&quot;</span><span class="p">)</span>
+    <span class="n">numpy_dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">tensor_type</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span><span class="o">.</span><span class="n">newbyteorder</span><span class="p">(</span><span class="s2">"&lt;"</span><span class="p">)</span>
     <span class="n">storage_type</span> <span class="o">=</span> <span class="n">to_arrow_type</span><span class="p">(</span><span class="n">tensor_type</span><span class="p">)</span>
     <span class="n">max_payload_size</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span><span class="o">.</span><span class="n">max</span>
     <span class="n">shapes</span> <span class="o">=</span> <span class="p">[]</span>
@@ -402,23 +402,23 @@ under the License.
             <span class="k">continue</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tensor</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">MaskedArray</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-                <span class="s2">&quot;Variable tensor values do not support element masks; &quot;</span>
-                <span class="s2">&quot;use None for a null tensor row.&quot;</span><span class="p">)</span>
+                <span class="s2">"Variable tensor values do not support element masks; "</span>
+                <span class="s2">"use None for a null tensor row."</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tensor</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-                <span class="s2">&quot;Variable tensor values must be numpy.ndarray or None, got </span><span class="si">%s</span><span class="s2">.&quot;</span>
+                <span class="s2">"Variable tensor values must be numpy.ndarray or None, got </span><span class="si">%s</span><span class="s2">."</span>
                 <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="n">tensor</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
         <span class="n">tensor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">tensor</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">tensor</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Variable tensor values do not support object dtype.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"Variable tensor values do not support object dtype."</span><span class="p">)</span>
         <span class="n">_check_variable_tensor_shape</span><span class="p">(</span><span class="n">tensor</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 
         <span class="n">payload_size</span> <span class="o">=</span> <span class="n">tensor</span><span class="o">.</span><span class="n">size</span> <span class="o">*</span> <span class="n">numpy_dtype</span><span class="o">.</span><span class="n">itemsize</span>
         <span class="n">total_payload_size</span> <span class="o">=</span> <span class="n">byte_offsets</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">payload_size</span>
         <span class="k">if</span> <span class="n">total_payload_size</span> <span class="o">&gt;</span> <span class="n">max_payload_size</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">OverflowError</span><span class="p">(</span>
-                <span class="s2">&quot;Variable tensor payload exceeds the maximum size supported by &quot;</span>
-                <span class="s2">&quot;Arrow binary storage (</span><span class="si">%d</span><span class="s2"> bytes).&quot;</span> <span class="o">%</span> <span class="n">max_payload_size</span><span class="p">)</span>
+                <span class="s2">"Variable tensor payload exceeds the maximum size supported by "</span>
+                <span class="s2">"Arrow binary storage (</span><span class="si">%d</span><span class="s2"> bytes)."</span> <span class="o">%</span> <span class="n">max_payload_size</span><span class="p">)</span>
 
         <span class="n">shapes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">tensor</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
         <span class="n">byte_offsets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">total_payload_size</span><span class="p">)</span>
@@ -439,14 +439,14 @@ under the License.
             <span class="n">non_null_tensors</span><span class="p">,</span>
             <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">dtype</span><span class="o">=</span><span class="n">numpy_dtype</span><span class="p">,</span>
-            <span class="n">casting</span><span class="o">=</span><span class="s2">&quot;unsafe&quot;</span><span class="p">,</span>
+            <span class="n">casting</span><span class="o">=</span><span class="s2">"unsafe"</span><span class="p">,</span>
         <span class="p">)</span>
 
-    <span class="n">shape_array</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">shapes</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">storage_type</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="s2">&quot;shape&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
+    <span class="n">shape_array</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">shapes</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">storage_type</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="s2">"shape"</span><span class="p">)</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
     <span class="n">offset_buffer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span>
-        <span class="n">byte_offsets</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span><span class="o">.</span><span class="n">newbyteorder</span><span class="p">(</span><span class="s2">&quot;&lt;&quot;</span><span class="p">))</span>
+        <span class="n">byte_offsets</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span><span class="o">.</span><span class="n">newbyteorder</span><span class="p">(</span><span class="s2">"&lt;"</span><span class="p">))</span>
     <span class="n">data_array</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Array</span><span class="o">.</span><span class="n">from_buffers</span><span class="p">(</span>
-        <span class="n">storage_type</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">type</span><span class="p">,</span>
+        <span class="n">storage_type</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="s2">"data"</span><span class="p">)</span><span class="o">.</span><span class="n">type</span><span class="p">,</span>
         <span class="nb">len</span><span class="p">(</span><span class="n">shapes</span><span class="p">),</span>
         <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">pa</span><span class="o">.</span><span class="n">py_buffer</span><span class="p">(</span><span class="n">offset_buffer</span><span class="p">),</span> <span class="n">pa</span><span class="o">.</span><span class="n">py_buffer</span><span class="p">(</span><span class="n">payload</span><span class="p">)],</span>
     <span class="p">)</span>

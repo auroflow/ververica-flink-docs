@@ -307,13 +307,13 @@ under the License.
 <span class="c1">#  distributed with this work for additional information</span>
 <span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
 <span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
-<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  "License"); you may not use this file except in compliance</span>
 <span class="c1">#  with the License.  You may obtain a copy of the License at</span>
 <span class="c1">#</span>
 <span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="c1">#</span>
 <span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  distributed under the License is distributed on an "AS IS" BASIS,</span>
 <span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1">#  See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
@@ -329,41 +329,41 @@ under the License.
     <span class="n">t_env</span> <span class="o">=</span> <span class="n">TableEnvironment</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">EnvironmentSettings</span><span class="o">.</span><span class="n">in_streaming_mode</span><span class="p">())</span>
 
     <span class="n">table</span> <span class="o">=</span> <span class="n">t_env</span><span class="o">.</span><span class="n">from_elements</span><span class="p">(</span>
-        <span class="n">elements</span><span class="o">=</span><span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Hello&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;World&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;Flink&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;PyFlink&quot;</span><span class="p">)],</span>
-        <span class="n">schema</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">])</span>
+        <span class="n">elements</span><span class="o">=</span><span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'Hello'</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">'World'</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">"Flink"</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s2">"PyFlink"</span><span class="p">)],</span>
+        <span class="n">schema</span><span class="o">=</span><span class="p">[</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'data'</span><span class="p">])</span>
 
     <span class="c1"># define the sink tables</span>
-    <span class="n">t_env</span><span class="o">.</span><span class="n">execute_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+    <span class="n">t_env</span><span class="o">.</span><span class="n">execute_sql</span><span class="p">(</span><span class="s2">"""</span>
 <span class="s2">        CREATE TABLE first_sink (</span>
 <span class="s2">            id BIGINT,</span>
 <span class="s2">            data VARCHAR</span>
 <span class="s2">        ) WITH (</span>
-<span class="s2">            &#39;connector&#39; = &#39;print&#39;</span>
+<span class="s2">            'connector' = 'print'</span>
 <span class="s2">        )</span>
-<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+<span class="s2">    """</span><span class="p">)</span>
 
-    <span class="n">t_env</span><span class="o">.</span><span class="n">execute_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+    <span class="n">t_env</span><span class="o">.</span><span class="n">execute_sql</span><span class="p">(</span><span class="s2">"""</span>
 <span class="s2">        CREATE TABLE second_sink (</span>
 <span class="s2">            id BIGINT,</span>
 <span class="s2">            data VARCHAR</span>
 <span class="s2">        ) WITH (</span>
-<span class="s2">            &#39;connector&#39; = &#39;print&#39;</span>
+<span class="s2">            'connector' = 'print'</span>
 <span class="s2">        )</span>
-<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+<span class="s2">    """</span><span class="p">)</span>
 
     <span class="c1"># create a statement set</span>
     <span class="n">statement_set</span> <span class="o">=</span> <span class="n">t_env</span><span class="o">.</span><span class="n">create_statement_set</span><span class="p">()</span>
 
-    <span class="c1"># emit the data with id &lt;= 3 to the &quot;first_sink&quot; via sql statement</span>
-    <span class="n">statement_set</span><span class="o">.</span><span class="n">add_insert_sql</span><span class="p">(</span><span class="s2">&quot;INSERT INTO first_sink SELECT * FROM </span><span class="si">%s</span><span class="s2"> WHERE id &lt;= 3&quot;</span> <span class="o">%</span> <span class="n">table</span><span class="p">)</span>
+    <span class="c1"># emit the data with id &lt;= 3 to the "first_sink" via sql statement</span>
+    <span class="n">statement_set</span><span class="o">.</span><span class="n">add_insert_sql</span><span class="p">(</span><span class="s2">"INSERT INTO first_sink SELECT * FROM </span><span class="si">%s</span><span class="s2"> WHERE id &lt;= 3"</span> <span class="o">%</span> <span class="n">table</span><span class="p">)</span>
 
-    <span class="c1"># emit the data which contains &quot;Flink&quot; to the &quot;second_sink&quot;</span>
+    <span class="c1"># emit the data which contains "Flink" to the "second_sink"</span>
     <span class="nd">@udf</span><span class="p">(</span><span class="n">result_type</span><span class="o">=</span><span class="n">DataTypes</span><span class="o">.</span><span class="n">BOOLEAN</span><span class="p">())</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">contains_flink</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">&quot;Flink&quot;</span> <span class="ow">in</span> <span class="n">data</span>
+        <span class="k">return</span> <span class="s2">"Flink"</span> <span class="ow">in</span> <span class="n">data</span>
 
     <span class="n">second_table</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">contains_flink</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
-    <span class="n">statement_set</span><span class="o">.</span><span class="n">add_insert</span><span class="p">(</span><span class="s2">&quot;second_sink&quot;</span><span class="p">,</span> <span class="n">second_table</span><span class="p">)</span>
+    <span class="n">statement_set</span><span class="o">.</span><span class="n">add_insert</span><span class="p">(</span><span class="s2">"second_sink"</span><span class="p">,</span> <span class="n">second_table</span><span class="p">)</span>
 
     <span class="c1"># execute the statement set</span>
     <span class="c1"># remove .wait if submitting to a remote cluster, refer to</span>
@@ -372,8 +372,8 @@ under the License.
     <span class="n">statement_set</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">stream</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">stream</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">"</span><span class="si">%(message)s</span><span class="s2">"</span><span class="p">)</span>
 
     <span class="n">multi_sink</span><span class="p">()</span>
 </pre></div>

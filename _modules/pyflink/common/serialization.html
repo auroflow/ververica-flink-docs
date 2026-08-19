@@ -278,13 +278,13 @@ under the License.
 <span class="c1">#  distributed with this work for additional information</span>
 <span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
 <span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
-<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  "License"); you may not use this file except in compliance</span>
 <span class="c1">#  with the License.  You may obtain a copy of the License at</span>
 <span class="c1">#</span>
 <span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="c1">#</span>
 <span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  distributed under the License is distributed on an "AS IS" BASIS,</span>
 <span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1">#  See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
@@ -294,44 +294,44 @@ under the License.
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.java_gateway</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_gateway</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;SerializationSchema&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;DeserializationSchema&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;SimpleStringSchema&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;Encoder&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;BulkWriterFactory&#39;</span>
+    <span class="s1">'SerializationSchema'</span><span class="p">,</span>
+    <span class="s1">'DeserializationSchema'</span><span class="p">,</span>
+    <span class="s1">'SimpleStringSchema'</span><span class="p">,</span>
+    <span class="s1">'Encoder'</span><span class="p">,</span>
+    <span class="s1">'BulkWriterFactory'</span>
 <span class="p">]</span>
 
 
 <div class="viewcode-block" id="SerializationSchema"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.serialization.SerializationSchema.html#pyflink.common.serialization.SerializationSchema">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">SerializationSchema</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Base class for SerializationSchema. The serialization schema describes how to turn a data object</span>
 <span class="sd">    into a different serialized representation. Most data sinks (for example Apache Kafka) require</span>
 <span class="sd">    the data to be handed to them in a specific format (for example as byte strings).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_serialization_schema</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_serialization_schema</span> <span class="o">=</span> <span class="n">j_serialization_schema</span></div>
 
 
 <div class="viewcode-block" id="DeserializationSchema"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.serialization.DeserializationSchema.html#pyflink.common.serialization.DeserializationSchema">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">DeserializationSchema</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Base class for DeserializationSchema. The deserialization schema describes how to turn the byte</span>
 <span class="sd">    messages delivered by certain data sources (for example Apache Kafka) into data types (Java/</span>
 <span class="sd">    Scala objects) that are processed by Flink.</span>
 
 <span class="sd">    In addition, the DeserializationSchema describes the produced type which lets Flink create</span>
 <span class="sd">    internal serializers and structures to handle the type.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_deserialization_schema</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_deserialization_schema</span> <span class="o">=</span> <span class="n">j_deserialization_schema</span></div>
 
 
 <div class="viewcode-block" id="SimpleStringSchema"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.serialization.SimpleStringSchema.html#pyflink.common.serialization.SimpleStringSchema">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">SimpleStringSchema</span><span class="p">(</span><span class="n">SerializationSchema</span><span class="p">,</span> <span class="n">DeserializationSchema</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Very simple serialization/deserialization schema for strings. By default, the serializer uses</span>
-<span class="sd">    &#39;UTF-8&#39; for string/byte conversion.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    'UTF-8' for string/byte conversion.</span>
+<span class="sd">    """</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">charset</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;UTF-8&#39;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">charset</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">'UTF-8'</span><span class="p">):</span>
         <span class="n">gate_way</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
         <span class="n">j_char_set</span> <span class="o">=</span> <span class="n">gate_way</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">java</span><span class="o">.</span><span class="n">nio</span><span class="o">.</span><span class="n">charset</span><span class="o">.</span><span class="n">Charset</span><span class="o">.</span><span class="n">forName</span><span class="p">(</span><span class="n">charset</span><span class="p">)</span>
         <span class="n">j_simple_string_serialization_schema</span> <span class="o">=</span> <span class="n">gate_way</span> \
@@ -343,40 +343,40 @@ under the License.
 
 
 <div class="viewcode-block" id="Encoder"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.serialization.Encoder.html#pyflink.common.serialization.Encoder">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">Encoder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Encoder is used by the file sink to perform the actual writing of the</span>
 <span class="sd">    incoming elements to the files in a bucket.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_encoder</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_encoder</span> <span class="o">=</span> <span class="n">j_encoder</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">simple_string_encoder</span><span class="p">(</span><span class="n">charset_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;UTF-8&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Encoder&#39;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">simple_string_encoder</span><span class="p">(</span><span class="n">charset_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"UTF-8"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'Encoder'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        A simple Encoder that uses toString() on the input elements and writes them to</span>
 <span class="sd">        the output bucket file separated by newline.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">j_encoder</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">serialization</span><span class="o">.</span>\
             <span class="n">SimpleStringEncoder</span><span class="p">(</span><span class="n">charset_name</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">Encoder</span><span class="p">(</span><span class="n">j_encoder</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="BulkWriterFactory"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.serialization.BulkWriterFactory.html#pyflink.common.serialization.BulkWriterFactory">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">BulkWriterFactory</span><span class="p">(</span><span class="n">JavaObjectWrapper</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    The Python wrapper of Java BulkWriter.Factory interface, which is the base interface for data</span>
 <span class="sd">    sinks that write records into files in a bulk manner.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_bulk_writer_factory</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">j_bulk_writer_factory</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="RowDataBulkWriterFactory"><a class="viewcode-back" href="../../../reference/pyflink.common/api/pyflink.common.serialization.RowDataBulkWriterFactory.html#pyflink.common.serialization.RowDataBulkWriterFactory">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">RowDataBulkWriterFactory</span><span class="p">(</span><span class="n">BulkWriterFactory</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A :class:`～BulkWriterFactory` that receives records with RowData type. This is for indicating</span>
 <span class="sd">    that Row record from Python must be first converted to RowData.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_bulk_writer_factory</span><span class="p">,</span> <span class="n">row_type</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">j_bulk_writer_factory</span><span class="p">)</span>

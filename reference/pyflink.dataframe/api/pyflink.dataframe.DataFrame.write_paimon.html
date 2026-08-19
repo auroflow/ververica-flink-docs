@@ -398,85 +398,85 @@ be supplied.</p></li>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pf</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">events</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">from_records</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="p">[(</span><span class="s2">&quot;2026-05-27&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;login&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;2026-05-27&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;pay&quot;</span><span class="p">)],</span>
-<span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;dt&quot;</span><span class="p">,</span> <span class="s2">&quot;user_id&quot;</span><span class="p">,</span> <span class="s2">&quot;payload&quot;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[(</span><span class="s2">"2026-05-27"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"login"</span><span class="p">),</span> <span class="p">(</span><span class="s2">"2026-05-27"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">"pay"</span><span class="p">)],</span>
+<span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">[</span><span class="s2">"dt"</span><span class="p">,</span> <span class="s2">"user_id"</span><span class="p">,</span> <span class="s2">"payload"</span><span class="p">],</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Append-only table with explicit bucket distribution</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">events</span><span class="o">.</span><span class="n">write_paimon</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;oss://bucket/warehouse/db.db/events&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"oss://bucket/warehouse/db.db/events"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">auto_create</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">write_mode</span><span class="o">=</span><span class="s2">&quot;append-only&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">file_format</span><span class="o">=</span><span class="s2">&quot;orc&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">write_mode</span><span class="o">=</span><span class="s2">"append-only"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">file_format</span><span class="o">=</span><span class="s2">"orc"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">bucket</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">bucket_key</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;dt&quot;</span><span class="p">,</span> <span class="s2">&quot;user_id&quot;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">bucket_key</span><span class="o">=</span><span class="p">[</span><span class="s2">"dt"</span><span class="p">,</span> <span class="s2">"user_id"</span><span class="p">],</span>
 <span class="gp">... </span>    <span class="n">parallelism</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Batch append-only write with clustering</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">events</span><span class="o">.</span><span class="n">write_paimon</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;oss://bucket/warehouse/db.db/events_clustered&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"oss://bucket/warehouse/db.db/events_clustered"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">auto_create</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">write_mode</span><span class="o">=</span><span class="s2">&quot;append-only&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">bucket_key</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;dt&quot;</span><span class="p">,</span> <span class="s2">&quot;user_id&quot;</span><span class="p">],</span>
-<span class="gp">... </span>    <span class="n">clustering_by_columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;dt&quot;</span><span class="p">,</span> <span class="s2">&quot;user_id&quot;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">write_mode</span><span class="o">=</span><span class="s2">"append-only"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">bucket_key</span><span class="o">=</span><span class="p">[</span><span class="s2">"dt"</span><span class="p">,</span> <span class="s2">"user_id"</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">clustering_by_columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"dt"</span><span class="p">,</span> <span class="s2">"user_id"</span><span class="p">],</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">order_schema</span> <span class="o">=</span> <span class="p">{</span>
-<span class="gp">... </span>    <span class="s2">&quot;order_id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
-<span class="gp">... </span>    <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">(),</span>
-<span class="gp">... </span>    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
-<span class="gp">... </span>    <span class="s2">&quot;event_ts&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">timestamp</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="s2">"order_id"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="s2">"amount"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="s2">"status"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="s2">"event_ts"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">timestamp</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
 <span class="gp">... </span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">orders</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_paimon</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;oss://bucket/warehouse/db.db/orders&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"oss://bucket/warehouse/db.db/orders"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="n">order_schema</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">primary_key</span><span class="o">=</span><span class="s2">&quot;order_id&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">primary_key</span><span class="o">=</span><span class="s2">"order_id"</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Change-log sink with lookup changelog production</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">orders</span><span class="o">.</span><span class="n">write_paimon</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;oss://bucket/warehouse/db.db/orders&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">primary_key</span><span class="o">=</span><span class="s2">&quot;order_id&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"oss://bucket/warehouse/db.db/orders"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">primary_key</span><span class="o">=</span><span class="s2">"order_id"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">auto_create</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">bucket_key</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;order_id&quot;</span><span class="p">],</span>
-<span class="gp">... </span>    <span class="n">changelog_producer</span><span class="o">=</span><span class="s2">&quot;lookup&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">merge_engine</span><span class="o">=</span><span class="s2">&quot;deduplicate&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">delete_strategy</span><span class="o">=</span><span class="s2">&quot;CHANGELOG_STANDARD&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">bucket_key</span><span class="o">=</span><span class="p">[</span><span class="s2">"order_id"</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">changelog_producer</span><span class="o">=</span><span class="s2">"lookup"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">merge_engine</span><span class="o">=</span><span class="s2">"deduplicate"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">delete_strategy</span><span class="o">=</span><span class="s2">"CHANGELOG_STANDARD"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">snapshot_num_retained_min</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">snapshot_time_retained</span><span class="o">=</span><span class="s2">&quot;12h&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">snapshot_time_retained</span><span class="o">=</span><span class="s2">"12h"</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Partial-update sink that ignores delete records</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">orders</span><span class="o">.</span><span class="n">write_paimon</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;oss://bucket/warehouse/db.db/orders_partial&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">primary_key</span><span class="o">=</span><span class="s2">&quot;order_id&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"oss://bucket/warehouse/db.db/orders_partial"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">primary_key</span><span class="o">=</span><span class="s2">"order_id"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">auto_create</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">merge_engine</span><span class="o">=</span><span class="s2">&quot;partial-update&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">merge_engine</span><span class="o">=</span><span class="s2">"partial-update"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">ignore_delete</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">lookup_cache_max_memory_size</span><span class="o">=</span><span class="s2">&quot;1 GB&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">lookup_cache_max_memory_size</span><span class="o">=</span><span class="s2">"1 GB"</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">metrics_schema</span> <span class="o">=</span> <span class="p">{</span>
-<span class="gp">... </span>    <span class="s2">&quot;product_id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
-<span class="gp">... </span>    <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">(),</span>
-<span class="gp">... </span>    <span class="s2">&quot;sales&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="s2">"product_id"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="s2">"price"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">float64</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="s2">"sales"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
 <span class="gp">... </span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_paimon</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;oss://bucket/warehouse/db.db/product_metrics&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"oss://bucket/warehouse/db.db/product_metrics"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="n">metrics_schema</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">primary_key</span><span class="o">=</span><span class="s2">&quot;product_id&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">primary_key</span><span class="o">=</span><span class="s2">"product_id"</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Aggregation merge engine with original Paimon option keys</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span><span class="o">.</span><span class="n">write_paimon</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;oss://bucket/warehouse/db.db/product_metrics_agg&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">primary_key</span><span class="o">=</span><span class="s2">&quot;product_id&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"oss://bucket/warehouse/db.db/product_metrics_agg"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">primary_key</span><span class="o">=</span><span class="s2">"product_id"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">auto_create</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">merge_engine</span><span class="o">=</span><span class="s2">&quot;aggregation&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">merge_engine</span><span class="o">=</span><span class="s2">"aggregation"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">extra_options</span><span class="o">=</span><span class="p">{</span>
-<span class="gp">... </span>        <span class="s2">&quot;fields.price.aggregate-function&quot;</span><span class="p">:</span> <span class="s2">&quot;max&quot;</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="s2">&quot;fields.sales.aggregate-function&quot;</span><span class="p">:</span> <span class="s2">&quot;sum&quot;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">"fields.price.aggregate-function"</span><span class="p">:</span> <span class="s2">"max"</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">"fields.sales.aggregate-function"</span><span class="p">:</span> <span class="s2">"sum"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="p">},</span>
 <span class="gp">... </span><span class="p">)</span>
 </pre></div>

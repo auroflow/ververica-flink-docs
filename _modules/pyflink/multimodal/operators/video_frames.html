@@ -278,18 +278,18 @@ under the License.
 <span class="c1">#  distributed with this work for additional information</span>
 <span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
 <span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
-<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  "License"); you may not use this file except in compliance</span>
 <span class="c1">#  with the License.  You may obtain a copy of the License at</span>
 <span class="c1">#</span>
 <span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="c1">#</span>
 <span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  distributed under the License is distributed on an "AS IS" BASIS,</span>
 <span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1">#  See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 <span class="c1">################################################################################</span>
-<span class="sd">&quot;&quot;&quot;Video frame operators for extraction pipelines.&quot;&quot;&quot;</span>
+<span class="sd">"""Video frame operators for extraction pipelines."""</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
 
@@ -315,20 +315,20 @@ under the License.
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.multimodal.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">_build_or_apply_udf</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;video_metadata&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;video_split&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;video_explode_frames&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;video_extract_frames&quot;</span><span class="p">,</span>
+    <span class="s2">"video_metadata"</span><span class="p">,</span>
+    <span class="s2">"video_split"</span><span class="p">,</span>
+    <span class="s2">"video_explode_frames"</span><span class="p">,</span>
+    <span class="s2">"video_extract_frames"</span><span class="p">,</span>
 <span class="p">]</span>
 
-<span class="n">_VALID_VIDEO_VALUE_ON_ERROR</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;raise&quot;</span><span class="p">,</span> <span class="s2">&quot;null&quot;</span><span class="p">}</span>
-<span class="n">_VALID_VIDEO_ROW_ON_ERROR</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;raise&quot;</span><span class="p">,</span> <span class="s2">&quot;skip&quot;</span><span class="p">}</span>
+<span class="n">_VALID_VIDEO_VALUE_ON_ERROR</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"raise"</span><span class="p">,</span> <span class="s2">"null"</span><span class="p">}</span>
+<span class="n">_VALID_VIDEO_ROW_ON_ERROR</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"raise"</span><span class="p">,</span> <span class="s2">"skip"</span><span class="p">}</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_normalize_on_error</span><span class="p">(</span><span class="n">on_error</span><span class="p">,</span> <span class="n">valid_values</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">on_error</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">valid_values</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;on_error must be one of </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">valid_values</span><span class="p">)</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="n">on_error</span><span class="si">!r}</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">"on_error must be one of </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">valid_values</span><span class="p">)</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="n">on_error</span><span class="si">!r}</span><span class="s2">"</span>
         <span class="p">)</span>
     <span class="k">return</span> <span class="n">on_error</span>
 
@@ -337,7 +337,7 @@ under the License.
     <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be a non-negative integer, got </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be a non-negative integer, got </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">value</span>
 
 
@@ -351,39 +351,39 @@ under the License.
     <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be a non-negative integer, got </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be a non-negative integer, got </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2">"</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">value</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_validated_file_read_options</span><span class="p">(</span><span class="n">read_chunk_size</span><span class="p">,</span> <span class="n">max_cached_blocks</span><span class="p">,</span> <span class="n">read_ahead_blocks</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate public file-read options before passing them to codec helpers.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Validate public file-read options before passing them to codec helpers."""</span>
     <span class="n">options</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">read_chunk_size</span> <span class="o">=</span> <span class="n">_optional_positive_int</span><span class="p">(</span><span class="s2">&quot;read_chunk_size&quot;</span><span class="p">,</span> <span class="n">read_chunk_size</span><span class="p">)</span>
+    <span class="n">read_chunk_size</span> <span class="o">=</span> <span class="n">_optional_positive_int</span><span class="p">(</span><span class="s2">"read_chunk_size"</span><span class="p">,</span> <span class="n">read_chunk_size</span><span class="p">)</span>
     <span class="n">max_cached_blocks</span> <span class="o">=</span> <span class="n">_optional_non_negative_int</span><span class="p">(</span>
-        <span class="s2">&quot;max_cached_blocks&quot;</span><span class="p">,</span> <span class="n">max_cached_blocks</span><span class="p">)</span>
+        <span class="s2">"max_cached_blocks"</span><span class="p">,</span> <span class="n">max_cached_blocks</span><span class="p">)</span>
     <span class="n">read_ahead_blocks</span> <span class="o">=</span> <span class="n">_optional_non_negative_int</span><span class="p">(</span>
-        <span class="s2">&quot;read_ahead_blocks&quot;</span><span class="p">,</span> <span class="n">read_ahead_blocks</span><span class="p">)</span>
+        <span class="s2">"read_ahead_blocks"</span><span class="p">,</span> <span class="n">read_ahead_blocks</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">read_chunk_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">options</span><span class="p">[</span><span class="s2">&quot;read_chunk_size&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">read_chunk_size</span>
+        <span class="n">options</span><span class="p">[</span><span class="s2">"read_chunk_size"</span><span class="p">]</span> <span class="o">=</span> <span class="n">read_chunk_size</span>
     <span class="k">if</span> <span class="n">max_cached_blocks</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">options</span><span class="p">[</span><span class="s2">&quot;max_cached_blocks&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">max_cached_blocks</span>
+        <span class="n">options</span><span class="p">[</span><span class="s2">"max_cached_blocks"</span><span class="p">]</span> <span class="o">=</span> <span class="n">max_cached_blocks</span>
     <span class="k">if</span> <span class="n">read_ahead_blocks</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">options</span><span class="p">[</span><span class="s2">&quot;read_ahead_blocks&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">read_ahead_blocks</span>
+        <span class="n">options</span><span class="p">[</span><span class="s2">"read_ahead_blocks"</span><span class="p">]</span> <span class="o">=</span> <span class="n">read_ahead_blocks</span>
     <span class="k">return</span> <span class="n">options</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_bridge_client</span><span class="p">(</span><span class="n">function_context</span><span class="p">,</span> <span class="n">operator_name</span><span class="p">):</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">function_context</span><span class="p">,</span> <span class="s2">&quot;_get_file_system_bridge_client&quot;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">function_context</span><span class="p">,</span> <span class="s2">"_get_file_system_bridge_client"</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">operator_name</span><span class="si">}</span><span class="s2"> requires a FunctionContext with FileSystem bridge access.&quot;</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">operator_name</span><span class="si">}</span><span class="s2"> requires a FunctionContext with FileSystem bridge access."</span>
         <span class="p">)</span>
     <span class="k">return</span> <span class="n">function_context</span><span class="o">.</span><span class="n">_get_file_system_bridge_client</span><span class="p">()</span>
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">_VideoMetadata</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Probe lightweight video container metadata.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Probe lightweight video container metadata."""</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">on_error</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">,</span> <span class="n">container_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">on_error</span><span class="o">=</span><span class="s2">"raise"</span><span class="p">,</span> <span class="n">container_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">read_chunk_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_cached_blocks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">read_ahead_blocks</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
@@ -393,7 +393,7 @@ under the License.
             <span class="n">read_chunk_size</span><span class="p">,</span> <span class="n">max_cached_blocks</span><span class="p">,</span> <span class="n">read_ahead_blocks</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_context</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_bridge_client</span> <span class="o">=</span> <span class="n">_bridge_client</span><span class="p">(</span><span class="n">function_context</span><span class="p">,</span> <span class="s2">&quot;video_metadata&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bridge_client</span> <span class="o">=</span> <span class="n">_bridge_client</span><span class="p">(</span><span class="n">function_context</span><span class="p">,</span> <span class="s2">"video_metadata"</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uri</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">uri</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -406,21 +406,21 @@ under the License.
                 <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">file_read_options</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_error</span> <span class="o">==</span> <span class="s2">&quot;null&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_error</span> <span class="o">==</span> <span class="s2">"null"</span><span class="p">:</span>
                 <span class="k">return</span> <span class="kc">None</span>
             <span class="k">raise</span>
 
 
 <div class="viewcode-block" id="video_metadata"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.video_metadata.html#pyflink.multimodal.operators.video_metadata">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">video_metadata</span><span class="p">(</span>
     <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
-    <span class="n">on_error</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">,</span>
+    <span class="n">on_error</span><span class="o">=</span><span class="s2">"raise"</span><span class="p">,</span>
     <span class="n">container_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">read_chunk_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">max_cached_blocks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">read_ahead_blocks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Probe lightweight video metadata from a URI/path.</span>
 
 <span class="sd">    The operator opens the video container through the Java-backed FileSystem</span>
@@ -429,8 +429,8 @@ under the License.
 <span class="sd">    Args:</span>
 <span class="sd">        *columns: Optional URI column. When provided, the UDF is applied</span>
 <span class="sd">            directly instead of returning a factory.</span>
-<span class="sd">        on_error: Error handling policy. ``&quot;raise&quot;`` propagates failures;</span>
-<span class="sd">            ``&quot;null&quot;`` returns ``None`` for unreadable inputs.</span>
+<span class="sd">        on_error: Error handling policy. ``"raise"`` propagates failures;</span>
+<span class="sd">            ``"null"`` returns ``None`` for unreadable inputs.</span>
 <span class="sd">        container_options: Optional PyAV ``av.open`` options.</span>
 <span class="sd">        read_chunk_size: Optional Java-backed file read chunk size in bytes.</span>
 <span class="sd">            Must not exceed the 16 MiB Java bridge read range limit.</span>
@@ -445,15 +445,15 @@ under the License.
 <span class="sd">        ``ROW&lt;width INT, height INT, fps DOUBLE, duration_ms BIGINT,</span>
 <span class="sd">        frame_count BIGINT, time_base DOUBLE, codec_name STRING,</span>
 <span class="sd">        video_stream_index INT&gt;``. ``codec_name`` is the PyAV/FFmpeg codec</span>
-<span class="sd">        short name, such as ``&quot;h264&quot;`` or ``&quot;hevc&quot;``; it is included for</span>
+<span class="sd">        short name, such as ``"h264"`` or ``"hevc"``; it is included for</span>
 <span class="sd">        decode compatibility and performance diagnostics. ``video_stream_index``</span>
 <span class="sd">        identifies the selected video stream within containers that also carry</span>
 <span class="sd">        audio or multiple video streams. The metadata is not expanded into</span>
 <span class="sd">        separate columns.</span>
 
 <span class="sd">    Example::</span>
-<span class="sd">        &gt;&gt;&gt; df = df.with_column(&quot;video_meta&quot;, video_metadata(col(&quot;uri&quot;)))</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; df = df.with_column("video_meta", video_metadata(col("uri")))</span>
+<span class="sd">    """</span>
     <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
         <span class="n">_VideoMetadata</span><span class="p">(</span>
             <span class="n">on_error</span><span class="o">=</span><span class="n">on_error</span><span class="p">,</span>
@@ -468,7 +468,7 @@ under the License.
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">_VideoSplit</span><span class="p">(</span><span class="n">TableFunction</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Split a video URI or segment ref into metadata-only segment refs.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Split a video URI or segment ref into metadata-only segment refs."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -476,7 +476,7 @@ under the License.
         <span class="n">num_segments</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">video_duration_ms</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">max_segments</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
-        <span class="n">on_error</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">,</span>
+        <span class="n">on_error</span><span class="o">=</span><span class="s2">"raise"</span><span class="p">,</span>
         <span class="n">container_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">read_chunk_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">max_cached_blocks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -485,25 +485,25 @@ under the License.
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">segment_duration_ms</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">num_segments</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;exactly one of segment_duration_ms or num_segments is required&quot;</span><span class="p">)</span>
+                <span class="s2">"exactly one of segment_duration_ms or num_segments is required"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">segment_duration_ms</span> <span class="o">=</span> <span class="p">(</span>
             <span class="kc">None</span> <span class="k">if</span> <span class="n">segment_duration_ms</span> <span class="ow">is</span> <span class="kc">None</span>
-            <span class="k">else</span> <span class="n">_validate_positive_int</span><span class="p">(</span><span class="s2">&quot;segment_duration_ms&quot;</span><span class="p">,</span> <span class="n">segment_duration_ms</span><span class="p">)</span>
+            <span class="k">else</span> <span class="n">_validate_positive_int</span><span class="p">(</span><span class="s2">"segment_duration_ms"</span><span class="p">,</span> <span class="n">segment_duration_ms</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">num_segments</span> <span class="o">=</span> <span class="p">(</span>
             <span class="kc">None</span> <span class="k">if</span> <span class="n">num_segments</span> <span class="ow">is</span> <span class="kc">None</span>
-            <span class="k">else</span> <span class="n">_validate_positive_int</span><span class="p">(</span><span class="s2">&quot;num_segments&quot;</span><span class="p">,</span> <span class="n">num_segments</span><span class="p">)</span>
+            <span class="k">else</span> <span class="n">_validate_positive_int</span><span class="p">(</span><span class="s2">"num_segments"</span><span class="p">,</span> <span class="n">num_segments</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">video_duration_ms</span> <span class="o">=</span> <span class="n">_optional_time_ms</span><span class="p">(</span>
-            <span class="s2">&quot;video_duration_ms&quot;</span><span class="p">,</span> <span class="n">video_duration_ms</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">max_segments</span> <span class="o">=</span> <span class="n">_validate_positive_int</span><span class="p">(</span><span class="s2">&quot;max_segments&quot;</span><span class="p">,</span> <span class="n">max_segments</span><span class="p">)</span>
+            <span class="s2">"video_duration_ms"</span><span class="p">,</span> <span class="n">video_duration_ms</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_segments</span> <span class="o">=</span> <span class="n">_validate_positive_int</span><span class="p">(</span><span class="s2">"max_segments"</span><span class="p">,</span> <span class="n">max_segments</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">on_error</span> <span class="o">=</span> <span class="n">_normalize_on_error</span><span class="p">(</span><span class="n">on_error</span><span class="p">,</span> <span class="n">_VALID_VIDEO_ROW_ON_ERROR</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">container_options</span> <span class="o">=</span> <span class="n">container_options</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">file_read_options</span> <span class="o">=</span> <span class="n">_validated_file_read_options</span><span class="p">(</span>
             <span class="n">read_chunk_size</span><span class="p">,</span> <span class="n">max_cached_blocks</span><span class="p">,</span> <span class="n">read_ahead_blocks</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_context</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_bridge_client</span> <span class="o">=</span> <span class="n">_bridge_client</span><span class="p">(</span><span class="n">function_context</span><span class="p">,</span> <span class="s2">&quot;video_split&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bridge_client</span> <span class="o">=</span> <span class="n">_bridge_client</span><span class="p">(</span><span class="n">function_context</span><span class="p">,</span> <span class="s2">"video_split"</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">video_input</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
@@ -529,11 +529,11 @@ under the License.
             <span class="p">)</span>
             <span class="k">if</span> <span class="n">end_time_ms</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                    <span class="s2">&quot;video_split requires video end_time_ms, video metadata &quot;</span>
-                    <span class="s2">&quot;duration_ms, or video_duration_ms&quot;</span>
+                    <span class="s2">"video_split requires video end_time_ms, video metadata "</span>
+                    <span class="s2">"duration_ms, or video_duration_ms"</span>
                 <span class="p">)</span>
             <span class="k">if</span> <span class="n">end_time_ms</span> <span class="o">&lt;</span> <span class="n">start_time_ms</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;segment end_time_ms must be &gt;= start_time_ms&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"segment end_time_ms must be &gt;= start_time_ms"</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">segment_duration_ms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">_split_by_duration</span><span class="p">(</span>
@@ -542,7 +542,7 @@ under the License.
                 <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">_split_by_count</span><span class="p">(</span>
                     <span class="n">video_ref</span><span class="o">.</span><span class="n">uri</span><span class="p">,</span> <span class="n">start_time_ms</span><span class="p">,</span> <span class="n">end_time_ms</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_error</span> <span class="o">==</span> <span class="s2">&quot;skip&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_error</span> <span class="o">==</span> <span class="s2">"skip"</span><span class="p">:</span>
                 <span class="k">return</span>
             <span class="k">raise</span>
 
@@ -588,14 +588,14 @@ under the License.
     <span class="n">num_segments</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">video_duration_ms</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">max_segments</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
-    <span class="n">on_error</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">,</span>
+    <span class="n">on_error</span><span class="o">=</span><span class="s2">"raise"</span><span class="p">,</span>
     <span class="n">container_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">read_chunk_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">max_cached_blocks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">read_ahead_blocks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Split a video URI or segment ref into metadata-only segment refs.</span>
 
 <span class="sd">    For full-video URI inputs, the operator probes video metadata when no</span>
@@ -617,8 +617,8 @@ under the License.
 <span class="sd">            ``num_segments`` is required.</span>
 <span class="sd">        video_duration_ms: Optional constant duration fallback in milliseconds.</span>
 <span class="sd">        max_segments: Safety limit for emitted segments per input row.</span>
-<span class="sd">        on_error: Error handling policy. ``&quot;raise&quot;`` propagates failures;</span>
-<span class="sd">            ``&quot;skip&quot;`` drops unreadable inputs.</span>
+<span class="sd">        on_error: Error handling policy. ``"raise"`` propagates failures;</span>
+<span class="sd">            ``"skip"`` drops unreadable inputs.</span>
 <span class="sd">        container_options: Optional PyAV ``av.open`` options used only when</span>
 <span class="sd">            this operator probes metadata itself.</span>
 <span class="sd">        read_chunk_size: Optional Java-backed file read chunk size in bytes</span>
@@ -637,8 +637,8 @@ under the License.
 <span class="sd">    Example::</span>
 <span class="sd">        &gt;&gt;&gt; segments = table.join_lateral(</span>
 <span class="sd">        ...     video_split(segment_duration_ms=1000)(</span>
-<span class="sd">        ...         col(&quot;uri&quot;)).alias(&quot;segment&quot;))</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        ...         col("uri")).alias("segment"))</span>
+<span class="sd">    """</span>
     <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udtf</span><span class="p">(</span>
         <span class="n">_VideoSplit</span><span class="p">(</span>
             <span class="n">segment_duration_ms</span><span class="o">=</span><span class="n">segment_duration_ms</span><span class="p">,</span>
@@ -658,16 +658,16 @@ under the License.
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">_VideoExplodeFrames</span><span class="p">(</span><span class="n">TableFunction</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extract selected frames from a video or metadata-only segment.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Extract selected frames from a video or metadata-only segment."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">frame_selector</span><span class="o">=</span><span class="s2">&quot;all_frames&quot;</span><span class="p">,</span>
+        <span class="n">frame_selector</span><span class="o">=</span><span class="s2">"all_frames"</span><span class="p">,</span>
         <span class="n">sample_interval_ms</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">max_frames</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">image_height</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">image_width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">on_error</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">,</span>
+        <span class="n">on_error</span><span class="o">=</span><span class="s2">"raise"</span><span class="p">,</span>
         <span class="n">container_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">read_chunk_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">max_cached_blocks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -677,9 +677,9 @@ under the License.
         <span class="bp">self</span><span class="o">.</span><span class="n">frame_selector</span> <span class="o">=</span> <span class="n">_normalize_frame_selector</span><span class="p">(</span><span class="n">frame_selector</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sample_interval_ms</span> <span class="o">=</span> <span class="p">(</span>
             <span class="kc">None</span> <span class="k">if</span> <span class="n">sample_interval_ms</span> <span class="ow">is</span> <span class="kc">None</span>
-            <span class="k">else</span> <span class="n">_validate_positive_int</span><span class="p">(</span><span class="s2">&quot;sample_interval_ms&quot;</span><span class="p">,</span> <span class="n">sample_interval_ms</span><span class="p">)</span>
+            <span class="k">else</span> <span class="n">_validate_positive_int</span><span class="p">(</span><span class="s2">"sample_interval_ms"</span><span class="p">,</span> <span class="n">sample_interval_ms</span><span class="p">)</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">max_frames</span> <span class="o">=</span> <span class="n">_optional_positive_int</span><span class="p">(</span><span class="s2">&quot;max_frames&quot;</span><span class="p">,</span> <span class="n">max_frames</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_frames</span> <span class="o">=</span> <span class="n">_optional_positive_int</span><span class="p">(</span><span class="s2">"max_frames"</span><span class="p">,</span> <span class="n">max_frames</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">image_height</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">image_width</span> <span class="o">=</span> <span class="n">_normalize_image_size</span><span class="p">(</span>
             <span class="n">image_height</span><span class="p">,</span> <span class="n">image_width</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">on_error</span> <span class="o">=</span> <span class="n">_normalize_on_error</span><span class="p">(</span><span class="n">on_error</span><span class="p">,</span> <span class="n">_VALID_VIDEO_ROW_ON_ERROR</span><span class="p">)</span>
@@ -689,7 +689,7 @@ under the License.
 
     <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_context</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_bridge_client</span> <span class="o">=</span> <span class="n">_bridge_client</span><span class="p">(</span>
-            <span class="n">function_context</span><span class="p">,</span> <span class="s2">&quot;video_explode_frames&quot;</span><span class="p">)</span>
+            <span class="n">function_context</span><span class="p">,</span> <span class="s2">"video_explode_frames"</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">video_input</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
@@ -705,26 +705,26 @@ under the License.
                 <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">file_read_options</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_error</span> <span class="o">==</span> <span class="s2">&quot;skip&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_error</span> <span class="o">==</span> <span class="s2">"skip"</span><span class="p">:</span>
                 <span class="k">return</span>
             <span class="k">raise</span>
 
 
 <div class="viewcode-block" id="video_explode_frames"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.video_explode_frames.html#pyflink.multimodal.operators.video_explode_frames">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">video_explode_frames</span><span class="p">(</span>
     <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
-    <span class="n">frame_selector</span><span class="o">=</span><span class="s2">&quot;all_frames&quot;</span><span class="p">,</span>
+    <span class="n">frame_selector</span><span class="o">=</span><span class="s2">"all_frames"</span><span class="p">,</span>
     <span class="n">sample_interval_ms</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">max_frames</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">image_height</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">image_width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">on_error</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">,</span>
+    <span class="n">on_error</span><span class="o">=</span><span class="s2">"raise"</span><span class="p">,</span>
     <span class="n">container_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">read_chunk_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">max_cached_blocks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">read_ahead_blocks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Expand selected video frames into one output row per frame.</span>
 
 <span class="sd">    Use the returned UDTF with ``Table.join_lateral`` / ``flat_map``. URI</span>
@@ -734,9 +734,9 @@ under the License.
 <span class="sd">    Args:</span>
 <span class="sd">        *columns: Optional URI or segment column. When provided, the UDTF is</span>
 <span class="sd">            applied directly instead of returning a factory.</span>
-<span class="sd">        frame_selector: Frame selection mode, ``&quot;all_frames&quot;`` (default),</span>
-<span class="sd">            ``&quot;keyframe&quot;``, or ``&quot;sample&quot;``.</span>
-<span class="sd">        sample_interval_ms: Sampling interval for ``frame_selector=&quot;sample&quot;``.</span>
+<span class="sd">        frame_selector: Frame selection mode, ``"all_frames"`` (default),</span>
+<span class="sd">            ``"keyframe"``, or ``"sample"``.</span>
+<span class="sd">        sample_interval_ms: Sampling interval for ``frame_selector="sample"``.</span>
 <span class="sd">        max_frames: Optional safety limit for emitted frames per input row.</span>
 <span class="sd">            ``None`` emits all selected frames.</span>
 <span class="sd">        image_height: Optional output frame height in pixels. Must be provided</span>
@@ -744,8 +744,8 @@ under the License.
 <span class="sd">            frame during materialization before it becomes an ``IMAGE`` value.</span>
 <span class="sd">        image_width: Optional output frame width in pixels. Must be provided</span>
 <span class="sd">            together with ``image_height``.</span>
-<span class="sd">        on_error: Error handling policy. ``&quot;raise&quot;`` (default) propagates</span>
-<span class="sd">            failures; ``&quot;skip&quot;`` emits no rows for inputs that fail before the</span>
+<span class="sd">        on_error: Error handling policy. ``"raise"`` (default) propagates</span>
+<span class="sd">            failures; ``"skip"`` emits no rows for inputs that fail before the</span>
 <span class="sd">            first frame and preserves rows already emitted before a later decode</span>
 <span class="sd">            error.</span>
 <span class="sd">        container_options: Optional PyAV ``av.open`` options.</span>
@@ -763,8 +763,8 @@ under the License.
 <span class="sd">    Example::</span>
 <span class="sd">        &gt;&gt;&gt; frames = table.join_lateral(</span>
 <span class="sd">        ...     video_explode_frames()(</span>
-<span class="sd">        ...         col(&quot;uri&quot;)).alias(&quot;frame&quot;, &quot;metadata&quot;))</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        ...         col("uri")).alias("frame", "metadata"))</span>
+<span class="sd">    """</span>
     <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udtf</span><span class="p">(</span>
         <span class="n">_VideoExplodeFrames</span><span class="p">(</span>
             <span class="n">frame_selector</span><span class="o">=</span><span class="n">frame_selector</span><span class="p">,</span>
@@ -785,16 +785,16 @@ under the License.
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">_VideoExtractFrames</span><span class="p">(</span><span class="n">ScalarFunction</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extract selected frames as one list per input video.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Extract selected frames as one list per input video."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">frame_selector</span><span class="o">=</span><span class="s2">&quot;all_frames&quot;</span><span class="p">,</span>
+        <span class="n">frame_selector</span><span class="o">=</span><span class="s2">"all_frames"</span><span class="p">,</span>
         <span class="n">sample_interval_ms</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">max_frames</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">image_height</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">image_width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">on_error</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">,</span>
+        <span class="n">on_error</span><span class="o">=</span><span class="s2">"raise"</span><span class="p">,</span>
         <span class="n">container_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">read_chunk_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">max_cached_blocks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -804,9 +804,9 @@ under the License.
         <span class="bp">self</span><span class="o">.</span><span class="n">frame_selector</span> <span class="o">=</span> <span class="n">_normalize_frame_selector</span><span class="p">(</span><span class="n">frame_selector</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sample_interval_ms</span> <span class="o">=</span> <span class="p">(</span>
             <span class="kc">None</span> <span class="k">if</span> <span class="n">sample_interval_ms</span> <span class="ow">is</span> <span class="kc">None</span>
-            <span class="k">else</span> <span class="n">_validate_positive_int</span><span class="p">(</span><span class="s2">&quot;sample_interval_ms&quot;</span><span class="p">,</span> <span class="n">sample_interval_ms</span><span class="p">)</span>
+            <span class="k">else</span> <span class="n">_validate_positive_int</span><span class="p">(</span><span class="s2">"sample_interval_ms"</span><span class="p">,</span> <span class="n">sample_interval_ms</span><span class="p">)</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">max_frames</span> <span class="o">=</span> <span class="n">_optional_positive_int</span><span class="p">(</span><span class="s2">&quot;max_frames&quot;</span><span class="p">,</span> <span class="n">max_frames</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_frames</span> <span class="o">=</span> <span class="n">_optional_positive_int</span><span class="p">(</span><span class="s2">"max_frames"</span><span class="p">,</span> <span class="n">max_frames</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">image_height</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">image_width</span> <span class="o">=</span> <span class="n">_normalize_image_size</span><span class="p">(</span>
             <span class="n">image_height</span><span class="p">,</span> <span class="n">image_width</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">on_error</span> <span class="o">=</span> <span class="n">_normalize_on_error</span><span class="p">(</span><span class="n">on_error</span><span class="p">,</span> <span class="n">_VALID_VIDEO_VALUE_ON_ERROR</span><span class="p">)</span>
@@ -816,7 +816,7 @@ under the License.
 
     <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function_context</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_bridge_client</span> <span class="o">=</span> <span class="n">_bridge_client</span><span class="p">(</span>
-            <span class="n">function_context</span><span class="p">,</span> <span class="s2">&quot;video_extract_frames&quot;</span><span class="p">)</span>
+            <span class="n">function_context</span><span class="p">,</span> <span class="s2">"video_extract_frames"</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">video_input</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">video_input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -837,26 +837,26 @@ under the License.
                 <span class="p">)</span>
             <span class="p">]</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_error</span> <span class="o">==</span> <span class="s2">&quot;null&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_error</span> <span class="o">==</span> <span class="s2">"null"</span><span class="p">:</span>
                 <span class="k">return</span> <span class="kc">None</span>
             <span class="k">raise</span>
 
 
 <div class="viewcode-block" id="video_extract_frames"><a class="viewcode-back" href="../../../../reference/pyflink.multimodal/api/pyflink.multimodal.operators.video_extract_frames.html#pyflink.multimodal.operators.video_extract_frames">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">video_extract_frames</span><span class="p">(</span>
     <span class="o">*</span><span class="n">columns</span><span class="p">,</span>
-    <span class="n">frame_selector</span><span class="o">=</span><span class="s2">&quot;all_frames&quot;</span><span class="p">,</span>
+    <span class="n">frame_selector</span><span class="o">=</span><span class="s2">"all_frames"</span><span class="p">,</span>
     <span class="n">sample_interval_ms</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">max_frames</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">image_height</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">image_width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">on_error</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">,</span>
+    <span class="n">on_error</span><span class="o">=</span><span class="s2">"raise"</span><span class="p">,</span>
     <span class="n">container_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">read_chunk_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">max_cached_blocks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">read_ahead_blocks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">concurrency</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Extract selected frames as an array on the same output row.</span>
 
 <span class="sd">    This scalar UDF is useful when downstream logic expects all selected frames</span>
@@ -866,9 +866,9 @@ under the License.
 <span class="sd">    Args:</span>
 <span class="sd">        *columns: Optional URI or segment column. When provided, the UDF is</span>
 <span class="sd">            applied directly instead of returning a factory.</span>
-<span class="sd">        frame_selector: Frame selection mode, ``&quot;all_frames&quot;`` (default),</span>
-<span class="sd">            ``&quot;keyframe&quot;``, or ``&quot;sample&quot;``.</span>
-<span class="sd">        sample_interval_ms: Sampling interval for ``frame_selector=&quot;sample&quot;``.</span>
+<span class="sd">        frame_selector: Frame selection mode, ``"all_frames"`` (default),</span>
+<span class="sd">            ``"keyframe"``, or ``"sample"``.</span>
+<span class="sd">        sample_interval_ms: Sampling interval for ``frame_selector="sample"``.</span>
 <span class="sd">        max_frames: Optional safety limit for frames retained in memory.</span>
 <span class="sd">            ``None`` retains all selected frames.</span>
 <span class="sd">        image_height: Optional output frame height in pixels. Must be provided</span>
@@ -876,8 +876,8 @@ under the License.
 <span class="sd">            frame during materialization before it becomes an ``IMAGE`` value.</span>
 <span class="sd">        image_width: Optional output frame width in pixels. Must be provided</span>
 <span class="sd">            together with ``image_height``.</span>
-<span class="sd">        on_error: Error handling policy. ``&quot;raise&quot;`` propagates failures;</span>
-<span class="sd">            ``&quot;null&quot;`` returns ``None`` for unreadable inputs.</span>
+<span class="sd">        on_error: Error handling policy. ``"raise"`` propagates failures;</span>
+<span class="sd">            ``"null"`` returns ``None`` for unreadable inputs.</span>
 <span class="sd">        container_options: Optional PyAV ``av.open`` options.</span>
 <span class="sd">        read_chunk_size: Optional Java-backed file read chunk size in bytes.</span>
 <span class="sd">            Must not exceed the 16 MiB Java bridge read range limit.</span>
@@ -893,8 +893,8 @@ under the License.
 
 <span class="sd">    Example::</span>
 <span class="sd">        &gt;&gt;&gt; df = df.with_column(</span>
-<span class="sd">        ...     &quot;frames&quot;, video_extract_frames(col(&quot;uri&quot;)))</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        ...     "frames", video_extract_frames(col("uri")))</span>
+<span class="sd">    """</span>
     <span class="n">wrapper</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span>
         <span class="n">_VideoExtractFrames</span><span class="p">(</span>
             <span class="n">frame_selector</span><span class="o">=</span><span class="n">frame_selector</span><span class="p">,</span>
@@ -918,19 +918,19 @@ under the License.
     <span class="k">if</span> <span class="n">metadata</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">metadata</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">metadata</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">_optional_time_ms</span><span class="p">(</span><span class="s2">&quot;duration_ms&quot;</span><span class="p">,</span> <span class="n">metadata</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">_optional_time_ms</span><span class="p">(</span><span class="s2">"duration_ms"</span><span class="p">,</span> <span class="n">metadata</span><span class="p">)</span>
 
-    <span class="n">duration_ms</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">metadata</span><span class="p">,</span> <span class="s2">&quot;duration_ms&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">duration_ms</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">metadata</span><span class="p">,</span> <span class="s2">"duration_ms"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">duration_ms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">_optional_time_ms</span><span class="p">(</span><span class="s2">&quot;duration_ms&quot;</span><span class="p">,</span> <span class="n">duration_ms</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">_optional_time_ms</span><span class="p">(</span><span class="s2">"duration_ms"</span><span class="p">,</span> <span class="n">duration_ms</span><span class="p">)</span>
 
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">duration_ms</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="n">VIDEO_METADATA_FIELDS</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;duration_ms&quot;</span><span class="p">)]</span>
+        <span class="n">duration_ms</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="n">VIDEO_METADATA_FIELDS</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">"duration_ms"</span><span class="p">)]</span>
     <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">IndexError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;video_metadata must be a duration_ms value or video_metadata row&quot;</span>
+            <span class="s2">"video_metadata must be a duration_ms value or video_metadata row"</span>
         <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
-    <span class="k">return</span> <span class="n">_optional_time_ms</span><span class="p">(</span><span class="s2">&quot;duration_ms&quot;</span><span class="p">,</span> <span class="n">duration_ms</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_optional_time_ms</span><span class="p">(</span><span class="s2">"duration_ms"</span><span class="p">,</span> <span class="n">duration_ms</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_video_segment_ref</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="n">start_time_ms</span><span class="p">,</span> <span class="n">end_time_ms</span><span class="p">):</span>

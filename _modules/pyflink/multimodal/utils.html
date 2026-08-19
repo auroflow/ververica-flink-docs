@@ -278,18 +278,18 @@ under the License.
 <span class="c1">#  distributed with this work for additional information</span>
 <span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
 <span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
-<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  "License"); you may not use this file except in compliance</span>
 <span class="c1">#  with the License.  You may obtain a copy of the License at</span>
 <span class="c1">#</span>
 <span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="c1">#</span>
 <span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  distributed under the License is distributed on an "AS IS" BASIS,</span>
 <span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1">#  See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 <span class="c1">################################################################################</span>
-<span class="sd">&quot;&quot;&quot;General helper utilities for multimodal UDF development.&quot;&quot;&quot;</span>
+<span class="sd">"""General helper utilities for multimodal UDF development."""</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">overload</span>
@@ -304,23 +304,23 @@ under the License.
 
 <span class="c1"># UDF construction helpers</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">_is_column_expression</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return True when *value* is a PyFlink column/expression object.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Return True when *value* is a PyFlink column/expression object."""</span>
     <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Expression</span><span class="p">)</span>
 
 
-<span class="n">_WrapperT</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;_WrapperT&quot;</span><span class="p">)</span>
-<span class="n">_ReturnT</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;_ReturnT&quot;</span><span class="p">)</span>
+<span class="n">_WrapperT</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">"_WrapperT"</span><span class="p">)</span>
+<span class="n">_ReturnT</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">"_ReturnT"</span><span class="p">)</span>
 
 
 <span class="c1"># Overload 1: no input columns — operator factory returns the wrapper unchanged</span>
-<span class="c1"># so the caller can apply it later, e.g. ``image_hash(&quot;phash&quot;)(col(&quot;img&quot;))``.</span>
+<span class="c1"># so the caller can apply it later, e.g. ``image_hash("phash")(col("img"))``.</span>
 <span class="nd">@overload</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">_build_or_apply_udf</span><span class="p">(</span><span class="n">wrapper</span><span class="p">:</span> <span class="n">_WrapperT</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">_WrapperT</span><span class="p">:</span>
     <span class="o">...</span>
 
 
 <span class="c1"># Overload 2: input columns supplied — apply the wrapper to them and return</span>
-<span class="c1"># the resulting Expression. The wrapper&#39;s return type is propagated so plain</span>
+<span class="c1"># the resulting Expression. The wrapper's return type is propagated so plain</span>
 <span class="c1"># test callables that return non-Expression values keep their declared type.</span>
 <span class="nd">@overload</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">_build_or_apply_udf</span><span class="p">(</span>
@@ -330,29 +330,29 @@ under the License.
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_build_or_apply_udf</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="o">*</span><span class="n">columns</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a UDF wrapper, or apply it when input columns are provided.</span>
+<span class="w">    </span><span class="sd">"""Return a UDF wrapper, or apply it when input columns are provided.</span>
 
 <span class="sd">    Operator constructors consistently build the final PyFlink UDF wrapper</span>
 <span class="sd">    first, then call this helper so no-parameter and parameterized operators</span>
 <span class="sd">    follow the same wrapper construction path.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">columns</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">wrapper</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">_is_column_expression</span><span class="p">(</span><span class="n">column</span><span class="p">)</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;UDF input arguments must be column expressions&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"UDF input arguments must be column expressions"</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">)</span>
 
 
-<span class="n">_UDF_RUNTIME_KEYS</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;concurrency&quot;</span><span class="p">,</span> <span class="s2">&quot;batch_size&quot;</span><span class="p">,</span> <span class="s2">&quot;num_gpus&quot;</span><span class="p">,</span> <span class="s2">&quot;gpu_type&quot;</span><span class="p">)</span>
+<span class="n">_UDF_RUNTIME_KEYS</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"concurrency"</span><span class="p">,</span> <span class="s2">"batch_size"</span><span class="p">,</span> <span class="s2">"num_gpus"</span><span class="p">,</span> <span class="s2">"gpu_type"</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_udf_runtime_kwargs</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return non-empty DataFrame UDF runtime options.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Return non-empty DataFrame UDF runtime options."""</span>
     <span class="k">return</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">_UDF_RUNTIME_KEYS</span> <span class="k">if</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">}</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_setup_cv2_threads</span><span class="p">(</span><span class="n">cv2_module</span><span class="p">):</span>
-    <span class="n">num_threads</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;OMP_NUM_THREADS&quot;</span><span class="p">)</span>
+    <span class="n">num_threads</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"OMP_NUM_THREADS"</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">num_threads</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span>
     <span class="k">try</span><span class="p">:</span>
@@ -371,16 +371,16 @@ under the License.
 
 
 <div class="viewcode-block" id="scatter_results"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.utils.scatter_results.html#pyflink.multimodal.utils.scatter_results">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">scatter_results</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">valid_indices</span><span class="p">,</span> <span class="n">total_len</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Place batch results back at their original indices.</span>
+<span class="w">    </span><span class="sd">"""Place batch results back at their original indices.</span>
 
 <span class="sd">    Batch UDF helpers may skip ``None`` inputs before invoking an expensive</span>
 <span class="sd">    model. This helper restores those valid-row results to the original batch</span>
 <span class="sd">    length and fills skipped positions with *default*.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">valid_indices</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;scatter_results length mismatch: &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;got </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2"> results for </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">valid_indices</span><span class="p">)</span><span class="si">}</span><span class="s2"> indices&quot;</span>
+            <span class="s2">"scatter_results length mismatch: "</span>
+            <span class="sa">f</span><span class="s2">"got </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2"> results for </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">valid_indices</span><span class="p">)</span><span class="si">}</span><span class="s2"> indices"</span>
         <span class="p">)</span>
 
     <span class="n">output</span> <span class="o">=</span> <span class="p">[</span><span class="n">default</span><span class="p">]</span> <span class="o">*</span> <span class="n">total_len</span>
@@ -389,23 +389,23 @@ under the License.
         <span class="c1"># Validate every index to prevent silent row/result misalignment.</span>
         <span class="k">if</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">idx</span> <span class="o">&gt;=</span> <span class="n">total_len</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;scatter_results index out of range: </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2"> for length </span><span class="si">{</span><span class="n">total_len</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">"scatter_results index out of range: </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2"> for length </span><span class="si">{</span><span class="n">total_len</span><span class="si">}</span><span class="s2">"</span>
             <span class="p">)</span>
         <span class="k">if</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Duplicate scatter_results index: </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Duplicate scatter_results index: </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
         <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
         <span class="n">output</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
     <span class="k">return</span> <span class="n">output</span></div>
 
 
-<div class="viewcode-block" id="run_image_batch_inference"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.utils.run_image_batch_inference.html#pyflink.multimodal.utils.run_image_batch_inference">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">run_image_batch_inference</span><span class="p">(</span><span class="n">image_series</span><span class="p">,</span> <span class="n">predict_fn</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;RGB&quot;</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Prepare a decoded Image batch, run inference, and scatter results.</span>
+<div class="viewcode-block" id="run_image_batch_inference"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.utils.run_image_batch_inference.html#pyflink.multimodal.utils.run_image_batch_inference">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">run_image_batch_inference</span><span class="p">(</span><span class="n">image_series</span><span class="p">,</span> <span class="n">predict_fn</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"RGB"</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Prepare a decoded Image batch, run inference, and scatter results.</span>
 
 <span class="sd">    ``mode`` is the model-input normalization mode. Most vision models expect</span>
 <span class="sd">    RGB tensors, so the default converts non-null Image rows to RGB before</span>
 <span class="sd">    calling ``predict_fn``. Operators that intentionally consume another image</span>
 <span class="sd">    mode should pass it explicitly.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
     <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.multimodal.codec</span><span class="w"> </span><span class="kn">import</span> <span class="n">image_batch_to_ndarrays</span>
@@ -422,8 +422,8 @@ under the License.
 <span class="c1"># ---------------------------------------------------------------------------</span>
 
 
-<div class="viewcode-block" id="resize_batch"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.utils.resize_batch.html#pyflink.multimodal.utils.resize_batch">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">resize_batch</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">target_size</span><span class="p">,</span> <span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;resize&quot;</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Resize a batch of differently-sized ndarrays to a uniform size.</span>
+<div class="viewcode-block" id="resize_batch"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.utils.resize_batch.html#pyflink.multimodal.utils.resize_batch">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">resize_batch</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">target_size</span><span class="p">,</span> <span class="n">strategy</span><span class="o">=</span><span class="s2">"resize"</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Resize a batch of differently-sized ndarrays to a uniform size.</span>
 
 <span class="sd">    Intended for pandas batch UDFs to unify decoded Image arrays into a</span>
 <span class="sd">    stackable batch.</span>
@@ -434,11 +434,11 @@ under the License.
 <span class="sd">        target_size: ``(height, width)`` target dimensions.</span>
 <span class="sd">        strategy: Resize strategy:</span>
 
-<span class="sd">            - ``&quot;resize&quot;``: Scale directly to target (may change aspect</span>
+<span class="sd">            - ``"resize"``: Scale directly to target (may change aspect</span>
 <span class="sd">              ratio).</span>
-<span class="sd">            - ``&quot;pad&quot;``: Scale keeping aspect ratio, pad shorter side</span>
+<span class="sd">            - ``"pad"``: Scale keeping aspect ratio, pad shorter side</span>
 <span class="sd">              with black.</span>
-<span class="sd">            - ``&quot;crop&quot;``: Scale keeping aspect ratio, center-crop to</span>
+<span class="sd">            - ``"crop"``: Scale keeping aspect ratio, center-crop to</span>
 <span class="sd">              target.</span>
 <span class="sd">        interpolation: Interpolation method.  Defaults to</span>
 <span class="sd">            ``cv2.INTER_LINEAR`` (if cv2 is available) or PIL LANCZOS.</span>
@@ -449,10 +449,10 @@ under the License.
 
 <span class="sd">    Example::</span>
 
-<span class="sd">        pixel_arrays = [image_to_ndarray(image, mode=&quot;RGB&quot;) for image in images]</span>
+<span class="sd">        pixel_arrays = [image_to_ndarray(image, mode="RGB") for image in images]</span>
 <span class="sd">        batch = resize_batch(pixel_arrays, (224, 224))</span>
 <span class="sd">        # batch.shape == (len(pixel_arrays), 224, 224, 3)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">images</span><span class="p">:</span>
         <span class="c1"># Keep empty batches aligned with the default RGB preprocessing contract.</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">target_size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">target_size</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
@@ -507,31 +507,31 @@ under the License.
             <span class="p">)</span>
             <span class="k">continue</span>
 
-        <span class="k">if</span> <span class="n">strategy</span> <span class="o">==</span> <span class="s2">&quot;resize&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">strategy</span> <span class="o">==</span> <span class="s2">"resize"</span><span class="p">:</span>
             <span class="n">resized</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                 <span class="n">_resize_direct</span><span class="p">(</span>
                     <span class="n">pixel_array</span><span class="p">,</span> <span class="n">target_height</span><span class="p">,</span> <span class="n">target_width</span><span class="p">,</span> <span class="n">resize_one</span>
                 <span class="p">)</span>
             <span class="p">)</span>
-        <span class="k">elif</span> <span class="n">strategy</span> <span class="o">==</span> <span class="s2">&quot;pad&quot;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">strategy</span> <span class="o">==</span> <span class="s2">"pad"</span><span class="p">:</span>
             <span class="n">resized</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                 <span class="n">_resize_pad</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">,</span> <span class="n">target_height</span><span class="p">,</span> <span class="n">target_width</span><span class="p">,</span> <span class="n">resize_one</span><span class="p">)</span>
             <span class="p">)</span>
-        <span class="k">elif</span> <span class="n">strategy</span> <span class="o">==</span> <span class="s2">&quot;crop&quot;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">strategy</span> <span class="o">==</span> <span class="s2">"crop"</span><span class="p">:</span>
             <span class="n">resized</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                 <span class="n">_resize_crop</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">,</span> <span class="n">target_height</span><span class="p">,</span> <span class="n">target_width</span><span class="p">,</span> <span class="n">resize_one</span><span class="p">)</span>
             <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Unknown resize strategy: </span><span class="si">{</span><span class="n">strategy</span><span class="si">!r}</span><span class="s2">. &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;Expected &#39;resize&#39;, &#39;pad&#39;, or &#39;crop&#39;.&quot;</span>
+                <span class="sa">f</span><span class="s2">"Unknown resize strategy: </span><span class="si">{</span><span class="n">strategy</span><span class="si">!r}</span><span class="s2">. "</span>
+                <span class="sa">f</span><span class="s2">"Expected 'resize', 'pad', or 'crop'."</span>
             <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">resized</span><span class="p">)</span></div>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_resize_direct</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">,</span> <span class="n">target_height</span><span class="p">,</span> <span class="n">target_width</span><span class="p">,</span> <span class="n">resize_one</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Direct resize to target size (may change aspect ratio).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Direct resize to target size (may change aspect ratio)."""</span>
     <span class="n">resized</span> <span class="o">=</span> <span class="n">resize_one</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">,</span> <span class="n">target_height</span><span class="p">,</span> <span class="n">target_width</span><span class="p">)</span>
     <span class="c1"># Ensure consistent 3D output for grayscale (match _resize_pad behavior)</span>
     <span class="k">if</span> <span class="n">resized</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
@@ -540,7 +540,7 @@ under the License.
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_resize_pad</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">,</span> <span class="n">target_height</span><span class="p">,</span> <span class="n">target_width</span><span class="p">,</span> <span class="n">resize_one</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Resize keeping aspect ratio, pad shorter side with black.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Resize keeping aspect ratio, pad shorter side with black."""</span>
     <span class="n">height</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">pixel_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
     <span class="n">scale</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">target_height</span> <span class="o">/</span> <span class="n">height</span><span class="p">,</span> <span class="n">target_width</span> <span class="o">/</span> <span class="n">width</span><span class="p">)</span>
     <span class="n">new_height</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">height</span> <span class="o">*</span> <span class="n">scale</span><span class="p">))</span>
@@ -562,7 +562,7 @@ under the License.
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_resize_crop</span><span class="p">(</span><span class="n">pixel_array</span><span class="p">,</span> <span class="n">target_height</span><span class="p">,</span> <span class="n">target_width</span><span class="p">,</span> <span class="n">resize_one</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Resize keeping aspect ratio, center-crop to target size.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Resize keeping aspect ratio, center-crop to target size."""</span>
     <span class="n">height</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">pixel_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
     <span class="n">scale</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">target_height</span> <span class="o">/</span> <span class="n">height</span><span class="p">,</span> <span class="n">target_width</span> <span class="o">/</span> <span class="n">width</span><span class="p">)</span>
     <span class="n">new_height</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">target_height</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">height</span> <span class="o">*</span> <span class="n">scale</span><span class="p">))</span>
@@ -582,7 +582,7 @@ under the License.
 
 
 <div class="viewcode-block" id="normalize_batch"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.utils.normalize_batch.html#pyflink.multimodal.utils.normalize_batch">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">normalize_batch</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="n">IMAGENET_RGB_MEAN</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="n">IMAGENET_RGB_STD</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Normalize a batch of images.</span>
+<span class="w">    </span><span class="sd">"""Normalize a batch of images.</span>
 
 <span class="sd">    Converts uint8 [0, 255] images to float32 and normalizes with the</span>
 <span class="sd">    given mean and std.  Defaults to ImageNet statistics.</span>
@@ -601,20 +601,20 @@ under the License.
 
 <span class="sd">        batch = resize_batch(pixel_arrays, (224, 224))</span>
 <span class="sd">        normed = normalize_batch(batch)  # ImageNet normalization</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">batch</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;normalize_batch expects a 4-D batch (N, H, W, C), &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;got shape </span><span class="si">{</span><span class="n">batch</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">"normalize_batch expects a 4-D batch (N, H, W, C), "</span>
+            <span class="sa">f</span><span class="s2">"got shape </span><span class="si">{</span><span class="n">batch</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span>
         <span class="p">)</span>
     <span class="n">channels</span> <span class="o">=</span> <span class="n">batch</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">mean</span><span class="p">)</span> <span class="o">!=</span> <span class="n">channels</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;mean has </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">mean</span><span class="p">)</span><span class="si">}</span><span class="s2"> elements but batch has </span><span class="si">{</span><span class="n">channels</span><span class="si">}</span><span class="s2"> channels&quot;</span>
+            <span class="sa">f</span><span class="s2">"mean has </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">mean</span><span class="p">)</span><span class="si">}</span><span class="s2"> elements but batch has </span><span class="si">{</span><span class="n">channels</span><span class="si">}</span><span class="s2"> channels"</span>
         <span class="p">)</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">std</span><span class="p">)</span> <span class="o">!=</span> <span class="n">channels</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;std has </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">std</span><span class="p">)</span><span class="si">}</span><span class="s2"> elements but batch has </span><span class="si">{</span><span class="n">channels</span><span class="si">}</span><span class="s2"> channels&quot;</span>
+            <span class="sa">f</span><span class="s2">"std has </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">std</span><span class="p">)</span><span class="si">}</span><span class="s2"> elements but batch has </span><span class="si">{</span><span class="n">channels</span><span class="si">}</span><span class="s2"> channels"</span>
         <span class="p">)</span>
     <span class="n">batch_f</span> <span class="o">=</span> <span class="n">batch</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="o">/</span> <span class="mf">255.0</span>
     <span class="n">_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
@@ -623,7 +623,7 @@ under the License.
 
 
 <div class="viewcode-block" id="batch_to_tensor"><a class="viewcode-back" href="../../../reference/pyflink.multimodal/api/pyflink.multimodal.utils.batch_to_tensor.html#pyflink.multimodal.utils.batch_to_tensor">[docs]</a><span class="k">def</span><span class="w"> </span><span class="nf">batch_to_tensor</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert an ndarray batch to a PyTorch tensor.</span>
+<span class="w">    </span><span class="sd">"""Convert an ndarray batch to a PyTorch tensor.</span>
 
 <span class="sd">    Performs HWC -&gt; CHW transposition (PyTorch convention) and optional</span>
 <span class="sd">    device transfer.  If the input is uint8, it is converted to float32</span>
@@ -632,7 +632,7 @@ under the License.
 <span class="sd">    Args:</span>
 <span class="sd">        batch: np.ndarray with shape ``(N, H, W, C)``.</span>
 <span class="sd">        device: Target device (str or ``torch.device``), e.g.</span>
-<span class="sd">            ``&quot;cuda:0&quot;``.  ``None`` means CPU.</span>
+<span class="sd">            ``"cuda:0"``.  ``None`` means CPU.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        ``torch.Tensor`` with shape ``(N, C, H, W)``, dtype float32.</span>
@@ -641,9 +641,9 @@ under the License.
 
 <span class="sd">        batch = resize_batch(pixel_arrays, (224, 224))</span>
 <span class="sd">        normed = normalize_batch(batch)</span>
-<span class="sd">        tensor = batch_to_tensor(normed, device=&quot;cuda:0&quot;)</span>
+<span class="sd">        tensor = batch_to_tensor(normed, device="cuda:0")</span>
 <span class="sd">        output = model(tensor)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
 
     <span class="k">if</span> <span class="n">batch</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">:</span>

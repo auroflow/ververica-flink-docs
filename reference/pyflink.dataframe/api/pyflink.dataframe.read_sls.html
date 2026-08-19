@@ -398,77 +398,77 @@ must not be supplied.</p></li>
 <p>Minimal source (timestamp mode, defaults):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pf</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_sls</span><span class="p">(</span>
-    <span class="s2">&quot;cn-hangzhou-intranet.log.aliyuncs.com&quot;</span><span class="p">,</span>
-    <span class="n">project</span><span class="o">=</span><span class="s2">&quot;my-project&quot;</span><span class="p">,</span>
-    <span class="n">logstore</span><span class="o">=</span><span class="s2">&quot;my-logstore&quot;</span><span class="p">,</span>
+    <span class="s2">"cn-hangzhou-intranet.log.aliyuncs.com"</span><span class="p">,</span>
+    <span class="n">project</span><span class="o">=</span><span class="s2">"my-project"</span><span class="p">,</span>
+    <span class="n">logstore</span><span class="o">=</span><span class="s2">"my-logstore"</span><span class="p">,</span>
     <span class="n">access_id</span><span class="o">=</span><span class="n">ALIYUN_AK_ID</span><span class="p">,</span>
     <span class="n">access_key</span><span class="o">=</span><span class="n">ALIYUN_AK_SECRET</span><span class="p">,</span>
     <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">&quot;__timestamp__&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">bigint</span><span class="p">(),</span>
-        <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
-        <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+        <span class="s2">"__timestamp__"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">bigint</span><span class="p">(),</span>
+        <span class="s2">"level"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+        <span class="s2">"message"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
     <span class="p">}</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <p>With computed event-time column and watermark:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_sls</span><span class="p">(</span>
-    <span class="s2">&quot;cn-hangzhou-intranet.log.aliyuncs.com&quot;</span><span class="p">,</span>
-    <span class="n">project</span><span class="o">=</span><span class="s2">&quot;my-project&quot;</span><span class="p">,</span>
-    <span class="n">logstore</span><span class="o">=</span><span class="s2">&quot;my-logstore&quot;</span><span class="p">,</span>
+    <span class="s2">"cn-hangzhou-intranet.log.aliyuncs.com"</span><span class="p">,</span>
+    <span class="n">project</span><span class="o">=</span><span class="s2">"my-project"</span><span class="p">,</span>
+    <span class="n">logstore</span><span class="o">=</span><span class="s2">"my-logstore"</span><span class="p">,</span>
     <span class="n">access_id</span><span class="o">=</span><span class="n">ALIYUN_AK_ID</span><span class="p">,</span>
     <span class="n">access_key</span><span class="o">=</span><span class="n">ALIYUN_AK_SECRET</span><span class="p">,</span>
     <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">bigint</span><span class="p">(),</span>
-        <span class="s2">&quot;ts_millis&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">bigint</span><span class="p">(),</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">bigint</span><span class="p">(),</span>
+        <span class="s2">"ts_millis"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">bigint</span><span class="p">(),</span>
     <span class="p">},</span>
     <span class="n">computed_columns</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">&quot;event_time&quot;</span><span class="p">:</span> <span class="s2">&quot;TO_TIMESTAMP_LTZ(ts_millis, 3)&quot;</span><span class="p">,</span>
+        <span class="s2">"event_time"</span><span class="p">:</span> <span class="s2">"TO_TIMESTAMP_LTZ(ts_millis, 3)"</span><span class="p">,</span>
     <span class="p">},</span>
-    <span class="n">watermark</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;event_time&quot;</span><span class="p">,</span> <span class="s2">&quot;event_time - INTERVAL &#39;5&#39; SECOND&quot;</span><span class="p">),</span>
+    <span class="n">watermark</span><span class="o">=</span><span class="p">(</span><span class="s2">"event_time"</span><span class="p">,</span> <span class="s2">"event_time - INTERVAL '5' SECOND"</span><span class="p">),</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <p>Consumer-group mode (resume from recorded offset):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_sls</span><span class="p">(</span>
-    <span class="s2">&quot;cn-hangzhou-intranet.log.aliyuncs.com&quot;</span><span class="p">,</span>
-    <span class="n">project</span><span class="o">=</span><span class="s2">&quot;my-project&quot;</span><span class="p">,</span>
-    <span class="n">logstore</span><span class="o">=</span><span class="s2">&quot;my-logstore&quot;</span><span class="p">,</span>
+    <span class="s2">"cn-hangzhou-intranet.log.aliyuncs.com"</span><span class="p">,</span>
+    <span class="n">project</span><span class="o">=</span><span class="s2">"my-project"</span><span class="p">,</span>
+    <span class="n">logstore</span><span class="o">=</span><span class="s2">"my-logstore"</span><span class="p">,</span>
     <span class="n">access_id</span><span class="o">=</span><span class="n">ALIYUN_AK_ID</span><span class="p">,</span>
     <span class="n">access_key</span><span class="o">=</span><span class="n">ALIYUN_AK_SECRET</span><span class="p">,</span>
-    <span class="n">schema</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">()},</span>
-    <span class="n">startup_mode</span><span class="o">=</span><span class="s2">&quot;consumer_group&quot;</span><span class="p">,</span>
-    <span class="n">consumer_group</span><span class="o">=</span><span class="s2">&quot;my-analytics-job&quot;</span>
+    <span class="n">schema</span><span class="o">=</span><span class="p">{</span><span class="s2">"level"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">()},</span>
+    <span class="n">startup_mode</span><span class="o">=</span><span class="s2">"consumer_group"</span><span class="p">,</span>
+    <span class="n">consumer_group</span><span class="o">=</span><span class="s2">"my-analytics-job"</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <p>Historical replay with <code class="docutils literal notranslate"><span class="pre">datetime</span></code> bounds:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_sls</span><span class="p">(</span>
-    <span class="s2">&quot;cn-hangzhou-intranet.log.aliyuncs.com&quot;</span><span class="p">,</span>
-    <span class="n">project</span><span class="o">=</span><span class="s2">&quot;my-project&quot;</span><span class="p">,</span>
-    <span class="n">logstore</span><span class="o">=</span><span class="s2">&quot;my-logstore&quot;</span><span class="p">,</span>
+    <span class="s2">"cn-hangzhou-intranet.log.aliyuncs.com"</span><span class="p">,</span>
+    <span class="n">project</span><span class="o">=</span><span class="s2">"my-project"</span><span class="p">,</span>
+    <span class="n">logstore</span><span class="o">=</span><span class="s2">"my-logstore"</span><span class="p">,</span>
     <span class="n">access_id</span><span class="o">=</span><span class="n">ALIYUN_AK_ID</span><span class="p">,</span>
     <span class="n">access_key</span><span class="o">=</span><span class="n">ALIYUN_AK_SECRET</span><span class="p">,</span>
-    <span class="n">schema</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">()},</span>
+    <span class="n">schema</span><span class="o">=</span><span class="p">{</span><span class="s2">"message"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">()},</span>
     <span class="n">start_time</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
     <span class="n">stop_time</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
-    <span class="n">time_zone</span><span class="o">=</span><span class="s2">&quot;Asia/Shanghai&quot;</span><span class="p">,</span>
+    <span class="n">time_zone</span><span class="o">=</span><span class="s2">"Asia/Shanghai"</span><span class="p">,</span>
     <span class="n">exit_after_finish</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <p>Forward-compat: passing non-named options via <code class="docutils literal notranslate"><span class="pre">extra_options</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_sls</span><span class="p">(</span>
-    <span class="s2">&quot;cn-hangzhou-intranet.log.aliyuncs.com&quot;</span><span class="p">,</span>
-    <span class="n">project</span><span class="o">=</span><span class="s2">&quot;my-project&quot;</span><span class="p">,</span>
-    <span class="n">logstore</span><span class="o">=</span><span class="s2">&quot;my-logstore&quot;</span><span class="p">,</span>
+    <span class="s2">"cn-hangzhou-intranet.log.aliyuncs.com"</span><span class="p">,</span>
+    <span class="n">project</span><span class="o">=</span><span class="s2">"my-project"</span><span class="p">,</span>
+    <span class="n">logstore</span><span class="o">=</span><span class="s2">"my-logstore"</span><span class="p">,</span>
     <span class="n">access_id</span><span class="o">=</span><span class="n">ALIYUN_AK_ID</span><span class="p">,</span>
     <span class="n">access_key</span><span class="o">=</span><span class="n">ALIYUN_AK_SECRET</span><span class="p">,</span>
-    <span class="n">schema</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">()},</span>
+    <span class="n">schema</span><span class="o">=</span><span class="p">{</span><span class="s2">"message"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">()},</span>
     <span class="n">extra_options</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">&quot;regionId&quot;</span><span class="p">:</span> <span class="s2">&quot;cn-hangzhou&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;compressType&quot;</span><span class="p">:</span> <span class="s2">&quot;lz4&quot;</span><span class="p">,</span>
+        <span class="s2">"regionId"</span><span class="p">:</span> <span class="s2">"cn-hangzhou"</span><span class="p">,</span>
+        <span class="s2">"compressType"</span><span class="p">:</span> <span class="s2">"lz4"</span><span class="p">,</span>
     <span class="p">}</span>
 <span class="p">)</span>
 </pre></div>

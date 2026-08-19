@@ -278,24 +278,24 @@ under the License.
 <span class="c1">#  distributed with this work for additional information</span>
 <span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
 <span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
-<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  "License"); you may not use this file except in compliance</span>
 <span class="c1">#  with the License.  You may obtain a copy of the License at</span>
 <span class="c1">#</span>
 <span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="c1">#</span>
 <span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  distributed under the License is distributed on an "AS IS" BASIS,</span>
 <span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1">#  See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 <span class="c1">################################################################################</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">SQL entry point for the DataFrame API.</span>
 
 <span class="sd">Allows users to write a SQL SELECT statement that references DataFrames in</span>
 <span class="sd">the calling scope (or passed explicitly), returning a new DataFrame.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
@@ -313,18 +313,18 @@ under the License.
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.table</span><span class="w"> </span><span class="kn">import</span> <span class="n">StreamTableEnvironment</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;sql&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"sql"</span><span class="p">]</span>
 
 <span class="n">_logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 <span class="n">SqlBinding</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">DataFrameFunctionWrapper</span><span class="p">]</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_parse_identifier</span><span class="p">(</span><span class="n">t_env</span><span class="p">:</span> <span class="s2">&quot;StreamTableEnvironment&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_parse_identifier</span><span class="p">(</span><span class="n">t_env</span><span class="p">:</span> <span class="s2">"StreamTableEnvironment"</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">t_env</span><span class="o">.</span><span class="n">_j_tenv</span><span class="o">.</span><span class="n">getParser</span><span class="p">()</span><span class="o">.</span><span class="n">parseIdentifier</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_is_valid_ident</span><span class="p">(</span><span class="n">t_env</span><span class="p">:</span> <span class="s2">&quot;StreamTableEnvironment&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_is_valid_ident</span><span class="p">(</span><span class="n">t_env</span><span class="p">:</span> <span class="s2">"StreamTableEnvironment"</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">_parse_identifier</span><span class="p">(</span><span class="n">t_env</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">True</span>
@@ -333,12 +333,12 @@ under the License.
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_validate_identifier</span><span class="p">(</span>
-    <span class="n">t_env</span><span class="p">:</span> <span class="s2">&quot;StreamTableEnvironment&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">kind</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">t_env</span><span class="p">:</span> <span class="s2">"StreamTableEnvironment"</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">kind</span><span class="p">:</span> <span class="nb">str</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">_parse_identifier</span><span class="p">(</span><span class="n">t_env</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1"># noqa: BLE001</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; is not a valid SQL </span><span class="si">{</span><span class="n">kind</span><span class="si">}</span><span class="s2"> name.&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"'</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">' is not a valid SQL </span><span class="si">{</span><span class="n">kind</span><span class="si">}</span><span class="s2"> name."</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_name_exists</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">existing_names</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
@@ -384,26 +384,26 @@ under the License.
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_parse_function_binding_name</span><span class="p">(</span>
-    <span class="n">t_env</span><span class="p">:</span> <span class="s2">&quot;StreamTableEnvironment&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">t_env</span><span class="p">:</span> <span class="s2">"StreamTableEnvironment"</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse a function binding name into a temporary system function name.</span>
+<span class="w">    </span><span class="sd">"""Parse a function binding name into a temporary system function name.</span>
 
 <span class="sd">    Temporary system functions are global simple names. A quoted simple SQL</span>
 <span class="sd">    identifier is accepted, but catalog/database-qualified names are not.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">identifier</span> <span class="o">=</span> <span class="n">_parse_identifier</span><span class="p">(</span><span class="n">t_env</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1"># noqa: BLE001</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; is not a valid SQL function name.&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"'</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">' is not a valid SQL function name."</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
 
     <span class="k">if</span> <span class="p">(</span>
         <span class="n">identifier</span><span class="o">.</span><span class="n">getCatalogName</span><span class="p">()</span><span class="o">.</span><span class="n">isPresent</span><span class="p">()</span>
         <span class="ow">or</span> <span class="n">identifier</span><span class="o">.</span><span class="n">getDatabaseName</span><span class="p">()</span><span class="o">.</span><span class="n">isPresent</span><span class="p">()</span>
     <span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;binding &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; is not a valid simple SQL function name. &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;Temporary system function bindings do not support &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;catalog/database-qualified names.&quot;</span>
+            <span class="sa">f</span><span class="s2">"binding '</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">' is not a valid simple SQL function name. "</span>
+            <span class="sa">f</span><span class="s2">"Temporary system function bindings do not support "</span>
+            <span class="sa">f</span><span class="s2">"catalog/database-qualified names."</span>
         <span class="p">)</span>
     <span class="k">return</span> <span class="n">identifier</span><span class="o">.</span><span class="n">getObjectName</span><span class="p">()</span>
 
@@ -411,7 +411,7 @@ under the License.
 <span class="k">def</span><span class="w"> </span><span class="nf">_resolve_explicit_bindings</span><span class="p">(</span>
     <span class="n">bindings</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SqlBinding</span><span class="p">],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DataFrame</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DataFrameFunctionWrapper</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate explicit binding values and split views from functions.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Validate explicit binding values and split views from functions."""</span>
     <span class="n">views</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DataFrame</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">functions</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DataFrameFunctionWrapper</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">bindings</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -421,18 +421,18 @@ under the License.
             <span class="n">functions</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;binding &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; must be a DataFrame or &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;DataFrameFunctionWrapper, &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">"binding '</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">' must be a DataFrame or "</span>
+                <span class="sa">f</span><span class="s2">"DataFrameFunctionWrapper, "</span>
+                <span class="sa">f</span><span class="s2">"got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">"</span>
             <span class="p">)</span>
     <span class="k">return</span> <span class="n">views</span><span class="p">,</span> <span class="n">functions</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_normalize_explicit_function_bindings</span><span class="p">(</span>
-    <span class="n">t_env</span><span class="p">:</span> <span class="s2">&quot;StreamTableEnvironment&quot;</span><span class="p">,</span>
+    <span class="n">t_env</span><span class="p">:</span> <span class="s2">"StreamTableEnvironment"</span><span class="p">,</span>
     <span class="n">functions</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DataFrameFunctionWrapper</span><span class="p">],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DataFrameFunctionWrapper</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Normalize explicit function aliases and reject case-insensitive collisions.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Normalize explicit function aliases and reject case-insensitive collisions."""</span>
     <span class="n">result</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DataFrameFunctionWrapper</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">seen</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">raw_name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">functions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -441,10 +441,10 @@ under the License.
         <span class="n">existing_name</span> <span class="o">=</span> <span class="n">seen</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">normalized_name</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">existing_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;binding &#39;</span><span class="si">{</span><span class="n">raw_name</span><span class="si">}</span><span class="s2">&#39; conflicts with binding &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">existing_name</span><span class="si">}</span><span class="s2">&#39; &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;because SQL function names are case-insensitive. Use only &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;one explicit binding for this function name.&quot;</span>
+                <span class="sa">f</span><span class="s2">"binding '</span><span class="si">{</span><span class="n">raw_name</span><span class="si">}</span><span class="s2">' conflicts with binding "</span>
+                <span class="sa">f</span><span class="s2">"'</span><span class="si">{</span><span class="n">existing_name</span><span class="si">}</span><span class="s2">' "</span>
+                <span class="sa">f</span><span class="s2">"because SQL function names are case-insensitive. Use only "</span>
+                <span class="sa">f</span><span class="s2">"one explicit binding for this function name."</span>
             <span class="p">)</span>
         <span class="n">seen</span><span class="p">[</span><span class="n">normalized_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_name</span>
         <span class="n">result</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
@@ -454,29 +454,29 @@ under the License.
 <span class="k">def</span><span class="w"> </span><span class="nf">_resolve_table_environment</span><span class="p">(</span>
     <span class="n">binding_views</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DataFrame</span><span class="p">],</span>
     <span class="n">auto_candidates</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DataFrame</span><span class="p">],</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;StreamTableEnvironment&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Resolve t_env by priority: explicit bindings, auto-bind candidates,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"StreamTableEnvironment"</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Resolve t_env by priority: explicit bindings, auto-bind candidates,</span>
 <span class="sd">    configured or newly created global environment.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">binding_views</span><span class="p">:</span>
         <span class="n">first_name</span><span class="p">,</span> <span class="n">first_df</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">binding_views</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
         <span class="n">t_env</span> <span class="o">=</span> <span class="n">first_df</span><span class="o">.</span><span class="n">_table</span><span class="o">.</span><span class="n">_t_env</span>
         <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
-            <span class="s2">&quot;resolved TableEnvironment from explicit binding &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">,</span> <span class="n">first_name</span>
+            <span class="s2">"resolved TableEnvironment from explicit binding '</span><span class="si">%s</span><span class="s2">'"</span><span class="p">,</span> <span class="n">first_name</span>
         <span class="p">)</span>
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">binding_views</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">df</span><span class="o">.</span><span class="n">_table</span><span class="o">.</span><span class="n">_t_env</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">t_env</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;binding &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; belongs to a different &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;TableEnvironment; all explicitly bound DataFrames &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;must share the same TableEnvironment.&quot;</span>
+                    <span class="sa">f</span><span class="s2">"binding '</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">' belongs to a different "</span>
+                    <span class="sa">f</span><span class="s2">"TableEnvironment; all explicitly bound DataFrames "</span>
+                    <span class="sa">f</span><span class="s2">"must share the same TableEnvironment."</span>
                 <span class="p">)</span>
         <span class="k">return</span> <span class="n">t_env</span>
 
     <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">auto_candidates</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="k">if</span> <span class="n">_is_valid_ident</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">_table</span><span class="o">.</span><span class="n">_t_env</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
             <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
-                <span class="s2">&quot;resolved TableEnvironment from auto-bound DataFrame &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">,</span>
+                <span class="s2">"resolved TableEnvironment from auto-bound DataFrame '</span><span class="si">%s</span><span class="s2">'"</span><span class="p">,</span>
                 <span class="n">name</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">_table</span><span class="o">.</span><span class="n">_t_env</span>
@@ -485,21 +485,21 @@ under the License.
     <span class="n">resolved_existing</span> <span class="o">=</span> <span class="n">t_env</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
     <span class="n">t_env</span> <span class="o">=</span> <span class="n">get_or_create_table_environment</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">resolved_existing</span><span class="p">:</span>
-        <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;resolved TableEnvironment from configured global environment&quot;</span><span class="p">)</span>
+        <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"resolved TableEnvironment from configured global environment"</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;created new TableEnvironment for SQL query&quot;</span><span class="p">)</span>
+        <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"created new TableEnvironment for SQL query"</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">t_env</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_resolve_auto_bind_dataframes</span><span class="p">(</span>
     <span class="n">candidates</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DataFrame</span><span class="p">],</span>
     <span class="n">bindings</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DataFrame</span><span class="p">],</span>
-    <span class="n">t_env</span><span class="p">:</span> <span class="s2">&quot;StreamTableEnvironment&quot;</span><span class="p">,</span>
+    <span class="n">t_env</span><span class="p">:</span> <span class="s2">"StreamTableEnvironment"</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DataFrame</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Filter caller-scope DataFrames and decide which to register.</span>
+<span class="w">    </span><span class="sd">"""Filter caller-scope DataFrames and decide which to register.</span>
 
-<span class="sd">    Auto-bind is best-effort: it never raises. Candidates that can&#39;t be</span>
-<span class="sd">    registered emit a warning so the user knows their DataFrame won&#39;t be</span>
+<span class="sd">    Auto-bind is best-effort: it never raises. Candidates that can't be</span>
+<span class="sd">    registered emit a warning so the user knows their DataFrame won't be</span>
 <span class="sd">    visible in SQL:</span>
 
 <span class="sd">    - the name is not a valid SQL view name;</span>
@@ -507,7 +507,7 @@ under the License.
 
 <span class="sd">    If the same ``DataFrame`` is already reachable from SQL via a binding alias,</span>
 <span class="sd">    these registration failures are skipped silently instead.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">bound_df_ids</span> <span class="o">=</span> <span class="p">{</span><span class="nb">id</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="k">for</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">bindings</span><span class="o">.</span><span class="n">values</span><span class="p">()}</span>
     <span class="n">table_or_view_names</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">t_env</span><span class="o">.</span><span class="n">list_tables</span><span class="p">())</span>
 
@@ -520,17 +520,17 @@ under the License.
             <span class="k">if</span> <span class="n">df_is_aliased</span><span class="p">:</span>
                 <span class="k">continue</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Skipping auto-bind of &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;: not a valid SQL view &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;name. To use this DataFrame in your query, pass &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;it under a valid view name via bindings &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;(e.g. `pf.sql(..., my_df=</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">)`).&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">"Skipping auto-bind of '</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">': not a valid SQL view "</span>
+                <span class="sa">f</span><span class="s2">"name. To use this DataFrame in your query, pass "</span>
+                <span class="sa">f</span><span class="s2">"it under a valid view name via bindings "</span>
+                <span class="sa">f</span><span class="s2">"(e.g. `pf.sql(..., my_df=</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">)`)."</span><span class="p">,</span>
                 <span class="n">stacklevel</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>  <span class="c1"># warn -&gt; _resolve_auto_bind_dataframes -&gt; sql -&gt; user</span>
             <span class="p">)</span>
             <span class="k">continue</span>
         <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">_table</span><span class="o">.</span><span class="n">_t_env</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">t_env</span><span class="p">:</span>
             <span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-                <span class="s2">&quot;skipping auto-bind of &#39;</span><span class="si">%s</span><span class="s2">&#39;: DataFrame belongs to a &quot;</span>
-                <span class="s2">&quot;different TableEnvironment&quot;</span><span class="p">,</span>
+                <span class="s2">"skipping auto-bind of '</span><span class="si">%s</span><span class="s2">': DataFrame belongs to a "</span>
+                <span class="s2">"different TableEnvironment"</span><span class="p">,</span>
                 <span class="n">name</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="k">continue</span>
@@ -538,11 +538,11 @@ under the License.
             <span class="k">if</span> <span class="n">df_is_aliased</span><span class="p">:</span>
                 <span class="k">continue</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Skipping auto-bind of &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;: a table/view &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;with this name already exists. To use this DataFrame in &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;your query, either rename your Python variable, or pass &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;it under a different name via bindings &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;(e.g. `pf.sql(..., my_df=</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">)`).&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">"Skipping auto-bind of '</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">': a table/view "</span>
+                <span class="sa">f</span><span class="s2">"with this name already exists. To use this DataFrame in "</span>
+                <span class="sa">f</span><span class="s2">"your query, either rename your Python variable, or pass "</span>
+                <span class="sa">f</span><span class="s2">"it under a different name via bindings "</span>
+                <span class="sa">f</span><span class="s2">"(e.g. `pf.sql(..., my_df=</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">)`)."</span><span class="p">,</span>
                 <span class="n">stacklevel</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>  <span class="c1"># warn -&gt; _resolve_auto_bind_dataframes -&gt; sql -&gt; user</span>
             <span class="p">)</span>
             <span class="k">continue</span>
@@ -553,12 +553,12 @@ under the License.
 <span class="k">def</span><span class="w"> </span><span class="nf">_resolve_auto_bind_functions</span><span class="p">(</span>
     <span class="n">candidates</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DataFrameFunctionWrapper</span><span class="p">],</span>
     <span class="n">bindings</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DataFrameFunctionWrapper</span><span class="p">],</span>
-    <span class="n">t_env</span><span class="p">:</span> <span class="s2">&quot;StreamTableEnvironment&quot;</span><span class="p">,</span>
+    <span class="n">t_env</span><span class="p">:</span> <span class="s2">"StreamTableEnvironment"</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DataFrameFunctionWrapper</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Filter caller-scope DataFrame functions and decide which to register.</span>
+<span class="w">    </span><span class="sd">"""Filter caller-scope DataFrame functions and decide which to register.</span>
 
-<span class="sd">    Auto-bind is best-effort: it never raises. Candidates that can&#39;t be</span>
-<span class="sd">    registered emit a warning so the user knows their function won&#39;t be</span>
+<span class="sd">    Auto-bind is best-effort: it never raises. Candidates that can't be</span>
+<span class="sd">    registered emit a warning so the user knows their function won't be</span>
 <span class="sd">    visible in SQL:</span>
 
 <span class="sd">    - the name is not a valid SQL function name;</span>
@@ -570,7 +570,7 @@ under the License.
 
 <span class="sd">    DataFrameFunctionWrapper does not carry a TableEnvironment, so this helper</span>
 <span class="sd">    does not perform the t_env mismatch check used for DataFrames.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">bound_function_ids</span> <span class="o">=</span> <span class="p">{</span><span class="nb">id</span><span class="p">(</span><span class="n">function</span><span class="p">)</span> <span class="k">for</span> <span class="n">function</span> <span class="ow">in</span> <span class="n">bindings</span><span class="o">.</span><span class="n">values</span><span class="p">()}</span>
     <span class="n">normalized_function_names</span> <span class="o">=</span> <span class="n">_normalize_function_names</span><span class="p">(</span><span class="n">t_env</span><span class="o">.</span><span class="n">list_functions</span><span class="p">())</span>
     <span class="n">normalized_user_defined_function_names</span> <span class="o">=</span> <span class="n">_normalize_function_names</span><span class="p">(</span>
@@ -590,10 +590,10 @@ under the License.
             <span class="k">if</span> <span class="n">function_is_aliased</span><span class="p">:</span>
                 <span class="k">continue</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Skipping auto-bind of &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;: not a valid SQL function &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;name. To use this function in your query, pass it under a &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;valid function name via bindings &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;(e.g. `pf.sql(..., my_function=</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">)`).&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">"Skipping auto-bind of '</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">': not a valid SQL function "</span>
+                <span class="sa">f</span><span class="s2">"name. To use this function in your query, pass it under a "</span>
+                <span class="sa">f</span><span class="s2">"valid function name via bindings "</span>
+                <span class="sa">f</span><span class="s2">"(e.g. `pf.sql(..., my_function=</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">)`)."</span><span class="p">,</span>
                 <span class="c1"># warn -&gt; _resolve_auto_bind_functions -&gt; sql -&gt; user</span>
                 <span class="n">stacklevel</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
             <span class="p">)</span>
@@ -605,21 +605,21 @@ under the License.
                 <span class="n">name</span><span class="p">,</span> <span class="n">normalized_user_defined_function_names</span>
             <span class="p">):</span>
                 <span class="n">guidance</span> <span class="o">=</span> <span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;To use this function in your query, either rename your &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;Python variable, or pass it under a different name via &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;bindings (e.g. `pf.sql(..., my_function=</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">)`).&quot;</span>
+                    <span class="sa">f</span><span class="s2">"To use this function in your query, either rename your "</span>
+                    <span class="sa">f</span><span class="s2">"Python variable, or pass it under a different name via "</span>
+                    <span class="sa">f</span><span class="s2">"bindings (e.g. `pf.sql(..., my_function=</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">)`)."</span>
                 <span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">guidance</span> <span class="o">=</span> <span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;To use this function under a different name, pass it via &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;bindings (e.g. `pf.sql(..., my_function=</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">)`). If you &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;intend to override the built-in/system function, pass &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;it explicitly with the same SQL name &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;(e.g. `pf.sql(..., </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">)`).&quot;</span>
+                    <span class="sa">f</span><span class="s2">"To use this function under a different name, pass it via "</span>
+                    <span class="sa">f</span><span class="s2">"bindings (e.g. `pf.sql(..., my_function=</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">)`). If you "</span>
+                    <span class="sa">f</span><span class="s2">"intend to override the built-in/system function, pass "</span>
+                    <span class="sa">f</span><span class="s2">"it explicitly with the same SQL name "</span>
+                    <span class="sa">f</span><span class="s2">"(e.g. `pf.sql(..., </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">)`)."</span>
                 <span class="p">)</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Skipping auto-bind of &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;: a function &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;with this name already exists. </span><span class="si">{</span><span class="n">guidance</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">"Skipping auto-bind of '</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">': a function "</span>
+                <span class="sa">f</span><span class="s2">"with this name already exists. </span><span class="si">{</span><span class="n">guidance</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
                 <span class="n">stacklevel</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>  <span class="c1"># warn -&gt; _resolve_auto_bind_functions -&gt; sql -&gt; user</span>
             <span class="p">)</span>
             <span class="k">continue</span>
@@ -630,12 +630,12 @@ under the License.
             <span class="k">if</span> <span class="n">function_is_aliased</span><span class="p">:</span>
                 <span class="k">continue</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Skipping auto-bind of &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;: a function &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;with this name is already auto-bound. Function names are &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;case-insensitive in SQL. To use this function in your query, &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;either rename your Python variable, or pass it under a &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;different name via bindings &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;(e.g. `pf.sql(..., my_function=</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">)`).&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">"Skipping auto-bind of '</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">': a function "</span>
+                <span class="sa">f</span><span class="s2">"with this name is already auto-bound. Function names are "</span>
+                <span class="sa">f</span><span class="s2">"case-insensitive in SQL. To use this function in your query, "</span>
+                <span class="sa">f</span><span class="s2">"either rename your Python variable, or pass it under a "</span>
+                <span class="sa">f</span><span class="s2">"different name via bindings "</span>
+                <span class="sa">f</span><span class="s2">"(e.g. `pf.sql(..., my_function=</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">)`)."</span><span class="p">,</span>
                 <span class="c1"># warn -&gt; _resolve_auto_bind_functions -&gt; sql -&gt; user</span>
                 <span class="n">stacklevel</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
             <span class="p">)</span>
@@ -646,21 +646,21 @@ under the License.
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_execute_with_temp_objects</span><span class="p">(</span>
-    <span class="n">t_env</span><span class="p">:</span> <span class="s2">&quot;StreamTableEnvironment&quot;</span><span class="p">,</span>
+    <span class="n">t_env</span><span class="p">:</span> <span class="s2">"StreamTableEnvironment"</span><span class="p">,</span>
     <span class="n">auto_views_to_register</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DataFrame</span><span class="p">],</span>
     <span class="n">binding_views_to_register</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DataFrame</span><span class="p">],</span>
     <span class="n">auto_functions_to_register</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DataFrameFunctionWrapper</span><span class="p">],</span>
     <span class="n">binding_functions_to_register</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DataFrameFunctionWrapper</span><span class="p">],</span>
     <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Register temp views/functions, run the query, and drop them in finally.</span>
+<span class="w">    </span><span class="sd">"""Register temp views/functions, run the query, and drop them in finally.</span>
 
 <span class="sd">    Auto-bound objects are best-effort: registration failures warn and skip.</span>
 <span class="sd">    Explicit bindings are strict and propagate registration failures.</span>
 
 <span class="sd">    Drop failures are logged but never propagated — letting a cleanup</span>
 <span class="sd">    error mask the actual query outcome would be a debugging trap.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">registered_views</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">registered_functions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">try</span><span class="p">:</span>
@@ -669,18 +669,18 @@ under the License.
                 <span class="n">t_env</span><span class="o">.</span><span class="n">create_temporary_view</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">_table</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1"># noqa: BLE001</span>
                 <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;Skipping auto-bind of &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;: DataFrame could not &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;be registered as a temporary view: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                    <span class="sa">f</span><span class="s2">"Skipping auto-bind of '</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">': DataFrame could not "</span>
+                    <span class="sa">f</span><span class="s2">"be registered as a temporary view: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
                     <span class="n">stacklevel</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>  <span class="c1"># warn -&gt; _execute_with_temp_objects -&gt; sql -&gt; user</span>
                 <span class="p">)</span>
                 <span class="k">continue</span>
             <span class="n">registered_views</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-            <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;registered temp view &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+            <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"registered temp view '</span><span class="si">%s</span><span class="s2">'"</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">binding_views_to_register</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">t_env</span><span class="o">.</span><span class="n">create_temporary_view</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">_table</span><span class="p">)</span>
             <span class="n">registered_views</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-            <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;registered temp view &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+            <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"registered temp view '</span><span class="si">%s</span><span class="s2">'"</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">function</span> <span class="ow">in</span> <span class="n">auto_functions_to_register</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">try</span><span class="p">:</span>
@@ -689,18 +689,18 @@ under the License.
                 <span class="p">)</span>
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1"># noqa: BLE001</span>
                 <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;Skipping auto-bind of &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;: function could not be &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;registered as a temporary system function: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                    <span class="sa">f</span><span class="s2">"Skipping auto-bind of '</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">': function could not be "</span>
+                    <span class="sa">f</span><span class="s2">"registered as a temporary system function: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
                     <span class="n">stacklevel</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>  <span class="c1"># warn -&gt; _execute_with_temp_objects -&gt; sql -&gt; user</span>
                 <span class="p">)</span>
                 <span class="k">continue</span>
             <span class="n">registered_functions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-            <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;registered temp system function &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+            <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"registered temp system function '</span><span class="si">%s</span><span class="s2">'"</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">function</span> <span class="ow">in</span> <span class="n">binding_functions_to_register</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">t_env</span><span class="o">.</span><span class="n">create_temporary_system_function</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">function</span><span class="o">.</span><span class="n">_table_wrapper</span><span class="p">)</span>
             <span class="n">registered_functions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-            <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;registered temp system function &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+            <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"registered temp system function '</span><span class="si">%s</span><span class="s2">'"</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
 
         <span class="n">result</span> <span class="o">=</span> <span class="n">t_env</span><span class="o">.</span><span class="n">sql_query</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
@@ -708,19 +708,19 @@ under the License.
         <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">registered_functions</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">t_env</span><span class="o">.</span><span class="n">drop_temporary_system_function</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-                <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;dropped temp system function &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+                <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"dropped temp system function '</span><span class="si">%s</span><span class="s2">'"</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1"># noqa: BLE001</span>
                 <span class="n">_logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-                    <span class="s2">&quot;drop_temporary_system_function(</span><span class="si">%s</span><span class="s2">) failed: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">e</span>
+                    <span class="s2">"drop_temporary_system_function(</span><span class="si">%s</span><span class="s2">) failed: </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">e</span>
                 <span class="p">)</span>
 
         <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">registered_views</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">t_env</span><span class="o">.</span><span class="n">drop_temporary_view</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-                <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;dropped temp view &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+                <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"dropped temp view '</span><span class="si">%s</span><span class="s2">'"</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1"># noqa: BLE001</span>
                 <span class="n">_logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-                    <span class="s2">&quot;drop_temporary_view(</span><span class="si">%s</span><span class="s2">) failed: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">e</span>
+                    <span class="s2">"drop_temporary_view(</span><span class="si">%s</span><span class="s2">) failed: </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">e</span>
                 <span class="p">)</span>
 
 
@@ -730,7 +730,7 @@ under the License.
     <span class="n">auto_bind</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="o">**</span><span class="n">bindings</span><span class="p">:</span> <span class="n">SqlBinding</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Run a SQL SELECT query, returning a DataFrame.</span>
 
 <span class="sd">    In the SELECT query, ``DataFrame`` values can be used as temporary views,</span>
@@ -741,12 +741,12 @@ under the License.
 <span class="sd">    You can make them visible to SQL in two ways:</span>
 
 <span class="sd">    - **Auto-bind**: with ``auto_bind=True`` (the default), ``sql`` scans the</span>
-<span class="sd">      caller&#39;s local and global variables for ``DataFrame`` and</span>
+<span class="sd">      caller's local and global variables for ``DataFrame`` and</span>
 <span class="sd">      ``DataFrameFunctionWrapper`` instances. It registers each one under its</span>
 <span class="sd">      Python variable name.</span>
 <span class="sd">    - **Explicit bindings**: pass keyword arguments to choose the SQL name</span>
-<span class="sd">      yourself, for example ``pf.sql(&quot;SELECT * FROM source&quot;, source=df)`` or</span>
-<span class="sd">      ``pf.sql(&quot;SELECT f(a) FROM source&quot;, source=df, f=my_udf)``.</span>
+<span class="sd">      yourself, for example ``pf.sql("SELECT * FROM source", source=df)`` or</span>
+<span class="sd">      ``pf.sql("SELECT f(a) FROM source", source=df, f=my_udf)``.</span>
 
 <span class="sd">    Notes on the differences between auto-bind and explicit bindings:</span>
 
@@ -771,7 +771,7 @@ under the License.
 <span class="sd">        query: A SQL SELECT statement. Other statement kinds (INSERT, DDL)</span>
 <span class="sd">               are not supported.</span>
 <span class="sd">        auto_bind: If True (default), auto-detect ``DataFrame`` and</span>
-<span class="sd">                   ``DataFrameFunctionWrapper`` instances in the caller&#39;s</span>
+<span class="sd">                   ``DataFrameFunctionWrapper`` instances in the caller's</span>
 <span class="sd">                   globals and locals. See above.</span>
 <span class="sd">        **bindings: Explicit alias -&gt; DataFrame or DataFrameFunctionWrapper</span>
 <span class="sd">                    mappings. Always registered, even when ``auto_bind`` is</span>
@@ -783,35 +783,35 @@ under the License.
 <span class="sd">    Note:</span>
 <span class="sd">        This function is **not safe** under concurrent calls against the</span>
 <span class="sd">        same TableEnvironment: register / sql_query / drop is not an</span>
-<span class="sd">        atomic sequence. Don&#39;t call it from multiple threads sharing one</span>
+<span class="sd">        atomic sequence. Don't call it from multiple threads sharing one</span>
 <span class="sd">        t_env.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        &gt;&gt;&gt; import pyflink.dataframe as pf</span>
-<span class="sd">        &gt;&gt;&gt; df1 = pf.from_dict({&quot;a&quot;: [1, 2, 3], &quot;b&quot;: [&quot;x&quot;, &quot;y&quot;, &quot;z&quot;]})</span>
-<span class="sd">        &gt;&gt;&gt; df2 = pf.from_dict({&quot;a&quot;: [1, 2, 3], &quot;c&quot;: [&quot;p&quot;, &quot;q&quot;, &quot;r&quot;]})</span>
-<span class="sd">        &gt;&gt;&gt; joined = pf.sql(&quot;SELECT * FROM df1 JOIN df2 ON df1.a = df2.a&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; df1 = pf.from_dict({"a": [1, 2, 3], "b": ["x", "y", "z"]})</span>
+<span class="sd">        &gt;&gt;&gt; df2 = pf.from_dict({"a": [1, 2, 3], "c": ["p", "q", "r"]})</span>
+<span class="sd">        &gt;&gt;&gt; joined = pf.sql("SELECT * FROM df1 JOIN df2 ON df1.a = df2.a")</span>
 
 <span class="sd">        &gt;&gt;&gt; @pf.udf</span>
 <span class="sd">        ... def add_one(x: int) -&gt; int:</span>
 <span class="sd">        ...     return x + 1</span>
-<span class="sd">        &gt;&gt;&gt; df = pf.from_dict({&quot;a&quot;: [1, 2, 3]})</span>
-<span class="sd">        &gt;&gt;&gt; incremented = pf.sql(&quot;SELECT add_one(a) FROM df&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; df = pf.from_dict({"a": [1, 2, 3]})</span>
+<span class="sd">        &gt;&gt;&gt; incremented = pf.sql("SELECT add_one(a) FROM df")</span>
 
 <span class="sd">        &gt;&gt;&gt; plus_one = pf.udf(lambda x: x + 1, return_dtype=pf.DataType.int64())</span>
 <span class="sd">        &gt;&gt;&gt; incremented = pf.sql(</span>
-<span class="sd">        ...     &quot;SELECT f(a) FROM source&quot;,</span>
+<span class="sd">        ...     "SELECT f(a) FROM source",</span>
 <span class="sd">        ...     auto_bind=False,</span>
 <span class="sd">        ...     source=df,</span>
 <span class="sd">        ...     f=plus_one,</span>
 <span class="sd">        ... )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">binding_views</span><span class="p">,</span> <span class="n">binding_functions</span> <span class="o">=</span> <span class="n">_resolve_explicit_bindings</span><span class="p">(</span><span class="n">bindings</span><span class="p">)</span>
     <span class="n">auto_view_candidates</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DataFrame</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">auto_function_candidates</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DataFrameFunctionWrapper</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="k">if</span> <span class="n">auto_bind</span><span class="p">:</span>
-        <span class="c1"># `sql` is a plain function with no decorators, so the user&#39;s</span>
+        <span class="c1"># `sql` is a plain function with no decorators, so the user's</span>
         <span class="c1"># frame is exactly one f_back. If a decorator is ever added,</span>
         <span class="c1"># this walk must be updated in lockstep — test_frame_back_level</span>
         <span class="c1"># pins the invariant.</span>
@@ -865,14 +865,14 @@ under the License.
             <span class="nb">set</span><span class="p">(</span><span class="n">t_env</span><span class="o">.</span><span class="n">list_temporary_tables</span><span class="p">())</span> <span class="o">|</span> <span class="nb">set</span><span class="p">(</span><span class="n">t_env</span><span class="o">.</span><span class="n">list_temporary_views</span><span class="p">())</span>
         <span class="p">)</span>
         <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">binding_views</span><span class="p">:</span>
-            <span class="n">_validate_identifier</span><span class="p">(</span><span class="n">t_env</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;view&quot;</span><span class="p">)</span>
+            <span class="n">_validate_identifier</span><span class="p">(</span><span class="n">t_env</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"view"</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">_temp_table_or_view_exists</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">temp_table_or_view_names</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;binding &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; conflicts with an existing temporary &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;table/view of the same name. Explicit DataFrame bindings &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;can override permanent catalog tables/views, but not &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;temporary tables/views. Use a different binding name, or &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;drop the existing &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; first.&quot;</span>
+                    <span class="sa">f</span><span class="s2">"binding '</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">' conflicts with an existing temporary "</span>
+                    <span class="sa">f</span><span class="s2">"table/view of the same name. Explicit DataFrame bindings "</span>
+                    <span class="sa">f</span><span class="s2">"can override permanent catalog tables/views, but not "</span>
+                    <span class="sa">f</span><span class="s2">"temporary tables/views. Use a different binding name, or "</span>
+                    <span class="sa">f</span><span class="s2">"drop the existing '</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">' first."</span>
                 <span class="p">)</span>
 
     <span class="k">if</span> <span class="n">binding_functions</span><span class="p">:</span>
@@ -884,11 +884,11 @@ under the License.
                 <span class="n">name</span><span class="p">,</span> <span class="n">normalized_user_defined_function_names</span>
             <span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;binding &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; conflicts with an existing user-defined &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;function of the same name. Explicit function bindings can &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;override built-in/system functions, but not temporary or &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;catalog user-defined functions. Use a different binding &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;name, or drop the existing &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; first.&quot;</span>
+                    <span class="sa">f</span><span class="s2">"binding '</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">' conflicts with an existing user-defined "</span>
+                    <span class="sa">f</span><span class="s2">"function of the same name. Explicit function bindings can "</span>
+                    <span class="sa">f</span><span class="s2">"override built-in/system functions, but not temporary or "</span>
+                    <span class="sa">f</span><span class="s2">"catalog user-defined functions. Use a different binding "</span>
+                    <span class="sa">f</span><span class="s2">"name, or drop the existing '</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">' first."</span>
                 <span class="p">)</span>
 
     <span class="n">auto_views</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DataFrame</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>

@@ -278,13 +278,13 @@ under the License.
 <span class="c1">#  distributed with this work for additional information</span>
 <span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
 <span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
-<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  "License"); you may not use this file except in compliance</span>
 <span class="c1">#  with the License.  You may obtain a copy of the License at</span>
 <span class="c1">#</span>
 <span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="c1">#</span>
 <span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  distributed under the License is distributed on an "AS IS" BASIS,</span>
 <span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1">#  See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
@@ -296,9 +296,9 @@ under the License.
 
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;JdbcSink&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;JdbcConnectionOptions&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;JdbcExecutionOptions&#39;</span>
+    <span class="s1">'JdbcSink'</span><span class="p">,</span>
+    <span class="s1">'JdbcConnectionOptions'</span><span class="p">,</span>
+    <span class="s1">'JdbcExecutionOptions'</span>
 <span class="p">]</span>
 
 
@@ -308,9 +308,9 @@ under the License.
         <span class="nb">super</span><span class="p">(</span><span class="n">JdbcSink</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">sink_func</span><span class="o">=</span><span class="n">j_jdbc_sink</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">sink</span><span class="p">(</span><span class="n">sql</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">type_info</span><span class="p">:</span> <span class="n">RowTypeInfo</span><span class="p">,</span> <span class="n">jdbc_connection_options</span><span class="p">:</span> <span class="s1">&#39;JdbcConnectionOptions&#39;</span><span class="p">,</span>
-             <span class="n">jdbc_execution_options</span><span class="p">:</span> <span class="s1">&#39;JdbcExecutionOptions&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sink</span><span class="p">(</span><span class="n">sql</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">type_info</span><span class="p">:</span> <span class="n">RowTypeInfo</span><span class="p">,</span> <span class="n">jdbc_connection_options</span><span class="p">:</span> <span class="s1">'JdbcConnectionOptions'</span><span class="p">,</span>
+             <span class="n">jdbc_execution_options</span><span class="p">:</span> <span class="s1">'JdbcExecutionOptions'</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Create a JDBC sink.</span>
 
 <span class="sd">        :param sql: arbitrary DML query (e.g. insert, update, upsert)</span>
@@ -319,7 +319,7 @@ under the License.
 <span class="sd">                                        retries.</span>
 <span class="sd">        :param jdbc_connection_options: parameters of connection, such as JDBC URL.</span>
 <span class="sd">        :return: A JdbcSink.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">sql_types</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">gateway</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span>
         <span class="n">JJdbcTypeUtil</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">jdbc</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JdbcTypeUtil</span>
@@ -328,10 +328,10 @@ under the License.
                              <span class="o">.</span><span class="n">typeInformationToSqlType</span><span class="p">(</span><span class="n">field_type</span><span class="o">.</span><span class="n">get_java_type_info</span><span class="p">()))</span>
         <span class="n">j_sql_type</span> <span class="o">=</span> <span class="n">to_jarray</span><span class="p">(</span><span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">int</span><span class="p">,</span> <span class="n">sql_types</span><span class="p">)</span>
         <span class="n">output_format_clz</span> <span class="o">=</span> <span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">Class</span>\
-            <span class="o">.</span><span class="n">forName</span><span class="p">(</span><span class="s1">&#39;org.apache.flink.connector.jdbc.internal.JdbcOutputFormat&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="o">.</span><span class="n">forName</span><span class="p">(</span><span class="s1">'org.apache.flink.connector.jdbc.internal.JdbcOutputFormat'</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span>
                      <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">Thread</span><span class="o">.</span><span class="n">currentThread</span><span class="p">()</span><span class="o">.</span><span class="n">getContextClassLoader</span><span class="p">())</span>
         <span class="n">j_int_array_type</span> <span class="o">=</span> <span class="n">to_jarray</span><span class="p">(</span><span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">int</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">getClass</span><span class="p">()</span>
-        <span class="n">j_builder_method</span> <span class="o">=</span> <span class="n">output_format_clz</span><span class="o">.</span><span class="n">getDeclaredMethod</span><span class="p">(</span><span class="s1">&#39;createRowJdbcStatementBuilder&#39;</span><span class="p">,</span>
+        <span class="n">j_builder_method</span> <span class="o">=</span> <span class="n">output_format_clz</span><span class="o">.</span><span class="n">getDeclaredMethod</span><span class="p">(</span><span class="s1">'createRowJdbcStatementBuilder'</span><span class="p">,</span>
                                                                <span class="n">to_jarray</span><span class="p">(</span><span class="n">gateway</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">Class</span><span class="p">,</span>
                                                                          <span class="p">[</span><span class="n">j_int_array_type</span><span class="p">]))</span>
         <span class="n">j_builder_method</span><span class="o">.</span><span class="n">setAccessible</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
@@ -347,9 +347,9 @@ under the License.
 
 
 <div class="viewcode-block" id="JdbcConnectionOptions"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.jdbc.JdbcConnectionOptions.html#pyflink.datastream.connectors.jdbc.JdbcConnectionOptions">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">JdbcConnectionOptions</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    JDBC connection options.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_jdbc_connection_options</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_jdbc_connection_options</span> <span class="o">=</span> <span class="n">j_jdbc_connection_options</span>
 
@@ -366,40 +366,40 @@ under the License.
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_jdbc_connection_options</span><span class="o">.</span><span class="n">getPassword</span><span class="p">()</span>
 
     <span class="k">class</span><span class="w"> </span><span class="nc">JdbcConnectionOptionsBuilder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Builder for JdbcConnectionOptions.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_options_builder</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span>\
                 <span class="o">.</span><span class="n">jdbc</span><span class="o">.</span><span class="n">JdbcConnectionOptions</span><span class="o">.</span><span class="n">JdbcConnectionOptionsBuilder</span><span class="p">()</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">with_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;JdbcConnectionOptions.JdbcConnectionOptionsBuilder&#39;</span><span class="p">:</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">with_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'JdbcConnectionOptions.JdbcConnectionOptionsBuilder'</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_options_builder</span><span class="o">.</span><span class="n">withUrl</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span>
 
         <span class="k">def</span><span class="w"> </span><span class="nf">with_driver_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">driver_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> \
-                <span class="o">-&gt;</span> <span class="s1">&#39;JdbcConnectionOptions.JdbcConnectionOptionsBuilder&#39;</span><span class="p">:</span>
+                <span class="o">-&gt;</span> <span class="s1">'JdbcConnectionOptions.JdbcConnectionOptionsBuilder'</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_options_builder</span><span class="o">.</span><span class="n">withDriverName</span><span class="p">(</span><span class="n">driver_name</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span>
 
         <span class="k">def</span><span class="w"> </span><span class="nf">with_user_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> \
-                <span class="o">-&gt;</span> <span class="s1">&#39;JdbcConnectionOptions.JdbcConnectionOptionsBuilder&#39;</span><span class="p">:</span>
+                <span class="o">-&gt;</span> <span class="s1">'JdbcConnectionOptions.JdbcConnectionOptionsBuilder'</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_options_builder</span><span class="o">.</span><span class="n">withUsername</span><span class="p">(</span><span class="n">user_name</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span>
 
         <span class="k">def</span><span class="w"> </span><span class="nf">with_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> \
-                <span class="o">-&gt;</span> <span class="s1">&#39;JdbcConnectionOptions.JdbcConnectionOptionsBuilder&#39;</span><span class="p">:</span>
+                <span class="o">-&gt;</span> <span class="s1">'JdbcConnectionOptions.JdbcConnectionOptionsBuilder'</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_options_builder</span><span class="o">.</span><span class="n">withPassword</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;JdbcConnectionOptions&#39;</span><span class="p">:</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'JdbcConnectionOptions'</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">JdbcConnectionOptions</span><span class="p">(</span><span class="n">j_jdbc_connection_options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_options_builder</span><span class="o">.</span><span class="n">build</span><span class="p">())</span></div>
 
 
 <div class="viewcode-block" id="JdbcExecutionOptions"><a class="viewcode-back" href="../../../../reference/pyflink.datastream/api/pyflink.datastream.connectors.jdbc.JdbcExecutionOptions.html#pyflink.datastream.connectors.jdbc.JdbcExecutionOptions">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">JdbcExecutionOptions</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    JDBC sink batch options.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j_jdbc_execution_options</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_j_jdbc_execution_options</span> <span class="o">=</span> <span class="n">j_jdbc_execution_options</span>
 
@@ -413,36 +413,36 @@ under the License.
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_j_jdbc_execution_options</span><span class="o">.</span><span class="n">getMaxRetries</span><span class="p">()</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">defaults</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;JdbcExecutionOptions&#39;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">defaults</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">'JdbcExecutionOptions'</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">JdbcExecutionOptions</span><span class="p">(</span>
             <span class="n">j_jdbc_execution_options</span><span class="o">=</span><span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>
             <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">jdbc</span><span class="o">.</span><span class="n">JdbcExecutionOptions</span><span class="o">.</span><span class="n">defaults</span><span class="p">())</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">builder</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;Builder&#39;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">builder</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">'Builder'</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">JdbcExecutionOptions</span><span class="o">.</span><span class="n">Builder</span><span class="p">()</span>
 
     <span class="k">class</span><span class="w"> </span><span class="nc">Builder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Builder for JdbcExecutionOptions.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span> <span class="o">=</span> <span class="n">get_gateway</span><span class="p">()</span><span class="o">.</span><span class="n">jvm</span>\
                 <span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">flink</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">jdbc</span><span class="o">.</span><span class="n">JdbcExecutionOptions</span><span class="o">.</span><span class="n">builder</span><span class="p">()</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">with_batch_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;JdbcExecutionOptions.Builder&#39;</span><span class="p">:</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">with_batch_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'JdbcExecutionOptions.Builder'</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">withBatchSize</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">with_batch_interval_ms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interval_ms</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;JdbcExecutionOptions.Builder&#39;</span><span class="p">:</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">with_batch_interval_ms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interval_ms</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'JdbcExecutionOptions.Builder'</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">withBatchIntervalMs</span><span class="p">(</span><span class="n">interval_ms</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">with_max_retries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_retries</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;JdbcExecutionOptions.Builder&#39;</span><span class="p">:</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">with_max_retries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_retries</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'JdbcExecutionOptions.Builder'</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">withMaxRetries</span><span class="p">(</span><span class="n">max_retries</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;JdbcExecutionOptions&#39;</span><span class="p">:</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'JdbcExecutionOptions'</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">JdbcExecutionOptions</span><span class="p">(</span><span class="n">j_jdbc_execution_options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_j_builder</span><span class="o">.</span><span class="n">build</span><span class="p">())</span></div>
 </pre></div>
 

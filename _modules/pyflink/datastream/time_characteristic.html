@@ -278,13 +278,13 @@ under the License.
 <span class="c1">#  distributed with this work for additional information</span>
 <span class="c1">#  regarding copyright ownership.  The ASF licenses this file</span>
 <span class="c1">#  to you under the Apache License, Version 2.0 (the</span>
-<span class="c1">#  &quot;License&quot;); you may not use this file except in compliance</span>
+<span class="c1">#  "License"); you may not use this file except in compliance</span>
 <span class="c1">#  with the License.  You may obtain a copy of the License at</span>
 <span class="c1">#</span>
 <span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="c1">#</span>
 <span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
-<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  distributed under the License is distributed on an "AS IS" BASIS,</span>
 <span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="c1">#  See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
@@ -293,11 +293,11 @@ under the License.
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyflink.java_gateway</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_gateway</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TimeCharacteristic&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'TimeCharacteristic'</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="TimeCharacteristic"><a class="viewcode-back" href="../../../reference/pyflink.datastream/api/pyflink.datastream.time_characteristic.TimeCharacteristic.html#pyflink.datastream.time_characteristic.TimeCharacteristic">[docs]</a><span class="k">class</span><span class="w"> </span><span class="nc">TimeCharacteristic</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    The time characteristic defines how the system determines time for time-dependent</span>
 <span class="sd">    order and operations that depend on time (such as time windows).</span>
 
@@ -330,7 +330,7 @@ under the License.
 <span class="sd">    :data:`EventTime`:</span>
 
 <span class="sd">    Event time means that the time of each individual element in the stream (also called event)</span>
-<span class="sd">    is determined by the event&#39;s individual custom timestamp. These timestamps either exist in</span>
+<span class="sd">    is determined by the event's individual custom timestamp. These timestamps either exist in</span>
 <span class="sd">    the elements from before they entered the Flink streaming dataflow, or are user-assigned at</span>
 <span class="sd">    the sources. The big implication of this is that it allows for elements to arrive in the</span>
 <span class="sd">    sources and in all operators out of order, meaning that elements with earlier timestamps may</span>
@@ -338,7 +338,7 @@ under the License.
 
 <span class="sd">    Operators that window or order data with respect to event time must buffer data until they</span>
 <span class="sd">    can be sure that all timestamps for a certain time interval have been received. This is</span>
-<span class="sd">    handled by the so called &quot;time watermarks&quot;.</span>
+<span class="sd">    handled by the so called "time watermarks".</span>
 
 <span class="sd">    Operations based on event time are very predictable - the result of windowing operations</span>
 <span class="sd">    is typically identical no matter when the window is executed and how fast the streams</span>
@@ -346,21 +346,21 @@ under the License.
 <span class="sd">    operating with processing time, and typically also introduces more latency. The amount of</span>
 <span class="sd">    extra cost depends mostly on how much out of order the elements arrive, i.e., how long the</span>
 <span class="sd">    time span between the arrival of early and late elements is. With respect to the</span>
-<span class="sd">    &quot;time watermarks&quot;, this means that the cost typically depends on how early or late the</span>
+<span class="sd">    "time watermarks", this means that the cost typically depends on how early or late the</span>
 <span class="sd">    watermarks can be generated for their timestamp.</span>
 
-<span class="sd">    In relation to :data:`IngestionTime`, the event time is similar, but refers the event&#39;s</span>
+<span class="sd">    In relation to :data:`IngestionTime`, the event time is similar, but refers the event's</span>
 <span class="sd">    original time, rather than the time assigned at the data source. Practically, that means</span>
 <span class="sd">    that event time has generally more meaning, but also that it takes longer to determine</span>
 <span class="sd">    that all elements for a certain time have arrived.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">ProcessingTime</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">IngestionTime</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">EventTime</span> <span class="o">=</span> <span class="mi">2</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_from_j_time_characteristic</span><span class="p">(</span><span class="n">j_time_characteristic</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;TimeCharacteristic&#39;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_from_j_time_characteristic</span><span class="p">(</span><span class="n">j_time_characteristic</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'TimeCharacteristic'</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">TimeCharacteristic</span><span class="p">[</span><span class="n">j_time_characteristic</span><span class="o">.</span><span class="n">name</span><span class="p">()]</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_to_j_time_characteristic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

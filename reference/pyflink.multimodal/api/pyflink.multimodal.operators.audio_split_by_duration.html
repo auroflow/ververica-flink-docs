@@ -345,30 +345,30 @@ For <code class="docutils literal notranslate"><span class="pre">segment_type=&q
 <dl>
 <dt>Examples::</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Usage 1: create a reusable UDTF and join it laterally.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">split</span> <span class="o">=</span> <span class="n">audio_split_by_duration</span><span class="p">(</span><span class="n">segment_duration_ms</span><span class="o">=</span><span class="mi">30000</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">segments</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">join_lateral</span><span class="p">(</span><span class="n">split</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;waveform&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;segment&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">segments</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">join_lateral</span><span class="p">(</span><span class="n">split</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"waveform"</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"segment"</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Usage 2: pass the column directly when joining laterally.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">segments</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">join_lateral</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">audio_split_by_duration</span><span class="p">(</span>
-<span class="gp">... </span>        <span class="n">col</span><span class="p">(</span><span class="s2">&quot;waveform&quot;</span><span class="p">),</span>
+<span class="gp">... </span>        <span class="n">col</span><span class="p">(</span><span class="s2">"waveform"</span><span class="p">),</span>
 <span class="gp">... </span>        <span class="n">segment_duration_ms</span><span class="o">=</span><span class="mi">30000</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;segment&quot;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"segment"</span><span class="p">)</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Usage 1: create a reusable UDTF for lazy reference segments.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ref_split</span> <span class="o">=</span> <span class="n">audio_split_by_duration</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">segment_duration_ms</span><span class="o">=</span><span class="mi">30000</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">segment_type</span><span class="o">=</span><span class="s2">&quot;ref&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">segment_type</span><span class="o">=</span><span class="s2">"ref"</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">segments</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">join_lateral</span><span class="p">(</span><span class="n">ref_split</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;uri&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;segment&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">segments</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">join_lateral</span><span class="p">(</span><span class="n">ref_split</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"uri"</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"segment"</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Usage 2: pass the URI column directly for lazy reference segments.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">segments</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">join_lateral</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">audio_split_by_duration</span><span class="p">(</span>
-<span class="gp">... </span>        <span class="n">col</span><span class="p">(</span><span class="s2">&quot;uri&quot;</span><span class="p">),</span>
+<span class="gp">... </span>        <span class="n">col</span><span class="p">(</span><span class="s2">"uri"</span><span class="p">),</span>
 <span class="gp">... </span>        <span class="n">segment_duration_ms</span><span class="o">=</span><span class="mi">30000</span><span class="p">,</span>
-<span class="gp">... </span>        <span class="n">segment_type</span><span class="o">=</span><span class="s2">&quot;ref&quot;</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;segment&quot;</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="n">segment_type</span><span class="o">=</span><span class="s2">"ref"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"segment"</span><span class="p">)</span>
 <span class="gp">... </span><span class="p">)</span>
 </pre></div>
 </div>

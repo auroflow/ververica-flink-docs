@@ -342,35 +342,35 @@ directory for new files (e.g., ’10s’, ‘1min’).</p></li>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pyflink.dataframe</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pf</span>
 <span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="s2">&quot;/path/to/users.json&quot;</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
-<span class="gp">... </span>    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
-<span class="gp">... </span>    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="s2">"/path/to/users.json"</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
+<span class="gp">... </span>    <span class="s2">"id"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="s2">"name"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
 <span class="gp">... </span><span class="p">})</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Read with JSON parse options</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;/path/to/users.json&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"/path/to/users.json"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
-<span class="gp">... </span>        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
-<span class="gp">... </span>        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"id"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"name"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
 <span class="gp">... </span>    <span class="p">},</span>
 <span class="gp">... </span>    <span class="n">ignore_parse_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="gp">... </span>    <span class="n">timestamp_format</span><span class="o">=</span><span class="s2">&quot;ISO-8601&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">timestamp_format</span><span class="o">=</span><span class="s2">"ISO-8601"</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Add a computed event-time column and watermark</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">events</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;/path/to/events.json&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"/path/to/events.json"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">schema</span><span class="o">=</span><span class="p">{</span>
-<span class="gp">... </span>        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
-<span class="gp">... </span>        <span class="s2">&quot;payload&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
-<span class="gp">... </span>        <span class="s2">&quot;ts_millis&quot;</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"id"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"payload"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">string</span><span class="p">(),</span>
+<span class="gp">... </span>        <span class="s2">"ts_millis"</span><span class="p">:</span> <span class="n">pf</span><span class="o">.</span><span class="n">DataType</span><span class="o">.</span><span class="n">int64</span><span class="p">(),</span>
 <span class="gp">... </span>    <span class="p">},</span>
 <span class="gp">... </span>    <span class="n">computed_columns</span><span class="o">=</span><span class="p">{</span>
-<span class="gp">... </span>        <span class="s2">&quot;event_time&quot;</span><span class="p">:</span> <span class="s2">&quot;TO_TIMESTAMP_LTZ(ts_millis, 3)&quot;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">"event_time"</span><span class="p">:</span> <span class="s2">"TO_TIMESTAMP_LTZ(ts_millis, 3)"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="p">},</span>
-<span class="gp">... </span>    <span class="n">watermark</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;event_time&quot;</span><span class="p">,</span> <span class="s2">&quot;event_time - INTERVAL &#39;5&#39; SECOND&quot;</span><span class="p">),</span>
-<span class="gp">... </span>    <span class="n">timestamp_format</span><span class="o">=</span><span class="s2">&quot;ISO-8601&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">watermark</span><span class="o">=</span><span class="p">(</span><span class="s2">"event_time"</span><span class="p">,</span> <span class="s2">"event_time - INTERVAL '5' SECOND"</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">timestamp_format</span><span class="o">=</span><span class="s2">"ISO-8601"</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">)</span>
 </pre></div>
 </div>

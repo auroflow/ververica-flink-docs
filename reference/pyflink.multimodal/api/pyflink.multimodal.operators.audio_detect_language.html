@@ -59,7 +59,7 @@ under the License.
 
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="Utilities" href="../utilities.html" />
-    <link rel="prev" title="pyflink.multimodal.operators.audio_asr_whisper" href="pyflink.multimodal.operators.audio_asr_whisper.html" />
+    <link rel="prev" title="pyflink.multimodal.operators.audio_concat" href="pyflink.multimodal.operators.audio_concat.html" />
 <script src="_static/pyflink.js" ></script>
 <link rel="stylesheet" href="_static/pyflink.css" type="text/css" />
 
@@ -351,17 +351,17 @@ In SQL, unnest or index the array before consuming item fields.</p>
 <dl>
 <dt>Examples::</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">decode</span> <span class="o">=</span> <span class="n">audio_decode</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">standardize</span> <span class="o">=</span> <span class="n">audio_standardize</span><span class="p">(</span><span class="n">sample_rate</span><span class="o">=</span><span class="mi">16000</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">speech_ready</span> <span class="o">=</span> <span class="n">standardize</span><span class="p">(</span><span class="n">decode</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;audio_bytes&quot;</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">speech_ready</span> <span class="o">=</span> <span class="n">standardize</span><span class="p">(</span><span class="n">decode</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"audio_bytes"</span><span class="p">)))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Usage 1: create a reusable UDF and apply it to a column.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">detect_language</span> <span class="o">=</span> <span class="n">audio_detect_language</span><span class="p">(</span><span class="n">top_k</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;language&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"language"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">detect_language</span><span class="p">(</span><span class="n">speech_ready</span><span class="p">),</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Usage 2: pass the column directly when building the expression.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_column</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="s2">&quot;language&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s2">"language"</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">audio_detect_language</span><span class="p">(</span><span class="n">speech_ready</span><span class="p">,</span> <span class="n">top_k</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span>
 <span class="gp">... </span><span class="p">)</span>
 </pre></div>
@@ -380,11 +380,11 @@ In SQL, unnest or index the array before consuming item fields.</p>
             <footer class="bd-footer-article">
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-  <a class='left-prev' id="prev-link" href="pyflink.multimodal.operators.audio_asr_whisper.html" title="previous page">
+  <a class='left-prev' id="prev-link" href="pyflink.multimodal.operators.audio_concat.html" title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
           <p class="prev-next-subtitle">previous</p>
-          <p class="prev-next-title">pyflink.multimodal.operators.audio_asr_whisper</p>
+          <p class="prev-next-title">pyflink.multimodal.operators.audio_concat</p>
       </div>
   </a>
   <a class='right-next' id="next-link" href="../utilities.html" title="next page">
